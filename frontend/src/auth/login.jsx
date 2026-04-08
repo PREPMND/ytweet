@@ -30,7 +30,7 @@ const Login = () => {
                     else{setWay('email')}
                 }}
                 >`Use {way=="email"?"username":"email"} To Login`</h3>
-                <div>
+                <div className='mt-6'>
                     <form 
                     className='h-full'
                     onSubmit={HandleSubmit}>
