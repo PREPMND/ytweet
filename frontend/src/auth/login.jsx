@@ -16,7 +16,7 @@ const Login = () => {
                 <div>
                     <form>
                         <input 
-                        
+                        className=''
                         //className={`${way=="email"?""}`}
                         type='text' 
                         placeholder='email' value={email} 
