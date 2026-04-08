@@ -11,7 +11,7 @@ const Login = () => {
             <div>
                 <h1>Login</h1>
                 <h3
-                onClick={}
+                onClick={()=>{}}
                 >Use Username To Login</h3>
                 <div>
                     <form>
