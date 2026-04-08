@@ -60,7 +60,7 @@ const Login = () => {
                     </form>
                 
                 </div>
-                <div className=''> Welcome {currentUser}</div>
+                <div className={`${}`}> Welcome {currentUser}</div>
             </div>
         </div>
     </div>
