@@ -3,8 +3,11 @@ import './index.css'
 import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
+
+      const [email,setEmail]=useState('');
+      const [username,setUsername]=useState('');
   <>
   <App/>
-  <Login
+  <Login/>
   </>
 )
