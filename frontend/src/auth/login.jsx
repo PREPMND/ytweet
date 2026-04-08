@@ -5,7 +5,7 @@ const Login = () => {
     const [username,setUsername]=useState('');
     const [password,setPassword]=useState('');
     const [way,setWay]=useState('email');
-    async function HandleSubmit(e,credentials){
+    async function HandleSubmit(e){
         e.preventDefault();
         try {
             const res = await axios.post("http://localhost:8000/api/v1/users/login",
