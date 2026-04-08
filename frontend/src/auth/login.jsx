@@ -32,6 +32,7 @@ const Login = () => {
                 >`Use {way=="email"?"username":"email"} To Login`</h3>
                 <div>
                     <form 
+                    className='h-full'
                     onSubmit={HandleSubmit}>
                         <input 
                         className={`${way=="email"?"flex":"hidden"} border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
