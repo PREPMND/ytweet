@@ -16,8 +16,7 @@ const Login = () => {
                 <div>
                     <form>
                         <input 
-                        className='text-yellow'
-                        className={`${way=="email"?""}`}
+                        className={`${way=="email"?"flex":"hidden"}`}
                         type='text' 
                         placeholder='email' value={email} 
                         name='email' onChange={(e)=>{setEmail(e.target.value)}}/>
