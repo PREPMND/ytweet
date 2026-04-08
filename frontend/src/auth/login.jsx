@@ -26,7 +26,7 @@ const Login = () => {
     <>
     <div>
         <div className='border border-gray-300 rounded w-fit h-fit '>
-            <div className='flex h-screen items-center justify-center flex-col'>
+            <div className='flex items-center justify-center flex-col'>
                 <h1 className='text-xl font-700 mb-4'>Login</h1>
                 <h3
                 className='cursor-pointer'
