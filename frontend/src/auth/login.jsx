@@ -29,7 +29,7 @@ const Login = () => {
                     if(way=="email"){setWay('username')}
                     else{setWay('email')}
                 }}
-                >`Use {way=="email"?"username":"email"} To Login`</h3>
+                >Use {way=="email"?"username":"email"} To Login`</h3>
                 <div className='mt-12'>
                     <form 
                     className='h-full w-full flex flex-col items-center justify-center gap-4'
