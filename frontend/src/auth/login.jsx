@@ -12,8 +12,7 @@ const Login = () => {
                         credentials,
                         {
                             withCredentials: true, // important if backend CORS has credentials:true
-                        }
-                        );
+                        });
             console.log(res.data.data.user.username)
             return res.data.data.user.username
         } catch (err) {
