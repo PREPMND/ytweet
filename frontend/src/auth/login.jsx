@@ -42,12 +42,12 @@ const Login = () => {
                         name='email' onChange={(e)=>{setEmail(e.target.value)}}/>
                         <input 
                         className={`${way=="email"?"hidden":"flex"} border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                        w-[300px]`}
+                        w-[200px]`}
                         type='text' 
                         placeholder='username' value={username} 
                         name='username' onChange={(e)=>{setUsername(e.target.value)}}/>
                         <input 
-                        className='border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-[300px]'
+                        className='border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-[200px]'
                         type='text'
                         value={password} placeholder='password'
                         
