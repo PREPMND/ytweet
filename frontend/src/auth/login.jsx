@@ -22,7 +22,7 @@ const Login = () => {
     <>
     <div>
         <div>
-            <div className=''>
+            <div className='flex justify-'>
                 <h1 >Login</h1>
                 <h3
                 onClick={()=>{
