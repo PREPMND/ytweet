@@ -13,7 +13,7 @@ const Login = () => {
                 <h3
                 onClick={()=>{
                     if(way=="email"){setWay('username')}
-                    
+                    else{setWay('email')}
                 
                 }}
                 >`Use {way=="email"?"username":"email"} To Login`</h3>
