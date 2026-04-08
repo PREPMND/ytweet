@@ -13,7 +13,7 @@ const Login = () => {
                     <form>
                         <input type='text' 
                         placeholder='email' value={email} 
-                        name='email' onChange={(e)}/>
+                        name='email' onChange={(e)=>{}}/>
                     </form>
                 </div>
             </div>
