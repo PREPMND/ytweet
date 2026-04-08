@@ -12,7 +12,7 @@ const Login = () => {
                 <h1 >Login</h1>
                 <h3
                 onClick={()=>{setWay('username')}}
-                >`Use ${} To Login`</h3>
+                >`Use ${way=="email"} To Login`</h3>
                 <div>
                     <form>
                         <input 
