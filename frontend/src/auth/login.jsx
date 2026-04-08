@@ -13,7 +13,7 @@ const Login = () => {
                     <form>
                         <input type='text' 
                         placeholder='email' value={email} 
-                        name='email' onChange={(e)=>{see.target.value}}/>
+                        name='email' onChange={(e)=>{setEmail(e.target.value)}}/>
                     </form>
                 </div>
             </div>
