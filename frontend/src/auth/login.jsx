@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Login = () => {
-    const []
+    const [email,setEmail]=use
     return (
     <>
     <div>
