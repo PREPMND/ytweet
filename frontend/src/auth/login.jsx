@@ -28,7 +28,9 @@ const Login = () => {
                         type='text' 
                         placeholder='username' value={username} 
                         name='username' onChange={(e)=>{setUsername(e.target.value)}}/>
-                        <input type='text'
+                        <input 
+                        type='text'
+                        
                         />
                     </form>
                 </div>
