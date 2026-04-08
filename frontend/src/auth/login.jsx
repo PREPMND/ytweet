@@ -9,7 +9,7 @@ const Login = () => {
                 <h1>Login</h1>
                 <div>
                     <form>
-                        
+                        <inpi
                     </form>
                 </div>
             </div>
