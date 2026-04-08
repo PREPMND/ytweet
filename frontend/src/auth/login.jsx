@@ -12,10 +12,12 @@ const Login = () => {
                 <h3>Use Username To Login</h3>
                 <div>
                     <form>
-                        <input type='text' 
+                        <input 
+                        type='text' 
                         placeholder='email' value={email} 
                         name='email' onChange={(e)=>{setEmail(e.target.value)}}/>
-                        <input type='text' 
+                        <input 
+                        type='text' 
                         placeholder='username' value={username} 
                         name='username' onChange={(e)=>{setUsername(e.target.value)}}/>
                     
