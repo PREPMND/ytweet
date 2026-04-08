@@ -22,7 +22,7 @@ const Login = () => {
     <>
     <div>
         <div>
-            <div className='flex justify-'>
+            <div className='flex justify-between items-center flex-col'>
                 <h1 >Login</h1>
                 <h3
                 onClick={()=>{
