@@ -6,6 +6,7 @@ const Login = () => {
     const [password,setPassword]=useState('');
     const [way,setWay]=useState('email');
     async function HandleSubmit(e){
+        e.preventdef
     }
     return (
     <>
