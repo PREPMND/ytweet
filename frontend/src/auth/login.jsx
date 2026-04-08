@@ -5,7 +5,7 @@ const Login = () => {
     const [username,setUsername]=useState('');
     const [password,setPassword]=useState('');
     const [way,setWay]=useState('email');
-    const currentUser = null;
+    const [currentUser,setCurrentUser] = useState(null);
     async function HandleSubmit(e){
         e.preventDefault();
         try {
