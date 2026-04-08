@@ -31,7 +31,7 @@ const Login = () => {
                 }}
                 >`Use {way=="email"?"username":"email"} To Login`</h3>
                 <div>
-                    <form onSubmit={HandleSubmit({})}>
+                    <form onSubmit={HandleSubmit({email,username,password})}>
                         <input 
                         className={`${way=="email"?"flex":"hidden"}`}
                         type='text' 
