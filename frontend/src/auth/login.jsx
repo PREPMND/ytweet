@@ -11,7 +11,9 @@ const Login = () => {
                 <h3>Use Username To Login</h3>
                 <div>
                     <form>
-                        <input type='text' placeholder='email' value={} name='email'/>
+                        <input type='text' 
+                        placeholder='email' value={} 
+                        name='email'/>
                     </form>
                 </div>
             </div>
