@@ -25,6 +25,7 @@ const Login = () => {
             <div className='flex h-screen items-center justify-center flex-col'>
                 <h1 className='text-xl font-700 mb-4'>Login</h1>
                 <h3
+                className=''
                 onClick={()=>{
                     if(way=="email"){setWay('username')}
                     else{setWay('email')}
