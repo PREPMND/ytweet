@@ -5,7 +5,9 @@ const Login = () => {
     const [username,setUsername]=useState('');
     const [password,setPassword]=useState('');
     const [way,setWay]=useState('email');
-    
+    async function name(params) {
+        
+    }
     return (
     <>
     <div>
