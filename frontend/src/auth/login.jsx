@@ -32,9 +32,7 @@ const Login = () => {
                         <input 
                         type='text'
                         value={password}
-                        onChange={(e)=>{setPassword()}} 
-
-
+                        onChange={(e)=>{setPassword(e.target.value)}} 
                         />
                     </form>
                 </div>
