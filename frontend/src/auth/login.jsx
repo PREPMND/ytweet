@@ -9,7 +9,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const res = await axios.post("http://localhost:8000/api/v1/users/login",
-                        ({email,username,password},
+                        {email,username,password},
                         {
                             withCredentials: true,                        
                         });
