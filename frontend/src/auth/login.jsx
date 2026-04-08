@@ -43,6 +43,7 @@ const Login = () => {
                         placeholder='username' value={username} 
                         name='username' onChange={(e)=>{setUsername(e.target.value)}}/>
                         <input 
+                        className='border'
                         type='text'
                         value={password}
                         onChange={(e)=>{setPassword(e.target.value)}} 
