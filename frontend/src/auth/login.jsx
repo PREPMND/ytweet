@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 const Login = () => {
     const [email,setEmail]=useState('');
     const [username,setUsername]=useState('');
+    const 
     const [way,setWay]=useState('email');
     return (
     <>
@@ -32,7 +33,7 @@ const Login = () => {
                         type='text'
                         value={password}
 
-                        
+
 
                         />
                     </form>
