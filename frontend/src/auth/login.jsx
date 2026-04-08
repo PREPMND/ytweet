@@ -11,7 +11,7 @@ const Login = () => {
             <div>
                 <h1 >Login</h1>
                 <h3
-                onClick={()=>{if{setWay('username')}}}
+                onClick={()=>{if(way=="email"{setWay('username')}}}
                 >`Use {way=="email"?"username":"email"} To Login`</h3>
                 <div>
                     <form>
