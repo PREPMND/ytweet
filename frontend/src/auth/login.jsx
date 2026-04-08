@@ -5,8 +5,7 @@ const Login = () => {
     const [username,setUsername]=useState('');
     const [password,setPassword]=useState('');
     const [way,setWay]=useState('email');
-    async function HandleSubmit() {
-        
+    async function HandleSubmit(e){
     }
     return (
     <>
