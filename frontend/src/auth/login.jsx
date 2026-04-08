@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 const Login = () => {
     const [email,setEmail]=useState('');
     const [username,setUsername]=useState('');
+    const [way,]
     return (
     <>
     <div>
