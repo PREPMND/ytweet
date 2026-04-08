@@ -7,7 +7,7 @@ const Login = () => {
         <div>
             <div>
                 <h1>Login</h1>
-                <h3>Do it </h3>
+                <h3>Use </h3>
                 <div>
                     <form>
                         <input type='text' placeholder='email' value={} name='email'/>
