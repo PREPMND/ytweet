@@ -29,7 +29,6 @@ const App = () => {
 
 return (
   <div>
-    {username ? `Welcome, ${username}` : "Logging in..."}
 
   </div>
 )
