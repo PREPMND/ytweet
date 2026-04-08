@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import axios from 'axios';
 const Login = () => {
     const [email,setEmail]=useState('');
     const [username,setUsername]=useState('');
@@ -13,7 +13,7 @@ const Login = () => {
                             {
                                 withCredentials: true, // important if backend CORS has credentials:true
                             }
-      );
+                        );
       console.log(res.data.data.user.username)
       return res.data.data.user.username
     } catch (err) {
