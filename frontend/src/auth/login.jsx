@@ -31,7 +31,9 @@ const Login = () => {
                         <input 
                         type='text'
                         value={password}
+
                         
+
                         />
                     </form>
                 </div>
