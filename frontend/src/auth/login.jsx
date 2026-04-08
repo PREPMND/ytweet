@@ -12,8 +12,8 @@ const Login = () => {
                 <div>
                     <form>
                         <input type='text' 
-                        placeholder='email' value={} 
-                        name='email'/>
+                        placeholder='email' value={email} 
+                        name='email' />
                     </form>
                 </div>
             </div>
