@@ -22,7 +22,7 @@ const Login = () => {
     <>
     <div>
         <div>
-            <div className='flex h-screen justify-between items-center flex-col'>
+            <div className='flex h-screen items-center flex-col'>
                 <h1 >Login</h1>
                 <h3
                 onClick={()=>{
