@@ -8,8 +8,7 @@ const Login = () => {
     async function HandleSubmit(e){
         e.preventDefault();
         try {
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/users/login",
+            const res = await axios.post("http://localhost:8000/api/v1/users/login",
         credentials,
         {
           withCredentials: true, // important if backend CORS has credentials:true
@@ -20,7 +19,7 @@ const Login = () => {
     } catch (err) {
       console.error("Login failed:", err.response?.data || err.message);
     }
-  }
+    }
     return (
     <>
     <div>
