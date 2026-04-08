@@ -17,7 +17,7 @@ const Login = () => {
                     <form>
                         <input 
                         
-                        className={`${way?"email"}`}
+                        className={`${way=="email"?}`}
                         type='text' 
                         placeholder='email' value={email} 
                         name='email' onChange={(e)=>{setEmail(e.target.value)}}/>
