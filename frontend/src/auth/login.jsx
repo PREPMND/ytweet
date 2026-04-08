@@ -9,7 +9,7 @@ const Login = () => {
                 <h1>Login</h1>
                 <div>
                     <form>
-                        <input type='text' placeholder='email' name='email'/>
+                        <input type='text' placeholder='email' value={} name='email'/>
                     </form>
                 </div>
             </div>
