@@ -5,7 +5,7 @@ const Login = () => {
     <>
     <div>
         <div>
-            <Clipboard
+            <
         </div>
     </div>
     </>
