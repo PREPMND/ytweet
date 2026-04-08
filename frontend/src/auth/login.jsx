@@ -50,7 +50,7 @@ const Login = () => {
                         className='border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                         type='text'
                         value={password} placeholder='password'
-                        max-w-[200pz]
+                        max-w-[200px]
                         onChange={(e)=>{setPassword(e.target.value)}} 
                         
                         />
