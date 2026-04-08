@@ -22,7 +22,7 @@ const Login = () => {
     <>
     <div>
         <div>
-            <div>
+            <div className=''>
                 <h1 >Login</h1>
                 <h3
                 onClick={()=>{
