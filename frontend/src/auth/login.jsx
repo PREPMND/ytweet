@@ -14,7 +14,8 @@ const Login = () => {
                         {
                             withCredentials: true,                        
                         });
-            setCurrentUser(res.data.data.user.usernamee;
+            setCurrentUser(res.data.data.user.username)
+;
             return res.data.data.user.username
         } catch (err) {
             console.error("Login failed:", err.response?.data || err.message);}
