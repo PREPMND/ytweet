@@ -7,6 +7,7 @@ const Login = () => {
     const [way,setWay]=useState('email');
     async function HandleSubmit(e){
         e.preventDefault();
+        
     }
     return (
     <>
