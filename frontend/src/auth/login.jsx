@@ -59,7 +59,7 @@ const Login = () => {
                     </form>
                 
                 </div>
-                <div> </div>
+                <div> Welcome {}</div>
             </div>
         </div>
     </div>
