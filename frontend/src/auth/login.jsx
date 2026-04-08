@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Login = () => {
-    const [email,setEmail]=use
+    const [email,setEmail]=useState('');
     return (
     <>
     <div>
