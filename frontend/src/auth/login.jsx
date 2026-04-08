@@ -25,7 +25,7 @@ const Login = () => {
     return (
     <>
     <div>
-        <div className='border border-gray-300 rounded '>
+        <div className='border border-gray-300 rounded w-fit '>
             <div className='flex h-screen items-center justify-center flex-col'>
                 <h1 className='text-xl font-700 mb-4'>Login</h1>
                 <h3
