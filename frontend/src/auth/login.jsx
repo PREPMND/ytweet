@@ -9,7 +9,7 @@ const Login = () => {
     <div>
         <div>
             <div>
-                <h1 className='bg-blue-500' >Login</h1>
+                <h1 >Login</h1>
                 <h3
                 onClick={()=>{setWay('username')}}
                 >Use Username To Login</h3>
