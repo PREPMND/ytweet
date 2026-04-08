@@ -14,10 +14,10 @@ const Login = () => {
                                 withCredentials: true, // important if backend CORS has credentials:true
                             }
                         );
-                console.log(res.data.data.user.username)
-                return res.data.data.user.username
+            console.log(res.data.data.user.username)
+            return res.data.data.user.username
         } catch (err) {
-                console.error("Login failed:", err.response?.data || err.message);}
+            console.error("Login failed:", err.response?.data || err.message);}
     }
     return (
     <>
