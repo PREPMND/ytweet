@@ -15,7 +15,7 @@ const Login = () => {
                         placeholder='email' value={email} 
                         name='email' onChange={(e)=>{setEmail(e.target.value)}}/>
                         <input type='text' 
-                        placeholder='email' value={email} 
+                        placeholder='username' value={email} 
                         name='email' onChange={(e)=>{setEmail(e.target.value)}}/>
                     
                     </form>
