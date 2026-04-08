@@ -32,7 +32,7 @@ const Login = () => {
                 >`Use {way=="email"?"username":"email"} To Login`</h3>
                 <div className='mt-12'>
                     <form 
-                    className='h-full w- flex flex-col items-center justify-center gap-4'
+                    className='h-full w-full flex flex-col items-center justify-center gap-4'
                     onSubmit={HandleSubmit}>
                         <input 
                         className={`${way=="email"?"flex":"hidden"} border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
