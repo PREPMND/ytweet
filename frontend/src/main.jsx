@@ -4,6 +4,9 @@ import App from './App.jsx'
 import Login from './auth/login.jsx'
 
 createRoot(document.getElementById('root')).render(
+
+    const [email,setEmail]=useState('');
+    const [username,setUsername]=useState('');
   <>
   <App/>
   <Login/>
