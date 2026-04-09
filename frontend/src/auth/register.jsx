@@ -33,7 +33,7 @@ const Register = () => {
                             <input
                             className='files'
                             type='file' accept='image/*' placeholder='Cover Image'/>
-
+                            </div>
                         </form>
                     </div>
                 </div>
