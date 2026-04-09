@@ -11,6 +11,7 @@ Api.interceptors.response.use(
         if(error.response.status==401){
             window.location.href="/login"
         }
-        return Promise
+        return Promise.reject(error)
     }
 )
+export 
