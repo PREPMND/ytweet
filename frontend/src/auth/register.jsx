@@ -26,7 +26,7 @@ const Register = () => {
                             className='files'
                             type='file' accept='image/*' placeholder='Avatar'/>
                             <input
-                            className='files'
+                            className='files file'
                             type='file' accept='image/*' placeholder='Cover Image'/>
 
                         </form>
