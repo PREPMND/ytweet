@@ -30,9 +30,9 @@ const Login = () => {
 
     <div>
 
-        <div 
+        {/*<div 
         className="h-screen w-screen" style={{ position: 'relative' }}>
-        {/*<Particles
+        <Particles
         className='bg-black'
         particleColors={["#ffffff"]}
         particleCount={200}
