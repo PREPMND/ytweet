@@ -11,7 +11,7 @@ const Register = () => {
                         className='flex flex-col gap-8 '
                         >
                             <input 
-                            className=''
+                            className='.input'
                             type='text' placeholder='Full Name'/>
                             <input type='text' placeholder='Email'/>
                             <input type='text' placeholder='UserName'/>
