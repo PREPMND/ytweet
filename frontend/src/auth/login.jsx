@@ -40,7 +40,7 @@ const Login = () => {
         particleBaseSize={100}
         moveParticlesOnHover
         alphaParticles={false}
-    disableRotation={false}
+        disableRotation={false}
         pixelRatio={1}/>
         </div>
         <div
