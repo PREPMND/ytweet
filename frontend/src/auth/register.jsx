@@ -24,6 +24,7 @@ const Register = () => {
                             type='text' placeholder='Password'/>
                             <input 
                             className='files'
+                            content=''
                             type='file' accept='image/*' placeholder='Avatar'/>
                             <input
                             className='files'
