@@ -61,13 +61,13 @@ const Login = () => {
                     className='h-full *:text-lg w-full flex flex-col items-center justify-center gap-4'
                     onSubmit={HandleSubmit}>
                         <input 
-                        className={`${way=="email"?"flex":"hidden"} border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                        className={`${way=="email"?"flex":"hidden"} border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2  focus:ring-blue-500 focus:border-transparent
                         w-[250px]`}
                         type='text' 
                         placeholder='Email' value={email} 
                         name='email' onChange={(e)=>{setEmail(e.target.value)}}/>
                         <input 
-                        className={`${way=="email"?"hidden":"flex"} border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                        className={`${way=="email"?"hidden":"flex"} border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 placeholder:text-neutral-700 focus:ring-blue-500 focus:border-transparent
                         w-[250px]`}
                         type='text' 
                         placeholder='Username' value={username} 
