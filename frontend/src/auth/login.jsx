@@ -64,7 +64,7 @@ const Login = () => {
                 
                 </div>
                 <div
-                className='cursor-pointer mt-6 text-blue-500 hover:underline'
+                className=``
                 >Want to create a new account!</div>
                 <div className={`${currentUser ? 'block' : 'hidden'}`}> Welcome {currentUser}</div>
             </div>
