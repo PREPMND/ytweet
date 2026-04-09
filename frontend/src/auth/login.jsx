@@ -30,7 +30,7 @@ const Login = () => {
 
     <div className='relative w-screen h-screen'>
 
-        <div style={{ width: '100%', height: '600px', position: 'relative' }}>
+        <div style={{ width: '100%', height: '85%', position: 'relative' }}>
         <Particles
         particleColors={["#ffffff"]}
         particleCount={200}
