@@ -3,4 +3,5 @@
 @tailwind utilities;
 .input{
     color: blue;
+    background-color: aquamarine;
 }
