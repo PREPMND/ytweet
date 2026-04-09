@@ -14,4 +14,4 @@ Api.interceptors.response.use(
         return Promise.reject(error)
     }
 )
-export 
+export default Api
