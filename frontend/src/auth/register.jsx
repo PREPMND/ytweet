@@ -24,7 +24,7 @@ const Register = () => {
                             className='input'
                             type='text' placeholder='Password'/>
                             </div>
-                            <div></div>
+                            <div className=>
                             <div>Choose Avatar</div>
                             <input 
                             className='files'
@@ -33,6 +33,7 @@ const Register = () => {
                             <input
                             className='files'
                             type='file' accept='image/*' placeholder='Cover Image'/>
+                            </div>
                         </form>
                     </div>
                 </div>
