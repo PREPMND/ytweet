@@ -33,7 +33,7 @@ const Login = () => {
         amplitude={10} speed={1}/>
         <div
         className='absolute inset-0 flex items-center justify-center'>
-        <div className='border border-amber-300 z-40 rounded-lg w-[400px] h-[400px]'>
+        <div className='border border-amber-300 z-30 rounded-lg w-[400px] h-[400px]'>
             <div className='flex items-center justify-center flex-col'>
                 <h1 className='text-xl font-700 mb-4'>Login</h1>
                 <h3
