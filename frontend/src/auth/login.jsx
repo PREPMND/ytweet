@@ -29,7 +29,7 @@ const Login = () => {
             <div className='flex items-center justify-center flex-col'>
                 <h1 className='text-xl font-700 mb-4'>Login</h1>
                 <h3
-                className='cursor-pointer mt-6 text-blue-500 hover:underline'
+                className='cursor-pointer mt-6 text-green-400 hover:underline'
                 onClick={()=>{
                     if(way=="email"){setWay('username')}
                     else{setWay('email')}
