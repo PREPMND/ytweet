@@ -26,7 +26,7 @@ const Login = () => {
     return (
     <>
 
-    <div className='relative w-screen items-center h-screen'>
+    <div className='relative w-screen h-screen'>
   
         <Aurora 
         className='absolute z-0 inset-0'
