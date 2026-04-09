@@ -82,6 +82,7 @@ const Login = () => {
                     ${currentUser ? 'block' : 'hidden'}`}> Welcome {currentUser}</div>
             </div>
         </div>
+        </div>
     </div>
     </>
   )
