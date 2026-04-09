@@ -1,2 +1,4 @@
 import {Routes,Route} from "react-router-dom"
-export 
+export default function AppRoutes(){
+    
+}
