@@ -33,7 +33,7 @@ const Login = () => {
         <div style={{ width: '100%', height: '100%', position: 'relative' }}>
         <Particles
         className='bg-black'
-        particleColors={["#"]}
+        particleColors={["#ffffff"]}
         particleCount={200}
         particleSpread={10}
         speed={0.1}
