@@ -4,8 +4,5 @@ export default function MainLayout(){
         <div>
             <h2>Navbar</h2>
         </div>
-        <div>
-            
-        </div>
     )
 }
