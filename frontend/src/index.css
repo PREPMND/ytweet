@@ -3,7 +3,7 @@
 @tailwind utilities;
 .input{
     padding: 10px;
-    border:
+    border:2px;
 }
 .files{
 
