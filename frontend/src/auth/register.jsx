@@ -3,7 +3,7 @@ import React from 'react'
 const Register = () => {
     return(
         <>
-        <div>
+        <div className='w-screen'>
             <div>
                 <div className='w-full'>
                     <h1>Welcome , Register</h1>
