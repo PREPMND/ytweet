@@ -27,7 +27,6 @@ const Login = () => {
     <>
 
     <div className='relative w-screen h-screen'>
-  
         <Aurora 
         className='absolute z-0 inset-0'
         colorStops={["#7cff67","#B19EEF","#5227FF"]} blend={0.5} 
