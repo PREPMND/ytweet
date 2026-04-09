@@ -8,7 +8,9 @@ const register = () => {
                 <div>
                     <h1>Welcome , Register</h1>
                     <div>
-                        
+                        <form>
+                            <input type=
+                        </form>
                     </div>
                 </div>
             </div>
