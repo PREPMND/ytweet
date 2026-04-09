@@ -10,7 +10,7 @@ const Register = () => {
                         <form
                         className='flex flex-col gap-8 '
                         >
-                            <div>
+                            
                             <input 
                             className='input'
                             type='text' placeholder='Full Name'/>
@@ -23,7 +23,7 @@ const Register = () => {
                             <input 
                             className='input'
                             type='text' placeholder='Password'/>
-                            </div>
+                    
                             <div className={`hidden`}>
                             <div>Choose Avatar</div>
                             <input 
