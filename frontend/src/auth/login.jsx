@@ -41,8 +41,7 @@ const Login = () => {
     moveParticlesOnHover
     alphaParticles={false}
     disableRotation={false}
-        pixelRatio={1}
-/>
+        pixelRatio={1}/>
         </div>
         <div
         className='absolute inset-0 flex z-30 items-center justify-center'>
