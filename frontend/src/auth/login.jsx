@@ -59,7 +59,7 @@ const Login = () => {
                         onChange={(e)=>{setPassword(e.target.value)}} 
                         
                         />
-                        <input type="submit" name='Login' placeholder='Login'/>
+                        <input type="submit" name='Login' bal placeholder='Login'/>
                     </form>
                 
                 </div>
