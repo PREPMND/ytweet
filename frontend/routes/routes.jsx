@@ -4,8 +4,8 @@ export default function AppRoutes(){
     return(
         <Routes>
             <Route element={<MainLayout/>}>
-            <Route element
             </Route>
+            
         </Routes>
     )
 }
