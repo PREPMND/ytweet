@@ -52,7 +52,7 @@ const Login = () => {
                         placeholder=' Username' value={username} 
                         name='username' onChange={(e)=>{setUsername(e.target.value)}}/>
                         <input 
-                        className='border border-gray-300 rounded px-4 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-[250px]'
+                        className='border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-[250px]'
                         type='text'
                         value={password} placeholder='Password'
                         
