@@ -9,7 +9,7 @@ export default function AppRoutes(){
             </Route>
             <Route element={<AuthLayout/>}>
             <Route element={<Login/>} path="/login"/>
-            <Route element={<Login/>} path="/register"/>
+            <Route element={<Register/>} path="/register"/>
             </Route>
         </Routes>
     )
