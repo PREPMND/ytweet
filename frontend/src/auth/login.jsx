@@ -73,7 +73,7 @@ const Login = () => {
                         placeholder='Username' value={username} 
                         name='username' onChange={(e)=>{setUsername(e.target.value)}}/>
                         <input 
-                        className='border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-[250px]'
+                        className='border border-gray-300  rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-[250px]'
                         type='text'
                         value={password} placeholder='Password'
                         
@@ -81,7 +81,7 @@ const Login = () => {
                         
                         />
                         <input 
-                        className='bg-blue-300 placeholder:text-white rounded px-4 py-1 font-[600] text-white '
+                        className='bg-blue-300 rounded px-4 py-1 font-[600] text-white '
                         type="submit" name='Login' value={"Login"} placeholder='Login' />
                     </form>
                 
