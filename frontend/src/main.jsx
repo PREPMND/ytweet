@@ -6,6 +6,8 @@ import Login from './auth/login.jsx'
 import Register from './auth/register.jsx'
 createRoot(document.getElementById('root')).render(
   <>
-  <
+  <BrowserRouter>
+  
+  </BrowserRouter>
   </>
 )
