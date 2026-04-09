@@ -1,5 +1,3 @@
-import axios from 'axios'
-import { useState ,useEffect} from 'react';
 import AppRoutes from '../routes/routes';
 const App = () => {
   {/*const [username,setUsername]=useState("")
