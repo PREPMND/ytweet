@@ -8,7 +8,9 @@ const Register = () => {
                 <div>
                     <h1>Welcome , Register</h1>
                     <div>
-                        <form>
+                        <form
+                        claaa
+                        >
                             <input type='text' placeholder='Full Name'/>
                             <input type='text' placeholder='Email'/>
                             <input type='text' placeholder='UserName'/>
