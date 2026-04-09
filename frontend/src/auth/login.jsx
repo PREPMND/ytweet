@@ -30,7 +30,7 @@ const Login = () => {
         <Aurora 
         className='absolute z-0 inset-0 h-full w-full'
         colorStops={["#7cff67","#B19EEF","#5227FF"]} blend={0.5} 
-        amplitude={10} speed={1}/>
+        amplitude={10} speed={1} canva/>
         <div
         className='absolute inset-0 flex z-30 items-center justify-center'>
         <div className='border border-amber-300 z-30 rounded-lg w-[400px] h-[400px]'>
