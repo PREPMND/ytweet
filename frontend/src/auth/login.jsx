@@ -30,7 +30,7 @@ const Login = () => {
 
     <div>
 
-        {/*<div 
+        <div 
         className="h-screen w-screen" style={{ position: 'relative' }}>
         <Particles
         className='bg-black'
@@ -43,7 +43,7 @@ const Login = () => {
         alphaParticles={false}
         disableRotation={false}
         pixelRatio={1}/>
-        </div>*/}
+        </div>
         <div
         className='absolute inset-0 flex z-30 items-center justify-center'>
         <div className='border backdrop-blur-md bg-white/40 border-gray-800 z-30 rounded-lg w-[400px] h-[400px]'>
