@@ -10,7 +10,11 @@ const register = () => {
                     <div>
                         <form>
                             <input type='text' placeholder='Full Name'/>
-                            
+                            <input type='text' placeholder='Full Name'/>
+                            <input type='text' placeholder='Full Name'/>
+                            <input type='text' placeholder='Full Name'/>
+                            <input type='text' placeholder='Full Name'/>
+
                         </form>
                     </div>
                 </div>
