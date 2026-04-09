@@ -5,7 +5,7 @@ const Register = () => {
         <>
         <div className=''>
             <div>
-                <div className='w-screen'>
+                <div className=''>
                     <h1>Welcome , Register</h1>
                     <div className='w-[400px] h-[600px] flex items-center justify-center'>
                         <form
