@@ -9,7 +9,7 @@ const register = () => {
                     <h1>Welcome , Register</h1>
                     <div>
                         <form>
-                            <input type="text" placeholder=
+                            <input type='text' placeholder='Full Name'/
                         </form>
                     </div>
                 </div>
