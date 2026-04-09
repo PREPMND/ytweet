@@ -81,7 +81,7 @@ const Login = () => {
                         
                         />
                         <input 
-                        className='bg-blue-300 rounded px-4 py-1 hover:bg-blue-700 transition-colors duration-300 ease-in-out font-[600] text-white text-lg w-[250px] cursor-pointer'
+                        className='bg-blue-300 rounded px-4 py-1 hover:bg-blue-700 transition-colors duration-300 ease-in-out font-[600] text-white text-lg w-[100px] cursor-pointer'
                         type="submit" name='Login' value={"Login"} placeholder='Login' />
                     </form>
                 
