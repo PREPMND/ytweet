@@ -1,1 +1,1 @@
-import 
+import { Outlet } from "react-router-dom";
