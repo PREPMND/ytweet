@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState ,useEffect} from 'react';
 const App = () => {
-  {const [username,setUsername]=useState("")
+  {/*const [username,setUsername]=useState("")
   async function loginUser(credentials) {
     try {
       const res = await axios.post(
