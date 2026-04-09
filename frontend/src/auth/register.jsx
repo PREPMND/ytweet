@@ -8,7 +8,7 @@ const Register = () => {
                 <div className=''>
                     <div className='w-full h-[100vh] flex items-center justify-center'>
                         <form
-                        className='flex flex-col gap-8 mb-6 *:width-[200px] '
+                        className='flex flex-col gap-8 mb-6 *:w-[200px] '
                         >
                             <input 
                             className='input'
