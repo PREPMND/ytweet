@@ -27,7 +27,14 @@ const Login = () => {
     <>
 
     <div className='flex justify-center items-center h-screen'>
-
+        import Aurora from './Aurora';
+  
+<Aurora
+  colorStops={["#7cff67","#B19EEF","#5227FF"]}
+  blend={0.5}
+  amplitude={1.0}
+  speed={1}
+/>
         <div className='border border-amber-300 z-40 rounded-lg w-[400px] h-[400px] flex items-center justify-center'>
             <div className='flex items-center justify-center flex-col'>
                 <h1 className='text-xl font-700 mb-4'>Login</h1>
