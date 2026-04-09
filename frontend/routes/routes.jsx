@@ -5,7 +5,7 @@ export default function AppRoutes(){
         <Routes>
             <Route element={<MainLayout/>}>
             </Route>
-            
+            <Route element={<AY}
         </Routes>
     )
 }
