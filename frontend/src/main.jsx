@@ -6,5 +6,6 @@ createRoot(document.getElementById('root')).render(
   <>
   <App/>
   <Login/>
+  <Reg
   </>
 )
