@@ -29,7 +29,7 @@ const Login = () => {
 
     <div className='relative w-screen h-screen'>
         <Aurora 
-        className=''
+        className='bg-'
         colorStops={["#7cff67","#B19EEF","#5227FF"]} blend={0.5} 
         amplitude={10} speed={1}/>
         <div
