@@ -10,7 +10,9 @@ const Register = () => {
                         <form
                         className='flex flex-col gap-8 '
                         >
-                            <input type='text' placeholder='Full Name'/>
+                            <input 
+                            
+                            type='text' placeholder='Full Name'/>
                             <input type='text' placeholder='Email'/>
                             <input type='text' placeholder='UserName'/>
                             <input type='text' placeholder='Password'/>
