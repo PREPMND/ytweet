@@ -8,6 +8,8 @@ const Api=axios.create({
 Api.interceptors.response.use(
     (response)=>response,
     (error)=>{
-        if
+        if(error.response.status==401){
+            
+        }
     }
 )
