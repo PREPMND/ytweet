@@ -31,7 +31,7 @@ const Login = () => {
         className='absolute z-0 inset-0'
         colorStops={["#7cff67","#B19EEF","#5227FF"]} blend={0.5} 
         amplitude={10} speed={1}/>
-        <div className=' absolute inset-0 border border-amber-300 z-40 rounded-lg w-[400px] h-[400px] flex items-center justify-center'>
+        <div className='border border-amber-300 z-40 rounded-lg w-[400px] h-[400px]'>
             <div className='flex items-center justify-center flex-col'>
                 <h1 className='text-xl font-700 mb-4'>Login</h1>
                 <h3
