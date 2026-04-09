@@ -6,8 +6,7 @@ const Register = () => {
         <div className=''>
             <div>
                 <div className=''>
-                    <h1>Welcome , Register</h1>
-                    <div className='w-full h-full flex items-center justify-center'>
+                    <div className='w-full h-[100vh] flex items-center justify-center'>
                         <form
                         className='flex flex-col '
                         >
