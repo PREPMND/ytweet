@@ -27,9 +27,8 @@ const Login = () => {
     <>
 
     <div className='flex justify-center items-center h-screen'>
-        import Aurora from './Aurora';
   
-     <Aurora
+    <Aurora
   colorStops={["#7cff67","#B19EEF","#5227FF"]}
   blend={0.5}
   amplitude={1.0}
