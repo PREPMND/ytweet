@@ -14,7 +14,7 @@ const register = () => {
                             <input type='text' placeholder='Full Name'/>
                             <input type='text' placeholder='Full Name'/>
                             <input type='file' accept='image/*' placeholder='Full Name'/>
-                            <input type='text' placeholder='Full Name'/>
+                            <input type='text' accept='image/*' placeholder='Full Name'/>
 
                         </form>
                     </div>
