@@ -26,6 +26,7 @@ const Register = () => {
                             <input 
                             className='files'
                             type='file' accept='image/*' placeholder='Avatar'/>
+                            <div>Choose Cover Image</div>
                             <input
                             className='files'
                             type='file' accept='image/*' placeholder='Cover Image'/>
