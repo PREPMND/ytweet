@@ -16,13 +16,13 @@
   border-color: #58c069;
 }
 .files {
-    border: 2px solid #4CAF50;
-    display: inline-block;
-    padding: 8px 12px;
-    cursor: pointer;
-    background-color: #f0f0f0;
-    border-radius: 6px;
-  }
+  border: 2px solid #4CAF50;
+  display: inline-block;
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+}
 input[type="file"] {
   display: none;
   }
