@@ -63,7 +63,7 @@ const Login = () => {
                     </form>
                 
                 </div>
-                <div>Already </div>
+                <div>Want to </div>
                 <div className={`${currentUser ? 'block' : 'hidden'}`}> Welcome {currentUser}</div>
             </div>
         </div>
