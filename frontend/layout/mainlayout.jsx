@@ -1,4 +1,8 @@
 import { Outlet } from "react-router-dom";
 export default function MainLayout(){
-    return
+    return(
+        <div>
+            <h2>Navbar</h2>
+        </div>
+    )
 }
