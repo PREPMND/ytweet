@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios';
+import Aurora from ""
 const Login = () => {
     const [email,setEmail]=useState('');
     const [username,setUsername]=useState('');
@@ -24,7 +25,7 @@ const Login = () => {
     }
     return (
     <>
-    
+
     <div className='flex justify-center z-40 items-center h-screen'>
         <div className='border border-amber-300 rounded-lg w-[400px] h-[400px] flex items-center justify-center'>
             <div className='flex items-center justify-center flex-col'>
