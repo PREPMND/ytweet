@@ -1,8 +1,9 @@
 import {Routes,Route} from "react-router-dom"
+import MainLayout from "../layout/mainlayout"
 export default function AppRoutes(){
     return(
         <Routes>
-            <Route element={<}
+            <Route element={<MainLayout/>}></Route>
         </Routes>
     )
 }
