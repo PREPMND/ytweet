@@ -6,7 +6,7 @@ const register = () => {
         <div>
             <div>
                 <div>
-                    <h1></h1>
+                    <h1>Welcome , Register</h1>
                 </div>
             </div>
         </div>
