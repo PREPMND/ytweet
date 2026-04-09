@@ -28,7 +28,7 @@ const Login = () => {
     return (
     <>
 
-    <div className='relative w-screen h-screen'>
+    <div className='relative'>
 
         <div style={{ width: '100%', height: '100%', position: 'relative' }}>
         <Particles
