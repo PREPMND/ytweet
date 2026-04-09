@@ -43,7 +43,7 @@ const Login = () => {
         alphaParticles={false}
         disableRotation={false}
         pixelRatio={1}/>
-        </div>
+        </div>*/
         <div
         className='absolute inset-0 flex z-30 items-center justify-center'>
         <div className='border backdrop-blur-md bg-white/30 border-amber-300 z-30 rounded-lg w-[400px] h-[400px]'>
