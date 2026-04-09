@@ -14,7 +14,7 @@ const Register = () => {
                             <input type='text' placeholder='UserName'/>
                             <input type='text' placeholder='Password'/>
                             <input type='file' accept='image/*' placeholder='Avatar'/>
-                            <input type='text' accept='image/*' placeholder='Cover Image'/>
+                            <input type='file' accept='image/*' placeholder='Cover Image'/>
 
                         </form>
                     </div>
