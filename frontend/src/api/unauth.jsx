@@ -6,5 +6,6 @@ const Api=axios.create({
     withCredentials:true
 })
 Api.interceptors.response.use(
-    (response)=>response
+    (response)=>response,
+    (error)=>
 )
