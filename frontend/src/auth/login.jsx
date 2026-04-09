@@ -60,7 +60,7 @@ const Login = () => {
                         
                         />
                         <input 
-                        className=''
+                        className='bg-blue-300 rounded'
                         type="submit" name='Login' value={"Login"} placeholder='Login'/>
                     </form>
                 
