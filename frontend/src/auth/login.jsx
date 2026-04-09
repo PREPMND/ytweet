@@ -63,7 +63,9 @@ const Login = () => {
                     </form>
                 
                 </div>
-                <div>Want to create a new account!</div>
+                <div
+                className=''
+                >Want to create a new account!</div>
                 <div className={`${currentUser ? 'block' : 'hidden'}`}> Welcome {currentUser}</div>
             </div>
         </div>
