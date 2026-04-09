@@ -1,9 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.input{
-    padding: 10px;
-    
+/* Basic input styling */
+input {
+  border: 2px solid #4A90E2;   /* solid border with color */
+  border-radius: 6px;          /* rounded corners */
+  padding: 8px 12px;           /* inner spacing */
+  outline: none;               /* remove default outline */
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #2C6FB2;       /* darker shade on focus */
+  box-shadow: 0 0 4px rgba(74, 144, 226, 0.6); /* subtle glow */
+}
+
+/* Optional hover effect */
+input:hover {
+  border-color: #5AA0F0;
 }
 .files{
 
