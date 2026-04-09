@@ -7,7 +7,7 @@ export default function AppRoutes(){
             <Route element={<MainLayout/>}>
             </Route>
             <Route element={<AuthLayout/>}>
-            
+            <Route element={<Lo}
             </Route>
         </Routes>
     )
