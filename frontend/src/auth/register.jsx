@@ -3,9 +3,9 @@ import React from 'react'
 const Register = () => {
     return(
         <>
-        <div className='w-screen'>
+        <div className=''>
             <div>
-                <div className='w-full'>
+                <div className='w-screen'>
                     <h1>Welcome , Register</h1>
                     <div className='w-[400px] h-[600px] flex items-center justify-center'>
                         <form
