@@ -3,7 +3,9 @@ import MainLayout from "../layout/mainlayout"
 export default function AppRoutes(){
     return(
         <Routes>
-            <Route element={<MainLayout/>}></Route>
+            <Route element={<MainLayout/>}>
+            <Route element
+            </Route>
         </Routes>
     )
 }
