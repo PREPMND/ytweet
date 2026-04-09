@@ -11,8 +11,8 @@ const register = () => {
                         <form>
                             <input type='text' placeholder='Full Name'/>
                             <input type='text' placeholder='Email'/>
-                            <input type='text' placeholder='User'/>
-                            <input type='text' placeholder=''/>
+                            <input type='text' placeholder='UserName'/>
+                            <input type='text' placeholder='Password'/>
                             <input type='file' accept='image/*' placeholder='Avatar'/>
                             <input type='text' accept='image/*' placeholder='Cover Image'/>
 
