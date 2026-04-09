@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import axios from 'axios';
 import Aurora from "../assets/aurora.jsx"
-import '../assets/aurora.css'
+import '../assets/parr.css'
 import Particles from '../assets/particles.jsx';
 const Login = () => {
     const [email,setEmail]=useState('');
