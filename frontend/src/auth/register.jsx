@@ -7,9 +7,9 @@ const Register = () => {
             <div>
                 <div>
                     <h1>Welcome , Register</h1>
-                    <div>
+                    <div >
                         <form
-                        className='flex flex-col'
+                        className='flex flex-col '
                         >
                             <input type='text' placeholder='Full Name'/>
                             <input type='text' placeholder='Email'/>
