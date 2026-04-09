@@ -32,7 +32,7 @@ const Login = () => {
         import Particles from './Particles';
 
         <div style={{ width: '100%', height: '600px', position: 'relative' }}>
-  <Particles
+        <Particles
     particleColors={["#ffffff"]}
     particleCount={200}
     particleSpread={10}
@@ -43,7 +43,7 @@ const Login = () => {
     disableRotation={false}
     pixelRatio={1}
 />
-</div>
+        </div>
         <div
         className='absolute inset-0 flex z-30 items-center justify-center'>
         <div className='border backdrop-blur-md bg-black/30 border-amber-300 z-30 rounded-lg w-[400px] h-[400px]'>
