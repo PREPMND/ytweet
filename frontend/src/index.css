@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 .input {
-  border: 2px solid #4A90E2;  
+  border: 2px solid #677585;  
   border-radius: 6px;          
   padding: 8px 12px;         
   outline: none;             
   transition: border-color 0.3s ease;
 }
 .input:focus {
-  border-color: #2C6FB2;   
+  border-color: #596571;   
   box-shadow: 0 0 4px rgba(74, 144, 226, 0.6);
 }
 .input:hover {
