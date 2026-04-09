@@ -7,7 +7,7 @@ const Register = () => {
             <div>
                 <div>
                     <h1>Welcome , Register</h1>
-                    <div className='w-[400px] h-['>
+                    <div className='w-[400px] h-[600px] '>
                         <form
                         className='flex flex-col '
                         >
