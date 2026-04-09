@@ -46,7 +46,7 @@ const Login = () => {
         </div>*/}
         <div
         className='absolute inset-0 flex z-30 items-center justify-center'>
-        <div className='border backdrop-blur-md bg-white/30 border-gray-800 z-30 rounded-lg w-[400px] h-[400px]'>
+        <div className='border backdrop-blur-md bg-black/30 border-gray-800 z-30 rounded-lg w-[400px] h-[400px]'>
             <div className='flex items-center justify-center flex-col'>
                 <h1 className='text-2xl font-[700] mt-2 text-neutral-800 mb-4'>Login</h1>
                 <h3
