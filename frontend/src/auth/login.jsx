@@ -26,7 +26,7 @@ const Login = () => {
     return (
     <>
 
-    <div className='flex justify-center relative items-center h-screen'>
+    <div className='flex justify-center relative w-screen items-center h-screen'>
   
         <Aurora 
         className='absolute z-0 inset-0'
