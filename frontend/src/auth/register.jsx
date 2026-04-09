@@ -13,6 +13,7 @@ const register = () => {
                             <input type='text' placeholder='Full Name'/>
                             <input type='text' placeholder='Full Name'/>
                             <input type='text' placeholder='Full Name'/>
+                            <input type='file' placeholder='Full Name'/>
                             <input type='text' placeholder='Full Name'/>
 
                         </form>
