@@ -1,11 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Basic input styling */
 input {
-  border: 2px solid #4A90E2;   /* solid border with color */
+  border: 2px solid #4A90E2;  
   border-radius: 6px;          
-  padding: 8px 12px;           /* inner spacing */
+  padding: 8px 12px;         
   outline: none;             
   transition: border-color 0.3s ease;
 }
