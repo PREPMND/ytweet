@@ -9,7 +9,7 @@ const Register = () => {
                     <h1>Welcome , Register</h1>
                     <div>
                         <form
-                        claaa
+                        className='flex flex-col'
                         >
                             <input type='text' placeholder='Full Name'/>
                             <input type='text' placeholder='Email'/>
