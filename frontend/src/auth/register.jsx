@@ -7,9 +7,10 @@ const Register = () => {
             <div>
                 <div className=''>
                     <div className='w-full h-[100vh] flex items-center justify-center'>
-                        <form className='flex gap-10'
+                        <form
+                        className='flex flex-col gap-8 '
                         >
-                            <div className='flex flex-col gap-8'>
+                            <div>
                             <input 
                             className='input'
                             type='text' placeholder='Full Name'/>
@@ -23,7 +24,7 @@ const Register = () => {
                             className='input'
                             type='text' placeholder='Password'/>
                             </div>
-                            <div className='hidden'>
+                            <div>
                             <div>Choose Avatar</div>
                             <input 
                             className='files'
@@ -32,7 +33,6 @@ const Register = () => {
                             <input
                             className='files'
                             type='file' accept='image/*' placeholder='Cover Image'/>
-                            </div>
                         </form>
                     </div>
                 </div>
