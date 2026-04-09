@@ -30,7 +30,8 @@ const Login = () => {
 
     <div className='relative'>
 
-        <div style={{ position: 'relative' }}>
+        <div 
+        className="h" style={{ position: 'relative' }}>
         <Particles
         className='bg-black'
         particleColors={["#ffffff"]}
