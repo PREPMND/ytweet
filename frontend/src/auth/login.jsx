@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios';
-import Aurora from "./"
+import Aurora from "../"
 const Login = () => {
     const [email,setEmail]=useState('');
     const [username,setUsername]=useState('');
