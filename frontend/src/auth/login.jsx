@@ -48,7 +48,7 @@ const Login = () => {
         className='absolute inset-0 flex z-30 items-center justify-center'>
         <div className='border backdrop-blur-md bg-white/30 border-amber-300 z-30 rounded-lg w-[400px] h-[400px]'>
             <div className='flex items-center justify-center flex-col'>
-                <h1 className='text-2xl font-[700] text-neutral-900 mb-4'>Login</h1>
+                <h1 className='text-2xl font-[600] text-neutral-800 mb-4'>Login</h1>
                 <h3
                 className='cursor-pointer mt-6 text-green-400 hover:underline'
                 onClick={()=>{
