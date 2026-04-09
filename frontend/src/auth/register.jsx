@@ -10,9 +10,9 @@ const register = () => {
                     <div>
                         <form>
                             <input type='text' placeholder='Full Name'/>
+                            <input type='text' placeholder=''/>
                             <input type='text' placeholder='Full Name'/>
-                            <input type='text' placeholder='Full Name'/>
-                            <input type='text' placeholder='Full Name'/>
+                            <input type='text' placeholder=''/>
                             <input type='file' accept='image/*' placeholder='Avatar'/>
                             <input type='text' accept='image/*' placeholder='Cover Image'/>
 
