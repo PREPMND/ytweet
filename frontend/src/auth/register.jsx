@@ -7,6 +7,9 @@ const register = () => {
             <div>
                 <div>
                     <h1>Welcome , Register</h1>
+                    <div>
+                        
+                    </div>
                 </div>
             </div>
         </div>
