@@ -28,7 +28,7 @@ const Login = () => {
     return (
     <>
 
-    <div className='relative'>
+    <div>
 
         <div 
         className="h-screen" style={{ position: 'relative' }}>
