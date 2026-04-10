@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const Register = () => {
     async function handlingNext(){
         alert("You confirm these details?");
-        
+        setNext(true);
     }
     const [next,setNext]=useState(false)
     return(
