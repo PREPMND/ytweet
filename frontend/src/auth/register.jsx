@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
 const Register = () => {
-    function (){
-
+    function handlingNext(){
+        
     }
     const [next,setNext]=useState(false)
     return(
