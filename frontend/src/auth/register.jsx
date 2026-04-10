@@ -4,8 +4,8 @@ const Register = () => {
 
     function handlingNext(){
         useEffect(()={
-            
-        })
+
+        },[next])
     }
     const [next, setNext] = useState(false)
     return (
