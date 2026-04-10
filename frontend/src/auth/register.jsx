@@ -24,7 +24,7 @@ const Register = () => {
                             className='input'
                             type='text' placeholder='Password'/>
                             <button
-                            
+                            onClick={}
                             >Next</button>
                             <div className={`hidden`}>
                             <div>Choose Avatar</div>
