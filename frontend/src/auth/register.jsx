@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Register = () => {
     async function handlingNext(){
-        awalert("You confirm these details?")
+        await alert("You confirm these details?")
     }
     const [next,setNext]=useState(false)
     return(
