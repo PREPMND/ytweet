@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
 
 const Register = () => {
-    async function handlingNext(){
-        alert("You confirm these details?");
-        setNext(true);
-    }
+    function handlingNext(e) {
+  e.preventDefault(); // prevent form submit refresh
+  const confirmed = window.confirm("You confirm these details?");
+  if (confirmed) {
+    setNext(true);
+  } else {
+    setNext(false);
+  }
+}
     const [next,setNext]=useState(false)
     return(
         <>
