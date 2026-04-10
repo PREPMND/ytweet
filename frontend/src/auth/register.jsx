@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const Register = () => {
-    const blockedUsername = ["", "ytweet", "modih"];
+    const blockedUsername = ["ytweet", "modih"];
     const [next, setNext] = useState(false);
     const [subnext, setSubnext] = useState(false);
     const [email, setEmail] = useState('');
@@ -28,14 +28,22 @@ const Register = () => {
     async function HandleSubmit(e) {
         e.preventDefault();
         try {
+            const formData = new FormData();
+            formData.append("email", email);
+            formData.append("username", username);
+            formData.append("password", password);
+            formData.append("fullName", fullName);
+            formData.append("avatar", avatar);
+            formData.append("coverImage", coverImage);
+            console.log(avatar)
             const res = await axios.post(
                 "http://localhost:8000/api/v1/users/register",
-                { email, username, password, fullName, avatar, coverImage },
+                formData,
                 { withCredentials: true }
             );
             return res;
         } catch (err) {
-            console.error("Login failed:", err.status ,err.message);
+            console.error("Register failed:", err.response?.data || err.message);
         }
     }
 
@@ -76,11 +84,11 @@ const Register = () => {
 
                 <div className={`${next ? "block" : "hidden"} *:mb-5`}>
                     <div>Choose Avatar</div>
-                    <input className='files' type='file' accept='image/*' value={avatar} placeholder='Avatar'
-                        onChange={(e) => setAvatar(e.target.value)} />
+                    <input className='files' type='file' accept='image/*' placeholder='Avatar'
+                        onChange={(e) => setAvatar(e.target.files[0])} />
                     <div>Choose Cover Image</div>
-                    <input className='files' type='file' accept='image/*' value={coverImage} placeholder='Cover Image'
-                        onChange={(e) => setCoverImage(e.target.value)} />
+                    <input className='files' type='file' accept='image/*' placeholder='Cover Image'
+                        onChange={(e) => setCoverImage(e.target.files[0])} />
 
                     <div className='flex justify-between mt-4'>
                         <button

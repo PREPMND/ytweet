@@ -29,7 +29,7 @@ const registerUser=asyncHandler(async(req,res,next)=>{
     //remove password and refresh token field from response
     //check for user creation 
     //retru res
-
+     console.log("yes")
     //getting user response
     const {fullName, email, username, password} = req.body
     if([fullName, email, username,password].some((field)=>field?.trim()===""))
@@ -41,13 +41,15 @@ const registerUser=asyncHandler(async(req,res,next)=>{
     if(existedUser){
         throw new apiError(409,"User with email or username already exists")
     }
-
+    
     const avatarLocalPath=req.files?.avatar[0]?.path;
+    console.log(avatarLocalPath)
     const coverImageLocalPath=req.files?.coverImage[0]?.path;
     if(!avatarLocalPath){
         throw new apiError(400,"Avatar File Is Required")
     }
     const avatar=await uploadOnCloudinary(avatarLocalPath)
+    console.log(avatarLocalPath)
     const coverImage=await uploadOnCloudinary(coverImageLocalPath)
     if(!avatar){
         throw new apiError( 400,"Avatar cannot be uploaded")
