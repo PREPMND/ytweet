@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Register = () => {
     function handlingNext(){
-        alert("")
+        alert("You sure before moving?")
     }
     const [next,setNext]=useState(false)
     return(
