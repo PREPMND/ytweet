@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Register = () => {
-    const 
+    const [next,setNext]=useState
     return(
         <>
         <div className=''>
