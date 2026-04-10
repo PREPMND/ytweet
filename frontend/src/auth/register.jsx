@@ -5,7 +5,7 @@ const Register = () => {
     function HandlingNext(){
         useEffect(()=>{
 
-        },[next])
+        },[])
     }
     const [next, setNext] = useState(false)
     return (
