@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
 const Register = () => {
-
     function HandlingNext(){
         useEffect(()=>{
             setNext(true)
