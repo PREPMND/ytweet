@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react'
 const Register = () => {
 
     function handlingNext(){
-        useEffect(()={
-
+        useEffect(()=>{
+            
         },[next])
     }
     const [next, setNext] = useState(false)
