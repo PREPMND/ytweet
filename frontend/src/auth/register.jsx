@@ -29,6 +29,7 @@ const Register = () => {
                             <button
                             onClick={
                                 handlingNext()
+
                             }
                             >Next</button>
                             <div className={`hidden`}>
