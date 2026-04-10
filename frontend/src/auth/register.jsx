@@ -26,7 +26,6 @@ const Register = () => {
             setSubnext(false);
         }
     }, [username, email, fullName, password]);
-
     async function HandleSubmit(e) {
         e.preventDefault();
         try {
@@ -51,7 +50,6 @@ const Register = () => {
             console.error("Register failed:", err.response?.data || err.message);
         }
     }
-
     function HandlingNext(e) {
         e.preventDefault();
         const confirmed = window.confirm("You confirm these details?");
@@ -59,12 +57,10 @@ const Register = () => {
             setNext(true);
         }
     }
-
     function HandlingBack(e) {
         e.preventDefault();
         setNext(false);
     }
-
     return (
         <>
         <div className='w-full h-[100vh] flex items-center justify-center'>
@@ -79,7 +75,6 @@ const Register = () => {
                     <input className='input' type='text' value={password} placeholder='Password'
                         onChange={(e) => setPassword(e.target.value)} />
                 </div>
-
                 <button
                     className={`${next ? "hidden" : "block"} ${subnext ? "bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded px-4 py-2" : "bg-gray-400 text-gray-700 cursor-not-allowed rounded px-4 py-2"}`}
                     onClick={HandlingNext}
@@ -87,7 +82,6 @@ const Register = () => {
                 >
                     Next
                 </button>
-
                 <div className={`${next ? "block" : "hidden"} *:mb-5`}>
                     <div>Choose Avatar</div>
                     <input className='files' type='file' accept='image/*' placeholder='Avatar'
@@ -110,7 +104,7 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <Loader2 className={`absolute top-0 animate-spin text-gray-600`} />
+                <Loader2 className={`${loading?"block":"hidden"} absolute top-0 animate-spin text-gray-600`} />
             </form>
             
         </div>
