@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Register = () => {
     function handlingNext(){
-        
+        alert("")
     }
     const [next,setNext]=useState(false)
     return(
