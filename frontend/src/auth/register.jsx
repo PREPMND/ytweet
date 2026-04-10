@@ -33,7 +33,7 @@ const Register = () => {
                                         HandlingNext()
                                     }
                                 >Next</button>
-                                <div className={`${next ? "block" : "hidden"}`}>
+                                <div className={`${next==true ? "block" : "hidden"}`}>
                                     <div>Choose Avatar</div>
                                     <input
                                         className='files'
