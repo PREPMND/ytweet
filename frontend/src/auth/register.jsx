@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import {useNavigate} from "react-router-dom"
+import {Home, Loader2} from "lucide-react"
 const Register = () => {
     const blockedUsername = ["ytweet", "modih"];
     const [next, setNext] = useState(false);
     const [subnext, setSubnext] = useState(false);
+    const [loading,setLoading]= useState(false);
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [avatar, setAvatar] = useState('');
     const [fullName, setFullName] = useState('');
     const [coverImage, setCoverImage] = useState('');
-
+    const navigate=useNavigate()
     useEffect(() => {
         if (
             !blockedUsername.includes(username) &&
@@ -36,11 +38,14 @@ const Register = () => {
             formData.append("avatar", avatar);
             formData.append("coverImage", coverImage);
             console.log(avatar)
+            setLoading(true);
             const res = await axios.post(
                 "http://localhost:8000/api/v1/users/register",
                 formData,
                 { withCredentials: true }
             );
+            setLoading(false);
+            if(res.status==200 || res.status==201){navigate("/")}
             return res;
         } catch (err) {
             console.error("Register failed:", err.response?.data || err.message);
@@ -61,6 +66,7 @@ const Register = () => {
     }
 
     return (
+        <>
         <div className='w-full h-[100vh] flex items-center justify-center'>
             <form className='flex flex-col gap-8 mb-6 *:w-[280px]' onSubmit={HandleSubmit}>
                 <div className={`${next ? "hidden" : "flex flex-col gap-8 mb-6 *:w-[280px]"}`}>
@@ -104,8 +110,13 @@ const Register = () => {
                         />
                     </div>
                 </div>
+                <Loader2 className={`absolute top-0 animate-spin text-gray-600`} />
             </form>
+            
         </div>
+        
+        </>
+        
     );
 };
 

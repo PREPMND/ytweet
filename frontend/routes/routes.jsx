@@ -7,10 +7,11 @@ export default function AppRoutes(){
     return(
         <Routes>
             <Route element={<MainLayout/>}>
+            <Route path="/" element={<h1>home</h1>}/>
             </Route>
             <Route element={<AuthLayout/>}>
-            <Route element={<Login/>} path="/login"/>
-            <Route element={<Register/>} path="/register"/>
+            <Route path="/login" element={<Login/>} />
+            <Route path="/register" element={<Register/>}/>
             </Route>
         </Routes>
     )
