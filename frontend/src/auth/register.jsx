@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const Register = () => {
-    const [next,setNext]=useState
+    const [next,setNext]=useState(false)
     return(
         <>
         <div className=''>
