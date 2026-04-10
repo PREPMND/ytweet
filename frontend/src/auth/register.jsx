@@ -29,8 +29,7 @@ const Register = () => {
                             type='text' placeholder='Password'/>
                             <button
                             onClick={
-                                handlingNext()
-
+                                handlingNext
                             }
                             >Next</button>
                             <div className={`${next?"block":"hidden"}`}>
