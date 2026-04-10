@@ -33,7 +33,7 @@ const Register = () => {
 
                             }
                             >Next</button>
-                            <div className={`hidden`}>
+                            <div className={`${}hidden`}>
                             <div>Choose Avatar</div>
                             <input 
                             className='files'
