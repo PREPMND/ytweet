@@ -20,20 +20,24 @@ const Register = () => {
   return (
     <div className='w-full h-[100vh] flex items-center justify-center'>
       <form className='flex flex-col gap-8 mb-6 *:w-[280px]'>
-        <div className={`${next?"hidden":"block"}`}>
+        <div className={`${next?"hidden":"flex flex-col gap-8 mb-6 *:w-[280px]"}`}>
         <input className='input' type='text' placeholder='Full Name' />
         <input className='input' type='text' placeholder='Email' />
         <input className='input' type='text' placeholder='UserName' />
         <input className='input' type='text' placeholder='Password' />
         </div>
-        <button onClick={HandlingNext}>Next</button>
+        <button
+        className={`${next ? "hidden" : "block"}`}
+        onClick={HandlingNext}>Next</button>
 
-        <div className={`${next ? "block" : "hidden"}`}>
+        <div className={`${next ? "block" : "hidden"} `}>
           <div>Choose Avatar</div>
           <input className='files' type='file' accept='image/*' placeholder='Avatar' />
           <div>Choose Cover Image</div>
           <input className='files' type='file' accept='image/*' placeholder='Cover Image' />
-          <input type='submit' />
+          <input 
+          className=''
+          type='submit' />
         </div>
       </form>
     </div>
