@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const Register = () => {
     function handlingNext(e) {
         e.preventDefault(); // prevent form submit refresh
-        const confirmed = window.confirm("You confirm these details?");
+        const confirmed = window.confirm("You confirm thse details?");
         if (confirmed) {
             setNext(true);
         } else {
