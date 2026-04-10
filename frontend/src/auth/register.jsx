@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
 
 const Register = () => {
-    function handlingNext(e) {
-        const confirmed = window.confirm("You confirm thse details?");
-        if (confirmed) {
-            setNext(true);
-        } else {
-            setNext(false);
-        }
+    function handlingNext(){
+        setNext(true)
+
     }
     const [next, setNext] = useState(false)
     return (
