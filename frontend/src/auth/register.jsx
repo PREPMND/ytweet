@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom"
-import {Home, Loader2} from "lucide-react"
+import {Home, Loader ,LoaderPinwheel} from "lucide-react"
 const Register = () => {
     const blockedUsername = ["ytweet", "modih"];
     const [next, setNext] = useState(false);
@@ -104,7 +104,7 @@ const Register = () => {
                         />
                     </div>
                 </div>
-                <Loader2 className={`${loading?"block":"hidden"} absolute top-0 animate-spin text-gray-600`} />
+                <LoaderPinwheel className={`${loading?"block":"hidden"} absolute top-0 animate-spin text-gray-600`} />
             </form>
             
         </div>
