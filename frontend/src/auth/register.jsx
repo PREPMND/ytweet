@@ -34,7 +34,7 @@ const Register = () => {
                             <input
                             className='files'
                             type='file' accept='image/*' placeholder='Cover Image'/>
-                            <
+                            <input type='submit'/>
                             </div>
                         </form>
                     </div>
