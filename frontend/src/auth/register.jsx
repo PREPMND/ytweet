@@ -34,7 +34,7 @@ const Register = () => {
                                     type='text' placeholder='Password' />
                                 <button
                                     onClick={
-                                        handlingNext()
+                                        handlingNext(e)
                                     }
                                 >Next</button>
                                 <div className={`${next ? "block" : "hidden"}`}>
