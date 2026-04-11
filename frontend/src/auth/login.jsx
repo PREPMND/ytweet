@@ -3,26 +3,38 @@ import axios from 'axios';
 import Aurora from "../assets/aurora.jsx"
 import '../assets/particles.css'
 import Particles from '../assets/particles.jsx';
+import { useNavigate } from "react-router-dom"
+import { Home, Loader, LoaderPinwheel } from "lucide-react"
+import orange from '../assets/orange.jpg'
 const Login = () => {
     const [email,setEmail]=useState('');
     const [username,setUsername]=useState('');
     const [password,setPassword]=useState('');
     const [way,setWay]=useState('email');
     const [currentUser,setCurrentUser] = useState(null);
+    const [error,setError] = useState(false);
     async function HandleSubmit(e){
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:8000/api/v1/users/login",
-                        {email,username,password},
-                        {
-                            withCredentials: true,                        
-                        });
-            setCurrentUser(res.data.data.user.username);
-            setEmail('');
-            setUsername('');
-            setPassword('');
-            return res.data.data.user.username
+            if ((email.trim() != '' || username.trim() != '') && password.trim() != '') {
+                const res = await axios.post("http://localhost:8000/api/v1/users/login",
+                            {email,username,password},
+                            {
+                                withCredentials: true,                        
+                            });
+                setCurrentUser(res.data.data.user.username);
+                setEmail('');
+                setUsername('');
+                setPassword('');
+                setError(false);
+                console.log(res.data.data.user.username)
+                return res.data.data.user.username
+            }
+            else{
+                setError(true);
+            }
         } catch (err) {
+            setError(true);
             console.error("Login failed:", err.response?.data || err.message);}
     }
     return (
@@ -46,11 +58,13 @@ const Login = () => {
         </div>*/}
         <div
         className='bg-white select-none absolute inset-0 flex z-30 items-center justify-center'>
+        <img className='z-0 inset-0 absolute w-full h-screen object-cover' src={orange} />
         <div className='border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg w-[400px] h-[400px]'>
+            
             <div className='flex items-center justify-center flex-col'>
                 <h1 className='text-2xl font-[700] mt-5 text-neutral-800 mb-4'>Login</h1>
                 <h3
-                className='cursor-pointer mt-6 text-green-400 hover:underline'
+                className='cursor-pointer mt-6 text-green-500 hover:underline'
                 onClick={()=>{
                     if(way=="email"){setWay('username')}
                     else{setWay('email')}
@@ -86,14 +100,12 @@ const Login = () => {
                     </form>
                 
                 </div>
+                <div className={`${error?"block":"opacity-0"} mt-2 text-red-500`}>Login Failed. Please check your credentials.</div>
                 <div
                 className={`
                     ${currentUser?'hidden':'block'}
-                    cursor-pointer mt-9 text-green-400 text-[15px] text-yellow hover:underline`}
+                    cursor-pointer mt-7 text-green-400 text-[15px] text-yellow hover:underline`}
                 >Want to create a new account!</div>
-                <div className={`
-                    mt-4
-                    ${currentUser ? 'block' : 'hidden'}`}> Welcome {currentUser}</div>
             </div>
         </div>
         </div>

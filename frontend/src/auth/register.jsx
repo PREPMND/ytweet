@@ -7,10 +7,9 @@ import background2 from '../assets/background2.jpg'
 import background3 from '../assets/background3.jpg'
 import background4 from '../assets/background4.jpg'
 const Register = () => {
-    const blockedUsername = ["ytweet", "modih"];
+    const blockedUsername = ["ytweet","modih",""," ", "admin", "administrator", "root", "sysadmin", "support", "helpdesk", "contact", "info", "sales", "marketing", "webmaster", "postmaster", "hostmaster", "abuse", "security", "noreply", "no-reply"];
     const [next, setNext] = useState(false);
     const [subnext, setSubnext] = useState(false);
-    const [button ,setButton] = useState(false);
     const [button2 ,setButton2] = useState(false);
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
@@ -20,12 +19,6 @@ const Register = () => {
     const [fullName, setFullName] = useState('');
     const [coverImage, setCoverImage] = useState('');
     const navigate = useNavigate()
-    const num   = Math.random() * 100;
-    let bg=null;
-    if(num<=25){bg={orange}}
-    else if(num>25 && num<=50){bg={background2}}
-    else if(num>50 && num<=75){bg={background3}}
-    else{bg={background4}}
 
     useEffect(() => {
         if (
@@ -80,7 +73,7 @@ const Register = () => {
 
             <div className='w-full h-[100vh] flex relative items-center justify-center'>
                 <img className='z-0 inset-0 absolute w-full h-screen object-cover' src={orange} />
-                <form className='flex flex-col gap-8 mb-6 *:w-[320px]' onSubmit={HandleSubmit}>
+                <form className='flex flex-col gap-8 mb-6 w-[390px]' onSubmit={HandleSubmit}>
                     <div className={`${next ? "hidden" : "flex flex-col gap-8 mb-6 *:w-[280px]"} border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 hover:border-green-500 z-30 shadow-lg rounded-lg py-9 *:w-[280px] h-full items-center justify-center transition-transform duration-500 ease-in-out 
               ${next ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100"}w-full `}>
                         <h1 className='text-2xl font-[700] text-center text-neutral-800 mb-2'>Register</h1>
@@ -94,7 +87,7 @@ const Register = () => {
                             onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <button
-                        className={`${next ? "hidden" : "block"} ${subnext ? "bg-blue-500/90 hover:bg-blue-700 z-40 text-white font-semibold rounded px-4 py-2" : "bg-gray-400 text-gray-700 cursor-not-allowed rounded px-4 py-2"} transition-colors duration-300 ease-in-out`}
+                        className={`${next ? "hidden" : "block"} ${subnext ? "bg-blue-500/90 hover:bg-blue-700 z-40 text-white font-semibold rounded px-4 py-2" : "bg-gray-400 text-gray-700 cursor-not-allowed rounded px-4 py-2"} transition-colors duration-300 ease-in-out z-40`}
                         onClick={HandlingNext}
                         disabled={!subnext}
                     >
