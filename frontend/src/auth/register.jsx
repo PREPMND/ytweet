@@ -3,10 +3,15 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 import { Home, Loader, LoaderPinwheel } from "lucide-react"
 import orange from '../assets/orange.jpg'
+import background2 from '../assets/background2.jpg'
+import background3 from '../assets/background3.jpg'
+import background4 from '../assets/background4.jpg'
 const Register = () => {
     const blockedUsername = ["ytweet", "modih"];
     const [next, setNext] = useState(false);
     const [subnext, setSubnext] = useState(false);
+    const [button ,setButton] = useState(false);
+    const [button2 ,setButton2] = useState(false);
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
@@ -15,6 +20,13 @@ const Register = () => {
     const [fullName, setFullName] = useState('');
     const [coverImage, setCoverImage] = useState('');
     const navigate = useNavigate()
+    const num   = Math.random() * 100;
+    let bg=null;
+    if(num<=25){bg={orange}}
+    else if(num>25 && num<=50){bg={background2}}
+    else if(num>50 && num<=75){bg={background3}}
+    else{bg={background4}}
+
     useEffect(() => {
         if (
             !blockedUsername.includes(username) &&
@@ -53,8 +65,9 @@ const Register = () => {
     }
     function HandlingNext(e) {
         e.preventDefault();
-        const confirmed = window.confirm("You confirm these details?");
-        if (confirmed) {
+        setButton2(true)
+        //const confirmed = window.confirm("You confirm these details?");
+        if (true) {
             setNext(true);
         }
     }
@@ -68,7 +81,8 @@ const Register = () => {
             <div className='w-full h-[100vh] flex relative items-center justify-center'>
                 <img className='z-0 inset-0 absolute w-full h-screen object-cover' src={orange} />
                 <form className='flex flex-col gap-8 mb-6 *:w-[320px]' onSubmit={HandleSubmit}>
-                    <div className={`${next ? "hidden" : "flex flex-col gap-8 mb-6 *:w-[280px]"} border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg py-9 *:w-[280px] h-full items-center justify-center `}>
+                    <div className={`${next ? "hidden" : "flex flex-col gap-8 mb-6 *:w-[280px]"} border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 hover:border-green-500 z-30 shadow-lg rounded-lg py-9 *:w-[280px] h-full items-center justify-center transition-transform duration-500 ease-in-out 
+              ${next ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100"}w-full `}>
                         <h1 className='text-2xl font-[700] text-center text-neutral-800 mb-2'>Register</h1>
                         <input className='input' type='text' value={fullName} placeholder='Full Name'
                             onChange={(e) => setFullName(e.target.value)} />
@@ -86,9 +100,9 @@ const Register = () => {
                     >
                         Next
                     </button>
-                    <div className={`${next ? "flex flex-col justify-center items-center" : "hidden"} *:mb-5 z-30 text-center `}>
+                    <div className={`${next ? "flex flex-col justify-center items-center" : "hidden"} *:mb-5 z-30 text-center font-[700] h-full`}>
 
-                        <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[500px]'>
+                        <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[500px] select-none bg-white/90 backdrop-blur-md'>
                             <div >
                             <div>Choose Avatar</div>
                             <input className='files' type='file' accept='image/*' placeholder='Avatar'
@@ -98,17 +112,17 @@ const Register = () => {
                                  <img className='w-full h-full object-cover' src={avatar ? URL.createObjectURL(avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
                             </div>
                         </div>
-                        <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[500px]'>
+                        <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[500px] select-none bg-white/90 backdrop-blur-md'>
                             <div >
                             <div>Choose Cover Image</div>
                             <input className='files' type='file' accept='image/*' placeholder='Cover Image'
                                 onChange={(e) => setCoverImage(e.target.files[0])} />
                             </div>
-                            <div className='border-[1px] shadow-lg rounded-md w-[90px] h-[80px] overflow-hidden'>
-                                 <img className='w-full h-full object-cover' src={coverImage ? URL.createObjectURL(coverImage) : orange} />
+                            <div className='border-[1px] shadow-lg rounded-[50%] w-[80px] h-[80px] overflow-hidden'>
+                                 <img className='w-full h-full object-cover' src={coverImage ? URL.createObjectURL(coverImage) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
                             </div>
                         </div>
-                        <div className='flex justify-between mt-4'>
+                        <div className='flex justify-between gap-10 mt-4'>
                             <button
                                 className='bg-gray-500 rounded px-4 py-1 hover:bg-gray-700 transition-colors duration-300 ease-in-out font-[600] text-white text-lg w-[100px]'
                                 onClick={HandlingBack}
@@ -122,7 +136,7 @@ const Register = () => {
                             />
                         </div>
                     </div>
-                    <LoaderPinwheel className={`${loading ? "block" : "hidden"} absolute top-0 animate-spin text-gray-600`} />
+                    <LoaderPinwheel className={`${loading ? "block" : "hidden"} absolute top-5  animate-spin text-yellow-50`} />
                 </form>
 
             </div>
