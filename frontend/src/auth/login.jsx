@@ -4,7 +4,7 @@ import Aurora from "../assets/aurora.jsx"
 import '../assets/particles.css'
 import Particles from '../assets/particles.jsx';
 import { useNavigate } from "react-router-dom"
-import { Home, Loader, LoaderPinwheel } from "lucide-react"
+import { LoaderPinwheel } from "lucide-react"
 import orange from '../assets/orange.jpg'
 const Login = () => {
     const [email,setEmail]=useState('');
@@ -13,9 +13,14 @@ const Login = () => {
     const [way,setWay]=useState('email');
     const [currentUser,setCurrentUser] = useState(null);
     const [error,setError] = useState(false);
+    const [loading,setLoading] = useState(false);
+
+    const navigate = useNavigate()
+
     async function HandleSubmit(e){
         e.preventDefault();
         try {
+            setLoading(true);
             if ((email.trim() != '' || username.trim() != '') && password.trim() != '') {
                 const res = await axios.post("http://localhost:8000/api/v1/users/login",
                             {email,username,password},
@@ -27,7 +32,10 @@ const Login = () => {
                 setUsername('');
                 setPassword('');
                 setError(false);
+                 
                 console.log(res.data.data.user.username)
+                setLoading(false);
+                navigate('/')
                 return res.data.data.user.username
             }
             else{
@@ -35,6 +43,7 @@ const Login = () => {
             }
         } catch (err) {
             setError(true);
+            setLoading(false);
             console.error("Login failed:", err.response?.data || err.message);}
     }
     return (
@@ -102,6 +111,7 @@ const Login = () => {
                 </div>
                 <div className={`${error?"block":"opacity-0"} mt-2 text-red-500`}>Login Failed. Please check your credentials.</div>
                 <div
+                onClick={()=>navigate("/register")}
                 className={`
                     ${currentUser?'hidden':'block'}
                     cursor-pointer mt-7 text-green-400 text-[15px] text-yellow hover:underline`}
@@ -109,6 +119,7 @@ const Login = () => {
             </div>
         </div>
         </div>
+        <LoaderPinwheel className={`${loading?"block":"hidden"} z-40 absolute left-1/2 top-10 animate-spin text-yellow-50`} size={28} />
     </div>
     </>
   )
