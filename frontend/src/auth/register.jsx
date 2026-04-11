@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom"
-import {Home, Loader ,LoaderPinwheel} from "lucide-react"
+import { useNavigate } from "react-router-dom"
+import { Home, Loader, LoaderPinwheel } from "lucide-react"
+import orange from '../assets/orange.jpg'
 const Register = () => {
     const blockedUsername = ["ytweet", "modih"];
     const [next, setNext] = useState(false);
     const [subnext, setSubnext] = useState(false);
-    const [loading,setLoading]= useState(false);
+    const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [avatar, setAvatar] = useState('');
     const [fullName, setFullName] = useState('');
     const [coverImage, setCoverImage] = useState('');
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     useEffect(() => {
         if (
             !blockedUsername.includes(username) &&
@@ -44,7 +45,7 @@ const Register = () => {
                 { withCredentials: true }
             );
             setLoading(false);
-            if(res.status==200 || res.status==201){navigate("/")}
+            if (res.status == 200 || res.status == 201) { navigate("/") }
             return res;
         } catch (err) {
             console.error("Register failed:", err.response?.data || err.message);
@@ -63,54 +64,71 @@ const Register = () => {
     }
     return (
         <>
-        <div className='w-full h-[100vh] flex items-center justify-center'>
-            <form className='flex flex-col gap-8 mb-6 *:w-[280px]' onSubmit={HandleSubmit}>
-                <div className={`${next ? "hidden" : "flex flex-col gap-8 mb-6 *:w-[280px]"}`}>
-                    <input className='input' type='text' value={fullName} placeholder='Full Name'
-                        onChange={(e) => setFullName(e.target.value)} />
-                    <input className='input' type='text' value={email} placeholder='Email'
-                        onChange={(e) => setEmail(e.target.value)} />
-                    <input className='input' type='text' value={username} placeholder='UserName'
-                        onChange={(e) => setUsername(e.target.value)} />
-                    <input className='input' type='text' value={password} placeholder='Password'
-                        onChange={(e) => setPassword(e.target.value)} />
-                </div>
-                <button
-                    className={`${next ? "hidden" : "block"} ${subnext ? "bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded px-4 py-2" : "bg-gray-400 text-gray-700 cursor-not-allowed rounded px-4 py-2"}`}
-                    onClick={HandlingNext}
-                    disabled={!subnext}
-                >
-                    Next
-                </button>
-                <div className={`${next ? "block" : "hidden"} *:mb-5`}>
-                    <div>Choose Avatar</div>
-                    <input className='files' type='file' accept='image/*' placeholder='Avatar'
-                        onChange={(e) => setAvatar(e.target.files[0])} />
-                    <div>Choose Cover Image</div>
-                    <input className='files' type='file' accept='image/*' placeholder='Cover Image'
-                        onChange={(e) => setCoverImage(e.target.files[0])} />
 
-                    <div className='flex justify-between mt-4'>
-                        <button
-                            className='bg-gray-500 rounded px-4 py-1 hover:bg-gray-700 transition-colors duration-300 ease-in-out font-[600] text-white text-lg w-[100px]'
-                            onClick={HandlingBack}
-                        >
-                            Back
-                        </button>
-                        <input
-                            className='bg-blue-500 rounded px-4 py-1 hover:bg-blue-700 transition-colors duration-300 ease-in-out font-[600] text-white text-lg w-[100px] cursor-pointer'
-                            type="submit"
-                            value='Register'
-                        />
+            <div className='w-full h-[100vh] flex relative items-center justify-center'>
+                <img className='z-0 inset-0 absolute w-full h-screen object-cover' src={orange} />
+                <form className='flex flex-col gap-8 mb-6 *:w-[320px]' onSubmit={HandleSubmit}>
+                    <div className={`${next ? "hidden" : "flex flex-col gap-8 mb-6 *:w-[280px]"} border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg py-9 *:w-[280px] h-full items-center justify-center `}>
+                        <h1 className='text-2xl font-[700] text-center text-neutral-800 mb-2'>Register</h1>
+                        <input className='input' type='text' value={fullName} placeholder='Full Name'
+                            onChange={(e) => setFullName(e.target.value)} />
+                        <input className='input' type='text' value={email} placeholder='Email'
+                            onChange={(e) => setEmail(e.target.value)} />
+                        <input className='input' type='text' value={username} placeholder='UserName'
+                            onChange={(e) => setUsername(e.target.value)} />
+                        <input className='input' type='text' value={password} placeholder='Password'
+                            onChange={(e) => setPassword(e.target.value)} />
                     </div>
-                </div>
-                <LoaderPinwheel className={`${loading?"block":"hidden"} absolute top-0 animate-spin text-gray-600`} />
-            </form>
-            
-        </div>
-        
+                    <button
+                        className={`${next ? "hidden" : "block"} ${subnext ? "bg-blue-500/90 hover:bg-blue-700 z-40 text-white font-semibold rounded px-4 py-2" : "bg-gray-400 text-gray-700 cursor-not-allowed rounded px-4 py-2"} transition-colors duration-300 ease-in-out`}
+                        onClick={HandlingNext}
+                        disabled={!subnext}
+                    >
+                        Next
+                    </button>
+                    <div className={`${next ? "flex flex-col justify-center items-center" : "hidden"} *:mb-5 z-30 text-center `}>
+
+                        <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[500px]'>
+                            <div >
+                            <div>Choose Avatar</div>
+                            <input className='files' type='file' accept='image/*' placeholder='Avatar'
+                                onChange={(e) => setAvatar(e.target.files[0])} />
+                            </div>
+                            <div className='border-[1px] shadow-lg rounded-[50%] w-[80px] h-[80px] overflow-hidden'>
+                                 <img className='w-full h-full object-cover' src={avatar ? URL.createObjectURL(avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
+                            </div>
+                        </div>
+                        <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[500px]'>
+                            <div >
+                            <div>Choose Cover Image</div>
+                            <input className='files' type='file' accept='image/*' placeholder='Cover Image'
+                                onChange={(e) => setCoverImage(e.target.files[0])} />
+                            </div>
+                            <div className='border-[1px] shadow-lg rounded-md w-[90px] h-[80px] overflow-hidden'>
+                                 <img className='w-full h-full object-cover' src={coverImage ? URL.createObjectURL(coverImage) : orange} />
+                            </div>
+                        </div>
+                        <div className='flex justify-between mt-4'>
+                            <button
+                                className='bg-gray-500 rounded px-4 py-1 hover:bg-gray-700 transition-colors duration-300 ease-in-out font-[600] text-white text-lg w-[100px]'
+                                onClick={HandlingBack}
+                            >
+                                Back
+                            </button>
+                            <input
+                                className='bg-blue-500 rounded px-4 py-1 hover:bg-blue-700 transition-colors duration-300 ease-in-out font-[600] text-white text-lg w-[100px] cursor-pointer'
+                                type="submit"
+                                value='Register'
+                            />
+                        </div>
+                    </div>
+                    <LoaderPinwheel className={`${loading ? "block" : "hidden"} absolute top-0 animate-spin text-gray-600`} />
+                </form>
+
+            </div>
+
         </>
-        
+
     );
 };
 
