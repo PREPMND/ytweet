@@ -136,7 +136,7 @@ const logOutUser=asyncHandler( async (req,res,next)=>{
     )
     const options={
         httpOnly:true,
-        secure:true
+        secure:false
     }
     return res
     .status(200)
@@ -162,7 +162,7 @@ const refreshAccessToken=asyncHandler( async (req,res,next)=>{
         }
         const options={
             httpOnly:true,
-            secure:true
+            secure:false
         }
         const {accessToken,newrefreshToken}=await generateAccessAndRefreshTokens(user._id)
         return res
