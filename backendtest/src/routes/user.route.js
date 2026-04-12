@@ -27,6 +27,9 @@ router.route("/logout").post(verifyJWT, logOutUser)
 router.route("/refreshtoken").post(refreshAccessToken)
 router.route("/changedpsw").post(verifyJWT,changeCurrentPassword)
 console.log("Token candidate:");
+router.get("/ping", verifyJWT, (req, res) => {
+  res.json({ message: "verifyJWT ran", user: req.user || null });
+});
 router.route("/currentuser").get(verifyJWT,getCurrentUser)
 console.log("Token candidate:");
 router.route("/updateaccount").patch(verifyJWT,updateAccountDetails)
