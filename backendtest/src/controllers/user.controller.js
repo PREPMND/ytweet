@@ -106,7 +106,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
     const options = {
         httpOnly: true,
         secure: false,
-        sameSite:"none"
+        sameSite: "none"
     }
     return res
         .status(200)
@@ -137,7 +137,7 @@ const logOutUser = asyncHandler(async (req, res, next) => {
     const options = {
         httpOnly: true,
         secure: false,
-        sameSite:"none"
+        sameSite: "none"
     }
     return res
         .status(200)
@@ -224,7 +224,12 @@ const getCurrentUser = asyncHandler(async (req, res, next) => {
     console.log("currentUser")
     const payload = new apiResponse(200, currentUser, "Yes");
     console.log("Sending payload:", payload);
-    res.status(200).json(payload);
+    res.status(200).json({
+        statusCode: 200,
+        data: req.user,
+        message: "Yes",
+        success: true
+    });
 })
 const updateAccountDetails = asyncHandler(async (req, res, next) => {
     //file changes should be handled seperately in other ocntrollers
