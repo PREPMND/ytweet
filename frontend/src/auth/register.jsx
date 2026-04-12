@@ -45,7 +45,7 @@ const Register = () => {
             console.log(avatar)
             setLoading(true);
             const res = await axios.post(
-                "https://localhost:8000/api/v1/users/register",
+                "http://localhost:8000/api/v1/users/register",
                 formData,
                 { withCredentials: true }
             );
