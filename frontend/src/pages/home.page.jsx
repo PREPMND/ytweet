@@ -1,25 +1,26 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Home = () => {
-    let res;
-    async function fetchData() {
-        try {
-            const response = await axios.post("http://localhost:8000/api/v1/users/currentuser")
-            console.log(response.data)
-            return response.data
-        }
-        catch(err){
-            console.log(err)
-        }
-    }
-    res=fetchData()
-  return (
-    <div
-    >
-      {res}
-    </div>
-  )
-}
+    const [res, setRes] = useState(null);
 
-export default Home
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.post("http://localhost:8000/api/v1/users/currentuser");
+                setRes(response.data);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        fetchData();
+    }, []);
+
+    return (
+        <div>
+            {res ? <pre>{JSON.stringify(res, null, 2)}</pre> : "Loading..."}
+        </div>
+    );
+};
+
+export default Home;
