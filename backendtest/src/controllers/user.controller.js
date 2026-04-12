@@ -220,7 +220,7 @@ const getCurrentUser= asyncHandler(async (req,res,next)=>{
     const currentUser= req.user;//an object
     return res.status(200).json(
         200,
-        currentUser || "caannot find",
+        currentUser,
         "Current User Object Has Been Provided Succesfully"
     )
 })
