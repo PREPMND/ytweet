@@ -7,8 +7,7 @@ export default function getCurrentUser() {
                     { withCredentials: true } // <-- critical
                 );
                 console.log(response.data)
-                setUser(response.data.data);
-                setMessage(response.data.message);
+                return response.data.data;
             } catch (err) {
                 if (err.status == 401) {
                     console.log(" Please log in.");
