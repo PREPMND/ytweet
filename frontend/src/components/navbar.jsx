@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 import getCurrentUser from '../api/currentuser.jsx';
-async function Navbar() {
+const  Navbar = () => {
     const currentUser = await getCurrentUser();
     console.log(currentUser);
 
