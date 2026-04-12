@@ -21,7 +21,6 @@ import routerVideo from "./routes/video.routes.js";
 console.log("YEA")
 application.get("/debug", (req, res) => res.send("debug works"));
 application.use("/api/v1/users", router)
-application.use("/api/v1/videos", routerVideo)
 console.log(listEndpoints(application));
 // Global error handler
 application.use((err, req, res, next) => {
