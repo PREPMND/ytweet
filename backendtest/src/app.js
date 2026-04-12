@@ -5,7 +5,7 @@ import listEndpoints from 'express-list-endpoints';
 
 
 const application = express();
-console.log(listEndpoints(application));
+
 application.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
@@ -22,7 +22,7 @@ console.log("YEA")
 
 application.use("/api/v1/users", router)
 application.use("/api/v1/videos", routerVideo)
-
+console.log(listEndpoints(application));
 // Global error handler
 application.use((err, req, res, next) => {
     const status = err.statusCode || 500;
