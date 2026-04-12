@@ -2,12 +2,12 @@ import express from "express";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { createVideo, getVideos, getVideoById, updateVideo, deleteVideo } from "../controllers/video.controller.js";
 
-const router = express.Router();
+const routerVideo = express.Router();
 
-router.post("/", verifyJWT, createVideo);
-router.get("/", getVideos);
-router.get("/:id", getVideoById);
-router.put("/:id", verifyJWT, updateVideo);
-router.delete("/:id", verifyJWT, deleteVideo);
+routerVideo.post("/", verifyJWT, createVideo);
+routerVideo.get("/", getVideos);
+routerVideo.get("/:id", getVideoById);
+routerVideo.put("/:id", verifyJWT, updateVideo);
+routerVideo.delete("/:id", verifyJWT, deleteVideo);
 
-export default router;
+export default routerVideo;

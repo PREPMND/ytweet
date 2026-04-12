@@ -13,10 +13,11 @@ application.use(cookieParser())
 
 
 import router from './routes/user.route.js'
+import videoRouter from "./routes/video.routes.js"
 console.log("YEA")
 
 application.use("/api/v1/users",router)
-application.use("/api/v1/videos",video)
+application.use("/api/v1/videos",videoRouter)
 export { application }
 
 
