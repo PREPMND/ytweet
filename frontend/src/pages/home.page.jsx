@@ -16,7 +16,10 @@ const Home = () => {
                     setUser(response.data.data);
                     setMessage(response.data.message);
                 } catch (err) {
-                    console.log(err);
+                    if( err.status == 401){
+                        console.log(" Please log in.");
+                    }
+                    console.log(err.status);
                 }
             }
             fetchData();
