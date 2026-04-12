@@ -1,8 +1,11 @@
 import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
-import 
+import listEndpoints from 'express-list-endpoints';
+
+
 const application = express();
+console.log(listEndpoints(application));
 application.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
