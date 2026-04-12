@@ -1,5 +1,4 @@
 import {Router} from "express"
-import { application } from "../app.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { loginUser, logOutUser, refreshAccessToken, registerUser ,changeCurrentPassword, getCurrentUser ,updateAccountDetails,updateUserAvatar,updateUserCoverImage, getUserChannelProfile,getWatchHistory} from "../controllers/user.controller.js"
 import { upload } from "../middlewares/multer.middleware.js"
@@ -38,9 +37,5 @@ router.route("/changeavatar").patch(verifyJWT,upload.single("avatar"),updateUser
 router.route("/changecoverimage").patch(verifyJWT,upload.single("coverImage"),updateUserCoverImage)
 router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
 router.route("/history").get(verifyJWT,getWatchHistory)
-application._router.stack.forEach(r => {
-  if (r.route) {
-    console.log(r.route.path, r.route.methods);
-  }
-});
+
 export default router;
