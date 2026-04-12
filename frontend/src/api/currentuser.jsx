@@ -8,7 +8,7 @@ export default function getCurrentUser() {
                 { withCredentials: true }
             );
             console.log(response.data)
-            return response.data.data;
+            return response;
         } catch (err) {
             if (err.status == 401) {
                 console.log(" Please log in.");
