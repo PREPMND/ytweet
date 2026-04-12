@@ -2,6 +2,7 @@ import { User } from "../models/user.models.js";
 import { apiError } from "../utils/apiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken";
+console.log("Token candidate:");
 export const verifyJWT = asyncHandler(async (req, res, next) => {
     console.log(">>> verifyJWT entered");
 
