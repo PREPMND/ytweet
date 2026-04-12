@@ -16,12 +16,21 @@ application.use(express.static("public"))
 application.use(cookieParser())
 
 
-import router from './routes/user.route.js'
-import routerVideo from "./routes/video.routes.js";
 console.log("YEA")
 application.get("/debug", (req, res) => res.send("debug works"));
-application.use("/api/v1/users", router)
-application.use("/api/v1/videos", routerVideo)
+try {
+    import router from './routes/user.route.js';
+    application.use("/api/v1/users", router);
+} catch (err) {
+    console.error("User router failed:", err);
+}
+
+try {
+    import routerVideo from "./routes/video.routes.js";
+    application.use("/api/v1/videos", routerVideo);
+} catch (err) {
+    console.error("Video router failed:", err);
+}
 console.log(listEndpoints(application));
 // Global error handler
 application.use((err, req, res, next) => {
