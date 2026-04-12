@@ -21,10 +21,13 @@ application.use("/api/v1/videos", routerVideo)
 // Global error handler
 application.use((err, req, res, next) => {
     const status = err.statusCode || 500;
+
     res.status(status).json({
         statusCode: status,
+        data: err.data || null,
         message: err.message || "Internal Server Error",
-        success: false
+        success: false,
+        errors: err.errors || []
     });
 });
 export { application }
