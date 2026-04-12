@@ -12,7 +12,7 @@ const Home = () => {
                     "http://localhost:8000/api/v1/users/currentuser",
                     { withCredentials: true } // <-- critical
                 );
-                console.log(response.data)
+                console.log(response)
                 setUser(response.data.data);
                 setMessage(response.data.message);
             } catch (err) {
