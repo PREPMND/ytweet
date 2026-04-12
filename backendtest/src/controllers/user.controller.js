@@ -219,9 +219,9 @@ const changeCurrentPassword=asyncHandler( async (req,res,next)=>{
 const getCurrentUser= asyncHandler(async (req,res,next)=>{
     const currentUser= req.user;//an object
     return res.status(200).json(
-        200,
-        {currentUser},
-        "Current User Object Has Been Provided Succesfully"
+        new apiResponse(
+        200,currentUser,
+        "Current User Object Has Been Provided Succesfully")
     )
 })
 const updateAccountDetails=asyncHandler(async (req,res,next)=>{
