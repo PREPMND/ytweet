@@ -35,11 +35,6 @@ application.use((err, req, res, next) => {
         errors: err.errors || []
     });
 });
-application._router.stack.forEach(r => {
-  if (r.route) {
-    console.log(r.route.path, r.route.methods);
-  }
-});
 export { application }
 
 
