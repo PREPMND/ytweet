@@ -6,10 +6,8 @@ import axios from 'axios';
 
 import getCurrentUser from '../api/currentuser';
 const navbar = () => {
-    
-    useEffect(() => {
-        getCurrentUser();
-    }, []);
+    const currentUser = getCurrentUser();
+    console.log(currentUser);
 
     return (
         <>
