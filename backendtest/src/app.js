@@ -18,6 +18,11 @@ console.log("YEA")
 
 application.use("/api/v1/users", router)
 application.use("/api/v1/videos", routerVideo)
+application._router.stack.forEach(r => {
+  if (r.route) {
+    console.log(r.route.path, r.route.methods);
+  }
+});
 // Global error handler
 application.use((err, req, res, next) => {
     const status = err.statusCode || 500;
