@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 import getCurrentUser from '../api/currentuser';
-const navbar = () => {
+const Navbar = () => {
     const currentUser = getCurrentUser();
     console.log(currentUser);
 
@@ -23,4 +23,4 @@ const navbar = () => {
     )
 }
 
-export default navbar
+export default Navbar
