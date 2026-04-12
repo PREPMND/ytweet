@@ -221,7 +221,7 @@ const getCurrentUser= asyncHandler(async (req,res,next)=>{
     console.log("currentUser")
     return res.status(200).json(
         new apiResponse(
-            200,{currentUser},"Yes"
+            200,currentUser,"Yes"
         )
     )
 })
