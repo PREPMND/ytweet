@@ -37,4 +37,9 @@ router.route("/changeavatar").patch(verifyJWT,upload.single("avatar"),updateUser
 router.route("/changecoverimage").patch(verifyJWT,upload.single("coverImage"),updateUserCoverImage)
 router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
 router.route("/history").get(verifyJWT,getWatchHistory)
+application._router.stack.forEach(r => {
+  if (r.route) {
+    console.log(r.route.path, r.route.methods);
+  }
+});
 export default router;
