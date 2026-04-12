@@ -16,7 +16,7 @@ application.use(express.static("public"))
 application.use(cookieParser())
 
 
-import router from '../routes/user.route.js'
+import router from './routes/user.route.js'
 import routerVideo from "./routes/video.routes.js";
 console.log("YEA")
 application.get("/debug", (req, res) => res.send("debug works"));
