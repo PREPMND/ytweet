@@ -217,10 +217,10 @@ const changeCurrentPassword=asyncHandler( async (req,res,next)=>{
     return res.status(200).json(new apiResponse(200,{},"Password Updated Succesfully"))
 })
 const getCurrentUser= asyncHandler(async (req,res,next)=>{
-    const currentUser=req.user;//an object
+    const currentUser= req.user;//an object
     return res.status(200).json(
         200,
-        currentUser,
+        currentUser || "caannot find",
         "Current User Object Has Been Provided Succesfully"
     )
 })
