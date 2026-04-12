@@ -1,4 +1,4 @@
-import { Video } from "../models/video.model.js"; // adjust path if needed
+import { Video } from "../models/video.models.js"; // adjust path if needed
 
 export const createVideo = async (req, res) => {
     try {
