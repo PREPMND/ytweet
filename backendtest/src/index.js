@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import listEndpoints from 'express-list-endpoints';
 dotenv.config({
     path:'./.env'
 })
@@ -9,4 +10,5 @@ MongoConnection();
 const PORT=8000
 application.listen(PORT,()=>{
     console.log("Server is running on ", PORT)
+    console.log(listEndpoints(application));
 })
