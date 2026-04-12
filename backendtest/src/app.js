@@ -16,7 +16,7 @@ import router from './routes/user.route.js'
 console.log("YEA")
 
 application.use("/api/v1/users",router)
-
+application.use("/api/v1/videos",video)
 export { application }
 
 
