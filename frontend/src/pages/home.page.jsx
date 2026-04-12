@@ -6,7 +6,8 @@ const Home = () => {
     async function fetchData() {
         try {
             const response = await axios.post("http://localhost:8000/api/v1/users/currentuser")
-            return response
+            console.log(response.data)
+            return response.data
         }
         catch(err){
             console.log(err)
