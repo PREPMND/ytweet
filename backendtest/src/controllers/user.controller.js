@@ -136,7 +136,8 @@ const logOutUser = asyncHandler(async (req, res, next) => {
     )
     const options = {
         httpOnly: true,
-        secure: false
+        secure: false,
+        sameSite:"none"
     }
     return res
         .status(200)
