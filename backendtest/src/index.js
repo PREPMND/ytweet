@@ -5,6 +5,7 @@ dotenv.config({
 })
 import { MongoConnection } from "./db/index.js";
 import { application } from "./app.js";
+console.log("Application object:", application);
 console.log(process.env.REFRESH_TOKEN_SECURITY)
 MongoConnection();
 const PORT=8000
