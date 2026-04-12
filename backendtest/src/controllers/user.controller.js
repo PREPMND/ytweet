@@ -220,7 +220,7 @@ const changeCurrentPassword = asyncHandler(async (req, res, next) => {
 const getCurrentUser = asyncHandler(async (req, res, next) => {
     const currentUser = await User.findById(req.user?._id)//an object
     console.log("currentUser")
-    const payload = new apiResponse(200, currentUser, "Yes");
+    const payload = new apiResponse(, currentUser, "Yes");
     console.log("Sending payload:", payload);
     res.status(200).json(payload);
 })
