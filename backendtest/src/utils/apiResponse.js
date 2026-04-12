@@ -6,3 +6,4 @@ class apiResponse {
     this.success = statusCode < 400; // fixed spelling
   }
 }
+export {apiResponse}
