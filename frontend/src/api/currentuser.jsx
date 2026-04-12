@@ -4,7 +4,7 @@ export default function getCurrentUser() {
     async function fetchData() {
         try {
             const response = await axios.get(
-                "http://localhost:8000/api/v1/users/currentuser",
+                "https://localhost:8000/api/v1/users/currentuser",
                 { withCredentials: true }
             );
             console.log(response)
