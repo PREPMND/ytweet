@@ -23,7 +23,6 @@ router.route("/login").post(
     loginUser)
 
 //secured routes
-console.log("Router object:", router);
 router.route("/logout").post(verifyJWT, logOutUser)
 router.route("/refreshtoken").post(refreshAccessToken)
 router.route("/changedpsw").post(verifyJWT,changeCurrentPassword)
@@ -41,5 +40,4 @@ router.get("/ping", verifyJWT, (req, res) => {
 router.route("/changecoverimage").patch(verifyJWT,upload.single("coverImage"),updateUserCoverImage)
 router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
 router.route("/history").get(verifyJWT,getWatchHistory)
-console.log("Router object:", router);
 export default router;
