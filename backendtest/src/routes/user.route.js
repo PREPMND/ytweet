@@ -35,6 +35,9 @@ router.route("/currentuser").get(verifyJWT,getCurrentUser)
 console.log("Token candidate:");
 router.route("/updateaccount").patch(verifyJWT,updateAccountDetails)
 router.route("/changeavatar").patch(verifyJWT,upload.single("avatar"),updateUserAvatar)
+router.get("/ping", verifyJWT, (req, res) => {
+  res.json({ message: "verifyJWT ran", user: req.user || null });
+});
 router.route("/changecoverimage").patch(verifyJWT,upload.single("coverImage"),updateUserCoverImage)
 router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
 router.route("/history").get(verifyJWT,getWatchHistory)
