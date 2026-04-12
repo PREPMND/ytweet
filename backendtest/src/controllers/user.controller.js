@@ -116,7 +116,7 @@ const loginUser=asyncHandler(async (req,res,next)=>{
         new apiResponse(
             200,
             {
-                user:loggedInUser,accessToken,refreshToken
+                user:loggedInUser
             },
             "User Logged In Successfully"
         )
@@ -172,7 +172,7 @@ const refreshAccessToken=asyncHandler( async (req,res,next)=>{
         .json(
             new apiResponse(
                 200,
-                {accessToken,newrefreshToken},
+                {},
                 "access token refreshed"
             )
         )
