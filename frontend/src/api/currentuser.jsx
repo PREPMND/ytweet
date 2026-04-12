@@ -7,7 +7,7 @@ export default function getCurrentUser() {
                 "http://localhost:8000/api/v1/users/currentuser",
                 { withCredentials: true }
             );
-            console.log(response.data)
+            console.log(response)
             return response.data;
         } catch (err) {
             if (err.status == 401) {
