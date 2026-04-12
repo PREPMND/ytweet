@@ -26,6 +26,7 @@ router.route("/login").post(
 router.route("/logout").post(verifyJWT, logOutUser)
 router.route("/refreshtoken").post(refreshAccessToken)
 router.route("/changedpsw").post(verifyJWT,changeCurrentPassword)
+console.log("Token candidate:");
 router.route("/currentuser").get(verifyJWT,getCurrentUser)
 router.route("/updateaccount").patch(verifyJWT,updateAccountDetails)
 router.route("/changeavatar").patch(verifyJWT,upload.single("avatar"),updateUserAvatar)
