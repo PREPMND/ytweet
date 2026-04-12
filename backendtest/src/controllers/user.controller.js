@@ -220,7 +220,9 @@ const getCurrentUser= asyncHandler(async (req,res,next)=>{
     const currentUser= req.user;//an object
     console.log("currentUser")
     return res.json(
-        currentUser
+        new apiResponse(
+            200,{currentUser},"Yes"
+        )
     )
 })
 const updateAccountDetails=asyncHandler(async (req,res,next)=>{
