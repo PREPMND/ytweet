@@ -7,7 +7,7 @@ import axios from 'axios';
 import getCurrentUser from '../api/currentuser.jsx';
 const Navbar = () => {
     const currentUser = getCurrentUser();
-    console.log(currentUser);
+    console.log(getCurrentUser());
 
     return (
         <>
