@@ -1,4 +1,4 @@
-import AppRoutes from '../routes/routes';
+import AppRoutes from './routes/routes.jsx';
 const App = () => {
   {/*const [username,setUsername]=useState("")
   async function loginUser(credentials) {

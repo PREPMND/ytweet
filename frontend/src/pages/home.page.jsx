@@ -1,10 +1,11 @@
 import React from 'react'
+import axios from 'axios';
 
 const Home = () => {
     let res;
     async function fetchData() {
         try {
-            const response = await fetch("http://localhost:8000/api/v1/users/me")
+            const response = await axios.post("http://localhost:8000/api/v1/users/currentuser")
             return response
         }
         catch(err){
