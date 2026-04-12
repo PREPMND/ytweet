@@ -1,7 +1,4 @@
 import dotenv from "dotenv";
-import { application } from "./app.js";
-import { verifyJWT } from "./middlewares/auth.middleware.js";
-import { router } from "express";
 dotenv.config({
     path:'./.env'
 })
