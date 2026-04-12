@@ -12,3 +12,4 @@ application.listen(PORT,()=>{
     console.log("Server is running on ", PORT)
     console.log(listEndpoints(application));
 })
+application.get("/hello", (req, res) => res.send("hello from index"));
