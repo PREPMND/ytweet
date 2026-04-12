@@ -218,6 +218,8 @@ const changeCurrentPassword = asyncHandler(async (req, res, next) => {
     return res.status(200).json(new apiResponse(200, {}, "Password Updated Succesfully"))
 })
 const getCurrentUser = asyncHandler(async (req, res, next) => {
+    console.log(">>> getCurrentUser called");
+
     const currentUser = await User.findById(req.user?._id)//an object
     console.log("currentUser")
     const payload = new apiResponse(200, currentUser, "Yes");
