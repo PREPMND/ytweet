@@ -5,14 +5,11 @@ import logolight from "../assets/logolight.jpg"
 
 import { Album, Airplay, Bolt, Cannabis } from "lucide-react"
 import { useState } from "react";
-const Navbar = () => {
+const Navbar = (props) => {
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
     const [hoverAirplay, setHoverAirplay] = useState(false)
-    const { data, error, isLoading } = useQuery({
-        queryKey: ["currentUser"],
-        queryFn: getCurrentUser
-    });
+    const { User } = props;
     return (
         <>
             <div>
@@ -25,8 +22,8 @@ const Navbar = () => {
                                 hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer
                                 hover:ring-2 hover:ring-blue-500"
 
-                            src={data?.user?.avatar} alt="User Avatar" />
-                        <span className=" text-[18px] font-medium  text-gray-700">{data?.user?.fullName}</span>
+                            src={User?.user?.avatar} alt="User Avatar" />
+                        <span className=" text-[18px] font-medium  text-gray-700">{User?.user?.fullName}</span>
 
                     </div>
                     <div className="w-fit absolute left-1/2 top-3">
