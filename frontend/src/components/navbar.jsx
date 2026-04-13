@@ -33,7 +33,7 @@ const Navbar = () => {
                         About 
                     </div>
                 </div>
-                <div className="w-full border-[1px] shadow-lg shadow-orange-300">
+                <div className="w-full border-[1px] hover:ring-1">
 
                 </div>
             </div>
