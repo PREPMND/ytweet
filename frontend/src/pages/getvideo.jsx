@@ -102,6 +102,8 @@ const VideoList = () => {
                                 fontSize: "14px",
                                 color: "black",
                                 lineHeight: "1.4",
+                                padding: "0 6px",
+                                fontWeight: "500",
                             }}
                         >
                             {video.title}
