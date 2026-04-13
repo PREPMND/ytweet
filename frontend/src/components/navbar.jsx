@@ -13,7 +13,7 @@ const Navbar = () => {
                     <div className="flex items-center select-none ">
                         <img 
                         className="rounded-[100%] object-cover w-10 h-10 ml-5 mt-2 
-                        hover:scale- transition-transform duration-300 ease-in-out cursor-pointer
+                        hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer
                         hover:ring-2 hover:ring-blue-500"
                         
                         src={data?.user?.avatar} alt="User Avatar" />
