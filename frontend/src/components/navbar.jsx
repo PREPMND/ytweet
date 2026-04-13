@@ -57,7 +57,7 @@ const Navbar = () => {
                         >
                             <Album />
                             <span
-                                className={`text-[10px] mt-1 transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"
+                                className={`text-[10px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"
                                     }`}
                             >
                                 Prep
@@ -71,7 +71,7 @@ const Navbar = () => {
                         >
                             <Airplay />
                             <span
-                                className={`text-[10px] mt-1 transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"
+                                className={`text-[10px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"
                                     }`}
                             >
                                 Prep
