@@ -1,12 +1,13 @@
 import React from 'react'
 import getCurrentUser from './currentuser';
 
-const getvideo = () => {
+const getVideo = () => {
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser, // You need to implement this function to fetch video by ID
     });
-    data.re
+    const currentUserId = data?.user?._id;
+    
     return (
         <div>
 
@@ -14,4 +15,4 @@ const getvideo = () => {
     )
 }
 
-export default getvideo
+export default getVideo
