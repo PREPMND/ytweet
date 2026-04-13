@@ -11,7 +11,7 @@ routerVideo.post("/createvideo", verifyJWT,
             maxCount: 1
         },
         {
-            name: "thumbnail",
+            name: "thumbnailLocalPath",
             maxCount: 1
         }
     ]),
