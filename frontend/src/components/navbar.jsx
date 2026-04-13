@@ -52,8 +52,8 @@ const Navbar = () => {
                                 <Airplay className="" />
                             </div>
                         </div>
-                        <div className={`gap-10 flex`}>
-                            <span className={`text-[10px] flex-col `} >Prep</span>
+                        <div className={`gap-12 flex`}>
+                            <span className={`text-[10px] flex-col pl-1 `} >Prep</span>
                             <span className={`text-[10px] flex-col `} >Prep</span>
                             <span className={`text-[10px] flex-col `} >Prep</span>
 
