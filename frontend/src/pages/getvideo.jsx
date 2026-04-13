@@ -48,13 +48,13 @@ const VideoList = () => {
                             padding: "10px",
                         }}
                     >
-                        {/* VIDEO ONLY (thumbnail comes from poster) */}
                         <video
                             controls
                             poster={video.thumbnail}
                             style={{
                                 width: "100%",
-                                aspectRatio: "16 / 9",                                borderRadius: "8px",
+                                aspectRatio: "16 / 9", 
+                                borderRadius: "8px",
                                 backgroundColor: "#000",
                                 objectFit: "cover",
                             }}
