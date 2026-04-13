@@ -2,22 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import getCurrentUser from '../api/currentuser.jsx';
-const Home = () => {
-    const [user, setUser] = useState(null);
-    const [message, setMessage] = useState("");
+const Home = (props) => {
+    const { User } = props;
     
-    const { data, error, isLoading } = useQuery({
-            queryKey: ["currentUser"],
-            queryFn: getCurrentUser
-        });
     return (
         <div>
-            {data ? (
+            {User ? (
                 <div>
-                    <h2>{message}</h2>
-                    <p><strong>ID:</strong> {data.user._id}</p>
-                    <p><strong>Email:</strong> {data.user.email}</p>
-                    <p><strong>Full Name:</strong> {data.user.fullName}</p>
+                    <h2>Welcome, {User.user.fullName}!</h2>
+                    <p><strong>ID:</strong> {User.user._id}</p>
+                    <p><strong>Email:</strong> {User.user.email}</p>
+                    <p><strong>Full Name:</strong> {User.user.fullName}</p>
                     {/* Add more fields as needed */}
                 </div>
             ) : (
