@@ -100,7 +100,7 @@ const VideoList = () => {
                             style={{
                                 marginTop: "8px",
                                 fontSize: "14px",
-                                color: "#e5e5e5",
+                                color: "black",
                                 lineHeight: "1.4",
                             }}
                         >
