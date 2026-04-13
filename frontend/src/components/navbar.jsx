@@ -6,13 +6,13 @@ const Navbar = () => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
     });
-
     return (
         <>
             <div>
                 <div>
                     <div>
-
+                        <img src={data?.user?.avatarUrl} alt="User Avatar" width={50} height={50} />
+                        <span>{data?.user?.email}</span>
                     </div>
                 </div>
             </div>
