@@ -4,7 +4,9 @@ import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 
 import { Album, Airplay, Bolt, Cannabis } from "lucide-react"
+import { useState } from "react";
 const Navbar = () => {
+    const [hover,setHover]=useState(false)
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
@@ -33,8 +35,10 @@ const Navbar = () => {
                     </div>
                     <div className=" flex items-center gap-10 z-20 pr-5">
                         <div>
-                            <Bolt className="" size={28} />
-                            <span></span>
+                            <Bolt 
+                            onMouseDown={()=>{}}
+                            className="" size={28} />
+                            <span>Move To Prep</span>
                         </div>
                         <div>
                             <Album className="" />
