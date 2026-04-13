@@ -12,8 +12,8 @@ const Navbar = () => {
                 <div>
                     <div>
                         <img 
-                        className="rounded-full object-cover w-5 ml-5 mt-2 "
-                        src={data?.user?.avatar} alt="User Avatar" width={50} height={50} />
+                        className="rounded-[100%] object-cover w-10 ml-5 mt-2 "
+                        src={data?.user?.avatar} alt="User Avatar" />
                     </div>
                 </div>
             </div>
