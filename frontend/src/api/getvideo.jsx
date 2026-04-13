@@ -2,7 +2,7 @@ import React from 'react'
 import getCurrentUser from './currentuser';
 import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
-const getVideo = () => {
+const createVideo = () => {
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser, // You need to implement this function to fetch video by ID
@@ -48,4 +48,4 @@ const getVideo = () => {
     )
 }
 
-export default getVideo
+export default createVideo
