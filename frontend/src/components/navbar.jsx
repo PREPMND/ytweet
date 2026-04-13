@@ -26,7 +26,7 @@ const Navbar = () => {
                                 hover:ring-2 hover:ring-blue-500"
 
                             src={data?.user?.avatar} alt="User Avatar" />
-                        <span className=" text-sm font-medium text-gray-700">{data?.user?.username}</span>
+                        <span className=" text-[18px] font-medium  text-gray-700">{data?.user?.fullName}</span>
 
                     </div>
                     <div className="w-fit absolute left-1/2 top-3">
