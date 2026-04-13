@@ -8,7 +8,17 @@ const Createvideo = () => {
         queryFn: getCurrentUser, // You need to implement this function to fetch video by ID
     });
     const currentUserId = data?.user?._id;
-    
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append("title", e.target.title.value);
+        formData.append("description", e.target.description.value);
+        formData.append("videoFile", e.target.videoFile.files[0]);
+        formData.append("thumbnail", e.target.thumbnail.files[0]);
+
+        await uploadVideo(formData);
+    };
     const uploadVideo = async (formData) => {
         try {
             const response = await axios.post(
