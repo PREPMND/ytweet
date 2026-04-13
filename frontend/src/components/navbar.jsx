@@ -29,8 +29,6 @@ const Navbar = () => {
                         <span className=" text-sm font-medium text-gray-700">{data?.user?.username}</span>
 
                     </div>
-
-
                     <div className="w-fit absolute left-1/2 top-3">
                         <img
                             className="w-12 h-12"
