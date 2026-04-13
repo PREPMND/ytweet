@@ -35,20 +35,26 @@ const Navbar = () => {
                             className="w-12 h-12"
                             src={logolight} />
                     </div>
-                    <div className=" flex items-center gap-10 z-20 pr-5">
-                        <div
-                            onMouseEnter={() => { setHoverBolt(true) }}
-                            onMouseLeave={() => { setHoverBolt(false) }}>
-                            <Bolt
+                    <div>
 
-                                className="" size={28} />
-                            <span className="text-[10px] flex-col " >Move To Prep</span>
+                        <div className=" flex items-center gap-10 z-20 pr-5">
+                            <div
+                                onMouseEnter={() => { setHoverBolt(true) }}
+                                onMouseLeave={() => { setHoverBolt(false) }}>
+                                <Bolt
+
+                                    className="" size={28} />
+                            </div>
+                            <div>
+                                <Album className="" />
+                            </div>
+                            <div>
+                                <Airplay className="" />
+                            </div>
                         </div>
                         <div>
-                            <Album className="" />
-                        </div>
-                        <div>
-                            <Airplay className="" />
+                            <span className="text-[10px] flex-col " >Prep</span>
+
                         </div>
                     </div>
                 </div>
