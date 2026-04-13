@@ -31,10 +31,11 @@ const Navbar = () => {
                             className="w-12 h-12"
                             src={logolight} />
                     </div>
-                    <div className=" flex gap-8 z-20 ">
+                    <div className=" flex gap-8 z-20 pr-3 ">
+                        <Bolt className="mr-5"/>
                         <Album className=""/>
                         <Airplay className=""/>
-                        <Bolt/>
+                        
                     </div>
                 </div>
                 <div className="w-full border-[1px] ring-0">
