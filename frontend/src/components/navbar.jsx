@@ -8,7 +8,7 @@ import { useState } from "react";
 const Navbar = () => {
     const [hoverBolt,setHoverBolt]=useState(false)
     const [hoverAlbum,setHoverAlbum]=useState(false);
-    const [hoverBolt,setHoverBolt]=useState(false)
+    const [hoverAirplay,setHoverAirplay]=useState(false)
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
