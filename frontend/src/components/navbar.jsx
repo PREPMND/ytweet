@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 
-import {Album ,Airplay,Bolt,Cannabis } from "lucide-react"
+import { Album, Airplay, Bolt, Cannabis } from "lucide-react"
 const Navbar = () => {
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
@@ -32,10 +32,16 @@ const Navbar = () => {
                             src={logolight} />
                     </div>
                     <div className=" flex items-center gap-10 z-20 pr-5">
-                        <Bolt className="" size={28}/>
-                        <Album className=""/>
-                        <Airplay className=""/>
-                        
+                        <div>
+                            <Bolt className="" size={28} />
+                            <span></span>
+                        </div>
+                        <div>
+                            <Album className="" />
+                        </div>
+                        <div>
+                            <Airplay className="" />
+                        </div>
                     </div>
                 </div>
                 <div className="w-full border-[1px] ring-0">
