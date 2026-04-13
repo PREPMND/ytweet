@@ -9,7 +9,7 @@ const createVideo = () => {
     });
     const currentUserId = data?.user?._id;
     
-    const createVideo = async () => {
+    const uploadVideo = async () => {
         try {
             const response = await axios.post(
                 "/api/videos",
@@ -35,7 +35,7 @@ const createVideo = () => {
     
     return (
         <div>
-            <button onClick={createVideo}>Create Video</button>
+            <button onClick={uploadVideo}>Create Video</button>
             <form>
                 <input type="text" name="title" placeholder="Video Title" />
                 <input type="text" name="videoFile" placeholder="Video File URL" />
