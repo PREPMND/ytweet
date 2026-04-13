@@ -11,11 +11,16 @@ const Navbar = () => {
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
     const [hoverAirplay, setHoverAirplay] = useState(false)
+    const [navigating, setNavigating] = useState(false);
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
     });
-    console.log(error)
+    if(error.data.statusCode===401){
+        setTimeout(() => {
+            navigate("/login");
+        }, 2000);
+    }
     return (
         <>
             <div>
