@@ -6,9 +6,9 @@ import logolight from "../assets/logolight.jpg"
 import { Album, Airplay, Bolt, Cannabis } from "lucide-react"
 import { useState } from "react";
 const Navbar = () => {
-    const [hoverBolt,setHoverBolt]=useState(false)
-    const [hoverAlbum,setHoverAlbum]=useState(false);
-    const [hoverAirplay,setHoverAirplay]=useState(false)
+    const [hoverBolt, setHoverBolt] = useState(false)
+    const [hoverAlbum, setHoverAlbum] = useState(false);
+    const [hoverAirplay, setHoverAirplay] = useState(false)
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
@@ -36,12 +36,13 @@ const Navbar = () => {
                             src={logolight} />
                     </div>
                     <div className=" flex items-center gap-10 z-20 pr-5">
-                        <div>
-                            <Bolt 
-                            onMouseEnter={()=>{setHoverBolt(true)}}
-                            onMouseLeave={()=>{setHoverBolt(false)}}
-                            className="" size={28} />
-                            {hoverBolt && <span className="text-[10px] flex-col" >Move To Prep</span>}
+                        <div
+                            onMouseEnter={() => { setHoverBolt(true) }}
+                            onMouseLeave={() => { setHoverBolt(false) }}>
+                            <Bolt
+
+                                className="" size={28} />
+                            <span className="text-[10px] flex-col" >Move To Prep</span>}
                         </div>
                         <div>
                             <Album className="" />
