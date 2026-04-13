@@ -22,7 +22,7 @@ const Createvideo = () => {
     const uploadVideo = async (formData) => {
         try {
             const response = await axios.post(
-                "/api/videos/createvideo",
+                "/api/v1/videos/createvideo",
                 formData,
                 {
                     withCredentials: true, // send cookies for verifyJWT
@@ -41,12 +41,14 @@ const Createvideo = () => {
     return (
         <div>
             <button onClick={uploadVideo}>Create Video</button>
-            <form className='text-xl flex flex-col gap-10 justify-center mt-7'>
+            <form
+                className="text-xl flex flex-col gap-10 justify-center mt-7"
+                onSubmit={handleSubmit}
+            >
                 <input type="text" name="title" placeholder="Video Title" />
-                <input type="file" name="videoFile" placeholder="Video File" />
-                <input type="file" name="thumbnail" placeholder="Thumbnail" />
+                <input type="file" name="videoFile" />
+                <input type="file" name="thumbnail" />
                 <input type="text" name="description" placeholder="Description" />
-                <input type="hidden" name="owner" value={currentUserId} />
                 <button type="submit">Submit</button>
             </form>
         </div>
