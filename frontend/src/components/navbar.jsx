@@ -105,7 +105,7 @@ const Navbar = () => {
                     <button onClick={() => navigating("/login")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Move to Login
                     </button>
-                    <CirclePlus onClick={() => } className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700 rotate-45" />
+                    <CirclePlus onClick={() => handleClose()} className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700 rotate-45" />
                 </div>
             }
 
