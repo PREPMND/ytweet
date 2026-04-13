@@ -54,7 +54,7 @@ const Navbar = () => {
                         </div>
                         <div className={`gap-12 flex`}>
                             <span className={`text-[10px] flex-col pl-1 `} >Prep</span>
-                            <span className={`text-[10px] flex-col `} >Prep</span>
+                            <span className={`text-[10px] flex-col pr-1 `} >Prep</span>
                             <span className={`text-[10px] flex-col `} >Prep</span>
 
                         </div>
