@@ -63,6 +63,7 @@ const VideoList = () => {
                             background: "#0f0f0f",
                             padding: "8px",
                             cursor: "pointer",
+                            transition: "opacity 0.3s ease",
                         }}
                     >
                         {playingId === video._id ? (
@@ -77,7 +78,9 @@ const VideoList = () => {
                                     aspectRatio: "16 / 9",
                                     objectFit: "cover",
                                     borderRadius: "10px",
+                                    transition: "opacity 0.3s ease",
                                 }}
+
                             />
                         ) : (
                             <img
