@@ -29,11 +29,11 @@ const Navbar = () => {
                             className="w-10 h-10"
                             src={logolight} />
                     </div>
-                    <div>
+                    <div className="p-3">
                         About 
                     </div>
                 </div>
-                <div className="w-full border-[1px] hover:ring-1">
+                <div className="w-full border-[1px] ring-0">
 
                 </div>
             </div>
