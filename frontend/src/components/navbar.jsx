@@ -28,13 +28,13 @@ const Navbar = () => {
             if (error?.response?.status === 401) {
                 setNavigate(true);
             }
-        }, 5000);
+        }, 50000);
     };
 
     return (
         <>
             <div>
-                <div className="flex items-center h-[80px] justify-between">
+                <div className="flex items-center fixed inset-0 h-[80px] justify-between">
 
                     <div className="flex items-center h-[80px] gap-4 pl-5">
 
