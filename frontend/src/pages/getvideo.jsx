@@ -30,17 +30,26 @@ const VideoList = () => {
     return (
         <div>
             <h2>Published Videos</h2>
-            <ul>
+            <ul style={{ listStyle: "none", padding: 0 }}>
                 {videos.map((video) => (
-                    <li key={video._id}>
+                    <li key={video._id} style={{ marginBottom: "30px" }}>
                         <h3>{video.title}</h3>
+
+                        {/* Thumbnail stacked above */}
                         <img
                             src={video.thumbnail}
                             alt={video.title}
-                            width="200"
-                            style={{ display: "block", marginBottom: "10px" }}
+                            width="320"
+                            style={{ display: "block", marginBottom: "10px", borderRadius: "8px" }}
                         />
-                        <video width="320" controls>
+
+                        {/* Video player */}
+                        <video
+                            width="320"
+                            poster={video.thumbnail}   // 👈 shows thumbnail as preview
+                            controls
+                            style={{ borderRadius: "8px" }}
+                        >
                             <source src={video.videoFile} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
