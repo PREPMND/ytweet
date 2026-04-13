@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 const VideoList = () => {
     const [videos, setVideos] = useState([]);
     const [title, setTitle] = useState(1);
     const [thumbnail, setThumbnail] = useState(1);
+    const timeoutRef = useRef(null);
     const [playingId, setPlayingId] = useState(null);
     const navigate = useNavigate();
     const fetchVideos = async (pageNum = 1) => {
@@ -47,10 +48,13 @@ const VideoList = () => {
                         key={video._id}
                         onClick={() => navigate(`/video/${video._id}`)}
                         onMouseEnter={() => {
-                            timeout = setTimeout(() => setPlayingId(video._id), 300);
+                            timeoutRef.current = setTimeout(() => {
+                                setPlayingId(video._id);
+                            }, 300);
                         }}
+
                         onMouseLeave={() => {
-                            clearTimeout(timeout);
+                            clearTimeout(timeoutRef.current);
                             setPlayingId(null);
                         }}
                         style={{
