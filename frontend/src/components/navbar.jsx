@@ -10,7 +10,7 @@ const Navbar = () => {
     return (
         <>
             <div>
-                <div className="flex items-center h-[80px] ">
+                <div className="flex items-center h-[80px] justify-between">
 
                     <div className="flex items-center w-[30%]">
 
