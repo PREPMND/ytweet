@@ -100,7 +100,7 @@ const Navbar = () => {
                 </div>
             </div>
             {
-                navigate && <div className="w-[60%] h-[60%] md:w-[40%] md:h-[40%] absolute top-1/2 bg-white/30 rounded-lg shadow-lg flex flex-col items-center mt-3 justify-center gap-6 z-40 inset-0 m-auto">
+                navigate && <div className="w-[60%] h-[60%] md:w-[40%] md:h-[40%] absolute top-[20%] bg-white/30 rounded-lg shadow-lg flex flex-col items-center mt-3 justify-center gap-6 z-40 inset-0 m-auto">
                     <h2 className="text-xl font-bold text-gray-800">Please log in to continue</h2>
                     <button onClick={() => navigating("/login")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Move to Login
