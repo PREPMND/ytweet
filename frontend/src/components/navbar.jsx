@@ -35,28 +35,32 @@ const Navbar = () => {
                             className="w-12 h-12"
                             src={logolight} />
                     </div>
-                    <div>
-
-                        <div className=" flex items-center mt-4 gap-10 z-20 pr-5">
-                            <div
-                                onMouseEnter={() => { setHoverBolt(true) }}
-                                onMouseLeave={() => { setHoverBolt(false) }}>
-                                <Bolt
-
-                                    className="" size={28} />
-                            </div>
-                            <div>
-                                <Album className="" />
-                            </div>
-                            <div>
-                                <Airplay className="" />
-                            </div>
+                    <div className="flex items-center mt-4 gap-10 z-20 pr-5">
+                        <div
+                            className="flex flex-col items-center"
+                            onMouseEnter={() => setHoverBolt(true)}
+                            onMouseLeave={() => setHoverBolt(false)}
+                        >
+                            <Bolt size={28} />
+                            {hoverBolt && <span className="text-[10px] mt-1">Prep</span>}
                         </div>
-                        <div className={`gap-12 flex`}>
-                            <span className={`text-[10px] flex-col pl-1 `} >Prep</span>
-                            <span className={`text-[10px] flex-col pr-1 `} >Prep</span>
-                            <span className={`text-[10px] flex-col `} >Prep</span>
 
+                        <div
+                            className="flex flex-col items-center"
+                            onMouseEnter={() => setHoverAlbum(true)}
+                            onMouseLeave={() => setHoverAlbum(false)}
+                        >
+                            <Album />
+                            {hoverAlbum && <span className="text-[10px] mt-1">Prep</span>}
+                        </div>
+
+                        <div
+                            className="flex flex-col items-center"
+                            onMouseEnter={() => setHoverAirplay(true)}
+                            onMouseLeave={() => setHoverAirplay(false)}
+                        >
+                            <Airplay />
+                            {hoverAirplay && <span className="text-[10px] mt-1">Prep</span>}
                         </div>
                     </div>
                 </div>
