@@ -6,7 +6,9 @@ import logolight from "../assets/logolight.jpg"
 import { Album, Airplay, Bolt, Cannabis } from "lucide-react"
 import { useState } from "react";
 const Navbar = () => {
-    const [hover,setHover]=useState(false)
+    const [hoverBolt,setHoverBolt]=useState(false)
+    const [hoverAlbum,setHoverAlbum]=useState(false);
+    
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
