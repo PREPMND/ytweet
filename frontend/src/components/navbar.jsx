@@ -22,7 +22,9 @@ const Navbar = () => {
                         
                     </div>
                     <div>
-                        <img src={logolight}/>
+                        <img 
+                        className="w-10 h-10"
+                        src={logolight}/>
                     </div>
                 </div>
             </div>
