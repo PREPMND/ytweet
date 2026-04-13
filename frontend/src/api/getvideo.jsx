@@ -32,9 +32,17 @@ const getVideo = () => {
             console.error("Error creating video:", error.response?.data || error.message);
         }
     };
+    
     return (
         <div>
-
+            <button onClick={createVideo}>Create Video</button>
+            <form>
+                <input type="text" placeholder="Video Title" />
+                <input type="text" placeholder="Video URL" />
+                <input type="text" placeholder="Thumbnail URL" />
+                <input type="number" placeholder="Duration (seconds)" />
+                <button type="submit">Submit</button>
+            </form>
         </div>
     )
 }
