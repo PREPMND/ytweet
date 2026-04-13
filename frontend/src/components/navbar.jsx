@@ -50,8 +50,6 @@ const Navbar = () => {
                                 JoinEdge
                             </span>
                         </div>
-
-
                         <div
                             className="flex flex-col items-center"
                             onMouseEnter={() => setHoverAlbum(true)}
