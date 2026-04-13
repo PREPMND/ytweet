@@ -29,6 +29,9 @@ const Navbar = () => {
                             className="w-10 h-10"
                             src={logolight} />
                     </div>
+                    <div>
+                        About 
+                    </div>
                 </div>
             </div>
 
