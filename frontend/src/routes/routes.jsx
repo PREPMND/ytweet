@@ -12,7 +12,7 @@ export default function AppRoutes(props){
             <Route path="/" element={<HomePage User={User} />}/>
             </Route>
             <Route element={<AuthLayout/>}>
-            <Route path="/login" element={<Login/>} />
+            <Route path="/login" element={<Login User={User} />} />
             <Route path="/register" element={<Register/>}/>
             </Route>
         </Routes>
