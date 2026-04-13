@@ -5,22 +5,22 @@ export const createVideo = async (req, res) => {
         const { title, description } = req.body;
 
         // owner comes from verified JWT middleware (req.user._id)
-        const video = await Video.create({
+        const videofile = await Video.create({
             title,
             description,
             owner: req.user._id,
         });
-        const avatarLocalPath = req.files?.avatar[0]?.path;
-    console.log(avatarLocalPath)
-    const coverImageLocalPath = req.files?.coverImage[0]?.path;
-    if (!avatarLocalPath) {
-        throw new apiError(400, "Avatar File Is Required")
+        const videoLocalPath = req.files?.video[0]?.path;
+    console.log(videoLocalPath)
+    const thumbnailLocalPath = req.files?.thumbnail[0]?.path;
+    if (!videoLocalPath) {
+        throw new apiError(400, "Video File Is Required")
     }
-    const avatar = await uploadOnCloudinary(avatarLocalPath)
-    console.log(avatarLocalPath)
-    const coverImage = await uploadOnCloudinary(coverImageLocalPath)
-    if (!avatar) {
-        throw new apiError(400, "Avatar cannot be uploaded")
+    const video = await uploadOnCloudinary(videoLocalPath)
+    console.log(videoLocalPath)
+    const thumbnail = await uploadOnCloudinary(thumbnailLocalPath)
+    if (!video) {
+        throw new apiError(400, "Video cannot be uploaded")
     }
 
         res.status(201).json({ success: true, data: video });
