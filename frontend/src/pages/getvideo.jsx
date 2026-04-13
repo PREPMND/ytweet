@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useNavigate } from "react-router-dom";
 const VideoList = () => {
     const [videos, setVideos] = useState([]);
@@ -30,16 +30,16 @@ const VideoList = () => {
     }, [title]);
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div style={{ padding: "0px" }}>
             <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
 
             <div
                 style={{
-                    display: "flex",
-                    flexWrap: "wrap",
+                    display: "grid",
+                    gap: "100px",
                     maxWidth: "1000px",
-                    justifyContent: "space-between",
-                    gap: "20px",
+                    margin: "0 auto",
+                    //gridTemplateColumns: "repeat(3, 1fr)",
                 }}
                 className="video-grid"
             >
