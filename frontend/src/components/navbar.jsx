@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 
-import { Album, Airplay, Bolt, Cannabis } from "lucide-react"
-import { useState,useEffect } from "react";
+import { Album, Airplay, Bolt} from "lucide-react"
+import { useState,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 const Navbar = () => {
     const [navigate, setNavigate] = useState(false);
