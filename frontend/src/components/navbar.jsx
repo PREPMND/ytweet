@@ -8,7 +8,7 @@ import { useState } from "react";
 const Navbar = () => {
     const [hoverBolt,setHoverBolt]=useState(false)
     const [hoverAlbum,setHoverAlbum]=useState(false);
-    const [hover]
+    const [hoverBolt,setHoverBolt]=useState(false)
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
@@ -38,9 +38,10 @@ const Navbar = () => {
                     <div className=" flex items-center gap-10 z-20 pr-5">
                         <div>
                             <Bolt 
-                            onMouseDown={()=>{}}
+                            onMouseEnter={()=>{setHoverBolt(true)}}
+                            onMouseLeave={()=>{setHoverBolt(false)}}
                             className="" size={28} />
-                            <span>Move To Prep</span>
+                            {hoverBolt && <span >Move To Prep</span>}
                         </div>
                         <div>
                             <Album className="" />
