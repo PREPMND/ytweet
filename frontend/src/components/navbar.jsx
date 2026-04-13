@@ -12,7 +12,8 @@ const Navbar = () => {
     const navigating = useNavigate();
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
-        queryFn: getCurrentUser
+        queryFn: getCurrentUser,
+        retry: false, // Disable automatic retries to handle errors manually
     });
 
     useEffect(() => {
