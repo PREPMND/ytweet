@@ -36,22 +36,42 @@ const VideoList = () => {
                         key={video._id}
                         style={{
                             marginBottom: "30px",
-                            maxWidth: "320px"
+                            width: "320px" // fixed width for consistency
                         }}
                     >
                         <h3 style={{ marginBottom: "10px" }}>{video.title}</h3>
 
-                        {/* Video player with thumbnail poster */}
+                        {/* Thumbnail stacked above */}
+                        <div
+                            style={{
+                                width: "320px",
+                                height: "180px", // fixed height for consistent aspect ratio
+                                overflow: "hidden",
+                                borderRadius: "8px",
+                                marginBottom: "10px"
+                            }}
+                        >
+                            <img
+                                src={video.thumbnail}
+                                alt={video.title}
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover" // ensures image fills box without distortion
+                                }}
+                            />
+                        </div>
+
+                        {/* Video player with poster thumbnail */}
                         <video
                             width="320"
                             height="180"
                             controls
-                            poster={video.thumbnail} // 👈 ensures thumbnail shows consistently
+                            poster={video.thumbnail}
                             style={{
-                                display: "block",
                                 borderRadius: "8px",
-                                objectFit: "cover", // keeps aspect ratio consistent
-                                backgroundColor: "#000" // fallback background
+                                backgroundColor: "#000",
+                                objectFit: "cover"
                             }}
                         >
                             <source src={video.videoFile} type="video/mp4" />
