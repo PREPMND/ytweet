@@ -37,7 +37,7 @@ const Navbar = () => {
                     </div>
                     <div>
 
-                        <div className=" flex items-center gap-10 z-20 pr-5">
+                        <div className=" flex items-center mt-4 gap-10 z-20 pr-5">
                             <div
                                 onMouseEnter={() => { setHoverBolt(true) }}
                                 onMouseLeave={() => { setHoverBolt(false) }}>
@@ -52,7 +52,7 @@ const Navbar = () => {
                                 <Airplay className="" />
                             </div>
                         </div>
-                        <div >
+                        <div className={`gap-10 flex`}>
                             <span className={`text-[10px] flex-col `} >Prep</span>
                             <span className={`text-[10px] flex-col `} >Prep</span>
                             <span className={`text-[10px] flex-col `} >Prep</span>
