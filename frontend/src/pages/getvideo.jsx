@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 const VideoList = () => {
     const [videos, setVideos] = useState([]);
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
+    const [title, setTitle] = useState(1);
+    const [thumbnail, setThumbnail] = useState(1);
 
     const fetchVideos = async (pageNum = 1) => {
         try {
@@ -12,8 +12,8 @@ const VideoList = () => {
 
             if (data.success) {
                 setVideos(data.data.docs.videoFile);       // paginated docs
-                setPage(data.data.docs.title);         // current page
-                setTotalPages(data.data.docs.thumbnail);
+                setTitle(data.data.docs.title);         // current title
+                setThumbnail(data.data.docs.thumbnail);
                 console.log("Total Pages:", data.data.docs); // total pages
             } else {
                 console.error("Backend error:", data.message);
@@ -24,8 +24,8 @@ const VideoList = () => {
     };
 
     useEffect(() => {
-        fetchVideos(page);
-    }, [page]);
+        fetchVideos(title);
+    }, [title]);
 
     return (
         <div>
@@ -43,13 +43,13 @@ const VideoList = () => {
             </ul>
 
             <div style={{ marginTop: "20px" }}>
-                <button disabled={page <= 1} onClick={() => fetchVideos(page - 1)}>
+                <button disabled={title <= 1} onClick={() => fetchVideos(title - 1)}>
                     Previous
                 </button>
                 <span style={{ margin: "0 10px" }}>
-                    Page {page} of {totalPages}
+                    Page {title} of {thumbnail}
                 </span>
-                <button disabled={page >= totalPages} onClick={() => fetchVideos(page + 1)}>
+                <button disabled={title >= thumbnail} onClick={() => fetchVideos(title + 1)}>
                     Next
                 </button>
             </div>
