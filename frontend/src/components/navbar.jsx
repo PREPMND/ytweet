@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
-import { Album, Airplay, Bolt, Cross} from "lucide-react"
+import { Album, Airplay, Bolt, Cross, CirclePlus} from "lucide-react"
 import { useState,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 const Navbar = () => {
@@ -94,7 +94,7 @@ const Navbar = () => {
                     <button onClick={() => navigating("/login")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Move to Login
                     </button>
-                    <Cross onClick={() => setNavigate(false)} className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700" />
+                    <CirclePlus onClick={() => setNavigate(false)} className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700 rotate-45" />
                 </div>
             }
 
