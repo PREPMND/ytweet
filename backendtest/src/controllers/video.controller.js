@@ -1,32 +1,35 @@
 import { Video } from "../models/video.models.js"; // adjust path if needed
 
 export const createVideo = async (req, res) => {
-    try {
-        const { title, description } = req.body;
+  try {
+    const { title, description } = req.body;
 
-        // owner comes from verified JWT middleware (req.user._id)
-        const videofile = await Video.create({
-            title,
-            description,
-            owner: req.user._id,
-        });
-        const videoLocalPath = req.files?.video[0]?.path;
-        console.log(videoLocalPath)
-        const thumbnailLocalPath = req.files?.thumbnail[0]?.path;
-        if (!videoLocalPath) {
-            throw new apiError(400, "Video File Is Required")
-        }
-        const video = await uploadOnCloudinary(videoLocalPath)
-        console.log(videoLocalPath)
-        const thumbnail = await uploadOnCloudinary(thumbnailLocalPath)
-        if (!video) {
-            throw new apiError(400, "Video cannot be uploaded")
-        }
+    const videoLocalPath = req.files?.videoFile?.[0]?.path;
+    const thumbnailLocalPath = req.files?.thumbnail?.[0]?.path;
 
-        res.status(201).json({ success: true, data: videofile });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+    if (!videoLocalPath) {
+      throw new apiError(400, "Video File Is Required");
     }
+
+    const videoUpload = await uploadOnCloudinary(videoLocalPath);
+    const thumbnailUpload = await uploadOnCloudinary(thumbnailLocalPath);
+
+    if (!videoUpload) {
+      throw new apiError(400, "Video cannot be uploaded");
+    }
+
+    const videoDoc = await Video.create({
+      title,
+      description,
+      owner: req.user._id,
+      videoUrl: videoUpload.secure_url,
+      thumbnailUrl: thumbnailUpload?.secure_url,
+    });
+
+    res.status(201).json({ success: true, data: videoDoc });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 };
 
 // Get all videos (with pagination)
