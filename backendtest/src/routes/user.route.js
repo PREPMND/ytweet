@@ -28,9 +28,9 @@ router.route("/refreshtoken").post(refreshAccessToken)
 router.route("/changedpsw").post(verifyJWT,changeCurrentPassword)
 //router.route("/currentuser").get(verifyJWT,getCurrentUser)
 console.log("Token candidate:")
-router.get("/currentuser", (req, res) => {
-    console.log("CURRENT USER ROUTE HIT");
-    res.json({ ok: true });
+router.get("/currentuser", verifyJWT, (req, res) => {
+    console.log("AFTER VERIFY");
+    res.json({ user: req.user || null });
 });
 console.log("Token candidate:");
 router.route("/updateaccount").patch(verifyJWT,updateAccountDetails)
