@@ -14,7 +14,7 @@ const VideoList = () => {
                 setVideos(data.data.docs);       // paginated docs
                 setPage(data.data.page);         // current page
                 setTotalPages(data.data.totalPages);
-                console.log("Total Pages:", data); // total pages
+                console.log("Total Pages:", data.data.docs); // total pages
             } else {
                 console.error("Backend error:", data.message);
             }
