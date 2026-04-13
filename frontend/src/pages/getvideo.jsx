@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 const VideoList = () => {
     const [videos, setVideos] = useState([]);
@@ -35,11 +35,12 @@ const VideoList = () => {
 
             <div
                 style={{
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    gap: "20px",
-  }}
+                    display: "flex",
+                    flexWrap: "wrap",
+                    maxWidth: "1200px",
+                    justifyContent: "space-between",
+                    gap: "20px",
+                }}
                 className="video-grid"
             >
                 {videos.map((video) => (
