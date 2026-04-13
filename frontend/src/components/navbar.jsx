@@ -11,7 +11,9 @@ const Navbar = () => {
             <div>
                 <div>
                     <div>
-                        <img src={data?.user?.avatarUrl} alt="User Avatar" width={50} height={50} />
+                        <img 
+                        className="rounded-lg"
+                        src={data?.user?.avatar} alt="User Avatar" width={50} height={50} />
                     </div>
                 </div>
             </div>
