@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 import getCurrentUser from '../api/currentuser.jsx';
-import { get } from 'mongoose';
 const Navbar = () => {
     const currentUser = getCurrentUser();
     console.log(getCurrentUser())
