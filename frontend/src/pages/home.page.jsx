@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useQuery } from '@tanstack/react-query';
-import getCurrentUser from '../api/currentuser.jsx';
 const Home = (props) => {
     const { User } = props;
     
