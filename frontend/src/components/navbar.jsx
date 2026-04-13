@@ -41,7 +41,7 @@ const Navbar = () => {
                             onMouseEnter={() => setHoverBolt(true)}
                             onMouseLeave={() => setHoverBolt(false)}
                         >
-                            <Bolt size={28} />
+                            <Bolt className={`${hoverAlbum?"text-":""}`}  size={28} />
                             <span
                                 className={`text-[10px] text-gray-600 font-[600] mt-1 transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"
                                     }`}
