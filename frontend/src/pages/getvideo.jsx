@@ -9,20 +9,15 @@ const Createvideo = () => {
     });
     const currentUserId = data?.user?._id;
     
-    const uploadVideo = async () => {
+    const uploadVideo = async (formData) => {
         try {
             const response = await axios.post(
-                "/api/videos",
+                "/api/videos/createvideo",
+                formData,
                 {
-                    videoFile: "path_or_url_to_video.mp4",
-                    thumbnail: "path_or_url_to_thumbnail.jpg",
-                    title: "My First Video",
-                    duration: 120, // duration in seconds
-                },
-                {
-                    withCredentials: true, // <-- critical for sending cookies
+                    withCredentials: true, // send cookies for verifyJWT
                     headers: {
-                        "Content-Type": "application/json",
+                        "Content-Type": "multipart/form-data",
                     },
                 }
             );
@@ -32,7 +27,7 @@ const Createvideo = () => {
             console.error("Error creating video:", error.response?.data || error.message);
         }
     };
-    
+
     return (
         <div>
             <button onClick={uploadVideo}>Create Video</button>
