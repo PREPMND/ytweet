@@ -61,8 +61,6 @@ const VideoList = () => {
                         >
                             <source src={video.videoFile} type="video/mp4" />
                         </video>
-
-                        {/* Title below */}
                         <h3
                             style={{
                                 fontSize: "16px",
@@ -76,7 +74,6 @@ const VideoList = () => {
                 ))}
             </div>
 
-            {/* Pagination */}
             <div
                 style={{
                     marginTop: "30px",
