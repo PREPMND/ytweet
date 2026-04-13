@@ -31,7 +31,7 @@ const Navbar = () => {
                             className="w-12 h-12"
                             src={logolight} />
                     </div>
-                    <div className=" flex gap-10">
+                    <div className=" flex ">
                         <Album/>
                         <Airplay/>
                         <Bolt/>
