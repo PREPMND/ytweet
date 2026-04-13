@@ -11,6 +11,7 @@ export default function AppRoutes(props){
         <Routes>
             <Route element={<MainLayout User={User} />}>
             <Route path="/" element={<HomePage User={User} />}/>
+            <Route path="/videos" element={<VideoList/>}/>
             </Route>
             <Route element={<AuthLayout User={User} />}>
             <Route path="/createvideo" element={<Createvideo/>}/>
