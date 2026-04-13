@@ -9,7 +9,7 @@ export const createVideo = async (req, res) => {
             videoFile,
             thumbnail,
             title,
-            duration,
+            description,
             owner: req.user._id,
         });
 
