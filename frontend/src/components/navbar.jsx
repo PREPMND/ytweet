@@ -99,15 +99,30 @@ const Navbar = () => {
 
                 </div>
             </div>
-            {
-                navigate && <div className="w-[60%] h-[60%] md:w-[40%] md:h-[40%] absolute top-[20%] bg-white/30 rounded-lg shadow-lg flex flex-col items-center mt-3 justify-center gap-6 z-40 inset-0 m-auto">
-                    <h2 className="text-xl font-bold text-gray-800">Please log in to continue</h2>
-                    <button onClick={() => navigating("/login")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                        Move to Login
-                    </button>
-                    <CirclePlus onClick={() => handleClose()} className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700 rotate-45" />
+            {navigate && (
+                <div className="fixed inset-0 z-40 flex items-center justify-center">
+                    {/* Overlay */}
+                    <div
+                        className="absolute inset-0 bg-black opacity-50"
+                        onClick={() => setNavigate(false)} // optional: close when clicking outside
+                    ></div>
+
+                    {/* Modal */}
+                    <div className="relative w-[40%] h-[40%] bg-white/30 rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50">
+                        <h2 className="text-xl font-bold text-gray-800">Please log in to continue</h2>
+                        <button
+                            onClick={() => navigating("/login")}
+                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Move to Login
+                        </button>
+                        <CirclePlus
+                            onClick={() => setNavigate(false)}
+                            className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700 rotate-45"
+                        />
+                    </div>
                 </div>
-            }
+            )}
 
         </>
     )
