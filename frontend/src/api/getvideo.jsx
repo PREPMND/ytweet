@@ -1,14 +1,14 @@
 import React from 'react'
 import getCurrentUser from './currentuser';
-
+import axios from "axios";
+import { useQuery } from '@tanstack/react-query';
 const getVideo = () => {
-    const { data, error, isLoading } = useQuery({
+    const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser, // You need to implement this function to fetch video by ID
     });
     const currentUserId = data?.user?._id;
-    import axios from "axios";
-
+    
     const createVideo = async () => {
         try {
             const response = await axios.post(
@@ -37,10 +37,11 @@ const getVideo = () => {
         <div>
             <button onClick={createVideo}>Create Video</button>
             <form>
-                <input type="text" placeholder="Video Title" />
-                <input type="text" placeholder="Video URL" />
-                <input type="text" placeholder="Thumbnail URL" />
-                <input type="number" placeholder="Duration (seconds)" />
+                <input type="text" name="title" placeholder="Video Title" />
+                <input type="text" name="videoFile" placeholder="Video File URL" />
+                <input type="text" name="thumbnail" placeholder="Thumbnail URL" />
+                <input type="number" name="duration" placeholder="Duration in seconds" />
+                <input type="hidden" name="owner" value={currentUserId} />
                 <button type="submit">Submit</button>
             </form>
         </div>
