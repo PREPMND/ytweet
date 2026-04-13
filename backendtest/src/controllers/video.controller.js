@@ -2,16 +2,15 @@ import { Video } from "../models/video.models.js"; // adjust path if needed
 
 export const createVideo = async (req, res) => {
     try {
-        const { videoFile, thumbnail, title, duration } = req.body;
+        const { title, description } = req.body;
 
         // owner comes from verified JWT middleware (req.user._id)
         const video = await Video.create({
-            videoFile,
-            thumbnail,
             title,
             description,
             owner: req.user._id,
         });
+        
 
         res.status(201).json({ success: true, data: video });
     } catch (error) {
