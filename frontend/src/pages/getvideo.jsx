@@ -12,7 +12,7 @@ const VideoList = () => {
 
             if (data.success) {
                 setVideos(data.data.docs.videoFile);       // paginated docs
-                setPage(data.data.docs.page);         // current page
+                setPage(data.data.docs.title);         // current page
                 setTotalPages(data.data.docs.thumbnail);
                 console.log("Total Pages:", data.data.docs); // total pages
             } else {
