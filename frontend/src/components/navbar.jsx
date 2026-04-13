@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
-import { Album, Airplay, Bolt, Cross, CirclePlus} from "lucide-react"
-import { useState,useEffect} from "react";
+import { Album, Airplay, Bolt, Cross, CirclePlus } from "lucide-react"
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const Navbar = () => {
     const [navigate, setNavigate] = useState(false);
@@ -14,12 +14,23 @@ const Navbar = () => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
     });
-    
+
     useEffect(() => {
         if (error?.response?.status === 401) {
             setNavigate(true);
         }
     }, [error]);
+    const handleClose = () => {
+        setNavigate(false);
+        // prevent immediate re-open
+        setTimeout(() => {
+            // after 5 seconds, allow showing again if error still exists
+            if (error?.response?.status === 401) {
+                setNavigate(true);
+            }
+        }, 5000);
+    };
+
     return (
         <>
             <div>
@@ -94,7 +105,7 @@ const Navbar = () => {
                     <button onClick={() => navigating("/login")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Move to Login
                     </button>
-                    <CirclePlus onClick={() => setNavigate(false)} className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700 rotate-45" />
+                    <CirclePlus onClick={() => } className="absolute top-3 right-3 cursor-pointer text-gray-500 hover:text-gray-700 rotate-45" />
                 </div>
             }
 
