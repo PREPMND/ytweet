@@ -11,7 +11,7 @@ const Navbar = () => {
         <>
             <div>
                 <div>
-                    <div className="flex items-center w-full select-none ">
+                    <div className="flex items-center flex-col w-full select-none ">
                         <div className="flex items-center w-[30%]">
 
                             <img
