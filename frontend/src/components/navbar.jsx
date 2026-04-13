@@ -11,7 +11,7 @@ const Navbar = () => {
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
     const [hoverAirplay, setHoverAirplay] = useState(false)
-    const navigate = useNavigate();
+    const navigating = useNavigate();
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
@@ -96,7 +96,7 @@ const Navbar = () => {
             {
                 navigate && <div className="w-[40%] h-[40%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-40 inset-0 m-auto">
                     <h2 className="text-2xl font-bold text-gray-800">Please log in to continue</h2>
-                    <button onClick={() => navigate("/login")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    <button onClick={() => navigating("/login")} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         Move to Login
                     </button>
                 </div>
