@@ -7,13 +7,15 @@ const VideoList = () => {
 
     const fetchVideos = async (pageNum = 1) => {
         try {
-            const res = await fetch(`/api/videos?page=${pageNum}&limit=3`);
+            const res = await fetch(`http://localhost:5000/api/v1/videos?page=${pageNum}&limit=3`);
             const data = await res.json();
 
             if (data.success) {
-                setVideos(data.data.docs);
-                setPage(data.data.page);
-                setTotalPages(data.data.totalPages);
+                setVideos(data.data.docs);       // paginated docs
+                setPage(data.data.page);         // current page
+                setTotalPages(data.data.totalPages); // total pages
+            } else {
+                console.error("Backend error:", data.message);
             }
         } catch (err) {
             console.error("Error fetching videos:", err);
