@@ -34,10 +34,12 @@ const VideoList = () => {
             <div
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-                    maxWidth: "700px",
                     gap: "20px",
+                    maxWidth: "1000px",
+                    margin: "0 auto",
+                    gridTemplateColumns: "repeat(3, 1fr)",
                 }}
+                className="video-grid"
             >
                 {videos.map((video) => (
                     <div
