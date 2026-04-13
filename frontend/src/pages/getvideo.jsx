@@ -48,6 +48,7 @@ const Createvideo = () => {
                 <input type="text" name="title" placeholder="Video Title" />
                 <input type="file" name="videoFile" />
                 <input type="file" name="thumbnail" />
+                <input type="text" name="owner" value={currentUserId} readOnly hidden />
                 <input type="text" name="description" placeholder="Description" />
                 <button type="submit">Submit</button>
             </form>
