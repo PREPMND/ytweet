@@ -12,7 +12,7 @@ const Navbar = () => {
                 <div>
                     <div>
                         <img 
-                        className="rounded-full object-cover"
+                        className="rounded-full object-cover w-5 ml-5 mt-2 "
                         src={data?.user?.avatar} alt="User Avatar" width={50} height={50} />
                     </div>
                 </div>
