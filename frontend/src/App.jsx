@@ -29,7 +29,7 @@ const App = () => {
   }, []);
 */}
   const [User, setUser] = useState(null);
-  const { data, error, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["currentUser"],
     queryFn: getCurrentUser
   });

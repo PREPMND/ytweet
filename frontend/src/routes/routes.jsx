@@ -8,10 +8,10 @@ export default function AppRoutes(props){
     const {User} = props;
     return(
         <Routes>
-            <Route element={<MainLayout/>}>
+            <Route element={<MainLayout User={User} />}>
             <Route path="/" element={<HomePage User={User} />}/>
             </Route>
-            <Route element={<AuthLayout/>}>
+            <Route element={<AuthLayout User={User} />}>
             <Route path="/login" element={<Login User={User} />} />
             <Route path="/register" element={<Register/>}/>
             </Route>
