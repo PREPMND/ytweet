@@ -45,19 +45,19 @@ const VideoList = () => {
                     <div
                         key={video._id}
                         style={{
-                            borderRadius: "10px",
+                            borderRadius: "12px",
                             overflow: "hidden",
-                            background: "#111",
-                            padding: "10px",
+                            background: "#0f0f0f",
+                            padding: "8px",
+                            transition: "0.3s",
+                            cursor: "pointer",
                         }}
                     >
-                        {/* THUMBNAIL OR VIDEO */}
                         {playingId !== video._id ? (
                             <div
                                 onClick={() => setPlayingId(video._id)}
                                 style={{
                                     position: "relative",
-                                    cursor: "pointer",
                                 }}
                             >
                                 <img
@@ -68,22 +68,21 @@ const VideoList = () => {
                                         width: "100%",
                                         aspectRatio: "16 / 9",
                                         objectFit: "cover",
-                                        borderRadius: "8px",
+                                        borderRadius: "10px",
                                     }}
                                 />
 
-                                {/* Custom Play Button */}
                                 <div
                                     style={{
                                         position: "absolute",
                                         top: "50%",
                                         left: "50%",
                                         transform: "translate(-50%, -50%)",
-                                        background: "rgba(0,0,0,0.6)",
+                                        background: "rgba(0,0,0,0.65)",
                                         borderRadius: "50%",
-                                        padding: "12px 16px",
+                                        padding: "10px 14px",
                                         color: "#fff",
-                                        fontSize: "18px",
+                                        fontSize: "16px",
                                     }}
                                 >
                                     ▶
@@ -96,7 +95,7 @@ const VideoList = () => {
                                 style={{
                                     width: "100%",
                                     aspectRatio: "16 / 9",
-                                    borderRadius: "8px",
+                                    borderRadius: "10px",
                                     backgroundColor: "#000",
                                 }}
                             >
@@ -104,12 +103,12 @@ const VideoList = () => {
                             </video>
                         )}
 
-                        {/* TITLE */}
                         <h3
                             style={{
-                                marginTop: "10px",
-                                fontSize: "15px",
-                                color: "#fff",
+                                marginTop: "8px",
+                                fontSize: "14px",
+                                color: "#e5e5e5",
+                                lineHeight: "1.4",
                             }}
                         >
                             {video.title}
