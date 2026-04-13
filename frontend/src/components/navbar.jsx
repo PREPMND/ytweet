@@ -8,15 +8,27 @@ import getCurrentUser from '../api/currentuser.jsx';
 const Navbar = () => {
     const currentUser = getCurrentUser();
     console.log(getCurrentUser())
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const data = await getCurrentUser();
+                console.log(data);
+            } catch (err) {
+                console.log("Error in component");
+            }
+        };
+
+        fetchUser();
+    }, []);
     return (
         <>
-        <div>
             <div>
                 <div>
-                    
+                    <div>
+
+                    </div>
                 </div>
             </div>
-        </div>
 
         </>
     )
