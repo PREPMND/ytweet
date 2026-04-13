@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 
-import {Album ,Airplay,Bolt } from "lucide-react"
+import {Album ,Airplay,Bolt,Cannabis } from "lucide-react"
 const Navbar = () => {
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
