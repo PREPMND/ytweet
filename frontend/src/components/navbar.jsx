@@ -55,7 +55,7 @@ const Navbar = () => {
                             onMouseEnter={() => setHoverAlbum(true)}
                             onMouseLeave={() => setHoverAlbum(false)}
                         >
-                            <Album className={`hover:text-amber-400`} />
+                            <Album className={`${hoverAlbum?"text-yellow-300":""}`} />
                             <span
                                 className={`text-[10px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"
                                     }`}
