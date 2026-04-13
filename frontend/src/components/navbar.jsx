@@ -16,7 +16,7 @@ const Navbar = () => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
     });
-    console.log("Navbar data:", error);
+    console.log(error.response);
     
     return (
         <>
