@@ -11,8 +11,8 @@ const Navbar = () => {
         <>
             <div>
                 <div>
-                    <div className="flex items-center select-none ">
-                        <div className="flex items-center">
+                    <div className="flex items-center w-full select-none ">
+                        <div className="flex items-center w-[30%]">
 
                             <img
                                 className="rounded-[100%] object-cover w-10 h-10 ml-5 mt-4
