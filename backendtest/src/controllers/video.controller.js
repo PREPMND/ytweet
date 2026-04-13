@@ -1,6 +1,6 @@
 import { Video } from "../models/video.models.js"; // adjust path if needed
-import { uploadOnCloudinary } from "../utils/cloudinary.util.s"; // adjust path if needed
-import { apiError } from "../utils/apiError.util.js"; // adjust path if needed
+import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if needed
+import { apiError } from "../utils/apiError.js"; // adjust path if needed
 export const createVideo = async (req, res) => {
   try {
     const { title, description } = req.body;
