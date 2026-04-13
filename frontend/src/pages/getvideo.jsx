@@ -44,64 +44,35 @@ const VideoList = () => {
                 {videos.map((video) => (
                     <div
                         key={video._id}
+                        onClick={() => navigate(`/video/${video._id}`)}
                         style={{
                             borderRadius: "12px",
                             overflow: "hidden",
                             background: "#0f0f0f",
                             padding: "8px",
-                            transition: "0.3s",
                             cursor: "pointer",
                         }}
                     >
-                        {playingId !== video._id ? (
-                            <div
-                                onClick={() => setPlayingId(video._id)}
-                                style={{
-                                    position: "relative",
-                                }}
-                            >
-                                <img
-                                    src={video.thumbnail}
-                                    alt={video.title}
-                                    loading="lazy"
-                                    style={{
-                                        width: "100%",
-                                        aspectRatio: "16 / 9",
-                                        objectFit: "cover",
-                                        borderRadius: "10px",
-                                    }}
-                                />
-
-                                <div
-                                    style={{
-                                        position: "absolute",
-                                        top: "50%",
-                                        left: "50%",
-                                        transform: "translate(-50%, -50%)",
-                                        background: "rgba(0,0,0,0.65)",
-                                        borderRadius: "50%",
-                                        padding: "10px 14px",
-                                        color: "#fff",
-                                        fontSize: "16px",
-                                    }}
-                                >
-                                    ▶
-                                </div>
-                            </div>
-                        ) : (
-                            <video
-                                controls
-                                autoPlay
-                                style={{
-                                    width: "100%",
-                                    aspectRatio: "16 / 9",
-                                    borderRadius: "10px",
-                                    backgroundColor: "#000",
-                                }}
-                            >
-                                <source src={video.videoFile} type="video/mp4" />
-                            </video>
-                        )}
+                        <video
+                            src={video.videoFile}
+                            poster={video.thumbnail}
+                            muted
+                            loop
+                            playsInline
+                            style={{
+                                width: "100%",
+                                aspectRatio: "16 / 9",
+                                objectFit: "cover",
+                                borderRadius: "10px",
+                            }}
+                            onMouseEnter={(e) => {
+                                e.target.play();
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.pause();
+                                e.target.currentTime = 0;
+                            }}
+                        />
 
                         <h3
                             style={{
