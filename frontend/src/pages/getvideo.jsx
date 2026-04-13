@@ -38,9 +38,8 @@ const Createvideo = () => {
             <button onClick={uploadVideo}>Create Video</button>
             <form>
                 <input type="text" name="title" placeholder="Video Title" />
-                <input type="text" name="videoFile" placeholder="Video File URL" />
-                <input type="text" name="thumbnail" placeholder="Thumbnail URL" />
-                <input type="number" name="duration" placeholder="Duration in seconds" />
+                <input type="file" name="videoFile" placeholder="Video File" />
+                <input type="file" name="thumbnail" placeholder="Thumbnail" />
                 <input type="hidden" name="owner" value={currentUserId} />
                 <button type="submit">Submit</button>
             </form>
