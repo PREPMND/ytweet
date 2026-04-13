@@ -36,7 +36,7 @@ const Createvideo = () => {
     return (
         <div>
             <button onClick={uploadVideo}>Create Video</button>
-            <form>
+            <form className='text-xl flex flex-col gap-10 justify-center mt-7'>
                 <input type="text" name="title" placeholder="Video Title" />
                 <input type="file" name="videoFile" placeholder="Video File" />
                 <input type="file" name="thumbnail" placeholder="Thumbnail" />
