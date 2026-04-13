@@ -35,9 +35,9 @@ const Navbar = () => {
                             className="w-12 h-12"
                             src={logolight} />
                     </div>
-                    <div className="flex items-center mt-4 gap-10 z-20 pr-5">
+                    <div className="flex items-center mt-4 gap-11 z-20 pr-5">
                         <div
-                            className="flex flex-col items-center"
+                            className="flex flex-col pr-14 items-center"
                             onMouseEnter={() => setHoverBolt(true)}
                             onMouseLeave={() => setHoverBolt(false)}
                         >
