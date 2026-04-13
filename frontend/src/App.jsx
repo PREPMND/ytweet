@@ -43,7 +43,7 @@ const App = () => {
 
   return (
     <div>
-      <AppRoutes currentUser={User} />
+      <AppRoutes User={User} />
     </div>
   )
 }
