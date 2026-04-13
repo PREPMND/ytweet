@@ -11,19 +11,19 @@ export const createVideo = async (req, res) => {
             owner: req.user._id,
         });
         const videoLocalPath = req.files?.video[0]?.path;
-    console.log(videoLocalPath)
-    const thumbnailLocalPath = req.files?.thumbnail[0]?.path;
-    if (!videoLocalPath) {
-        throw new apiError(400, "Video File Is Required")
-    }
-    const video = await uploadOnCloudinary(videoLocalPath)
-    console.log(videoLocalPath)
-    const thumbnail = await uploadOnCloudinary(thumbnailLocalPath)
-    if (!video) {
-        throw new apiError(400, "Video cannot be uploaded")
-    }
+        console.log(videoLocalPath)
+        const thumbnailLocalPath = req.files?.thumbnail[0]?.path;
+        if (!videoLocalPath) {
+            throw new apiError(400, "Video File Is Required")
+        }
+        const video = await uploadOnCloudinary(videoLocalPath)
+        console.log(videoLocalPath)
+        const thumbnail = await uploadOnCloudinary(thumbnailLocalPath)
+        if (!video) {
+            throw new apiError(400, "Video cannot be uploaded")
+        }
 
-        res.status(201).json({ success: true, data: video });
+        res.status(201).json({ success: true, data: videofile });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
