@@ -34,7 +34,7 @@ const Navbar = () => {
                         >
                             <Bolt className={`${hoverBolt ? "text-neutral-950" : "text-neutral-700"}`} size={28} />
                             <span
-                                className={`text-[11px] text-gray-600 font-[600] mt-1 transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"
+                                className={`text-[11px] text-gray-600 font-[600] transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"
                                     }`}
                             >
                                 PREP
