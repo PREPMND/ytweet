@@ -30,7 +30,7 @@ const Navbar = () => {
                     </div>
 
 
-                    <div className="w-fit">
+                    <div className="w-fit absolute left-1/2 t-3">
                         <img
                             className="w-12 h-12"
                             src={logolight} />
