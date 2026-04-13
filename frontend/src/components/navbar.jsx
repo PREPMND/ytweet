@@ -7,9 +7,11 @@ import { Album, Airplay, Bolt, Cannabis } from "lucide-react"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+    const [navigate,setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
     const [hoverAirplay, setHoverAirplay] = useState(false)
+    const navigate = useNavigate();
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
@@ -20,7 +22,9 @@ const Navbar = () => {
         console.log("Status:", error.response?.status);
         console.log("Data:", error.response?.data);
     }
-    
+    if(error && error.response?.status === 401) {
+        setNavigate(true);
+    }
     return (
         <>
             <div>
@@ -88,6 +92,9 @@ const Navbar = () => {
                 <div className="w-full border-[1px] ring-0">
 
                 </div>
+            </div>
+            <div>
+                
             </div>
 
         </>
