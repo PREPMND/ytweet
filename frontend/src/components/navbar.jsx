@@ -18,7 +18,7 @@ const Navbar = () => {
             <div>
                 <div className="flex items-center h-[80px] justify-between">
 
-                    <div className="flex items-center gap-4 pl-5">
+                    <div className="flex items-center h-[80px] gap-4 pl-5">
 
                         <img
                             className="rounded-[100%] object-cover w-10 h-10 
