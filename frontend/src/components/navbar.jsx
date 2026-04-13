@@ -42,7 +42,7 @@ const Navbar = () => {
                             <Bolt
 
                                 className="" size={28} />
-                            <span className="text-[10px] flex-col" >Move To Prep</span>}
+                            <span className="text-[10px] flex-col " >Move To Prep</span>
                         </div>
                         <div>
                             <Album className="" />
