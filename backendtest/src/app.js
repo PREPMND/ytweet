@@ -19,6 +19,8 @@ application.use(cookieParser())
 import router from './routes/user.route.js'
 application.get("/debug", (req, res) => res.send("debug works"));
 application.use("/api/v1/users", router)
+import routerVideo from './routes/video.routes.js'
+application.use("/api/v1/videos", routerVideo)
 console.log(listEndpoints(application));
 // Global error handler
 application.use((err, req, res, next) => {
