@@ -43,58 +43,58 @@ const VideoList = () => {
                 className="video-grid"
             >
                 {videos.map((video) => (
-  <div
-    key={video._id}
-    onClick={() => navigate(`/video/${video._id}`)}
-    onMouseEnter={() => setPlayingId(video._id)}
-    onMouseLeave={() => setPlayingId(null)}
-    style={{
-      borderRadius: "12px",
-      overflow: "hidden",
-      background: "#0f0f0f",
-      padding: "8px",
-      cursor: "pointer",
-    }}
-  >
-    {playingId === video._id ? (
-      <video
-        src={video.videoFile}
-        autoPlay
-        muted
-        loop
-        playsInline
-        style={{
-          width: "100%",
-          aspectRatio: "16 / 9",
-          objectFit: "cover",
-          borderRadius: "10px",
-        }}
-      />
-    ) : (
-      <img
-        src={video.thumbnail}
-        alt={video.title}
-        style={{
-          width: "100%",
-          aspectRatio: "16 / 9",
-          objectFit: "cover",
-          borderRadius: "10px",
-        }}
-      />
-    )}
+                    <div
+                        key={video._id}
+                        onClick={() => navigate(`/video/${video._id}`)}
+                        onMouseEnter={() => setPlayingId(video._id)}
+                        onMouseLeave={() => setPlayingId(null)}
+                        style={{
+                            borderRadius: "12px",
+                            overflow: "hidden",
+                            background: "#0f0f0f",
+                            padding: "8px",
+                            cursor: "pointer",
+                        }}
+                    >
+                        {playingId === video._id ? (
+                            <video
+                                src={video.videoFile}
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                style={{
+                                    width: "100%",
+                                    aspectRatio: "16 / 9",
+                                    objectFit: "cover",
+                                    borderRadius: "10px",
+                                }}
+                            />
+                        ) : (
+                            <img
+                                src={video.thumbnail}
+                                alt={video.title}
+                                style={{
+                                    width: "100%",
+                                    aspectRatio: "16 / 9",
+                                    objectFit: "cover",
+                                    borderRadius: "10px",
+                                }}
+                            />
+                        )}
 
-    <h3
-      style={{
-        marginTop: "8px",
-        fontSize: "14px",
-        color: "#e5e5e5",
-        lineHeight: "1.4",
-      }}
-    >
-      {video.title}
-    </h3>
-  </div>
-))}
+                        <h3
+                            style={{
+                                marginTop: "8px",
+                                fontSize: "14px",
+                                color: "#e5e5e5",
+                                lineHeight: "1.4",
+                            }}
+                        >
+                            {video.title}
+                        </h3>
+                    </div>
+                ))}
             </div>
 
             <div
