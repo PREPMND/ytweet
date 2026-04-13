@@ -15,6 +15,12 @@ const Navbar = () => {
         queryFn: getCurrentUser
     });
     console.log(error);
+    if (error) {
+        // error is an AxiosError
+        console.log("Error object:", error);
+        console.log("Status:", error.response?.status);
+        console.log("Data:", error.response?.data);
+    }
     
     return (
         <>
