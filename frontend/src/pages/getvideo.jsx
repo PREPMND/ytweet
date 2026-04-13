@@ -32,26 +32,27 @@ const VideoList = () => {
             <h2>Published Videos</h2>
             <ul style={{ listStyle: "none", padding: 0 }}>
                 {videos.map((video) => (
-                    <li key={video._id} style={{ marginBottom: "30px" }}>
-                        <h3>{video.title}</h3>
+                    <li
+                        key={video._id}
+                        style={{
+                            marginBottom: "30px",
+                            maxWidth: "320px"
+                        }}
+                    >
+                        <h3 style={{ marginBottom: "10px" }}>{video.title}</h3>
 
-                        {/* Thumbnail stacked above */}
-                        <img
-                        className="object-cover"
-                            src={video.thumbnail}
-                            alt={video.title}
-                            width="320"
-                            height="180"
-                            style={{ display: "block", marginBottom: "10px", borderRadius: "8px" }}
-                        />
-
-                        {/* Video player */}
+                        {/* Video player with thumbnail poster */}
                         <video
                             width="320"
                             height="180"
-                            poster={video.thumbnail}   // 👈 shows thumbnail as preview
                             controls
-                            style={{ borderRadius: "8px" }}
+                            poster={video.thumbnail} // 👈 ensures thumbnail shows consistently
+                            style={{
+                                display: "block",
+                                borderRadius: "8px",
+                                objectFit: "cover", // keeps aspect ratio consistent
+                                backgroundColor: "#000" // fallback background
+                            }}
                         >
                             <source src={video.videoFile} type="video/mp4" />
                             Your browser does not support the video tag.
