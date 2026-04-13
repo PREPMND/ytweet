@@ -74,7 +74,7 @@ const Navbar = () => {
                                 className={`text-[10px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"
                                     }`}
                             >
-                                BreezyMode
+                                
                             </span>
                         </div>
                     </div>
