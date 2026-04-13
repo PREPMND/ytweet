@@ -1,6 +1,7 @@
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 export default function getCurrentUser() {
+    const navigate = useNavigate();
     async function fetchData() {
         try {
             const response = await axios.get(
@@ -12,6 +13,7 @@ export default function getCurrentUser() {
         } catch (err) {
             if (err.response?.status === 401) {
                 console.log("Please log in.");
+                navigate("/login");
             } else {
                 console.log("Error status:", err.response?.status);
                 console.log("Error data:", err.response?.data);
