@@ -47,7 +47,7 @@ const VideoList = () => {
                         key={video._id}
                         onClick={() => navigate(`/video/${video._id}`)}
                         onMouseEnter={() => {
-                            let timeout = setTimeout(() => setPlayingId(video._id), 300);
+                            timeout = setTimeout(() => setPlayingId(video._id), 300);
                         }}
                         onMouseLeave={() => {
                             clearTimeout(timeout);
