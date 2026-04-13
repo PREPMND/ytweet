@@ -31,84 +31,41 @@ const VideoList = () => {
         <div style={{ padding: "20px" }}>
             <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
 
-            {/* GRID */}
             <div
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", // 👈 smaller width
+                    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
                     gap: "20px",
-                    maxWidth: "900px", // 👈 keeps layout tighter
-                    margin: "0 auto",
                 }}
             >
                 {videos.map((video) => (
                     <div
                         key={video._id}
                         style={{
-                            borderRadius: "12px",
+                            borderRadius: "10px",
                             overflow: "hidden",
-                            background: "#0f0f0f",
-                            padding: "8px",
-                            transition: "0.3s",
-                            cursor: "pointer",
+                            background: "white",
+                            padding: "",
                         }}
                     >
-                        {playingId !== video._id ? (
-                            <div
-                                onClick={() => setPlayingId(video._id)}
-                                style={{
-                                    position: "relative",
-                                }}
-                            >
-                                <img
-                                    src={video.thumbnail}
-                                    alt={video.title}
-                                    loading="lazy"
-                                    style={{
-                                        width: "100%",
-                                        aspectRatio: "16 / 9",
-                                        objectFit: "cover",
-                                        borderRadius: "10px",
-                                    }}
-                                />
-
-                                <div
-                                    style={{
-                                        position: "absolute",
-                                        top: "50%",
-                                        left: "50%",
-                                        transform: "translate(-50%, -50%)",
-                                        background: "rgba(0,0,0,0.65)",
-                                        borderRadius: "50%",
-                                        padding: "10px 14px",
-                                        color: "#fff",
-                                        fontSize: "16px",
-                                    }}
-                                >
-                                    ▶
-                                </div>
-                            </div>
-                        ) : (
-                            <video
-                                controls
-                                autoPlay
-                                style={{
-                                    width: "100%",
-                                    aspectRatio: "16 / 9",
-                                    borderRadius: "10px",
-                                    backgroundColor: "#000",
-                                }}
-                            >
-                                <source src={video.videoFile} type="video/mp4" />
-                            </video>
-                        )}
-
+                        <video
+                            controls
+                            poster={video.thumbnail}
+                            style={{
+                                width: "100%",
+                                aspectRatio: "16 / 9", 
+                                borderRadius: "8px",
+                                backgroundColor: "#000",
+                                objectFit: "cover",
+                            }}
+                        >
+                            <source src={video.videoFile} type="video/mp4" />
+                        </video>
                         <h3
                             style={{
-                                marginTop: "8px",
-                                fontSize: "14px",
-                                color: "#e5e5e5",
-                                lineHeight: "1.4",
+                                fontSize: "16px",
+                                marginTop: "10px",
+                                color: "#fff",
                             }}
                         >
                             {video.title}
@@ -117,31 +74,23 @@ const VideoList = () => {
                 ))}
             </div>
 
-            {/* PAGINATION */}
             <div
                 style={{
                     marginTop: "30px",
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center",
                     gap: "10px",
                 }}
             >
-                <button
-                    disabled={page <= 1}
-                    onClick={() => fetchVideos(page - 1)}
-                >
+                <button disabled={title <= 1} onClick={() => fetchVideos(title - 1)}>
                     Previous
                 </button>
 
                 <span>
-                    Page {page} of {totalPages}
+                    Page {title} of {thumbnail}
                 </span>
 
-                <button
-                    disabled={page >= totalPages}
-                    onClick={() => fetchVideos(page + 1)}
-                >
+                <button disabled={title >= thumbnail} onClick={() => fetchVideos(title + 1)}>
                     Next
                 </button>
             </div>
