@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const VideoList = () => {
     const [videos, setVideos] = useState([]);
     const [title, setTitle] = useState(1);
     const [thumbnail, setThumbnail] = useState(1);
-    const [playingId, setPlayingId] = useState(null);
+    const navigate = useNavigate();
     const fetchVideos = async (pageNum = 1) => {
         try {
             const res = await fetch(`http://localhost:8000/api/v1/videos/getvideos`);
