@@ -46,53 +46,32 @@ const VideoList = () => {
                             overflow: "hidden",
                             background: "#111",
                             padding: "10px",
-                            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
                         }}
                     >
-                        {/* Thumbnail */}
-                        <div
-                            style={{
-                                width: "100%",
-                                height: "180px",
-                                overflow: "hidden",
-                                borderRadius: "8px",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            <img
-                                src={video.thumbnail}
-                                alt={video.title}
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "cover",
-                                }}
-                            />
-                        </div>
-
-                        {/* Title */}
-                        <h3
-                            style={{
-                                fontSize: "16px",
-                                marginBottom: "10px",
-                                color: "#fff",
-                            }}
-                        >
-                            {video.title}
-                        </h3>
-
-                        {/* Video */}
+                        {/* VIDEO ONLY (thumbnail comes from poster) */}
                         <video
                             controls
                             poster={video.thumbnail}
                             style={{
                                 width: "100%",
-                                borderRadius: "8px",
+                                aspectRatio: "16 / 9",                                borderRadius: "8px",
                                 backgroundColor: "#000",
+                                objectFit: "cover",
                             }}
                         >
                             <source src={video.videoFile} type="video/mp4" />
                         </video>
+
+                        {/* Title below */}
+                        <h3
+                            style={{
+                                fontSize: "16px",
+                                marginTop: "10px",
+                                color: "#fff",
+                            }}
+                        >
+                            {video.title}
+                        </h3>
                     </div>
                 ))}
             </div>
@@ -103,14 +82,10 @@ const VideoList = () => {
                     marginTop: "30px",
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center",
                     gap: "10px",
                 }}
             >
-                <button
-                    disabled={title <= 1}
-                    onClick={() => fetchVideos(title - 1)}
-                >
+                <button disabled={title <= 1} onClick={() => fetchVideos(title - 1)}>
                     Previous
                 </button>
 
@@ -118,10 +93,7 @@ const VideoList = () => {
                     Page {title} of {thumbnail}
                 </span>
 
-                <button
-                    disabled={title >= thumbnail}
-                    onClick={() => fetchVideos(title + 1)}
-                >
+                <button disabled={title >= thumbnail} onClick={() => fetchVideos(title + 1)}>
                     Next
                 </button>
             </div>
