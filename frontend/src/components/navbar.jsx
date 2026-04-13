@@ -32,7 +32,7 @@ const Navbar = () => {
                             src={logolight} />
                     </div>
                     <div className=" flex ">
-                        <Album/>
+                        <Album className="px-5"/>
                         <Airplay/>
                         <Bolt/>
                     </div>
