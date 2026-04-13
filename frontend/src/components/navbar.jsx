@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import getCurrentUser from '../api/currentuser.jsx';
-import {logolight} from "../assets/logolight.png"
+import logolight from "../assets/logolight.jpg"
 const Navbar = () => {
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
