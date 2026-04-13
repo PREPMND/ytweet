@@ -15,7 +15,7 @@ const Navbar = () => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
     });
-    if(error.status === 401){navigate("/login")}
+    if(error.response?.status === 401){navigate("/login")}
     return (
         <>
             <div>
