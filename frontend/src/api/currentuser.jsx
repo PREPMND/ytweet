@@ -19,5 +19,5 @@ export default function getCurrentUser() {
             throw err; // Re-throw the error to be handled by the caller
         }
     }
-    fetchData();
+    return fetchData();
 }
