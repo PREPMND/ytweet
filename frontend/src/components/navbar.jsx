@@ -14,7 +14,6 @@ const Navbar = () => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
     });
-    console.log(error);
     if (error) {
         // error is an AxiosError
         console.log("Error object:", error);
