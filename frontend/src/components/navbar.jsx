@@ -26,7 +26,7 @@ const Navbar = () => {
 
                     <div>
                         <img
-                            className="w-10 h-10"
+                            className="w-12 h-12"
                             src={logolight} />
                     </div>
                     <div className="p-3">
