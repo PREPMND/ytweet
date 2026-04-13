@@ -35,6 +35,7 @@ const VideoList = () => {
                 style={{
                     display: "grid",
                     gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+                    maxWidth: "700px",
                     gap: "20px",
                 }}
             >
