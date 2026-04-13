@@ -17,6 +17,7 @@ const Navbar = () => {
                         hover:ring-2 hover:ring-blue-500"
                         
                         src={data?.user?.avatar} alt="User Avatar" />
+                        
                     </div>
                 </div>
             </div>
