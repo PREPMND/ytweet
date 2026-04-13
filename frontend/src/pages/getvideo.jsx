@@ -61,7 +61,7 @@ const VideoList = () => {
                         style={{
                             borderRadius: "12px",
                             overflow: "hidden",
-                            background: "#0f0f0f",
+                            background: "white",
                             padding: "8px",
                             cursor: "pointer",
                             transition: "opacity 0.3s ease",
