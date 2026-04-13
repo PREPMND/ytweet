@@ -44,7 +44,7 @@ const VideoList = () => {
                         style={{
                             borderRadius: "10px",
                             overflow: "hidden",
-                            background: "",
+                            background: "white",
                             padding: "10px",
                         }}
                     >
