@@ -11,12 +11,11 @@ const Navbar = () => {
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
     const [hoverAirplay, setHoverAirplay] = useState(false)
-    const [navigating, setNavigating] = useState(false);
     const { data, error, isLoading } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
     });
-    console.log(error.response);
+    console.log(error);
     
     return (
         <>
