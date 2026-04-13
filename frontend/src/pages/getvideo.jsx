@@ -28,27 +28,35 @@ const VideoList = () => {
     }, [title]);
 
     return (
-        <div>
-            <h2>Published Videos</h2>
-            <ul style={{ listStyle: "none", padding: 0 }}>
+        <div style={{ padding: "20px" }}>
+            <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
+
+            <div
+                style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                    gap: "20px",
+                }}
+            >
                 {videos.map((video) => (
-                    <li
+                    <div
                         key={video._id}
                         style={{
-                            marginBottom: "30px",
-                            width: "320px" // fixed width for consistency
+                            borderRadius: "10px",
+                            overflow: "hidden",
+                            background: "#111",
+                            padding: "10px",
+                            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
                         }}
                     >
-                        <h3 style={{ marginBottom: "10px" }}>{video.title}</h3>
-
-                        {/* Thumbnail stacked above */}
+                        {/* Thumbnail */}
                         <div
                             style={{
-                                width: "320px",
-                                height: "180px", // fixed height for consistent aspect ratio
+                                width: "100%",
+                                height: "180px",
                                 overflow: "hidden",
                                 borderRadius: "8px",
-                                marginBottom: "10px"
+                                marginBottom: "10px",
                             }}
                         >
                             <img
@@ -57,38 +65,63 @@ const VideoList = () => {
                                 style={{
                                     width: "100%",
                                     height: "100%",
-                                    objectFit: "cover" // ensures image fills box without distortion
+                                    objectFit: "cover",
                                 }}
                             />
                         </div>
 
-                        {/* Video player with poster thumbnail */}
+                        {/* Title */}
+                        <h3
+                            style={{
+                                fontSize: "16px",
+                                marginBottom: "10px",
+                                color: "#fff",
+                            }}
+                        >
+                            {video.title}
+                        </h3>
+
+                        {/* Video */}
                         <video
-                            width="320"
-                            height="180"
                             controls
                             poster={video.thumbnail}
                             style={{
+                                width: "100%",
                                 borderRadius: "8px",
                                 backgroundColor: "#000",
-                                objectFit: "cover"
                             }}
                         >
                             <source src={video.videoFile} type="video/mp4" />
-                            Your browser does not support the video tag.
                         </video>
-                    </li>
+                    </div>
                 ))}
-            </ul>
+            </div>
 
-            <div style={{ marginTop: "20px" }}>
-                <button disabled={title <= 1} onClick={() => fetchVideos(title - 1)}>
+            {/* Pagination */}
+            <div
+                style={{
+                    marginTop: "30px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "10px",
+                }}
+            >
+                <button
+                    disabled={title <= 1}
+                    onClick={() => fetchVideos(title - 1)}
+                >
                     Previous
                 </button>
-                <span style={{ margin: "0 10px" }}>
+
+                <span>
                     Page {title} of {thumbnail}
                 </span>
-                <button disabled={title >= thumbnail} onClick={() => fetchVideos(title + 1)}>
+
+                <button
+                    disabled={title >= thumbnail}
+                    onClick={() => fetchVideos(title + 1)}
+                >
                     Next
                 </button>
             </div>
