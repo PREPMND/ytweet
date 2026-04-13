@@ -37,15 +37,18 @@ const VideoList = () => {
 
                         {/* Thumbnail stacked above */}
                         <img
+                        className="object-cover"
                             src={video.thumbnail}
                             alt={video.title}
                             width="320"
+                            height="180"
                             style={{ display: "block", marginBottom: "10px", borderRadius: "8px" }}
                         />
 
                         {/* Video player */}
                         <video
                             width="320"
+                            height="180"
                             poster={video.thumbnail}   // 👈 shows thumbnail as preview
                             controls
                             style={{ borderRadius: "8px" }}
