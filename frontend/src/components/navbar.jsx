@@ -33,6 +33,9 @@ const Navbar = () => {
                         About 
                     </div>
                 </div>
+                <div className="w-full border-[1px] ">
+
+                </div>
             </div>
 
         </>
