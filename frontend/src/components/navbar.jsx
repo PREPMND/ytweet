@@ -104,12 +104,12 @@ const Navbar = () => {
                 <div className="fixed inset-0 z-40 flex items-center justify-center">
                     {/* Overlay */}
                     <div
-                        className="absolute inset-0 bg-black opacity-50"
+                        className="absolute inset-0 opacity-50"
                         onClick={() => setNavigate(false)} // optional: close when clicking outside
                     ></div>
 
                     {/* Modal */}
-                    <div className="relative w-[40%] h-[40%] bg-white/90 rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50">
+                    <div className="relative w-[50%] h-[40%]  bg-white/90 rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50">
                         <h2 className="text-xl font-bold">Please log in to continue</h2>
                         <button
                             onClick={() => navigating("/login")}
