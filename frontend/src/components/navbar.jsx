@@ -5,7 +5,9 @@ import logolight from "../assets/logolight.jpg"
 
 import { Album, Airplay, Bolt, Cannabis } from "lucide-react"
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const Navbar = () => {
+    const navigate = useNavigate();
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
     const [hoverAirplay, setHoverAirplay] = useState(false)
@@ -13,6 +15,7 @@ const Navbar = () => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
     });
+    if(error.status === 401){navigate("/login")}
     return (
         <>
             <div>
