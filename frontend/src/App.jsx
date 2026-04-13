@@ -1,4 +1,7 @@
 import AppRoutes from './routes/routes.jsx';
+import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import getCurrentUser from './api/currentuser.jsx';
 const App = () => {
   {/*const [username,setUsername]=useState("")
   async function loginUser(credentials) {
@@ -25,12 +28,24 @@ const App = () => {
     fetchUser();
   }, []);
 */}
+  const [User, setUser] = useState(null);
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["currentUser"],
+    queryFn: getCurrentUser
+  });
+  useEffect(() => {
+    if (data?.user) {
+      setUser(data.user);
+    } else {
+      setUser(null);
+    }
+  }, [data]);
 
-return (
-  <div>
-    <AppRoutes/>
-  </div>
-)
+  return (
+    <div>
+      <AppRoutes currentUser={User} />
+    </div>
+  )
 }
 
 export default App

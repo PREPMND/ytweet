@@ -1,37 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { useQuery } from '@tanstack/react-query';
+import getCurrentUser from '../api/currentuser.jsx';
 const Home = () => {
     const [user, setUser] = useState(null);
     const [message, setMessage] = useState("");
-
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await axios.get(
-                    "http://localhost:8000/api/v1/users/currentuser",
-                    { withCredentials: true } // <-- critical
-                );
-                //console.log(response)
-                setUser(response.data.data);
-                setMessage(response.data.message);
-            } catch (err) {
-                if (err.status == 401) {
-                    console.log(" Please log in.");
-                }
-                console.log(err.status);
-            }
-        }
-        fetchData();
-    }, []);
-
+    
+    const { data, error, isLoading } = useQuery({
+            queryKey: ["currentUser"],
+            queryFn: getCurrentUser
+        });
     return (
         <div>
-            {user ? (
+            {data ? (
                 <div>
                     <h2>{message}</h2>
-                    <p><strong>ID:</strong> {user.id}</p>
-                    <p><strong>Email:</strong> {user.email}</p>
+                    <p><strong>ID:</strong> {data.user._id}</p>
+                    <p><strong>Email:</strong> {data.user.email}</p>
+                    <p><strong>Full Name:</strong> {data.user.fullName}</p>
                     {/* Add more fields as needed */}
                 </div>
             ) : (
