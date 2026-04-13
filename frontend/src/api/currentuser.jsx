@@ -16,6 +16,7 @@ export default function getCurrentUser() {
                 console.log("Error status:", err.response?.status);
                 console.log("Error data:", err.response?.data);
             }
+            throw err; // Re-throw the error to be handled by the caller
         }
     }
     fetchData();
