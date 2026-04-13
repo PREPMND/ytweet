@@ -7,7 +7,7 @@ const VideoList = () => {
 
     const fetchVideos = async (pageNum = 1) => {
         try {
-            const res = await fetch(`http://localhost:5000/api/v1/videos?page=${pageNum}&limit=3`);
+            const res = await fetch(`http://localhost:8000/api/v1/videos?page=${pageNum}&limit=3`);
             const data = await res.json();
 
             if (data.success) {
