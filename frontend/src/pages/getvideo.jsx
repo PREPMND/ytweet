@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 const VideoList = () => {
     const [videos, setVideos] = useState([]);
@@ -39,7 +39,7 @@ const VideoList = () => {
                     gap: "30px",
                     maxWidth: "1000px",
                     margin: "0 auto",
-            
+
                     //gridTemplateColumns: "repeat(3, 1fr)",
                 }}
                 className="video-grid"
@@ -59,12 +59,10 @@ const VideoList = () => {
                             setPlayingId(null);
                         }}
                         style={{
-                            borderRadius: "12px",
-                            overflow: "hidden",
-                            background: "white",
-                            padding: "8px",
-                            cursor: "pointer",
-                            transition: "opacity 0.3s ease",
+                            display: "flex",
+                            flexWrap: "wrap",
+                            justifyContent: "space-between",
+                            gap: "20px",
                         }}
                     >
                         {playingId === video._id ? (
