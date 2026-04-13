@@ -31,8 +31,10 @@ const Navbar = () => {
                             className="w-12 h-12"
                             src={logolight} />
                     </div>
-                    <div className="p-3">
-                        About 
+                    <div className="p-3 flex">
+                        <Album/>
+                        <Airplay/>
+                        <Bolt/>
                     </div>
                 </div>
                 <div className="w-full border-[1px] ring-0">
