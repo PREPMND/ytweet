@@ -16,11 +16,8 @@ const Navbar = () => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser
     });
-    if(error.data.statusCode===401){
-        setTimeout(() => {
-            navigate("/login");
-        }, 2000);
-    }
+    console.log("Navbar data:", error);
+    
     return (
         <>
             <div>
