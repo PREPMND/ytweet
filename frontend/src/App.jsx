@@ -40,7 +40,7 @@ const App = () => {
       setUser(null);
     }
   }, [data]);
-
+  console.log("App component - Current User:", User);
   return (
     <div>
       <AppRoutes User={User} />
