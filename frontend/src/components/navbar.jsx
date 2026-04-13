@@ -32,7 +32,7 @@ const Navbar = () => {
                             src={logolight} />
                     </div>
                     <div className=" flex gap-10 z-20 pr-5">
-                        <Bolt className=""/>
+                        <Bolt className="" size={28}/>
                         <Album className=""/>
                         <Airplay className=""/>
                         
