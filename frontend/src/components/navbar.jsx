@@ -108,8 +108,8 @@ const Navbar = () => {
                     ></div>
 
                     {/* Modal */}
-                    <div className="relative w-[40%] h-[40%] bg-white/30 rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50">
-                        <h2 className="text-xl font-bold text-gray-800">Please log in to continue</h2>
+                    <div className="relative w-[40%] h-[40%] bg-white/90 rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50">
+                        <h2 className="text-xl font-bold">Please log in to continue</h2>
                         <button
                             onClick={() => navigating("/login")}
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
