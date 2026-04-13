@@ -41,7 +41,7 @@ const Navbar = () => {
                             onMouseEnter={()=>{setHoverBolt(true)}}
                             onMouseLeave={()=>{setHoverBolt(false)}}
                             className="" size={28} />
-                            {hoverBolt && <span >Move To Prep</span>}
+                            {hoverBolt && <span className="text-[10px] flex-col" >Move To Prep</span>}
                         </div>
                         <div>
                             <Album className="" />
