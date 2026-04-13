@@ -37,11 +37,24 @@ const Navbar = () => {
                     </div>
                     <div className="flex items-center mt-4 gap-11 z-20 pr-5">
                         <div
-                            className="flex flex-col pr-14 items-center"
+                            className="flex flex-col items-center"
+                            onMouseEnter={() => setHoverAirplay(true)}
+                            onMouseLeave={() => setHoverAirplay(false)}
+                        >
+                            <Airplay className={`${hoverAirplay ? "text-yellow-400 shadow-lg shadow-yellow-300 scale-105" : ""}`} />
+                            <span
+                                className={`text-[10px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"
+                                    }`}
+                            >
+                                JoinEdge
+                            </span>
+                        </div>
+                        <div
+                            className="flex flex-col  items-center"
                             onMouseEnter={() => setHoverBolt(true)}
                             onMouseLeave={() => setHoverBolt(false)}
                         >
-                            <Bolt className={`${hoverBolt?"text-neutral-950":"text-neutral-700"}`}  size={28} />
+                            <Bolt className={`${hoverBolt ? "text-neutral-950" : "text-neutral-700"}`} size={28} />
                             <span
                                 className={`text-[10px] text-gray-600 font-[600] mt-1 transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"
                                     }`}
@@ -55,7 +68,7 @@ const Navbar = () => {
                             onMouseEnter={() => setHoverAlbum(true)}
                             onMouseLeave={() => setHoverAlbum(false)}
                         >
-                            <Album className={`${hoverAlbum?"text-yellow-400":""}`} />
+                            <Album className={`${hoverAlbum ? "text-yellow-400" : ""}`} />
                             <span
                                 className={`text-[10px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"
                                     }`}
@@ -64,19 +77,7 @@ const Navbar = () => {
                             </span>
                         </div>
 
-                        <div
-                            className="flex flex-col items-center"
-                            onMouseEnter={() => setHoverAirplay(true)}
-                            onMouseLeave={() => setHoverAirplay(false)}
-                        >
-                            <Airplay className={`${hoverAirplay?"text-yellow-400 shadow-lg shadow-yellow-300 scale-105":""}`}/>
-                            <span
-                                className={`text-[10px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"
-                                    }`}
-                            >
-                                JoinEdge
-                            </span>
-                        </div>
+
                     </div>
                 </div>
                 <div className="w-full border-[1px] ring-0">
