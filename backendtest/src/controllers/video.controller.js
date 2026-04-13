@@ -23,8 +23,8 @@ export const createVideo = async (req, res) => {
       title,
       description,
       owner: req.user._id,
-      videoUrl: videoUpload.secure_url,
-      thumbnailUrl: thumbnailUpload?.secure_url,
+      videoFile: videoUpload.secure_url,
+      thumbnail: thumbnailUpload?.secure_url,
     });
 
     res.status(201).json({ success: true, data: videoDoc });
