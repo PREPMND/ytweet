@@ -1,5 +1,5 @@
 import React from 'react'
-import getCurrentUser from './currentuser';
+import getCurrentUser from '../api/currentuser';
 import axios from "axios";
 import { useQuery } from '@tanstack/react-query';
 const createVideo = () => {
