@@ -30,7 +30,7 @@ const VideoList = () => {
     }, [title]);
 
     return (
-        <div style={{ padding: "0px" }}>
+        <div style={{ padding: "10px" }}>
             <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
 
             <div
