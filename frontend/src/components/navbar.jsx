@@ -35,7 +35,7 @@ const Navbar = () => {
                             className="w-12 h-12"
                             src={logolight} />
                     </div>
-                    <div className="flex items-center  mt-4 gap-11 z-20 pr-5">
+                    <div className="flex items-center  mt-4 gap-11 z-20 pr-9">
                         <div
                             className="flex flex-col  mr-14 items-center"
                             onMouseEnter={() => setHoverAirplay(true)}
@@ -43,7 +43,7 @@ const Navbar = () => {
                         >
                             <Airplay className={`${hoverAirplay ? "text-yellow-400 shadow-lg shadow-yellow-300 scale-105" : ""}`} />
                             <span
-                                className={`text-[10px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"
+                                className={`text-[12px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"
                                     }`}
                             >
                                 JoinEdge
@@ -56,7 +56,7 @@ const Navbar = () => {
                         >
                             <Bolt className={`${hoverBolt ? "text-neutral-950" : "text-neutral-700"}`} size={28} />
                             <span
-                                className={`text-[10px] text-gray-600 font-[600] mt-1 transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"
+                                className={`text-[12px] text-gray-600 font-[600] mt-1 transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"
                                     }`}
                             >
                                 PREP
@@ -70,7 +70,7 @@ const Navbar = () => {
                         >
                             <Album className={`${hoverAlbum ? "text-yellow-400" : ""}`} />
                             <span
-                                className={`text-[10px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"
+                                className={`text-[12px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"
                                     }`}
                             >
                                 Saved
