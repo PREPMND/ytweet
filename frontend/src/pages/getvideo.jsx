@@ -36,9 +36,10 @@ const VideoList = () => {
             <div
                 style={{
                     display: "grid",
-                    gap: "20px",
+                    gap: "30px",
                     maxWidth: "1000px",
                     margin: "0 auto",
+            
                     //gridTemplateColumns: "repeat(3, 1fr)",
                 }}
                 className="video-grid"
