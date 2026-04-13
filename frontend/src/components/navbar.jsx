@@ -26,12 +26,12 @@ const Navbar = () => {
                     </div>
 
 
-                    <div>
+                    <div className="w-fit">
                         <img
                             className="w-12 h-12"
                             src={logolight} />
                     </div>
-                    <div className=" flex z-20 ">
+                    <div className=" flex gap-4 z-20 ">
                         <Album className=""/>
                         <Airplay className=""/>
                         <Bolt/>
