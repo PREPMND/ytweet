@@ -37,12 +37,17 @@ const Navbar = () => {
                     </div>
                     <div className="flex items-center mt-4 gap-10 z-20 pr-5">
                         <div
-                            className="flex flex-col transition-transform duration-300 ease-in-out items-center"
+                            className="flex flex-col items-center"
                             onMouseEnter={() => setHoverBolt(true)}
                             onMouseLeave={() => setHoverBolt(false)}
                         >
                             <Bolt size={28} />
-                            {hoverBolt && <span className="text-[10px] mt-1">Prep</span>}
+                            <span
+                                className={`text-[10px] mt-1 transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"
+                                    }`}
+                            >
+                                Prep
+                            </span>
                         </div>
 
                         <div
@@ -51,7 +56,12 @@ const Navbar = () => {
                             onMouseLeave={() => setHoverAlbum(false)}
                         >
                             <Album />
-                            {hoverAlbum && <span className="text-[10px] mt-1">Prep</span>}
+                            <span
+                                className={`text-[10px] mt-1 transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"
+                                    }`}
+                            >
+                                Prep
+                            </span>
                         </div>
 
                         <div
@@ -60,7 +70,12 @@ const Navbar = () => {
                             onMouseLeave={() => setHoverAirplay(false)}
                         >
                             <Airplay />
-                            {hoverAirplay && <span className="text-[10px] mt-1">Prep</span>}
+                            <span
+                                className={`text-[10px] mt-1 transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"
+                                    }`}
+                            >
+                                Prep
+                            </span>
                         </div>
                     </div>
                 </div>
