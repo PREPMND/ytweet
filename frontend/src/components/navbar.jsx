@@ -11,7 +11,7 @@ const Navbar = () => {
         <>
             <div>
                 <div>
-                    <div className="flex items-center flex-col w-full select-none ">
+                    <div className="">
                         <div className="flex items-center w-[30%]">
 
                             <img
@@ -21,7 +21,7 @@ const Navbar = () => {
 
                                 src={data?.user?.avatar} alt="User Avatar" />
                             <span className="ml-3 text-sm font-medium text-gray-700">{data?.user?.username}</span>
-                        </div>
+                        
 
                     </div>
                     <div>
