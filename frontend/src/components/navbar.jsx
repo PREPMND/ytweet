@@ -27,7 +27,7 @@ const Navbar = () => {
 
                             src={data?.user?.avatar} alt="User Avatar" />
                         <span className=" text-sm font-medium text-gray-700">{data?.user?.username}</span>
-                        
+
                     </div>
 
 
@@ -70,7 +70,7 @@ const Navbar = () => {
                             onMouseEnter={() => setHoverBolt(true)}
                             onMouseLeave={() => setHoverBolt(false)}
                         >
-                            <Bolt className={`${hoverBolt ? "text-neutral-950" : "text-neutral-700"}`} size={28} />
+                            <Bolt className={`${hoverBolt ? "text-neutral-950" : "text-neutral-700"}`} />
                             <span
                                 className={`text-[11px] text-gray-600 font-[600] transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"
                                     }`}
