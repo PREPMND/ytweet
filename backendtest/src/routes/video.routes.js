@@ -4,7 +4,18 @@ import { createVideo, getVideos, getVideoById, updateVideo, deleteVideo } from "
 
 const routerVideo = express.Router();
 
-routerVideo.post("/createvideo", verifyJWT, createVideo);
+routerVideo.post("/createvideo", verifyJWT,
+    upload.fields([
+        {
+            name: "videoFile",
+            maxCount: 1
+        },
+        {
+            name: "thumbnail",
+            maxCount: 1
+        }
+    ]),
+    createVideo);
 routerVideo.get("/getvideos", getVideos);
 routerVideo.get("/getvideo/:id", getVideoById);
 routerVideo.put("/updatevideo/:id", verifyJWT, updateVideo);
