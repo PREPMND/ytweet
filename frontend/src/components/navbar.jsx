@@ -34,7 +34,7 @@ const Navbar = () => {
                             className="w-12 h-12"
                             src={logolight} />
                     </div>
-                    <div className="flex items-center  mt-4 gap-11 z-20 pr-9">
+                    <div className="flex items-center  mt-4 gap-11 z-20 pr-4 sm:pr-9">
                         <div
                             className="flex flex-col mr:7 md:mr-14 items-center"
                             onMouseEnter={() => setHoverAirplay(true)}
