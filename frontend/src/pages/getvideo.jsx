@@ -4,7 +4,7 @@ const VideoList = () => {
     const [videos, setVideos] = useState([]);
     const [title, setTitle] = useState(1);
     const [thumbnail, setThumbnail] = useState(1);
-
+    const [playingId, setPlayingId] = useState(null);
     const fetchVideos = async (pageNum = 1) => {
         try {
             const res = await fetch(`http://localhost:8000/api/v1/videos/getvideos`);
@@ -34,7 +34,7 @@ const VideoList = () => {
             <div
                 style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
                     gap: "20px",
                 }}
             >
