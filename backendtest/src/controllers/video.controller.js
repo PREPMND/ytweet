@@ -10,7 +10,18 @@ export const createVideo = async (req, res) => {
             description,
             owner: req.user._id,
         });
-        
+        const avatarLocalPath = req.files?.avatar[0]?.path;
+    console.log(avatarLocalPath)
+    const coverImageLocalPath = req.files?.coverImage[0]?.path;
+    if (!avatarLocalPath) {
+        throw new apiError(400, "Avatar File Is Required")
+    }
+    const avatar = await uploadOnCloudinary(avatarLocalPath)
+    console.log(avatarLocalPath)
+    const coverImage = await uploadOnCloudinary(coverImageLocalPath)
+    if (!avatar) {
+        throw new apiError(400, "Avatar cannot be uploaded")
+    }
 
         res.status(201).json({ success: true, data: video });
     } catch (error) {
