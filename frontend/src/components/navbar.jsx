@@ -4,10 +4,10 @@ import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 
 import { Album, Airplay, Bolt, Cannabis } from "lucide-react"
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 const Navbar = () => {
-    const [navigate,setNavigate] = useState(false);
+    const [navigate, setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
     const [hoverAirplay, setHoverAirplay] = useState(false)
@@ -22,9 +22,12 @@ const Navbar = () => {
         console.log("Status:", error.response?.status);
         console.log("Data:", error.response?.data);
     }
-    if(error && error.response?.status === 401) {
-        setNavigate(true);
-    }
+    useEffect(() => {
+        if (error?.response?.status === 401) {
+            setNavigate(true);
+        }
+    }, [error]);
+
     return (
         <>
             <div>
