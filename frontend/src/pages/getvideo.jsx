@@ -37,7 +37,7 @@ const VideoList = () => {
                 style={{
                     display: "flex",
                     flexWrap: "wrap",
-                    maxWidth: "1200px",
+                    maxWidth: "1000px",
                     justifyContent: "space-between",
                     gap: "20px",
                 }}
