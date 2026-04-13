@@ -10,10 +10,7 @@ export default function getCurrentUser() {
         } catch (err) {
             if (err.response?.status === 401) {
                 console.log("Please log in.");
-            } else {
-                console.log("Error status:", err.response?.status);
-                console.log("Error data:", err.response?.data);
-            }
+            } 
             throw err; // Re-throw the error to be handled by the caller
         }
     }
