@@ -33,7 +33,7 @@ const Navbar = () => {
                     </div>
                     <div className=" flex ">
                         <Album className="px-5"/>
-                        <Airplay/>
+                        <Airplay className="px-5"/>
                         <Bolt/>
                     </div>
                 </div>
