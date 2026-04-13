@@ -22,7 +22,7 @@ const Createvideo = () => {
     const uploadVideo = async (formData) => {
         try {
             const response = await axios.post(
-                "/api/v1/videos/createvideo",
+                "http://localhost:8000/api/v1/videos/createvideo",
                 formData,
                 {
                     withCredentials: true, // send cookies for verifyJWT
