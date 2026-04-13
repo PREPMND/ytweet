@@ -7,7 +7,7 @@ const routerVideo = express.Router();
 routerVideo.post("/createvideo", verifyJWT,
     upload.fields([
         {
-            name: "videoFile",
+            name: "videoLocalPath",
             maxCount: 1
         },
         {
