@@ -11,8 +11,8 @@ const VideoList = () => {
             const data = await res.json();
 
             if (data.success) {
-                setVideos(data.data.docs);       // paginated docs
-                setPage(data.data.page);         // current page
+                setVideos(data.data.docs.videoFile);       // paginated docs
+                setPage(data.data.docs.page);         // current page
                 setTotalPages(data.data.totalPages);
                 console.log("Total Pages:", data.data.docs); // total pages
             } else {
