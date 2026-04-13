@@ -4,7 +4,7 @@ import AuthLayout from "../layout/authlayout"
 import Login from "../auth/login"
 import Register from "../auth/register"
 import HomePage from "../pages/home.page.jsx"
-import Createvideo from "../pages/getvideo.jsx"
+import Createvideo from "../pages/createvideo.jsx"
 import VideoList from "../pages/getvideo.jsx"
 export default function AppRoutes(props){
     const {User} = props;
