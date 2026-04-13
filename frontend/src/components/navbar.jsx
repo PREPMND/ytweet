@@ -5,11 +5,14 @@ import logolight from "../assets/logolight.jpg"
 
 import { Album, Airplay, Bolt, Cannabis } from "lucide-react"
 import { useState } from "react";
-const Navbar = (props) => {
+const Navbar = () => {
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
     const [hoverAirplay, setHoverAirplay] = useState(false)
-    const { User } = props;
+    const { data, error, isLoading } = useQuery({
+        queryKey: ["currentUser"],
+        queryFn: getCurrentUser
+    });
     return (
         <>
             <div>
@@ -22,8 +25,8 @@ const Navbar = (props) => {
                                 hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer
                                 hover:ring-2 hover:ring-blue-500"
 
-                            src={User?.user?.avatar} alt="User Avatar" />
-                        <span className=" text-[18px] font-medium  text-gray-700">{User?.user?.fullName}</span>
+                            src={data?.user?.avatar} alt="User Avatar" />
+                        <span className=" text-[18px] font-medium  text-gray-700">{data?.user?.fullName}</span>
 
                     </div>
                     <div className="w-fit absolute left-1/2 top-3">
@@ -50,7 +53,7 @@ const Navbar = (props) => {
                             onMouseEnter={() => setHoverAlbum(true)}
                             onMouseLeave={() => setHoverAlbum(false)}
                         >
-                            <Album className={`${hoverAlbum ? "" : ""}`} />
+                            <Album className={`${hoverAlbum ? "text-yellow-400" : ""}`} />
                             <span
                                 className={`text-[12px] mt-1 text-gray-600 font-[600] transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"
                                     }`}
