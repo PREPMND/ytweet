@@ -12,15 +12,15 @@ const Navbar = () => {
             <div>
                 <div className="flex items-center h-[80px] justify-between">
 
-                    <div className="flex items-center w-[30%]">
+                    <div className="flex items-center gap-4 pl-5">
 
                         <img
-                            className="rounded-[100%] object-cover w-10 h-10 ml-5
+                            className="rounded-[100%] object-cover w-10 h-10 
                                 hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer
                                 hover:ring-2 hover:ring-blue-500"
 
                             src={data?.user?.avatar} alt="User Avatar" />
-                        <span className="ml-3 text-sm font-medium text-gray-700">{data?.user?.username}</span>
+                        <span className=" text-sm font-medium text-gray-700">{data?.user?.username}</span>
                     </div>
 
 
