@@ -67,6 +67,7 @@ input[type="file"]:hover {
 @media (max-width: 1023px) {
   .video-grid {
     grid-template-columns: repeat(2, 1fr);
+    width: 100%;
   }
 }
 
