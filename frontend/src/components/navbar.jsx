@@ -4,8 +4,7 @@ import logolight from "../assets/logolight.jpg"
 import { Album, Airplay, Bolt, Cross, CirclePlus } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-const Navbar = (props) => {
-    const { menubar, setMenubar } = props;
+const Navbar = ({ menubar, setMenubar }) => {
     const [navigate, setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
