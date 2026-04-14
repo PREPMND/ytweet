@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <div>
-      <AppRoutes menubar={menubar} setMenubar={setMenubar} darkModenav={darkModenav} setDarkModenav={setDarkModenav} />
+      <AppRoutes menubar={menubar} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav} />
     </div>
   )
 }
