@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 const Createvideo = () => {
     const { data } = useQuery({
         queryKey: ["currentUser"],
-        queryFn: getCurrentUser, // You need to implement this function to fetch video by ID
+        queryFn: getCurrentUser, 
     });
     const currentUserId = data?.user?._id;
     const handleSubmit = async (e) => {
