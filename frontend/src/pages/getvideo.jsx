@@ -7,7 +7,24 @@ const VideoList = () => {
     const timeoutRef = useRef(null);
     const [playingId, setPlayingId] = useState(null);
     const navigate = useNavigate();
-    export const getVideos = async (req, res) => {
+    const fetchVideos = async (pageNum = 1) => {
+        try {
+            const res = await fetch(`http://localhost:8000/api/v1/videos/getvideos`);
+            const data = await res.json();
+
+            if (data.success) {
+                setVideos(data.data.docs);       // paginated docs
+                setTitle(data.data.docs.title);         // current title
+                setThumbnail(data.data.docs.thumbnail);
+                console.log("Total Pages:", data.data.docs); // total pages
+            } else {
+                console.error("Backend error:", data.message);
+            }
+        } catch (err) {
+            console.error("Error fetching videos:", err);
+        }
+    };
+    const getVideos = async (req, res) => {
         try {
             const { page = 1, limit = 10 } = req.query;
 
@@ -27,6 +44,7 @@ const VideoList = () => {
             res.status(500).json({ success: false, message: error.message });
         }
     };
+
     useEffect(() => {
         fetchVideos(title);
     }, [title]);
