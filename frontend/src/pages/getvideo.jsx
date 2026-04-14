@@ -134,7 +134,7 @@ const VideoList = () => {
                 ))}
             </div>
 
-            {data!=null && (
+            {videos && (
                 <div
                     style={{
                         marginTop: "30px",
