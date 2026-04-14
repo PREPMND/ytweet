@@ -134,13 +134,13 @@ const VideoList = () => {
                 ))}
             </div>
 
-            {!(videos==null) && (
-                <div
-                    style={{
-                        marginTop: "30px",
-                        display: "flex",
-                        justifyContent: "center",
-                        gap: "10px",
+            <div
+                className={`${videos.length === 0 ? "hidden" : ""} mt-6 flex justify-center items-center gap-4`}
+                style={{
+                    marginTop: "30px",
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "10px",
                 }}
             >
                 <button disabled={title <= 1} onClick={() => fetchVideos(title - 1)}>
@@ -154,7 +154,7 @@ const VideoList = () => {
                 <button disabled={title >= thumbnail} onClick={() => fetchVideos(title + 1)}>
                     Next
                 </button>
-            </div>)}
+            </div>
         </div>
     );
 };
