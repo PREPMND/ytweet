@@ -89,14 +89,8 @@ const VideoList = () => {
                         )}
 
                         <h3
-                            style={{
-                                marginTop: "8px",
-                                fontSize: "14px",
-                                color: "black",
-                                lineHeight: "1.4",
-                                padding: "0 6px",
-                                fontWeight: "500",
-                            }}
+                            className="mt-2 text-sm text-black leading-[1.4] px-[6px] font-medium"
+
                         >
                             {video.title}
                         </h3>
