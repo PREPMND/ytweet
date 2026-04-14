@@ -38,7 +38,11 @@ const Createvideo = () => {
             );
 
             console.log("Video created:", response.data);
-            if (response.data.success) { navi }
+            if (response.data.success) { 
+                setTimeout(() => {
+                    navigate("/");
+                }, 3000);
+             }
         } catch (error) {
             console.error(
                 "Error creating video:",
