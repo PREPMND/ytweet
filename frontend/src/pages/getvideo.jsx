@@ -134,12 +134,13 @@ const VideoList = () => {
                 ))}
             </div>
 
-            {<div
-                style={{
-                    marginTop: "30px",
-                    display: "flex",
-                    justifyContent: "center",
-                    gap: "10px",
+            {data && (
+                <div
+                    style={{
+                        marginTop: "30px",
+                        display: "flex",
+                        justifyContent: "center",
+                        gap: "10px",
                 }}
             >
                 <button disabled={title <= 1} onClick={() => fetchVideos(title - 1)}>
