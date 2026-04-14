@@ -38,22 +38,45 @@ export const createVideo = async (req, res) => {
     }
 };
 
-// Get all videos (with pagination)
-function formatDuration(seconds) {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  return `${hours}h ${minutes}m`;
-}
 export const getVideos = async (req, res) => {
     try {
         const { page = 1, limit = 10 } = req.query;
 
-        const aggregate = Video.aggregate([{ $match: { isPublished: true } }]);
-        const options = { page, limit };
+        const aggregate = Video.aggregate([
+            { $match: { isPublished: true } },
+            {
+                $lookup: {
+                    from: "users",               
+                    localField: "owner",        
+                    foreignField: "_id",         
+                    as: "owner"
+                }
+            },
+            { $unwind: "$owner" },          
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    videoFile: 1,
+                    thumbnail: 1,
+                    duration: 1,
+                    "owner._id": 1,
+                    "owner.username": 1,
+                    "owner.email": 1,
+                    "owner.avatar": 1
+                }
+            }
+        ]);
 
+        const options = { page, limit };
         const videos = await Video.aggregatePaginate(aggregate, options);
 
-        // enrich with formatted duration
+        function formatDuration(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            return `${hours}h ${minutes}m`;
+        }
+
         videos.docs = videos.docs.map((v) => ({
             ...v,
             durationFormatted: formatDuration(v.duration || 0),
