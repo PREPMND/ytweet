@@ -14,6 +14,9 @@ const VideoList = () => {
 
     const fetchVideos = async (pageNum = 1) => {
         try {
+            setTimeout(() => {
+                setData(false);
+            }, 5000);
             const res = await fetch(`http://localhost:8000/api/v1/videos/getvideos`);
             const data = await res.json();
 
