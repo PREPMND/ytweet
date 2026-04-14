@@ -71,8 +71,9 @@ const VideoList = () => {
                                 style={{
                                     width: "100%",
                                     aspectRatio: "16 / 9",
-                                    objectFit: "cover",
+                                    objectFit: "contain",
                                     borderRadius: "10px",
+                                    backgroundColor: "black",
                                     transition: "opacity 0.3s ease",
                                 }}
 
