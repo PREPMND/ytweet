@@ -91,7 +91,20 @@ const VideoList = () => {
                             />
 
                         )}
-                        <span
+                        
+
+                        <div
+                            className="flex flex-start items-center leading-[1.4] h-[80px] mt-1 ml-2"><img className="w-9 h-9 rounded-full object-cover" src={video.owner.avatar} alt="Avatar" />
+                            <div className="px-[11px]">
+                                <h3
+                                    className="mt-1 text-md text-black leading-[1.4] px-[6px] font-medium capitalize"
+
+                                >
+                                    {video.title}
+                                </h3>
+                                <p className="text-sm text-gray-600 px-[6px]">{video.owner.username}</p>
+                            </div>
+                            <span
                             style={{
                                 position: "absolute",
                                 bottom: "8px",
@@ -105,18 +118,6 @@ const VideoList = () => {
                         >
                             {video.durationFormatted}
                         </span>
-
-                        <div
-                            className="flex flex-start items-center leading-[1.4] h-[80px] mt-1 ml-2"><img className="w-9 h-9 rounded-full object-cover" src={video.owner.avatar} alt="Avatar" />
-                            <div className="px-[11px]">
-                                <h3
-                                    className="mt-1 text-md text-black leading-[1.4] px-[6px] font-medium capitalize"
-
-                                >
-                                    {video.title}
-                                </h3>
-                                <p className="text-sm text-gray-600 px-[6px]">{video.owner.username}</p>
-                            </div>
                         </div>
                     </div>
                 ))}
