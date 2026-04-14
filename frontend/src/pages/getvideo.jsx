@@ -27,22 +27,6 @@ const VideoList = () => {
     useEffect(() => {
         fetchVideos(title);
     }, [title]);
-    const getVideoDuration = (url) => {
-        return new Promise((resolve, reject) => {
-            const video = document.createElement("video");
-            video.src = url;
-            video.preload = "metadata";
-
-            video.onloadedmetadata = () => {
-                const seconds = video.duration;
-                const hours = Math.floor(seconds / 3600);
-                const minutes = Math.floor((seconds % 3600) / 60);
-                resolve({ hours, minutes });
-            };
-
-            video.onerror = (err) => reject(err);
-        });
-    };
 
     // Usage
     
@@ -111,7 +95,7 @@ const VideoList = () => {
                                 }}
                             />
                         )}
-                        <div><img src={video._id.avatar} alt="Avatar" /></div>
+                        <div><img src={video.owner.avatar} alt="Avatar" /></div>
                         <h3
                             className="mt-1 text-md text-black leading-[1.4] px-[6px] font-medium capitalize"
 
