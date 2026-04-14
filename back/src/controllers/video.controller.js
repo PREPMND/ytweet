@@ -39,6 +39,11 @@ export const createVideo = async (req, res) => {
 };
 
 // Get all videos (with pagination)
+function formatDuration(seconds) {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  return `${hours}h ${minutes}m`;
+}
 export const getVideos = async (req, res) => {
     try {
         const { page = 1, limit = 10 } = req.query;
