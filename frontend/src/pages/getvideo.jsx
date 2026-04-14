@@ -112,7 +112,7 @@ const VideoList = () => {
                                 }}
                             />
                         )}
-                        <div>duration: {video.videoFile.duration}</div>
+                        <div><img src={video._id.avatar} alt="Avatar" /></div>
                         <h3
                             className="mt-1 text-md text-black leading-[1.4] px-[6px] font-medium capitalize"
 
