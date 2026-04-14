@@ -137,13 +137,8 @@ const VideoList = () => {
             </div>
 
             <div
-                className={` hidden mt-6  justify-center items-center gap-4`}
-                style={{
-                    marginTop: "30px",
-                    display: "flex",
-                    justifyContent: "center",
-                    gap: "10px",
-                }}
+                className={`${data?"":"hidden"} mt-6  justify-center items-center gap-4`}
+                
             >
                 <button disabled={title <= 1} onClick={() => fetchVideos(title - 1)}>
                     Previous
