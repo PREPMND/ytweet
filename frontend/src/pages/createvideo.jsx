@@ -3,6 +3,7 @@ import getCurrentUser from "../api/currentuser.jsx";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { LoaderPinwheel } from "lucide-react";
 const Createvideo = () => {
     const { data } = useQuery({
         queryKey: ["currentUser"],
@@ -154,6 +155,7 @@ const Createvideo = () => {
                     </button>
                 </div>
             )}
+            <LoaderPinwheel className={`${loading?"block":"hidden"} z-40 absolute left-1/2 top-10 animate-spin text-yellow-50`} size={28} />
         </div>
     );
 };
