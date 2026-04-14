@@ -90,9 +90,7 @@ const VideoList = () => {
                             />
 
                         )}
-                        <div className="px-[6px] mt-1 text-sm text-gray-600">
-                            Duration: {video.durationFormatted}
-                        </div>
+                        
                         <div
                             className="flex flex-start items-center h-[80px] mt-1 ml-2"><img className="w-9 h-9 rounded-full object-cover" src={video.owner.avatar} alt="Avatar" />
                             <div className="px-[11px]">
@@ -103,7 +101,8 @@ const VideoList = () => {
                                     {video.title}
                                 </h3>
                                 <p className="text-sm text-gray-600 px-[6px]">{video.owner.username}</p>
-                            </div></div>
+                            </div>
+                            </div>
                     </div>
                 ))}
             </div>
