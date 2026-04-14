@@ -96,10 +96,10 @@ const VideoList = () => {
                             />
                         )}
                         <div
-                         className="flex flex-start items-center h-[80px] mt-1 ml-2"><img className="w-9 h-9 rounded-full object-cover" src={video.owner.avatar} alt="Avat   ar" />
+                         className="flex flex-start items-center h-[80px] mt-1 ml-2"><img className="w-9 h-9 rounded-full object-cover" src={video.owner.avatar} alt="Avatar" />
                          <div >
                         <h3
-                            className="mt-1 text-md text-black leading-[1.4] px-[6px] font-medium capitalize"
+                            className="mt-1 text-md text-black leading-[1.4] px-[px] font-medium capitalize"
 
                         >
                             {video.title}
