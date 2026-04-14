@@ -14,12 +14,11 @@ export default function AppRoutes(props){
             <Route path="/" element={
                 <>
                 <HomePage />
-                    
-                <VideoList  />
+                <VideoList setDarkMode={setDarkMode} darkMode={darkMode} />
                 </>}/>
             </Route>
             <Route element={<AuthLayout />}>
-            <Route path="/createvideo" element={<Createvideo/>}/>
+            <Route path="/createvideo" element={<Createvideo />}/>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register/>}/>
             </Route>
