@@ -57,7 +57,7 @@ const VideoList = () => {
                             clearTimeout(timeoutRef.current);
                             setPlayingId(null);
                         }}
-                        className="border-"
+                        className="border-3"
                     >
                         {playingId === video._id ? (
                             <video
