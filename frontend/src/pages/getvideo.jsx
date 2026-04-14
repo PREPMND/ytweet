@@ -134,7 +134,7 @@ const VideoList = () => {
                 ))}
             </div>
 
-            <div
+            {<div
                 style={{
                     marginTop: "30px",
                     display: "flex",
@@ -153,7 +153,7 @@ const VideoList = () => {
                 <button disabled={title >= thumbnail} onClick={() => fetchVideos(title + 1)}>
                     Next
                 </button>
-            </div>
+            </div>}
         </div>
     );
 };
