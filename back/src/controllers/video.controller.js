@@ -23,7 +23,6 @@ export const createVideo = async (req, res) => {
       title,
       description,
       owner: req.user,
-
       isPublished: true,
       videoFile: videoUpload.secure_url,
       thumbnail: thumbnailUpload?.secure_url,
