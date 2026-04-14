@@ -30,7 +30,7 @@ const VideoList = () => {
     }, [title]);
 
     return (
-        <div style={{ padding: "10px" }} className={darkMode ? "bg-black text-white" : ""}>
+        <div style={{ padding: "10px" }} className={darkMode ? "bg-neutral-900 text-white" : ""}>
             <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
 
             <button
@@ -64,7 +64,7 @@ const VideoList = () => {
                             clearTimeout(timeoutRef.current);
                             setPlayingId(null);
                         }}
-                        className={`overflow-hidden shadow-sm mb-4 rounded-[2vh] cursor-pointer transition-transform relative duration-500 ease-in-out ${darkMode ? "bg-neutral-900" : ""}`}
+                        className={`overflow-hidden shadow-sm mb-4 rounded-[2vh] cursor-pointer transition-transform relative duration-500 ease-in-out ${darkMode ? "bg-black" : ""}`}
                     >
                         {playingId === video._id ? (
                             <video
