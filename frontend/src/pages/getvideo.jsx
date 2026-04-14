@@ -139,7 +139,7 @@ const VideoList = () => {
                     </div>
                 ))}
             </div>
-            <LoaderPinwheel className={`mx-auto mt-10 ${data ? "hidden" : ""}`} size={48} color="#3b82f6" />
+            <LoaderPinwheel className={`text-center mt-10 text-white ${data ? "hidden" : ""}`} size={48} />
             <div
                 className={`${data?"":"hidden"} mt-6  justify-center items-center gap-4`}
                 
