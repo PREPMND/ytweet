@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const VideoList = () => {
     const [videos, setVideos] = useState([]);
+    const [data, setData] = useState(false);
     const [title, setTitle] = useState(1);
     const [thumbnail, setThumbnail] = useState(1);
     const [darkMode, setDarkMode] = useState(true);
@@ -17,6 +18,7 @@ const VideoList = () => {
 
             if (data.success) {
                 setVideos(data.data.docs);
+                setData(true);
             } else {
                 console.error("Backend error:", data.message);
             }
