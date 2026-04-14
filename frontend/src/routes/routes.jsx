@@ -13,7 +13,6 @@ export default function AppRoutes(props){
             <Route element={<MainLayout menubar={menubar} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} />}>
             <Route path="/" element={
                 <>
-                <HomePage />
                 <VideoList setDarkMode={setDarkMode} darkMode={darkMode} />
                 </>}/>
             </Route>
