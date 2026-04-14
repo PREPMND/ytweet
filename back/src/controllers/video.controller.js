@@ -22,7 +22,8 @@ export const createVideo = async (req, res) => {
     const videoDoc = await Video.create({
       title,
       description,
-      owner: req.user._id,
+      owner: req.user,
+
       isPublished: true,
       videoFile: videoUpload.secure_url,
       thumbnail: thumbnailUpload?.secure_url,
@@ -44,7 +45,7 @@ export const getVideos = async (req, res) => {
 
         const videos = await Video.aggregatePaginate(aggregate, options);
 
-        res.status(200).json({ success: true, data: videos, userId: req.user._id.avatar });
+        res.status(200).json({ success: true, data: videos });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
