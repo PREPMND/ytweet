@@ -127,6 +127,26 @@ const Navbar = (props) => {
                     </div>
                 </div>
             )}
+            {
+                menubar && (
+                    <div className="fixed inset-0 z-50 flex">
+                        <div
+                            className="absolute inset-0 bg-black opacity-50"
+                            onClick={() => setMenubar(false)}
+                        ></div>
+                        <div className="relative w-full h-full bg-white/90 rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50">
+                            <h2 className="text-xl font-bold">Menu</h2>
+                            <button
+                                onClick={() => setMenubar(false)}
+                                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                            >
+                                Close Menu
+                            </button>
+                        </div>
+                    </div>
+                )
+
+            }
 
         </>
     )
