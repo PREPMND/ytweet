@@ -3,39 +3,39 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if n
 import { apiError } from "../utils/apiError.js"; // adjust path if needed
 import { User } from "../models/user.models.js"; // adjust path if needed
 export const createVideo = async (req, res) => {
-  try {
-    const { title, description } = req.body;
+    try {
+        const { title, description } = req.body;
 
-    const videoLocalPath = req.files?.videoFile?.[0]?.path;
-    const thumbnailLocalPath = req.files?.thumbnail?.[0]?.path;
+        const videoLocalPath = req.files?.videoFile?.[0]?.path;
+        const thumbnailLocalPath = req.files?.thumbnail?.[0]?.path;
 
-    if (!videoLocalPath) {
-      throw new apiError(400, "Video File Is Required");
+        if (!videoLocalPath) {
+            throw new apiError(400, "Video File Is Required");
+        }
+
+        const videoUpload = await uploadOnCloudinary(videoLocalPath);
+        const thumbnailUpload = await uploadOnCloudinary(thumbnailLocalPath);
+
+        if (!videoUpload) {
+            throw new apiError(400, "Video cannot be uploaded");
+        }
+        const loggedInUser = await User.findById(req.user._id).select(
+            "-password -refreshToken -coverImage -email -createdAt -updatedAt"
+        )
+        const videoDoc = await Video.create({
+            title,
+            description,
+            owner: loggedInUser,
+            isPublished: true,
+            videoFile: videoUpload.secure_url,
+            duration: Math.floor(videoUpload.duration),
+            thumbnail: thumbnailUpload?.secure_url,
+        });
+
+        res.status(201).json({ success: true, data: videoDoc });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
     }
-
-    const videoUpload = await uploadOnCloudinary(videoLocalPath);
-    const thumbnailUpload = await uploadOnCloudinary(thumbnailLocalPath);
-
-    if (!videoUpload) {
-      throw new apiError(400, "Video cannot be uploaded");
-    }
-    const loggedInUser = await User.findById(req.user._id).select(
-                "-password -refreshToken -coverImage -email -createdAt -updatedAt"
-    )
-    const videoDoc = await Video.create({
-      title,
-      description,
-      owner: loggedInUser,
-      isPublished: true,
-      videoFile: videoUpload.secure_url,
-      duration: Math.floor(videoUpload.duration),
-      thumbnail: thumbnailUpload?.secure_url,
-    });
-
-    res.status(201).json({ success: true, data: videoDoc });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
 };
 
 // Get all videos (with pagination)
@@ -45,15 +45,20 @@ export const getVideos = async (req, res) => {
 
         const aggregate = Video.aggregate([{ $match: { isPublished: true } }]);
         const options = { page, limit };
-        
+
         const videos = await Video.aggregatePaginate(aggregate, options);
+
+        // enrich with formatted duration
+        videos.docs = videos.docs.map((v) => ({
+            ...v,
+            durationFormatted: formatDuration(v.duration || 0),
+        }));
 
         res.status(200).json({ success: true, data: videos });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-
 // Get single video by ID
 export const getVideoById = async (req, res) => {
     try {
