@@ -7,14 +7,15 @@ import HomePage from "../pages/home.page.jsx"
 import Createvideo from "../pages/createvideo.jsx"
 import VideoList from "../pages/getvideo.jsx"
 export default function AppRoutes(props){
-    const {menubar,setMenubar} = props;
+    const {menubar,setMenubar,darkMode,setDarkMode} = props;
     return(
         <Routes>
-            <Route element={<MainLayout menubar={menubar} setMenubar={setMenubar} />}>
+            <Route element={<MainLayout menubar={menubar} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} />}>
             <Route path="/" element={
                 <>
                 <HomePage />
-                <VideoList />
+                    
+                <VideoList  />
                 </>}/>
             </Route>
             <Route element={<AuthLayout />}>
