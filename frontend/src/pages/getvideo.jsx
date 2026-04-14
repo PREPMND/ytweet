@@ -30,7 +30,7 @@ const VideoList = () => {
     }, [title]);
 
     return (
-        <div style={{ padding: "10px" }} className={darkMode ? "bg-neutral-950 text-white" : ""}>
+        <div style={{ padding: "10px" }} className={darkMode ? "bg-neutral-950 text-white min-h-[calc(100vh-80px)]" : ""}>
             <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
 
             <button
