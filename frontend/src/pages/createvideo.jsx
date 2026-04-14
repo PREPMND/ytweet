@@ -58,7 +58,7 @@ const Createvideo = () => {
             onChange={(e) => setVideoFile(e.target.files[0])}
             className="file:bg-red-600 file:text-white file:border-0 file:px-4 file:py-2 file:rounded-lg bg-zinc-800 p-2 rounded-lg"
           />
-
+          <h2 className="text-2xl font-semibold">Upload Thumbnail</h2>
           <input
             type="file"
             accept="image/*"
