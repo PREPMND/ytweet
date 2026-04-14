@@ -46,7 +46,7 @@ const VideoList = () => {
     };
 
     // Usage
-    getVideoDuration({video.videoFile})
+    getVideoDuration(video.videoFile)
         .then(({ hours, minutes }) => {
             console.log(`Duration: ${hours}h ${minutes}m`);
         });
