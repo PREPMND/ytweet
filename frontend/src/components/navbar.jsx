@@ -106,7 +106,7 @@ const Navbar = ({ menubar, setMenubar }) => {
                 <div className="fixed inset-0 z-40 flex items-center justify-center">
                     {/* Overlay */}
                     <div
-                        className="absolute inset-0 bg-black opacity-50"
+                        className="absolute inset-0 w-[60%] md:w-[40%] bg-black opacity-50"
                         onClick={() => setNavigate(false)} // optional: close when clicking outside
                     ></div>
 
