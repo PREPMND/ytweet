@@ -3,11 +3,13 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const VideoList = () => {
+    const {darkMode, setDarkMode} = props;
+
     const [videos, setVideos] = useState([]);
     const [data, setData] = useState(false);
     const [title, setTitle] = useState(1);
     const [thumbnail, setThumbnail] = useState(1);
-    const [darkMode, setDarkMode] = useState(true);
+
     const timeoutRef = useRef(null);
     const [playingId, setPlayingId] = useState(null);
     const navigate = useNavigate();
