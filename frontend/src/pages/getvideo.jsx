@@ -89,7 +89,7 @@ const VideoList = () => {
                         )}
 
                         <h3
-                            className="mt-2 text-sm text-black leading-[1.4] px-[6px] font-medium"
+                            className="mt-1 text-md text-black leading-[1.4] px-[6px] font-medium capitalize"
 
                         >
                             {video.title}
