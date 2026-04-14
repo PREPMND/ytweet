@@ -87,6 +87,7 @@ const VideoList = () => {
                                     aspectRatio: "16 / 9",
                                     objectFit: "cover",
                                     borderRadius: "10px",
+                                    transition: "opacity 0.3s ease",
                                 }}
                             />
 
