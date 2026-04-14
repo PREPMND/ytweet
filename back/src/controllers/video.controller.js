@@ -44,7 +44,7 @@ export const getVideos = async (req, res) => {
 
         const videos = await Video.aggregatePaginate(aggregate, options);
 
-        res.status(200).json({ success: true, data: videos });
+        res.status(200).json({ success: true, data: videos, });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
