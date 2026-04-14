@@ -6,12 +6,11 @@ import { Album, Airplay, Bolt, CirclePlus } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ menubar, setMenubar }) => {
+const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav }) => {
     const [navigate, setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
     const [hoverAirplay, setHoverAirplay] = useState(false)
-    const [darkMode, setDarkMode] = useState(true);
 
     const navigating = useNavigate();
 
@@ -29,7 +28,7 @@ const Navbar = ({ menubar, setMenubar }) => {
 
     return (
         <>
-            <div className={darkMode ? "bg-black  text-white" : ""}>
+            <div className={darkModenav ? "bg-black  text-white" : ""}>
                 <div className="flex items-center inset-0 z-0 h-[80px] justify-between select-none border-gray-700">
 
                     <div className="flex items-center h-[80px] gap-4 pl-5">
@@ -41,13 +40,13 @@ const Navbar = ({ menubar, setMenubar }) => {
                             src={data?.user?.avatar}
                             alt="User Avatar"
                         />
-                        <span className={`hidden sm:block text-[18px] font-medium ${darkMode ? "text-gray-200" : "text-gray-700"}`}>
+                        <span className={`hidden sm:block text-[18px] font-medium ${darkModenav ? "text-gray-200" : "text-gray-700"}`}>
                             {data?.user?.fullName}
                         </span>
                     </div>
 
                     <div className="w-fit sm:flex absolute hidden left-1/2 top-3">
-                        <img className="w-12 h-12 object-cover" src={darkMode ? logodark : logolight} />
+                        <img className="w-12 h-12 object-cover" src={darkModenav ? logodark : logolight} />
                     </div>
 
                     <div className="flex items-center mt-4 gap-11 z-20 pr-4 sm:pr-9">
@@ -58,7 +57,7 @@ const Navbar = ({ menubar, setMenubar }) => {
                             onMouseLeave={() => setHoverAirplay(false)}
                         >
                             <Airplay className={`${hoverAirplay ? "text-yellow-400" : "text-gray-400"}`} />
-                            <span className={`text-[12px] mt-1 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"} ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+                            <span className={`text-[12px] mt-1 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"} ${darkModenav ? "text-gray-300" : "text-gray-600"}`}>
                                 JoinEdge
                             </span>
                         </div>
@@ -68,8 +67,8 @@ const Navbar = ({ menubar, setMenubar }) => {
                             onMouseEnter={() => setHoverAlbum(true)}
                             onMouseLeave={() => setHoverAlbum(false)}
                         >
-                            <Album className={`${darkMode ? "text-gray-300" : ""}`} />
-                            <span className={`text-[12px] mt-1 font-[600] transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"} ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+                            <Album className={`${darkModenav ? "text-gray-300" : ""}`} />
+                            <span className={`text-[12px] mt-1 font-[600] transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"} ${darkModenav ? "text-gray-300" : "text-gray-600"}`}>
                                 Saved
                             </span>
                         </div>
@@ -80,13 +79,13 @@ const Navbar = ({ menubar, setMenubar }) => {
                             onMouseLeave={() => setHoverBolt(false)}
                         >
                             <Bolt className={`${hoverBolt ? "text-blue-400" : "text-gray-400"}`} />
-                            <span className={`text-[11px] mt-1 font-[600] transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"} ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+                            <span className={`text-[11px] mt-1 font-[600] transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"} ${darkModenav ? "text-gray-300" : "text-gray-600"}`}>
                                 PREP
                             </span>
                         </div>
 
                         <button
-                            onClick={() => setDarkMode(!darkMode)}
+                            onClick={() => setDarkModenav(!darkModenav)}
                             className="ml-4 px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700"
                         >
                             Toggle
@@ -94,14 +93,14 @@ const Navbar = ({ menubar, setMenubar }) => {
                     </div>
                 </div>
 
-                <div className={`w-full border-t ${darkMode ? "border-gray-800" : ""}`}></div>
+                <div className={`w-full border-t ${darkModenav ? "border-gray-800" : ""}`}></div>
             </div>
 
             {navigate && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center">
                     <div className="absolute inset-0 bg-black opacity-60"></div>
 
-                    <div className={`relative w-[50%] h-[40%] rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50 ${darkMode ? "bg-gray-900 text-white" : "bg-white"}`}>
+                    <div className={`relative w-[50%] h-[40%] rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"}`}>
                         <h2 className="text-xl font-bold">Please log in to continue</h2>
                         <button
                             onClick={() => navigating("/login")}
@@ -124,7 +123,7 @@ const Navbar = ({ menubar, setMenubar }) => {
                         onClick={() => setMenubar(false)}
                     ></div>
 
-                    <div className={`relative w-[60%] md:w-[40%] h-full shadow-lg flex flex-col items-center justify-center gap-6 z-50 ${darkMode ? "bg-gray-900 text-white" : "bg-white"}`}>
+                    <div className={`relative w-[60%] md:w-[40%] h-full shadow-lg flex flex-col items-center justify-center gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"}`}>
                         <h2 className="text-xl font-bold">Menu</h2>
                         <button
                             onClick={() => setMenubar(false)}

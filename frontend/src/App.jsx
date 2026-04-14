@@ -28,9 +28,11 @@ const App = () => {
 */}
   const [menubar, setMenubar] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
+  const [darkModenav, setDarkModenav] = useState(true);
+
   return (
     <div>
-      <AppRoutes menubar={menubar} setMenubar={setMenubar} />
+      <AppRoutes menubar={menubar} setMenubar={setMenubar} darkModenav={darkModenav} setDarkModenav={setDarkModenav} />
     </div>
   )
 }
