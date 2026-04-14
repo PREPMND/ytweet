@@ -18,11 +18,13 @@ export const createVideo = async (req, res) => {
     if (!videoUpload) {
       throw new apiError(400, "Video cannot be uploaded");
     }
-
+    const loggedInUser = await User.findById(req.user._id).select(
+                "-password -refreshToken -coverImage -email -createdAt -updatedAt"
+    )
     const videoDoc = await Video.create({
       title,
       description,
-      owner: req.user._ID,
+      owner: loggedInUser,
       isPublished: true,
       videoFile: videoUpload.secure_url,
       duration: Math.floor(videoUpload.duration),
@@ -42,7 +44,7 @@ export const getVideos = async (req, res) => {
 
         const aggregate = Video.aggregate([{ $match: { isPublished: true } }]);
         const options = { page, limit };
-
+        
         const videos = await Video.aggregatePaginate(aggregate, options);
 
         res.status(200).json({ success: true, data: videos });
