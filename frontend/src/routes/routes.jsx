@@ -7,7 +7,7 @@ import HomePage from "../pages/home.page.jsx"
 import Createvideo from "../pages/createvideo.jsx"
 import VideoList from "../pages/getvideo.jsx"
 export default function AppRoutes(props){
-    const {menubar,setMenubar,darkModenav,setDarkModenav} = props;
+    const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode} = props;
     return(
         <Routes>
             <Route element={<MainLayout menubar={menubar} setMenubar={setMenubar} darkModenav={darkModenav} setDarkModenav={setDarkModenav} />}>
