@@ -83,7 +83,7 @@ const Createvideo = () => {
           <video
             src={videoFile ? URL.createObjectURL(videoFile) : ""}
             controls
-            className="w-full rounded-xl"
+            className="w-full rounded-xl aspect-[16/9] object-contain"
           />
 
           <img
