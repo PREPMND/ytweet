@@ -60,7 +60,7 @@ input[type="file"]:hover {
 @media (min-width: 1024px) {
   .video-grid {
     grid-template-columns: repeat(3, 1fr);
-    width: 1000px;
+    width: 00px;
   }
 }
 
