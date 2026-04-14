@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 const VideoList = () => {
     const [videos, setVideos] = useState([]);
@@ -28,7 +28,28 @@ const VideoList = () => {
     useEffect(() => {
         fetchVideos(title);
     }, [title]);
+    const getVideoDuration = (url) => {
+        return new Promise((resolve, reject) => {
+            const video = document.createElement("video");
+            video.src = url;
+            video.preload = "metadata";
 
+            video.onloadedmetadata = () => {
+                const seconds = video.duration;
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                resolve({ hours, minutes });
+            };
+
+            video.onerror = (err) => reject(err);
+        });
+    };
+
+    // Usage
+    getVideoDuration("https://res.cloudinary.com/.../video.mp4")
+        .then(({ hours, minutes }) => {
+            console.log(`Duration: ${hours}h ${minutes}m`);
+        });
     return (
         <div style={{ padding: "10px" }}>
             <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
