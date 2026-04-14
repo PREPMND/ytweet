@@ -142,22 +142,6 @@ const VideoList = (props) => {
                 ))}
             </div>
             <LoaderPinwheel className={`mx-auto animate-spin flex place-items-center mt-20 ${darkMode ? "text-white" : "text-black"} ${videos===null? "hidden" : ""}`} size={40} />
-            <div
-                className={`${data?"":"hidden"} mt-6  justify-center items-center gap-4`}
-                
-            >
-                <button disabled={title <= 1} onClick={() => fetchVideos(title - 1)}>
-                    Previous
-                </button>
-
-                <span>
-                    Page {title} of {thumbnail}
-                </span>
-
-                <button disabled={title >= thumbnail} onClick={() => fetchVideos(title + 1)}>
-                    Next
-                </button>
-            </div>
         </div>
     );
 };
