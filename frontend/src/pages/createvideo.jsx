@@ -97,7 +97,7 @@ const Createvideo = () => {
             placeholder="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="bg-zinc-800 text-white p-3 font-[400] text-[16px]rounded-lg outline-none focus:ring-2 focus:ring-red-500"
+            className="bg-zinc-800 text-white p-3 font-[400] rounded-lg text-[16px]rounded-lg outline-none focus:ring-2 focus:ring-red-500"
           />
 
           <textarea
