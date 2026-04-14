@@ -77,9 +77,14 @@ const VideoList = () => {
                             />
                         ) : (
                             <img
-                            src={video.thumbnail}
-                            alt={video.title}
-                            className="overflow-hidden cursor-pointer transition-transform duration-500 ease-in-out"
+                                src={video.thumbnail}
+                                alt={video.title}
+                                style={{
+                                    width: "100%",
+                                    aspectRatio: "16 / 9",
+                                    objectFit: "cover",
+                                    borderRadius: "10px",
+                                }}
                             />
                         )}
 
