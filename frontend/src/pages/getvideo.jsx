@@ -63,6 +63,9 @@ const VideoList = () => {
             >
                 {videos.map((video) => (
                     <div
+                        onLoad={()=>{
+                            getVideoDuration(video.videoFile)
+                        }}
                         key={video._id}
                         onClick={() => navigate(`/video/${video._id}`)}
                         onMouseEnter={() => {
