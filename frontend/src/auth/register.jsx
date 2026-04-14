@@ -53,6 +53,7 @@ const Register = () => {
             if (res.status == 200 || res.status == 201) { navigate("/") }
             return res;
         } catch (err) {
+            setLoading(false);
             console.error("Register failed:", err.response?.data || err.message);
         }
     }
