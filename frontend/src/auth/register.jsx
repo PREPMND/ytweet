@@ -3,9 +3,6 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 import { Home, Loader, LoaderPinwheel } from "lucide-react"
 import orange from '../assets/orange.jpg'
-import background2 from '../assets/background2.jpg'
-import background3 from '../assets/background3.jpg'
-import background4 from '../assets/background4.jpg'
 const Register = () => {
     const blockedUsername = ["ytweet","modih",""," ", "admin", "administrator", "root", "sysadmin", "support", "helpdesk", "contact", "info", "sales", "marketing", "webmaster", "postmaster", "hostmaster", "abuse", "security", "noreply", "no-reply"];
     const [next, setNext] = useState(false);
