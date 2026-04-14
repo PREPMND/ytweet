@@ -51,7 +51,7 @@ const VideoList = () => {
                         onMouseEnter={() => {
                             timeoutRef.current = setTimeout(() => {
                                 setPlayingId(video._id);
-                            }, 2000);
+                            }, 1300);
                         }}
 
                         onMouseLeave={() => {
@@ -95,7 +95,8 @@ const VideoList = () => {
                         
 
                         <div
-                            className="flex flex-start items-center leading-[1.4] h-[80px] mt-1 ml-2"><img className="w-9 h-9 shrink-0 rounded-full object-cover" src={video.owner.avatar} alt="Avatar" />
+                            className="flex flex-start items-center leading-[1.4] h-[80px] mt-1 ml-2">
+                                <img className="w-9 h-9 shrink-0 rounded-full object-cover" src={video.owner.avatar} alt="Avatar" />
                             <div className="px-[11px]">
                                 <h3
                                     className="mt-1 text-md text-black leading-[1.4] px-[6px] font-medium capitalize text-wrap overflow-hidden whitespace-nowrap"
