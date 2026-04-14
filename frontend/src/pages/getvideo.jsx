@@ -46,10 +46,7 @@ const VideoList = () => {
     };
 
     // Usage
-    getVideoDuration(video.videoFile)
-        .then(({ hours, minutes }) => {
-            console.log(`Duration: ${hours}h ${minutes}m`);
-        });
+    
     return (
         <div style={{ padding: "10px" }}>
             <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
