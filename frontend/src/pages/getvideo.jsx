@@ -77,10 +77,9 @@ const VideoList = () => {
                             />
                         ) : (
                             <img
-                                src={video.thumbnail}
-                                alt={video.title}
-                                
-                        className="overflow-hidden cursor-pointer transition-transform duration-500 ease-in-out"
+                            src={video.thumbnail}
+                            alt={video.title}
+                            className="overflow-hidden cursor-pointer transition-transform duration-500 ease-in-out"
                             />
                         )}
 
