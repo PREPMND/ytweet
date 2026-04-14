@@ -14,8 +14,6 @@ const VideoList = () => {
 
             if (data.success) {
                 setVideos(data.data.docs);       // paginated docs
-                setTitle(data.data.docs.title);         // current title
-                setThumbnail(data.data.docs.thumbnail);
                 console.log("Total Pages:", data.data.docs); // total pages
             } else {
                 console.error("Backend error:", data.message);
@@ -24,26 +22,7 @@ const VideoList = () => {
             console.error("Error fetching videos:", err);
         }
     };
-    const getVideos = async (req, res) => {
-        try {
-            const { page = 1, limit = 10 } = req.query;
-
-            const aggregate = Video.aggregate([{ $match: { isPublished: true } }]);
-            const options = { page, limit };
-
-            const videos = await Video.aggregatePaginate(aggregate, options);
-
-            // enrich with formatted duration
-            videos.docs = videos.docs.map((v) => ({
-                ...v,
-                durationFormatted: formatDuration(v.duration || 0),
-            }));
-
-            res.status(200).json({ success: true, data: videos });
-        } catch (error) {
-            res.status(500).json({ success: false, message: error.message });
-        }
-    };
+    
 
     useEffect(() => {
         fetchVideos(title);
@@ -66,7 +45,7 @@ const VideoList = () => {
     };
 
     // Usage
-
+    
     return (
         <div style={{ padding: "10px" }}>
             <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
@@ -83,7 +62,7 @@ const VideoList = () => {
             >
                 {videos.map((video) => (
                     <div
-                        onLoad={() => {
+                        onLoad={()=>{
                             getVideoDuration(video.videoFile).then(({ hours, minutes }) => {
                                 console.log(`Video Duration: ${hours} hours and ${minutes} minutes`);
                             }).catch((err) => {
