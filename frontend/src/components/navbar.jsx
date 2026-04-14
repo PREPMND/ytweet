@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
+import logodark from "../assets/logodark.jpg"
 import { Album, Airplay, Bolt, CirclePlus } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
