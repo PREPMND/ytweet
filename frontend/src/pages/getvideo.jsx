@@ -22,14 +22,14 @@ const VideoList = () => {
             console.error("Error fetching videos:", err);
         }
     };
-    
+
 
     useEffect(() => {
         fetchVideos(title);
     }, [title]);
 
     // Usage
-    
+
     return (
         <div style={{ padding: "10px" }}>
             <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
@@ -88,19 +88,22 @@ const VideoList = () => {
                                     borderRadius: "10px",
                                 }}
                             />
-                            
-                        )}
-                        <div
-                         className="flex flex-start items-center h-[80px] mt-1 ml-2"><img className="w-9 h-9 rounded-full object-cover" src={video.owner.avatar} alt="Avatar" />
-                         <div className="px-[11px]">
-                        <h3
-                            className="mt-1 text-md text-black leading-[1.4] px-[6px] font-medium capitalize"
 
-                        >
-                            {video.title}
-                        </h3>
-                        <p className="text-sm text-gray-600 px-[6px]">{video.owner.username}</p>
-                        </div></div>
+                        )}
+                        <div className="px-[6px] mt-1 text-sm text-gray-600">
+                            Duration: {video.durationFormatted}
+                        </div>
+                        <div
+                            className="flex flex-start items-center h-[80px] mt-1 ml-2"><img className="w-9 h-9 rounded-full object-cover" src={video.owner.avatar} alt="Avatar" />
+                            <div className="px-[11px]">
+                                <h3
+                                    className="mt-1 text-md text-black leading-[1.4] px-[6px] font-medium capitalize"
+
+                                >
+                                    {video.title}
+                                </h3>
+                                <p className="text-sm text-gray-600 px-[6px]">{video.owner.username}</p>
+                            </div></div>
                     </div>
                 ))}
             </div>
