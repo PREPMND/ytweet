@@ -36,7 +36,7 @@ const VideoList = () => {
             <button
                 onClick={() => setDarkMode(!darkMode)}
                 style={{ marginBottom: "10px" }}
-                className="px-3 py-1 bg-gray-800 text-white rounded"
+                className="px-3 py-1 bg-neutral-900 text-white rounded"
             >
                 Toggle Mode
             </button>
@@ -64,7 +64,7 @@ const VideoList = () => {
                             clearTimeout(timeoutRef.current);
                             setPlayingId(null);
                         }}
-                        className={`overflow-hidden shadow-sm mb-4 rounded-[2vh] cursor-pointer transition-transform relative duration-500 ease-in-out ${darkMode ? "bg-gray-900" : ""}`}
+                        className={`overflow-hidden shadow-sm mb-4 rounded-[2vh] cursor-pointer transition-transform relative duration-500 ease-in-out ${darkMode ? "bg-neutral-900" : ""}`}
                     >
                         {playingId === video._id ? (
                             <video
