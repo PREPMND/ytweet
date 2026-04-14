@@ -46,7 +46,7 @@ const Navbar = ({ menubar, setMenubar }) => {
                     </div>
 
                     <div className="w-fit sm:flex absolute hidden left-1/2 top-3">
-                        <img className="w-12 h-12" src={logolight} />
+                        <img className="w-12 h-12" src={darkMode ? logolight : logodark} />
                     </div>
 
                     <div className="flex items-center mt-4 gap-11 z-20 pr-4 sm:pr-9">
