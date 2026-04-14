@@ -2,7 +2,7 @@ import { LoaderPinwheel } from "lucide-react";
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-const VideoList = () => {
+const VideoList = (props) => {
     const {darkMode, setDarkMode} = props;
 
     const [videos, setVideos] = useState([]);
