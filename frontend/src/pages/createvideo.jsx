@@ -38,13 +38,15 @@ const Createvideo = () => {
             );
 
             console.log("Video created:", response.data);
-            
+
             if (response.data.success) { 
                 setTimeout(() => {
+                    setLoading(false);
                     navigate("/");
                 }, 3000);
              }
         } catch (error) {
+            setLoading(false);
             console.error(
                 "Error creating video:",
                 error.response?.data || error.message
