@@ -28,10 +28,10 @@ const VideoList = () => {
     useEffect(() => {
         fetchVideos(title);
     }, [title]);
-    const getVideoDuration = (url) => {
+    const getVideoDuration = (video.videoFile) => {
         return new Promise((resolve, reject) => {
             const video = document.createElement("video");
-            video.src = url;
+            video.src = video.videoFile;
             video.preload = "metadata";
 
             video.onloadedmetadata = () => {
