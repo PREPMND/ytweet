@@ -64,7 +64,11 @@ const VideoList = () => {
                 {videos.map((video) => (
                     <div
                         onLoad={()=>{
-                            getVideoDuration(video.videoFile)
+                            getVideoDuration(video.videoFile).then(({ hours, minutes }) => {
+                                console.log(`Video Duration: ${hours} hours and ${minutes} minutes`);
+                            }).catch((err) => {
+                                console.error("Error getting video duration:", err);
+                            });
                         }}
                         key={video._id}
                         onClick={() => navigate(`/video/${video._id}`)}
