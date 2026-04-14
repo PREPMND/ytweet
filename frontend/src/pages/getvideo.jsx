@@ -1,3 +1,4 @@
+import { LoaderPinwheel } from "lucide-react";
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -135,7 +136,7 @@ const VideoList = () => {
                     </div>
                 ))}
             </div>
-
+            <LoaderPinwheel className={`mx-auto mt-10 ${data ? "hidden" : ""}`} size={48} color="#3b82f6" />
             <div
                 className={`${data?"":"hidden"} mt-6  justify-center items-center gap-4`}
                 
