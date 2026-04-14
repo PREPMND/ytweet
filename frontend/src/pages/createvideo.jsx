@@ -155,7 +155,7 @@ const Createvideo = () => {
                     </button>
                 </div>
             )}
-            <LoaderPinwheel className={`${loading?"block":"hidden"} z-40 absolute left-1/2 top-10 animate-spin text-yellow-50`} size={28} />
+            <LoaderPinwheel className={`${loading?"block":"hidden"} z-40 absolute left-1/2 top-10 animate-spin text-neutral-950`} size={28} />
         </div>
     );
 };
