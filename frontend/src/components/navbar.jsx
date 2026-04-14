@@ -29,8 +29,8 @@ const Navbar = ({ menubar, setMenubar }) => {
 
     return (
         <>
-            <div className={darkMode ? "bg-black text-white" : ""}>
-                <div className="flex items-center inset-0 z-0 h-[80px] justify-between border-b border-gray-700">
+            <div className={darkMode ? "bg-black  text-white" : ""}>
+                <div className="flex items-center inset-0 z-0 h-[80px] justify-between select-none border-gray-700">
 
                     <div className="flex items-center h-[80px] gap-4 pl-5">
                         <img
