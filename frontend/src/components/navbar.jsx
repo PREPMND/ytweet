@@ -29,7 +29,7 @@ const Navbar = () => {
             if (error?.response?.status === 401) {
                 setNavigate(true);
             }
-        }, 50000);
+        }, 5000);
     };
 
     return (
