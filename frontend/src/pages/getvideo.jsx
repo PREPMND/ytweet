@@ -102,9 +102,7 @@ const VideoList = () => {
                                 </h3>
                                 <p className="text-sm text-gray-600 px-[6px]">{video.owner.username}</p>
                             </div>
-                            <div className="px-[6px] text-right absolute right-0 mt-1 text-sm font-[500] text-gray-600">
-                                Duration: {video.durationFormatted}
-                            </div></div>
+                            </div>
                     </div>
                 ))}
             </div>
