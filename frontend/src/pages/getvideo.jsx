@@ -57,14 +57,7 @@ const VideoList = () => {
                             clearTimeout(timeoutRef.current);
                             setPlayingId(null);
                         }}
-                        style={{
-                            borderRadius: "12px",
-                            overflow: "hidden",
-                            background: "white",
-                            padding: "8px",
-                            cursor: "pointer",
-                            transition: "opacity 0.3s ease",
-                        }}
+                        className="border-"
                     >
                         {playingId === video._id ? (
                             <video
