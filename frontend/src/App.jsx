@@ -1,4 +1,5 @@
 import AppRoutes from './routes/routes.jsx';
+import { useState } from 'react';
 const App = () => {
   {/*const [username,setUsername]=useState("")
   async function loginUser(credentials) {
@@ -25,10 +26,10 @@ const App = () => {
     fetchUser();
   }, []);
 */}
-  
+  const [menubar, setMenubar] = useState(false);
   return (
     <div>
-      <AppRoutes />
+      <AppRoutes menubar={menubar} setMenubar={setMenubar} />
     </div>
   )
 }

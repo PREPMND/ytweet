@@ -7,19 +7,19 @@ import HomePage from "../pages/home.page.jsx"
 import Createvideo from "../pages/createvideo.jsx"
 import VideoList from "../pages/getvideo.jsx"
 export default function AppRoutes(props){
-    const {User} = props;
+    const {menubar,setMenubar} = props;
     return(
         <Routes>
-            <Route element={<MainLayout User={User} />}>
+            <Route element={<MainLayout menubar={menubar} setMenubar={setMenubar} />}>
             <Route path="/" element={
                 <>
-                <HomePage User={User}/>
+                <HomePage />
                 <VideoList />
                 </>}/>
             </Route>
-            <Route element={<AuthLayout User={User} />}>
+            <Route element={<AuthLayout />}>
             <Route path="/createvideo" element={<Createvideo/>}/>
-            <Route path="/login" element={<Login User={User} />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register/>}/>
             </Route>
         </Routes>

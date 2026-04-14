@@ -4,7 +4,8 @@ import logolight from "../assets/logolight.jpg"
 import { Album, Airplay, Bolt, Cross, CirclePlus } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-const Navbar = () => {
+const Navbar = (props) => {
+    const { menubar, setMenubar } = props;
     const [navigate, setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
@@ -39,6 +40,9 @@ const Navbar = () => {
                     <div className="flex items-center h-[80px] gap-4 pl-5">
 
                         <img
+                            onClick={()=>{
+                                setMenubar(true);
+                            }}
                             className="rounded-[100%] object-cover w-10 h-10 
                                 hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer
                                 hover:ring-2 hover:ring-blue-500"
