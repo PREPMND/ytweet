@@ -25,11 +25,10 @@ const Navbar = () => {
         setNavigate(false);
         // prevent immediate re-open
         setTimeout(() => {
-            // after 5 seconds, allow showing again if error still exists
             if (error?.response?.status === 401) {
                 setNavigate(true);
             }
-        }, 5000);
+        }, 50000);
     };
 
     return (
