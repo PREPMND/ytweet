@@ -28,10 +28,10 @@ const VideoList = () => {
     useEffect(() => {
         fetchVideos(title);
     }, [title]);
-    const getVideoDuration = (video.videoFile) => {
+    const getVideoDuration = (url) => {
         return new Promise((resolve, reject) => {
             const video = document.createElement("video");
-            video.src = video.videoFile;
+            video.src = url;
             video.preload = "metadata";
 
             video.onloadedmetadata = () => {
@@ -46,7 +46,7 @@ const VideoList = () => {
     };
 
     // Usage
-    getVideoDuration("https://res.cloudinary.com/.../video.mp4")
+    getVideoDuration({video.videoFile})
         .then(({ hours, minutes }) => {
             console.log(`Duration: ${hours}h ${minutes}m`);
         });
