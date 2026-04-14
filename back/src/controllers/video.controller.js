@@ -22,7 +22,7 @@ export const createVideo = async (req, res) => {
     const videoDoc = await Video.create({
       title,
       description,
-      owner: req.user,
+      owner: req.user._ID,
       isPublished: true,
       videoFile: videoUpload.secure_url,
       duration: Math.floor(videoUpload.duration),
