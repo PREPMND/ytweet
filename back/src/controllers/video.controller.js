@@ -25,6 +25,7 @@ export const createVideo = async (req, res) => {
       owner: req.user,
       isPublished: true,
       videoFile: videoUpload.secure_url,
+      duration: Math.floor(videoUpload.duration),
       thumbnail: thumbnailUpload?.secure_url,
     });
 
