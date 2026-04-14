@@ -30,7 +30,7 @@ const VideoList = () => {
     }, [title]);
 
     return (
-        <div style={{ padding: "10px" }} className={darkMode ? "bg-neutral-900 text-white" : ""}>
+        <div style={{ padding: "10px" }} className={darkMode ? "bg-neutral-950 text-white" : ""}>
             <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
 
             <button
@@ -48,6 +48,7 @@ const VideoList = () => {
                     maxWidth: "1100px",
                     margin: "0 auto",
                     position: "relative",
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 }}
                 className="video-grid"
             >
