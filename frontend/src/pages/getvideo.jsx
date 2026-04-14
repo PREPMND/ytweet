@@ -109,7 +109,7 @@ const VideoList = () => {
                                 position: "absolute",
                                 top: "8px",
                                 right: "8px",
-                                backgroundColor: "rgba(0,0,0,0.9)",
+                                backgroundColor: "black ",
                                 color: "#fff",
                                 padding: "2px 6px",
                                 borderRadius: "4px",
