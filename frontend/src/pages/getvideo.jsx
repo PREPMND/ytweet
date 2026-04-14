@@ -87,7 +87,7 @@ const VideoList = () => {
                                 }}
                             />
                         )}
-                        <div>duration: {video.duration}</div>
+                        <div>duration: {video.videoFile.duration}</div>
                         <h3
                             className="mt-1 text-md text-black leading-[1.4] px-[6px] font-medium capitalize"
 
