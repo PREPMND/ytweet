@@ -136,7 +136,7 @@ const Navbar = ({ menubar, setMenubar }) => {
                         ></div>
 
                         {/* Sidebar Menu (50% width) */}
-                        <div className="relative w-1/2 h-full bg-white/90 shadow-lg flex flex-col items-center justify-center gap-6 z-50">
+                        <div className="relative w-[60%] md:w-[40%] h-full bg-white/90 shadow-lg flex flex-col items-center justify-center gap-6 z-50">
                             <h2 className="text-xl font-bold">Menu</h2>
                             <button
                                 onClick={() => setMenubar(false)}
