@@ -10,7 +10,7 @@ const Createvideo = () => {
     });
     const navigate = useNavigate();
     const currentUserId = data?.user?._id;
-
+    const [loading, setLoading] = useState(false);
     const [step, setStep] = useState(1);
     const [videoFile, setVideoFile] = useState(null);
     const [thumbnail, setThumbnail] = useState(null);
@@ -24,7 +24,7 @@ const Createvideo = () => {
         formData.append("videoFile", videoFile);
         formData.append("thumbnail", thumbnail);
         formData.append("owner", currentUserId);
-
+        setLoading(true);
         try {
             const response = await axios.post(
                 "http://localhost:8000/api/v1/videos/createvideo",
@@ -38,6 +38,7 @@ const Createvideo = () => {
             );
 
             console.log("Video created:", response.data);
+            
             if (response.data.success) { 
                 setTimeout(() => {
                     navigate("/");
