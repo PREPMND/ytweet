@@ -58,7 +58,7 @@ const VideoList = () => {
                             clearTimeout(timeoutRef.current);
                             setPlayingId(null);
                         }}
-                        className="overflow-hidden cursor-pointer transition-transform duration-500 ease-in-out"
+                        className="overflow-hidden cursor-pointer transition-transform  duration-500 ease-in-out"
                     >
                         {playingId === video._id ? (
                             <video
