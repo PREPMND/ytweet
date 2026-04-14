@@ -103,7 +103,7 @@ const VideoList = () => {
                                 >
                                     {video.title}
                                 </h3>
-                                <p className="text-sm text-gray-600 px-[6px]">{video.owner.username}</p>
+                                <p className="text-sm hover:underline text-gray-600 px-[6px]">{video.owner.username}</p>
                             </div>
                             <span
                             style={{
