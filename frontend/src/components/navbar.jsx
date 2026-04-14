@@ -39,7 +39,7 @@ const Navbar = ({ menubar, setMenubar }) => {
                     <div className="flex items-center h-[80px] gap-4 pl-5">
 
                         <img
-                            onClick={()=>{
+                            onClick={() => {
                                 setMenubar(true);
                             }}
                             className="rounded-[100%] object-cover w-10 h-10 
@@ -129,11 +129,14 @@ const Navbar = ({ menubar, setMenubar }) => {
             {
                 menubar && (
                     <div className="fixed inset-0 z-50 flex">
+                        {/* Backdrop */}
                         <div
                             className="absolute inset-0 bg-black opacity-50"
-                            onClick={(prev) => setMenubar(!prev)}
+                            onClick={() => setMenubar(false)}
                         ></div>
-                        <div className="relative w-full h-full bg-white/90 rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50">
+
+                        {/* Sidebar Menu (50% width) */}
+                        <div className="relative w-1/2 h-full bg-white/90 shadow-lg flex flex-col items-center justify-center gap-6 z-50">
                             <h2 className="text-xl font-bold">Menu</h2>
                             <button
                                 onClick={() => setMenubar(false)}
@@ -144,9 +147,7 @@ const Navbar = ({ menubar, setMenubar }) => {
                         </div>
                     </div>
                 )
-
             }
-
         </>
     )
 }
