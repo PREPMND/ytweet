@@ -48,7 +48,6 @@ const VideoList = () => {
                     maxWidth: "1100px",
                     margin: "0 auto",
                     position: "relative",
-                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 }}
                 className="video-grid"
             >
