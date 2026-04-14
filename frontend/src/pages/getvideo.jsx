@@ -52,7 +52,7 @@ const VideoList = () => {
                         onMouseEnter={() => {
                             timeoutRef.current = setTimeout(() => {
                                 setPlayingId(video._id);
-                            }, 300);
+                            }, 3000);
                         }}
 
                         onMouseLeave={() => {
