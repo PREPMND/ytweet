@@ -95,7 +95,7 @@ const VideoList = () => {
                                 }}
                             />
                         )}
-                        <div><img className="" src={video.owner.avatar} alt="Avatar" /></div>
+                        <div><img className="w-9 h-9 rounded-full" src={video.owner.avatar} alt="Avat   ar" /></div>
                         <h3
                             className="mt-1 text-md text-black leading-[1.4] px-[6px] font-medium capitalize"
 
