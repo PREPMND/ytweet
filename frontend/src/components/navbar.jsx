@@ -125,13 +125,11 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
 
                     <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-4 pt-5 gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"}`}>
                         <div>
-                            <button onClick={() => setDarkMode(!darkMode)} className="px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700">
-                                Toggle Dark Mode
-                            </button>
+                            
                             <div className="flex items-center flex-col justify-center mr-4">
                                 <div>
                                     <img 
-                                    className="rounded-full "
+                                    className="rounded-full h-[140px] w-[140px] object-cover mb-2"
                                     src={data?.user.avatar || ""}/>
                                 </div>
                                 <div>{data?.user.username}</div>
@@ -143,6 +141,9 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                                 <span className="ml-2 text-[24px] font-[500]">Create Videos</span>
                             </div>
                             </div>
+                            <button onClick={() => setDarkMode(!darkMode)} className="px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700">
+                                Toggle Dark Mode
+                            </button>
                         </div>
                         
                     </div>
