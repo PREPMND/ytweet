@@ -169,7 +169,11 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             >
                                 Toggle Dark Mode
                             </button>
-
+                            <div>
+                                <div>
+                                    <but
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
