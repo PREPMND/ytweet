@@ -22,7 +22,7 @@ const Login = () => {
         try {
             setLoading(true);
             if ((email.trim() != '' || username.trim() != '') && password.trim() != '') {
-                const res = await axios.post(`${import.meta.env.BACKEND}/api/v1/users/login`,
+                const res = await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/users/login`,
                             {email,username,password},
                             {
                                 withCredentials: true,                        
