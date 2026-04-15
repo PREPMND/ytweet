@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
-import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft } from "lucide-react"
+import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -161,10 +161,10 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 </div>
                                 
                             </div>
-                            <div className={`mt-2`}>
+                            <div className={`mt-4`}>
                                 <button className="flex border-rose-400 border-2 rounded-[10px] px-3 gap-4 py-2">
                                     <div>About Us</div>
-                                    <LucideToggleLeft/>
+                                    <ChevronDown/>
                                 </button>
                             </div>
                             <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] text-center mt-3 text-white border-[1px] w-[260px]`}></div>
