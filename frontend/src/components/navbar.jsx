@@ -133,7 +133,7 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                                     src={data?.user.avatar || ""}/>
                                 </div>
                                 <div className="text-neutral-900 font-[500] text-[16px]">{data?.user.fullName}</div>
-                                <button className="b- rounded-[12px] text-[20px] font-[400] " >Account Details</button>
+                                <button className="border-2 px-3 py-1 hover rounded-[12px] text-[20px] font-[400] " >Account Details</button>
                             </div>
                             <div className="">
                             <div className="flex items-center text-slate-800 hover:text-black transition-colors duration-100 ease-in-out mt-5 ">
