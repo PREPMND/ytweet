@@ -132,7 +132,7 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                                     className="rounded-full h-[140px] w-[140px] object-cover mb-2"
                                     src={data?.user.avatar || ""}/>
                                 </div>
-                                <div>{data?.user.username}</div>
+                                <div className="text-neutral-900 font-[500] text-[16px]">{data?.user.fullName}</div>
                                 <button >Account Details</button>
                             </div>
                             <div className="ml-2">
