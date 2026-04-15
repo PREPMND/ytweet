@@ -92,7 +92,7 @@ const VideoList = (props) => {
                             />
                         ) : (
                             <img
-                            className="hover:scale-[1.03] transition-transform duration-400 ease-in-out"
+                            className="hover:scale-[1.03] transition-transform duration-500 ease-in-out"
                                 src={video.thumbnail}
                                 alt={video.title}
                                 style={{
