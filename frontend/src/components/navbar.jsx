@@ -138,7 +138,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 </div>
                                 <button className={`border-2 px-3 mt-3 py-1 rounded-[12px] text-[18px] text-neutral-900 font-[400]hover:text-black transition-all duration-300 ease-in-out hover:scale-105  hover:shadow-sm ${darkModenav?"text-black bg-white  hover:shadow-fuchsia-400 hover:shadow-md":"hover:shadow-stone-500"}`} >Account Details</button>
                             </div>
-                            <div className=" text-[12px] text-center mt-2 text-white border-[1px] w-[260px]"></div>
+                            <div className= {` ${darkModenav?"text-left":} text-[12px] text-center mt-2 text-white border-[1px] w-[260px]`}></div>
                             <div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkModenav ? "text-gray-300 hover:text-white" : "text-slate-800 hover:text-black"}`}>
                                     <VideotapeIcon className="font-[100] mr-6" size={32} fontWeight={100} />
