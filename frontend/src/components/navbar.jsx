@@ -123,10 +123,10 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                         onClick={() => setMenubar(false)}
                     ></div>
 
-                    <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-4 pt-5 gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"}`}>
+                    <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-6 pt-5 gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"} select-none`}>
                         <div>
                             
-                            <div className="flex items-center flex-col justify-center mr-4">
+                            <div className="flex items-center flex-col justify-center mr-6">
                                 <div>
                                     <img 
                                     className="rounded-full h-[140px] w-[140px] object-cover mb-2"
@@ -135,7 +135,7 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                                 <div className="text-neutral-900 font-[500] text-[16px]">{data?.user.fullName}</div>
                                 <button >Account Details</button>
                             </div>
-                            <div className="ml-2">
+                            <div className="">
                             <div className="flex items-center text-slate-800 hover:text-black transition-colors duration-100 ease-in-out mt-5 ">
                                 <VideotapeIcon className="font-[100] mr-6" size={40} fontWeight={100}/>
                                 <span className="ml-2 text-[24px] font-[500]">Create Videos</span>
