@@ -128,7 +128,7 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                             <button onClick={() => setDarkMode(!darkMode)} className="px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700">
                                 Toggle Dark Mode
                             </button>
-                            <div className="flex items-center mt-5">
+                            <div className="flex items-center text-slate-600 mt-5">
                                 <VideotapeIcon className="font-[100] mr-6" size={40} fontWeight={100}/>
                                 <span className="ml-2 text-[24px] font-[500]">Create Videos</span>
                             </div>
