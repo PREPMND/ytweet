@@ -147,12 +147,12 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 </div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white" : "text-slate-800 hover:text-black"}`}>
                                     <Album className=" mr-7" size={24}/>
-                                    <span className="ml-2 text-[20px] font-[500]">Saved Topics</span>
+                                    <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out text-[20px] font-[500]">Saved Topics</span>
                                     
                                 </div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white" : "text-slate-800 hover:text-black"}`}>
                                     <Airplay className=" mr-7" size={24}/>
-                                    <span className="ml-2 text-[20px] font-[500]">Join Edge</span>
+                                    <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out text-[20px] font-[500]">Join Edge</span>
                                     
                                 </div>
                                 
