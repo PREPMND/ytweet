@@ -141,15 +141,13 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] text-center mt-2  text-white/70 border-[1px] w-[260px]`}></div>
                             <div>
                                 <div 
-                                
+                                onClick={()=>navigating("/createvideo")}
                                 className={`flex items-center transition-colors duration-200 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/70" : "text-slate-900 hover:text-black"}`}>
                                     <VideotapeIcon className=" mr-7" size={24}/>
                                     <span 
-                                    onClick={navigating("/createvideo")}
+                                    
                                     className="ml-2 hover:scale-105 transition-transform duration-200 ease-out text-[20px] font-[500]">Create Videos</span>
-                                    <PlusCircle 
-                                    onClick={navigating("/createvideo")}
-                                    className={`ml-10 hover:scale-105  transition-transform duration-200 ease-in-out ${darkMode?"text-white/80 hover:text-white":"text-black"} `}   size={28}/>
+                                    <PlusCircle className={`ml-10 hover:scale-105  transition-transform duration-200 ease-in-out ${darkMode?"text-white/80 hover:text-white":"text-black"} `}   size={28}/>
                                 </div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/70" : "text-slate-900 hover:text-black"}`}>
                                     <Album className=" mr-7" size={24}/>
