@@ -145,12 +145,12 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                     <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out text-[20px] font-[500]">Create Videos</span>
                                     <PlusCircle className={`ml-10 hover:scale-105  transition-transform duration-300 ease-in-out ${darkMode?"text-white/80 hover:text-white":"text-black"} `}   size={28}/>
                                 </div>
-                                <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white" : "text-slate-800 hover:text-black"}`}>
+                                <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/70" : "text-slate-900 hover:text-black"}`}>
                                     <Album className=" mr-7" size={24}/>
                                     <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out text-[20px] font-[500]">Saved Topics</span>
                                     
                                 </div>
-                                <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white" : "text-slate-800 hover:text-black"}`}>
+                                <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/70" : "text-slate-900 hover:text-black"}`}>
                                     <Airplay className=" mr-7" size={24}/>
                                     <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out text-[20px] font-[500]">Join Edge</span>
                                     
