@@ -39,15 +39,7 @@ const VideoList = (props) => {
 
     return (
         <div style={{ padding: "10px" }} className={darkMode ? "bg-neutral-950 text-white min-h-[calc(100vh-80px)]" : ""}>
-            <h2 style={{ marginBottom: "20px" }}>Published Videos</h2>
-
-            <button
-                onClick={() => setDarkMode(!darkMode)}
-                style={{ marginBottom: "10px" }}
-                className="px-3 py-1 bg-neutral-900 text-white rounded"
-            >
-                Toggle Mode
-            </button>
+            
 
             <div
                 style={{
