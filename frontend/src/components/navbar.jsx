@@ -129,7 +129,7 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                                 Toggle Dark Mode
                             </button>
                             <div className="flex items-center mt-5">
-                                <VideotapeIcon className="font-[300]" size={40}/>
+                                <VideotapeIcon className="font-[100] mr-6" size={40} fontWeight={100}/>
                                 <span className="ml-2">Create Videos</span>
                             </div>
                             
