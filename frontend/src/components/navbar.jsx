@@ -141,7 +141,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
 
                             <div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkModenav ? "text-gray-300 hover:text-white" : "text-slate-800 hover:text-black"}`}>
-                                    <VideotapeIcon className="font-[100] mr-6" size={40} fontWeight={100} />
+                                    <VideotapeIcon className="font-[100] mr-6" size={32} fontWeight={100} />
                                     <span className="ml-2 text-[24px] font-[500]">Create Videos</span>
                                 </div>
                             </div>
