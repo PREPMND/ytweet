@@ -129,7 +129,7 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                             <div className="flex items-center flex-col justify-center mr-6">
                                 <div>
                                     <img 
-                                    className="rounded-full h-[140px] w-[140px] object-cover mb-2"
+                                    className="hover:ring-1 ring rounded-full h-[140px] w-[140px] object-cover mb-2"
                                     src={data?.user.avatar || ""}/>
                                 </div>
                                 <div className="text-neutral-900 font-[500] text-[16px]">{data?.user.fullName}</div>
