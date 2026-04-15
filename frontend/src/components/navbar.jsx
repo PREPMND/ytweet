@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
-import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon } from "lucide-react"
+import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -144,6 +144,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                     <VideotapeIcon className=" mr-7" size={28}/>
                                     <span className="ml-2 text-[22px] font-[500]">Create Videos</span>
                                 </div>
+                                <PlayCircle className={}   size={24}/>
                             </div>
 
                             <button
