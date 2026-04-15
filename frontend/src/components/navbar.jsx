@@ -37,7 +37,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             className="rounded-full object-cover w-10 h-10 
                             hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer
                             hover:ring-2 hover:ring-blue-500"
-                            src={data?.user?.avatar}
+                            src={data?.user?.avatar || "https://i.sstatic.net/lsh78.jpg"}
                             alt="User Avatar"
                         />
                         <span className={`hidden sm:block text-[18px] font-medium ${darkMode ? "text-gray-200" : "text-gray-700"}`}>
