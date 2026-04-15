@@ -128,7 +128,7 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                             <button onClick={() => setDarkMode(!darkMode)} className="px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700">
                                 Toggle Dark Mode
                             </button>
-                            <div className="flex items-center flex-col justify-center">
+                            <div className="flex items-center flex-col justify-center mr-4">
                                 <div>
                                     <img 
                                     className="rounded-full "
