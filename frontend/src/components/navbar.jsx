@@ -6,7 +6,7 @@ import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode }) => {
+const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode }) => {
     const [navigate, setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
@@ -123,29 +123,39 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                         onClick={() => setMenubar(false)}
                     ></div>
 
-                    <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-6 pt-5 gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"} select-none`}>
+                    <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-6 pt-5 gap-6 z-50 ${darkModenav ? "bg-netrual-900 text-white" : "bg-white"} select-none`}>
                         <div>
-                            
+
                             <div className="flex items-center flex-col justify-center mr-6">
                                 <div>
-                                    <img 
-                                    className="hover:ring-1 ring-pink-100 shadow-md shadow-stone-500 rounded-full h-[140px] w-[140px] object-cover mb-2 transition-transform duration-300 ease-in-out hover:bg-white/20 hover:scale-[1.04]"
-                                    src={data?.user.avatar || ""}/>
+                                    <img
+                                        className="hover:ring-1 ring-pink-100 shadow-md shadow-stone-500 rounded-full h-[140px] w-[140px] object-cover mb-2 transition-transform duration-300 ease-in-out hover:bg-white/20 hover:scale-[1.04]"
+                                        src={data?.user.avatar || ""}
+                                    />
                                 </div>
-                                <div className="text-neutral-900 font-[500] text-[16px]">{data?.user.fullName}</div>
-                                <button className="border-2 px-3 mt-3 py-1 rounded-[12px] text-[18px]  text-neutral-900 font-[400]hover:text-black transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-stone-500 hover:shadow-sm" >Account Details</button>
+                                <div className={`${darkModenav ? "text-white" : "text-neutral-900"} font-[500] text-[16px]`}>
+                                    {data?.user.fullName}
+                                </div>
+                                <button className={`border-2 px-3 mt-3 py-1 rounded-[12px] text-[18px] font-[400] transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-stone-500 hover:shadow-sm ${darkModenav ? "text-gray-200 hover:text-white border-gray-600" : "text-neutral-900 hover:text-black"}`}>
+                                    Account Details
+                                </button>
                             </div>
-                            <div className="">
-                            <div className="flex items-center text-slate-800 hover:text-black transition-colors duration-100 ease-in-out mt-5 ">
-                                <VideotapeIcon className="font-[100] mr-6" size={40} fontWeight={100}/>
-                                <span className="ml-2 text-[24px] font-[500]">Create Videos</span>
+
+                            <div>
+                                <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkModenav ? "text-gray-300 hover:text-white" : "text-slate-800 hover:text-black"}`}>
+                                    <VideotapeIcon className="font-[100] mr-6" size={40} fontWeight={100} />
+                                    <span className="ml-2 text-[24px] font-[500]">Create Videos</span>
+                                </div>
                             </div>
-                            </div>
-                            <button onClick={() => setDarkMode(!darkMode)} className="px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700">
+
+                            <button
+                                onClick={() => setDarkMode(!darkMode)}
+                                className="px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700"
+                            >
                                 Toggle Dark Mode
                             </button>
+
                         </div>
-                        
                     </div>
                 </div>
             )}
