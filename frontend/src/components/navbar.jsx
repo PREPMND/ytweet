@@ -140,7 +140,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             </div>
                             <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] text-center mt-2  text-white/70 border-[1px] w-[260px]`}></div>
                             <div>
-                                <div className={`flex items-center transition-colors duration-200 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/70" : "text-slate-900 hover:text-black"}`}>
+                                <div 
+                                
+                                className={`flex items-center transition-colors duration-200 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/70" : "text-slate-900 hover:text-black"}`}>
                                     <VideotapeIcon className=" mr-7" size={24}/>
                                     <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out text-[20px] font-[500]">Create Videos</span>
                                     <PlusCircle className={`ml-10 hover:scale-105  transition-transform duration-200 ease-in-out ${darkMode?"text-white/80 hover:text-white":"text-black"} `}   size={28}/>
@@ -161,7 +163,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 </div>
                                 
                             </div>
-                            <div className={`mt-9`}>
+                            <div className={`mt-[10px]`}>
                                 <button className="flex border-rose-400 border-2 rounded-[10px] px-3 gap-4 py-2">
                                     <div>About Us</div>
                                     <ChevronDown/>
