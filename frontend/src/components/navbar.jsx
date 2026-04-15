@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
-import { Album, Airplay, Bolt, CirclePlus } from "lucide-react"
+import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -123,11 +123,15 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                         onClick={() => setMenubar(false)}
                     ></div>
 
-                    <div className={`relative w-[60%] md:w-[40%] h-full shadow-lg flex flex-col items-center justify-center gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"}`}>
+                    <div className={`relative w-[60%] md:w-[40%] h-full shadow-lg flex flex-col pl-4 pt-5 gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"}`}>
                         <div>
                             <button onClick={() => setDarkMode(!darkMode)} className="px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700">
                                 Toggle Dark Mode
                             </button>
+                            <div className="flex items-center">
+                                <VideotapeIcon/>
+                                <span className="ml-2">Create Videos</span>
+                            </div>
                             
                         </div>
                         
