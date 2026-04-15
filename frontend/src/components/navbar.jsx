@@ -161,7 +161,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 </div>
                                 
                             </div>
-                            <div className={`mt-4`}>
+                            <div className={`mt-9`}>
                                 <button className="flex border-rose-400 border-2 rounded-[10px] px-3 gap-4 py-2">
                                     <div>About Us</div>
                                     <ChevronDown/>
