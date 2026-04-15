@@ -162,7 +162,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 
                             </div>
                             <div className={`mt-2`}>
-                                <button className="flex border-rose-400 border-2 rounded-[10px] px-3 py-2">
+                                <button className="flex border-rose-400 border-2 rounded-[10px] px-3 gap-4 py-2">
                                     <div>About Us</div>
                                     <LucideToggleLeft/>
                                 </button>
