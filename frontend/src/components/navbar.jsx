@@ -140,10 +140,10 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             </div>
                             <div className= {` ${darkModenav?"":"text-stone-900"} text-[12px] text-center mt-2 text-white border-[1px] w-[260px]`}></div>
                             <div>
-                                <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkModenav ? "text-gray-300 hover:text-white" : "text-slate-800 hover:text-black"}`}>
+                                <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkModenav ? "text-white hover:text-white" : "text-slate-800 hover:text-black"}`}>
                                     <VideotapeIcon className=" mr-7" size={28}/>
                                     <span className="ml-2 text-[22px] font-[500]">Create Videos</span>
-                                    <PlayCircle className={``}   size={24}/>
+                                    <PlayCircle className={`ml-5 hover:scale-105 hover:text-yellow-300 transition-transform duration-300 ease-in-out text-white`}   size={24}/>
                                 </div>
                                 
                             </div>
