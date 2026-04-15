@@ -104,7 +104,7 @@ const VideoList = (props) => {
                             />
                             <div className="px-[11px]">
                                 <h3
-                                    className={`mt-1 text-md leading-[1.4] px-[6px] font-medium capitalize overflow-hidden whitespace-wrap truncate ${
+                                    className={`mt-1 text-md leading-[1.4] px-[6px] font-medium capitalize overflow-hidden whitespace-break-spaces ${
                                         darkMode ? "text-white" : "text-black"
                                     }`}
                                 >
