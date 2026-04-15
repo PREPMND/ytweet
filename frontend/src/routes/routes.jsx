@@ -10,7 +10,7 @@ export default function AppRoutes(props){
     const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode} = props;
     return(
         <Routes>
-            <Route element={<MainLayout menubar={menubar}  setMenubar={setMenubar} darkModenav={darkModenav} setDarkModenav={setDarkModenav} />}>
+            <Route element={<MainLayout menubar={menubar} darkMode={darkMode} setDarkMode={setDarkMode} setMenubar={setMenubar} darkModenav={darkModenav} setDarkModenav={setDarkModenav} />}>
             <Route path="/" element={
                 <>
                 <VideoList setDarkMode={setDarkMode} darkMode={darkMode} />
