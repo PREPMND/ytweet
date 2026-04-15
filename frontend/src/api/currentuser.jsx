@@ -3,7 +3,7 @@ export default function getCurrentUser() {
     async function fetchData() {
         try {
             const response = await axios.get(
-                `${process.env.BACKEND}/api/v1/users/currentuser`,
+                https://ytweet-61k7.onrender.com,
                 { withCredentials: true }
             );
             return response.data;
