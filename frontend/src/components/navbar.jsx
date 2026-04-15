@@ -169,7 +169,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             >
                                 Toggle Dark Mode
                             </button>
-                            <div className={`justify-center flex m-auto mr-[44px]`}>
+                            <div className={`justify-center flex mr-[44px]`}>
                                 <button className="flex border-rose-400 border-2 rounded-[10px] px-3 py-2">
                                     <div>About Us</div>
                                     <LucideToggleLeft/>
