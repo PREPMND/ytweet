@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const Api=axios.create({
-    baseURL:"https://localhost:8000/api/v1/users",
+    baseURL:`${import.meta.env.BACKEND}/api/v1/users`,
     withCredentials:true
 })
 Api.interceptors.response.use(
