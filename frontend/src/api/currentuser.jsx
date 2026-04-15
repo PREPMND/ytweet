@@ -3,7 +3,7 @@ export default function getCurrentUser() {
     async function fetchData() {
         try {
             const response = await axios.get(
-                `${import.meta.env.BACKEND}/api/v1/users/currentuser`,
+                `${import.meta.env.VITE_BACKEND}/api/v1/users/currentuser`,
                 { withCredentials: true }
             );
             console.log(import.meta.env.BACKEND)

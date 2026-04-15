@@ -28,7 +28,7 @@ const Createvideo = () => {
         setLoading(true);
         try {
             const response = await axios.post(
-                `${import.meta.env.BACKEND}/api/v1/videos/createvideo`,
+                `${import.meta.env.VITE_BACKEND}/api/v1/videos/createvideo`,
                 formData,
                 {
                     withCredentials: true,

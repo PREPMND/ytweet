@@ -19,7 +19,7 @@ const VideoList = (props) => {
             setTimeout(() => {
                 setData(false);
             }, 5000);
-            const res = await fetch(`${import.meta.env.BACKEND}/api/v1/videos/getvideo`);
+            const res = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideo`);
             const data = await res.json();
 
             if (data.success) {
