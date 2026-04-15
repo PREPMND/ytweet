@@ -130,8 +130,12 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                             </button>
                             <div>
                                 <div>
-                                    <img src=use
+                                    <img 
+                                    className="rounded-full "
+                                    src={data?.user.avatar || ""}/>
                                 </div>
+                                <div>{data?.user.username}</div>
+                                <button >Account Details</button>
                             </div>
                             <div className="ml-2">
                             <div className="flex items-center text-slate-800 hover:text-black transition-colors duration-100 ease-in-out mt-5 ">
