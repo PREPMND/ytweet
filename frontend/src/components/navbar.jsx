@@ -135,7 +135,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             <div>
                                 <div 
                                 onClick={()=>navigating("/createvideo")}
-                                className={`flex items-center transition-colors duration-200 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/70" : "text-slate-900 hover:text-black"}`}>
+                                className={`flex items-center transition-colors duration-200 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/95" : "text-slate-900 hover:text-black"}`}>
                                     <VideotapeIcon className=" mr-7" size={24}/>
                                     <span 
                                     
