@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
-import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle } from "lucide-react"
+import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -143,7 +143,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkModenav ? "text-white hover:text-white" : "text-slate-800 hover:text-black"}`}>
                                     <VideotapeIcon className=" mr-7" size={28}/>
                                     <span className="ml-2 text-[22px] font-[500]">Create Videos</span>
-                                    <PlayCircle className={`ml-5 hover:scale-105 hover:text-yellow-300 transition-transform duration-300 ease-in-out text-white`}   size={24}/>
+                                    <PlusCircle className={`ml-7 hover:scale-105 hover:text-purple-300 transition-transform duration-300 ease-in-out text-white`}   size={28}/>
                                 </div>
                                 
                             </div>
