@@ -141,8 +141,8 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             <div className= {` ${darkModenav?"":"text-stone-900"} text-[12px] text-center mt-2 text-white border-[1px] w-[260px]`}></div>
                             <div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkModenav ? "text-gray-300 hover:text-white" : "text-slate-800 hover:text-black"}`}>
-                                    <VideotapeIcon className="font-[100] mr-6" size={32} fontWeight={100} />
-                                    <span className="ml-2 text-[24px] font-[500]">Create Videos</span>
+                                    <VideotapeIcon className=" mr-7" size={28}/>
+                                    <span className="ml-2 text-[22px] font-[500]">Create Videos</span>
                                 </div>
                             </div>
 
