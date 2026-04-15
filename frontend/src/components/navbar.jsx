@@ -123,7 +123,7 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                         onClick={() => setMenubar(false)}
                     ></div>
 
-                    <div className={`relative w-[60%] md:w-[40%] h-full shadow-lg flex flex-col pl-4 pt-5 gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"}`}>
+                    <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-4 pt-5 gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"}`}>
                         <div>
                             <button onClick={() => setDarkMode(!darkMode)} className="px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700">
                                 Toggle Dark Mode
