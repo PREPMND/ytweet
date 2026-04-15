@@ -76,6 +76,7 @@ const VideoList = (props) => {
                     >
                         {playingId === video._id ? (
                             <video
+                                className="rounded-[10px] rounded-b-none"
                                 src={video.videoFile}
                                 autoPlay
                                 muted
@@ -85,7 +86,6 @@ const VideoList = (props) => {
                                     width: "100%",
                                     aspectRatio: "16 / 9",
                                     objectFit: "contain",
-                                    borderRadius: "10px",
                                     backgroundColor: "black",
                                     transition: "opacity 0.3s ease",
                                 }}
