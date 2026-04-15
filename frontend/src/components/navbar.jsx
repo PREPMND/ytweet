@@ -122,8 +122,8 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                         className="absolute inset-0 bg-black opacity-60"
                         onClick={() => setMenubar(false)}
                     ></div>
-
-                    <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-9 pt-5 gap-6 z-50 ${darkModenav ? "bg-neutral-900 shadow-lg shadow-neutral-200 text-white" : "bg-white"} select-none`}>
+                     
+                    <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-[44px] pt-5 gap-6 z-50 ${darkModenav ? "bg-neutral-900 shadow-lg shadow-neutral-200 text-white" : "bg-white"} select-none`}>
                         <div>
 
                             <div className="flex items-center flex-col justify-center mr-[44px]">
@@ -138,7 +138,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 </div>
                                 <button className={`border-2 px-3 mt-3 py-1 rounded-[12px] text-[18px] text-neutral-900 font-[400]hover:text-black transition-all duration-300 ease-in-out hover:scale-105  hover:shadow-sm ${darkModenav?"text-black bg-white  hover:shadow-fuchsia-400 hover:shadow-md":"hover:shadow-stone-500"}`} >Account Details</button>
                             </div>
-
+                            <div className="w-full text-[12px] text-white "></div>
                             <div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkModenav ? "text-gray-300 hover:text-white" : "text-slate-800 hover:text-black"}`}>
                                     <VideotapeIcon className="font-[100] mr-6" size={32} fontWeight={100} />
