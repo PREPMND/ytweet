@@ -28,7 +28,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
 
     return (
         <>
-            <div className={darkModenav ? "bg-black  text-white" : ""}>
+            <div className={darkMode ? "bg-black  text-white" : ""}>
                 <div className="flex items-center inset-0 z-0 h-[80px] justify-between select-none border-gray-700">
 
                     <div className="flex items-center h-[80px] gap-4 pl-5">
@@ -40,13 +40,13 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             src={data?.user?.avatar}
                             alt="User Avatar"
                         />
-                        <span className={`hidden sm:block text-[18px] font-medium ${darkModenav ? "text-gray-200" : "text-gray-700"}`}>
+                        <span className={`hidden sm:block text-[18px] font-medium ${darkMode ? "text-gray-200" : "text-gray-700"}`}>
                             {data?.user?.fullName}
                         </span>
                     </div>
 
                     <div className="w-fit sm:flex absolute hidden left-1/2 top-3">
-                        <img className="w-12 h-12 object-cover" src={darkModenav ? logodark : logolight} />
+                        <img className="w-12 h-12 object-cover" src={darkMode ? logodark : logolight} />
                     </div>
 
                     <div className="flex items-center mt-4 gap-11 z-20 pr-4 sm:pr-9">
@@ -57,7 +57,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             onMouseLeave={() => setHoverAirplay(false)}
                         >
                             <Airplay className={`${hoverAirplay ? "text-yellow-400" : "text-gray-400"}`} />
-                            <span className={`text-[12px] mt-1 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"} ${darkModenav ? "text-gray-300" : "text-gray-600"}`}>
+                            <span className={`text-[12px] mt-1 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"} ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
                                 JoinEdge
                             </span>
                         </div>
@@ -67,8 +67,8 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             onMouseEnter={() => setHoverAlbum(true)}
                             onMouseLeave={() => setHoverAlbum(false)}
                         >
-                            <Album className={`${darkModenav ? "text-gray-300" : ""}`} />
-                            <span className={`text-[12px] mt-1 font-[600] transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"} ${darkModenav ? "text-gray-300" : "text-gray-600"}`}>
+                            <Album className={`${darkMode ? "text-gray-300" : ""}`} />
+                            <span className={`text-[12px] mt-1 font-[600] transition-opacity duration-300 ${hoverAlbum ? "opacity-100" : "opacity-0"} ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
                                 Saved
                             </span>
                         </div>
@@ -79,13 +79,13 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             onMouseLeave={() => setHoverBolt(false)}
                         >
                             <Bolt className={`${hoverBolt ? "text-blue-400" : "text-gray-400"}`} />
-                            <span className={`text-[11px] mt-1 font-[600] transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"} ${darkModenav ? "text-gray-300" : "text-gray-600"}`}>
+                            <span className={`text-[11px] mt-1 font-[600] transition-opacity duration-300 ${hoverBolt ? "opacity-100" : "opacity-0"} ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
                                 PREP
                             </span>
                         </div>
 
                         <button
-                            onClick={() => setDarkModenav(!darkModenav)}
+                            onClick={() => setDarkModenav(!darkMode)}
                             className="ml-4 px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700"
                         >
                             Toggle
@@ -93,14 +93,14 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     </div>
                 </div>
 
-                <div className={`w-full border-t ${darkModenav ? "border-gray-800" : ""}`}></div>
+                <div className={`w-full border-t ${darkMode ? "border-gray-800" : ""}`}></div>
             </div>
 
             {navigate && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center">
                     <div className="absolute inset-0 bg-black opacity-60"></div>
 
-                    <div className={`relative w-[50%] h-[40%] rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"}`}>
+                    <div className={`relative w-[50%] h-[40%] rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50 ${darkMode ? "bg-gray-900 text-white" : "bg-white"}`}>
                         <h2 className="text-xl font-bold">Please log in to continue</h2>
                         <button
                             onClick={() => navigating("/login")}
@@ -123,7 +123,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                         onClick={() => setMenubar(false)}
                     ></div>
                      
-                    <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-[44px] pt-5 gap-6 z-50 ${darkModenav ? "bg-neutral-900 shadow-lg shadow-neutral-200 text-white" : "bg-white"} select-none`}>
+                    <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-[44px] pt-5 gap-6 z-50 ${darkMode ? "bg-neutral-900 shadow-lg shadow-neutral-200 text-white" : "bg-white"} select-none`}>
                         <div>
 
                             <div className="flex items-center flex-col justify-center mr-[44px] mb-4">
@@ -133,21 +133,21 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                         src={data?.user.avatar || ""}
                                     />
                                 </div>
-                                <div className={`${darkModenav ? "text-white" : "text-neutral-900"} font-[500] text-[16px]`}>
+                                <div className={`${darkMode ? "text-white" : "text-neutral-900"} font-[500] text-[16px]`}>
                                     {data?.user.fullName}
                                 </div>
-                                <button className={`border-2 px-3 mt-3 py-1 rounded-[12px] text-[18px] text-neutral-900 font-[400]hover:text-black transition-all duration-300 ease-in-out hover:scale-105  hover:shadow-sm ${darkModenav?"text-black bg-white  hover:shadow-fuchsia-400 hover:shadow-md":"hover:shadow-stone-500"}`} >Account Details</button>
+                                <button className={`border-2 px-3 mt-3 py-1 rounded-[12px] text-[18px] text-neutral-900 font-[400]hover:text-black transition-all duration-300 ease-in-out hover:scale-105  hover:shadow-sm ${darkMode?"text-black bg-white  hover:shadow-fuchsia-400 hover:shadow-md":"hover:shadow-stone-500"}`} >Account Details</button>
                             </div>
-                            <div className= {` ${darkModenav?"":"text-stone-900"} text-[12px] text-center mt-2  text-white border-[1px] w-[260px]`}></div>
+                            <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] text-center mt-2  text-white border-[1px] w-[260px]`}></div>
                             <div>
-                                <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkModenav ? "text-white hover:text-white" : "text-slate-800 hover:text-black"}`}>
+                                <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white" : "text-slate-800 hover:text-black"}`}>
                                     <VideotapeIcon className=" mr-7" size={28}/>
                                     <span className="ml-2 text-[22px] font-[500]">Create Videos</span>
                                     <PlusCircle className={`ml-7 hover:scale-105 hover:text-purple-300 transition-transform duration-300 ease-in-out text-white`}   size={28}/>
                                 </div>
                                 
                             </div>
-                            <div className= {` ${darkModenav?"":"text-stone-900"} text-[12px] text-center mt-3 text-white border-[1px] w-[260px]`}></div>
+                            <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] text-center mt-3 text-white border-[1px] w-[260px]`}></div>
 
                             <button
                                 onClick={() => setDarkMode(!darkMode)}
