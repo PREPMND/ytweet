@@ -123,7 +123,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                         onClick={() => setMenubar(false)}
                     ></div>
 
-                    <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-6 pt-5 gap-6 z-50 ${darkModenav ? "bg-netrual-900 text-white" : "bg-white"} select-none`}>
+                    <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-6 pt-5 gap-6 z-50 ${darkModenav ? "bg-neutral-900 shadow-lg shadow-neutral-200 text-white" : "bg-white"} select-none`}>
                         <div>
 
                             <div className="flex items-center flex-col justify-center mr-6">
