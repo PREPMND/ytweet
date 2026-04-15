@@ -129,7 +129,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             <div className="flex items-center flex-col justify-center mr-[44px] mb-4">
                                 <div>
                                     <img
-                                        className="hover:ring-2 ring-fuchsia-400 shadow-md shadow-stone-500 rounded-full h-[140px] w-[140px] object-cover mb-2 transition-transform duration-300 ease-in-out hover:bg-white/20 hover:scale-[1.04]"
+                                        className={`${darkMode?"shadow-white":""} hover:ring-2 ring-fuchsia-400 shadow-md shadow-stone-500 rounded-full h-[140px] w-[140px] object-cover mb-2 transition-transform duration-300 ease-in-out hover:bg-white/20 hover:scale-[1.04]`}
                                         src={data?.user.avatar || ""}
                                     />
                                 </div>
