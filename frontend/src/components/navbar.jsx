@@ -128,14 +128,9 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDar
                             <button onClick={() => setDarkMode(!darkMode)} className="px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700">
                                 Toggle Dark Mode
                             </button>
+                            
                         </div>
-                        <h2 className="text-xl font-bold">Menu</h2>
-                        <button
-                            onClick={() => setMenubar(false)}
-                            className="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
-                        >
-                            Close Menu
-                        </button>
+                        
                     </div>
                 </div>
             )}
