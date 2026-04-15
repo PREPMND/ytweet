@@ -129,14 +129,14 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             <div className="flex items-center flex-col justify-center mr-6">
                                 <div>
                                     <img
-                                        className="hover:ring-1 ring-pink-100 shadow-md shadow-stone-500 rounded-full h-[140px] w-[140px] object-cover mb-2 transition-transform duration-300 ease-in-out hover:bg-white/20 hover:scale-[1.04]"
+                                        className="hover:ring-1 ring-fuchsia-400 shadow-md shadow-stone-500 rounded-full h-[140px] w-[140px] object-cover mb-2 transition-transform duration-300 ease-in-out hover:bg-white/20 hover:scale-[1.04]"
                                         src={data?.user.avatar || ""}
                                     />
                                 </div>
                                 <div className={`${darkModenav ? "text-white" : "text-neutral-900"} font-[500] text-[16px]`}>
                                     {data?.user.fullName}
                                 </div>
-                                <button className={`border-2 px-3 mt-3 py-1 rounded-[12px] text-[18px] text-neutral-900 font-[400]hover:text-black transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-stone-500 hover:shadow-sm ${darkModenav?"text-black bg-white shadow-fuchsia-100 ":""}`} >Account Details</button>
+                                <button className={`border-2 px-3 mt-3 py-1 rounded-[12px] text-[18px] text-neutral-900 font-[400]hover:text-black transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-stone-500 hover:shadow-sm ${darkModenav?"text-black bg-white shadow-fuchsia-400 shadow-md":""}`} >Account Details</button>
                             </div>
 
                             <div>
