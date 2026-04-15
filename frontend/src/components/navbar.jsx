@@ -83,13 +83,6 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 PREP
                             </span>
                         </div>
-
-                        <button
-                            onClick={() => setDarkModenav(!darkMode)}
-                            className="ml-4 px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700"
-                        >
-                            Toggle
-                        </button>
                     </div>
                 </div>
 
