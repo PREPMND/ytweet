@@ -130,7 +130,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 <div>
                                     <img
                                         className={`${darkMode?"shadow-white":""} hover:ring-2 ring-fuchsia-400 shadow-md shadow-stone-500 rounded-full h-[140px] w-[140px] object-cover mb-2 transition-transform duration-300 ease-in-out hover:bg-white/20 hover:scale-[1.04]`}
-                                        src={data?.user.avatar || ""}
+                                        src={data?.user.avatar || "https://i.sstatic.net/lsh78.jpg"}
                                     />
                                 </div>
                                 <div className={`${darkMode ? "text-white" : "text-neutral-900"} font-[500] text-[16px]`}>
