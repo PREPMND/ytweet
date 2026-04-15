@@ -6,7 +6,7 @@ import { Album, Airplay, Bolt, CirclePlus } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav }) => {
+const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode }) => {
     const [navigate, setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
@@ -124,6 +124,11 @@ const Navbar = ({ menubar, setMenubar,darkModenav,setDarkModenav }) => {
                     ></div>
 
                     <div className={`relative w-[60%] md:w-[40%] h-full shadow-lg flex flex-col items-center justify-center gap-6 z-50 ${darkModenav ? "bg-gray-900 text-white" : "bg-white"}`}>
+                        <div>
+                            <button onClick={() => setDarkMode(!darkMode)} className="px-3 py-1 text-sm rounded bg-gray-800 text-white hover:bg-gray-700">
+                                Toggle Dark Mode
+                            </button>
+                        </div>
                         <h2 className="text-xl font-bold">Menu</h2>
                         <button
                             onClick={() => setMenubar(false)}
