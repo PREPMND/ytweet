@@ -143,8 +143,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkModenav ? "text-gray-300 hover:text-white" : "text-slate-800 hover:text-black"}`}>
                                     <VideotapeIcon className=" mr-7" size={28}/>
                                     <span className="ml-2 text-[22px] font-[500]">Create Videos</span>
+                                    <PlayCircle className={``}   size={24}/>
                                 </div>
-                                <PlayCircle className={}   size={24}/>
+                                
                             </div>
 
                             <button
