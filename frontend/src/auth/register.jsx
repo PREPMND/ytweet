@@ -42,7 +42,7 @@ const Register = () => {
             console.log(avatar)
             setLoading(true);
             const res = await axios.post(
-                `${import.meta.env.BACKEND}/api/v1/users/register`,
+                `${import.meta.env.VITE_BACKEND}/api/v1/users/register`,
                 formData,
                 { withCredentials: true }
             );
