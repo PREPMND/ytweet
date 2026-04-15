@@ -161,6 +161,12 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 </div>
                                 
                             </div>
+                            <div className={`mt-2`}>
+                                <button className="flex border-rose-400 border-2 rounded-[10px] px-3 py-2">
+                                    <div>About Us</div>
+                                    <LucideToggleLeft/>
+                                </button>
+                            </div>
                             <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] text-center mt-3 text-white border-[1px] w-[260px]`}></div>
 
                             <button
@@ -169,12 +175,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             >
                                 Toggle Dark Mode
                             </button>
-                            <div className={`justify-center flex mr-[44px]`}>
-                                <button className="flex border-rose-400 border-2 rounded-[10px] px-3 py-2">
-                                    <div>About Us</div>
-                                    <LucideToggleLeft/>
-                                </button>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
