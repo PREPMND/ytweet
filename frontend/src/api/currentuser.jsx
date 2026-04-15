@@ -6,6 +6,7 @@ export default function getCurrentUser() {
                 `${import.meta.env.BACKEND}/api/v1/users/currentuser`,
                 { withCredentials: true }
             );
+            console.log(${import.meta.env.BACKEND})
             return response.data;
         } catch (err) {
             if (err.response?.status === 401) {
