@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import getCurrentUser from '../api/currentuser';
+import { useParams } from 'react-router-dom';
 const ChannelIndv = (props) => {
     const {profileSelected,setProfileSelected}=props
+    const {username}=useParams()
     const [channel,setChannel]=useState(null);
     const { data } = useQuery({
         queryKey: ["currentUser"],
