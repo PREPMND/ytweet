@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 const ChannelIndv = (props) => {
     const {profileSelected,setProfileSelected}=props
     const {username}=useParams()
+    username=profileSelected;
     const [channel,setChannel]=useState(null);
     const { data } = useQuery({
         queryKey: ["currentUser"],
