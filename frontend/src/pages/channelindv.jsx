@@ -12,7 +12,7 @@ const ChannelIndv = (props) => {
         try {
             setTimeout(() => {
                 
-            }, 5000);
+            }, 1000);
             const data = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${profileSelected}`);
             if (data.success) {
                 setChannel(data)
