@@ -106,7 +106,7 @@ const VideoList = (props) => {
                                 alt="Avatar"
                             />
                             <div
-                                onClick={() => { setProfileSelected(video.owner.username) }}
+                                onClick={() => { Handle }}
                                 className="px-[11px]">
                                 <h3
                                     className={`mt-1 text-md leading-[1.4] px-[6px] font-medium capitalize overflow-hidden whitespace-break-spaces ${darkMode ? "text-white" : "text-black"
