@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const VideoList = (props) => {
-    const {darkMode, setDarkMode,profileSelected,setProfileSelected} = props;
+    const { darkMode, setDarkMode, profileSelected, setProfileSelected } = props;
 
     const [videos, setVideos] = useState([]);
     const [data, setData] = useState(false);
@@ -36,10 +36,13 @@ const VideoList = (props) => {
     useEffect(() => {
         fetchVideos(title);
     }, [title]);
-
+    function Handle(channel) {
+        setProfileSelected(channel);
+        navigate(`/:${channel}`);
+    }
     return (
         <div style={{ padding: "10px" }} className={darkMode ? "bg-neutral-950 text-white min-h-[calc(100vh-80px)]" : ""}>
-            
+
 
             <div
                 style={{
@@ -84,7 +87,7 @@ const VideoList = (props) => {
                             />
                         ) : (
                             <img
-                            className="hover:scale-[1.02] overflow-hidden transition-transform duration-300 ease-in-out"
+                                className="hover:scale-[1.02] overflow-hidden transition-transform duration-300 ease-in-out"
                                 src={video.thumbnail}
                                 alt={video.title}
                                 style={{
@@ -102,17 +105,18 @@ const VideoList = (props) => {
                                 src={video.owner.avatar}
                                 alt="Avatar"
                             />
-                            <div className="px-[11px]">
+                            <div
+                                onClick={() => { setProfileSelected(video.owner.username) }}
+                                className="px-[11px]">
                                 <h3
-                                    className={`mt-1 text-md leading-[1.4] px-[6px] font-medium capitalize overflow-hidden whitespace-break-spaces ${
-                                        darkMode ? "text-white" : "text-black"
-                                    }`}
+                                    className={`mt-1 text-md leading-[1.4] px-[6px] font-medium capitalize overflow-hidden whitespace-break-spaces ${darkMode ? "text-white" : "text-black"
+                                        }`}
                                 >
                                     {video.title}
                                 </h3>
                                 <p
-                                onClick={()=>{setProfileSelected(video.owner.username)}}
-                                className={`text-sm hover:underline px-[6px] ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+
+                                    className={`text-sm hover:underline px-[6px] ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
                                     {video.owner.username}
                                 </p>
                             </div>
@@ -135,7 +139,7 @@ const VideoList = (props) => {
                     </div>
                 ))}
             </div>
-            <LoaderPinwheel className={`mx-auto animate-spin flex place-items-center mt-20 ${darkMode ? "text-white" : "text-black"} ${videos===null? "hidden" : ""}`} size={40} />
+            <LoaderPinwheel className={`mx-auto animate-spin flex place-items-center mt-20 ${darkMode ? "text-white" : "text-black"} ${videos === null ? "hidden" : ""}`} size={40} />
         </div>
     );
 };
