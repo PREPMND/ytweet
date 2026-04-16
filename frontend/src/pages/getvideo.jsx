@@ -37,6 +37,7 @@ const VideoList = (props) => {
         fetchVideos(title);
     }, [title]);
     function Handle(channel) {
+        console.log(channel)
         setProfileSelected(channel);
         navigate(`/${channel}`);
     }
