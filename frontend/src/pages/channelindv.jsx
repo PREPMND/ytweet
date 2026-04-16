@@ -4,7 +4,7 @@ import getCurrentUser from '../api/currentuser';
 import { useParams } from 'react-router-dom';
 const ChannelIndv = (props) => {
     const {profileSelected,setProfileSelected}=props
-    const {username}=useParams()
+    let {username}=useParams()
     username=profileSelected;
     const [channel,setChannel]=useState(null);
     const { data } = useQuery({
@@ -16,7 +16,7 @@ const ChannelIndv = (props) => {
             setTimeout(() => {
                 
             }, 1000);
-            const data = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${profileSelected}`);
+            const data = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${username}`);
             if (data.success) {
                 setChannel(data)
                 console.log(data)
