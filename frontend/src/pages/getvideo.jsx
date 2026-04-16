@@ -110,7 +110,9 @@ const VideoList = (props) => {
                                 >
                                     {video.title}
                                 </h3>
-                                <p className={`text-sm hover:underline px-[6px] ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+                                <p
+                                onClick={()=>{setProfileSelected(video.owner.username)}}
+                                className={`text-sm hover:underline px-[6px] ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
                                     {video.owner.username}
                                 </p>
                             </div>
