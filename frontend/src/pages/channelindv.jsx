@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query';
+import 
 const ChannelIndv = (props) => {
     const {profileSelected,setProfileSelected}=props
     const [channel,setChannel]=useState(null);
@@ -11,9 +12,9 @@ const ChannelIndv = (props) => {
     const fetchVideos = async (pageNum = 1) => {
         try {
             setTimeout(() => {
-                setData(false);
+                
             }, 5000);
-            const data = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${username}`);
+            const data = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${profileSelected}`);
             if (data.success) {
                 setChannel(data)
                 console.log(data)
