@@ -11,11 +11,10 @@ const ChannelIndv = () => {
             setTimeout(() => {
                 setData(false);
             }, 5000);
-            const res = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/`);
+            const res = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${username}`);
             const data = await res.json();
 
             if (data.success) {
-                setVideos(data.data.docs);
                 setData(true);
             } else {
                 console.error("Backend error:", data.message);
