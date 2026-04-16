@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query';
-const ChannelIndv = () => {
-    const {channelP}
+const ChannelIndv = (props) => {
+    const {profileSelected,setProfileSelected}=props
     const [channel,setChannel]=useState(null);
     const { data } = useQuery({
         queryKey: ["currentUser"],
