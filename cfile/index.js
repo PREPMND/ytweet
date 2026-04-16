@@ -1,1 +1,1 @@
-console.log("File ")
+console.log("Data Stored Sucessfully!")
