@@ -105,8 +105,8 @@ const loginUser = asyncHandler(async (req, res, next) => {
 
     const options = {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax"
+        secure: true,
+        sameSite: "none"
     }
     return res
         .status(200)
@@ -136,8 +136,8 @@ const logOutUser = asyncHandler(async (req, res, next) => {
     )
     const options = {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax"
+        secure: true,
+        sameSite: "none"
     }
     return res
         .status(200)
@@ -163,8 +163,8 @@ const refreshAccessToken = asyncHandler(async (req, res, next) => {
         }
         const options = {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax"
+            secure: true,
+            sameSite: "none"
         }
         const { accessToken, newrefreshToken } = await generateAccessAndRefreshTokens(user._id)
         return res
@@ -215,7 +215,7 @@ const changeCurrentPassword = asyncHandler(async (req, res, next) => {
         throw new apiError(401, "Wrong Password")
     }
     user.password = newPassword;
-    await user.save({ validateBeforeSave: false });//didnt use bcrypt hash as already a middle ware .pre that will run befpre save and hash the password also that is a sync await 
+    await user.save({ validateBeforeSave: true });//didnt use bcrypt hash as already a middle ware .pre that will run befpre save and hash the password also that is a sync await 
     return res.status(200).json(new apiResponse(200, {}, "Password Updated Succesfully"))
 })
 const getCurrentUser = asyncHandler(async (req, res, next) => {
@@ -350,7 +350,7 @@ const getUserChannelProfile = asyncHandler(async (req, res, next) => {
                     $cond: {
                         if: { $in: [req.user?._id, "$subscribers.subscriber"] },
                         then: true,
-                        else: false
+                        else: true
                     }
                 }
 
