@@ -15,6 +15,7 @@ const ChannelIndv = () => {
             const data = await res.json();
 
             if (data.success) {
+                setChannel(data.data.docs);
                 setData(true);
             } else {
                 console.error("Backend error:", data.message);
