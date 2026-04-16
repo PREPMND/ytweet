@@ -38,7 +38,7 @@ const VideoList = (props) => {
     }, [title]);
     function Handle(channel) {
         setProfileSelected(channel);
-        navigate(`/:${channel}`);
+        navigate(`/${channel}`);
     }
     return (
         <div style={{ padding: "10px" }} className={darkMode ? "bg-neutral-950 text-white min-h-[calc(100vh-80px)]" : ""}>
