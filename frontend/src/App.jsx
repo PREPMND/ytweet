@@ -29,10 +29,10 @@ const App = () => {
   const [menubar, setMenubar] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [darkModenav, setDarkModenav] = useState(true);
-
+  const [profileSelected,setProfileSelected]=useState(null)
   return (
     <div>
-      <AppRoutes menubar={menubar} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav} />
+      <AppRoutes menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav} />
     </div>
   )
 }
