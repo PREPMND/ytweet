@@ -24,6 +24,9 @@ const ChannelIndv = (props) => {
             console.error("Error fetching videos:", err);
         }
     };
+    if(profileSelected!=null){
+        
+    }
     return (
         <>
             <div>
