@@ -6,6 +6,7 @@ import Register from "../auth/register"
 import HomePage from "../pages/home.page.jsx"
 import Createvideo from "../pages/createvideo.jsx"
 import VideoList from "../pages/getvideo.jsx"
+import ChannelIndv from "../pages/channelindv.jsx"
 export default function AppRoutes(props){
     const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode,profileSelected,setProfileSelected} = props;
     return(
@@ -17,7 +18,7 @@ export default function AppRoutes(props){
                 </>}/>
             </Route>
             <Route element={<AuthLayout />}>
-            <Route path="/:username" element={}/>
+            <Route path="/:username" element={<ChannelIndv profileSelected={profileSelected} setProfileSelected={setProfileSelected}/>}/>
             <Route path="/createvideo" element={<Createvideo />}/>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register/>}/>
