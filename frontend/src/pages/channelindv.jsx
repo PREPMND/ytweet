@@ -6,7 +6,7 @@ const ChannelIndv = () => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
-
+    
     return (
         <>
         <div>
