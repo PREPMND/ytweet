@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query';
 const ChannelIndv = () => {
+    const [channel,setChannel]=useState(null);
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
@@ -11,12 +12,10 @@ const ChannelIndv = () => {
             setTimeout(() => {
                 setData(false);
             }, 5000);
-            const res = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${username}`);
-            const data = await res.json();
-
+            const data = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${username}`);
             if (data.success) {
-                setChannel(data.data.docs);
-                setData(true);
+                setChannel(data)
+                console.log(data)
             } else {
                 console.error("Backend error:", data.message);
             }
@@ -28,8 +27,8 @@ const ChannelIndv = () => {
         <>
             <div>
                 <div>
-                    <img src=''
-            </div>
+                    
+                </div>
             </div>
         </>
     )
