@@ -1,13 +1,17 @@
 import React from 'react'
+import axios from 'axios'
+const ChannelIndv = () => {
 
-const channelindv = () => {
+
     return (
         <>
         <div>
-            Indv Channels
+            <div>
+                <img src=''
+            </div>
         </div>
         </>
     )
 }
 
-export default channelindv
+export default ChannelIndv
