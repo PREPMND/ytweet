@@ -57,7 +57,6 @@ const VideoList = (props) => {
                 {videos.map((video) => (
                     <div
                         key={video._id}
-                        onClick={() => navigate(`/video/${video._id}`)}
                         onMouseEnter={() => {
                             timeoutRef.current = setTimeout(() => {
                                 setPlayingId(video._id);
