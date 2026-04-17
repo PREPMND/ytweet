@@ -36,8 +36,9 @@ const ChannelIndv = (props) => {
             console.error(err);
         }
     };
-
-
+    useEffect(()=>{
+        fetchVideos()
+    },[])
     return (
         <>
             <div>
