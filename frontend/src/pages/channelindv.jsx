@@ -13,7 +13,7 @@ const ChannelIndv = (props) => {
     });
     const fetchVideos = async () => {
         try {
-            const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${username}`);
+            const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/users/c/:${data}`);
             console.log(user)
             if (user.success) {
                 setChannel(user)
