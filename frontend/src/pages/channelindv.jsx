@@ -17,7 +17,7 @@ const ChannelIndv = (props) => {
                 
             }, 1000);
             const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${username}`);
-            console.log()
+            console.log(user)
             if (user.success) {
                 setChannel(user)
                 console.log(user)
