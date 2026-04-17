@@ -129,7 +129,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 <div className={`${darkMode ? "text-white" : "text-neutral-900"} font-[500] text-[16px]`}>
                                     {data?.user.fullName}
                                 </div>
-                                <button className={`border-2 px-3 mt-3 py-1 rounded-[12px] text-[18px] text-neutral-900 font-[400]hover:text-black transition-all duration-300 ease-in-out hover:scale-105  hover:shadow-sm ${darkMode?"text-black bg-white  hover:shadow-fuchsia-400 hover:shadow-md":"hover:shadow-stone-500"}`} >Account Details</button>
+                                <button className={`border-2 px-3 mt-3 py-1 rounded-[12px] text-[18px] text-neutral-900 font-[400]hover:text-black transition-all duration-300 ease-in-out hover:scale-105  hover:shadow-sm ${darkMode?"text-black bg-white  hover:shadow-fuchsia-400 hover:shadow-md":"hover:shadow-stone-500"}`} >Account Details
+                                    <span className={`${isLoggedIn==true?"flex":"hidden"}`}>Account Details</span><span>Log In</span>
+                                </button>
                             </div>
                             <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] text-center mt-2  text-white/70 border-[1px] w-[260px]`}></div>
                             <div>
