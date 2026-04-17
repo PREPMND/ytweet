@@ -11,6 +11,7 @@ const ChannelIndv = (props) => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
+    console.log(data)
     const fetchVideos = async () => {
         try {
             const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/users/c/:${data}`);
