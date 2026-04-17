@@ -25,6 +25,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
             setNavigate(true);
         }
         if(error){setisLoggedIn(false)}
+        if(!error){setisLoggedIn(true)}
     }, [error]);
 
     return (
