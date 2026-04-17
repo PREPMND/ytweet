@@ -139,7 +139,7 @@ const VideoList = (props) => {
                     </div>
                 ))}
             </div>
-            <LoaderPinwheel className={`mx-auto animate-spin flex place-items-center mt-20 ${darkMode ? "text-white" : "text-black"} ${videos === null ? "hidden" : ""}`} size={40} />
+            <LoaderPinwheel className={`mx-auto animate-spin flex justify-center mt-20 ${darkMode ? "text-white" : "text-black"} ${videos === null ? "hidden" : "flex"}`} size={40} />
         </div>
     );
 };
