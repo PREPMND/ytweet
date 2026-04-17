@@ -17,10 +17,11 @@ const ChannelIndv = (props) => {
                 
             }, 1000);
             const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${username}`);
+            console.log()
             if (user.success) {
                 setChannel(user)
-                console.log()
-            } else {user
+                console.log(user)
+            } else {
                 console.error("Backend error:", data.message);
             }
         } catch (err) {
