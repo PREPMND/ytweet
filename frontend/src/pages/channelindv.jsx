@@ -17,7 +17,7 @@ const ChannelIndv = (props) => {
 
             setChannel(data.username)
             username = profileSelected;
-            const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/users/c/:${data}`);
+            const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/users/c/:${channel}`);
             console.log(user)
             if (user.success) {
                 setChannel(user)
