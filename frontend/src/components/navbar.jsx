@@ -6,7 +6,7 @@ import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode }) => {
+const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode,isLoggedIn,setisLoggedIn }) => {
     const [navigate, setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
