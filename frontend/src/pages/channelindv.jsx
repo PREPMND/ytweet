@@ -13,9 +13,6 @@ const ChannelIndv = (props) => {
     });
     const fetchVideos = async () => {
         try {
-            setTimeout(() => {
-                
-            }, 1000);
             const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${username}`);
             console.log(user)
             if (user.success) {
@@ -28,6 +25,7 @@ const ChannelIndv = (props) => {
             console.error("Error fetching videos:", err);
         }
     };
+    fetchVideos()
     return (
         <>
             <div>
