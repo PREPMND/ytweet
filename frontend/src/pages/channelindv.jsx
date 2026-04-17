@@ -3,10 +3,10 @@ import { useQuery } from '@tanstack/react-query';
 import getCurrentUser from '../api/currentuser';
 import { useParams } from 'react-router-dom';
 const ChannelIndv = (props) => {
-    const {profileSelected,setProfileSelected}=props
-    let {username}=useParams()
-    username=profileSelected;
-    const [channel,setChannel]=useState(null);
+    const { profileSelected, setProfileSelected } = props
+    let { username } = useParams()
+
+    const [channel, setChannel] = useState(null);
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
@@ -14,6 +14,9 @@ const ChannelIndv = (props) => {
     console.log(data)
     const fetchVideos = async () => {
         try {
+
+            setChannel(data.username)
+            username = profileSelected;
             const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/users/c/:${data}`);
             console.log(user)
             if (user.success) {
@@ -31,7 +34,7 @@ const ChannelIndv = (props) => {
         <>
             <div>
                 <div>
-                    
+
                 </div>
             </div>
         </>
