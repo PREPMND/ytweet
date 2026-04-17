@@ -11,11 +11,12 @@ const ChannelIndv = (props) => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
-    console.log(data)
+    setChannel(data.username)
+
+    console.log(channel)
     const fetchVideos = async () => {
         try {
 
-            setChannel(data.username)
             username = profileSelected;
             const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/users/c/:${channel}`);
             console.log(user)
