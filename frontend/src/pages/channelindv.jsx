@@ -16,11 +16,11 @@ const ChannelIndv = (props) => {
             setTimeout(() => {
                 
             }, 1000);
-            const data = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${username}`);
-            if (data.success) {
-                setChannel(data)
-                console.log(data)
-            } else {
+            const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/user/c/:${username}`);
+            if (user.success) {
+                setChannel(user)
+                console.log()
+            } else {user
                 console.error("Backend error:", data.message);
             }
         } catch (err) {
