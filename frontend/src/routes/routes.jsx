@@ -9,7 +9,7 @@ import VideoList from "../pages/getvideo.jsx"
 import ChannelIndv from "../pages/channelindv.jsx"
 export default function AppRoutes(props){
     const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode,profileSelected,setProfileSelected
-        setisLoggedIn
+        setisLoggedIn,isLoggedIn
     } = props;
     return(
         <Routes>
