@@ -3,35 +3,41 @@ import { useQuery } from '@tanstack/react-query';
 import getCurrentUser from '../api/currentuser';
 import { useParams } from 'react-router-dom';
 const ChannelIndv = (props) => {
-    const { profileSelected, setProfileSelected } = props
-    let { username } = useParams()
 
+    const { username: routeUsername } = useParams(); // from URL
     const [channel, setChannel] = useState(null);
+    const [username, setUsername] = useState(routeUsername); // local state
+
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
-    
-    useEffect(()=>{
-        setChannel(data.user.username)
-        username=data.user.username;
-    },[data])
-    console.log(channel)
+
+    useEffect(() => {
+        if (data?.user?.username) {
+            setChannel(data.user.username);
+            setUsername(data.user.username); // update state, not the param
+        }
+    }, [data]);
+
+    console.log(channel);
+
     const fetchVideos = async () => {
         try {
-            const user = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/users/c/:${username}`);
-            console.log(user)
+            const res = await fetch(
+                `${import.meta.env.VITE_BACKEND}/api/v1/users/c/${username}`
+            );
+            const user = await res.json();
+            console.log(user);
             if (user.success) {
-                setChannel(user)
-                console.log(user)
-            } else {
-                console.error("Backend error:", data.message);
+                setChannel(user);
             }
         } catch (err) {
-            console.error("Error fetching videos:", err);
+            console.error(err);
         }
     };
-    fetchVideos()
+
+
     return (
         <>
             <div>
