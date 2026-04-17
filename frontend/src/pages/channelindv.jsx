@@ -14,7 +14,6 @@ const ChannelIndv = (props) => {
     
     useEffect(()=>{
         setChannel(data.user.username)
-        console.log(data.user)
     },[data])
     console.log(channel)
     const fetchVideos = async () => {
