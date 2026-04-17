@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query';
 import getCurrentUser from '../api/currentuser';
 import { useParams } from 'react-router-dom';
@@ -11,8 +11,10 @@ const ChannelIndv = (props) => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
-    setChannel(data.username)
-
+    
+    useEffect(()=>{
+        setChannel(data.username)
+    },[])
     console.log(channel)
     const fetchVideos = async () => {
         try {
