@@ -59,7 +59,7 @@ const ChannelIndv = () => {
             className="w-28 h-28 rounded-full border-4 border-zinc-900 object-cover"
           />
 
-          <div>
+          <div className="flex items-center">
             <h2 className="text-2xl font-semibold">{channel.username}</h2>
             <p className="text-zinc-400 text-sm">
               {channel.subscriberCount} subscribers
