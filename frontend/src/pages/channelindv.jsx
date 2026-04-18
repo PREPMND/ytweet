@@ -40,12 +40,12 @@ const ChannelIndv = () => {
 
   return (
     <div className="text-white">
-      <div className="w-full h-[290px] bg-zinc-800">
+      <div className="w-full  bg-zinc-800">
         {channel.coverImage && (
           <img
             src={channel.coverImage}
             alt=""
-            className="w-full h-full object-cover"
+            className="w-full h-[40%] object-cover"
           />
         )}
       </div>
