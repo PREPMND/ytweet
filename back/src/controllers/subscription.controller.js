@@ -24,8 +24,7 @@ export const toggleSubscription = asyncHandler(async (req, res) => {
         channel: channelId,
     });
 
-    return res.json({
-        success: true,
-        subscribed: true,
-    });
+    return res
+        .status(200)
+        .json(new apiResponse(200, { subscribed: true }));
 });
