@@ -41,7 +41,7 @@ const ChannelIndv = () => {
                 ...prev,
                 isSubscribed: subscribed,
                 subscriberCount:
-                    prev.subscriberCount + (subscribed ? 1 : -1),
+                    prev.subscriberCount + (subscribed ? -1 : 1),
             }));
         } catch (err) {
             console.error(err);
