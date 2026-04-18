@@ -63,6 +63,10 @@ const ChannelIndv = () => {
                 setChannel(result.data);
                 console.log(channel)
             }
+            if (!res.ok) {
+                console.error("Bad request", res.status);
+                return;
+            }
         } catch (err) {
             console.error(err);
         }
