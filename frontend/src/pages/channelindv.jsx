@@ -17,23 +17,21 @@ const ChannelIndv = () => {
         setIsSubscribing(true);
 
         try {
-            if (channel.isSubscribed) {
-                await fetch(`/api/v1/unsubscribe/${channel._id}`, {
-                    method: "DELETE",
-                    credentials: "include",
-                });
-            } else {
-                await fetch(`/api/v1/subscribe/${channel._id}`, {
+            const res = await fetch(
+                `/api/v1/subscriptions/${channel._id}`,
+                {
                     method: "POST",
                     credentials: "include",
-                });
-            }
+                }
+            );
+
+            const data = await res.json();
 
             setChannel((prev) => ({
                 ...prev,
-                isSubscribed: !prev.isSubscribed,
+                isSubscribed: data.subscribed,
                 subscriberCount:
-                    prev.subscriberCount + (prev.isSubscribed ? -1 : 1),
+                    prev.subscriberCount + (data.subscribed ? 1 : -1),
             }));
         } catch (err) {
             console.error(err);
