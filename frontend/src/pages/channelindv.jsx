@@ -61,6 +61,7 @@ const ChannelIndv = () => {
 
             if (result.success) {
                 setChannel(result.data);
+                console.log(channel)
             }
         } catch (err) {
             console.error(err);
