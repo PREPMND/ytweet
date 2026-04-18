@@ -72,7 +72,7 @@ const ChannelIndv = () => {
                 Subscribed
               </button>
             ) : (
-              <button className="bg-red-600 px-5 py-2 rounded-full hover:bg-red-700">
+              <button className="bg-red-600 px-5 py-2 rounded-full hover:bg-rose-600">
                 Subscribe
               </button>
             )}
