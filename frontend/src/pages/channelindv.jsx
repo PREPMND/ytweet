@@ -12,23 +12,34 @@ const ChannelIndv = () => {
         queryFn: getCurrentUser,
     });
     const handleSubscribe = async () => {
-        if (channel.isSubscribed) {
-            await fetch(`/api/v1/unsubscribe/${channel._id}`, {
-                method: "DELETE",
-                credentials: "include",
-            });
-        } else {
-            await fetch(`/api/v1/subscribe/${channel._id}`, {
-                method: "POST",
-                credentials: "include",
-            });
-        }
+        if (isSubscribing) return;
 
-        setChannel((prev) => ({
-            ...prev,
-            isSubscribed: !prev.isSubscribed,
-            subscriberCount: prev.subscriberCount + (prev.isSubscribed ? -1 : 1),
-        }));
+        setIsSubscribing(true);
+
+        try {
+            if (channel.isSubscribed) {
+                await fetch(`/api/v1/unsubscribe/${channel._id}`, {
+                    method: "DELETE",
+                    credentials: "include",
+                });
+            } else {
+                await fetch(`/api/v1/subscribe/${channel._id}`, {
+                    method: "POST",
+                    credentials: "include",
+                });
+            }
+
+            setChannel((prev) => ({
+                ...prev,
+                isSubscribed: !prev.isSubscribed,
+                subscriberCount:
+                    prev.subscriberCount + (prev.isSubscribed ? -1 : 1),
+            }));
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setIsSubscribing(false);
+        }
     };
     const currentUserId = data?.user?._id;
 
@@ -86,21 +97,21 @@ const ChannelIndv = () => {
 
                     <div className="ml-auto">
                         {channel.isSubscribed ? (
-                            <button 
-                            onClick={handleSubscribe}
-                            className="bg-zinc-700 px-5 py-2 rounded-full">
+                            <button
+                                onClick={handleSubscribe}
+                                className="bg-zinc-700 px-5 py-2 rounded-full">
                                 Subscribed
                             </button>
                         ) : (
-                            <button 
-                            onClick={handleSubscribe}
-                            className="bg-red-600 px-5 py-2 rounded-full hover:bg-rose-600 hover:scale-105 transition-transfrom duration-300 ease-in-out">
+                            <button
+                                onClick={handleSubscribe}
+                                className="bg-red-600 px-5 py-2 rounded-full hover:bg-rose-600 hover:scale-105 transition-transfrom duration-300 ease-in-out">
                                 Subscribe
                             </button>
                         )}
                     </div>
                 </div>
-                
+
                 {/* Tabs */}
                 <div className="mt-6 border-b border-zinc-700 flex gap-6 text-sm">
                     <button className="pb-2 border-b-2 border-white">Videos</button>
