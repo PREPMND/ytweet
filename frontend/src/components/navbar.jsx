@@ -3,7 +3,7 @@ import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
 import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown } from "lucide-react"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useEffectEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode,isLoggedIn,setisLoggedIn }) => {
@@ -27,7 +27,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         if(error){setisLoggedIn(false)}
         if(!error){setisLoggedIn(true)}
     }, [error]);
-
+    useEffect(()=>{
+        localStorage.setItem()
+    })
     return (
         <>
             <div className={darkMode ? "bg-black  text-white" : ""}>
