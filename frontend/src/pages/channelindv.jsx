@@ -100,7 +100,7 @@ const ChannelIndv = () => {
                         )}
                     </div>
                 </div>
-
+                
                 {/* Tabs */}
                 <div className="mt-6 border-b border-zinc-700 flex gap-6 text-sm">
                     <button className="pb-2 border-b-2 border-white">Videos</button>
