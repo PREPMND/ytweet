@@ -26,6 +26,7 @@ const ChannelIndv = () => {
             );
 
             const data = await res.json();
+            console.log(data)
             const subscribed = data.subscribed ?? data.data?.subscribed;
             setChannel((prev) => ({
                 ...prev,
