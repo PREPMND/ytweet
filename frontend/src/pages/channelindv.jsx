@@ -25,7 +25,15 @@ const ChannelIndv = () => {
                 }
             );
 
-            const data = await res.json();
+            const text = await res.text();
+            console.log("RAW RESPONSE:", text);
+
+            let data = {};
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                console.error("Response is not JSON",e);
+            }
 
             const subscribed = data.data?.subscribed;
 
