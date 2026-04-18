@@ -26,6 +26,7 @@ const App = () => {
     fetchUser();
   }, []);
 */}
+
   const [menubar, setMenubar] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [darkModenav, setDarkModenav] = useState(true);
