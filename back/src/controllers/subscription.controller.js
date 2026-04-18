@@ -18,3 +18,15 @@ const subscribe = asyncHandler(async (req, res) => {
     new apiResponse(200, sub, "Subscribed successfully")
   );
 });
+const unsubscribe = asyncHandler(async (req, res) => {
+  const { channelId } = req.params;
+
+  await Subscription.findOneAndDelete({
+    subscriber: req.user._id,
+    channel: channelId,
+  });
+
+  return res.status(200).json(
+    new apiResponse(200, {}, "Unsubscribed successfully")
+  );
+});
