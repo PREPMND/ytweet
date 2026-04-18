@@ -1,5 +1,5 @@
 import AppRoutes from './routes/routes.jsx';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 const App = () => {
   {/*const [username,setUsername]=useState("")
   async function loginUser(credentials) {
@@ -28,10 +28,18 @@ const App = () => {
 */}
 
   const [menubar, setMenubar] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    JSON.parse(localStorage.getItem("darkMode")) ?? false
+  );
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+    document.body.className = darkMode ? "dark" : "light";
+  }, [darkMode]);
+
   const [darkModenav, setDarkModenav] = useState(true);
-  const [profileSelected,setProfileSelected]=useState(null);
-  const [isLoggedIn,setisLoggedIn]=useState(false);
+  const [profileSelected, setProfileSelected] = useState(null);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
   return (
     <div>
       <AppRoutes isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav} />
