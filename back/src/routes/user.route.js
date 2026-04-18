@@ -42,5 +42,4 @@ router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
 router.route("/history").get(verifyJWT,getWatchHistory)
 
 router.post("/subscriptions/:channelId", verifyJWT, toggleSubscription);
-router.delete("/unsubscribe/:channelId", verifyJWT, unsubscribe);
 export default router;
