@@ -18,7 +18,7 @@ const ChannelIndv = () => {
 
         try {
             const res = await fetch(
-                `/api/v1/subscriptions/${channel._id}`,
+                `/api/v1/users/subscriptions/${channel._id}`,
                 {
                     method: "POST",
                     credentials: "include",
