@@ -340,14 +340,16 @@ const getUserChannelProfile = asyncHandler(async (req, res, next) => {
                                 $filter: {
                                     input: "$subscribers",
                                     as: "sub",
-                                    cond: { $eq: ["$$sub.subscriber", req.user._id] }
-                                }
-                            }
+                                    cond: {
+                                        $eq: ["$$sub.subscriber", req.user._id],
+                                    },
+                                },
+                            },
                         },
-                        0
-                    ]
-                }
-            }
+                        0,
+                    ],
+                },
+            },
         },
         {
             $project: {
