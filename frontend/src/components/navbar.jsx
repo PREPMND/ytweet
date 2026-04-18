@@ -27,9 +27,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         if(error){setisLoggedIn(false)}
         if(!error){setisLoggedIn(true)}
     }, [error]);
-    useEffect(()=>{
-        localStorage.setItem()
-    })
+
     return (
         <>
             <div className={darkMode ? "bg-black  text-white" : ""}>
