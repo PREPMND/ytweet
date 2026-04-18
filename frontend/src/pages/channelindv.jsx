@@ -18,7 +18,7 @@ const ChannelIndv = () => {
 
         try {
             const res = await fetch(
-                `/api/v1/users/subscriptions/${channel._id}`,
+                `${import.meta.env.VITE_BACKEND}/api/v1/users/subscriptions/${channel._id}`,
                 {
                     method: "POST",
                     credentials: "include",
@@ -32,7 +32,7 @@ const ChannelIndv = () => {
             try {
                 data = JSON.parse(text);
             } catch (e) {
-                console.error("Response is not JSON",e);
+                console.error("Response is not JSON", e);
             }
 
             const subscribed = data.data?.subscribed;
