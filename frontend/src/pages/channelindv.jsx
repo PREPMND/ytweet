@@ -6,12 +6,30 @@ import getCurrentUser from "../api/currentuser";
 const ChannelIndv = () => {
     const { username } = useParams();
     const [channel, setChannel] = useState(null);
-
+    const [isSubscribing, setIsSubscribing] = useState(false);
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
-    
+    const handleSubscribe = async () => {
+        if (channel.isSubscribed) {
+            await fetch(`/api/v1/unsubscribe/${channel._id}`, {
+                method: "DELETE",
+                credentials: "include",
+            });
+        } else {
+            await fetch(`/api/v1/subscribe/${channel._id}`, {
+                method: "POST",
+                credentials: "include",
+            });
+        }
+
+        setChannel((prev) => ({
+            ...prev,
+            isSubscribed: !prev.isSubscribed,
+            subscriberCount: prev.subscriberCount + (prev.isSubscribed ? -1 : 1),
+        }));
+    };
     const currentUserId = data?.user?._id;
 
     const fetchChannel = async () => {
