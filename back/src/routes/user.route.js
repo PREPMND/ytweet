@@ -39,4 +39,7 @@ router.route("/changeavatar").patch(verifyJWT,upload.single("avatar"),updateUser
 router.route("/changecoverimage").patch(verifyJWT,upload.single("coverImage"),updateUserCoverImage)
 router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
 router.route("/history").get(verifyJWT,getWatchHistory)
+
+router.post("/subscribe/:channelId", verifyJWT, subscribe);
+router.delete("/unsubscribe/:channelId", verifyJWT, unsubscribe);
 export default router;
