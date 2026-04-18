@@ -86,11 +86,15 @@ const ChannelIndv = () => {
 
                     <div className="ml-auto">
                         {channel.isSubscribed ? (
-                            <button className="bg-zinc-700 px-5 py-2 rounded-full">
+                            <button 
+                            onClick={()=>{handleSubscribe}}
+                            className="bg-zinc-700 px-5 py-2 rounded-full">
                                 Subscribed
                             </button>
                         ) : (
-                            <button className="bg-red-600 px-5 py-2 rounded-full hover:bg-rose-600 hover:scale-105 transition-transfrom duration-300 ease-in-out">
+                            <button 
+                            onClick={()=>{handleSubscribe}}
+                            className="bg-red-600 px-5 py-2 rounded-full hover:bg-rose-600 hover:scale-105 transition-transfrom duration-300 ease-in-out">
                                 Subscribe
                             </button>
                         )}
