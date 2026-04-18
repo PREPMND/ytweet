@@ -41,6 +41,6 @@ router.route("/changecoverimage").patch(verifyJWT,upload.single("coverImage"),up
 router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
 router.route("/history").get(verifyJWT,getWatchHistory)
 
-router.post("/subscriptions/:channelId", verifyJWT, subscribe);
+router.post("/subscriptions/:channelId", verifyJWT, toggleSubscription);
 router.delete("/unsubscribe/:channelId", verifyJWT, unsubscribe);
 export default router;
