@@ -1,4 +1,5 @@
-import { asyncHandler } from "../utils/asyncHandler";
+import { asyncHandler,api } from "../utils/asyncHandler";
+import { Subscription } from "../models/subscription.models";
 const subscribe = asyncHandler(async (req, res) => {
   const { channelId } = req.params;
 
