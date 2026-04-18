@@ -56,7 +56,7 @@ const ChannelIndv = () => {
           <img
             src={channel.avatar}
             alt=""
-            className="w-28 h-28 rounded-full border-4 border-zinc-900 object-cover"
+            className="w-28 hover:ring-1 hover:ring-yellow-200 h-28 rounded-full border-4 border-zinc-900 object-cover"
           />
 
           <div className="flex items-center">
