@@ -319,55 +319,34 @@ const getUserChannelProfile = asyncHandler(async (req, res, next) => {
     const channel = await User.aggregate([
         {
             $match: {
-                username: username?.toLowerCase()
-            }
-        },
-        {
-            $lookup: {
-                from: "subscriptions",//as Subscription in db will be subscription
-                localField: "subcribers_id",
-                foreignField: "channel",
-                as: "subscribers"
-            }
+                username: username.toLowerCase(),
+            },
         },
         {
             $lookup: {
                 from: "subscriptions",
-                localField: "subscribed_id",
-                foreignField: "subscriber",
-                as: "subscribedTo"
-            }
+                localField: "_id",
+                foreignField: "channel",
+                as: "subscribers",
+            },
         },
         {
             $addFields: {
-                subscriberCount: {
-                    $size: "$subscribers"
-                },
-                subscribredToCount: {
-                    $size: "$subscribedTo"
-                },
+                subscriberCount: { $size: "$subscribers" },
                 isSubscribed: {
-                    $cond: {
-                        if: { $in: [req.user?._id, "$subscribers.subscriber"] },
-                        then: true,
-                        else: true
-                    }
-                }
-
-            }
+                    $in: [req.user._id, "$subscribers.subscriber"],
+                },
+            },
         },
         {
             $project: {
-                fullName: 1,
-                avatar: 1,
-                coverImage: 1,
-                subscriberCount: 1,
-                subscribredToCount: 1,
                 username: 1,
-                isSubscribed: 1
-            }
-        }
-    ])
+                avatar: 1,
+                subscriberCount: 1,
+                isSubscribed: 1,
+            },
+        },
+    ]);
     if (!channel.length) {
         throw new apiError(404, "channel does not exist")
     }
