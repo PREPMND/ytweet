@@ -164,12 +164,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 </div>
                                 
                             </div>
-                            <div className={`mt-8`}>
-                                <button className="flex border-rose-400 border-2 rounded-[10px] px-2 py-1">
-                                    <div>About Us</div>
-                                    <ChevronDown/>
-                                </button>
-                            </div>
+                            
                             <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] hidden text-center mt-3 text-white border-[1px] w-[260px]`}></div>
 
                             <button
@@ -178,7 +173,12 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             >
                                 Toggle Dark Mode
                             </button>
-                            
+                            <div className={`mt-8`}>
+                                <button className="flex border-rose-400 border-2 rounded-[10px] px-2 py-1">
+                                    <div>About Us</div>
+                                    <ChevronDown/>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
