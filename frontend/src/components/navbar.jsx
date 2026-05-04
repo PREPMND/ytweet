@@ -121,7 +121,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     <div className={`relative w-[60%] md:w-[30%] h-full shadow-lg flex flex-col pl-[44px] pt-5 gap-6 z-50 ${darkMode ? "bg-neutral-900 shadow-lg shadow-neutral-200 text-white" : "bg-white"} select-none overflow-y-scroll`}>
                         <div>
 
-                            <div className="flex items-center flex-col justify-center mr-[40px] mb-4">
+                            <div className="flex items-center mt-4 flex-col justify-center mr-[40px] mb-4">
                                 <div>
                                     <img
                                         className={`${darkMode?"shadow-white":""} hover:ring-2 ring-fuchsia-400 shadow-md shadow-stone-500 rounded-full h-[100px] w-[100px] md:h-[140px] md:w-[140px] object-cover mb-2 transition-transform duration-300 ease-in-out hover:bg-white/20 hover:scale-[1.04]`}
