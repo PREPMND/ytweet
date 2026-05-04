@@ -6,7 +6,6 @@ export default function getCurrentUser() {
                 `${import.meta.env.VITE_BACKEND}/api/v1/users/currentuser`,
                 { withCredentials: true }
             );
-            console.log(import.meta.env.VITE_BACKEND)
             return response.data;
         } catch (err) {
             if (err.response?.status === 401) {
