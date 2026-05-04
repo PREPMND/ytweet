@@ -138,7 +138,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                     className={`${isLoggedIn==false?"flex":"hidden"}`}>Log In</span>
                                 </button>
                             </div>
-                            <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] text-center mt-2 hidden md:flex  text-white/70 border-[1px] w-[260px]`}></div>
+                            <div className= {` ${darkMode?"":"text-stone-900"}  text-[12px] md:text-[12px] text-center mt-2 hidden md:flex  text-white/70 border-[1px] w-[260px]`}></div>
                             <div>
                                 <div 
                                 onClick={()=>navigating("/createvideo")}
