@@ -40,7 +40,7 @@ export const createVideo = async (req, res) => {
 
 export const getVideos = async (req, res) => {
     try {
-        const { page = 1, limit = 11 } = req.query;
+        const { page = 1 } = req.query;
 
         const aggregate = Video.aggregate([
             { $match: { isPublished: true } },
@@ -68,7 +68,7 @@ export const getVideos = async (req, res) => {
             }
         ]);
 
-        const options = { page, limit };
+        const options = { page };
         const videos = await Video.aggregatePaginate(aggregate, options);
 
         function formatDuration(seconds) {
