@@ -24,6 +24,7 @@ const VideoList = (props) => {
 
             if (data.success) {
                 setVideos(data.data.docs);
+                console.log(data.data.docs.title)
                 setData(true);
             } else {
                 console.error("Backend error:", data.message);
