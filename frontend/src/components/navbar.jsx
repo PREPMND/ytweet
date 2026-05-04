@@ -95,7 +95,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                 <div className="fixed inset-0 z-40 flex items-center justify-center">
                     <div className="absolute inset-0 bg-black opacity-60"></div>
 
-                    <div className={`relative w-[80%]  md:w-[50%] md:h-[40%] rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50 ${darkMode ? "bg-gray-900 text-white" : "bg-white"}`}>
+                    <div className={`relative w-[80%] h-[35%] md:w-[50%] md:h-[40%] rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50 ${darkMode ? "bg-gray-900 text-white" : "bg-white"}`}>
                         <h2 className="text-xl font-bold">Please log in to continue</h2>
                         <button
                             onClick={() => navigating("/login")}
