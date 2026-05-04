@@ -12,7 +12,7 @@ const generateAccessAndRefreshTokens = async (userId) => {
         const refreshToken = user.generateRefreshToken()
 
         user.refreshToken = refreshToken
-        await user.save({ validateBeforeSave: true })
+        await user.save({ validateBeforeSave: false })
 
         return { accessToken, refreshToken }
     } catch {
@@ -104,8 +104,8 @@ const loginUser = asyncHandler(async (req, res, next) => {
     )
 
     const options = {
-        httpOnly: true,
-        secure: true,
+        httpOnly: false,
+        secure: false,
         sameSite: "none"
     }
     return res
@@ -131,12 +131,12 @@ const logOutUser = asyncHandler(async (req, res, next) => {
             }
         },
         {
-            new: true
+            new: false
         }
     )
     const options = {
-        httpOnly: true,
-        secure: true,
+        httpOnly: false,
+        secure: false,
         sameSite: "none"
     }
     return res
@@ -162,8 +162,8 @@ const refreshAccessToken = asyncHandler(async (req, res, next) => {
             throw new apiError(401, "Refresh token is expired or used")
         }
         const options = {
-            httpOnly: true,
-            secure: true,
+            httpOnly: false,
+            secure: false,
             sameSite: "none"
         }
         const { accessToken, newrefreshToken } = await generateAccessAndRefreshTokens(user._id)
@@ -215,7 +215,7 @@ const changeCurrentPassword = asyncHandler(async (req, res, next) => {
         throw new apiError(401, "Wrong Password")
     }
     user.password = newPassword;
-    await user.save({ validateBeforeSave: true });//didnt use bcrypt hash as already a middle ware .pre that will run befpre save and hash the password also that is a sync await 
+    await user.save({ validateBeforeSave: false });//didnt use bcrypt hash as already a middle ware .pre that will run befpre save and hash the password also that is a sync await 
     return res.status(200).json(new apiResponse(200, {}, "Password Updated Succesfully"))
 })
 const getCurrentUser = asyncHandler(async (req, res, next) => {
@@ -229,7 +229,7 @@ const getCurrentUser = asyncHandler(async (req, res, next) => {
         statusCode: 200,
         data: req.user,
         message: "Yes",
-        success: true
+        success: false
     });
 })
 const updateAccountDetails = asyncHandler(async (req, res, next) => {
@@ -247,7 +247,7 @@ const updateAccountDetails = asyncHandler(async (req, res, next) => {
                 email: email
             }
         },
-        { new: true }
+        { new: false }
     ).select("-password -refreshToken")
 
     return res
@@ -278,7 +278,7 @@ const updateUserAvatar = asyncHandler(async (req, res, next) => {
                 avatar: avatar.url
             }
         },
-        { new: true }
+        { new: false }
     ).select("-password -refreshToken")
     return res
         .status(200)
@@ -303,7 +303,7 @@ const updateUserCoverImage = asyncHandler(async (req, res, next) => {
                 coverImage: CoverImage.url
             }
         },
-        { new: true }
+        { new: false }
     ).select("-password -refreshToken")
     return res
         .status(200)
