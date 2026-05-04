@@ -61,7 +61,7 @@ const VideoList = (props) => {
                         onMouseEnter={() => {
                             timeoutRef.current = setTimeout(() => {
                                 setPlayingId(video._id);
-                            }, 1300);
+                            }, 300);
                         }}
                         onMouseLeave={() => {
                             clearTimeout(timeoutRef.current);
