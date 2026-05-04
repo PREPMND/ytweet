@@ -87,7 +87,6 @@ const Register = () => {
                     <button
                         className={`${next ? "hidden" : "block"} ${subnext ? "bg-blue-500/90 hover:bg-blue-700 z-40 text-white font-semibold rounded px-4 py-2" : "bg-gray-400 text-gray-700 cursor-not-allowed rounded px-4 py-2"} transition-colors duration-300 ease-in-out z-40`}
                         onClick={HandlingNext}
-                        disabled={!subnext}
                     >
                         Next
                     </button>
