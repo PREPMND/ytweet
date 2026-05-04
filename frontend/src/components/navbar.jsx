@@ -170,7 +170,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                     <ChevronDown/>
                                 </button>
                             </div>
-                            <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] text-center mt-3 text-white border-[1px] w-[260px]`}></div>
+                            <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] hidden text-center mt-3 text-white border-[1px] w-[260px]`}></div>
 
                             <button
                                 onClick={() => setDarkMode(!darkMode)}
