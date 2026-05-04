@@ -157,12 +157,12 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                 </div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/95" : "text-slate-900 hover:text-black"}`}>
                                     <Bolt className="mr-5 md:mr-7" size={24}/>
-                                    <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out text-[20px] font-[500]">Enter PREP!</span>
+                                    <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out md:text-[20px] text-[15px] font-[500]">Enter PREP!</span>
                                     
                                 </div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/95" : "text-slate-900 hover:text-black"}`}>
                                     <Airplay className="mr-5 md:mr-7" size={24}/>
-                                    <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out text-[20px] font-[500]">Join Edge</span>
+                                    <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out md:text-[20px] text-[15px] font-[500]">Join Edge</span>
                                 </div>
                                 
                             </div>
