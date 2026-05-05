@@ -114,7 +114,7 @@ const Login = () => {
                 onClick={()=>navigate("/register")}
                 className={`
                     ${currentUser?'hidden':'block'}
-                    cursor-pointer mt-7 text-green-400 text-[15px] text-yellow hover:underline`}
+                    cursor-pointer md:mt-7 text-green-400 text-[15px] text-yellow hover:underline`}
                 >Want to create a new account!</div>
             </div>
         </div>
