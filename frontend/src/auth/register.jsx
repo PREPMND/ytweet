@@ -101,7 +101,7 @@ const Register = () => {
                     </button>
                     <div className={`${next ? "flex flex-col justify-center items-center" : "hidden"} *:mb-5 z-30 text-center font-[700] h-full`}>
 
-                        <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[500px] select-none bg-white/90 backdrop-blur-md'>
+                        <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[320px] md:w-[500px] select-none bg-white/90 backdrop-blur-md'>
                             <div >
                                 <div>Choose Avatar</div>
                                 <input className='files' type='file' accept='image/*' placeholder='Avatar'
