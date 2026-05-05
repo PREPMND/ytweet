@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const VideoList = (props) => {
     const { darkMode, setProfileSelected } = props;
-
-    const [title, setTitle] = useState(1);
-
     const timeoutRef = useRef(null);
     const [playingId, setPlayingId] = useState(null);
     const navigate = useNavigate();
