@@ -58,7 +58,7 @@ const Register = () => {
         e.preventDefault();
         setButton2(true)
         //const confirmed = window.confirm("You confirm these details?");
-        if (true) {
+        if () {
             setNext(true);
         }
     }
