@@ -20,12 +20,6 @@ console.log("THIS VIDEO ROUTE FILE IS LOADED");
 routerVideo.get("/getvideos", getVideos);
 routerVideo.get("/getvideo/:id", getVideoById);
 // use :id as a path param
-routerVideo.get("/getvideosbychannel/:id", getVideoByChannel);
 routerVideo.put("/updatevideo/:id", verifyJWT, updateVideo);
 routerVideo.delete("/deletevideo/:id", verifyJWT, deleteVideo);
-console.log(
-  routerVideo.stack
-    .filter(r => r.route)
-    .map(r => r.route.path)
-);
 export default routerVideo;
