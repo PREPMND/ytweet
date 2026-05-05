@@ -37,65 +37,53 @@ export const createVideo = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-
 export const getVideos = async (req, res) => {
-    try {
-        const { page = 1 } = req.query;
-
-        const aggregate = Video.aggregate([
-            { $match: { isPublished: true } },
-            {
-                $lookup: {
-                    from: "users",
-                    localField: "owner",
-                    foreignField: "_id",
-                    as: "owner"
-                }
-            },
-            { $unwind: "$owner" },
-            {
-                $project: {
-                    title: 1,
-                    description: 1,
-                    videoFile: 1,
-                    thumbnail: 1,
-                    duration: 1,
-                    "owner._id": 1,
-                    "owner.username": 1,
-                    "owner.email": 1,
-                    "owner.avatar": 1
-                }
-            }
-        ]);
-
-        const videos = await Video.aggregate(aggregate);
-
-        function formatDuration(seconds) {
-            const hours = Math.floor(seconds / 3600);
-            const minutes = Math.floor((seconds % 3600) / 60);
-            if (seconds < 60) {
-                return `${seconds}s`;
-            }
-            if (seconds < 3600) {
-                return `${minutes}m`;
-            }
-            return `${hours}h ${minutes}m`;
+  try {
+    const aggregate = Video.aggregate([
+      { $match: { isPublished: true } },
+      {
+        $lookup: {
+          from: "users",
+          localField: "owner",
+          foreignField: "_id",
+          as: "owner"
         }
+      },
+      { $unwind: "$owner" },
+      {
+        $project: {
+          title: 1,
+          description: 1,
+          videoFile: 1,
+          thumbnail: 1,
+          duration: 1,
+          "owner._id": 1,
+          "owner.username": 1,
+          "owner.email": 1,
+          "owner.avatar": 1
+        }
+      }
+    ]);
 
-        videos.docs = videos.docs.map((v) => ({
-            ...v,
-            durationFormatted: formatDuration(v.duration || 0),
-        }));
-        const formatted = videos.map((v) => ({
-            ...v,
-            durationFormatted: formatDuration(v.duration || 0),
-        }));
+    const videos = await aggregate;
 
-
-        res.status(200).json({ success: true, data: formatted });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+    function formatDuration(seconds) {
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      if (seconds < 60) return `${seconds}s`;
+      if (seconds < 3600) return `${minutes}m`;
+      return `${hours}h ${minutes}m`;
     }
+
+    const formatted = videos.map((v) => ({
+      ...v,
+      durationFormatted: formatDuration(v.duration || 0),
+    }));
+
+    res.status(200).json({ success: true, data: formatted });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 };
 // Get single video by ID
 export const getVideoById = async (req, res) => {
