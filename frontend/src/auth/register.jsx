@@ -110,7 +110,7 @@ const Register = () => {
                                 <input className='files' type='file' accept='image/*' placeholder='Avatar'
                                     onChange={(e) => setAvatar(e.target.files[0])} />
                             </div>
-                            <div className='border-[1px] md:flex hidden shadow-lg rounded-[50%] md:w-[80px] md:h-[80px] w-[40px] h-[40px] overflow-hidden'>
+                            <div className='border-[1px] md:flex hidden shadow-lg rounded-[50%] md:w-[80px] md:h-[80px] w-[80px] h-[80px] overflow-hidden'>
                                 <img className='w-full h-full object-cover' src={avatar ? URL.createObjectURL(avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
                             </div>
                         </div>
@@ -120,7 +120,7 @@ const Register = () => {
                                 <input className='files' type='file' accept='image/*' placeholder='Cover Image'
                                     onChange={(e) => setCoverImage(e.target.files[0])} />
                             </div>
-                            <div className='border-[1px] shadow-lg rounded-[50%] w-[80px] h-[80px] overflow-hidden'>
+                            <div className='border-[1px] shadow-lg rounded-[50%] md:w-[80px] md:h-[80px] w-[60px] h-[60px] overflow-hidden'>
                                 <img className='w-full h-full object-cover' src={coverImage ? URL.createObjectURL(coverImage) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
                             </div>
                         </div>
