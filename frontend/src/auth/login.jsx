@@ -68,9 +68,9 @@ const Login = () => {
         <div
         className='bg-white select-none absolute inset-0 flex z-30 items-center justify-center'>
         <img className='z-0 inset-0 absolute w-full h-screen object-cover' src={orange} />
-        <div className='border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg w-[300px] h-[350px] md:w-[400px] md:h-[400px]'>
+        <div className='border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg w-[300px] h-[380px] md:w-[400px] md:h-[400px]'>
             
-            <div className='flex items-center justify-center flex-col'>
+            <div className='flex items-center justify-center h-full flex-col'>
                 <h1 className='text-2xl font-[700] mt-3 md:mt-5 text-neutral-800 mb-4'>Login</h1>
                 <h3
                 className='cursor-pointer mt-4 md:mt-6 text-green-500 hover:underline'
