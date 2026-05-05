@@ -100,6 +100,22 @@ const ChannelIndv = () => {
             setIsLoadingVideos(false);
         }
     };
+    useEffect(() => {
+        if (channel?._id) {
+            setVideos([]);
+            setPage(1);
+            fetchVideos(1);
+        }
+    }, [channel]);
+
+    const handleLoadMore = () => {
+        if (hasMore && !isLoadingVideos) {
+            const nextPage = page + 1;
+            setPage(nextPage);
+            fetchVideos(nextPage);
+        }
+    };
+
 
     return (
         <div className="text-white">
