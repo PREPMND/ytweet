@@ -12,18 +12,21 @@ const VideoList = (props) => {
     const [playingId, setPlayingId] = useState(null);
     const navigate = useNavigate();
 
+    const [videos, setVideos] = useState([]);
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+
     const fetchVideos = async (pageNum = 1) => {
         try {
-            setTimeout(() => {
-                setData(false);
-            }, 3000);
-            const res = await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideos`);
+            const res = await fetch(
+                `${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideos?page=${pageNum}&limit=20`
+            );
             const data = await res.json();
 
             if (data.success) {
-                setVideos(data.data.docs);
-                console.log(data.data.docs)
-                setData(true);
+                // append instead of replace
+                setVideos(prev => [...prev, ...data.data.docs]);
+                setHasMore(pageNum < data.data.totalPages);
             } else {
                 console.error("Backend error:", data.message);
             }
@@ -32,6 +35,23 @@ const VideoList = (props) => {
         }
     };
 
+    useEffect(() => {
+        fetchVideos(page);
+    }, [page]);
+
+    // scroll listener
+    useEffect(() => {
+        function handleScroll() {
+            if (
+                window.innerHeight + window.scrollY >= document.body.offsetHeight - 200 &&
+                hasMore
+            ) {
+                setPage(prev => prev + 1);
+            }
+        }
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [hasMore]);
     useEffect(() => {
         fetchVideos(title);
     }, [title]);
