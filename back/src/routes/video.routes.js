@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { createVideo, getVideos, getVideoById, updateVideo, deleteVideo } from "../controllers/video.controller.js";
+import { createVideo, getVideos, getVideoById, updateVideo, deleteVideo, getVideoByChannel } from "../controllers/video.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 const routerVideo = express.Router();
 
@@ -18,7 +18,7 @@ routerVideo.post("/createvideo", verifyJWT,
     createVideo);
 routerVideo.get("/getvideos", getVideos);
 routerVideo.get("/getvideo/:id", getVideoById);
-routerVideo.get("/")
+routerVideo.get("/getvideobychannel",verifyJWT,getVideoByChannel);
 routerVideo.put("/updatevideo/:id", verifyJWT, updateVideo);
 routerVideo.delete("/deletevideo/:id", verifyJWT, deleteVideo);
 
