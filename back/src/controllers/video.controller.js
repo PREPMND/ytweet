@@ -109,11 +109,13 @@ export const getVideoById = async (req, res) => {
 };
 export const getVideoByChannel = async (req, res) => {
     try {
-        const { channelId, page = 1, limit = 10 } = req.query;
+        const { id } = req.params;
+        const { page = 1, limit = 10 } = req.query;
 
-        if (!channelId) {
+        if (!id) {
             return res.status(400).json({ success: false, message: "Channel ID is required" });
         }
+
 
         // Build aggregation pipeline
         const pipeline = [
