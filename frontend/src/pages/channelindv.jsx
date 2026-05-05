@@ -78,8 +78,41 @@ const ChannelIndv = () => {
         if (username) fetchChannel();
     }, [username]);
 
-    
-    
+    const fetchVideos = async (pageNum = 1) => {
+        if (!channel?._id) return;
+        setIsLoadingVideos(true);
+        try {
+            const res = await fetch(
+                `${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideosbychannel?channelId=${channel._id}&page=${pageNum}&limit=10`,
+                { credentials: "include" }
+            );
+            const result = await res.json();
+            if (result.success) {
+                setVideos((prev) => [...prev, ...result.data.docs]);
+                setHasMore(pageNum < result.data.totalPages);
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setIsLoadingVideos(false);
+        }
+    };
+    useEffect(() => {
+        if (channel?._id) {
+            setVideos([]);
+            setPage(1);
+            fetchVideos(1);
+        }
+    }, [channel]);
+
+    const handleLoadMore = () => {
+        if (hasMore && !isLoadingVideos) {
+            const nextPage = page + 1;
+            setPage(nextPage);
+            fetchVideos(nextPage);
+        }
+    };
+
     if (!channel) {
         return <div className="text-white p-10">Loading...</div>;
     }
