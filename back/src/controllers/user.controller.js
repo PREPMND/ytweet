@@ -28,7 +28,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
     //created user object , in mongodb an object is called as nosql
     //remove password and refresh token field from response
     //check for user creation 
-    //retru res
+    //return res
     console.log("yes")
     //getting user response
     const { fullName, email, username, password } = req.body
