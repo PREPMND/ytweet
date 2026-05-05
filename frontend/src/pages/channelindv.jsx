@@ -78,9 +78,7 @@ const ChannelIndv = () => {
         if (username) fetchChannel();
     }, [username]);
 
-    if (!channel) {
-        return <div className="text-white p-10">Loading...</div>;
-    }
+    
     const fetchVideos = async (pageNum = 1) => {
         if (!channel?._id) return;
         setIsLoadingVideos(true);
@@ -115,7 +113,9 @@ const ChannelIndv = () => {
             fetchVideos(nextPage);
         }
     };
-
+    if (!channel) {
+        return <div className="text-white p-10">Loading...</div>;
+    }
 
     return (
         <div className="text-white">
