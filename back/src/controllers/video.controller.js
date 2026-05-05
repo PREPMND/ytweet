@@ -36,7 +36,7 @@ export const createVideo = async (req, res) => {
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
-}; 
+};
 export const getVideos = async (req, res) => {
     try {
         const { page = 1, limit = 20 } = req.query;
@@ -107,11 +107,71 @@ export const getVideoById = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-export const getVideoByChannel= aysnc(req,res)=>{
-    try{
-        const owner=req.body;
+export const getVideoByChannel = async (req, res) => {
+    try {
+        const { channelId, page = 1, limit = 10 } = req.query;
+
+        if (!channelId) {
+            return res.status(400).json({ success: false, message: "Channel ID is required" });
+        }
+
+        // Build aggregation pipeline
+        const pipeline = [
+            { $match: { owner: channelId, isPublished: true } },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "owner",
+                    foreignField: "_id",
+                    as: "owner"
+                }
+            },
+            { $unwind: "$owner" },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    videoFile: 1,
+                    thumbnail: 1,
+                    duration: 1,
+                    views: 1,
+                    createdAt: 1,
+                    "owner._id": 1,
+                    "owner.username": 1,
+                    "owner.email": 1,
+                    "owner.avatar": 1
+                }
+            },
+            { $sort: { createdAt: -1 } }
+        ];
+
+        // Use aggregatePaginate
+        const options = {
+            page: parseInt(page, 10),
+            limit: parseInt(limit, 10)
+        };
+
+        const result = await Video.aggregatePaginate(Video.aggregate(pipeline), options);
+
+        // Format duration helper
+        function formatDuration(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            if (seconds < 60) return `${seconds}s`;
+            if (seconds < 3600) return `${minutes}m`;
+            return `${hours}h ${minutes}m`;
+        }
+
+        result.docs = result.docs.map((v) => ({
+            ...v,
+            durationFormatted: formatDuration(v.duration || 0),
+        }));
+
+        res.status(200).json({ success: true, data: result });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
     }
-}
+};
 // Update video
 export const updateVideo = async (req, res) => {
     try {
