@@ -91,6 +91,7 @@ const ChannelIndv = () => {
                 setVideos((prev) => [...prev, ...result.data.docs]);
                 setHasMore(pageNum < result.data.totalPages);
             }
+            console.log(videos);
         } catch (err) {
             console.error(err);
         } finally {
