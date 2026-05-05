@@ -33,9 +33,6 @@ input[type="file"]::file-selector-button {
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.3s ease;
-  @media screen {
-    
-  }
 }
 
 input[type="file"]::file-selector-button:hover {
