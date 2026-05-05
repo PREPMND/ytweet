@@ -3,9 +3,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const VideoList = (props) => {
-    const { darkMode, setDarkMode, profileSelected, setProfileSelected } = props;
+    const { darkMode, setProfileSelected } = props;
 
-    const [data, setData] = useState(false);
     const [title, setTitle] = useState(1);
 
     const timeoutRef = useRef(null);
