@@ -77,6 +77,25 @@ const ChannelIndv = () => {
     if (!channel) {
         return <div className="text-white p-10">Loading...</div>;
     }
+    const fetchVideos = async (pageNum = 1) => {
+        if (!channel?._id) return;
+        setIsLoadingVideos(true);
+        try {
+            const res = await fetch(
+                `${import.meta.env.VITE_BACKEND}/api/v1/videos/channel?channelId=${channel._id}&page=${pageNum}&limit=10`,
+                { credentials: "include" }
+            );
+            const result = await res.json();
+            if (result.success) {
+                setVideos((prev) => [...prev, ...result.data.docs]);
+                setHasMore(pageNum < result.data.totalPages);
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setIsLoadingVideos(false);
+        }
+    };
 
     return (
         <div className="text-white">
