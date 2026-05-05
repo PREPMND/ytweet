@@ -79,21 +79,34 @@ const ChannelIndv = () => {
     }, [username]);
 
     const fetchVideos = async (pageNum = 1) => {
-        if (!channel?._id) return;
+        if (!channel?._id || isLoadingVideos) return;
+
         setIsLoadingVideos(true);
+
         try {
             const res = await fetch(
                 `${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideosbychannel/${channel._id}?page=${pageNum}&limit=10`,
                 { credentials: "include" }
             );
+
             const result = await res.json();
+
             if (result.success) {
-                setVideos((prev) => [...prev, ...result.data.docs]);
+                const newVideos = result.data.docs;
+
+                setVideos((prev) => {
+                    // ✅ prevent duplicates (important)
+                    const existingIds = new Set(prev.map(v => v._id));
+                    const filtered = newVideos.filter(v => !existingIds.has(v._id));
+                    return [...prev, ...filtered];
+                });
+
                 setHasMore(pageNum < result.data.totalPages);
+            } else {
+                console.error("API error:", result.message);
             }
-            console.log(videos);
         } catch (err) {
-            console.error(err);
+            console.error("Fetch videos error:", err);
         } finally {
             setIsLoadingVideos(false);
         }
