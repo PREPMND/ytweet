@@ -117,10 +117,13 @@ const Register = () => {
                         <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[350px] md:w-[500px] select-none bg-white/90 backdrop-blur-md'>
                             <div >
                                 <div>Choose Cover Image</div>
+                                <div className='border-[1px] shadow-lg rounded-[50%] w-[80px] h-[80px] md:hidden flex m-auto overflow-hidden'>
+                                <img className='w-full h-full object-cover' src={coverImage ? URL.createObjectURL(coverImage) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
+                            </div>
                                 <input className='files' type='file' accept='image/*' placeholder='Cover Image'
                                     onChange={(e) => setCoverImage(e.target.files[0])} />
                             </div>
-                            <div className='border-[1px] shadow-lg rounded-[50%] md:w-[80px] md:h-[80px] w-[60px] h-[60px] overflow-hidden'>
+                            <div className='border-[1px] shadow-lg rounded-[50%] w-[80px] h-[80px] hidden md:flex  overflow-hidden'>
                                 <img className='w-full h-full object-cover' src={coverImage ? URL.createObjectURL(coverImage) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
                             </div>
                         </div>
