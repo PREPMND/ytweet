@@ -68,7 +68,7 @@ const Login = () => {
         <div
         className='bg-white select-none absolute inset-0 flex z-30 items-center justify-center'>
         <img className='z-0 inset-0 absolute w-full h-screen object-cover' src={orange} />
-        <div className='border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg w-[400px] h-[400px]'>
+        <div className='border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg w-[300px] md:w-[400px] h-[400px]'>
             
             <div className='flex items-center justify-center flex-col'>
                 <h1 className='text-2xl font-[700] mt-5 text-neutral-800 mb-4'>Login</h1>
@@ -85,7 +85,7 @@ const Login = () => {
                     onSubmit={HandleSubmit}>
                         <input 
                         className={`${way=="email"?"flex":"hidden"} border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 placeholder:text-neutral-700 focus:ring-blue-500 focus:border-transparent
-                        w-[250px]`}
+                        w-[200px] md:w-[250px]`}
                         type='text' 
                         placeholder='Email' value={email} 
                         name='email' onChange={(e)=>{setEmail(e.target.value)}}/>
