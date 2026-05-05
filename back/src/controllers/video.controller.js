@@ -106,29 +106,50 @@ export const getVideoById = async (req, res) => {
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
-};
+}; import mongoose from "mongoose";
+
 export const getVideoByChannel = async (req, res) => {
     try {
         const { id } = req.params;
-        const { page = 1, limit = 10 } = req.query;
+        let { page = 1, limit = 10 } = req.query;
 
+        // ✅ Validation
         if (!id) {
-            return res.status(400).json({ success: false, message: "Channel ID is required" });
+            return res.status(400).json({
+                success: false,
+                message: "Channel ID is required",
+            });
         }
 
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid Channel ID",
+            });
+        }
 
-        // Build aggregation pipeline
+        page = parseInt(page);
+        limit = parseInt(limit);
+
+        // ✅ Aggregation pipeline
         const pipeline = [
-            { $match: { owner: id, isPublished: true } },
+            {
+                $match: {
+                    owner: new mongoose.Types.ObjectId(id),
+                    isPublished: true,
+                },
+            },
             {
                 $lookup: {
-                    from: "users",
+                    from: "users", // collection name (must match MongoDB)
                     localField: "owner",
                     foreignField: "_id",
-                    as: "owner"
-                }
+                    as: "owner",
+                },
             },
-            { $unwind: "$owner" },
+            {
+                $unwind: "$owner",
+            },
             {
                 $project: {
                     title: 1,
@@ -140,38 +161,56 @@ export const getVideoByChannel = async (req, res) => {
                     createdAt: 1,
                     "owner._id": 1,
                     "owner.username": 1,
-                    "owner.email": 1,
-                    "owner.avatar": 1
-                }
+                    "owner.avatar": 1,
+                },
             },
-            { $sort: { createdAt: -1 } }
+            {
+                $sort: { createdAt: -1 },
+            },
         ];
 
-        // Use aggregatePaginate
+        // ✅ Pagination
         const options = {
-            page: parseInt(page, 10),
-            limit: parseInt(limit, 10)
+            page,
+            limit,
         };
 
-        const result = await Video.aggregatePaginate(Video.aggregate(pipeline), options);
+        const result = await Video.aggregatePaginate(
+            Video.aggregate(pipeline),
+            options
+        );
 
-        // Format duration helper
-        function formatDuration(seconds) {
-            const hours = Math.floor(seconds / 3600);
-            const minutes = Math.floor((seconds % 3600) / 60);
-            if (seconds < 60) return `${seconds}s`;
-            if (seconds < 3600) return `${minutes}m`;
-            return `${hours}h ${minutes}m`;
-        }
+        // ✅ Format duration
+        const formatDuration = (seconds) => {
+            if (!seconds) return "0s";
 
-        result.docs = result.docs.map((v) => ({
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = Math.floor(seconds % 60);
+
+            if (h > 0) return `${h}h ${m}m`;
+            if (m > 0) return `${m}m ${s}s`;
+            return `${s}s`;
+        };
+
+        const formattedDocs = result.docs.map((v) => ({
             ...v,
-            durationFormatted: formatDuration(v.duration || 0),
+            durationFormatted: formatDuration(v.duration),
         }));
 
-        res.status(200).json({ success: true, data: result });
+        return res.status(200).json({
+            success: true,
+            data: {
+                ...result,
+                docs: formattedDocs,
+            },
+        });
     } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+        console.error("Get videos by channel error:", error);
+        return res.status(500).json({
+            success: false,
+            message: error.message || "Internal Server Error",
+        });
     }
 };
 // Update video
