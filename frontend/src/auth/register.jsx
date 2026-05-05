@@ -71,8 +71,8 @@ const Register = () => {
 
             <div className='w-full h-[100vh] flex relative items-center justify-center'>
                 <img className='z-0 inset-0 absolute w-full h-screen object-cover' src={orange} />
-                <form className='flex flex-col gap-8 mb-6 w-[390px]' onSubmit={HandleSubmit}>
-                    <div className={`${next ? "hidden" : "flex flex-col gap-8 mb-6 *:w-[280px]"} border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 hover:border-green-500 z-30 shadow-lg rounded-lg py-9 *:w-[280px] h-full items-center justify-center transition-transform duration-500 ease-in-out 
+                <form className='flex flex-col gap-8 mb-6 w-[300px] md:w-[390px]' onSubmit={HandleSubmit}>
+                    <div className={`${next ? "hidden" : "flex flex-col gap-8 mb-6 "} border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 hover:border-green-500 z-30 shadow-lg rounded-lg py-9 *:w-[240px]  md:*:w-[280px] h-full items-center justify-center transition-transform duration-500 ease-in-out 
               ${next ? "-translate-x-full opacity-0" : "translate-x-0 opacity-100"}w-full `}>
                         <h1 className='text-2xl font-[700] text-center text-neutral-800 mb-2'>Register</h1>
                         <input className='input' type='text' value={fullName} placeholder='Full Name'
