@@ -85,7 +85,7 @@ const Register = () => {
                             onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <button
-                        className={`${next ? "hidden" : "block"} ${subnext ? "bg-blue-500/90 hover:bg-blue-700 z-40 text-white font-semibold rounded px-4 py-2" : "bg-gray-400 text-gray-700 rounded disabled px-4 py-2"} transition-colors duration-300 ease-in-out z-40`}
+                        className={`${next ? "hidden" : "block"} ${subnext ? "bg-blue-500/90 hover:bg-blue-700 z-40 text-white font-semibold rounded px-4 py-2" : "bg-gray-400 text-gray-700 rounded px-4 py-2"} transition-colors duration-300 ease-in-out z-40`}
                         onClick={HandlingNext}
                     >
                         Next
