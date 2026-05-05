@@ -18,6 +18,7 @@ routerVideo.post("/createvideo", verifyJWT,
     createVideo);
 routerVideo.get("/getvideos", getVideos);
 routerVideo.get("/getvideo/:id", getVideoById);
+routerVideo.get("/")
 routerVideo.put("/updatevideo/:id", verifyJWT, updateVideo);
 routerVideo.delete("/deletevideo/:id", verifyJWT, deleteVideo);
 
