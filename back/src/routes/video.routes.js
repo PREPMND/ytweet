@@ -23,5 +23,9 @@ routerVideo.get("/getvideo/:id", getVideoById);
 routerVideo.get("/getvideosbychannel/:id", getVideoByChannel);
 routerVideo.put("/updatevideo/:id", verifyJWT, updateVideo);
 routerVideo.delete("/deletevideo/:id", verifyJWT, deleteVideo);
-
+console.log(
+  routerVideo.stack
+    .filter(r => r.route)
+    .map(r => r.route.path)
+);
 export default routerVideo;
