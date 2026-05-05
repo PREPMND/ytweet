@@ -37,8 +37,11 @@ export const createVideo = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+
 export const getVideos = async (req, res) => {
     try {
+        const { page = 1 } = req.query;
+
         const aggregate = Video.aggregate([
             { $match: { isPublished: true } },
             {
@@ -65,20 +68,29 @@ export const getVideos = async (req, res) => {
             }
         ]);
 
-        const videos = await aggregate;
+        const videos = await Video.aggregate(aggregate);
 
         function formatDuration(seconds) {
             const hours = Math.floor(seconds / 3600);
             const minutes = Math.floor((seconds % 3600) / 60);
-            if (seconds < 60) return `${seconds}s`;
-            if (seconds < 3600) return `${minutes}m`;
+            if (seconds < 60) {
+                return `${seconds}s`;
+            }
+            if (seconds < 3600) {
+                return `${minutes}m`;
+            }
             return `${hours}h ${minutes}m`;
         }
 
+        videos.docs = videos.docs.map((v) => ({
+            ...v,
+            durationFormatted: formatDuration(v.duration || 0),
+        }));
         const formatted = videos.map((v) => ({
             ...v,
             durationFormatted: formatDuration(v.duration || 0),
         }));
+
 
         res.status(200).json({ success: true, data: formatted });
     } catch (error) {
