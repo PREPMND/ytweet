@@ -68,7 +68,6 @@ export const getVideos = async (req, res) => {
             }
         ]);
 
-        const options = { page , limit:20};
         const videos = await Video.aggregate(aggregate);
 
         function formatDuration(seconds) {
