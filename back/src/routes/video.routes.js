@@ -16,6 +16,7 @@ routerVideo.post("/createvideo", verifyJWT,
         }
     ]),
     createVideo);
+console.log("THIS VIDEO ROUTE FILE IS LOADED");
 routerVideo.get("/getvideos", getVideos);
 routerVideo.get("/getvideo/:id", getVideoById);
 // use :id as a path param
