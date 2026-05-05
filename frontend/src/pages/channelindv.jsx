@@ -13,9 +13,7 @@ const ChannelIndv = () => {
     });
     const handleSubscribe = async () => {
         if (isSubscribing) return;
-
         setIsSubscribing(true);
-
         try {
             const res = await fetch(
                 `${import.meta.env.VITE_BACKEND}/api/v1/users/subscriptions/${channel._id}`,
