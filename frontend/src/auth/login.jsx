@@ -71,15 +71,15 @@ const Login = () => {
         <div className='border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg w-[300px] h-[350px] md:w-[400px] md:h-[400px]'>
             
             <div className='flex items-center justify-center flex-col'>
-                <h1 className='text-2xl font-[700] mt-5 text-neutral-800 mb-4'>Login</h1>
+                <h1 className='text-2xl font-[700] mt-3 md:mt-5 text-neutral-800 mb-4'>Login</h1>
                 <h3
-                className='cursor-pointer mt-6 text-green-500 hover:underline'
+                className='cursor-pointer mt-4 md:mt-6 text-green-500 hover:underline'
                 onClick={()=>{
                     if(way=="email"){setWay('username')}
                     else{setWay('email')}
                 }}
                 >Use {way=="email"?"username":"email"} To Login</h3>
-                <div className='mt-12'>
+                <div className='mt-7 md:mt-12'>
                     <form 
                     className='h-full *:text-lg w-full flex flex-col items-center justify-center gap-4'
                     onSubmit={HandleSubmit}>
