@@ -36,54 +36,62 @@ export const createVideo = async (req, res) => {
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
-};
+}; 
 export const getVideos = async (req, res) => {
-  try {
-    const aggregate = Video.aggregate([
-      { $match: { isPublished: true } },
-      {
-        $lookup: {
-          from: "users",
-          localField: "owner",
-          foreignField: "_id",
-          as: "owner"
-        }
-      },
-      { $unwind: "$owner" },
-      {
-        $project: {
-          title: 1,
-          description: 1,
-          videoFile: 1,
-          thumbnail: 1,
-          duration: 1,
-          "owner._id": 1,
-          "owner.username": 1,
-          "owner.email": 1,
-          "owner.avatar": 1
-        }
-      }
-    ]);
+    try {
+        const { page = 1, limit = 20 } = req.query;
 
-    const videos = await aggregate;
+        const aggregate = Video.aggregate([
+            { $match: { isPublished: true } },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "owner",
+                    foreignField: "_id",
+                    as: "owner"
+                }
+            },
+            { $unwind: "$owner" },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    videoFile: 1,
+                    thumbnail: 1,
+                    duration: 1,
+                    "owner._id": 1,
+                    "owner.username": 1,
+                    "owner.email": 1,
+                    "owner.avatar": 1
+                }
+            }
+        ]);
 
-    function formatDuration(seconds) {
-      const hours = Math.floor(seconds / 3600);
-      const minutes = Math.floor((seconds % 3600) / 60);
-      if (seconds < 60) return `${seconds}s`;
-      if (seconds < 3600) return `${minutes}m`;
-      return `${hours}h ${minutes}m`;
+        // Use aggregatePaginate for proper pagination
+        const options = {
+            page: parseInt(page, 10),
+            limit: parseInt(limit, 10)
+        };
+
+        const videos = await Video.aggregatePaginate(aggregate, options);
+
+        function formatDuration(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            if (seconds < 60) return `${seconds}s`;
+            if (seconds < 3600) return `${minutes}m`;
+            return `${hours}h ${minutes}m`;
+        }
+
+        videos.docs = videos.docs.map((v) => ({
+            ...v,
+            durationFormatted: formatDuration(v.duration || 0),
+        }));
+
+        res.status(200).json({ success: true, data: videos });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
     }
-
-    const formatted = videos.map((v) => ({
-      ...v,
-      durationFormatted: formatDuration(v.duration || 0),
-    }));
-
-    res.status(200).json({ success: true, data: formatted });
-  } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
-  }
 };
 // Get single video by ID
 export const getVideoById = async (req, res) => {
