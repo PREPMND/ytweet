@@ -85,8 +85,7 @@ const Login = () => {
                     onSubmit={HandleSubmit}>
                         <input 
                         className={`${way=="email"?"flex":"hidden"} border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 placeholder:text-neutral-700 focus:ring-blue-500 focus:border-transparent
-                        
-                        w-[150px] md:w-[250px]`}
+                        w-[250px]`}
                         type='text' 
                         placeholder='Email' value={email} 
                         name='email' onChange={(e)=>{setEmail(e.target.value)}}/>
