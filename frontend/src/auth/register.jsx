@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom"
 import { Home, Loader, LoaderPinwheel } from "lucide-react"
 import orange from '../assets/orange.jpg'
 const Register = () => {
-    const blockedUsername = ["ytweet","modih",""," ", "admin", "administrator", "root", "sysadmin", "support", "helpdesk", "contact", "info", "sales", "marketing", "webmaster", "postmaster", "hostmaster", "abuse", "security", "noreply", "no-reply"];
+    const blockedUsername = ["ytweet", "modih", "", " ", "admin", "administrator", "root", "sysadmin", "support", "helpdesk", "contact", "info", "sales", "marketing", "webmaster", "postmaster", "hostmaster", "abuse", "security", "noreply", "no-reply"];
     const [next, setNext] = useState(false);
     const [subnext, setSubnext] = useState(false);
-    const [button2 ,setButton2] = useState(false);
+    const [button2, setButton2] = useState(false);
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
@@ -58,9 +58,18 @@ const Register = () => {
         e.preventDefault();
         setButton2(true)
         //const confirmed = window.confirm("You confirm these details?");
-        if () {
+        if (
+            email.trim() !== "" &&
+            username.trim() !== "" &&
+            password.trim() !== "" &&
+            fullName.trim() !== "" &&
+            subnext
+        ) {
             setNext(true);
+        } else {
+            alert("Please fill all fields correctly before continuing.");
         }
+
     }
     function HandlingBack(e) {
         e.preventDefault();
@@ -94,22 +103,22 @@ const Register = () => {
 
                         <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[500px] select-none bg-white/90 backdrop-blur-md'>
                             <div >
-                            <div>Choose Avatar</div>
-                            <input className='files' type='file' accept='image/*' placeholder='Avatar'
-                                onChange={(e) => setAvatar(e.target.files[0])} />
+                                <div>Choose Avatar</div>
+                                <input className='files' type='file' accept='image/*' placeholder='Avatar'
+                                    onChange={(e) => setAvatar(e.target.files[0])} />
                             </div>
                             <div className='border-[1px] shadow-lg rounded-[50%] w-[80px] h-[80px] overflow-hidden'>
-                                 <img className='w-full h-full object-cover' src={avatar ? URL.createObjectURL(avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
+                                <img className='w-full h-full object-cover' src={avatar ? URL.createObjectURL(avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
                             </div>
                         </div>
                         <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[500px] select-none bg-white/90 backdrop-blur-md'>
                             <div >
-                            <div>Choose Cover Image</div>
-                            <input className='files' type='file' accept='image/*' placeholder='Cover Image'
-                                onChange={(e) => setCoverImage(e.target.files[0])} />
+                                <div>Choose Cover Image</div>
+                                <input className='files' type='file' accept='image/*' placeholder='Cover Image'
+                                    onChange={(e) => setCoverImage(e.target.files[0])} />
                             </div>
                             <div className='border-[1px] shadow-lg rounded-[50%] w-[80px] h-[80px] overflow-hidden'>
-                                 <img className='w-full h-full object-cover' src={coverImage ? URL.createObjectURL(coverImage) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
+                                <img className='w-full h-full object-cover' src={coverImage ? URL.createObjectURL(coverImage) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
                             </div>
                         </div>
                         <div className='flex justify-between gap-10 mt-4'>
