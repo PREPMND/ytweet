@@ -74,9 +74,9 @@ const VideoList = (props) => {
                 }}
                 className="video-grid"
             >
-                {videos.map((video) => (
+                {videos.map((video,idx) => (
                     <div
-                        key={video._id}
+                        key={`${video._id}-${idx}`}
                         onMouseEnter={() => {
                             timeoutRef.current = setTimeout(() => {
                                 setPlayingId(video._id);
