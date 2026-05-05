@@ -107,7 +107,11 @@ export const getVideoById = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-
+export const getVideoByChannel= aysnc(req,res)=>{
+    try{
+        
+    }
+}
 // Update video
 export const updateVideo = async (req, res) => {
     try {
