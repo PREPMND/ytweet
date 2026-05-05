@@ -46,13 +46,13 @@ export const getVideos = async (req, res) => {
             { $match: { isPublished: true } },
             {
                 $lookup: {
-                    from: "users",               
-                    localField: "owner",        
-                    foreignField: "_id",         
+                    from: "users",
+                    localField: "owner",
+                    foreignField: "_id",
                     as: "owner"
                 }
             },
-            { $unwind: "$owner" },          
+            { $unwind: "$owner" },
             {
                 $project: {
                     title: 1,
@@ -73,10 +73,10 @@ export const getVideos = async (req, res) => {
         function formatDuration(seconds) {
             const hours = Math.floor(seconds / 3600);
             const minutes = Math.floor((seconds % 3600) / 60);
-            if(seconds<60){
+            if (seconds < 60) {
                 return `${seconds}s`;
             }
-            if(seconds<3600){
+            if (seconds < 3600) {
                 return `${minutes}m`;
             }
             return `${hours}h ${minutes}m`;
@@ -86,8 +86,13 @@ export const getVideos = async (req, res) => {
             ...v,
             durationFormatted: formatDuration(v.duration || 0),
         }));
+        const formatted = videos.map((v) => ({
+            ...v,
+            durationFormatted: formatDuration(v.duration || 0),
+        }));
 
-        res.status(200).json({ success: true, data: videos });
+
+        res.status(200).json({ success: true, data: formatted });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
