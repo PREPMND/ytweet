@@ -19,7 +19,7 @@ routerVideo.post("/createvideo", verifyJWT,
 routerVideo.get("/getvideos", getVideos);
 routerVideo.get("/getvideo/:id", getVideoById);
 // use :id as a path param
-routerVideo.get("/getvideosbychannel/:id", verifyJWT, getVideoByChannel);
+routerVideo.get("/getvideosbychannel/:id", getVideoByChannel);
 routerVideo.put("/updatevideo/:id", verifyJWT, updateVideo);
 routerVideo.delete("/deletevideo/:id", verifyJWT, deleteVideo);
 
