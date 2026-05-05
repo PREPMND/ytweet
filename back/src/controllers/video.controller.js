@@ -109,7 +109,7 @@ export const getVideoById = async (req, res) => {
 };
 export const getVideoByChannel= aysnc(req,res)=>{
     try{
-        
+        const owner=req.body;
     }
 }
 // Update video
