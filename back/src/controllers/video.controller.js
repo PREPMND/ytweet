@@ -119,7 +119,7 @@ export const getVideoByChannel = async (req, res) => {
 
         // Build aggregation pipeline
         const pipeline = [
-            { $match: { owner: channelId, isPublished: true } },
+            { $match: { owner: id, isPublished: true } },
             {
                 $lookup: {
                     from: "users",
