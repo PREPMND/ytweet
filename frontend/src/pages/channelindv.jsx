@@ -62,7 +62,7 @@ const ChannelIndv = () => {
             const result = await res.json();
 
             if (result.success) {
-                setChannel(result);
+                setChannel(result.data);
                 console.log(channel)
             }
             if (!res.ok) {
