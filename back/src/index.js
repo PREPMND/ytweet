@@ -7,7 +7,7 @@ import { MongoConnection } from "./db/index.js";
 import { application } from "./app.js";
 console.log(process.env.REFRESH_TOKEN_SECURITY)
 MongoConnection();
-app.use((req, res, next) => {
+application.use((req, res, next) => {
     console.log("Incoming:", req.method, req.url);
     next();
 });
