@@ -10,12 +10,12 @@ const ChannelIndv = () => {
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [isLoadingVideos, setIsLoadingVideos] = useState(false);
+    const [isSubscribing, setIsSubscribing] = useState(false);
 
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
-
     const currentUserId = data?.user?._id;
 
     const fetchChannel = async () => {
@@ -50,6 +50,28 @@ const ChannelIndv = () => {
             console.error(err);
         } finally {
             setIsLoadingVideos(false);
+        }
+    };
+
+    const handleSubscribe = async () => {
+        if (isSubscribing) return;
+        setIsSubscribing(true);
+        try {
+            const res = await fetch(
+                `${import.meta.env.VITE_BACKEND}/api/v1/users/subscriptions/${channel._id}`,
+                { method: "POST", credentials: "include" }
+            );
+            const result = await res.json();
+            const subscribed = result.data?.subscribed;
+            setChannel((prev) => ({
+                ...prev,
+                isSubscribed: subscribed,
+                subscriberCount: prev.subscriberCount + (subscribed ? 1 : -1),
+            }));
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setIsSubscribing(false);
         }
     };
 
@@ -92,6 +114,27 @@ const ChannelIndv = () => {
                             {channel.subscriberCount} subscribers
                         </p>
                     </div>
+
+                    {/* Subscribe button restored */}
+                    <div className="ml-auto">
+                        {channel.isSubscribed ? (
+                            <button
+                                onClick={handleSubscribe}
+                                disabled={isSubscribing}
+                                className="bg-zinc-700 px-5 py-2 rounded-full"
+                            >
+                                Subscribed
+                            </button>
+                        ) : (
+                            <button
+                                onClick={handleSubscribe}
+                                disabled={isSubscribing}
+                                className="bg-red-600 px-5 py-2 rounded-full hover:bg-rose-600 hover:scale-105 transition-transform duration-300 ease-in-out"
+                            >
+                                Subscribe
+                            </button>
+                        )}
+                    </div>
                 </div>
 
                 {/* Tabs */}
@@ -114,7 +157,9 @@ const ChannelIndv = () => {
                             />
                             <div className="p-4">
                                 <h3 className="text-lg font-semibold">{video.title}</h3>
-                                <p className="text-sm text-zinc-400">{video.durationFormatted}</p>
+                                <p className="text-sm text-zinc-400">
+                                    {video.durationFormatted}
+                                </p>
                                 <p className="text-sm text-zinc-500">{video.views} views</p>
                             </div>
                         </div>
