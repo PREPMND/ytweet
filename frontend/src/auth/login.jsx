@@ -79,7 +79,7 @@ const Login = () => {
                     else{setWay('email')}
                 }}
                 >Use {way=="email"?"username":"email"} To Login</h3>
-                <div className='mt-7 md:mt-12'>
+                <div className='mt-8 md:mt-12'>
                     <form 
                     className='h-full *:text-lg w-full flex flex-col items-center justify-center gap-4'
                     onSubmit={HandleSubmit}>
