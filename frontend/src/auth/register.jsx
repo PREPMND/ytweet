@@ -104,7 +104,7 @@ const Register = () => {
                         <div className='flex gap-9 border-[1px] shadow-md rounded-lg p-4 items-center justify-center w-[350px] md:w-[500px] select-none bg-white/90 backdrop-blur-md'>
                             <div >
                                 <div>Choose Avatar</div>
-                                <input className='files w-[250px]' type='file' accept='image/*' placeholder='Avatar'
+                                <input className='files' type='file' accept='image/*' placeholder='Avatar'
                                     onChange={(e) => setAvatar(e.target.files[0])} />
                             </div>
                             <div className='border-[1px] shadow-lg rounded-[50%] md:w-[80px] md:h-[80px] w-[40px] h-[40px] overflow-hidden'>
