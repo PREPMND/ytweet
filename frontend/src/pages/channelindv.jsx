@@ -84,7 +84,7 @@ const ChannelIndv = () => {
         setIsLoadingVideos(true);
         try {
             const res = await fetch(
-                `${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideobychannel`,
+                `${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideosbychannel`,
                 { credentials: "include" }
             );
             const result = await res.json();
