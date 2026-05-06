@@ -51,7 +51,6 @@ const ChannelIndv = () => {
             setIsSubscribing(false);
         }
     };
-    const currentUserId = data?.user?._id;
 
     const fetchChannel = async () => {
         try {
@@ -78,7 +77,13 @@ const ChannelIndv = () => {
         console.log(res);
     }
 
-   
+    useEffect(() => {
+        if (username) fetchChannel();
+    }, [username]);
+
+    
+    
+
     if (!channel) {
         return <div className="text-white p-10">Loading...</div>;
     }
