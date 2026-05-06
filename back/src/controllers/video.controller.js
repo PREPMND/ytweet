@@ -111,34 +111,12 @@ export const getVideoById = async (req, res) => {
 export const getVideoByChannel = async (req, res) => {
     try {
 
-        const result = await Video.aggregatePaginate(
-            Video.aggregate(pipeline),
-            options
-        );
-
-        // ✅ Format duration
-        const formatDuration = (seconds) => {
-            if (!seconds) return "0s";
-
-            const h = Math.floor(seconds / 3600);
-            const m = Math.floor((seconds % 3600) / 60);
-            const s = Math.floor(seconds % 60);
-
-            if (h > 0) return `${h}h ${m}m`;
-            if (m > 0) return `${m}m ${s}s`;
-            return `${s}s`;
-        };
-
-        const formattedDocs = result.docs.map((v) => ({
-            ...v,
-            durationFormatted: formatDuration(v.duration),
-        }));
+        const result="result"
 
         return res.status(200).json({
             success: true,
             data: {
-                ...result,
-                docs: formattedDocs,
+                result
             },
         });
     } catch (error) {
