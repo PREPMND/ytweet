@@ -114,7 +114,7 @@ export const getVideoById = async (req, res) => {
 };
 export const getVideoByChannel = async (req, res) => {
     try {
-
+        const id=req.params()
         const result="result"
 
         return res.status(200).json({
