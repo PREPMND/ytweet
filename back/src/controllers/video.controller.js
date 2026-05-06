@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Video } from "../models/video.models.js"; // adjust path if needed
 import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if needed
 import { apiError } from "../utils/apiError.js"; // adjust path if needed
@@ -106,8 +107,7 @@ export const getVideoById = async (req, res) => {
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
     }
-}; import mongoose from "mongoose";
-
+};
 export const getVideoByChannel = async (req, res) => {
     try {
         const { id } = req.params;
