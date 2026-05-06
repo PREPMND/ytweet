@@ -79,7 +79,6 @@ const ChannelIndv = () => {
     }
 
     const fetchVideos = async (pageNum = 1) => {
-        if (!channel?._id || isLoadingVideos) return;
 
         setIsLoadingVideos(true);
 
