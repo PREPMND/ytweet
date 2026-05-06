@@ -17,6 +17,7 @@ routerVideo.post("/createvideo", verifyJWT,
     ]),
     createVideo);
 console.log("THIS VIDEO ROUTE FILE IS LOADED");
+routerVideo.get("/any",)
 routerVideo.get("/getvideosbychannel", getVideoByChannel);
 routerVideo.get("/getvideos", getVideos);
 routerVideo.get("/getvideo/:id", getVideoById);
