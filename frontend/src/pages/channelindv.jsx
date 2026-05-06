@@ -77,6 +77,7 @@ const ChannelIndv = () => {
         const res=await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideosbychannel`)
         console.log(res);
     }
+    
     const fetchVideos = async (pageNum = 1) => {
         if (!channel?._id || isLoadingVideos) return;
 
