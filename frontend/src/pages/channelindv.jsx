@@ -73,11 +73,9 @@ const ChannelIndv = () => {
             console.error(err);
         }
     };
-
-    useEffect(() => {
-        if (username) fetchChannel();
-    }, [username]);
-
+    const smth =async ()=>{
+        
+    }
     const fetchVideos = async (pageNum = 1) => {
         if (!channel?._id || isLoadingVideos) return;
 
@@ -111,6 +109,12 @@ const ChannelIndv = () => {
             setIsLoadingVideos(false);
         }
     };
+
+    useEffect(() => {
+        if (username) fetchChannel();
+    }, [username]);
+
+    
     useEffect(() => {
         if (channel?._id) {
             setVideos([]);
