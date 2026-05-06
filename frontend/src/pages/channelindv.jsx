@@ -88,7 +88,7 @@ const ChannelIndv = () => {
                 `${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideosbychannel`,
                 { credentials: "include" }
             );
-
+          
             const result = await res.json();
 
             if (result.success) {
