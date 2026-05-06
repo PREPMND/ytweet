@@ -73,7 +73,7 @@ const ChannelIndv = () => {
             console.error(err);
         }
     };
-    const smth =async ()=>{
+    const smth = ()=>{
         const res=fetch(`${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideosbychannel`)
         console.log(res);
     }
