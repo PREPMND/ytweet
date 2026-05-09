@@ -112,25 +112,6 @@ export const getVideoById = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
-export const getVideoByChannel = async (req, res) => {
-    try {
-        const id=req.params()
-        const result="result"
-
-        return res.status(200).json({
-            success: true,
-            data: {
-                result
-            },
-        });
-    } catch (error) {
-        console.error("Get videos by channel error:", error);
-        return res.status(500).json({
-            success: false,
-            message: error.message || "Internal Server Error",
-        });
-    }
-};
 // Update video
 export const updateVideo = async (req, res) => {
     try {
