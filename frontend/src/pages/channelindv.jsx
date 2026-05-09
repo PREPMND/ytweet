@@ -15,6 +15,7 @@ const ChannelIndv = () => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
+    console.log("CURRENT USER DATA:", data);
     const handleSubscribe = async () => {
         if (isSubscribing) return;
         setIsSubscribing(true);
