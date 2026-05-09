@@ -69,7 +69,6 @@ const ChannelIndv = () => {
             <div className="max-w-5xl mx-auto px-4 mt-16">
                 <div className="flex items-center gap-6">
                     <img
-                        onClick={smth}
                         src={channel.avatar}
                         alt=""
                         className="w-28 hover:ring-1 hover:ring-yellow-200 hover:scale-105 transition-transform duration-300 ease-in-out h-28 rounded-full border-4 border-zinc-900 object-cover"
