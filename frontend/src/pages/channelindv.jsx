@@ -4,13 +4,6 @@ import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
 
 const ChannelIndv = () => {
-    const { username } = useParams();
-    const [channel, setChannel] = useState(null);
-    const [isSubscribing, setIsSubscribing] = useState(false);
-    const [videos, setVideos] = useState([]);
-    const [page, setPage] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
-    const [isLoadingVideos, setIsLoadingVideos] = useState(false);
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
@@ -56,6 +49,7 @@ const ChannelIndv = () => {
 
 
     return (
+        <div>ieifhwe</div>
     )
             
 };
