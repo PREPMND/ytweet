@@ -69,7 +69,6 @@ const ChannelIndv = () => {
             <div className="max-w-5xl mx-auto px-4 mt-16">
                 <div className="flex items-center gap-6">
                     <img
-                        src={channel.avatar}
                         alt=""
                         className="w-28 hover:ring-1 hover:ring-yellow-200 hover:scale-105 transition-transform duration-300 ease-in-out h-28 rounded-full border-4 border-zinc-900 object-cover"
                     />
@@ -104,31 +103,6 @@ const ChannelIndv = () => {
                     <button className="pb-2 text-zinc-400">About</button>
                 </div>
 
-                {/* Placeholder for videos */}
-                <div className="mt-6">
-                    <p className="text-zinc-400">Videos will go here...</p>
-                </div>
-                <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    {videos.map((video) => (
-                        <div
-                            key={video._id}
-                            className="bg-zinc-800 rounded-lg overflow-hidden shadow hover:scale-105 transition-transform"
-                        >
-                            <img
-                                src={video.thumbnail}
-                                alt={video.title}
-                                className="w-full h-40 object-cover"
-                            />
-                            <div className="p-4">
-                                <h3 className="text-lg font-semibold">{video.title}</h3>
-                                <p className="text-sm text-zinc-400">
-                                    {video.durationFormatted}
-                                </p>
-                                <p className="text-sm text-zinc-500">{video.views} views</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
 
             </div>
         </div>
