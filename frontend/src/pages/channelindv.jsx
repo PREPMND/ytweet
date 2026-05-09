@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
+import { set } from "mongoose";
 
 const ChannelIndv = () => {
     const { username } = useParams();
@@ -16,6 +17,7 @@ const ChannelIndv = () => {
         queryFn: getCurrentUser,
     });
     console.log("CURRENT USER DATA:", data);
+    setChannel(data.user);
     const handleSubscribe = async () => {
         if (isSubscribing) return;
         setIsSubscribing(true);
