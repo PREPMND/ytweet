@@ -52,35 +52,6 @@ const ChannelIndv = () => {
         }
     };
 
-    const fetchChannel = async () => {
-        try {
-            const res = await fetch(
-                `${import.meta.env.VITE_BACKEND}/api/v1/users/c/${username}`,
-                { credentials: "include" }
-            );
-            const result = await res.json();
-
-            if (result.success) {
-                setChannel(result.data);
-                console.log(channel)
-            }
-            if (!res.ok) {
-                console.error("Bad request", res.status);
-                return;
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    };
-    const smth =async ()=>{
-        const res=await fetch(`${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideosbychannel`)
-        console.log(res);
-    }
-
-    useEffect(() => {
-        if (username) fetchChannel();
-    }, [username]);
-
     
     
 
