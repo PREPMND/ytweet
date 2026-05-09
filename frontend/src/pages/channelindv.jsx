@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
-import { set } from "mongoose";
 
 const ChannelIndv = () => {
     const { username } = useParams();
