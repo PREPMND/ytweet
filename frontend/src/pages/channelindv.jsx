@@ -5,7 +5,7 @@ import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
 
 const ChannelIndv = () => {
-    const {setProfileSelected} = props
+    const {profileSelected} = props;
     const [videos, setVideos] = useState([]);
     const { data } = useQuery({
         queryKey: ["currentUser"],
