@@ -41,7 +41,7 @@ const ChannelIndv = () => {
                         key={video._id || index}>
                         
                         <div className="w-[80%] flex ">
-                            <img className="h-[200px] object-cover aspect-video w-[40%]" src={video.thumbnail} alt={video.title} />
+                            <img className=" object-cover aspect-[16/9] w-[40%]" src={video.thumbnail} alt={video.title} />
                             <h3 className="">{video.title}</h3>
                         </div>
                         <h1 className="ml-14">Options</h1>
