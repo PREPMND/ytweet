@@ -11,7 +11,7 @@ const ChannelIndv = () => {
         queryFn: getCurrentUser,
     });
     console.log("CURRENT USER DATA:", data);
-    const channelVideo = (ownerId) => {
+    const channelVideo =async (ownerId) => {
         const videoArray =await api.get("/videos/any", { owner: data.user._id });
         setVideos(videoArray);
     }
