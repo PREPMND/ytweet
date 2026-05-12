@@ -4,7 +4,7 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if n
 import { apiError } from "../utils/apiError.js"; // adjust path if needed
 import { User } from "../models/user.models.js"; // adjust path if needed
 import { asyncHandler } from "../utils/asyncHandler.js";
-export default const any=asyncHandler(async (req,res)=>{
+export const any=asyncHandler(async (req,res)=>{
     const {owner}= req.body;
     const pipelines=await Video.aggregate(
         [
@@ -15,7 +15,7 @@ export default const any=asyncHandler(async (req,res)=>{
             },
         ]
     )
-    return pipelines[0];
+    return pipelines;
 })
 export const createVideo = async (req, res) => {
     try {
