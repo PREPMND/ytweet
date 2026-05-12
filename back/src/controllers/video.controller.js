@@ -4,7 +4,7 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if n
 import { apiError } from "../utils/apiError.js"; // adjust path if needed
 import { User } from "../models/user.models.js"; // adjust path if needed
 export const any= (req,res)=>{
-    const result="smth";
+    const pipeline= Video.aggregate()
     return result;
 }
 export const createVideo = async (req, res) => {
