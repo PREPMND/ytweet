@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
 
-const ChannelIndv = () => {
+const ChannelIndv = (props) => {
     const {profileSelected} = props;
     const [videos, setVideos] = useState([]);
     const { data } = useQuery({
@@ -14,7 +14,7 @@ const ChannelIndv = () => {
     console.log("CURRENT USER DATA:", data.user._id);
     const channelVideo = async (ownerId) => {
         try {
-            const res = await api.post("/videos/any", { owner: ownerId });
+            const res = await api.post("/videos/any", { owner: profileSelected });
             setVideos(res.data.data); // match backend response structure
             console.log("Videos for channel:", res.data.data);
         } catch (err) {
