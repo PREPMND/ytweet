@@ -125,7 +125,7 @@ const VideoList = (props) => {
                                 alt="Avatar"
                             />
                             <div
-                                onClick={() => { Handle(video.owner.username) }}
+                                onClick={() => { Handle(video.owner._id) }}
                                 className="px-[11px]">
                                 <h3
                                     className={`mt-1 text-md leading-[1.4] px-[6px] font-medium capitalize overflow-hidden whitespace-break-spaces ${darkMode ? "text-white" : "text-black"
@@ -136,7 +136,7 @@ const VideoList = (props) => {
                                 <p
 
                                     className={`text-sm hover:underline px-[6px] ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                    {video.owner.username}
+                                    {video.owner._id}
                                 </p>
                             </div>
                             <span
