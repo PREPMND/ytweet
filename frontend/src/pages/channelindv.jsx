@@ -14,7 +14,7 @@ const ChannelIndv = (props) => {
     console.log("CURRENT USER DATA:", data.user._id);
     const channelVideo = async (ownerId) => {
         try {
-            const res = await api.post("/videos/any", { owner: profileSelected });
+            const res = await api.post("/videos/any", { owner: ownerId });
             setVideos(res.data.data); // match backend response structure
             console.log("Videos for channel:", res.data.data);
         } catch (err) {
@@ -24,7 +24,7 @@ const ChannelIndv = (props) => {
 
     useEffect(() => {
         channelVideo(profileSelected);
-    }, [data, profileSelected]); // dependency should be user id, not videos
+    }, [data]); // dependency should be user id, not videos
 
 
     return (
