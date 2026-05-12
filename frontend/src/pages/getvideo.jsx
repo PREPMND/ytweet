@@ -136,7 +136,7 @@ const VideoList = (props) => {
                                 <p
 
                                     className={`text-sm hover:underline px-[6px] ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                    {video.owner}
+                                    {video.owner.username}
                                 </p>
                             </div>
                             <span
