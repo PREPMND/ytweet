@@ -40,7 +40,7 @@ const ChannelIndv = () => {
                     className="flex justify-between flex-row-reverse"
                     key={video._id || index}>
 
-                        <h3 className="">{video.title}</h3>
+                        <h3 className="mr-9">{video.title}</h3>
                         <img className="h-[200px] object-cover aspect-video w-[40%]" src={video.thumbnail} alt={video.title} />
                     </div>
                 ))}
