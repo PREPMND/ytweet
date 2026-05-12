@@ -5,7 +5,7 @@ import { apiError } from "../utils/apiError.js"; // adjust path if needed
 import { User } from "../models/user.models.js"; // adjust path if needed
 export const any= (req,res)=>{
     const owner= req.body;
-    const pipeline=await Video.aggregate(
+    const pipelines=await Video.aggregate(
         [
             {
                 $match:{
@@ -14,7 +14,7 @@ export const any= (req,res)=>{
             },
         ]
     )
-    return pipeline;
+    return pipelines;
 }
 export const createVideo = async (req, res) => {
     try {
