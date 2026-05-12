@@ -36,12 +36,16 @@ const ChannelIndv = () => {
             </div>
             <div>
                 {videos.map((video, index) => (
-                    <div 
-                    className="flex justify-between flex-row-reverse"
-                    key={video._id || index}>
+                    <div
+                        className="flex justify-between"
+                        key={video._id || index}>
+                        
+                        <div className="w-[80%] flex ">
+                            <img className="h-[200px] object-cover aspect-video w-[40%]" src={video.thumbnail} alt={video.title} />
+                            <h3 className="">{video.title}</h3>
+                        </div>
                         <h1 className="ml-14">Options</h1>
-                        <h3 className="">{video.title}</h3>
-                        <img className="h-[200px] object-cover aspect-video w-[40%]" src={video.thumbnail} alt={video.title} />
+
                     </div>
                 ))}
             </div>
