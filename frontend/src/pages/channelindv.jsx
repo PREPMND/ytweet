@@ -11,20 +11,24 @@ const ChannelIndv = () => {
         queryFn: getCurrentUser,
     });
     console.log("CURRENT USER DATA:", data.user._id);
-    const channelVideo =async (ownerId) => {
-        const videoArray =await api.get("/videos/any", { owner:'69de0a165d8808539acb4ef3'});
-        setVideos(videoArray);
-    }
+    const channelVideo = async (ownerId) => {
+        try {
+            const res = await api.post("/videos/any", { owner: ownerId });
+            setVideos(res.data.data); // match backend response structure
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     useEffect(() => {
-            channelVideo(data.user._id);
-    }, [videos]);
-    console.log("Channel Videos:", videos); 
+        channelVideo(data.user._id);
+    }, [data.user._id]); // dependency should be user id, not videos
 
 
     return (
         <div>ieifhwe</div>
     )
-            
+
 };
 
 export default ChannelIndv;
