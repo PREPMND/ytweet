@@ -37,7 +37,7 @@ const ChannelIndv = () => {
             <div>
                 {videos.map((video, index) => (
                     <div
-                        className="flex justify-between"
+                        className="flex justify-between mb-4"
                         key={video._id || index}>
                         
                         <div className="w-[80%] flex gap-5 ">
