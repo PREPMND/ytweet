@@ -15,7 +15,7 @@ export const any=asyncHandler(async (req,res)=>{
             },
         ]
     )
-    return pipelines;
+    return pipelines[0];
 })
 export const createVideo = async (req, res) => {
     try {

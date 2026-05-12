@@ -12,7 +12,7 @@ const ChannelIndv = () => {
     });
     console.log("CURRENT USER DATA:", data.user._id);
     const channelVideo =async (ownerId) => {
-        const videoArray =await api.get("/videos/any", { owner: data.user._id });
+        const videoArray =await api.get("/videos/any", { owner: owner:'69de0a165d8808539acb4ef3'});
         setVideos(videoArray);
     }
     useEffect(() => {
