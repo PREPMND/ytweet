@@ -3,7 +3,8 @@ import { Video } from "../models/video.models.js"; // adjust path if needed
 import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if needed
 import { apiError } from "../utils/apiError.js"; // adjust path if needed
 import { User } from "../models/user.models.js"; // adjust path if needed
-export const any=async (req,res)=>{
+import { asyncHandler } from "../utils/asyncHandler.js";
+export const any=asyncHandler (req,res)=>{
     const {owner}= req.body;
     const pipelines=await Video.aggregate(
         [
