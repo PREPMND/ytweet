@@ -39,7 +39,7 @@ const ChannelIndv = () => {
                     <div key={video._id || index}>
                         <h3>{video.title}</h3>
                         <p>{video.description}</p>
-                        <img src={video.thumbnail} alt={video.title} />
+                        <img className="h-[200px] object-cover aspect-video w-[40%]" src={video.thumbnail} alt={video.title} />
                     </div>
                 ))}
             </div>
