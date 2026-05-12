@@ -14,7 +14,7 @@ export const any= (req,res)=>{
             }
         ]
     )
-    return result;
+    return pipeline;
 }
 export const createVideo = async (req, res) => {
     try {
