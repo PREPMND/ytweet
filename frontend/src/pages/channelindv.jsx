@@ -27,7 +27,17 @@ const ChannelIndv = () => {
 
 
     return (
-        <div>ieifhwe</div>
+        <div>
+        <div>
+            //the channel description
+        </div>
+        <div>
+            //some other thing
+        </div>
+        <div>
+            ${vedios.map}
+        </div>
+        </div>
     )
 
 };
