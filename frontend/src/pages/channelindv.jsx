@@ -35,7 +35,9 @@ const ChannelIndv = () => {
             //some other thing
         </div>
         <div>
-            ${vedios.map}
+            {videos.map()=>{
+                
+            }}
         </div>
         </div>
     )
