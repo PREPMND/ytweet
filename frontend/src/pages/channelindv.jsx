@@ -11,9 +11,12 @@ const ChannelIndv = () => {
         queryFn: getCurrentUser,
     });
     console.log("CURRENT USER DATA:", data);
-    const videoArray =api.get("/videos/any", { owner: data._id });
+    const function channelVideo(ownerId) {
+        const videoArray =api.get("/videos/any", { owner: data._id });
+        setVideos(videoArray);
+    }
     useEffect(() => {
-            fetchVideos(page);
+            cha;
     }, [page]);
 
 
