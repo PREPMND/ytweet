@@ -12,7 +12,9 @@ const ChannelIndv = () => {
     });
     console.log("CURRENT USER DATA:", data);
     const videoArray =api.get("/videos/any", { owner: data._id });
-    
+    useEffect(() => {
+            fetchVideos(page);
+    }, [page]);
 
 
     return (
