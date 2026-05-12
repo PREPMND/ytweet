@@ -14,7 +14,7 @@ const ChannelIndv = () => {
     const channelVideo = async (ownerId) => {
         try {
             const res = await api.post("/videos/any", { owner: ownerId });
-            setVideos(res.data.data); // match backend response structure
+            setVideos(res); // match backend response structure
         } catch (err) {
             console.error(err);
         }
@@ -22,7 +22,7 @@ const ChannelIndv = () => {
 
     useEffect(() => {
         channelVideo(data.user._id);
-    }, [data.user._id]); // dependency should be user id, not videos
+    }, [data]); // dependency should be user id, not videos
 
 
     return (
