@@ -42,9 +42,9 @@ const ChannelIndv = () => {
                         
                         <div className="w-[80%] flex gap-5 ">
                             <img className=" object-cover aspect-[16/9] w-[40%]" src={video.thumbnail} alt={video.title} />
-                            <h3 className="mt-4">{video.title}</h3>
+                            <h3 className="mt-2">{video.title}</h3>
                         </div>
-                        <h1 className="ml-14">Options</h1>
+                        <h1 className="mr-7">Options</h1>
 
                     </div>
                 ))}
