@@ -13,7 +13,7 @@ const ChannelIndv = () => {
     console.log("CURRENT USER DATA:", data.user._id);
     const channelVideo = async (ownerId) => {
         try {
-            const res = await api.post("/videos/any", { owner: ownerId });
+            const res = await api.get("/videos/any", { owner: ownerId });
             setVideos(res); // match backend response structure
         } catch (err) {
             console.error(err);
