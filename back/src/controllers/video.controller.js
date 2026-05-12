@@ -9,9 +9,9 @@ export const any= (req,res)=>{
         [
             {
                 $match:{
-                    owner: owner
-                }
-            }
+                    owner: owner,
+                },
+            },
         ]
     )
     return pipeline;
