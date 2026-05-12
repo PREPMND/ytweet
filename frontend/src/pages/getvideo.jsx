@@ -55,9 +55,9 @@ const VideoList = (props) => {
         fetchVideos(title);
     }, [title]);
     function Handle(channel) {
-        console.log(channel)
-        setProfileSelected(channel);
-        navigate(`/${channel}`);
+        console.log(channel._id)
+        setProfileSelected(channel._id);
+        navigate(`/${channel.username}`);
     }
     return (
         <div style={{ padding: "10px" }} className={darkMode ? "bg-neutral-950 text-white min-h-[calc(100vh-80px)]" : ""}>
@@ -125,7 +125,7 @@ const VideoList = (props) => {
                                 alt="Avatar"
                             />
                             <div
-                                onClick={() => { Handle(video.owner._id) }}
+                                onClick={() => { Handle(video.owner) }}
                                 className="px-[11px]">
                                 <h3
                                     className={`mt-1 text-md leading-[1.4] px-[6px] font-medium capitalize overflow-hidden whitespace-break-spaces ${darkMode ? "text-white" : "text-black"
@@ -136,7 +136,7 @@ const VideoList = (props) => {
                                 <p
 
                                     className={`text-sm hover:underline px-[6px] ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
-                                    {video.owner._id}
+                                    {video.owner}
                                 </p>
                             </div>
                             <span
