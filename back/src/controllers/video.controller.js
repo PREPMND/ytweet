@@ -10,7 +10,7 @@ export const any=asyncHandler(async (req,res)=>{
         [
             {
                 $match:{
-                    owner: owner,
+                    owner: new mongoose.Types.ObjectId(owner) 
                 },
             },
         ]
