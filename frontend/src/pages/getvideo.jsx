@@ -54,10 +54,10 @@ const VideoList = (props) => {
     useEffect(() => {
         fetchVideos(title);
     }, [title]);
-    function Handle(channel) {
-        console.log(channel._id)
-        setProfileSelected(channel._id);
-        navigate(`/${channel.username}`);
+    function Handle(channelId,channelUsername) {
+        console.log(channelId)
+        setProfileSelected(channelId);
+        navigate(`/${channelUsername}`);
     }
     return (
         <div style={{ padding: "10px" }} className={darkMode ? "bg-neutral-950 text-white min-h-[calc(100vh-80px)]" : ""}>
@@ -119,13 +119,13 @@ const VideoList = (props) => {
 
                         <div className="flex flex-start items-center leading-[1.4] h-[80px] mt-1 ml-2">
                             <img
-                                onClick={() => { Handle(video.owner.username) }}
+                                onClick={() => { Handle(video.owner._id, video.owner.username) }}
                                 className="w-9 h-9 hover:ring-1 hover:scale-105 hover:ring-blue-300 shrink-0 transition-transform duration-500 ease-in-out rounded-full object-cover"
                                 src={video.owner.avatar}
                                 alt="Avatar"
                             />
                             <div
-                                onClick={() => { Handle(video.owner) }}
+                                onClick={() => { Handle(video.owner._id, video.owner.username) }}
                                 className="px-[11px]">
                                 <h3
                                     className={`mt-1 text-md leading-[1.4] px-[6px] font-medium capitalize overflow-hidden whitespace-break-spaces ${darkMode ? "text-white" : "text-black"
