@@ -28,17 +28,21 @@ const ChannelIndv = () => {
 
     return (
         <div>
-        <div>
+            <div>
             //the channel description
-        </div>
-        <div>
+            </div>
+            <div>
             //some other thing
-        </div>
-        <div>
-            {videos.map()=>{
-                
-            }}
-        </div>
+            </div>
+            <div>
+                {videos.map((video, index) => (
+                    <div key={video._id || index}>
+                        <h3>{video.title}</h3>
+                        <p>{video.description}</p>
+                        <img src={video.thumbnail} alt={video.title} />
+                    </div>
+                ))}
+            </div>
         </div>
     )
 
