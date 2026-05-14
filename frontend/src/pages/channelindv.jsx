@@ -44,7 +44,7 @@ const ChannelIndv = (props) => {
                         
                         <div className="w-full md:w-[80%] px-3 md:mx-0 flex  ">
                             <img className="object-cover aspect-[16/9] rounded-md w-[100%] md:w-[50%]" src={video.thumbnail} alt={video.title} />
-                            <h3 className={`md:mt-[1px] hidden md:flex font-[600] text-[18px] 
+                            <h3 className={`md:mt-[1px] ml-5 hidden md:flex font-[600] text-[18px] 
                                 ${video.title.length > 70 ?"whitespace-pre-wrap" : ""}`}>{video.title}</h3>
                             <EllipsisVertical className="text-[18px]  cursor-pointer absolute right-3 mt-3"  />
                         </div>
