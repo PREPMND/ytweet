@@ -47,7 +47,7 @@ const ChannelIndv = (props) => {
                         </div>
                         <div className="flex items-center justify-between
                         w-full ">
-                            <h3 className="mt-2 ml-2 font-[600] md:hidden flex text-[18px]">{video.title}</h3>
+                            <h3 className="mt-2 ml-[10px] font-[600] md:hidden flex text-[18px]">{video.title}</h3>
                             <h1 className="mr-7">Options</h1>
                         </div>
                         
