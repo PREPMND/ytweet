@@ -96,7 +96,7 @@ export const getVideos = async (req, res) => {
             page: parseInt(page, 10),
             limit: parseInt(limit, 10)
         };
-
+        console,log("AGGREGATE:", JSON.stringify(aggregate));
         const videos = await Video.aggregatePaginate(aggregate, options);
 
         function formatDuration(seconds) {
