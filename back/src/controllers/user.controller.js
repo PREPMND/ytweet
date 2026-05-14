@@ -360,6 +360,7 @@ const getUserChannelProfile = asyncHandler(async (req, res, next) => {
                 avatar: 1,
                 subscriberCount: 1,
                 isSubscribed: 1,
+                coverImage: 1,
             },
         },
     ]);
