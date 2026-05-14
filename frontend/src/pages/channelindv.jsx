@@ -24,6 +24,7 @@ const ChannelIndv = (props) => {
             console.error(err);
         }
     };
+    console.log("VIDEOS:", videos);
 
     useEffect(() => {
         channelVideo(profileSelected.owner._id);
