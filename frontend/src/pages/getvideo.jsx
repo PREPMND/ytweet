@@ -26,6 +26,7 @@ const VideoList = (props) => {
                 // append instead of replace
                 setVideos(prev => [...prev, ...data.data.docs]);
                 setHasMore(pageNum < data.data.totalPages);
+                console.log("VIDEOS:", data.data.docs);
             } else {
                 console.error("Backend error:", data.message);
             }
