@@ -43,7 +43,7 @@ export const createVideo = async (req, res) => {
             throw new apiError(400, "Video cannot be uploaded");
         }
         const loggedInUser = await User.findById(req.user._id).select(
-            "-password -refreshToken -coverImage -email -createdAt -updatedAt"
+            "-password -refreshToken -email -createdAt -updatedAt"
         )
         const videoDoc = await Video.create({
             title,
