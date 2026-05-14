@@ -78,12 +78,13 @@ export const getVideos = async (req, res) => {
             {
                 $project: {
                     title: 1,
+                    description: 1,
                     videoFile: 1,
                     thumbnail: 1,
                     duration: 1,
                     "owner._id": 1,
                     "owner.username": 1,
-                    "owner.coverImage": 1,
+                    "owner.email": 1,
                     "owner.avatar": 1,
                     "owner.coverImage": 1
                 }
