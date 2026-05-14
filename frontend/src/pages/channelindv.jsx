@@ -33,9 +33,9 @@ const ChannelIndv = (props) => {
     return (
         <div className="relative">
             <div>
-                <img  className="ml-9 z-0 absolute rounded-[100%] w-[100px]  h-[100px] md:h-[20%] md:w-[20%]" src={data.user.coverImage} />
+                <img  className="ml-9 z-0 inset-0 absolute rounded-[100%] w-[100px]  h-[100px] md:h-[20%] md:w-[20%]" src={data.user.coverImage} />
             </div>
-            <div className="flex mt-5 md:mt-3 z-0 items-center ">
+            <div className="flex mt-5 md:mt-3 z-40 items-center ">
             {/* the channel description */}
             
             <img className="ml-9 rounded-[100%] w-[100px] h-[100px] md:h-[20%] md:w-[20%]" src={data.user.avatar} alt={data.user.name} />
