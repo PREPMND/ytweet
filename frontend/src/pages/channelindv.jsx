@@ -34,6 +34,7 @@ const ChannelIndv = (props) => {
         <div>
             <div className="flex mt-5 md:mt-3  items-center ">
             {/* the channel description */}
+            
             <img className="ml-9 rounded-[100%] w-[100px] h-[100px] md:h-[20%] md:w-[20%]" src={data.user.avatar} alt={data.user.name} />
             <div className="flex ml-10 justify-between font-[Saira] text-[20px] md:text-[28px] font-[500] w-[70%] items-center h-[120px] ">
                 <div className="">{data.user.username}</div>
