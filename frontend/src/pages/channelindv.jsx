@@ -45,8 +45,9 @@ const ChannelIndv = (props) => {
                             <img className=" object-cover mx-2 aspect-[16/9] rounded-md w-[100%] md:w-[50%]" src={video.thumbnail} alt={video.title} />
                             <h3 className="mt-2 hidden md:flex font-[600] text-[18px]">{video.title}</h3>
                         </div>
-                        <div className="flex">
-                            <h3 className="mt-2 font-[600] md:hidden flex text-[18px]">{video.title}</h3>
+                        <div className="flex items-center justify-between
+                        w-full ">
+                            <h3 className="mt-2 ml-2 font-[600] md:hidden flex text-[18px]">{video.title}</h3>
                             <h1 className="mr-7">Options</h1>
                         </div>
                         
