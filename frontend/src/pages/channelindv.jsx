@@ -33,6 +33,10 @@ const ChannelIndv = (props) => {
             <div>
             //the channel description
             <img src={data.user.avatar} alt={data.user.name} />
+            <div>
+                <div>{data.user.name}</div>
+                <div>{data.user.subscribers.length} subscribers</div>
+            </div>
             </div>
             <div>
             //some other thing
