@@ -7,6 +7,7 @@ import api from "../api/api";
 
 const ChannelIndv = (props) => {
     const {profileSelected} = props;
+    const [subscribers, setSubscribers] = useState(0);
     const [videos, setVideos] = useState([]);
     const { data } = useQuery({
         queryKey: ["currentUser"],
@@ -35,7 +36,7 @@ const ChannelIndv = (props) => {
             <img src={data.user.avatar} alt={data.user.name} />
             <div>
                 <div>{data.user.name}</div>
-                <div>{data.user.subscribers.length} subscribers</div>
+                <div>{subscribers} subscribers</div>
             </div>
             </div>
             <div>
