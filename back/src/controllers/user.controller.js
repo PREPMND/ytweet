@@ -100,7 +100,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id)
     //these tokens are not present in local user
     const loggedInUser = await User.findById(user._id).select(
-        "-password -refreshToken"
+        "-password -refreshToken coverImage"
     )
 
     const options = {
