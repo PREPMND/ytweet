@@ -87,8 +87,8 @@ export const getVideos = async (req, res) => {
                     "owner.email": 1,
                     "owner.avatar": 1,
                     "owner.coverImage": 1
-                }
-            }
+                },
+            },
         ]);
 
         // Use aggregatePaginate for proper pagination
