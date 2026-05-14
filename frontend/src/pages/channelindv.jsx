@@ -47,9 +47,9 @@ const ChannelIndv = (props) => {
                             <h3 className={`mt-2 hidden  md:flex font-[600] text-[18px] 
                                 ${video.title.length > 60 ?"whitespace-pre-wrap" : ""}`}>{video.title}</h3>
                         </div>
-                        <div className="flex items-center ml-2 mb-3 md:mb-0 justify-between w-full gap-4 ">
+                        <div className="flex items-center px-2 mb-3 md:mb-0 justify-between w-full gap-2 ">
                             <h3 className="mt-2 pl-[10px] font-[600] md:hidden flex text-[15px] md:text-[18px]">{video.title}</h3>
-                            <EllipsisVertical className="text-[34px]  cursor-pointer"  />
+                            <EllipsisVertical className="text-[18px]  cursor-pointer"  />
                         </div>
                         
 
