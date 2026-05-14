@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { EllipsisVertical } from "@phosphor-icons/react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
@@ -50,6 +51,7 @@ const ChannelIndv = (props) => {
                         w-full ">
                             <h3 className="mt-2 pl-[10px] font-[600] md:hidden flex text-[15px] md:text-[18px]">{video.title}</h3>
                             <h1 className="mr-7">Options</h1>
+                            <EllipsisVertical className="mr-3 cursor-pointer" size={20} />
                         </div>
                         
 
