@@ -46,8 +46,10 @@ const ChannelIndv = (props) => {
                 </button>
             </div>
             </div>
-            <div>
-            //some other thing
+            <div className="flex gap-2 mb-4 text-black">
+            {/* some other thing */}
+            <div className="w-[50%] h-[2px] border-b border-black"></div>
+            <div className="w-[50%] h-[2px]  "></div>
             </div>
             <div>
                 {videos.map((video, index) => (
