@@ -50,7 +50,7 @@ const ChannelIndv = (props) => {
                         <div className="flex items-center ml-2 mb-3 md:mb-0 justify-between
                         w-full ">
                             <h3 className="mt-2 pl-[10px] font-[600] md:hidden flex text-[15px] md:text-[18px]">{video.title}</h3>
-                            <EllipsisVertical className="mr-5  cursor-pointer" size={30} />
+                            <EllipsisVertical className="mr-5 text-[34px]  cursor-pointer"  />
                         </div>
                         
 
