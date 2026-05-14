@@ -50,8 +50,18 @@ const ChannelIndv = (props) => {
             </div>
             <div className="flex gap-2 mb-5 mt-5 text-black">
             {/* some other thing */}
-            <div className={`w-[50%] h-[2px] border-[2px] ${videoSelected ? "border-black h-[1.5px]" : "border-red-300"}  `}></div>
-            <div className={`w-[50%] h-[2px] border-[2px]  ${yangSelected ? "border-black h-[1.5px]" : "border-amber-200"}  `}></div>
+            <div
+            onClick={() => {
+                setVideoSelected(true);
+                setYangSelected(false);
+            }}
+            className={`w-[50%] h-[2px] border-[2px] ${videoSelected ? "border-black h-[1.5px]" : "border-red-300"}  `}></div>
+            <div
+            onClick={() => {
+                setVideoSelected(false);
+                setYangSelected(true);
+            }}
+            className={`w-[50%] h-[2px] border-[2px]  ${yangSelected ? "border-black h-[1.5px]" : "border-amber-200"}  `}></div>
 
             </div>
             <div>
