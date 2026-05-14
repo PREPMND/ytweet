@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {EllipsisVertical} from "lucide-react";
-import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
