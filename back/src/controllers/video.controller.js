@@ -84,7 +84,6 @@ export const getVideos = async (req, res) => {
                     duration: 1,
                     "owner._id": 1,
                     "owner.username": 1,
-                    "owner.fullName": 1,
                     "owner.email": 1,
                     "owner.avatar": 1,
                     "owner.coverImage": 1
