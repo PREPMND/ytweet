@@ -7,6 +7,7 @@ import api from "../api/api";
 
 const ChannelIndv = (props) => {
     const {profileSelected} = props;
+    console.log("PROFILE SELECTED:", profileSelected);
     const [subscribers, setSubscribers] = useState(0);
     const [localSubscriptionStatus, setLocalSubscriptionStatus] = useState(false);
     const [videoSelected, setVideoSelected] = useState(true);
