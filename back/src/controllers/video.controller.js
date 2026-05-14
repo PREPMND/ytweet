@@ -13,6 +13,14 @@ export const any=asyncHandler(async (req,res)=>{
                     owner: new mongoose.Types.ObjectId(owner) 
                 },
             },
+            {
+                project:{
+                    coverImage:1,
+                    title:1,
+                    thumbnail:1,
+                    videoFile:1,
+                }
+            }
         ]
     )
     return res.status(200).json({ success: true, data: pipelines });
