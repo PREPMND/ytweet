@@ -5,7 +5,7 @@ import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
 
 const ChannelIndv = (props) => {
-    const {profileSelected} = props;
+    const {profileSelected,darkMode} = props;
     console.log("PROFILE SELECTED:", profileSelected);
     const [subscribers, setSubscribers] = useState(0);
     const [localSubscriptionStatus, setLocalSubscriptionStatus] = useState(false);
