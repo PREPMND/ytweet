@@ -38,7 +38,7 @@ const ChannelIndv = (props) => {
             <div className="flex ml-10 justify-between font-[Saira] text-[20px] md:text-[28px] font-[500] w-[70%] items-center h-[120px] ">
                 <div className="">{data.user.username}</div>
                 <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] text-white text-[18px] w-[120px] text-center md:text-[20px] px-3 py-1 rounded-[12px] mr-4 `}>
-                    {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
+                    {localSubscriptionStatus ? "Unsubscribe bg-[#cc0000]" : "Subscribe"}
                 </button>
             </div>
             </div>
