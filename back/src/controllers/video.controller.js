@@ -14,12 +14,12 @@ export const any=asyncHandler(async (req,res)=>{
                 },
             },
             {
-                project:{
+                $project:{
                     coverImage:1,
                     title:1,
                     thumbnail:1,
                     videoFile:1,
-                }
+                },
             }
         ]
     )
