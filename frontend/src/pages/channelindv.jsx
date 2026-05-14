@@ -9,6 +9,7 @@ const ChannelIndv = (props) => {
     const {profileSelected} = props;
     const [subscribers, setSubscribers] = useState(0);
     const [localSubscriptionStatus, setLocalSubscriptionStatus] = useState(false);
+    const 
     const [videos, setVideos] = useState([]);
     const { data } = useQuery({
         queryKey: ["currentUser"],
@@ -46,10 +47,11 @@ const ChannelIndv = (props) => {
                 </button>
             </div>
             </div>
-            <div className="flex gap-2 mb-4 text-black">
+            <div className="flex gap-2 mb-5 mt-5 text-black">
             {/* some other thing */}
-            <div className="w-[50%] h-[2px] border-b border-black"></div>
-            <div className="w-[50%] h-[2px]  "></div>
+            <div className={`w-[50%] h-[2px] border-[2px]  border-black  `}></div>
+            <div className={`w-[50%] h-[2px] border-[2px]  border-black  `}></div>
+
             </div>
             <div>
                 {videos.map((video, index) => (
