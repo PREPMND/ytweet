@@ -36,7 +36,7 @@ const ChannelIndv = (props) => {
             <img className="ml-9 rounded-[100%] w-[100px] md:h-[30%]" src={data.user.avatar} alt={data.user.name} />
             <div className="flex ml-10 justify-between font-[Saira] text-[20px] md:text-[28px] font-[500] w-[70%] items-center h-[120px] ">
                 <div className="">{data.user.username}</div>
-                <div className={`text-[15px] mr-4 md:text-[22px]`}>{subscribers} subscribers</div>
+                <button className="bg-[#cc0000] text-white text-[18px] md:text-[20px] px-4 py-2 rounded-[12px] mr-4">Subscribe</button>
             </div>
             </div>
             <div>
