@@ -9,7 +9,8 @@ const ChannelIndv = (props) => {
     const {profileSelected} = props;
     const [subscribers, setSubscribers] = useState(0);
     const [localSubscriptionStatus, setLocalSubscriptionStatus] = useState(false);
-    const 
+    const [videoSelected, setVideoSelected] = useState(true);
+    const [yangSelected, setYangSelected] = useState(false);
     const [videos, setVideos] = useState([]);
     const { data } = useQuery({
         queryKey: ["currentUser"],
