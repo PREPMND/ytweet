@@ -39,7 +39,7 @@ const ChannelIndv = (props) => {
             <div className="flex mt-5 md:mt-3 z-40 items-center ">
             {/* the channel description */}
             
-            <img className="ml-9 rounded-[100%] w-[100px] h-[100px] md:h-[20%] md:w-[20%]" src={data.user.avatar} alt={data.user.name} />
+            <img className="ml-6 md:ml-9 rounded-[100%] w-[100px] h-[100px] md:h-[20%] md:w-[20%]" src={data.user.avatar} alt={data.user.name} />
             <div className="flex pl-10 justify-between font-[Saira] text-[20px] md:text-[28px] font-[500] w-[70%] items-center h-[120px] ">
                 <div className="">{data.user.username}</div>
                 <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[18px] w-[120px] text-center md:text-[18px] px-2 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
