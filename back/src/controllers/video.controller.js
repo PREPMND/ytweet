@@ -98,7 +98,7 @@ export const getVideos = async (req, res) => {
             limit: parseInt(limit, 10)
         };
         
-        const videos = await Video.aggregatePaginate(aggregate);
+        const videos = await Video.aggregatePaginate(aggregate, options);
 
         function formatDuration(seconds) {
             const hours = Math.floor(seconds / 3600);
