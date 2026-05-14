@@ -44,7 +44,7 @@ const ChannelIndv = (props) => {
                         
                         <div className="w-full md:w-[80%] px-3 md:mx-0 flex gap-5 ">
                             <img className="object-cover aspect-[16/9] rounded-md w-[100%] md:w-[50%]" src={video.thumbnail} alt={video.title} />
-                            <h3 className={`mt-2 hidden  md:flex font-[600] text-[18px] 
+                            <h3 className={`md:mt-[1px] hidden md:flex font-[600] text-[18px] 
                                 ${video.title.length > 60 ?"whitespace-pre-wrap" : ""}`}>{video.title}</h3>
                         </div>
                         <div className="flex items-start md:h-auto h-12 md:px-0 px-2 mb-3 md:mb-0 justify-between md:w-auto w-full gap-2 ">
