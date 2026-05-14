@@ -24,7 +24,6 @@ const ChannelIndv = (props) => {
             console.error(err);
         }
     };
-    console.log("VIDEOS:", videos);
 
     useEffect(() => {
         channelVideo(profileSelected.owner._id);
@@ -34,7 +33,7 @@ const ChannelIndv = (props) => {
     return (
         <div className="relative">
             <div className="relative w-screen">
-                <img  className="-z-30 -mt-5 inset-0 absolute w-screen h-[100px] " src={profileSelected.coverImage} />
+                <img  className="-z-30 -mt-5 inset-0 absolute w-screen h-[100px] " src={profileSelected.owner.coverImage} />
             </div>
             <div className="flex mt-5 md:mt-3 z-40 items-center ">
             {/* the channel description */}
