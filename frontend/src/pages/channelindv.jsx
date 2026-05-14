@@ -65,8 +65,6 @@ const ChannelIndv = (props) => {
                             <h3 className="mt-2 pl-[10px] font-[600] md:hidden flex text-[15px] md:text-[18px]">{video.title}</h3>
                             <EllipsisVertical className="text-[18px]  cursor-pointer absolute right-2 mt-3"  />
                         </div>
-                        
-
                     </div>
                 ))}
             </div>
