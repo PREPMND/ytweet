@@ -27,7 +27,7 @@ const ChannelIndv = (props) => {
     };
 
     useEffect(() => {
-        channelVideo(profileSelected);
+        channelVideo(profileSelected._id);
     }, [data]); // dependency should be user id, not videos
 
 
