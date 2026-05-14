@@ -90,13 +90,14 @@ export const getVideos = async (req, res) => {
                 },
             },
         ]);
+        console.log("AGGREGATE:", aggregate);
 
         // Use aggregatePaginate for proper pagination
         const options = {
             page: parseInt(page, 10),
             limit: parseInt(limit, 10)
         };
-        console.log("AGGREGATE:", aggregate);
+        
         const videos = await Video.aggregatePaginate(aggregate, options);
 
         function formatDuration(seconds) {
