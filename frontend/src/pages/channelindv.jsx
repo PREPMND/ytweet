@@ -43,7 +43,7 @@ const ChannelIndv = (props) => {
                         
                         <div className="w-[80%] flex gap-5 ">
                             <img className=" object-cover ml-2 aspect-[16/9] rounded-md w-[50%]" src={video.thumbnail} alt={video.title} />
-                            <h3 className="mt-2 font-[600] font-[saira]">{video.title}</h3>
+                            <h3 className="mt-2 font-[600] font-[ubuntu]">{video.title}</h3>
                         </div>
                         <h1 className="mr-7">Options</h1>
 
