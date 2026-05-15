@@ -127,6 +127,21 @@ const ChannelIndv = (props) => {
                         key={video._id || index}>
 
                         <div className="w-full md:w-[80%] px-3 md:mx-0 flex  ">
+                            
+                            <img
+                                loading="lazy"
+                                className="object-cover aspect-video rounded-md w-full md:w-[50%]"
+                                src={video.thumbnail}
+                                alt={video.title}
+                            />
+                            <h3 className={`md:mt-[1px] ml-5 hidden md:flex font-[600] text-[18px] 
+                                ${video.title.length > 70 ? "whitespace-pre-wrap" : ""}`}>{video.title}</h3>
+                            <EllipsisVertical 
+                            onClick={(e) => {
+                                        e.stopPropagation();
+                                        toggleMenu(video._id);
+                            }}
+                            className="text-[18px]  cursor-pointer hidden md:flex absolute right-3 mt-3" />
                             <MenuDropdown
                             isOpen={menuOpenId === video._id}
                             darkMode={darkMode}
@@ -153,20 +168,6 @@ const ChannelIndv = (props) => {
                                 },
                             ]}
                         />
-                            <img
-                                loading="lazy"
-                                className="object-cover aspect-video rounded-md w-full md:w-[50%]"
-                                src={video.thumbnail}
-                                alt={video.title}
-                            />
-                            <h3 className={`md:mt-[1px] ml-5 hidden md:flex font-[600] text-[18px] 
-                                ${video.title.length > 70 ? "whitespace-pre-wrap" : ""}`}>{video.title}</h3>
-                            <EllipsisVertical 
-                            onClick={(e) => {
-                                        e.stopPropagation();
-                                        toggleMenu(video._id);
-                            }}
-                            className="text-[18px]  cursor-pointer hidden md:flex absolute right-3 mt-3" />
                         </div>
                         
                         <div className="flex md:hidden items-start md:h-auto h-12 md:px-0 px-2 mb-3 md:mb-0 justify-between md:w-auto w-full gap-2 ">
