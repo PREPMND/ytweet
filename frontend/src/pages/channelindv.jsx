@@ -86,7 +86,7 @@ const ChannelIndv = (props) => {
             )}
             {!loadingVideos && (
                 <div className="relative w-full">
-                    <img className="-z-30 -mt-5 inset-0 absolute w-full h-[100px] " src={data.user.coverImage} />
+                    <img className=" -mt-5 inset-0 w-full h-[140px] object-cover " src={data.user.coverImage} />
                 </div>
             )}
             {!loadingVideos && (
