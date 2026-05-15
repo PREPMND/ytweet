@@ -17,12 +17,26 @@ const ChannelIndv = (props) => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
+    console.log(api.defaults.baseURL);
+
     const fetchuserById = async (Id) => {
         if (!Id) return;
         console.log("ID SENT:", Id);
         try {
-            const res = await api.post("/users/userbyid", { Id: Id });
-            console.log(res);
+            const res = await fetch(
+                "http://localhost:8000/api/v1/users/userbyid",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        Id
+                    })
+                }
+            );
+
+            console.log(await res.json());
         }
         catch (err) {
             console.log(err);
