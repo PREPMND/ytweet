@@ -5,6 +5,10 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js"
 import { apiResponse } from "../utils/apiResponse.js";
 import jwt from "jsonwebtoken"
 import mongoose from "mongoose";
+const userById = asyncHandler(async(req,res)=>{
+    const {Id}=req.body;
+    
+})
 const generateAccessAndRefreshTokens = async (userId) => {
     try {
         const user = await User.findById(userId)
