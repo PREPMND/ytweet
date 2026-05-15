@@ -16,7 +16,7 @@ export const any = asyncHandler(async (req, res) => {
         },
     ]);
 
-    const user = await User.findById(_id);
+    const user = await User.findById(owner).select("-password -refreshToken -email -createdAt -updatedAt");
 
     // attach owner details to each video
     const videosWithOwner = pipelines.map((video) => ({
