@@ -13,9 +13,8 @@ const userById = asyncHandler(async(req,res)=>{
     const userDetails=await User.findById(Id).select(
         "-refreshToken -password");
     return res.status(201).json(
-        apiResponse(200,userDetails,"User was found succesfully")
+        new apiResponse(200,userDetails,"User was found succesfully")
     )
-        
 })
 const generateAccessAndRefreshTokens = async (userId) => {
     try {
