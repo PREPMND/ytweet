@@ -28,13 +28,11 @@ router.route("/logout").post(verifyJWT, logOutUser)
 router.route("/refreshtoken").post(refreshAccessToken)
 router.route("/changedpsw").post(verifyJWT,changeCurrentPassword)
 //router.route("/currentuser").get(verifyJWT,getCurrentUser)
-console.log("Token candidate:")
 router.get("/currentuser", verifyJWT, (req, res) => {
     console.log("AFTER VERIFY");
     res.json({ user: req.user || null });
 });
 router.route("/userbyid").post(userById)
-console.log(userById);
 router.route("/updateaccount").patch(verifyJWT,updateAccountDetails)
 router.route("/changeavatar").patch(verifyJWT,upload.single("avatar"),updateUserAvatar)
 
@@ -43,9 +41,5 @@ router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
 router.route("/history").get(verifyJWT,getWatchHistory)
 
 router.post("/subscriptions/:channelId", verifyJWT, toggleSubscription);
-console.log(
-  router.stack
-    .filter(r => r.route)
-    .map(r => r.route.path)
-);
+
 export default router;
