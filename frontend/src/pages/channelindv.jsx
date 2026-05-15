@@ -126,7 +126,7 @@ const ChannelIndv = (props) => {
                         className="flex md:flex-row flex-col justify-between mb-4"
                         key={video._id || index}>
 
-                        <div className="w-full md:w-[80%] px-3 md:mx-0 flex  ">
+                        <div className="w-full md:w-[80%] relative px-3 md:mx-0 flex  ">
 
                             <img
                                 loading="lazy"
