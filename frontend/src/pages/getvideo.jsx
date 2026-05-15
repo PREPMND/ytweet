@@ -95,6 +95,11 @@ const VideoList = (props) => {
         navigate(`/${channelUsername}`);
     }
 
+    const [menuOpenId, setMenuOpenId] = useState(null);
+
+    function toggleMenu(id) {
+        setMenuOpenId((prev) => (prev === id ? null : id));
+    }
     return (
         <div
             className={`relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-300 ease-out will-change-transform transform-gpu ${darkMode ? "bg-black" : "bg-white"
