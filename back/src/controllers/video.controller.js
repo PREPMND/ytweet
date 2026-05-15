@@ -23,6 +23,10 @@ export const any=asyncHandler(async (req,res)=>{
             },
         ]
     )
+    const user= await User.findById(owner).select("username email avatar coverImage");
+    pipelines.forEach((pipeline)=>{
+        pipeline.owner=user;
+    });
     return res.status(200).json({ success: true, data: pipelines });
 })
 export const createVideo = async (req, res) => {
