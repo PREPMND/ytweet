@@ -201,7 +201,7 @@ const VideoList = (props) => {
                                         e.stopPropagation();
                                         toggleMenu(video._id);
                                     }}
-                                    className={`absolute bottom-4 right-2 z-30 p-1.5 rounded-full transition-all duration-200 ${darkMode
+                                    className={`absolute bottom-6 right-2 z-30 p-1.5 rounded-full transition-all duration-200 ${darkMode
                                         ? "bg-black/60 hover:bg-black/80 text-white"
                                         : "bg-white/80 hover:bg-white text-black"
                                         }`}
