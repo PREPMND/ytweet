@@ -41,7 +41,7 @@ const ChannelIndv = (props) => {
                 <div className="px-3 space-y-5">
                     {/* Mobile layout */}
                     <div className="md:hidden space-y-5">
-                        {[...Array(5)].map((_, i) => (
+                        {[...Array(4)].map((_, i) => (
                             <div key={i} className="animate-pulse">
                                 <div className="bg-neutral-300 rounded-md w-full aspect-video"></div>
                                 <div className="mt-3 space-y-2">
@@ -54,7 +54,7 @@ const ChannelIndv = (props) => {
 
                     {/* Desktop layout */}
                     <div className="hidden md:grid md:grid-cols-1 aspect-video md:max-w-[40%] md:gap-6">
-                        {[...Array(3)].map((_, i) => (
+                        {[...Array(2)].map((_, i) => (
                             <div key={i} className="animate-pulse">
                                 <div className="bg-neutral-300 rounded-md w-full aspect-video"></div>
                                 <div className="mt-3 space-y-2">
