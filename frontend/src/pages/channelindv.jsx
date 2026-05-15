@@ -55,7 +55,7 @@ const ChannelIndv = (props) => {
                 <div className="relative w-full">
                     <img className="-z-30 -mt-5 inset-0 absolute w-full h-[100px] " src={data.user.coverImage} />
                 </div>
-            )}
+            
             <div className="flex mt-5 md:mt-3 z-40 items-center ">
                 {/* the channel description */}
 
