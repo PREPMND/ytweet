@@ -43,4 +43,9 @@ router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
 router.route("/history").get(verifyJWT,getWatchHistory)
 
 router.post("/subscriptions/:channelId", verifyJWT, toggleSubscription);
+console.log(
+  router.stack
+    .filter(r => r.route)
+    .map(r => r.route.path)
+);
 export default router;
