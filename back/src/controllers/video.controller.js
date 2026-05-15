@@ -12,7 +12,7 @@ export const any = asyncHandler(async (req, res) => {
 
     const user = await User.findById(owner).select("-password -refreshToken -email -createdAt -updatedAt");
 
-    return res.status(200).json({ success: true, data: videos});
+    return res.status(200).json({ success: true, data: user});
 });
 export const createVideo = async (req, res) => {
     try {
