@@ -22,8 +22,8 @@ const ChannelIndv = (props) => {
         try {
             const res = await api.post("/videos/any", { owner: ownerId });
             setVideos(res.data.data);
-            // match backend response structure
-            setLoadingVideos(false);
+             // match backend response structure
+             setLoadingVideos(false);
         } catch (err) {
             console.error(err);
         }
@@ -51,11 +51,8 @@ const ChannelIndv = (props) => {
                     ))}
                 </div>
             )}
-            <div className="w-full h-[100px] overflow-hidden">
-                <img
-                    src={data.user.coverImage}
-                    className="w-full h-full object-cover"
-                />
+            <div className="relative w-full">
+                <img className="-z-30 -mt-5 inset-0 absolute w-full h-[100px] " src={data.user.coverImage} />
             </div>
             <div className="flex mt-5 md:mt-3 z-40 items-center ">
                 {/* the channel description */}
