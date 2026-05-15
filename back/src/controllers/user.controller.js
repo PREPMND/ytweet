@@ -12,7 +12,7 @@ const userById = async (req, res) => {
     try {
 
         const { Id } = req.body;
-
+        console.log(typeof Id, Id);
         const userDetails = await User.findById(Id);
 
         console.log("USER:", userDetails);
