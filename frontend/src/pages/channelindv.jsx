@@ -51,9 +51,11 @@ const ChannelIndv = (props) => {
                     ))}
                 </div>
             )}
-            <div className="relative w-full">
-                <img className="-z-30 -mt-5 inset-0 absolute w-full h-[100px] " src={data.user.coverImage} />
-            </div>
+            {!loadingVideos && (
+                <div className="relative w-full">
+                    <img className="-z-30 -mt-5 inset-0 absolute w-full h-[100px] " src={data.user.coverImage} />
+                </div>
+            )}
             <div className="flex mt-5 md:mt-3 z-40 items-center ">
                 {/* the channel description */}
 
@@ -81,7 +83,7 @@ const ChannelIndv = (props) => {
                     }}
                     className={`w-[50%] h-[2px] border-[2px]  ${yangSelected ? "border-black h-[1.5px]" : "border-amber-200"}  `}></div>
 
-            </div>
+            </div>)}
             <div>
                 {videos.map((video, index) => (
                     <div
