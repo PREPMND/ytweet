@@ -54,7 +54,7 @@ const ChannelIndv = (props) => {
 
                     {/* Desktop layout */}
                     <div className="hidden md:grid md:grid-cols-1 md:max-w-[40%] md:gap-6">
-                        {[...Array(6)].map((_, i) => (
+                        {[...Array(3)].map((_, i) => (
                             <div key={i} className="animate-pulse">
                                 <div className="bg-neutral-300 rounded-md w-full aspect-video"></div>
                                 <div className="mt-3 space-y-2">
