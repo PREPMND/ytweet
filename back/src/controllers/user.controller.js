@@ -7,15 +7,10 @@ import jwt from "jsonwebtoken"
 import mongoose from "mongoose";
 const userById = async (req, res) => {
 
-    console.log("CONTROLLER HIT");
 
     try {
-
-        console.log("BODY:", req.body);
-
         const { Id } = req.body;
 
-        console.log("ID:", Id);
 
         if (!Id) {
             return res.status(400).json({
@@ -26,7 +21,6 @@ const userById = async (req, res) => {
 
         const userDetails = await User.findById(Id);
 
-        console.log("USER:", userDetails);
 
         return res.status(200).json({
             success: true,
