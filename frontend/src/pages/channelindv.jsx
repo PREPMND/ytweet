@@ -17,13 +17,14 @@ const ChannelIndv = (props) => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
-    const userById=async(Id)=>{
-        if(!Id) return ;
-        try{
-            const res=await api.post("/users/userbyid",{Id:Id});
+    const userById = async (Id) => {
+        if (!Id) return;
+        console.log("ID SENT:", Id);
+        try {
+            const res = await api.post("/users/userbyid", { Id: Id });
             console.log(res);
         }
-        catch(err){
+        catch (err) {
             console.log(err);
         }
     }
@@ -41,11 +42,15 @@ const ChannelIndv = (props) => {
     };
     useEffect(() => {
         channelVideo(profileSelected.owner._id);
-    }, [data]); 
+    }, [data]);
     // dependency should be user id, not videos
     useEffect(() => {
-        userById(profileSelected.owner._id)
-    }, [profileSelected]); 
+
+        if (!profileSelected?.owner?._id) return;
+
+        userById(profileSelected.owner._id);
+
+    }, [profileSelected]);
     function toggleMenu(id) {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
