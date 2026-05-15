@@ -120,7 +120,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                      
                     <div 
                     
-                    className={`relative sm:w-[50%] w-[60%] md:w-[40%] lg:w-[30%] h-full shadow-lg flex flex-col pl-[30px] md:pl-[44px] pt-5 gap-6 z-50 ${darkMode ? "bg-neutral-900 shadow-lg shadow-neutral-200 text-white" : "bg-white"} select-none overflow-y-scroll`}>
+                    className={`relative sm:w-[45%] w-[60%] md:w-[40%] lg:w-[30%] h-full shadow-lg flex flex-col pl-[30px] md:pl-[44px] pt-5 gap-6 z-50 ${darkMode ? "bg-neutral-900 shadow-lg shadow-neutral-200 text-white" : "bg-white"} select-none overflow-y-scroll`}>
                         <div>
 
                             <div className="flex items-center mt-4 flex-col justify-center mr-[40px] mb-4">
