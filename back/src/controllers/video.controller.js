@@ -15,14 +15,6 @@ export const any = asyncHandler(async (req, res) => {
         },
     ]);
 
-    const user = await User.findById(_id);
-
-    // attach owner details to each video
-    const videosWithOwner = pipelines.map((video) => ({
-        ...video,
-        owner: user,
-    }));
-
     return res.status(200).json({ success: true, data: pipeline });
 });
 export const createVideo = async (req, res) => {
