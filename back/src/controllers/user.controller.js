@@ -7,7 +7,11 @@ import jwt from "jsonwebtoken"
 import mongoose from "mongoose";
 const userById = asyncHandler(async(req,res)=>{
     const {Id}=req.body;
-    
+    if(!Id){
+        throw new apiError(404,"Id didnot reach backend");
+    };
+    const userDetails=await User.findById(Id).select("
+        -refreshToken -password")
 })
 const generateAccessAndRefreshTokens = async (userId) => {
     try {
