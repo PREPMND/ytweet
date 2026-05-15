@@ -23,7 +23,7 @@ const ChannelIndv = (props) => {
             const res = await api.post("/videos/any", { owner: ownerId });
             setVideos(res.data.data);
              // match backend response structure
-             setLoadingVideos(false);
+             setLoadingVideos(fal);
         } catch (err) {
             console.error(err);
         }
@@ -55,7 +55,8 @@ const ChannelIndv = (props) => {
                 <div className="relative w-full">
                     <img className="-z-30 -mt-5 inset-0 absolute w-full h-[100px] " src={data.user.coverImage} />
                 </div>
-            
+            )}
+            {!loadingVideos && (
             <div className="flex mt-5 md:mt-3 z-40 items-center ">
                 {/* the channel description */}
 
@@ -67,7 +68,8 @@ const ChannelIndv = (props) => {
                         {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
                     </button>
                 </div>
-            </div>
+            </div>)}
+            {!loadingVideos && (
             <div className="flex gap-2 mb-5 mt-5 text-black">
                 {/* some other thing */}
                 <div
