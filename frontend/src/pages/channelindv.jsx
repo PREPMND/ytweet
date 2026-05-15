@@ -114,32 +114,13 @@ const ChannelIndv = (props) => {
                                 src={video.thumbnail}
                                 alt={video.title}
                             />
-                            <div className="hidden md:flex justify-between items-start ml-5 w-full min-w-0">
-                                <h3
-                                    className={`font-[600] text-[18px] leading-6 line-clamp-2 break-words flex-1 min-w-0 ${darkMode ? "text-white" : "text-black"
-                                        }`}
-                                >
-                                    {video.title}
-                                </h3>
-
-                                <EllipsisVertical
-                                    className={`text-[18px] shrink-0 ml-3 mt-1 cursor-pointer ${darkMode ? "text-white" : "text-black"
-                                        }`}
-                                />
-                            </div>
+                            <h3 className={`md:mt-[1px] ml-5 hidden md:flex font-[600] text-[18px] 
+                                ${video.title.length > 70 ? "whitespace-pre-wrap" : ""}`}>{video.title}</h3>
+                            <EllipsisVertical className="text-[18px]  cursor-pointer hidden md:flex absolute right-3 mt-3" />
                         </div>
-                        <div className="flex md:hidden items-start px-2 mb-3 justify-between w-full gap-2 min-w-0">
-                            <h3
-                                className={`mt-2 pl-[10px] font-[600] text-[15px] leading-5 line-clamp-2 break-words flex-1 min-w-0 ${darkMode ? "text-white" : "text-black"
-                                    }`}
-                            >
-                                {video.title}
-                            </h3>
-
-                            <EllipsisVertical
-                                className={`text-[18px] shrink-0 cursor-pointer mt-2 ${darkMode ? "text-white" : "text-black"
-                                    }`}
-                            />
+                        <div className="flex md:hidden items-start md:h-auto h-12 md:px-0 px-2 mb-3 md:mb-0 justify-between md:w-auto w-full gap-2 ">
+                            <h3 className="mt-2 pl-[10px] font-[600] md:hidden flex text-[15px] md:text-[18px]">{video.title}</h3>
+                            <EllipsisVertical className="text-[18px]  cursor-pointer md:hidden absolute right-2 mt-3" />
                         </div>
                     </div>
                 ))}
