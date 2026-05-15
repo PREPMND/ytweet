@@ -15,7 +15,11 @@ export const any=asyncHandler(async (req,res)=>{
             },
             {
                 $project:{
-                    coverImage:,
+                    "owner._id": 1,
+                    "owner.username": 1,
+                    "owner.email": 1,
+                    "owner.avatar": 1,
+                    "owner.coverImage": 1,
                     title:1,
                     thumbnail:1,
                     videoFile:1,
