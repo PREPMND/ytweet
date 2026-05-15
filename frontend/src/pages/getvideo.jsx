@@ -120,7 +120,7 @@ const VideoList = (props) => {
                 }`}
         >
             <div
-                className="grid gap-5 max-w-[1100px] mx-auto"
+                className="grid gap-5 mx-1 max-w-[1100px] mx-auto"
                 style={{
                     gridTemplateColumns:
                         "repeat(auto-fit,minmax(320px,1fr))",
