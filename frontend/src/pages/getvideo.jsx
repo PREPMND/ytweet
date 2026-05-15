@@ -53,7 +53,21 @@ const VideoList = (props) => {
     useEffect(() => {
         fetchVideos(page);
     }, [page]);
-
+    function handleWatchLater(video) {
+        console.log("Watch later:", video);
+    }
+    function handlePlaylist(video) {
+        console.log("Save to playlist:", video);
+    }
+    function handleShare(video) {
+        console.log("Share:", video);
+    }
+    function handleNotInterested(video) {
+        console.log("Not interested:", video);
+    }
+    function handleReport(video) {
+        console.log("Report:", video);
+    }
     useEffect(() => {
         const handleScroll = () => {
 
