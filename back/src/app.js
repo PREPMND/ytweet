@@ -1,7 +1,6 @@
 import cookieParser from "cookie-parser";
 import express from "express";
 import cors from "cors";
-import listEndpoints from 'express-list-endpoints';
 
 
 const application = express();
