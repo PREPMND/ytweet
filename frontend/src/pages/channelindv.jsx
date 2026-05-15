@@ -40,8 +40,12 @@ const ChannelIndv = (props) => {
     };
 
     useEffect(() => {
-        channelVideo(profileSelected.owner._id);
-    }, [data]); // dependency should be user id, not videos
+        channelVideo(profileSelected.owner);
+    }, [data]); 
+    // dependency should be user id, not videos
+    useEffect(() => {
+        userById(profileSelected.owner)
+    }, [profileSelected]); 
     function toggleMenu(id) {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
