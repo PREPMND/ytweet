@@ -17,7 +17,7 @@ const ChannelIndv = (props) => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
-    const userById = async (Id) => {
+    const fetchuserById = async (Id) => {
         if (!Id) return;
         console.log("ID SENT:", Id);
         try {
@@ -48,7 +48,7 @@ const ChannelIndv = (props) => {
 
         if (!profileSelected?.owner?._id) return;
 
-        userById(profileSelected.owner._id);
+        fetchuserById(profileSelected.owner._id);
 
     }, [profileSelected]);
     function toggleMenu(id) {
