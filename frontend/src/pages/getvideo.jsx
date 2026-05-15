@@ -168,101 +168,103 @@ const VideoList = (props) => {
                                 alt="Avatar"
                                 loading="lazy"
                             />
+                            <div className="flex justify-between items-start gap-2 w-full min-w-0">
 
-                            <div
-                                onClick={() => {
-                                    Handle(
-                                        video.owner._id,
-                                        video.owner.username,
-                                        video
-                                    );
-                                }}
-                                className="flex flex-col overflow-hidden"
-                            >
-                                <h3
-                                    className={`text-[15px] leading-5 font-medium line-clamp-2 ${darkMode
-                                        ? "text-white"
-                                        : "text-black"
-                                        }`}
+                                <div
+                                    onClick={() => {
+                                        Handle(
+                                            video.owner._id,
+                                            video.owner.username,
+                                            video
+                                        );
+                                    }}
+                                    className="flex flex-col flex-1 min-w-0"
                                 >
-                                    {video.title}
-                                </h3>
+                                    <h3
+                                        className={`text-[15px] leading-5 font-medium line-clamp-2 break-words ${darkMode
+                                                ? "text-white"
+                                                : "text-black"
+                                            }`}
+                                    >
+                                        {video.title}
+                                    </h3>
 
-                                <p
-                                    className={`text-sm mt-1 hover:underline ${darkMode
-                                        ? "text-neutral-400"
-                                        : "text-neutral-600"
-                                        }`}
-                                >
-                                    {video.owner.username}
-                                </p>
+                                    <p
+                                        className={`text-sm mt-1 hover:underline truncate ${darkMode
+                                                ? "text-neutral-400"
+                                                : "text-neutral-600"
+                                            }`}
+                                    >
+                                        {video.owner.username}
+                                    </p>
+                                </div>
+
                                 <button
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         toggleMenu(video._id);
                                     }}
-                                    className={`absolute bottom-6 right-2 z-30 p-1.5 rounded-full transition-all duration-200 ${darkMode
-                                        ? "bg-black/60 hover:bg-black/80 text-white"
-                                        : "bg-white/80 hover:bg-white text-black"
+                                    className={`shrink-0 mt-1 p-1 rounded-full transition-colors ${darkMode
+                                            ? "hover:bg-neutral-800 text-white"
+                                            : "hover:bg-neutral-200 text-black"
                                         }`}
                                 >
                                     <EllipsisVertical size={18} />
                                 </button>
-                                
                             </div>
                             {menuOpenId === video._id && (
-                                    <div
-                                        className={`font-[Saira] font-[500] absolute bottom-8 right-8 z-40 w-[200px] md:min-w-[220px] overflow-hidden rounded-xl shadow-xl border ${darkMode
-                                            ? "bg-neutral-900 border-neutral-700 text-white"
-                                            : "bg-white border-neutral-200 text-black"
+                                <div
+                                    className={`font-[Saira] font-[500] absolute bottom-8 right-8 z-40 w-[200px] md:min-w-[220px] overflow-hidden rounded-xl shadow-xl border ${darkMode
+                                        ? "bg-neutral-900 border-neutral-700 text-white"
+                                        : "bg-white border-neutral-200 text-black"
+                                        }`}
+                                >
+                                    <button
+                                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
+                                            ? "hover:bg-neutral-800"
+                                            : "hover:bg-neutral-100"
                                             }`}
                                     >
-                                        <button
-                                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                                ? "hover:bg-neutral-800"
-                                                : "hover:bg-neutral-100"
-                                                }`}
-                                        >
-                                            Watch later
-                                        </button>
+                                        Watch later
+                                    </button>
 
-                                        <button
-                                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                                ? "hover:bg-neutral-800"
-                                                : "hover:bg-neutral-100"
-                                                }`}
-                                        >
-                                            Save to playlist
-                                        </button>
+                                    <button
+                                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
+                                            ? "hover:bg-neutral-800"
+                                            : "hover:bg-neutral-100"
+                                            }`}
+                                    >
+                                        Save to playlist
+                                    </button>
 
-                                        <button
-                                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                                ? "hover:bg-neutral-800"
-                                                : "hover:bg-neutral-100"
-                                                }`}
-                                        >
-                                            Share
-                                        </button>
+                                    <button
+                                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
+                                            ? "hover:bg-neutral-800"
+                                            : "hover:bg-neutral-100"
+                                            }`}
+                                    >
+                                        Share
+                                    </button>
 
-                                        <button
-                                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                                ? "hover:bg-neutral-800"
-                                                : "hover:bg-neutral-100"
-                                                }`}
-                                        >
-                                            Not interested
-                                        </button>
+                                    <button
+                                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
+                                            ? "hover:bg-neutral-800"
+                                            : "hover:bg-neutral-100"
+                                            }`}
+                                    >
+                                        Not interested
+                                    </button>
 
-                                        <button
-                                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                                ? "hover:bg-neutral-800"
-                                                : "hover:bg-neutral-100"
-                                                }`}
-                                        >
-                                            Report
-                                        </button>
-                                    </div>
-                                )}
+                                    <button
+                                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
+                                            ? "hover:bg-neutral-800"
+                                            : "hover:bg-neutral-100"
+                                            }`}
+                                    >
+                                        Report
+                                    </button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 ))}
