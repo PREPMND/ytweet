@@ -77,7 +77,6 @@ export const getVideos = async (req, res) => {
             { $unwind: "$owner" },
             {
                 $project: {
-                    title: 1,
                     description: 1,
                     videoFile: 1,
                     thumbnail: 1,
