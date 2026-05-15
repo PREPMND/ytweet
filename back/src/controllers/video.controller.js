@@ -19,7 +19,8 @@ export const any=asyncHandler(async (req,res)=>{
                     title:1,
                     thumbnail:1,
                     videoFile:1,
-                    
+                    avatar:"$owner.avatar",
+                    username:"$owner.username",
                 },
             }
         ]
