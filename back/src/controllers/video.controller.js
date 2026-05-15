@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Video } from "../models/video.models.js"; // adjust path if needed
+import { User } from "../models/user.models.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if needed
 import { apiError } from "../utils/apiError.js"; // adjust path if needed
 import { User } from "../models/user.models.js"; // adjust path if needed
@@ -11,14 +12,6 @@ export const any=asyncHandler(async (req,res)=>{
             {
                 $match:{
                     owner: new mongoose.Types.ObjectId(owner) 
-                },
-            },
-            {
-                $project:{
-                    coverImage:1,
-                    title:1,
-                    thumbnail:1,
-                    videoFile:1,
                 },
             },
         ]
