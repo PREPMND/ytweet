@@ -19,7 +19,7 @@ const ChannelIndv = (props) => {
     });
     const userById=async(Id)=>{
         try{
-            const res=await api.post("/videos/userbyid",{Id:Id});
+            const res=await api.post("/user/userbyid",{Id:Id});
             console.log(res);
         }
         catch(err){
@@ -40,7 +40,7 @@ const ChannelIndv = (props) => {
     };
 
     useEffect(() => {
-        channelVideo(profileSelected.owner);
+        channelVideo(profileSelected.owner._id);
     }, [data]); 
     // dependency should be user id, not videos
     useEffect(() => {
