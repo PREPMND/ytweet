@@ -3,7 +3,7 @@ import { EllipsisVertical } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
-
+import { MenuDropdown } from "../utils/videoMenu";
 const ChannelIndv = (props) => {
     const { profileSelected, darkMode } = props;
     console.log("PROFILE SELECTED:", profileSelected);
