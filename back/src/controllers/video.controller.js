@@ -20,7 +20,7 @@ export const any=asyncHandler(async (req,res)=>{
     pipelines.forEach((pipeline)=>{
         pipeline.owner=user;
     });
-    return res.status(200).json({ success: true, data: pipelines });
+    return res.status(200).json({ success: true, data: { videos: pipelines, owner: user } });
 })
 export const createVideo = async (req, res) => {
     try {
