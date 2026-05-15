@@ -17,6 +17,15 @@ const ChannelIndv = (props) => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
+    const userById=async(Id)=>{
+        try{
+            const res=await api.post("/videos/userbyid",{Id:Id});
+            console.log(res);
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
     const channelVideo = async (ownerId) => {
         setLoadingVideos(true);
         try {
