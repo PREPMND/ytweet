@@ -21,7 +21,9 @@ const ChannelIndv = (props) => {
         setLoadingVideos(true);
         try {
             const res = await api.post("/videos/any", { owner: ownerId });
-            setVideos(res.data.data); // match backend response structure
+            setVideos(res.data.data);
+             // match backend response structure
+             setLoadingVideos(false);
         } catch (err) {
             console.error(err);
         }
