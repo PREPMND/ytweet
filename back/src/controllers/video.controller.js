@@ -23,7 +23,7 @@ export const any = asyncHandler(async (req, res) => {
         owner: user,
     }));
 
-    return res.status(200).json({ success: true, data: videosWithOwner });
+    return res.status(200).json({ success: true, data: pipeline });
 });
 export const createVideo = async (req, res) => {
     try {
