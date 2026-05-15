@@ -33,7 +33,7 @@ router.get("/currentuser", verifyJWT, (req, res) => {
     console.log("AFTER VERIFY");
     res.json({ user: req.user || null });
 });
-router.route("/userbyid").post(userById)
+router.route("/userbyid").get(userById)
 console.log("Token candidate:");
 router.route("/updateaccount").patch(verifyJWT,updateAccountDetails)
 router.route("/changeavatar").patch(verifyJWT,upload.single("avatar"),updateUserAvatar)

@@ -19,7 +19,7 @@ const ChannelIndv = (props) => {
     });
     const userById=async(Id)=>{
         try{
-            const res=await api.post("/user/userbyid",{Id:Id});
+            const res=await api.get("/user/userbyid",{Id:Id});
             console.log(res);
         }
         catch(err){
