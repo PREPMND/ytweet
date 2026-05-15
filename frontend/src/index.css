@@ -12,7 +12,13 @@
     "wdth" 100;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
+body {
+  overflow-x: hidden;
+}
 
 .input {
   border: 2px solid #dddddd;  
