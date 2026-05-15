@@ -121,7 +121,7 @@ const ChannelIndv = (props) => {
                 </div>)}
             <div>
                 {videos.map((video, index) => (
-                    <div>
+                    
                     <div
                         className="flex md:flex-row flex-col justify-between mb-4"
                         key={video._id || index}>
@@ -153,33 +153,6 @@ const ChannelIndv = (props) => {
                             className="text-[18px]  cursor-pointer md:hidden absolute right-2 mt-3" />
                         </div>
                         
-                    </div>
-                    <MenuDropdown
-                            isOpen={menuOpenId === video._id}
-                            darkMode={darkMode}
-                            items={[
-                                {
-                                    label: "Watch later",
-                                    onClick: () => handleWatchLater(video),
-                                },
-                                {
-                                    label: "Save to playlist",
-                                    onClick: () => handlePlaylist(video),
-                                },
-                                {
-                                    label: "Share",
-                                    onClick: () => handleShare(video),
-                                },
-                                {
-                                    label: "Not interested",
-                                    onClick: () => handleNotInterested(video),
-                                },
-                                {
-                                    label: "Report",
-                                    onClick: () => handleReport(video),
-                                },
-                            ]}
-                        />
                     </div>
                     
                 ))}
