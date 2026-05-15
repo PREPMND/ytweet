@@ -62,7 +62,7 @@ export const createVideo = async (req, res) => {
 };
 export const getVideos = async (req, res) => {
     try {
-        const { page = 1, limit = 20 } = req.query;
+        const { page = 1, limit = 5 } = req.query;
 
         const aggregate = Video.aggregate([
             { $match: { isPublished: true } },
