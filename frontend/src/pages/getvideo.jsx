@@ -171,28 +171,30 @@ const VideoList = (props) => {
                             <div className="flex justify-between items-start gap-2 w-full min-w-0">
 
                                 <div
-                                    onClick={() => {
-                                        Handle(
-                                            video.owner._id,
-                                            video.owner.username,
-                                            video
-                                        );
-                                    }}
+
                                     className="flex flex-col flex-1 min-w-0"
                                 >
                                     <h3
+
                                         className={`text-[15px] leading-5 font-medium line-clamp-2 break-words ${darkMode
-                                                ? "text-white"
-                                                : "text-black"
+                                            ? "text-white"
+                                            : "text-black"
                                             }`}
                                     >
                                         {video.title}
                                     </h3>
 
                                     <p
+                                        onClick={() => {
+                                            Handle(
+                                                video.owner._id,
+                                                video.owner.username,
+                                                video
+                                            );
+                                        }}
                                         className={`text-sm mt-1 hover:underline truncate ${darkMode
-                                                ? "text-neutral-400"
-                                                : "text-neutral-600"
+                                            ? "text-neutral-400"
+                                            : "text-neutral-600"
                                             }`}
                                     >
                                         {video.owner.username}
@@ -205,8 +207,8 @@ const VideoList = (props) => {
                                         toggleMenu(video._id);
                                     }}
                                     className={`shrink-0 mt-1 p-1 rounded-full transition-colors ${darkMode
-                                            ? "hover:bg-neutral-800 text-white"
-                                            : "hover:bg-neutral-200 text-black"
+                                        ? "hover:bg-neutral-800 text-white"
+                                        : "hover:bg-neutral-200 text-black"
                                         }`}
                                 >
                                     <EllipsisVertical size={18} />
