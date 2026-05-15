@@ -12,7 +12,7 @@ const ChannelIndv = (props) => {
     const [yangSelected, setYangSelected] = useState(false);
     const [loadingVideos, setLoadingVideos] = useState(false);
     const [menuOpenId, setMenuOpenId] = useState(null);
-    const coverImage=null;
+    let coverImage=null;
     const [videos, setVideos] = useState([]);
     const { data } = useQuery({
         queryKey: ["currentUser"],
@@ -24,7 +24,7 @@ const ChannelIndv = (props) => {
         try {
             const res = await api.post("/users/userbyid", { Id});
             console.log(res);
-            coverImage=res.coverImage
+            coverImage=res.data.data.coverImage;
         }
         catch (err) {
             console.log(err);
