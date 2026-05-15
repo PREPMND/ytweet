@@ -141,7 +141,7 @@ const ChannelIndv = (props) => {
                                     e.stopPropagation();
                                     toggleMenu(video._id);
                                 }}
-                                className="text-[18px]  cursor-pointer hidden md:flex absolute right-3 mt-3" />
+                                className="text-[18px]  cursor-pointer hidden md:flex absolute right-1 mt-3" />
                             <MenuDropdown
                                 isOpen={menuOpenId === video._id}
                                 darkMode={darkMode}
