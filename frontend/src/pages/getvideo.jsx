@@ -201,12 +201,65 @@ const VideoList = (props) => {
                                         toggleMenu(video._id);
                                     }}
                                     className={`absolute top-2 left-2 z-30 p-1.5 rounded-full transition-all duration-200 ${darkMode
-                                            ? "bg-black/60 hover:bg-black/80 text-white"
-                                            : "bg-white/80 hover:bg-white text-black"
+                                        ? "bg-black/60 hover:bg-black/80 text-white"
+                                        : "bg-white/80 hover:bg-white text-black"
                                         }`}
                                 >
                                     <EllipsisVertical size={18} />
                                 </button>
+                                {menuOpenId === video._id && (
+                                    <div
+                                        className={`absolute top-11 left-2 z-40 min-w-[220px] overflow-hidden rounded-xl shadow-xl border ${darkMode
+                                                ? "bg-neutral-900 border-neutral-700 text-white"
+                                                : "bg-white border-neutral-200 text-black"
+                                            }`}
+                                    >
+                                        <button
+                                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
+                                                    ? "hover:bg-neutral-800"
+                                                    : "hover:bg-neutral-100"
+                                                }`}
+                                        >
+                                            Watch later
+                                        </button>
+
+                                        <button
+                                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
+                                                    ? "hover:bg-neutral-800"
+                                                    : "hover:bg-neutral-100"
+                                                }`}
+                                        >
+                                            Save to playlist
+                                        </button>
+
+                                        <button
+                                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
+                                                    ? "hover:bg-neutral-800"
+                                                    : "hover:bg-neutral-100"
+                                                }`}
+                                        >
+                                            Share
+                                        </button>
+
+                                        <button
+                                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
+                                                    ? "hover:bg-neutral-800"
+                                                    : "hover:bg-neutral-100"
+                                                }`}
+                                        >
+                                            Not interested
+                                        </button>
+
+                                        <button
+                                            className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
+                                                    ? "hover:bg-neutral-800"
+                                                    : "hover:bg-neutral-100"
+                                                }`}
+                                        >
+                                            Report
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
