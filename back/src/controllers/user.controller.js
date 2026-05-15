@@ -5,18 +5,33 @@ import { uploadOnCloudinary } from "../utils/cloudinary.js"
 import { apiResponse } from "../utils/apiResponse.js";
 import jwt from "jsonwebtoken"
 import mongoose from "mongoose";
-const userById = asyncHandler(async(req,res)=>{
-    const {Id}=req.body;
-    if(!Id){
-        throw new apiError(400,"Id didnot reach backend");
-    };
-    const userDetails=await User.findById(Id).select(
-        "-refreshToken -password");
-    console.log("wuwgg")
-    return res.status(200).json(
-        new apiResponse(200,userDetails,"User was found succesfully")
-    )
-})
+const userById = async (req, res) => {
+
+    console.log("REQ BODY:", req.body);
+
+    try {
+
+        const { Id } = req.body;
+
+        const userDetails = await User.findById(Id);
+
+        console.log("USER:", userDetails);
+
+        return res.json({
+            success: true,
+            data: userDetails
+        });
+
+    } catch (err) {
+
+        console.log("ACTUAL ERROR:", err);
+
+        return res.status(500).json({
+            success: false,
+            message: err.message
+        });
+    }
+};
 const generateAccessAndRefreshTokens = async (userId) => {
     try {
         const user = await User.findById(userId)
