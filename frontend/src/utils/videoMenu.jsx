@@ -1,4 +1,4 @@
-function MenuDropdown({
+export function MenuDropdown({
   isOpen,
   darkMode,
   items,
