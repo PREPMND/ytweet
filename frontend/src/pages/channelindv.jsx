@@ -90,7 +90,7 @@ const ChannelIndv = (props) => {
                 </div>
             )}
             {!loadingVideos && (
-                <div className="flex mt-2 md:mt-3 z-40 items-center ">
+                <div className="flex mt-2 z-40 items-center ">
                     {/* the channel description */}
 
                     <img className="ml-4 md:ml-9 rounded-full object-cover aspect-square
@@ -103,7 +103,7 @@ const ChannelIndv = (props) => {
                     </div>
                 </div>)}
             {!loadingVideos && (
-                <div className="flex gap-2 mb-5 mt-5 text-black">
+                <div className="flex gap-2 mb-9 mt-9 text-black">
                     {/* some other thing */}
                     <div
                         onClick={() => {
