@@ -15,7 +15,7 @@ export const any = asyncHandler(async (req, res) => {
         },
     ]);
 
-    return res.status(200).json({ success: true, data: pipeline });
+    return res.status(200).json({ success: true, data: pipelines });
 });
 export const createVideo = async (req, res) => {
     try {
