@@ -11,12 +11,14 @@ const ChannelIndv = (props) => {
     const [localSubscriptionStatus, setLocalSubscriptionStatus] = useState(false);
     const [videoSelected, setVideoSelected] = useState(true);
     const [yangSelected, setYangSelected] = useState(false);
+    const [loadingVideos, setLoadingVideos] = useState(false);
     const [videos, setVideos] = useState([]);
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
     const channelVideo = async (ownerId) => {
+        setLoadingVideos(true);
         try {
             const res = await api.post("/videos/any", { owner: ownerId });
             setVideos(res.data.data); // match backend response structure
