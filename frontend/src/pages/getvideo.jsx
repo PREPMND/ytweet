@@ -27,7 +27,7 @@ const VideoList = (props) => {
             );
 
             const data = await res.json();
-
+            console.log("Fetched videos:", data);
             if (data.success) {
 
                 setVideos((prev) => {
