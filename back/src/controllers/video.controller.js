@@ -15,7 +15,7 @@ export const any=asyncHandler(async (req,res)=>{
             },
             {
                 $project:{
-                    coverImage:1,
+                    coverImage:,
                     title:1,
                     thumbnail:1,
                     videoFile:1,
