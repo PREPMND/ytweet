@@ -39,7 +39,7 @@ const ChannelIndv = (props) => {
         <div className="relative">
             {loadingVideos && (
                 <div>
-                <div className="space-y-5 flex items-center md:hidden px-3">
+                <div className="space-y-5 flex md:hidden px-3">
                     {[1,2,3,4,5].map((i) => (
                         <div key={i} className="animate-pulse flex gap-4">
                             <div className="bg-neutral-300 rounded-md w-[50%] aspect-video"></div>
