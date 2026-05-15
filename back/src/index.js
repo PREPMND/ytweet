@@ -11,7 +11,7 @@ application.use((req, res, next) => {
     console.log("Incoming:", req.method, req.url);
     next();
 });
-const PORT= process.env.PORT || 8000;
+const PORT= process.env.PORT || 3000;
 application.listen(PORT,()=>{
     console.log("Server is running on ", PORT)
     console.log(listEndpoints(application));
