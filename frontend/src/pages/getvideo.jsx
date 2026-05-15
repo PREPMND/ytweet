@@ -125,7 +125,7 @@ const VideoList = (props) => {
                         className={`overflow-hidden rounded-2xl cursor-pointer transition-all duration-300 ease-out will-change-transform transform-gpu ${darkMode ? "bg-black" : "bg-white"
                             }`}
                     >
-                        <div className="relative overflow-hidden rounded-xl bg-black">
+                        <div className="relative select-none overflow-hidden rounded-xl bg-black">
                             {playingId === video._id ? (
                                 <video
                                     src={video.videoFile}
