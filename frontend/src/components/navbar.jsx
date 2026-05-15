@@ -19,7 +19,6 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         queryFn: getCurrentUser,
         retry: false,
     });
-    console.log("Current user data:", data);
     useEffect(() => {
         if (error?.response?.status === 401) {
             setNavigate(true);
