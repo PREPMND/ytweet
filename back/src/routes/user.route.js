@@ -34,7 +34,7 @@ router.get("/currentuser", verifyJWT, (req, res) => {
     res.json({ user: req.user || null });
 });
 router.route("/userbyid").post(userById)
-console.log("Token candidate:");
+console.log(userById);
 router.route("/updateaccount").patch(verifyJWT,updateAccountDetails)
 router.route("/changeavatar").patch(verifyJWT,upload.single("avatar"),updateUserAvatar)
 
