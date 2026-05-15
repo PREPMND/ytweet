@@ -22,8 +22,8 @@ const ChannelIndv = (props) => {
         try {
             const res = await api.post("/videos/any", { owner: ownerId });
             setVideos(res.data.data);
-             // match backend response structure
-             setLoadingVideos(false);
+            // match backend response structure
+            setLoadingVideos(false);
         } catch (err) {
             console.error(err);
         }
@@ -38,31 +38,32 @@ const ChannelIndv = (props) => {
 
         <div className="relative">
             {loadingVideos && (
-                <div className="relative w-full">
-                <div className="space-y-5 flex md:hidden px-3">
-                    {[1,2,3,4,5].map((i) => (
-                        <div key={i} className="animate-pulse flex gap-4">
-                            <div className="bg-neutral-300 rounded-md w-[50%] aspect-video"></div>
-
-                            <div className="flex-1 space-y-3 mt-2">
-                                <div className="h-4 bg-neutral-300 rounded w-[80%]"></div>
-                                <div className="h-4 bg-neutral-300 rounded w-[50%]"></div>
+                <div className="px-3 space-y-5">
+                    {/* Mobile layout */}
+                    <div className="md:hidden space-y-5">
+                        {[...Array(5)].map((_, i) => (
+                            <div key={i} className="animate-pulse">
+                                <div className="bg-neutral-300 rounded-md w-full aspect-video"></div>
+                                <div className="mt-3 space-y-2">
+                                    <div className="h-4 bg-neutral-300 rounded w-[80%]"></div>
+                                    <div className="h-4 bg-neutral-300 rounded w-[60%]"></div>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
-                <div className="space-y-5 hidden md:flex px-3">
-                    {[1, 2, 3].map((i) => (
-                        <div key={i} className="animate-pulse flex gap-4">
-                            <div className="bg-neutral-300 rounded-md w-[50%] aspect-video"></div>
+                        ))}
+                    </div>
 
-                            <div className="flex-1 space-y-3 mt-2">
-                                <div className="h-4 bg-neutral-300 rounded w-[80%]"></div>
-                                <div className="h-4 bg-neutral-300 rounded w-[50%]"></div>
+                    {/* Desktop layout */}
+                    <div className="hidden md:grid md:grid-cols-3 md:gap-6">
+                        {[...Array(6)].map((_, i) => (
+                            <div key={i} className="animate-pulse">
+                                <div className="bg-neutral-300 rounded-md w-full aspect-video"></div>
+                                <div className="mt-3 space-y-2">
+                                    <div className="h-4 bg-neutral-300 rounded w-[80%]"></div>
+                                    <div className="h-4 bg-neutral-300 rounded w-[60%]"></div>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
                 </div>
             )}
             {!loadingVideos && (
@@ -71,35 +72,35 @@ const ChannelIndv = (props) => {
                 </div>
             )}
             {!loadingVideos && (
-            <div className="flex mt-5 md:mt-3 z-40 items-center ">
-                {/* the channel description */}
+                <div className="flex mt-5 md:mt-3 z-40 items-center ">
+                    {/* the channel description */}
 
-                <img className="ml-6 md:ml-9 rounded-full object-cover aspect-square
+                    <img className="ml-6 md:ml-9 rounded-full object-cover aspect-square
                 w-[100px] h-[100px] md:h-[20%] md:w-[20%]" src={profileSelected.owner.avatar} alt={profileSelected.owner.username} />
-                <div className="flex pl-6 md:pl-10 justify-between font-[Saira] text-[20px] md:text-[28px] font-[500] w-[70%] items-center h-[120px] ">
-                    <div className="">{profileSelected.owner.username}</div>
-                    <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[18px] w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
-                        {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
-                    </button>
-                </div>
-            </div>)}
+                    <div className="flex pl-6 md:pl-10 justify-between font-[Saira] text-[20px] md:text-[28px] font-[500] w-[70%] items-center h-[120px] ">
+                        <div className="">{profileSelected.owner.username}</div>
+                        <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[18px] w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
+                            {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
+                        </button>
+                    </div>
+                </div>)}
             {!loadingVideos && (
-            <div className="flex gap-2 mb-5 mt-5 text-black">
-                {/* some other thing */}
-                <div
-                    onClick={() => {
-                        setVideoSelected(true);
-                        setYangSelected(false);
-                    }}
-                    className={`w-[50%] h-[2px] border-[2px] ${videoSelected ? "border-black h-[1.5px]" : "border-red-300"}  `}></div>
-                <div
-                    onClick={() => {
-                        setVideoSelected(false);
-                        setYangSelected(true);
-                    }}
-                    className={`w-[50%] h-[2px] border-[2px]  ${yangSelected ? "border-black h-[1.5px]" : "border-amber-200"}  `}></div>
+                <div className="flex gap-2 mb-5 mt-5 text-black">
+                    {/* some other thing */}
+                    <div
+                        onClick={() => {
+                            setVideoSelected(true);
+                            setYangSelected(false);
+                        }}
+                        className={`w-[50%] h-[2px] border-[2px] ${videoSelected ? "border-black h-[1.5px]" : "border-red-300"}  `}></div>
+                    <div
+                        onClick={() => {
+                            setVideoSelected(false);
+                            setYangSelected(true);
+                        }}
+                        className={`w-[50%] h-[2px] border-[2px]  ${yangSelected ? "border-black h-[1.5px]" : "border-amber-200"}  `}></div>
 
-            </div>)}
+                </div>)}
             <div>
                 {videos.map((video, index) => (
                     <div
