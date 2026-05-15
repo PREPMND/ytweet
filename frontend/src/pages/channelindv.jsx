@@ -24,7 +24,7 @@ const ChannelIndv = (props) => {
         console.log("ID SENT:", Id);
         try {
             const res = await fetch(
-                "http://localhost:3000/api/v1/users/userbyid",
+                "http://localhost:8000/api/v1/users/userbyid",
                 {
                     method: "POST",
                     headers: {
