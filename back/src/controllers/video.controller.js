@@ -14,6 +14,15 @@ export const any=asyncHandler(async (req,res)=>{
                 },
             },
             {
+                $lookup: {
+                    from: "users",
+                    localField: "owner",
+                    foreignField: "_id",
+                    as: "owner"
+                }
+            },
+            { $unwind: "$owner" },
+            {
                 $project:{
                     "owner._id": 1,
                     "owner.username": 1,
