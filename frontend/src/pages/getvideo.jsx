@@ -27,7 +27,6 @@ const VideoList = (props) => {
             );
 
             const data = await res.json();
-            console.log("Fetched videos:", data);
             if (data.success) {
 
                 setVideos((prev) => {
@@ -109,7 +108,6 @@ const VideoList = (props) => {
     function Handle(channelId, channelUsername, channel) {
         setProfileSelected(channel);
         navigate(`/${channelUsername}`);
-        console.log("Channel ID:", channel);
     }
 
     function toggleMenu(id) {
