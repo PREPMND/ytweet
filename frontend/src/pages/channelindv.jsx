@@ -24,6 +24,7 @@ const ChannelIndv = (props) => {
         try {
             const res = await api.post("/users/userbyid", { Id});
             console.log(res);
+            coverImage=res.coverImage
         }
         catch (err) {
             console.log(err);
