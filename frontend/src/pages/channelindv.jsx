@@ -36,7 +36,7 @@ const ChannelIndv = (props) => {
     function toggleMenu(id) {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
-    
+
     function handleWatchLater(video) {
         console.log("Watch later:", video);
     }
@@ -121,13 +121,13 @@ const ChannelIndv = (props) => {
                 </div>)}
             <div>
                 {videos.map((video, index) => (
-                    
+
                     <div
                         className="flex md:flex-row flex-col justify-between mb-4"
                         key={video._id || index}>
 
                         <div className="w-full md:w-[80%] px-3 md:mx-0 flex  ">
-                            
+
                             <img
                                 loading="lazy"
                                 className="object-cover aspect-video rounded-md w-full md:w-[50%]"
@@ -136,54 +136,54 @@ const ChannelIndv = (props) => {
                             />
                             <h3 className={`md:mt-[1px] ml-5 hidden md:flex font-[600] text-[18px] 
                                 ${video.title.length > 70 ? "whitespace-pre-wrap" : ""}`}>{video.title}</h3>
-                            <EllipsisVertical 
-                            onClick={(e) => {
-                                        e.stopPropagation();
-                                        toggleMenu(video._id);
-                            }}
-                            className="text-[18px]  cursor-pointer hidden md:flex absolute right-3 mt-3" />
+                            <EllipsisVertical
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    toggleMenu(video._id);
+                                }}
+                                className="text-[18px]  cursor-pointer hidden md:flex absolute right-3 mt-3" />
                             <MenuDropdown
-                            isOpen={menuOpenId === video._id}
-                            darkMode={darkMode}
-                            items={[
-                                {
-                                    label: "Watch later",
-                                    onClick: () => handleWatchLater(video),
-                                },
-                                {
-                                    label: "Save to playlist",
-                                    onClick: () => handlePlaylist(video),
-                                },
-                                {
-                                    label: "Share",
-                                    onClick: () => handleShare(video),
-                                },
-                                {
-                                    label: "Not interested",
-                                    onClick: () => handleNotInterested(video),
-                                },
-                                {
-                                    label: "Report",
-                                    onClick: () => handleReport(video),
-                                },
-                            ]}
-                        />
+                                isOpen={menuOpenId === video._id}
+                                darkMode={darkMode}
+                                items={[
+                                    {
+                                        label: "Watch later",
+                                        onClick: () => handleWatchLater(video),
+                                    },
+                                    {
+                                        label: "Save to playlist",
+                                        onClick: () => handlePlaylist(video),
+                                    },
+                                    {
+                                        label: "Share",
+                                        onClick: () => handleShare(video),
+                                    },
+                                    {
+                                        label: "Not interested",
+                                        onClick: () => handleNotInterested(video),
+                                    },
+                                    {
+                                        label: "Report",
+                                        onClick: () => handleReport(video),
+                                    },
+                                ]}
+                            />
                         </div>
-                        
+
                         <div className="flex md:hidden items-start md:h-auto h-12 md:px-0 px-2 mb-3 md:mb-0 justify-between md:w-auto w-full gap-2 ">
                             <h3 className="mt-2 pl-[10px] font-[600] md:hidden flex text-[15px] md:text-[18px]">{video.title}</h3>
                             <EllipsisVertical
-                            onClick={(e) => {
-                                        e.stopPropagation();
-                                        toggleMenu(video._id);
-                                    }}
-                            className="text-[18px]  cursor-pointer md:hidden absolute right-2 mt-3" />
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    toggleMenu(video._id);
+                                }}
+                                className="text-[18px]  cursor-pointer md:hidden absolute right-2 mt-3" />
                         </div>
-                        
+
                     </div>
-                    
+
                 ))}
-                
+
             </div>
         </div>
     )
