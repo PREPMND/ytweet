@@ -127,6 +127,32 @@ const ChannelIndv = (props) => {
                         key={video._id || index}>
 
                         <div className="w-full md:w-[80%] px-3 md:mx-0 flex  ">
+                            <MenuDropdown
+                            isOpen={menuOpenId === video._id}
+                            darkMode={darkMode}
+                            items={[
+                                {
+                                    label: "Watch later",
+                                    onClick: () => handleWatchLater(video),
+                                },
+                                {
+                                    label: "Save to playlist",
+                                    onClick: () => handlePlaylist(video),
+                                },
+                                {
+                                    label: "Share",
+                                    onClick: () => handleShare(video),
+                                },
+                                {
+                                    label: "Not interested",
+                                    onClick: () => handleNotInterested(video),
+                                },
+                                {
+                                    label: "Report",
+                                    onClick: () => handleReport(video),
+                                },
+                            ]}
+                        />
                             <img
                                 loading="lazy"
                                 className="object-cover aspect-video rounded-md w-full md:w-[50%]"
