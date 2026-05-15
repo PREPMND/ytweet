@@ -11,7 +11,7 @@ export function MenuDropdown({
       className={`
         font-[Saira] font-[500]
         absolute bottom-8 right-8
-        z-40 w-[200px] md:min-w-[220px]
+        z-40 w-[200px] sm:w-[190px] md:min-w-[220px]
         overflow-hidden rounded-xl shadow-xl border
         ${
           darkMode
