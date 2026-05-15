@@ -8,7 +8,7 @@ const VideoList = (props) => {
     const timeoutRef = useRef(null);
     const [playingId, setPlayingId] = useState(null);
     const navigate = useNavigate();
-
+    const [menuOpenId, setMenuOpenId] = useState(null);
     const [videos, setVideos] = useState([]);
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
@@ -97,9 +97,7 @@ const VideoList = (props) => {
 
     return (
         <div
-            className={`px-[10px] overflow-x-hidden min-h-screen ${darkMode
-                ? "bg-neutral-950 text-white"
-                : "bg-white text-black"
+            className={`relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-300 ease-out will-change-transform transform-gpu ${darkMode ? "bg-black" : "bg-white"
                 }`}
         >
             <div
@@ -210,14 +208,14 @@ const VideoList = (props) => {
                                 {menuOpenId === video._id && (
                                     <div
                                         className={`absolute top-11 left-2 z-40 min-w-[220px] overflow-hidden rounded-xl shadow-xl border ${darkMode
-                                                ? "bg-neutral-900 border-neutral-700 text-white"
-                                                : "bg-white border-neutral-200 text-black"
+                                            ? "bg-neutral-900 border-neutral-700 text-white"
+                                            : "bg-white border-neutral-200 text-black"
                                             }`}
                                     >
                                         <button
                                             className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                                    ? "hover:bg-neutral-800"
-                                                    : "hover:bg-neutral-100"
+                                                ? "hover:bg-neutral-800"
+                                                : "hover:bg-neutral-100"
                                                 }`}
                                         >
                                             Watch later
@@ -225,8 +223,8 @@ const VideoList = (props) => {
 
                                         <button
                                             className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                                    ? "hover:bg-neutral-800"
-                                                    : "hover:bg-neutral-100"
+                                                ? "hover:bg-neutral-800"
+                                                : "hover:bg-neutral-100"
                                                 }`}
                                         >
                                             Save to playlist
@@ -234,8 +232,8 @@ const VideoList = (props) => {
 
                                         <button
                                             className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                                    ? "hover:bg-neutral-800"
-                                                    : "hover:bg-neutral-100"
+                                                ? "hover:bg-neutral-800"
+                                                : "hover:bg-neutral-100"
                                                 }`}
                                         >
                                             Share
@@ -243,8 +241,8 @@ const VideoList = (props) => {
 
                                         <button
                                             className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                                    ? "hover:bg-neutral-800"
-                                                    : "hover:bg-neutral-100"
+                                                ? "hover:bg-neutral-800"
+                                                : "hover:bg-neutral-100"
                                                 }`}
                                         >
                                             Not interested
@@ -252,8 +250,8 @@ const VideoList = (props) => {
 
                                         <button
                                             className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                                    ? "hover:bg-neutral-800"
-                                                    : "hover:bg-neutral-100"
+                                                ? "hover:bg-neutral-800"
+                                                : "hover:bg-neutral-100"
                                                 }`}
                                         >
                                             Report
