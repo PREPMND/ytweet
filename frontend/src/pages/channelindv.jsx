@@ -54,7 +54,7 @@ const ChannelIndv = (props) => {
     }
     return (
 
-        <div className="relative">
+        <div className={`relative `}>
             {loadingVideos && (
                 <div className="px-3 space-y-5">
                     {/* Mobile layout */}
