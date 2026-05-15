@@ -33,7 +33,22 @@ const ChannelIndv = (props) => {
 
 
     return (
+
         <div className="relative">
+            {loadingVideos && (
+                <div className="space-y-5 px-3">
+                    {[1, 2, 3].map((i) => (
+                        <div key={i} className="animate-pulse flex gap-4">
+                            <div className="bg-neutral-300 rounded-md w-[50%] aspect-video"></div>
+
+                            <div className="flex-1 space-y-3 mt-2">
+                                <div className="h-4 bg-neutral-300 rounded w-[80%]"></div>
+                                <div className="h-4 bg-neutral-300 rounded w-[50%]"></div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
             <div className="relative w-screen">
                 <img className="-z-30 -mt-5 inset-0 absolute w-screen h-[100px] " src={data.user.coverImage} />
             </div>
