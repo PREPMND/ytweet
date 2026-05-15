@@ -16,7 +16,7 @@ export const any=asyncHandler(async (req,res)=>{
             },
         ]
     )
-    const user= await User.findById(owner).select("username email avatar coverImage");
+    const user= await User.findById(owner);
     pipelines.forEach((pipeline)=>{
         pipeline.owner=user;
     });
