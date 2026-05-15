@@ -140,7 +140,7 @@ const VideoList = (props) => {
                                 <img
                                     loading="lazy"
                                     decoding="async"
-                                    fetchpriority="low"
+                                    fetchPriority="low"
                                     src={video.thumbnail}
                                     alt={video.title}
                                     className="w-full aspect-video object-cover transition-transform duration-500 ease-out hover:scale-[1.02]"
