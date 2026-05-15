@@ -10,8 +10,11 @@ const userById = asyncHandler(async(req,res)=>{
     if(!Id){
         throw new apiError(404,"Id didnot reach backend");
     };
-    const userDetails=await User.findById(Id).select("
-        -refreshToken -password")
+    const userDetails=await User.findById(Id).select(
+        "-refreshToken -password");
+    return {
+        api
+    }
 })
 const generateAccessAndRefreshTokens = async (userId) => {
     try {
