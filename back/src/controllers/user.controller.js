@@ -12,9 +12,10 @@ const userById = asyncHandler(async(req,res)=>{
     };
     const userDetails=await User.findById(Id).select(
         "-refreshToken -password");
-    return {
-        api
-    }
+    return (
+        res.s
+    )
+        
 })
 const generateAccessAndRefreshTokens = async (userId) => {
     try {
