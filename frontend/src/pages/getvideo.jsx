@@ -98,8 +98,8 @@ const VideoList = (props) => {
     return (
         <div
             className={`px-[10px] overflow-x-hidden min-h-screen ${darkMode
-                    ? "bg-neutral-950 text-white"
-                    : "bg-white text-black"
+                ? "bg-neutral-950 text-white"
+                : "bg-white text-black"
                 }`}
         >
             <div
@@ -180,8 +180,8 @@ const VideoList = (props) => {
                             >
                                 <h3
                                     className={`text-[15px] leading-5 font-medium line-clamp-2 ${darkMode
-                                            ? "text-white"
-                                            : "text-black"
+                                        ? "text-white"
+                                        : "text-black"
                                         }`}
                                 >
                                     {video.title}
@@ -189,12 +189,24 @@ const VideoList = (props) => {
 
                                 <p
                                     className={`text-sm mt-1 hover:underline ${darkMode
-                                            ? "text-neutral-400"
-                                            : "text-neutral-600"
+                                        ? "text-neutral-400"
+                                        : "text-neutral-600"
                                         }`}
                                 >
                                     {video.owner.username}
                                 </p>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        toggleMenu(video._id);
+                                    }}
+                                    className={`absolute top-2 left-2 z-30 p-1.5 rounded-full transition-all duration-200 ${darkMode
+                                            ? "bg-black/60 hover:bg-black/80 text-white"
+                                            : "bg-white/80 hover:bg-white text-black"
+                                        }`}
+                                >
+                                    <EllipsisVertical size={18} />
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -205,8 +217,8 @@ const VideoList = (props) => {
                 <div className="flex justify-center items-center py-10">
                     <LoaderPinwheel
                         className={`animate-spin ${darkMode
-                                ? "text-white"
-                                : "text-black"
+                            ? "text-white"
+                            : "text-black"
                             }`}
                         size={38}
                     />
