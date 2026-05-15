@@ -143,7 +143,7 @@ const ChannelIndv = (props) => {
                                 }}
                                 className="text-[18px]  cursor-pointer hidden md:flex absolute right-1 mt-3" />
                             <MenuDropdown
-                                className="bottom-[-10px] "
+                                className="bottom-[-10px] md:bottom-[-20px] right-2 md:right-3"
                                 isOpen={menuOpenId === video._id}
                                 darkMode={darkMode}
                                 items={[
