@@ -65,7 +65,6 @@ export const getVideos = async (req, res) => {
         const { page = 1, limit = 6 } = req.query;
 
         const aggregate = Video.aggregate([
-            { $match: { isPublished: true } },
             {
                 $lookup: {
                     from: "users",
@@ -77,7 +76,7 @@ export const getVideos = async (req, res) => {
             { $unwind: "$owner" },
             {
                 $project: {
-                    description: 1,
+                    description: 0,
                     videoFile: 1,
                     thumbnail: 1,
                     duration: 1,
