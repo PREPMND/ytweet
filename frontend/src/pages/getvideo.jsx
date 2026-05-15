@@ -21,7 +21,7 @@ const VideoList = (props) => {
             setLoading(true);
 
             const res = await fetch(
-                `${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideos?page=${pageNum}&limit=20`
+                `${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideos?page=${pageNum}&limit=5`
             );
 
             const data = await res.json();
