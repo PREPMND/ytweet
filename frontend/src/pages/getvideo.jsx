@@ -210,7 +210,7 @@ const VideoList = (props) => {
                                 </button>
                                 {menuOpenId === video._id && (
                                     <div
-                                        className={`absolute bottom-8 right-6 z-40 min-w-[220px] overflow-hidden rounded-xl shadow-xl border ${darkMode
+                                        className={`absolute bottom-8 right-8 z-40 min-w-[220px] overflow-hidden rounded-xl shadow-xl border ${darkMode
                                             ? "bg-neutral-900 border-neutral-700 text-white"
                                             : "bg-white border-neutral-200 text-black"
                                             }`}
