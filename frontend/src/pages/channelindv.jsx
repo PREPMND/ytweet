@@ -18,6 +18,7 @@ const ChannelIndv = (props) => {
         queryFn: getCurrentUser,
     });
     const userById=async(Id)=>{
+        if(!Id) return ;
         try{
             const res=await api.post("/users/userbyid",{Id:Id});
             console.log(res);
