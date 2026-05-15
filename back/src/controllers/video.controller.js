@@ -8,23 +8,12 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 export const any = asyncHandler(async (req, res) => {
     const { owner } = req.body;
 
-    const pipelines = await Video.aggregate([
-        {
-            $match: {
-                owner: new mongoose.Types.ObjectId(owner),
-            },
-        },
-    ]);
+    const videos = await Video.find({ owner })
+        .populate("owner", "_id username email avatar coverImage");
 
     const user = await User.findById(owner).select("-password -refreshToken -email -createdAt -updatedAt");
 
-    // attach owner details to each video
-    const videosWithOwner = pipelines.map((video) => ({
-        ...video,
-        owner: user,
-    }));
-
-    return res.status(200).json({ success: true, data: videosWithOwner });
+    return res.status(200).json({ success: true, data: videos});
 });
 export const createVideo = async (req, res) => {
     try {
