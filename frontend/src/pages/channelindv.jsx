@@ -130,7 +130,7 @@ const ChannelIndv = (props) => {
 
                             <img
                                 loading="lazy"
-                                className="object-cover aspect-video rounded-md w-[90%] md:w-[50%]"
+                                className="object-cover aspect-video rounded-md w-full md:w-[50%]"
                                 src={video.thumbnail}
                                 alt={video.title}
                             />
