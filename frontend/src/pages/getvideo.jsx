@@ -208,7 +208,9 @@ const VideoList = (props) => {
                                 >
                                     <EllipsisVertical size={18} />
                                 </button>
-                                {menuOpenId === video._id && (
+                                
+                            </div>
+                            {menuOpenId === video._id && (
                                     <div
                                         className={`font-[Saira] font-[500] absolute bottom-8 right-8 z-40 w-[200px] md:min-w-[220px] overflow-hidden rounded-xl shadow-xl border ${darkMode
                                             ? "bg-neutral-900 border-neutral-700 text-white"
@@ -261,7 +263,6 @@ const VideoList = (props) => {
                                         </button>
                                     </div>
                                 )}
-                            </div>
                         </div>
                     </div>
                 ))}
