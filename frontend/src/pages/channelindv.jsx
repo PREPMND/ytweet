@@ -150,33 +150,9 @@ const ChannelIndv = (props) => {
                                     }}
                             className="text-[18px]  cursor-pointer md:hidden absolute right-2 mt-3" />
                         </div>
-                        <MenuDropdown
-                            isOpen={menuOpenId === video._id}
-                            darkMode={darkMode}
-                            items={[
-                                {
-                                    label: "Watch later",
-                                    onClick: () => handleWatchLater(video),
-                                },
-                                {
-                                    label: "Save to playlist",
-                                    onClick: () => handlePlaylist(video),
-                                },
-                                {
-                                    label: "Share",
-                                    onClick: () => handleShare(video),
-                                },
-                                {
-                                    label: "Not interested",
-                                    onClick: () => handleNotInterested(video),
-                                },
-                                {
-                                    label: "Report",
-                                    onClick: () => handleReport(video),
-                                },
-                            ]}
-                        />
+                        
                     </div>
+                    
                 ))}
             </div>
         </div>
