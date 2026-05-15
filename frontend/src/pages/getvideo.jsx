@@ -1,7 +1,7 @@
 import { LoaderPinwheel } from "lucide-react";
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { EllipsisVertical } from "lucide-react";
 const VideoList = (props) => {
     const { darkMode, setProfileSelected } = props;
 
@@ -94,8 +94,6 @@ const VideoList = (props) => {
         setProfileSelected(channel);
         navigate(`/${channelUsername}`);
     }
-
-    const [menuOpenId, setMenuOpenId] = useState(null);
 
     function toggleMenu(id) {
         setMenuOpenId((prev) => (prev === id ? null : id));
