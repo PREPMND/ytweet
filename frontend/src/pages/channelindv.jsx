@@ -51,10 +51,10 @@ const ChannelIndv = (props) => {
                     ))}
                 </div>
             )}
-            <div className="relative w-full overflow-hidden">
+            <div className="w-full h-[100px] overflow-hidden">
                 <img
-                    className="-z-30 -mt-5 inset-0 absolute w-full h-[100px] object-cover"
                     src={data.user.coverImage}
+                    className="w-full h-full object-cover"
                 />
             </div>
             <div className="flex mt-5 md:mt-3 z-40 items-center ">
