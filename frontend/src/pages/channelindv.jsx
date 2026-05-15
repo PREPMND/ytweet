@@ -23,7 +23,6 @@ const ChannelIndv = (props) => {
         if (!Id) return;
         try {
             const res = await api.post("/users/userbyid", { Id});
-            console.log(res);
             setcoverImage(res.data.data.coverImage)
         }
         catch (err) {
@@ -35,7 +34,6 @@ const ChannelIndv = (props) => {
         try {
             const res = await api.post("/videos/any", { owner: ownerId });
             setVideos(res.data.data);
-            console.log("Fetched videos:", res.data.data);
             // match backend response structure
             setLoadingVideos(false);
         } catch (err) {
