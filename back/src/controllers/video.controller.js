@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { Video } from "../models/video.models.js"; // adjust path if needed
-import { User } from "../models/user.models.js"; // adjust path if needed
 import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if needed
 import { apiError } from "../utils/apiError.js"; // adjust path if needed
 import { User } from "../models/user.models.js"; // adjust path if needed
@@ -15,26 +14,13 @@ export const any=asyncHandler(async (req,res)=>{
                 },
             },
             {
-                $lookup: {
-                    from: "users",
-                    localField: "owner",
-                    foreignField: "_id",
-                    as: "owner"
-                }
-            },
-            { $unwind: "$owner" },
-            {
                 $project:{
-                    "owner._id": 1,
-                    "owner.username": 1,
-                    "owner.email": 1,
-                    "owner.avatar": 1,
-                    "owner.coverImage": 1,
+                    coverImage:1,
                     title:1,
                     thumbnail:1,
                     videoFile:1,
                 },
-            }
+            },
         ]
     )
     return res.status(200).json({ success: true, data: pipelines });
