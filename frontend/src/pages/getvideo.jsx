@@ -214,59 +214,32 @@ const VideoList = (props) => {
                                     <EllipsisVertical size={18} />
                                 </button>
                             </div>
-                            {menuOpenId === video._id && (
-                                <div
-                                    className={`font-[Saira] font-[500] absolute bottom-8 right-8 z-40 w-[200px] md:min-w-[220px] overflow-hidden rounded-xl shadow-xl border ${darkMode
-                                        ? "bg-neutral-900 border-neutral-700 text-white"
-                                        : "bg-white border-neutral-200 text-black"
-                                        }`}
-                                >
-                                    <button
-                                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                            ? "hover:bg-neutral-800"
-                                            : "hover:bg-neutral-100"
-                                            }`}
-                                    >
-                                        Watch later
-                                    </button>
-
-                                    <button
-                                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                            ? "hover:bg-neutral-800"
-                                            : "hover:bg-neutral-100"
-                                            }`}
-                                    >
-                                        Save to playlist
-                                    </button>
-
-                                    <button
-                                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                            ? "hover:bg-neutral-800"
-                                            : "hover:bg-neutral-100"
-                                            }`}
-                                    >
-                                        Share
-                                    </button>
-
-                                    <button
-                                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                            ? "hover:bg-neutral-800"
-                                            : "hover:bg-neutral-100"
-                                            }`}
-                                    >
-                                        Not interested
-                                    </button>
-
-                                    <button
-                                        className={`w-full text-left px-4 py-3 text-sm transition-colors ${darkMode
-                                            ? "hover:bg-neutral-800"
-                                            : "hover:bg-neutral-100"
-                                            }`}
-                                    >
-                                        Report
-                                    </button>
-                                </div>
-                            )}
+                            <MenuDropdown
+                                isOpen={menuOpenId === video._id}
+                                darkMode={darkMode}
+                                items={[
+                                    {
+                                        label: "Watch later",
+                                        onClick: () => handleWatchLater(video),
+                                    },
+                                    {
+                                        label: "Save to playlist",
+                                        onClick: () => handlePlaylist(video),
+                                    },
+                                    {
+                                        label: "Share",
+                                        onClick: () => handleShare(video),
+                                    },
+                                    {
+                                        label: "Not interested",
+                                        onClick: () => handleNotInterested(video),
+                                    },
+                                    {
+                                        label: "Report",
+                                        onClick: () => handleReport(video),
+                                    },
+                                ]}
+                            />
                         </div>
                     </div>
                 ))}
