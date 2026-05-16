@@ -52,7 +52,9 @@ const Login = () => {
     {
         !bgLoaded && (
             <div>
+                <div className='border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg w-[300px] h-[380px] md:w-[400px] md:h-[400px]'>
                 
+                </div>
             </div>
         )
     }
