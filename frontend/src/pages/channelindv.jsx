@@ -13,7 +13,7 @@ const ChannelIndv = (props) => {
     const [loadingVideos, setLoadingVideos] = useState(false);
     const [menuOpenId, setMenuOpenId] = useState(null);
     const [coverImage,setcoverImage]=useState(null);
-    const [imageLoaded,setimageLoaded]
+    const [imageLoaded,setimageLoaded]=useState(false);
     const [videos, setVideos] = useState([]);
     const { data } = useQuery({
         queryKey: ["currentUser"],
@@ -105,7 +105,9 @@ const ChannelIndv = (props) => {
             )}
             {!loadingVideos && (
                 <div className="relative w-full">
-                    <img className=" -mt-5 inset-0 rounded-b-lg w-full h-[140px] object-cover " src={coverImage} />
+                    <img 
+                    onLoad={()=>{setimageLoaded(true)}}
+                    className=" -mt-5 inset-0 rounded-b-lg w-full h-[140px] object-cover " src={coverImage} />
                 </div>
             )}
             {!loadingVideos && (
