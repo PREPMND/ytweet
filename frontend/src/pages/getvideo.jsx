@@ -28,10 +28,10 @@ const VideoList = (props) => {
 
             const data = await res.json();
             if (data.success) {
+                await preloadImages(newVideos.map((v) => v.thumbnail));
 
                 setVideos((prev) => {
                     const existingIds = new Set(prev.map(v => v._id));
-
                     const filtered = data.data.docs.filter(
                         v => !existingIds.has(v._id)
                     );
