@@ -51,6 +51,9 @@ const ChannelIndv = (props) => {
             console.error(err);
         }
     };
+    useEffect(()=>{
+        subcriptionStatus();
+    },[profileSelected])
     useEffect(() => {
         channelVideo(profileSelected.owner._id);
     }, [data]);
