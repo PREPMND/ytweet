@@ -22,7 +22,7 @@ const ChannelIndv = (props) => {
     const subcriptionStatus = async () => {
         if (!data?.user) return;
         try {
-            const res = await api.post(`/users/getchannel`, { username: profileSelected.owner.username });
+            const res = await api.post(`/users/getchannel`, { username: profileSelected.owner.username }, { withCredentials: true });
             console.log(res.data.data);
         }
         catch (err) {
