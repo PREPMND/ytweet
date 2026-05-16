@@ -41,6 +41,7 @@ const VideoList = (props) => {
 
             const data = await res.json();
             if (data.success) {
+                const newVideos = data.data.docs;
                 await preloadImages(newVideos.map((v) => v.thumbnail));
 
                 setVideos((prev) => {
