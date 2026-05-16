@@ -85,7 +85,7 @@ const Login = () => {
                 <div
                     className='bg-white select-none absolute inset-0 flex z-30 items-center justify-center'>
                     <img
-                        className='-z-20 hidden inset-0 absolute w-full h-screen object-cover' src={orange} />
+                        className='-z-20 inset-0 absolute w-full h-screen object-cover' src={orange} />
 
                     <div className='border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg w-[300px] h-[380px] md:w-[400px] md:h-[400px]'>
 
