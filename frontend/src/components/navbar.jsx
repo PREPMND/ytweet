@@ -6,7 +6,7 @@ import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle
 import { useState, useEffect, useEffectEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode,isLoggedIn,setisLoggedIn }) => {
+const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode, isLoggedIn, setisLoggedIn }) => {
     const [navigate, setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
@@ -18,13 +18,15 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
         retry: false,
+        refetchOnWindowFocus: false,
+        refetchInterval: false,
     });
     useEffect(() => {
         if (error?.response?.status === 401) {
             setNavigate(true);
         }
-        if(error){setisLoggedIn(false)}
-        if(!error){setisLoggedIn(true)}
+        if (error) { setisLoggedIn(false) }
+        if (!error) { setisLoggedIn(true) }
     }, [error]);
 
     return (
@@ -116,57 +118,57 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                         className="absolute inset-0 bg-black opacity-60"
                         onClick={() => setMenubar(false)}
                     ></div>
-                     
-                    <div 
-                    
-                    className={`relative sm:w-[45%] w-[60%] md:w-[40%] lg:w-[30%] h-full shadow-lg flex flex-col pl-[30px] md:pl-[44px] pt-5 gap-6 z-50 ${darkMode ? "bg-neutral-900 shadow-lg shadow-neutral-200 text-white" : "bg-white"} select-none overflow-y-scroll`}>
+
+                    <div
+
+                        className={`relative sm:w-[45%] w-[60%] md:w-[40%] lg:w-[30%] h-full shadow-lg flex flex-col pl-[30px] md:pl-[44px] pt-5 gap-6 z-50 ${darkMode ? "bg-neutral-900 shadow-lg shadow-neutral-200 text-white" : "bg-white"} select-none overflow-y-scroll`}>
                         <div>
 
                             <div className="flex items-center mt-4 flex-col justify-center mr-[40px] mb-4">
                                 <div>
                                     <img
-                                        className={`${darkMode?"shadow-white":""} hover:ring-2 ring-fuchsia-400 shadow-md shadow-stone-500 rounded-full h-[100px] w-[100px] md:h-[140px] md:w-[140px] object-cover mb-2 transition-transform duration-300 ease-in-out hover:bg-white/20 hover:scale-[1.04]`}
+                                        className={`${darkMode ? "shadow-white" : ""} hover:ring-2 ring-fuchsia-400 shadow-md shadow-stone-500 rounded-full h-[100px] w-[100px] md:h-[140px] md:w-[140px] object-cover mb-2 transition-transform duration-300 ease-in-out hover:bg-white/20 hover:scale-[1.04]`}
                                         src={data?.user.avatar || "https://i.sstatic.net/lsh78.jpg"}
                                     />
                                 </div>
                                 <div className={`${darkMode ? "text-white" : "text-neutral-900"} font-[500] text-[12px] md:text-[16px]`}>
                                     {data?.user.fullName}
                                 </div>
-                                <button className={`border-2 px-3 md:px-3 mt-2 md:mt-3 py-1 rounded-[12px] mb-2 md:mb-0 text-[15px]  md:text-[18px] text-neutral-900 font-[500] hover:text-black transition-all duration-300 ease-in-out hover:scale-105  hover:shadow-sm ${darkMode?"text-black bg-white  hover:shadow-fuchsia-400 hover:shadow-md":"hover:shadow-stone-500"}`} >
-                                    <span className={`${isLoggedIn==true?"flex":"hidden"}`}>Account Details</span>
-                                    <span 
-                                    onClick={()=>{navigating("/login")}}
-                                    className={`${isLoggedIn==false?"flex":"hidden"}`}>Log In</span>
+                                <button className={`border-2 px-3 md:px-3 mt-2 md:mt-3 py-1 rounded-[12px] mb-2 md:mb-0 text-[15px]  md:text-[18px] text-neutral-900 font-[500] hover:text-black transition-all duration-300 ease-in-out hover:scale-105  hover:shadow-sm ${darkMode ? "text-black bg-white  hover:shadow-fuchsia-400 hover:shadow-md" : "hover:shadow-stone-500"}`} >
+                                    <span className={`${isLoggedIn == true ? "flex" : "hidden"}`}>Account Details</span>
+                                    <span
+                                        onClick={() => { navigating("/login") }}
+                                        className={`${isLoggedIn == false ? "flex" : "hidden"}`}>Log In</span>
                                 </button>
                             </div>
-                            <div className= {` ${darkMode?"":"text-stone-900"}  text-[10px] md:text-[12px] text-center mt-2 hidden md:flex  text-white/70 border-[1px] w-[260px]`}></div>
+                            <div className={` ${darkMode ? "" : "text-stone-900"}  text-[10px] md:text-[12px] text-center mt-2 hidden md:flex  text-white/70 border-[1px] w-[260px]`}></div>
                             <div>
-                                <div 
-                                onClick={()=>navigating("/createvideo")}
-                                className={`flex items-center transition-colors duration-200 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/95" : "text-slate-900 hover:text-black"}`}>
-                                    <VideotapeIcon className=" mr-5 md:mr-7" size={24}/>
-                                    <span 
-                                    className="ml-2 hover:scale-105 transition-transform duration-200 ease-out md:text-[20px] text-[15px] font-[500]">Create Videos</span>
-                                    <PlusCircle className={`ml-10 hover:scale-105  transition-transform hidden md:flex duration-200 ease-in-out ${darkMode?"text-white/90 hover:text-white":"text-black"} `}   size={28}/>
+                                <div
+                                    onClick={() => navigating("/createvideo")}
+                                    className={`flex items-center transition-colors duration-200 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/95" : "text-slate-900 hover:text-black"}`}>
+                                    <VideotapeIcon className=" mr-5 md:mr-7" size={24} />
+                                    <span
+                                        className="ml-2 hover:scale-105 transition-transform duration-200 ease-out md:text-[20px] text-[15px] font-[500]">Create Videos</span>
+                                    <PlusCircle className={`ml-10 hover:scale-105  transition-transform hidden md:flex duration-200 ease-in-out ${darkMode ? "text-white/90 hover:text-white" : "text-black"} `} size={28} />
                                 </div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/95" : "text-slate-900 hover:text-black"}`}>
-                                    <Album className="mr-5 md:mr-7" size={24}/>
+                                    <Album className="mr-5 md:mr-7" size={24} />
                                     <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out md:text-[20px] text-[15px] font-[500]">Saved Topics</span>
-                                    
+
                                 </div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/95" : "text-slate-900 hover:text-black"}`}>
-                                    <Bolt className="mr-5 md:mr-7" size={24}/>
+                                    <Bolt className="mr-5 md:mr-7" size={24} />
                                     <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out md:text-[20px] text-[15px] font-[500]">Enter PREP!</span>
-                                    
+
                                 </div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/95" : "text-slate-900 hover:text-black"}`}>
-                                    <Airplay className="mr-5 md:mr-7" size={24}/>
+                                    <Airplay className="mr-5 md:mr-7" size={24} />
                                     <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out md:text-[20px] text-[15px] font-[500]">Join Edge</span>
                                 </div>
-                                
+
                             </div>
-                            
-                            <div className= {` ${darkMode?"":"text-stone-900"} text-[12px] hidden text-center mt-3 text-white border-[1px] w-[260px]`}></div>
+
+                            <div className={` ${darkMode ? "" : "text-stone-900"} text-[12px] hidden text-center mt-3 text-white border-[1px] w-[260px]`}></div>
 
                             <button
                                 onClick={() => setDarkMode(!darkMode)}
@@ -177,7 +179,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             <div className={`mt-8`}>
                                 <button className="flex border-rose-400 border-2 rounded-[10px] px-2 py-1">
                                     <div>About Us</div>
-                                    <ChevronDown/>
+                                    <ChevronDown />
                                 </button>
                             </div>
                         </div>
