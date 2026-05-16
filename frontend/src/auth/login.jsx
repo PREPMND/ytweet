@@ -64,6 +64,7 @@ const Login = () => {
             }
             <img
                 onLoad={() => { setbgLoaded(true) }}
+                onError={() => setbgLoaded(true)} 
                 className='-z-20 inset-0 absolute w-full h-screen object-cover' src={orange} />
             {bgLoaded && (<div>
                 {/*
