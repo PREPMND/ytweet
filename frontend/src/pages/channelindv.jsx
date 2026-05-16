@@ -74,7 +74,7 @@ const ChannelIndv = (props) => {
     return (
 
         <div className={`relative`}>
-            {loadingVideos && (
+            {(loadingVideos) && (
                 <div className="px-3 space-y-5">
                     {/* Mobile layout */}
                     <div className="md:hidden space-y-5">
@@ -103,14 +103,14 @@ const ChannelIndv = (props) => {
                     </div>
                 </div>
             )}
-            {!loadingVideos && (
+            {(!loadingVideos && !imageLoaded) && (
                 <div className="relative w-full">
                     <img 
                     onLoad={()=>{setimageLoaded(true)}}
                     className=" -mt-5 inset-0 rounded-b-lg w-full h-[140px] object-cover " src={coverImage} />
                 </div>
             )}
-            {!loadingVideos && (
+            {(!loadingVideos && !imageLoaded) && (
                 <div className="flex mt-2 z-40 items-center ">
                     {/* the channel description */}
 
@@ -123,7 +123,7 @@ const ChannelIndv = (props) => {
                         </button>
                     </div>
                 </div>)}
-            {!loadingVideos && (
+            {(!loadingVideos && !imageLoaded) && (
                 <div className="flex gap-2 mb-9 mt-9 text-black">
                     {/* some other thing */}
                     <div
