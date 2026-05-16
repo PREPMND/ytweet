@@ -22,9 +22,11 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         refetchInterval: false,
     });
     useEffect(() => {
-        if (error?.response?.status === 401) {
-            setNavigate(true);
-        }
+        if (
+            error.response?.status === 401 &&
+            !originalRequest._retry &&
+            !originalRequest.url.includes("/users/refreshtoken")
+        )
         if (error) { setisLoggedIn(false) }
         if (!error) { setisLoggedIn(true) }
     }, [error]);
