@@ -13,7 +13,7 @@ const ChannelIndv = (props) => {
     const [loadingVideos, setLoadingVideos] = useState(false);
     const [menuOpenId, setMenuOpenId] = useState(null);
     const [coverImage,setcoverImage]=useState(null);
-    const 
+    const [imageLoaded,setimageLoaded]
     const [videos, setVideos] = useState([]);
     const { data } = useQuery({
         queryKey: ["currentUser"],
