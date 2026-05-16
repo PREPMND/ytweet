@@ -49,8 +49,14 @@ const Login = () => {
     }
     return (
     <>
-
-    {(<div>
+    {
+        !bgLoaded && (
+            <div>
+                
+            </div>
+        )
+    }
+    {bgLoaded && (<div>
 {/*
         <div 
         className="h-screen w-screen" style={{ position: 'relative' }}>
