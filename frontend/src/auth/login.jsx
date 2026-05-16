@@ -62,6 +62,9 @@ const Login = () => {
                     </div>
                 )
             }
+            <img
+                onLoad={() => { setbgLoaded(true) }}
+                className='-z-20 inset-0 absolute w-full h-screen object-cover' src={orange} />
             {bgLoaded && (<div>
                 {/*
         <div 
@@ -80,9 +83,7 @@ const Login = () => {
         </div>*/}
                 <div
                     className='bg-white select-none absolute inset-0 flex z-30 items-center justify-center'>
-                    <img
-                        onLoad={() => { setbgLoaded(true) }}
-                        className='z-0 inset-0 absolute w-full h-screen object-cover' src={orange} />
+                    
                     <div className='border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg w-[300px] h-[380px] md:w-[400px] md:h-[400px]'>
 
                         <div className='flex items-center justify-center h-full flex-col'>
