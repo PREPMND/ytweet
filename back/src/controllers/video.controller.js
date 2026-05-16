@@ -14,7 +14,7 @@ export const any = asyncHandler(async (req, res) => {
             },
         },
     ]);
-
+    console.log("Pipelines result in /any route:", pipelines);
     return res.status(200).json({ success: true, data: pipelines });
 });
 export const createVideo = async (req, res) => {
