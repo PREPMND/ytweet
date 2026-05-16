@@ -23,7 +23,8 @@ const ChannelIndv = (props) => {
         if (!data?.user) return;
         try {
             const res = await api.post(`/users/getchannel`, { username: profileSelected.owner.username });
-            setLocalSubscriptionStatus(res.data.data.isSubscribed);
+            setLocalSubscriptionStatus(res.data.data);
+            console.log(res.data.data);
         }
         catch (err) {
             console.log(err);
