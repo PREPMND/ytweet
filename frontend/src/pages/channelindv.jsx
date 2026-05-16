@@ -103,7 +103,7 @@ const ChannelIndv = (props) => {
                     </div>
                 </div>
             )}
-            {(!loadingVideos && imageLoaded) && (
+            {(!loadingVideos) && (
                 <div className="relative w-full">
                     <img 
                     onLoad={()=>{setimageLoaded(true)}}
