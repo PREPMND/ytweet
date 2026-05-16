@@ -34,7 +34,7 @@ router.get("/currentuser", verifyJWT, (req, res) => {
 router.route("/userbyid").post(userById)
 router.route("/updateaccount").patch(verifyJWT,updateAccountDetails)
 router.route("/changeavatar").patch(verifyJWT,upload.single("avatar"),updateUserAvatar)
-
+router.route("/getchannel").post(getUserChannelProfile)
 router.route("/changecoverimage").patch(verifyJWT,upload.single("coverImage"),updateUserCoverImage)
 router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
 router.route("/history").get(verifyJWT,getWatchHistory)
