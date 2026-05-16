@@ -28,6 +28,19 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         if (error) { setisLoggedIn(false) }
         if (!error) { setisLoggedIn(true) }
     }, [error]);
+    useEffect(() => {
+
+        const interval = setInterval(() => {
+
+            if (!data?.user) {
+                setNavigate(true);
+            }
+
+        }, 300000);
+
+        return () => clearInterval(interval);
+
+    }, [data]);
 
     return (
         <>
