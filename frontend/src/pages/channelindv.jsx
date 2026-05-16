@@ -7,7 +7,7 @@ import { MenuDropdown } from "../utils/videoMenu";
 const ChannelIndv = (props) => {
     const { profileSelected, darkMode } = props;
     const [subscribers, setSubscribers] = useState(0);
-    const [localSubscriptionStatus, setLocalSubscriptionStatus] = useState([]);
+    const [localSubscriptionStatus, setLocalSubscriptionStatus] = useState(false);
     const [videoSelected, setVideoSelected] = useState(true);
     const [yangSelected, setYangSelected] = useState(false);
     const [loadingVideos, setLoadingVideos] = useState(false);
@@ -23,7 +23,6 @@ const ChannelIndv = (props) => {
         if (!data?.user) return;
         try {
             const res = await api.post(`/users/getchannel`, { username: profileSelected.owner.username });
-            setLocalSubscriptionStatus(res.data.data);
             console.log(res.data.data);
         }
         catch (err) {
