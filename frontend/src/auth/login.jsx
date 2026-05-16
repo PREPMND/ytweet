@@ -53,11 +53,11 @@ const Login = () => {
             {
                 !bgLoaded && (
                     <div className='flex items-center h-screen justify-center'>
-                        <div className='border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg gap-9 flex flex-col justify-center place-content-center *:mx-auto *mb-5 w-[300px] h-[380px] md:w-[400px] md:h-[400px]'>
-                            <div className='bg-neutral-500  h-[40px] w-[80%]'></div>
-                            <div className='bg-neutral-500  h-[40px] w-[80%]'></div>
-                            <div className='bg-neutral-500 h-[40px] w-[80%]'></div>
-                            <div className='bg-neutral-500 h-[40px] w-[80%]'></div>
+                        <div className='border-[1.5px] backdrop-blur-md bg-white/90 border-blue-500 transition-colors duration-500 hover:border-green-500 z-30 shadow-lg rounded-lg gap-9 flex flex-col justify-center place-content-center *:h-[40px] *:w-[80%] *:bg-neutral-500 *:mx-auto *:animate-pulse *mb-5 w-[300px] h-[380px] md:w-[400px] md:h-[400px]'>
+                            <div className=''></div>
+                            <div className=''></div>
+                            <div className=''></div>
+                            <div className=''></div>
                         </div>
                     </div>
                 )
