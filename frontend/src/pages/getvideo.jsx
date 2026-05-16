@@ -15,6 +15,19 @@ const VideoList = (props) => {
     const [page, setPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [loading, setLoading] = useState(false);
+    const preloadImages = (urls) => {
+        return Promise.all(
+            urls.map(
+                (url) =>
+                    new Promise((resolve) => {
+                        const img = new Image();
+                        img.src = url;
+                        img.onload = resolve;
+                        img.onerror = resolve; // resolve even if error, so it doesn't hang
+                    })
+            )
+        );
+    };
 
     const fetchVideos = async (pageNum = 1) => {
         if (loading || !hasMore) return;
