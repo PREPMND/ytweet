@@ -19,7 +19,14 @@ const ChannelIndv = (props) => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
-    
+    const subcriptionStatus = async () => {
+        if (!data?.user) return;
+        try {
+            const res = await api.post(`/users/getchall/${profileSelected.owner.username}`);
+            setLocalSubscriptionStatus(res.data.data.isSubscribed);
+        }
+
+    }
     const fetchuserById = async (Id) => {
         if (!Id) return;
         try {
