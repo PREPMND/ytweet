@@ -15,7 +15,7 @@ export default function AppRoutes(props){
             <Route element={<MainLayout menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setMenubar={setMenubar} darkModenav={darkModenav} setDarkModenav={setDarkModenav} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />}>
             <Route path="/" element={
                 <>
-                <VideoList setDarkMode={setDarkMode} profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} />
+                <VideoList setDarkMode={setDarkMode}  profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setvideo />
                 </>}/>
             </Route>
             <Route element={<AuthLayout />}>
