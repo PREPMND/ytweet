@@ -9,7 +9,7 @@ import VideoList from "../pages/getvideo.jsx"
 import ChannelIndv from "../pages/channelindv.jsx"
 import { VideoIndv } from "../pages/videoplayer.jsx"
 export default function AppRoutes(props){
-    const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode,profileSelected,setProfileSelected, setisLoggedIn,isLoggedIn } = props;
+    const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode,profileSelected,setProfileSelected, setisLoggedIn,isLoggedIn,videoIdSelected,setvideoIdSelected } = props;
     return(
         <Routes>
             <Route element={<MainLayout menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setMenubar={setMenubar} darkModenav={darkModenav} setDarkModenav={setDarkModenav} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />}>
@@ -20,7 +20,8 @@ export default function AppRoutes(props){
             </Route>
             <Route element={<AuthLayout />}>
             <Route path="/:username" element={<ChannelIndv profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} />}/>
-            <Route path="/watchvideo" element={<VideoIndv/>}/>
+            <Route path="/watchvideo" element={<VideoIndv
+            />}/>
             <Route path="/createvideo" element={<Createvideo />}/>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register setisLoggedIn={setisLoggedIn}/>}/>
