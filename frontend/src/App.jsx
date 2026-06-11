@@ -31,7 +31,7 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("darkMode")) ?? false
   );
-  const [videoIdSelected,setvideoIdSelected]=
+  
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     document.body.className = darkMode ? "dark" : "light";
@@ -40,9 +40,11 @@ const App = () => {
   const [darkModenav, setDarkModenav] = useState(true);
   const [profileSelected, setProfileSelected] = useState(null);
   const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [videoIdSelected,setvideoIdSelected]= useState(null);
   return (
     <div>
-      <AppRoutes isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav} />
+      <AppRoutes isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav} 
+      videoIdSelected={videoIdSelected}  setvideoIdSelected={setvideoIdSelected}/>
     </div>
   )
 }
