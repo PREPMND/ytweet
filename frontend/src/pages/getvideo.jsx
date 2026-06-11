@@ -198,7 +198,7 @@ const VideoList = (props) => {
                                 loading="lazy"
                             />
                             <div 
-                            onClick={GoToVideo(video)}}
+                            onClick={GoToVideo(video)}
                             className="flex justify-between items-start gap-2 w-full min-w-0">
 
                                 <div
