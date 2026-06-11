@@ -127,6 +127,9 @@ const VideoList = (props) => {
     function toggleMenu(id) {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
+    function GoToVideo(vidDetails){
+        
+    }
     return (
         <div
             className={`relative overflow-hidden cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
