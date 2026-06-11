@@ -209,10 +209,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             >
                                 Log Out
                             </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+              
                         </div>
                     </div>
                 </div>
