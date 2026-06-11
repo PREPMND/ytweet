@@ -202,13 +202,15 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                     <ChevronDown />
                                 </button>
                             </div>
-                            <div className={` ${darkMode ? "" : "text-stone-900"} text-[12px] hidden text-center mt-3 text-white border-[1px] w-[260px]`}></div>
-                            <button
+                            <div className={` ${darkMode ? "" : "text-stone-900"} text-[12px] hidden text-center mt-3 text-white border-[1px] w-[260px]`}>
+                                <button
                                 onClick={HandleLogout}
                                 className={`px-3 py-1 text-sm text-center flex justify-center mt-7 rounded bg-red-600 text-white hover:bg-red-500 ${isLoggedIn ? "flex" : "hidden"}`}
                             >
                                 Log Out
                             </button>
+                            </div>
+                            
               
                         </div>
                     </div>
