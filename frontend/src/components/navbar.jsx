@@ -182,7 +182,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             </div>
 
                             <div className={` ${darkMode ? "" : "text-stone-900"} text-[12px] hidden text-center mt-3 text-white border-[1px] w-[260px]`}></div>
-
+                            <div onClick={HandleLogout}>
+                                LOGOUT
+                            </div>
                             <button
                                 onClick={() => setDarkMode(!darkMode)}
                                 className="px-3 py-1 text-sm text-center flex justify-center mt-7 rounded bg-gray-800 text-white hover:bg-gray-700"
