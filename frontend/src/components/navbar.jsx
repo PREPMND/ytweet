@@ -1,4 +1,4 @@
-import { useQuery,queryClient } from "@tanstack/react-query";
+import { useQuery,useQueryClient } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
@@ -6,7 +6,7 @@ import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle
 import { useState, useEffect, useEffectEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+const queryClient = useQueryClient();
 const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode, isLoggedIn, setisLoggedIn }) => {
     const [navigate, setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
