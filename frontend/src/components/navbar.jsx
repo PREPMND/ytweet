@@ -133,7 +133,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
             )}
 
             {menubar && (
-                <div className="fixed inset-0 z-50  flex">
+                <div className="fixed inset-0 z-50 overflow-y-auto flex">
                     <div
                         className="absolute inset-0 bg-black opacity-60"
                         onClick={() => setMenubar(false)}
