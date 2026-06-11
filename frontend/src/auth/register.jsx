@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 import { Home, Loader, LoaderPinwheel } from "lucide-react"
 import orange from '../assets/orange.jpg'
-const Register = () => {
+const Register = (props) => {
     const blockedUsername = ["ytweet", "modih", "", " ", "admin", "administrator", "root", "sysadmin", "support", "helpdesk", "contact", "info", "sales", "marketing", "webmaster", "postmaster", "hostmaster", "abuse", "security", "noreply", "no-reply"];
     const [next, setNext] = useState(false);
     const [subnext, setSubnext] = useState(false);
@@ -16,6 +16,7 @@ const Register = () => {
     const [fullName, setFullName] = useState('');
     const [coverImage, setCoverImage] = useState('');
     const navigate = useNavigate()
+    const { setisLoggedIn } = props;
 
     useEffect(() => {
         if (
@@ -47,7 +48,10 @@ const Register = () => {
                 { withCredentials: true }
             );
             setLoading(false);
-            if (res.status == 200 || res.status == 201) { navigate("/") }
+            if (res.status == 200 || res.status == 201) { 
+                navigate("/") ;
+                setisLoggedIn(true);
+            }
             return res;
         } catch (err) {
             setLoading(false);
