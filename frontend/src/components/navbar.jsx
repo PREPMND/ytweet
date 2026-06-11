@@ -28,6 +28,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         }
         if (error) { setisLoggedIn(false) }
         if (!error) { setisLoggedIn(true) }
+        console.log(error);
     }, [error]);
     useEffect(() => {
 
