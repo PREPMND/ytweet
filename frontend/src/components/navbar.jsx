@@ -14,7 +14,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
     const [hoverAirplay, setHoverAirplay] = useState(false)
 
     const navigating = useNavigate();
-
+    console.log(isLoggedIn)
     const { data, error } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
