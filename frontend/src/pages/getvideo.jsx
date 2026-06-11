@@ -174,6 +174,7 @@ const VideoList = (props) => {
                                 />
                             ) : (
                                 <img
+                                    onClick={()=>{GoToVideo(video)}}
                                     loading="lazy"
                                     decoding="async"
                                     fetchPriority="low"
