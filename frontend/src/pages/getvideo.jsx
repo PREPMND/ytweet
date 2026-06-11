@@ -5,7 +5,7 @@ import { EllipsisVertical } from "lucide-react";
 
 import { MenuDropdown } from "../utils/videoMenu";
 const VideoList = (props) => {
-    const { darkMode, setProfileSelected, setvideoIdSelected } = props;
+    const { darkMode, setProfileSelected, setvideoIdSelected,videoIdSelected } = props;
 
     const timeoutRef = useRef(null);
     const [playingId, setPlayingId] = useState(null);
