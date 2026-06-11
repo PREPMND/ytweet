@@ -41,7 +41,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         return () => clearInterval(interval);
 
     }, [data]);
-
+    const HandleLogout = () => {
+        
+    }
     return (
         <>
             <div className={darkMode ? "bg-black  text-white" : ""}>
