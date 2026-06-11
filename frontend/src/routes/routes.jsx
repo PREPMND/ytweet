@@ -19,7 +19,7 @@ export default function AppRoutes(props){
                 </>}/>
             </Route>
             <Route element={<AuthLayout />}>
-            <Route path="/:username" element={<ChannelIndv profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} />}/>
+            <Route path="/:username" element={<ChannelIndv profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setvideoIdSelected={setvideoIdSelected} />}/>
             <Route path="/watchvideo" element={<VideoIndv videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected}
             />}/>
             <Route path="/createvideo" element={<Createvideo />}/>
