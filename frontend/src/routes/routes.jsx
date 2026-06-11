@@ -15,11 +15,11 @@ export default function AppRoutes(props){
             <Route element={<MainLayout menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setMenubar={setMenubar} darkModenav={darkModenav} setDarkModenav={setDarkModenav} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />}>
             <Route path="/" element={
                 <>
-                <VideoList setDarkMode={setDarkMode}  profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setvideoIdSelected={setvideoIdSelected} />
+                <VideoList setDarkMode={setDarkMode}  profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setvideoIdSelected={setvideoIdSelected} videoIdSelected={videoIdSelected} />
                 </>}/>
             </Route>
             <Route element={<AuthLayout />}>
-            <Route path="/:username" element={<ChannelIndv profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setvideoIdSelected={setvideoIdSelected} />}/>
+            <Route path="/:username" element={<ChannelIndv profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setvideoIdSelected={setvideoIdSelected} videoIdSelected={videoIdSelected} />}/>
             <Route path="/watchvideo" element={<VideoIndv videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected}
             />}/>
             <Route path="/createvideo" element={<Createvideo />}/>
