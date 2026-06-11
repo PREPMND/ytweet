@@ -31,7 +31,7 @@ const App = () => {
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("darkMode")) ?? false
   );
-
+  const [videoIdSelected,setvideoIdSelected]=
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     document.body.className = darkMode ? "dark" : "light";
