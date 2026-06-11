@@ -128,7 +128,8 @@ const VideoList = (props) => {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
     function GoToVideo(vidDetails){
-        
+        setvideoIdSelected(vidDetails);
+        navigate("/watchvideo")
     }
     return (
         <div
