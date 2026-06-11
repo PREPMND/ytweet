@@ -6,13 +6,13 @@ import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle
 import { useState, useEffect, useEffectEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-const queryClient = useQueryClient();
+
 const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode, isLoggedIn, setisLoggedIn }) => {
     const [navigate, setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
     const [hoverAirplay, setHoverAirplay] = useState(false)
-
+    const queryClient = useQueryClient();
     const navigating = useNavigate();
     console.log(isLoggedIn)
     const { data, error } = useQuery({
