@@ -128,7 +128,7 @@ const VideoList = (props) => {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
     function GoToVideo(vidDetails){
-
+        
     }
     return (
         <div
