@@ -163,6 +163,7 @@ const VideoList = (props) => {
                         <div className="relative select-none overflow-hidden rounded-xl bg-black">
                             {playingId === video._id ? (
                                 <video
+                                    
                                     src={video.videoFile}
                                     autoPlay
                                     muted
@@ -204,7 +205,7 @@ const VideoList = (props) => {
                                 loading="lazy"
                             />
                             <div
-                                onClick={()=>{GoToVideo(video)}}
+                                
                                 className="flex justify-between items-start gap-2 w-full min-w-0">
 
                                 <div
