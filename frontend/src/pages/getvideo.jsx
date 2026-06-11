@@ -127,12 +127,12 @@ const VideoList = (props) => {
     function toggleMenu(id) {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
-    useEffect(() => {
+    
         function GoToVideo(vidDetails) {
             setvideoIdSelected(vidDetails);
             navigate("/watchvideo");
         }
-    },[videoIdSelected])
+    
     return (
         <div
             className={`relative overflow-hidden cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
