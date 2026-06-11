@@ -45,6 +45,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
     const HandleLogout = async () => {
         const confirmLogout = await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/users/logout`, {}, { withCredentials: true });
         if (confirmLogout.status === 200) {
+            queryClient.removeQueries(["currentUser"]);
             setisLoggedIn(false);
             setNavigate(true);
         }
