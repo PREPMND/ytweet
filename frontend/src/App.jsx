@@ -40,7 +40,7 @@ const App = () => {
   const [darkModenav, setDarkModenav] = useState(true);
   const [profileSelected, setProfileSelected] = useState(null);
   const [isLoggedIn, setisLoggedIn] = useState(false);
-  const [videoIdSelected,setvideoIdSelected]= useState(null);
+  const [videoIdSelected,setvideoIdSelected]= useState({});
   return (
     <div>
       <AppRoutes isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav} 
