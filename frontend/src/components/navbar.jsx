@@ -5,6 +5,7 @@ import logodark from "../assets/logodark..jpg"
 import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown } from "lucide-react"
 import { useState, useEffect, useEffectEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode, isLoggedIn, setisLoggedIn }) => {
     const [navigate, setNavigate] = useState(false);
@@ -41,8 +42,12 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         return () => clearInterval(interval);
 
     }, [data]);
-    const HandleLogout = () => {
-        
+    const HandleLogout = async () => {
+        const confirmLogout = await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/users/logout`, {}, { withCredentials: true });
+        if (confirmLogout.status === 200) {
+            setisLoggedIn(false);
+            setNavigate(true);
+        }
     }
     return (
         <>
