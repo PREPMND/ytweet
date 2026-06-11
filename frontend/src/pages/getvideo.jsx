@@ -5,7 +5,7 @@ import { EllipsisVertical } from "lucide-react";
 
 import { MenuDropdown } from "../utils/videoMenu";
 const VideoList = (props) => {
-    const { darkMode, setProfileSelected ,setvideoIdSelected } = props;
+    const { darkMode, setProfileSelected, setvideoIdSelected } = props;
 
     const timeoutRef = useRef(null);
     const [playingId, setPlayingId] = useState(null);
@@ -127,10 +127,12 @@ const VideoList = (props) => {
     function toggleMenu(id) {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
-    function GoToVideo(vidDetails){
-        setvideoIdSelected(vidDetails);
-        navigate("/watchvideo");
-    }
+    useEffect(() => {
+        function GoToVideo(vidDetails) {
+            setvideoIdSelected(vidDetails);
+            navigate("/watchvideo");
+        }
+    },[videoIdSelected])
     return (
         <div
             className={`relative overflow-hidden cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
@@ -201,9 +203,9 @@ const VideoList = (props) => {
                                 alt="Avatar"
                                 loading="lazy"
                             />
-                            <div 
-                            onClick={GoToVideo(video)}
-                            className="flex justify-between items-start gap-2 w-full min-w-0">
+                            <div
+                                onClick={GoToVideo(video)}
+                                className="flex justify-between items-start gap-2 w-full min-w-0">
 
                                 <div
 
