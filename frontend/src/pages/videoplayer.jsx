@@ -29,7 +29,7 @@ export const VideoIndv = (props) => {
                             
                         </div>
                         <div>
-                            <ThumbsUp className="w-7 h-7 mr-2 text-gray-600" />
+                            <ThumbsUp className="w-7 h-7 mr-5 mt-2 text-gray-600" />
                             <div>
 
                             </div>
