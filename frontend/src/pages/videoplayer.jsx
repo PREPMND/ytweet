@@ -7,7 +7,11 @@ export const VideoIndv =(props)=>{
             <div>
                 {/* Actual video player*/}
                 DIJGBOS
-                
+                <div>
+                    <video controls>
+                        <source src={`videoIdSelected.videoFile`} type="video/mp4"/>
+                    </video>
+                </div>
             </div>
             <div>
                 {/* Comment and likes */}
