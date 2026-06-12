@@ -31,9 +31,9 @@ export const VideoIndv = (props) => {
                         
                         <p className="text-gray-600 mt-2">{videoIdSelected.description}</p>
                         <div>
-                            <ThumbsUp className="w-5 h-5 text-gray-600" />
+                            <ThumbsUp className="w-7 h-7 text-gray-600" />
                             <div>
-                                
+
                             </div>
                         </div>
                     </div>
