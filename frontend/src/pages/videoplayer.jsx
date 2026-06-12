@@ -7,7 +7,7 @@ export const VideoIndv =(props)=>{
             <div>
                 {/* Actual video player*/}
                 DIJGBOS
-                <div >
+                <div className='h-[70%]'>
                     <video
                     className="w-full h-[40%] md:h-[60%] bg-black aspect-video object-contain rounded-lg"
                     controls>
