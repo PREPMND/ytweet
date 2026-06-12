@@ -3,7 +3,7 @@ export const VideoIndv = (props) => {
     console.log(videoIdSelected)
     return (
         <>
-            <div className="mt-2 ml-2">
+            <div className="my-2 mx-2 ">
                 <div>
                     {/* Actual video player*/}
                     
