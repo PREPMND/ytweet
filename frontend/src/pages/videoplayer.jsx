@@ -8,7 +8,9 @@ export const VideoIndv =(props)=>{
                 {/* Actual video player*/}
                 DIJGBOS
                 <div>
-                    <video controls>
+                    <video
+                    className="w-full h-[40%] md:h-[70%] aspect-video object-cover rounded-lg"
+                    controls>
                         <source src={videoIdSelected.videoFile} type="video/mp4"/>
                     </video>
                 </div>
