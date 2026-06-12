@@ -10,7 +10,7 @@ export const VideoIndv = (props) => {
                     <div className='h-[70%]'>
 
                         <video
-                            className="w-full h-[40%] md:h-[60%] bg-black aspect-[16/9] object-contain rounded-lg"
+                            className="w-full md:w-[80%] h-[40%] md:h-[60%] bg-black aspect-[16/9] object-contain rounded-lg"
                             controls
                         >
                             <source src={videoIdSelected.videoFile} type="video/mp4" />
