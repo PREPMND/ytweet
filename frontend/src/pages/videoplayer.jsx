@@ -20,6 +20,10 @@ export const VideoIndv = (props) => {
                 </div>
                 <div>
                     {/* Comment and likes */}
+                    <div>
+                        <h2 className="text-xl font-bold mt-4">{videoIdSelected.title}</h2>
+                        <p className="text-gray-600 mt-2">{videoIdSelected.description}</p>
+                    </div>
                 </div>
                 <div>
                     {/* video suggestions */}
