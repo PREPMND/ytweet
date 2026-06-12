@@ -116,13 +116,13 @@ const ChannelIndv = (props) => {
                     </div>
                 </div>
             )}
-            {(!loadingVideos) && (
-                <div className="relative w-full">
+        
+                <div className={`relative w-full ${imageLoaded ? '' : 'animate-pulse hidden'}`}>
                     <img 
                     onLoad={()=>{setimageLoaded(true)}}
                     className=" -mt-5 inset-0 rounded-b-lg w-full h-[140px] object-cover " src={coverImage} />
                 </div>
-            )}
+        
             {(!loadingVideos && imageLoaded) && (
                 <div className="flex mt-2 z-40 items-center ">
                     {/* the channel description */}
