@@ -21,6 +21,9 @@ export const VideoIndv = (props) => {
                 <div>
                     {/* Comment and likes */}
                     <div>
+                        <div>
+                            <img className="w-10 h-10 rounded-full" src={videoIdSelected.owner.avatar} alt="Profile" />
+                        </div>
                         <h2 className="text-xl font-bold mt-4">{videoIdSelected.title}</h2>
                         <p className="text-gray-600 mt-2">{videoIdSelected.description}</p>
                     </div>
