@@ -28,10 +28,8 @@ export const VideoIndv = (props) => {
                             <h2 className="text-xl truncate font-bold ">{videoIdSelected.title}</h2>
                             
                         </div>
-                        
-                        <p className="text-gray-600 mt-2">{videoIdSelected.description}</p>
                         <div>
-                            <ThumbsUp className="w-7 h-7 text-gray-600" />
+                            <ThumbsUp className="w-7 h-7 mr-2 text-gray-600" />
                             <div>
 
                             </div>
