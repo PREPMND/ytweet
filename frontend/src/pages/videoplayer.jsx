@@ -31,7 +31,7 @@ export const VideoIndv = (props) => {
                         
                         <p className="text-gray-600 mt-2">{videoIdSelected.description}</p>
                         <div>
-                            <
+                            <Like
                         </div>
                     </div>
                 </div>
