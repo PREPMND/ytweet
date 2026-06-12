@@ -9,7 +9,7 @@ export const VideoIndv =(props)=>{
                 DIJGBOS
                 <div>
                     <video controls>
-                        <source src={`videoIdSelected.videoFile`} type="video/mp4"/>
+                        <source src={videoIdSelected.videoFile} type="video/mp4"/>
                     </video>
                 </div>
             </div>
