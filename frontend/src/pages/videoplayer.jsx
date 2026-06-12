@@ -1,3 +1,5 @@
+import { Droplet } from "lucide-react";
+
 export const VideoIndv = (props) => {
     const { videoIdSelected } = props;
     console.log(videoIdSelected)
@@ -21,9 +23,10 @@ export const VideoIndv = (props) => {
                 <div>
                     {/* Comment and likes */}
                     <div>
-                        <div className="flex  mt-4 h-[40px] items-center">
+                        <div className="flex  mt-4 h-[40px] items-center gap-5">
                             <img className="w-10 h-10 rounded-full object-cover" src={videoIdSelected.owner.avatar} alt="Profile" />
                             <h2 className="text-xl font-bold ">{videoIdSelected.title}</h2>
+                            <Droplet className="ml-auto" fill={"black"} size={20} />
                         </div>
                         
                         <p className="text-gray-600 mt-2">{videoIdSelected.description}</p>
