@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom"
 import { Home, Loader, LoaderPinwheel } from "lucide-react"
@@ -16,6 +17,7 @@ const Register = (props) => {
     const [fullName, setFullName] = useState('');
     const [coverImage, setCoverImage] = useState('');
     const navigate = useNavigate()
+    const queryClient = useQueryClient();
     const { setisLoggedIn } = props;
 
     useEffect(() => {
@@ -48,6 +50,7 @@ const Register = (props) => {
                 { withCredentials: true }
             );
             setLoading(false);
+            queryClient.invalidateQueries(["currentUser"]);
             navigate("/") ;
             setisLoggedIn(true);
             
