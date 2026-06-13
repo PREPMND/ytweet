@@ -149,7 +149,7 @@ const Register = (props) => {
                     </div>
                     
                 </form>
-                {loading && (
+                {true && (
                         <LoaderPinwheel className="block animate-spin text-yellow-50" />
                     )}
             </div>
