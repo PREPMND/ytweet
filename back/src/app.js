@@ -9,6 +9,19 @@ application.use(cors({
     origin: process.env.CORS_ORIGIN,
     credentials: true
 }))
+const HandleLogout = async () => {
+  const confirmLogout = await axios.post(
+    `${import.meta.env.VITE_BACKEND}/api/v1/users/logout`,
+    {},
+    { withCredentials: true }
+  );
+  if (confirmLogout.status === 200) {
+    queryClient.removeQueries(["currentUser"]);
+    setisLoggedIn(false);
+    setNavigate(true);
+  }
+};
+
 application.use(express.json({ limit: "16kb" }))
 application.use(express.urlencoded({ extended: true, limit: "16kb" }))
 application.use(express.static("public"))
