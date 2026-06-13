@@ -24,7 +24,7 @@ export default function AppRoutes(props){
             />}/>
             <Route path="/createvideo" element={<Createvideo />}/>
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register setisLoggedIn={setisLoggedIn} setCurrentUser={setCurrentUser} />}/>
+            <Route path="/register" element={<Register setisLoggedIn={setisLoggedIn}  />}/>
             </Route>
         </Routes>
     )
