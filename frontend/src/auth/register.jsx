@@ -48,10 +48,10 @@ const Register = (props) => {
                 { withCredentials: true }
             );
             setLoading(false);
-            if (res.status == 200 || res.status == 201) { 
-                navigate("/") ;
-                setisLoggedIn(true);
-            }
+            setCu
+            navigate("/") ;
+            setisLoggedIn(true);
+            
             return res;
         } catch (err) {
             setLoading(false);
