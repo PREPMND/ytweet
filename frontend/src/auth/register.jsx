@@ -16,7 +16,7 @@ const Register = (props) => {
     const [fullName, setFullName] = useState('');
     const [coverImage, setCoverImage] = useState('');
     const navigate = useNavigate()
-    const { setisLoggedIn ,setCurrentUser} = props;
+    const { setisLoggedIn } = props;
 
     useEffect(() => {
         if (
@@ -48,7 +48,6 @@ const Register = (props) => {
                 { withCredentials: true }
             );
             setLoading(false);
-            setCurrentUser(res.data.data.user.username);
             navigate("/") ;
             setisLoggedIn(true);
             
