@@ -51,9 +51,9 @@ const Register = (props) => {
             );
             setLoading(false);
             queryClient.invalidateQueries(["currentUser"]);
-            navigate("/") ;
+            navigate("/");
             setisLoggedIn(true);
-            
+
             return res;
         } catch (err) {
             setLoading(false);
@@ -111,8 +111,8 @@ const Register = (props) => {
                             <div >
                                 <div>Choose Avatar</div>
                                 <div className='border-[1px] md:hidden flex shadow-lg rounded-[50%] md:w-[80px] md:h-[80px] w-[80px] h-[80px] m-auto my-1 overflow-hidden'>
-                                <img className='w-full h-full object-cover' src={avatar ? URL.createObjectURL(avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
-                            </div>
+                                    <img className='w-full h-full object-cover' src={avatar ? URL.createObjectURL(avatar) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
+                                </div>
                                 <input className='files' type='file' accept='image/*' placeholder='Avatar'
                                     onChange={(e) => setAvatar(e.target.files[0])} />
                             </div>
@@ -124,8 +124,8 @@ const Register = (props) => {
                             <div >
                                 <div>Choose Cover Image</div>
                                 <div className='border-[1px] shadow-lg rounded-[50%] w-[80px] h-[80px] md:hidden flex m-auto overflow-hidden'>
-                                <img className='w-full h-full object-cover' src={coverImage ? URL.createObjectURL(coverImage) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
-                            </div>
+                                    <img className='w-full h-full object-cover' src={coverImage ? URL.createObjectURL(coverImage) : "https://cdn-icons-png.flaticon.com/512/149/149071.png"} />
+                                </div>
                                 <input className='files' type='file' accept='image/*' placeholder='Cover Image'
                                     onChange={(e) => setCoverImage(e.target.files[0])} />
                             </div>
@@ -147,7 +147,9 @@ const Register = (props) => {
                             />
                         </div>
                     </div>
-                    <LoaderPinwheel className={`${loading ? "block" : ""} absolute top-5  animate-spin text-yellow-50`} />
+                    {loading && (
+                        <LoaderPinwheel className="block animate-spin text-yellow-50" />
+                    )}
                 </form>
 
             </div>
