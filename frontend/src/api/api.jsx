@@ -5,12 +5,14 @@ const api = axios.create({
     baseURL: `${import.meta.env.VITE_BACKEND}/api/v1`,
     withCredentials: true,
 });
-const navigate=useNavigate
+
+
 api.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
-
+        const navigate=useNavigate();
+        const queryClient=useQueryClient();
         if (
             error.response?.status === 401 &&
             !originalRequest._retry &&
