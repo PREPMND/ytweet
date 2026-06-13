@@ -19,7 +19,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
         retry: false,
-        refetchOnWindowFocus: false,
+        refetchOnWindowFocus: true,
         refetchInterval: false,
     });
     useEffect(() => {
