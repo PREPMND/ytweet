@@ -7,9 +7,7 @@ const api = axios.create({
 
 api.interceptors.response.use(
     (response) => response,
-
     async (error) => {
-
         const originalRequest = error.config;
 
         if (
@@ -17,17 +15,11 @@ api.interceptors.response.use(
             !originalRequest._retry &&
             !originalRequest.url.includes("/users/refreshtoken")
         ) {
-
             originalRequest._retry = true;
-
             try {
-
                 await api.post("/users/refreshtoken");
-
                 return api(originalRequest);
-
             } catch (refreshError) {
-
                 return Promise.reject(refreshError);
             }
         }
