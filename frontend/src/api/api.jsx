@@ -1,10 +1,11 @@
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 const api = axios.create({
     baseURL: `${import.meta.env.VITE_BACKEND}/api/v1`,
     withCredentials: true,
 });
-
+const navigate=useNavigate
 api.interceptors.response.use(
     (response) => response,
     async (error) => {
@@ -20,8 +21,13 @@ api.interceptors.response.use(
                 await api.post("/users/refreshtoken");
                 return api(originalRequest);
             } catch (refreshError) {
+                // clear cache, redirect to login
+                queryClient.removeQueries(["currentUser"]);
+                navigate("/login");
                 return Promise.reject(refreshError);
             }
+
+
         }
 
         return Promise.reject(error);
