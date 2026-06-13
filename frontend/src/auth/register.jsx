@@ -149,9 +149,9 @@ const Register = (props) => {
                     </div>
 
                 </form>
-                <div className="relative h-5 ">
+                <div className="">
                     {true && (
-                        <LoaderPinwheel className="absolute top-5 animate-spin text-yellow-50" />
+                        <LoaderPinwheel className="absolute z-50 top-5 animate-spin text-yellow-50" />
                     )}
                 </div>
 
