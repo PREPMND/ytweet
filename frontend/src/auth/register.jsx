@@ -147,7 +147,7 @@ const Register = (props) => {
                             />
                         </div>
                     </div>
-                    <LoaderPinwheel className={`${loading ? "block" : ""} absolute top-5  animate-spin text-yellow-50`} />
+                    <LoaderPinwheel className={`${loading ? "block" : ""} absolute top-5 mx-0 w-full animate-spin text-yellow-50`} />
                 </form>
 
             </div>
