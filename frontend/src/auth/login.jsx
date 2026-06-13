@@ -16,7 +16,7 @@ const Login = () => {
     const [bgLoaded, setbgLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    const navigate = useNavigate()
+    const navigate=useNavigate();
 
     async function HandleSubmit(e) {
         e.preventDefault();
@@ -36,8 +36,8 @@ const Login = () => {
 
                 console.log(res.data.data.user.username)
                 setLoading(false);
-                navigate('/')
-                return res.data.data.user.username
+                navigate('/');
+                return res.data.data.user.username;
             }
             else {
                 setError(true);
