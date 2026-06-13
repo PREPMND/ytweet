@@ -147,11 +147,11 @@ const Register = (props) => {
                             />
                         </div>
                     </div>
-                    {loading && (
+                    
+                </form>
+                {loading && (
                         <LoaderPinwheel className="block animate-spin text-yellow-50" />
                     )}
-                </form>
-
             </div>
 
         </>
