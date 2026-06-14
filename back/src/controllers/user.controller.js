@@ -122,6 +122,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
         sameSite: "lax",
         maxAge: 7 * 24 * 60 * 60 * 1000
     }
+    console.log(refreshToken);
     return res
         .status(200)
         .cookie("accessToken", accessToken, options)
