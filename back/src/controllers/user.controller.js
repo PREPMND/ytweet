@@ -6,31 +6,21 @@ import { apiResponse } from "../utils/apiResponse.js";
 import jwt from "jsonwebtoken"
 import mongoose from "mongoose";
 const userById = async (req, res) => {
-
-
     try {
         const { Id } = req.body;
-
-
         if (!Id) {
             return res.status(400).json({
                 success: false,
                 message: "No ID received"
             });
         }
-
         const userDetails = await User.findById(Id);
-
-
         return res.status(200).json({
             success: true,
             data: userDetails
         });
-
     } catch (err) {
-
         console.log("ACTUAL ERROR:", err);
-
         return res.status(500).json({
             success: false,
             message: err.message
@@ -42,10 +32,8 @@ const generateAccessAndRefreshTokens = async (userId) => {
         const user = await User.findById(userId)
         const accessToken = user.generateAccessToken()
         const refreshToken = user.generateRefreshToken()
-
         user.refreshToken = refreshToken
         await user.save({ validateBeforeSave: true })
-
         return { accessToken, refreshToken }
     } catch {
         throw new apiError(500, "Something went wrong while generating tokens")
@@ -67,12 +55,10 @@ const registerUser = asyncHandler(async (req, res, next) => {
     if ([fullName, email, username, password].some((field) => field?.trim() === "")) {
         throw new apiError(400, "All fields are required")
     }
-
     const existedUser = await User.findOne({ $or: [{ email }, { username }] })
     if (existedUser) {
         throw new apiError(409, "User with email or username already exists")
     }
-
     const avatarLocalPath = req.files?.avatar[0]?.path;
     console.log(avatarLocalPath)
     const coverImageLocalPath = req.files?.coverImage[0]?.path;
@@ -85,7 +71,6 @@ const registerUser = asyncHandler(async (req, res, next) => {
     if (!avatar) {
         throw new apiError(400, "Avatar cannot be uploaded")
     }
-
     //entering the database
     const user = await User.create({
         fullName,
@@ -102,7 +87,6 @@ const registerUser = asyncHandler(async (req, res, next) => {
     if (!createdUser) {
         throw new apiError(500, "smth went wrong while registering the user")
     }
-
     return res.status(201).json(
         new apiResponse(200, createdUser, "User Registered Succesfully")
     )
