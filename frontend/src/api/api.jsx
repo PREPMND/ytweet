@@ -1,7 +1,5 @@
 import axios from "axios";
 
-let refreshPromise = null;
-
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_BACKEND}/api/v1`,
   withCredentials: true,
