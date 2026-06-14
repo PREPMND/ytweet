@@ -11,17 +11,16 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     if (
-      originalRequest &&
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url?.includes("/users/refreshtoken")
+      !originalRequest.url.includes("/users/refreshtoken")
     ) {
       originalRequest._retry = true;
-
       try {
         await api.post("/users/refreshtoken");
         return api(originalRequest);
       } catch (refreshError) {
+        // Instead of calling hooks here, emit an event
         window.dispatchEvent(new Event("logout"));
         return Promise.reject(refreshError);
       }
