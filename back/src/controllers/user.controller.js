@@ -176,21 +176,22 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         process.env.REFRESH_TOKEN_SECURITY
     );
     console.log("cookie:", incomingRefreshToken);
-console.log("db:", user.refreshToken);
+
     const user = await User.findById(decodedToken?._id);
     console.log("user")
 
     if (!user) {
         throw new apiError(401, "Invalid RefreshToken");
     }
-    console.log("cookie:", incomingRefreshToken);
-    console.log("db:", user.refreshToken);
-    console.log("equal:", incomingRefreshToken === user.refreshToken);
-    console.log("AAAAAAAAAAAA");
+    
 
     if (incomingRefreshToken !== user.refreshToken) {
         throw new apiError(401, "Refresh token is expired or used");
     }
+    console.log("cookie:", incomingRefreshToken);
+    console.log("db:", user.refreshToken);
+    console.log("equal:", incomingRefreshToken === user.refreshToken);
+    console.log("AAAAAAAAAAAA");
     console.log("before generate");
     const options = {
         httpOnly: true,
