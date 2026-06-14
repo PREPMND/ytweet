@@ -175,7 +175,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
         incomingRefreshToken,
         process.env.REFRESH_TOKEN_SECURITY
     );
-
+    console.log("cookie:", incomingRefreshToken);
+console.log("db:", user.refreshToken);
     const user = await User.findById(decodedToken?._id);
     console.log("user")
 
