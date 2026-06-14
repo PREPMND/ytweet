@@ -183,7 +183,7 @@ const refreshAccessToken = asyncHandler(async (req, res, next) => {
             maxAge: 7 * 24 * 60 * 60 * 1000
         }
         const { accessToken, newrefreshToken } = await generateAccessAndRefreshTokens(user._id)
-        console.log( refreshToken)
+        console.log( req.cookies)
         return res
             .status(200)
             .cookie("accessToken", accessToken,options)
