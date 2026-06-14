@@ -25,10 +25,8 @@ router.route("/login").post(
 
 //secured routes
 router.route("/logout").post(verifyJWT, logOutUser)
-router.route("/refreshtoken").post((req,res)=>{
-    console.log("REFRESH ROUTE DIRECT");
-    res.send("ok");
-});
+console.log(refreshAccessToken);
+router.route("/refreshtoken").post(refreshAccessToken)
 router.route("/changedpsw").post(verifyJWT,changeCurrentPassword)
 //router.route("/currentuser").get(verifyJWT,getCurrentUser)
 router.get("/currentuser", verifyJWT, (req, res) => {
