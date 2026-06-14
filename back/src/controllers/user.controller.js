@@ -248,6 +248,7 @@ const getCurrentUser = asyncHandler(async (req, res, next) => {
     console.log("currentUser")
     const payload = new apiResponse(200, currentUser, "Yes");
     console.log("Sending payload:", payload);
+    console.log(req.user);
     res.status(200).json({
         statusCode: 200,
         data: req.user,
