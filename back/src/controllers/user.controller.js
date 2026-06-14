@@ -201,7 +201,8 @@ const refreshAccessToken = asyncHandler(async (req,res) => {
     console.log("before generate");
     const { accessToken, refreshToken } =
         await generateAccessAndRefreshTokens(user._id);
-        
+    console.log("after generate");
+
     return res
         .status(200)
         .cookie("accessToken",accessToken,options)
