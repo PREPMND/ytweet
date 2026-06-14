@@ -1,5 +1,5 @@
 import axios from "axios";
-
+let refreshPromise = null;
 const api = axios.create({
   baseURL: `${import.meta.env.VITE_BACKEND}/api/v1`,
   withCredentials: true,
@@ -17,10 +17,16 @@ api.interceptors.response.use(
     ) {
       originalRequest._retry = true;
       try {
-        await api.post("/users/refreshtoken");
+        if (!refreshPromise) {
+          refreshPromise = api.post("/users/refreshtoken");
+        }
+
+        await refreshPromise;
+        refreshPromise = null;
+
         return api(originalRequest);
       } catch (refreshError) {
-        // Instead of calling hooks here, emit an event
+        refreshPromise = null;
         window.dispatchEvent(new Event("logout"));
         return Promise.reject(refreshError);
       }
