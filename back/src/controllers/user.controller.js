@@ -161,6 +161,7 @@ const logOutUser = asyncHandler(async (req, res, next) => {
         .json(200, {}, "User Logged Out Succesfully")
 })
 const refreshAccessToken = asyncHandler(async (req, res, next) => {
+    console.log("refresh route hit");
     const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
     if (!incomingRefreshToken) {
         throw new apiError(401, "Unauthorized Request")
