@@ -100,7 +100,6 @@ const loginUser = asyncHandler(async (req, res, next) => {
     //send cookies ,secure cookies
     //successfull 
     const { email, username, password } = req.body
-
     if (!username && !email) {
         throw new apiError(400, "Username or Email is required")
     }//User.findOne({username}) and await as data in diff continent
@@ -112,13 +111,11 @@ const loginUser = asyncHandler(async (req, res, next) => {
     if (!isPasswordValid) {
         throw new apiError(401, "Invalid Password")
     }
-
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id)
     //these tokens are not present in local user
     const loggedInUser = await User.findById(user._id).select(
         "-password -refreshToken "
     )
-
     const options = {
         httpOnly: true,
         secure: false,
