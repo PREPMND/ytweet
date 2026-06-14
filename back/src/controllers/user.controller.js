@@ -198,10 +198,10 @@ const refreshAccessToken = asyncHandler(async (req,res) => {
         sameSite:"lax",
         maxAge:7 * 24 * 60 * 60 * 1000
     };
-
+    console.log("before generate");
     const { accessToken, refreshToken } =
         await generateAccessAndRefreshTokens(user._id);
-
+        
     return res
         .status(200)
         .cookie("accessToken",accessToken,options)
