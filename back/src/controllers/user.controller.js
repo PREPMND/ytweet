@@ -185,6 +185,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     console.log("cookie:", incomingRefreshToken);
     console.log("db:", user.refreshToken);
     console.log("equal:", incomingRefreshToken === user.refreshToken);
+    console.log("AAAAAAAAAAAA");
+
     if (incomingRefreshToken !== user.refreshToken) {
         throw new apiError(401, "Refresh token is expired or used");
     }
