@@ -185,7 +185,7 @@ const refreshAccessToken = asyncHandler(async (req,res) => {
     if (incomingRefreshToken !== user.refreshToken) {
         throw new apiError(401,"Refresh token is expired or used");
     }
-
+    console.log("before generate");
     const options = {
         httpOnly:true,
         secure:false,
