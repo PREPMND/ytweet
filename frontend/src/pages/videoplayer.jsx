@@ -1,7 +1,8 @@
 import { Droplet, ThumbsUp } from "lucide-react";
-
+import {useState} from "react";
 export const VideoIndv = (props) => {
     const { videoIdSelected } = props;
+    const[desOpen, setDesOpen] = useState(false);
     console.log(videoIdSelected)
     return (
         <>
@@ -24,10 +25,7 @@ export const VideoIndv = (props) => {
                     {/* Comment and likes */}
                     <div>
                         <div className="flex  mt-4 h-[40px]  items-center gap-5">
-
                             <h2 className="text-xl ml-3 truncate font-bold ">{videoIdSelected.title}</h2>
-                            
-
                         </div>
                         <div>
                             <p className="ml-3 mt-2 text-sm text-gray-600">{videoIdSelected.description}</p>
