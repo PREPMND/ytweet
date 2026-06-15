@@ -23,7 +23,7 @@ const VideoList = (props) => {
                         const img = new Image();
                         img.src = url;
                         img.onload = resolve;
-                        img.onerror = resolve; // resolve even if error, so it doesn't hang
+                        img.onerror = resolve; 
                     })
             )
         );
