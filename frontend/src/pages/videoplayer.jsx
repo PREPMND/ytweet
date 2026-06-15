@@ -1,4 +1,4 @@
-import { Droplet, ThumbsUp } from "lucide-react";
+import { Droplet, ThumbsUp,ChevronDown } from "lucide-react";
 import {useState} from "react";
 export const VideoIndv = (props) => {
     const { videoIdSelected } = props;
@@ -28,7 +28,7 @@ export const VideoIndv = (props) => {
                             <h2 className="text-xl ml-3 truncate font-bold ">{videoIdSelected.title}</h2>
                         </div>
                         <div>
-                            <
+                            <ChevronDown className="ml-3 mt-2 cursor-pointer" onClick={() => setDesOpen(!desOpen)} />
                             <p className="ml-3 mt-2 text-sm text-gray-600">{videoIdSelected.description}</p>
                         </div>
                         <div className="flex items-center gap-3 ml-3 mt-4">
