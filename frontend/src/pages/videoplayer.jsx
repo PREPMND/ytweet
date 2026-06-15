@@ -24,9 +24,12 @@ export const VideoIndv = (props) => {
                     {/* Comment and likes */}
                     <div>
                         <div className="flex  mt-4 h-[40px]  items-center gap-5">
-                            <img className="w-10 h-10 rounded-full object-cover" src={videoIdSelected.owner.avatar} alt="Profile" />
+                            
                             <h2 className="text-xl truncate font-bold ">{videoIdSelected.title}</h2>
                             
+                        </div>
+                        <div>
+                            <img className="w-10 h-10 rounded-full object-cover" src={videoIdSelected.owner.avatar} alt="Profile" />
                         </div>
                         <div className="mr-5 mt-2">
                             <ThumbsUp className="w-7 h-7 text-gray-600" />
