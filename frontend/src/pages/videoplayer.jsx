@@ -46,6 +46,12 @@ export const VideoIndv = (props) => {
                                     ${desOpen ? 'translate-y-0':'translate-y-full'} transition-transform  duration-1000 ease-in-out`}
                                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                                 >
+                                    <div>
+                                        <h2 className="text-2xl font-[500] text-[20px] md:text-[30px] font-[Saira]">
+                                            {videoIdSelected.title}
+                                        </h2>
+                                        <
+                                    </div>
                                     
                                     <h2 className="text-md my-4 text-[16px] md:text-[23px] font-[Saira] font-[500] mb-2">Description</h2>
                                     <p className="text-sm text-gray-600 text-[13px] md:text-[16px] overflow-y-auto no-scrollbar max-h-[50vh]">
