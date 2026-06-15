@@ -116,12 +116,14 @@ const loginUser = asyncHandler(async (req, res, next) => {
     const loggedInUser = await User.findById(user._id).select(
         "-password -refreshToken "
     )
-    const options = {
-        httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000
-    }
+    
+
+    res.cookie("refreshToken", token, {
+        httpOnly: true,                     // always true
+        secure: isProd,                     // only true in production
+        sameSite: isProd ? "none" : "lax",  // "none" for prod cross-domain, "lax" for localhost
+    });
+
     console.log(refreshToken);
     return res
         .status(200)
@@ -149,12 +151,14 @@ const logOutUser = asyncHandler(async (req, res, next) => {
             new: true
         }
     )
-    const options = {
-        httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000
-    }
+    
+
+    res.cookie("refreshToken", token, {
+        httpOnly: true,                     // always true
+        secure: isProd,                     // only true in production
+        sameSite: isProd ? "none" : "lax",  // "none" for prod cross-domain, "lax" for localhost
+    });
+
     return res
         .status(200)
         .clearCookie("accessToken", options)
@@ -163,7 +167,7 @@ const logOutUser = asyncHandler(async (req, res, next) => {
 })
 const refreshAccessToken = asyncHandler(async (req, res) => {
     console.log("refresh route hit");
-    
+
     const incomingRefreshToken =
         req.cookies?.refreshToken || req.body?.refreshToken;
 
@@ -183,7 +187,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     if (!user) {
         throw new apiError(401, "Invalid RefreshToken");
     }
-    
+
 
     if (incomingRefreshToken !== user.refreshToken) {
         throw new apiError(401, "Refresh token is expired or used");
@@ -193,12 +197,14 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     console.log("equal:", incomingRefreshToken === user.refreshToken);
     console.log("AAAAAAAAAAAA");
     console.log("before generate");
-    const options = {
-        httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000
-    };
+    
+
+    res.cookie("refreshToken", token, {
+        httpOnly: true,                     // always true
+        secure: isProd,                     // only true in production
+        sameSite: isProd ? "none" : "lax",  // "none" for prod cross-domain, "lax" for localhost
+    });
+    ;
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id);
 
     return res
