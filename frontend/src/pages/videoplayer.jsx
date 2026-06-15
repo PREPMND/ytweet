@@ -8,7 +8,7 @@ export const VideoIndv = (props) => {
             <div className="my-2 mx-2 ">
                 <div>
                     {/* Actual video player*/}
-                    
+
                     <div className=' h-[70%]'>
 
                         <video
@@ -24,16 +24,17 @@ export const VideoIndv = (props) => {
                     {/* Comment and likes */}
                     <div>
                         <div className="flex  mt-4 h-[40px]  items-center gap-5">
-                            
+
                             <h2 className="text-xl ml-3 truncate font-bold ">{videoIdSelected.title}</h2>
-                            
+                            <div>
+                                <p className="ml-3 mt-2 text-sm text-gray-600">{videoIdSelected.description}</p>
+                            </div>
+
                         </div>
                         <div className="flex items-center gap-3 ml-3 mt-5">
                             <img className="w-10 h-10 rounded-full object-cover" src={videoIdSelected.owner.avatar} alt="Profile" />
                         </div>
-                        <div>
-                            <p className="ml-3 mt-2 text-sm text-gray-600">{videoIdSelected.description}</p>
-                        </div>
+                        
                     </div>
                 </div>
                 <div>
