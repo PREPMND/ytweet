@@ -26,11 +26,12 @@ export const VideoIndv = (props) => {
                     <div>
                         <div className="flex  mt-4 h-[40px]  items-center gap-5">
                             <h2 className="text-xl ml-3 truncate font-bold ">{videoIdSelected.title}</h2>
+                            <ChevronDown className="ml-3 mt-2 cursor-pointer" onClick={() => setDesOpen(!desOpen)} />
                         </div>
                         <div>
-                            <ChevronDown className="ml-3 mt-2 cursor-pointer" onClick={() => setDesOpen(!desOpen)} />
+                            
                             {desOpen && (
-                                <p className="ml-3 mt-2 text-sm text-gray-600">{videoIdSelected.description}</p>
+                                <p className="ml-3 mt-2 transition-transform ease-in-out duration-800 text-sm text-gray-600">{videoIdSelected.description}</p>
                             )}
                         </div>
                         <div className="flex items-center gap-3 ml-3 mt-4">
