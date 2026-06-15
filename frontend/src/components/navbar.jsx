@@ -194,7 +194,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             
                             <button
                                 onClick={() => setDarkMode(!darkMode)}
-                                className="px-3 h-6 w-10 py-1  text-sm text-center flex justify-center mt-7 rounded bg-gray-800 text-white hover:bg-gray-700"
+                                className="px-3 min-h-6 min-w-10 py-1  text-sm text-center flex justify-center mt-7 rounded bg-gray-800 text-white hover:bg-gray-700"
                             >
                                 Toggle Dark Mode
                             </button>
