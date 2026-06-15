@@ -31,13 +31,13 @@ export const VideoIndv = (props) => {
                         <div>
 
 
-                            <p
-                                className={`ml-3 mt-2 text-sm text-gray-600 transition-all duration-500 ease-in-out 
-                                ${desOpen ? 'opacity-100 line-clamp-none' :
-                                'opacity-70 line-clamp-1'}`}
+                            <div
+                                className={`ml-3 mt-2 text-sm text-gray-600 overflow-hidden transition-[max-height] duration-500 ease-in-out`}
+                                style={{ maxHeight: desOpen ? '500px' : '40px' }}
                             >
                                 {videoIdSelected.description}
-                            </p>
+                            </div>
+
 
 
                         </div>
