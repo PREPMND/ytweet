@@ -116,7 +116,7 @@ const loginUser = asyncHandler(async (req, res, next) => {
     const loggedInUser = await User.findById(user._id).select(
         "-password -refreshToken "
     )
-    
+    const isProd = process.env.NODE_ENV === "production";
 
     res.cookie("refreshToken", token, {
         httpOnly: true,                     // always true
@@ -151,7 +151,7 @@ const logOutUser = asyncHandler(async (req, res, next) => {
             new: true
         }
     )
-    
+    const isProd = process.env.NODE_ENV === "production";
 
     res.cookie("refreshToken", token, {
         httpOnly: true,                     // always true
@@ -197,7 +197,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     console.log("equal:", incomingRefreshToken === user.refreshToken);
     console.log("AAAAAAAAAAAA");
     console.log("before generate");
-    
+    const isProd = process.env.NODE_ENV === "production";
 
     res.cookie("refreshToken", token, {
         httpOnly: true,                     // always true
