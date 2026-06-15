@@ -39,7 +39,7 @@ export const VideoIndv = (props) => {
                                 onClick={() => setDesOpen(false)}
                             >
                                 <div
-                                    className={`absolute bottom-0 w-[100%] left-0 right-0 md:top-[30%] min-h-[50%] md:mx-auto md:w-[80%] pt-4 pl-5  bg-white rounded-t-lg p-4 z-50
+                                    className={`absolute bottom-0 w-[100%] left-0 right-0 md:top-[30%] h-[60%] md:mx-auto md:w-[80%] pt-4 pl-5  bg-white rounded-t-lg p-4 z-50
                                     ${desOpen ? 'translate-y-0':'translate-y-full'} transition-transform  duration-1000 ease-in-out`}
                                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                                 >
