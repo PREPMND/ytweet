@@ -28,7 +28,7 @@ export const VideoIndv = (props) => {
                             <h2 className="text-xl ml-3 truncate font-bold ">{videoIdSelected.title}</h2>
                             
                         </div>
-                        <div>
+                        <div className="flex items-center gap-3 ml-3 mt-5">
                             <img className="w-10 h-10 rounded-full object-cover" src={videoIdSelected.owner.avatar} alt="Profile" />
                         </div>
                         <div className="mr-5 mt-2">
