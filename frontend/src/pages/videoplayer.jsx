@@ -29,7 +29,9 @@ export const VideoIndv = (props) => {
                         </div>
                         <div>
                             <ChevronDown className="ml-3 mt-2 cursor-pointer" onClick={() => setDesOpen(!desOpen)} />
-                            <p className="ml-3 mt-2 text-sm text-gray-600">{videoIdSelected.description}</p>
+                            {desOpen && (
+                                <p className="ml-3 mt-2 text-sm text-gray-600">{videoIdSelected.description}</p>
+                            )}
                         </div>
                         <div className="flex items-center gap-3 ml-3 mt-4">
                             <img className="w-10 h-10 rounded-full object-cover" src={videoIdSelected.owner.avatar} alt="Profile" />
