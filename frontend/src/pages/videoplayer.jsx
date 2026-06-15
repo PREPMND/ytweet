@@ -25,7 +25,7 @@ export const VideoIndv = (props) => {
                     {/* Comment and likes */}
                     <div>
                         <div className="flex w-full justify-between md:w-[70%] mt-4 h-[40px] items-center gap-5">
-                            <h2 className="text-xl ml-3 truncate font-bold">
+                            <h2 className="text-xl ml-3 w-[85%] truncate font-bold">
                                 {videoIdSelected.title}
                             </h2>
                             <ChevronDown
