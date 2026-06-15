@@ -26,7 +26,7 @@ export const VideoIndv = (props) => {
                     <div>
                         <div className="flex w-full justify-between md:w-[70%] mt-4 h-[40px]  items-center gap-5">
                             <h2 className="text-xl ml-3 truncate font-bold ">{videoIdSelected.title}</h2>
-                            <ChevronDown className="ml-3 text-right mt-2 cursor-pointer" onClick={() => setDesOpen(!desOpen)} />
+                            <ChevronDown className={`ml-3 text-right mt-2 cursor-pointer ${desOpen ? 'rotate-180' : ''}`} onClick={() => setDesOpen(!desOpen)} />
                         </div>
                         <div>
 
