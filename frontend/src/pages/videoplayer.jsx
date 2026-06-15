@@ -6,14 +6,14 @@ export const VideoIndv = (props) => {
     console.log(videoIdSelected)
     return (
         <>
-            <div className="my-2 mx-2 ">
+            <div className="my-2 ">
                 <div>
                     {/* Actual video player*/}
 
                     <div className=' h-[70%]'>
 
                         <video
-                            className="w-full md:w-[70%] h-[40%] md:h-[60%] bg-black aspect-[16/9] object-contain rounded-lg"
+                            className="w-[95%] m-auto md:w-[70%] h-[40%] md:h-[60%] bg-black aspect-[16/9] object-contain rounded-lg"
                             controls
                         >
                             <source src={videoIdSelected.videoFile} type="video/mp4" />
