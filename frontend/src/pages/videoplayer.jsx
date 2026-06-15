@@ -1,8 +1,8 @@
-import { Droplet, ThumbsUp,ChevronDown } from "lucide-react";
-import {useState} from "react";
+import { Droplet, ThumbsUp, ChevronDown } from "lucide-react";
+import { useState } from "react";
 export const VideoIndv = (props) => {
     const { videoIdSelected } = props;
-    const[desOpen, setDesOpen] = useState(false);
+    const [desOpen, setDesOpen] = useState(false);
     console.log(videoIdSelected)
     return (
         <>
@@ -29,10 +29,10 @@ export const VideoIndv = (props) => {
                             <ChevronDown className="ml-3 text-right mt-2 cursor-pointer" onClick={() => setDesOpen(!desOpen)} />
                         </div>
                         <div>
-                            
-                            {desOpen && (
-                                <p className="ml-3 mt-2 transition-all ease-in-out duration-800 text-sm text-gray-600">{videoIdSelected.description}</p>
-                            )}
+
+
+                            <p className={`${desOpen ? 'opacity-100' : 'opacity-0'} ml-3 mt-2 transition-all ease-in-out duration-800 text-sm text-gray-600`}>{videoIdSelected.description}</p>
+
                         </div>
                         <div className="flex items-center gap-3 ml-3 mt-4">
                             <img className="w-10 h-10 rounded-full object-cover" src={videoIdSelected.owner.avatar} alt="Profile" />
