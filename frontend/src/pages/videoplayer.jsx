@@ -42,7 +42,7 @@ export const VideoIndv = (props) => {
                             >
                                 {/* Popup container */}
                                 <div
-                                    className="absolute bottom-0 left-0 right-0 md:top-[30%] md:mx-auto md:w-[100%] bg-white rounded-t-lg p-4 z-50"
+                                    className="absolute bottom-0 left-0 right-0 md:top-[30%] md:mx-auto md:w-[80%] bg-white rounded-t-lg p-4 z-50"
                                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                                 >
                                     <h3 className="text-lg font-bold mb-2">{videoIdSelected.title}</h3>
