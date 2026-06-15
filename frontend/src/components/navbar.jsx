@@ -1,4 +1,4 @@
-import { useQuery,useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
@@ -191,25 +191,26 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             </div>
 
                             <div className={` ${darkMode ? "" : "text-stone-900"} text-[12px] hidden text-center mt-3 text-white border-[1px] w-[260px]`}></div>
-                            
+
                             <button
                                 onClick={() => setDarkMode(!darkMode)}
-                                className="px-3 min-h-6 min-w-10 py-1  text-sm text-center flex justify-center mt-7 rounded bg-gray-800 text-white hover:bg-gray-700"
+                                className="w-32 h-10 text-sm text-center flex justify-center items-center mt-7 rounded bg-gray-800 text-white hover:bg-gray-700"
                             >
                                 Toggle Dark Mode
                             </button>
-                            
-                            <div className={` ${darkMode ? "" : "text-stone-900"} text-[12px] hidden text-center  mt-3 text-white border-[1px] w-[260px]`}>
-                                
+
+                            <div className={` ${darkMode ? "" : "text-stone-900"} text-[12px] hidden text-center mt-3 text-white border w-64`}>
                             </div>
-                            <div className={`w-full`}>
+
+                            <div className="w-full">
                                 <button
                                     onClick={HandleLogout}
-                                    className={`text-sm text-center mt-7 rounded min-h-5 min-w-10 bg-red-600 text-white hover:bg-red-500 ${isLoggedIn ? "flex" : "hidden"}`}
+                                    className={`w-32 h-10 text-sm text-center flex justify-center items-center mt-7 rounded bg-red-600 text-white hover:bg-red-500 ${isLoggedIn ? "flex" : "hidden"}`}
                                 >
                                     Log Out
                                 </button>
                             </div>
+
                         </div>
                     </div>
                 </div>
