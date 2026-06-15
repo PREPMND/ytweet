@@ -25,7 +25,7 @@ export const VideoIndv = (props) => {
                     <div>
                         <div className="flex  mt-4 h-[40px]  items-center gap-5">
                             
-                            <h2 className="text-xl truncate font-bold ">{videoIdSelected.title}</h2>
+                            <h2 className="text-xl ml-3 truncate font-bold ">{videoIdSelected.title}</h2>
                             
                         </div>
                         <div>
