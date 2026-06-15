@@ -24,23 +24,35 @@ export const VideoIndv = (props) => {
                 <div>
                     {/* Comment and likes */}
                     <div>
-                        <div className="flex w-full justify-between md:w-[70%] mt-4 h-[40px]  items-center gap-5">
-                            <h2 className="text-xl ml-3 truncate font-bold ">{videoIdSelected.title}</h2>
-                            <ChevronDown className={`ml-3 text-right mt-2 cursor-pointer ${desOpen ? 'rotate-180' : ''}`} onClick={() => setDesOpen(!desOpen)} />
+                        <div className="flex w-full justify-between md:w-[70%] mt-4 h-[40px] items-center gap-5">
+                            <h2 className="text-xl ml-3 truncate font-bold">
+                                {videoIdSelected.title}
+                            </h2>
+                            <ChevronDown
+                                className={`ml-3 text-right mt-2 cursor-pointer ${desOpen ? 'rotate-180' : ''}`}
+                                onClick={() => setDesOpen(true)}
+                            />
                         </div>
-                        <div>
 
-
+                        {/* Overlay */}
+                        {desOpen && (
                             <div
-                                className={`ml-3 mt-2 text-sm text-gray-600 overflow-hidden transition-[max-height] duration-1000 ease-in-out`}
-                                style={{ maxHeight: desOpen ? '500px' : '0px' }}
+                                className="fixed inset-0 bg-black bg-opacity-50 z-40"
+                                onClick={() => setDesOpen(false)}
                             >
-                                {videoIdSelected.description}
+                                {/* Popup container */}
+                                <div
+                                    className="absolute bottom-0 left-0 right-0 md:top-[30%] md:mx-auto md:w-[70%] bg-white rounded-t-lg p-4 z-50"
+                                    onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                                >
+                                    <h3 className="text-lg font-bold mb-2">{videoIdSelected.title}</h3>
+                                    <p className="text-sm text-gray-600 overflow-y-auto max-h-[50vh]">
+                                        {videoIdSelected.description}
+                                    </p>
+                                </div>
                             </div>
+                        )}
 
-
-
-                        </div>
                         <div className="flex items-center gap-3 ml-3 mt-4">
                             <img className="w-10 h-10 rounded-full object-cover" src={videoIdSelected.owner.avatar} alt="Profile" />
                             <div className="flex flex-col ml-5">
