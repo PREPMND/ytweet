@@ -204,7 +204,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             </div>
                             <button
                                 onClick={HandleLogout}
-                                className={`px-3 py-1 text-sm text-center flex justify-center mt-7 rounded min-h-6 min-w-10 bg-red-600 text-white hover:bg-red-500 ${isLoggedIn ? "flex" : "hidden"}`}
+                                className={`text-sm text-center mt-7 rounded min-h-6 min-w-10 bg-red-600 text-white hover:bg-red-500 ${isLoggedIn ? "flex" : "hidden"}`}
                             >
                                 Log Out
                             </button>
