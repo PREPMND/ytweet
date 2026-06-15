@@ -29,7 +29,7 @@ export const VideoIndv = (props) => {
                                 {videoIdSelected.title}
                             </h2>
                             <ChevronDown
-                                className={`mr-2 md:mr-0 absolute md:flex md:right-auto right-2 mt-2 cursor-pointer ${desOpen ? 'rotate-180' : ''}`}
+                                className={`mr-2 md:mr-0 absolute text-right md:flex  md:right-0 right-2 mt-2 cursor-pointer ${desOpen ? 'rotate-180' : ''}`}
                                 onClick={() => setDesOpen(true)}
                             />
                         </div>
