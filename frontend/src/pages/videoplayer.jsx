@@ -31,11 +31,8 @@ export const VideoIndv = (props) => {
                         <div className="flex items-center gap-3 ml-3 mt-5">
                             <img className="w-10 h-10 rounded-full object-cover" src={videoIdSelected.owner.avatar} alt="Profile" />
                         </div>
-                        <div className="mr-5 mt-2">
-                            <ThumbsUp className="w-7 h-7 text-gray-600" />
-                            <div>
-                                
-                            </div>
+                        <div>
+                            <p className="ml-3 mt-2 text-sm text-gray-600">{videoIdSelected.description}</p>
                         </div>
                     </div>
                 </div>
