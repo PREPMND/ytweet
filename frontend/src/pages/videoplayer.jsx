@@ -47,9 +47,8 @@ export const VideoIndv = (props) => {
                                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                                 >
                                     
-                                    <h3 className="text-lg font-[500]">{videoIdSelected.title}</h3>
-                                    <h2 className="text-md my-4 font-semibold mb-2">Description</h2>
-                                    <p className="text-sm text-gray-600 overflow-y-auto max-h-[50vh]">
+                                    <h2 className="text-md my-4 text-[16px] md:text-[23px] font-[Saira] font-[500] mb-2">Description</h2>
+                                    <p className="text-sm text-gray-600 text-[13px] md:text-[16px] overflow-y-auto max-h-[50vh]">
                                         {videoIdSelected.description}
                                     </p>
                                 </div>
