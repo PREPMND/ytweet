@@ -31,13 +31,15 @@ export const VideoIndv = (props) => {
                         <div>
                             
                             {desOpen && (
-                                <p className="ml-3 mt-2 transition-opacity ease-in-out duration-800 text-sm text-gray-600">{videoIdSelected.description}</p>
+                                <p className="ml-3 mt-2 transition-all ease-in-out duration-800 text-sm text-gray-600">{videoIdSelected.description}</p>
                             )}
                         </div>
                         <div className="flex items-center gap-3 ml-3 mt-4">
                             <img className="w-10 h-10 rounded-full object-cover" src={videoIdSelected.owner.avatar} alt="Profile" />
+                            <div className="flex flex-col ml-5">
+                                <h3 className="font-semibold text-lg">{videoIdSelected.owner.username}</h3>
+                            </div>
                         </div>
-                        
                     </div>
                 </div>
                 <div>
