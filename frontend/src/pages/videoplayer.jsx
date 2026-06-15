@@ -34,7 +34,7 @@ export const VideoIndv = (props) => {
                             <p
                                 className={`ml-3 mt-2 text-sm text-gray-600 transition-all duration-500 ease-in-out 
                                 ${desOpen ? 'opacity-100 line-clamp-none' :
-                                'opacity-70 line-clamp-3'}`}
+                                'opacity-70 line-clamp-1'}`}
                             >
                                 {videoIdSelected.description}
                             </p>
