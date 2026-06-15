@@ -33,14 +33,11 @@ export const VideoIndv = (props) => {
                                 onClick={() => setDesOpen(true)}
                             />
                         </div>
-
-                        {/* Overlay */}
                         {desOpen && (
                             <div
                                 className="fixed inset-0 bg-black bg-opacity-50 z-40"
                                 onClick={() => setDesOpen(false)}
                             >
-                                {/* Popup container */}
                                 <div
                                     className={`absolute bottom-0 left-0 right-0 md:top-[30%] md:mx-auto md:w-[80%] pt-4 pl-5  bg-white rounded-t-lg p-4 z-50
                                     ${desOpen ? 'translate-y-0':'translate-y-full'} transition-transform  duration-1000 ease-in-out`}
