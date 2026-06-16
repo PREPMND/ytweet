@@ -46,7 +46,22 @@ export const VideoIndv = (props) => {
         }
         return `${m}:${s.toString().padStart(2, "0")}`;
     }
+    const { id } = useParams();
+  const [video, setVideo] = useState(null);
 
+  useEffect(() => {
+    const fetchVideo = async () => {
+      try {
+        const res = await axios.get(`/api/getvideo/${id}`);
+        setVideo(res.data.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchVideo();
+  }, [id]);
+
+  if (!video) return <p>Loading...</p>;
     return (
         <>
             <div className="my-2 ">
