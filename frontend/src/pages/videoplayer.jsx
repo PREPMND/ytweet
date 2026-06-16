@@ -27,7 +27,7 @@ export const VideoIndv = (props) => {
         }
     };
     useEffect(() => {
-            channelVideo(profileSelected.owner._id);
+            channelVideo(videoIdSelected.owner._id);
     }, [videos]);
     return (
         <>
