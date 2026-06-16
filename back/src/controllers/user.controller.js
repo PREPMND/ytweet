@@ -118,12 +118,11 @@ const loginUser = asyncHandler(async (req, res, next) => {
     )
     const isProd = process.env.NODE_ENV === "production";
 
-    const options = {
-        httpOnly: true,
-        secure: false,
-        sameSite: "lax",
-        maxAge: 7 * 24 * 60 * 60 * 1000
-    };
+    res.cookie("refreshToken", token, {
+        httpOnly: true,                     // always true
+        secure: isProd,                     // only true in production
+        sameSite: isProd ? "none" : "lax",  // "none" for prod cross-domain, "lax" for localhost
+    });
 
     console.log(refreshToken);
     return res
