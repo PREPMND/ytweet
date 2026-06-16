@@ -18,34 +18,6 @@ export const VideoIndv = (props) => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
-
-    const channelVideo = async (ownerId) => {
-        setLoadingVideos(true);
-        try {
-            const res = await api.post("/videos/any", { owner: ownerId });
-            setVideos(res.data.data);
-            console.log("Owner's other videos:", res.data.data);
-            // match backend response structure
-            setLoadingVideos(false);
-        } catch (err) {
-            console.error(err);
-        }
-    };
-    useEffect(() => {
-        channelVideo(videoIdSelected.owner._id);
-    }, [data]);
-
-    {/* Function to format duration in seconds to HH:MM:SS or MM:SS */ }
-    function formatDuration(seconds) {
-        const h = Math.floor(seconds / 3600);
-        const m = Math.floor((seconds % 3600) / 60);
-        const s = Math.floor(seconds % 60);
-
-        if (h > 0) {
-            return `${h}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-        }
-        return `${m}:${s.toString().padStart(2, "0")}`;
-    }
     const { id } = useParams();
     const [video, setVideo] = useState(null);
 
