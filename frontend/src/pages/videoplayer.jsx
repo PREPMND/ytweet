@@ -1,5 +1,6 @@
 import { Droplet, ThumbsUp, ChevronDown } from "lucide-react";
-import { useState,useQuery,useEffect } from "react";
+import { useState,useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
 
