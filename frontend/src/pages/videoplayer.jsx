@@ -95,7 +95,7 @@ export const VideoIndv = () => {
                         {videos.map((v) => (
                             <div
                                 key={v._id}
-                                className="flex-shrink-0 w-full relative cursor-pointer"
+                                className="flex-shrink-0 w-full md:flex relative cursor-pointer"
                                 onClick={() => navigate(`/video/${v._id}`)}
                             >
                                 <img
@@ -103,7 +103,9 @@ export const VideoIndv = () => {
                                     alt={v.title}
                                     className="w-full md:w-[50%] rounded-lg aspect-video h-full object-cover"
                                 />
-                                
+                                <h3 className=" font-semibold px-2 py-1 rounded">
+                                    {v.title}
+                                </h3>
                             </div>
                         ))}
                     </div>
