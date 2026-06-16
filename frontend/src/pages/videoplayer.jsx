@@ -6,6 +6,11 @@ export const VideoIndv = (props) => {
     console.log(videoIdSelected)
 
     {/* owner's other videos are present here */ }
+    const { data } = useQuery({
+        queryKey: ["currentUser"],
+        queryFn: getCurrentUser,
+    });
+
     const channelVideo = async (ownerId) => {
         setLoadingVideos(true);
         try {
