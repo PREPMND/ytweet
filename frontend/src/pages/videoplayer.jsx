@@ -16,15 +16,15 @@ export const VideoIndv = () => {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const res = await axios.get(`/api/v1/videos/watchvideo/${id}`);
+        const res = await api.get(`/videos/watchvideo/${id}`);
         setVideo(res.data.data);
         console.log("Fetched video data:", res.data);
 
         // fetch owner's other videos
         setLoadingVideos(true);
-        //const res2 = await api.post("/videos/any", { owner: res.data });
-        //setVideos(res2.data.data);
-        //console.log("Owner's other videos:", res2.data.data);
+        const res2 = await api.post("/videos/any", { owner: res.data });
+        setVideos(res2.data.data);
+        console.log("Owner's other videos:", res2.data.data);
         setLoadingVideos(false);
       } catch (err) {
         console.error(err);
@@ -70,7 +70,7 @@ export const VideoIndv = () => {
       {/* More from this channel */}
       <div className="mt-4">
         <h2 className="text-xl font-semibold ml-3 mt-6 mb-1">More from this channel</h2>
-        {/*loadingVideos ? (
+        {loadingVideos ? (
           <p className="m-auto">Loading videos...</p>
         ) : (
           <div className="flex overflow-x-auto flex-col gap-4 p-3">
@@ -91,7 +91,7 @@ export const VideoIndv = () => {
               </div>
             ))}
           </div>
-        )*/}
+        )}
       </div>
     </div>
   );
