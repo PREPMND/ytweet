@@ -1,6 +1,7 @@
 import { Droplet, ThumbsUp, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
 
@@ -9,7 +10,7 @@ export const VideoIndv = (props) => {
     const [desOpen, setDesOpen] = useState(false);
     const [loadingVideos, setLoadingVideos] = useState(false);
     const [videos, setVideos] = useState([]);
-
+    const navigate = useNavigate();
     console.log(videoIdSelected)
 
     {/* owner's other videos are present here */ }
