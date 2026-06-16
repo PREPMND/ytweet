@@ -54,56 +54,63 @@ export const VideoIndv = () => {
                     onClick={() => setDesOpen(!desOpen)}
                 />
             </div>
-            ${desOpen ? 'translate-y-0' : 'translate-y-full'} transition-transform  duration-1000 ease-in-out`}
-            onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
-            >
-            <div>
-                <h2 className="text-2xl font-[500] text-[20px] md:text-[30px] font-[Saira]">
-                    {videoIdSelected.title}
-                </h2>
-                <div className="border-b border-gray-500 mt-3"></div>
+            {desOpen && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-50 z-40"
+                    onClick={() => setDesOpen(false)}
+                >
+                    <div
+                        className={`absolute bottom-0 w-[100%] left-0 right-0 md:top-[30%] md:h-auto h-[60%] md:mx-auto md:w-[80%] pt-4 pl-5  bg-white rounded-t-lg p-4 z-50
+                                    ${desOpen ? 'translate-y-0' : 'translate-y-full'} transition-transform  duration-1000 ease-in-out`}
+                        onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                    >
+                        <div>
+                            <h2 className="text-2xl font-[500] text-[20px] md:text-[30px] font-[Saira]">
+                                {video.title}
+                            </h2>
+                            <div className="border-b border-gray-500 mt-3"></div>
+                        </div>
+
+                        <h2 className="text-md my-4 text-[16px] md:text-[23px] font-[Saira] font-[500] mb-2">Description</h2>
+                        <p className="text-sm text-gray-600 text-[13px] md:text-[16px] overflow-y-auto no-scrollbar max-h-[50vh]">
+                            {video.description}
+                        </p>
+                    </div>
+                </div>
+            )}
+
+            {/* Owner info */}
+            <div className="flex items-center gap-3 ml-3 mt-4">
+                <img className="w-10 h-10 rounded-full object-cover" src={video.owner.avatar} alt="Profile" />
+                <h3 className="font-semibold text-lg">{video.owner.username}</h3>
             </div>
 
-            <h2 className="text-md my-4 text-[16px] md:text-[23px] font-[Saira] font-[500] mb-2">Description</h2>
-            <p className="text-sm text-gray-600 text-[13px] md:text-[16px] overflow-y-auto no-scrollbar max-h-[50vh]">
-                {videoIdSelected.description}
-            </p>
-        </div>
-                            
-        )}
-
-{/* Owner info */ }
-<div className="flex items-center gap-3 ml-3 mt-4">
-    <img className="w-10 h-10 rounded-full object-cover" src={video.owner.avatar} alt="Profile" />
-    <h3 className="font-semibold text-lg">{video.owner.username}</h3>
-</div>
-
-{/* More from this channel */ }
-<div className="mt-4">
-    <h2 className="text-xl font-semibold ml-3 mt-6 mb-1">More from this channel</h2>
-    {loadingVideos ? (
-        <p className="m-auto">Loading videos...</p>
-    ) : (
-        <div className="flex overflow-x-auto flex-col gap-4 p-3">
-            {videos.map((v) => (
-                <div
-                    key={v._id}
-                    className="flex-shrink-0 w-full relative cursor-pointer"
-                    onClick={() => navigate(`/video/${v._id}`)}
-                >
-                    <img
-                        src={v.thumbnail}
-                        alt={v.title}
-                        className="w-full rounded-lg aspect-video h-full object-cover"
-                    />
-                    <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                        {v.durationFormatted}
-                    </span>
-                </div>
-            ))}
-        </div>
-    )}
-</div>
+            {/* More from this channel */}
+            <div className="mt-4">
+                <h2 className="text-xl font-semibold ml-3 mt-6 mb-1">More from this channel</h2>
+                {loadingVideos ? (
+                    <p className="m-auto">Loading videos...</p>
+                ) : (
+                    <div className="flex overflow-x-auto flex-col gap-4 p-3">
+                        {videos.map((v) => (
+                            <div
+                                key={v._id}
+                                className="flex-shrink-0 w-full relative cursor-pointer"
+                                onClick={() => navigate(`/video/${v._id}`)}
+                            >
+                                <img
+                                    src={v.thumbnail}
+                                    alt={v.title}
+                                    className="w-full rounded-lg aspect-video h-full object-cover"
+                                />
+                                <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                    {v.durationFormatted}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div >
     );
 };
