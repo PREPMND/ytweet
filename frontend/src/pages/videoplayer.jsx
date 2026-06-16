@@ -111,31 +111,30 @@ export const VideoIndv = (props) => {
                 <div>
                     {/* video suggestions */}
                     <div className="mt-4">
-                        <h2 className="text-xl font-bold ml-3 mb-2">More from this channel</h2>
+                        <h2 className="text-xl font-bold ml-3 mb-2 font-[Saira">More from this channel</h2>
                         {loadingVideos ? (
                             <p className="m-auto">Loading videos...</p>
                         ) : (
                             <div className="flex overflow-x-auto flex-col gap-4 p-3">
                                 {videos.map((video) => (
-                                    <div key={video._id} className="flex-shrink-0 w-full relative inset-0">
-                                        <video
-                                            src={video.url}
-                                            poster={video.thumbnail}
-                                            
-                                            className="w-full rounded-lg  aspect-video h-full object-cover"
-                                            
-                                            onLoadedMetadata={(e) => {
-                                                const duration = e.target.duration; // in seconds
-                                                videos.durationFormatted = formatDuration(duration);
-                                                console.log("Duration:", duration);
-                                            }}
+                                    <div
+                                        key={video._id}
+                                        className="flex-shrink-0 w-full relative cursor-pointer"
+                                        onClick={() => navigate(`/video/${video._id}`)} // or your routing logic
+                                    >
+                                        {/* Thumbnail only */}
+                                        <img
+                                            src={video.thumbnail}
+                                            alt={video.title}
+                                            className="w-full rounded-lg aspect-video h-full object-cover"
                                         />
-                                        {/* Duration overlay */}
-                                        <span className="absolute w-10 h-8 bottom-2 right-2 bg-black bg-opacity-70 z-50 text-white text-xs px-2 py-1 rounded">
-                                            {videos.durationFormatted}
-                                        </span>
 
+                                        {/* Duration overlay */}
+                                        <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                            {video.durationFormatted}
+                                        </span>
                                     </div>
+
                                 ))}
                             </div>
                         )}
