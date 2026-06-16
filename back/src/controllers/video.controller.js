@@ -101,8 +101,8 @@ export const getVideos = async (req, res) => {
         }
 
         videos.docs = videos.docs.map((v) => ({
-            ...videos,
-            durationFormatted: formatDuration(videos.duration || 0),
+            ...v,
+            durationFormatted: formatDuration(v.duration || 0),
         }));
 
         res.status(200).json({ success: true, data: videos });
@@ -114,18 +114,7 @@ export const getVideos = async (req, res) => {
 export const getVideoById = async (req, res) => {
     try {
         const video = await Video.findById(req.params.id).populate("owner", "username email");
-        function formatDuration(seconds) {
-            const hours = Math.floor(seconds / 3600);
-            const minutes = Math.floor((seconds % 3600) / 60);
-            if (seconds < 60) return `${seconds}s`;
-            if (seconds < 3600) return `${minutes}m`;
-            return `${hours}h ${minutes}m`;
-        }
-
-        videos.docs = videos.docs.map((v) => ({
-            ...v,
-            durationFormatted: formatDuration(v.duration || 0),
-        }));
+        
         if (!video) {
             return res.status(404).json({ success: false, message: "Video not found" });
         }
