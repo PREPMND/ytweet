@@ -23,6 +23,7 @@ export const VideoIndv = (props) => {
         try {
             const res = await api.post("/videos/any", { owner: ownerId });
             setVideos(res.data.data);
+            console.log("Owner's other videos:", res.data.data);
             // match backend response structure
             setLoadingVideos(false);
         } catch (err) {
