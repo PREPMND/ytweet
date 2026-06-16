@@ -97,6 +97,25 @@ export const VideoIndv = (props) => {
                 </div>
                 <div>
                     {/* video suggestions */}
+                    <div className="mt-4">
+                        <h2 className="text-xl font-bold ml-3 mb-2">More from this channel</h2>
+                        {loadingVideos ? (
+                            <p className="ml-3">Loading videos...</p>
+                        ) : (
+                            <div className="flex overflow-x-auto gap-4 p-3">
+                                {videos.map((video) => (
+                                    <div key={video._id} className="flex-shrink-0 w-40">
+                                        <video
+                                            src={video.url}
+                                            poster={video.thumbnail}
+                                            className="w-full h-full object-cover"
+                                            controls
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </>
