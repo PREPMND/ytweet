@@ -108,6 +108,7 @@ export const VideoIndv = (props) => {
                                         <video
                                             src={video.url}
                                             poster={video.thumbnail}
+                                            duration={video.durationFormatted}
                                             className="w-full aspect-video h-full object-cover"
                                             controls
                                         />
