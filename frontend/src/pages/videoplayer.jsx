@@ -18,14 +18,14 @@ export const VideoIndv = () => {
       try {
         const res = await axios.get(`/api/v1/videos/watchvideo/${id}`);
         setVideo(res.data.data);
-        console.log("Fetched video data:", res.data.data);
+        console.log("Fetched video data:", res.data);
 
         // fetch owner's other videos
-        {setLoadingVideos(true);
-        const res2 = await api.post("/videos/any", { owner: res.data.data.owner._id });
+        setLoadingVideos(true);
+        const res2 = await api.post("/videos/any", { owner: res.data });
         setVideos(res2.data.data);
         console.log("Owner's other videos:", res2.data.data);
-        setLoadingVideos(false);}
+        setLoadingVideos(false);
       } catch (err) {
         console.error(err);
       }
