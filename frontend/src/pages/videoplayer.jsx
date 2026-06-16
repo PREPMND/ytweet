@@ -1,5 +1,5 @@
 import { Droplet, ThumbsUp, ChevronDown } from "lucide-react";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
@@ -9,7 +9,7 @@ export const VideoIndv = (props) => {
     const [desOpen, setDesOpen] = useState(false);
     const [loadingVideos, setLoadingVideos] = useState(false);
     const [videos, setVideos] = useState([]);
-    
+
     console.log(videoIdSelected)
 
     {/* owner's other videos are present here */ }
@@ -31,7 +31,7 @@ export const VideoIndv = (props) => {
         }
     };
     useEffect(() => {
-            channelVideo(videoIdSelected.owner._id);
+        channelVideo(videoIdSelected.owner._id);
     }, [data]);
     return (
         <>
@@ -69,7 +69,7 @@ export const VideoIndv = (props) => {
                             >
                                 <div
                                     className={`absolute bottom-0 w-[100%] left-0 right-0 md:top-[30%] md:h-auto h-[60%] md:mx-auto md:w-[80%] pt-4 pl-5  bg-white rounded-t-lg p-4 z-50
-                                    ${desOpen ? 'translate-y-0':'translate-y-full'} transition-transform  duration-1000 ease-in-out`}
+                                    ${desOpen ? 'translate-y-0' : 'translate-y-full'} transition-transform  duration-1000 ease-in-out`}
                                     onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                                 >
                                     <div>
@@ -78,7 +78,7 @@ export const VideoIndv = (props) => {
                                         </h2>
                                         <div className="border-b border-gray-500 mt-3"></div>
                                     </div>
-                                    
+
                                     <h2 className="text-md my-4 text-[16px] md:text-[23px] font-[Saira] font-[500] mb-2">Description</h2>
                                     <p className="text-sm text-gray-600 text-[13px] md:text-[16px] overflow-y-auto no-scrollbar max-h-[50vh]">
                                         {videoIdSelected.description}
@@ -111,6 +111,15 @@ export const VideoIndv = (props) => {
                                             duration={video.durationFormatted}
                                             className="w-full aspect-video h-full object-cover"
                                             controls
+                                            onLoadedMetadata={(e) => {
+                                                const duration = e.target.duration; // in seconds
+                                                console.log("Duration:", duration);
+                                            }}
+                                        />
+                                        {/* Duration overlay */}
+                                        <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                            {video.durationFormatted}
+                                        </span>
                                         />
                                     </div>
                                 ))}
