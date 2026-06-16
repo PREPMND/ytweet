@@ -101,8 +101,8 @@ export const getVideos = async (req, res) => {
         }
 
         videos.docs = videos.docs.map((v) => ({
-            ...v,
-            durationFormatted: formatDuration(v.duration || 0),
+            ...video,
+            durationFormatted: formatDuration(video.duration || 0),
         }));
 
         res.status(200).json({ success: true, data: videos });
