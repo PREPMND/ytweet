@@ -103,7 +103,7 @@ export const VideoIndv = () => {
                                     alt={v.title}
                                     className="w-full md:w-[50%] rounded-lg aspect-video h-full object-cover"
                                 />
-                                <h3 className=" font-[500]  px-5 font-[Saira] text-[20px] rounded">
+                                <h3 className=" font-[500] px-2 line-clamp-2 md:line-clamp-6 md:px-5 font-[Saira] text-[20px] rounded">
                                     {v.title}
                                 </h3>
                             </div>
