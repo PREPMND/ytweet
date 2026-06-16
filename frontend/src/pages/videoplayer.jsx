@@ -33,6 +33,19 @@ export const VideoIndv = (props) => {
     useEffect(() => {
         channelVideo(videoIdSelected.owner._id);
     }, [data]);
+
+    {/* Function to format duration in seconds to HH:MM:SS or MM:SS */ }
+    function formatDuration(seconds) {
+        const h = Math.floor(seconds / 3600);
+        const m = Math.floor((seconds % 3600) / 60);
+        const s = Math.floor(seconds % 60);
+
+        if (h > 0) {
+            return `${h}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+        }
+        return `${m}:${s.toString().padStart(2, "0")}`;
+    }
+
     return (
         <>
             <div className="my-2 ">
@@ -113,7 +126,7 @@ export const VideoIndv = (props) => {
                                             controls
                                             onLoadedMetadata={(e) => {
                                                 const duration = e.target.duration; // in seconds
-                                            
+                                                video.durationFormatted = formatDuration(duration);
                                                 console.log("Duration:", duration);
                                             }}
                                         />
@@ -121,7 +134,7 @@ export const VideoIndv = (props) => {
                                         <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
                                             {video.durationFormatted}
                                         </span>
-                                        
+
                                     </div>
                                 ))}
                             </div>
