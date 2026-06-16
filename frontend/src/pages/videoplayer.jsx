@@ -101,7 +101,7 @@ export const VideoIndv = () => {
                                 <img
                                     src={v.thumbnail}
                                     alt={v.title}
-                                    className="w-full rounded-lg aspect-video h-full object-cover"
+                                    className="w-full md:w-[50%] rounded-lg aspect-video h-full object-cover"
                                 />
                                 <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
                                     {v.durationFormatted}
