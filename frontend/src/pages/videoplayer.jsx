@@ -117,7 +117,7 @@ export const VideoIndv = (props) => {
                         ) : (
                             <div className="flex overflow-x-auto flex-col gap-4 p-3">
                                 {videos.map((video) => (
-                                    <div key={video._id} className="flex-shrink-0 w-full ">
+                                    <div key={video._id} className="flex-shrink-0 w-full relative inset-0">
                                         <video
                                             src={video.url}
                                             poster={video.thumbnail}
@@ -131,7 +131,7 @@ export const VideoIndv = (props) => {
                                             }}
                                         />
                                         {/* Duration overlay */}
-                                        <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                        <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 z-50 text-white text-xs px-2 py-1 rounded">
                                             {video.durationFormatted}
                                         </span>
 
