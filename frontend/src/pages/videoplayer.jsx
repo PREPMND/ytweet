@@ -122,7 +122,7 @@ export const VideoIndv = (props) => {
                                             src={video.url}
                                             poster={video.thumbnail}
                                             
-                                            className="w-full rounded-lg hover:scale-105 aspect-video h-full object-cover"
+                                            className="w-full rounded-lg  aspect-video h-full object-cover"
                                             controls
                                             onLoadedMetadata={(e) => {
                                                 const duration = e.target.duration; // in seconds
