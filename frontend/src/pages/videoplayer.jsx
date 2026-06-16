@@ -96,7 +96,7 @@ export const VideoIndv = () => {
                             <div
                                 key={v._id}
                                 className="flex-shrink-0 w-full md:flex relative cursor-pointer"
-                                onClick={() => navigate(`/video/${v._id}`)}
+                                onClick={() => navigate(`/watchvideo/${v._id}`)}
                             >
                                 <img
                                     src={v.thumbnail}
