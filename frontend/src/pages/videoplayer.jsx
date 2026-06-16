@@ -113,6 +113,7 @@ export const VideoIndv = (props) => {
                                             controls
                                             onLoadedMetadata={(e) => {
                                                 const duration = e.target.duration; // in seconds
+                                            
                                                 console.log("Duration:", duration);
                                             }}
                                         />
