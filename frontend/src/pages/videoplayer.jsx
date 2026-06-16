@@ -4,6 +4,19 @@ export const VideoIndv = (props) => {
     const { videoIdSelected } = props;
     const [desOpen, setDesOpen] = useState(false);
     console.log(videoIdSelected)
+
+    {/* owner's other videos are present here */ }
+    const channelVideo = async (ownerId) => {
+        setLoadingVideos(true);
+        try {
+            const res = await api.post("/videos/any", { owner: ownerId });
+            setVideos(res.data.data);
+            // match backend response structure
+            setLoadingVideos(false);
+        } catch (err) {
+            console.error(err);
+        }
+    };
     return (
         <>
             <div className="my-2 ">
