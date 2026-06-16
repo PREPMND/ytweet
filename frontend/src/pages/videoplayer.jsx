@@ -22,7 +22,7 @@ export const VideoIndv = () => {
 
         // fetch owner's other videos
         setLoadingVideos(true);
-        const res2 = await api.post("/videos/any", { owner: res.data.data });
+        const res2 = await api.post("/videos/any", { owner: res.data.data.owner._id });
         setVideos(res2.data.data);
         console.log("Owner's other videos:", res2.data.data);
         setLoadingVideos(false);
