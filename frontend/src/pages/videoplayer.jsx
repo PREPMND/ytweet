@@ -16,8 +16,9 @@ export const VideoIndv = () => {
   useEffect(() => {
     const fetchVideo = async () => {
       try {
-        const res = await axios.get(`/api/v1/videos/watchvideo/:${id}`);
+        const res = await axios.get(`/api/v1/videos/watchvideo/${id}`);
         setVideo(res.data.data);
+        console.log("Fetched video data:", res.data.data);
 
         // fetch owner's other videos
         setLoadingVideos(true);
