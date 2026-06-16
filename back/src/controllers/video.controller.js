@@ -113,7 +113,7 @@ export const getVideos = async (req, res) => {
 // Get single video by ID
 export const getVideoById = async (req, res) => {
     try {
-        const video = await Video.findById(req.params.id).populate("owner", "username email");
+        const video = await Video.findById(req.params.id).populate("owner", "username avatar email");
         function formatDuration(seconds) {
             const hours = Math.floor(seconds / 3600);
             const minutes = Math.floor((seconds % 3600) / 60);
