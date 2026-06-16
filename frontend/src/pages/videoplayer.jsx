@@ -1,5 +1,5 @@
 import { Droplet, ThumbsUp, ChevronDown } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useParams } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import getCurrentUser from "../api/currentuser";
@@ -47,21 +47,21 @@ export const VideoIndv = (props) => {
         return `${m}:${s.toString().padStart(2, "0")}`;
     }
     const { id } = useParams();
-  const [video, setVideo] = useState(null);
+    const [video, setVideo] = useState(null);
 
-  useEffect(() => {
-    const fetchVideo = async () => {
-      try {
-        const res = await axios.get(`/api/getvideo/${id}`);
-        setVideo(res.data.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchVideo();
-  }, [id]);
+    useEffect(() => {
+        const fetchVideo = async () => {
+            try {
+                const res = await axios.get(`/api/getvideo/${id}`);
+                setVideo(res.data.data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchVideo();
+    }, [id]);
 
-  if (!video) return <p>Loading...</p>;
+    if (!video) return <p>Loading...</p>;
     return (
         <>
             <div className="my-2 ">
