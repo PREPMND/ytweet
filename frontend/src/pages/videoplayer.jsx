@@ -115,12 +115,12 @@ export const VideoIndv = (props) => {
                                                 const duration = e.target.duration; // in seconds
                                                 console.log("Duration:", duration);
                                             }}
-                                        
+                                        />
                                         {/* Duration overlay */}
                                         <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
                                             {video.durationFormatted}
                                         </span>
-                                        />
+                                        
                                     </div>
                                 ))}
                             </div>
