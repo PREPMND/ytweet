@@ -130,7 +130,8 @@ const VideoList = (props) => {
     
     function GoToVideo(vidDetails) {
         setvideoIdSelected(vidDetails);
-        navigate("/watchvideo/:{vidDetails._id}");
+        console.log("Selected Video Details:", vidDetails);
+        navigate(`/watchvideo/${vidDetails._id}`);
     }
     
     return (
