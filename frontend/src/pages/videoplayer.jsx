@@ -131,7 +131,7 @@ export const VideoIndv = (props) => {
                                             }}
                                         />
                                         {/* Duration overlay */}
-                                        <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 z-50 text-white text-xs px-2 py-1 rounded">
+                                        <span className="absolute w-10 h-8 bottom-2 right-2 bg-black bg-opacity-70 z-50 text-white text-xs px-2 py-1 rounded">
                                             {videos.durationFormatted}
                                         </span>
 
