@@ -21,11 +21,11 @@ export const VideoIndv = () => {
         console.log("Fetched video data:", res.data.data);
 
         // fetch owner's other videos
-        setLoadingVideos(true);
+        {setLoadingVideos(true);
         const res2 = await api.post("/videos/any", { owner: res.data.data.owner._id });
         setVideos(res2.data.data);
         console.log("Owner's other videos:", res2.data.data);
-        setLoadingVideos(false);
+        setLoadingVideos(false);}
       } catch (err) {
         console.error(err);
       }
