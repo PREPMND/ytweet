@@ -1,12 +1,16 @@
 import { Droplet, ThumbsUp, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useState,useQuery } from "react";
+import getCurrentUser from "../api/currentuser";
 export const VideoIndv = (props) => {
     const { videoIdSelected } = props;
     const [desOpen, setDesOpen] = useState(false);
+    const [loadingVideos, setLoadingVideos] = useState(false);
+    const [videos, setVideos] = useState([]);
+    
     console.log(videoIdSelected)
 
     {/* owner's other videos are present here */ }
-    const { data } = useQuery({
+    const { videos } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
