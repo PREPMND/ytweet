@@ -111,7 +111,7 @@ export const VideoIndv = (props) => {
                 <div>
                     {/* video suggestions */}
                     <div className="mt-4">
-                        <h2 className="text-xl font-bold ml-3 mb-2 font-[Saira">More from this channel</h2>
+                        <h2 className="text-xl font-[500] ml-3 mt-6 mb-1 font-[Saira]">More from this channel</h2>
                         {loadingVideos ? (
                             <p className="m-auto">Loading videos...</p>
                         ) : (
