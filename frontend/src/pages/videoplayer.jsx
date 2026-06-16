@@ -26,6 +26,9 @@ export const VideoIndv = (props) => {
             console.error(err);
         }
     };
+    useEffect(() => {
+            channelVideo(profileSelected.owner._id);
+    }, [videos]);
     return (
         <>
             <div className="my-2 ">
