@@ -117,12 +117,12 @@ export const VideoIndv = (props) => {
                         ) : (
                             <div className="flex overflow-x-auto flex-col gap-4 p-3">
                                 {videos.map((video) => (
-                                    <div key={video._id} className="flex-shrink-0 w-[90%">
+                                    <div key={video._id} className="flex-shrink-0 w-full ">
                                         <video
                                             src={video.url}
                                             poster={video.thumbnail}
                                             
-                                            className="w-full aspect-video h-full object-cover"
+                                            className="w-full rounded-lg hover:scale-105 aspect-video h-full object-cover"
                                             controls
                                             onLoadedMetadata={(e) => {
                                                 const duration = e.target.duration; // in seconds
