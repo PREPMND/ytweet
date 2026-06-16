@@ -114,7 +114,15 @@ export const getVideos = async (req, res) => {
 export const getVideoById = async (req, res) => {
     try {
         const video = await Video.findById(req.params.id).populate("owner", "username email");
-        
+        function formatDuration(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            if (seconds < 60) return `${seconds}s`;
+            if (seconds < 3600) return `${minutes}m`;
+            return `${hours}h ${minutes}m`;
+        }
+
+        video.durationFormatted = formatDuration(video.duration || 0);
         if (!video) {
             return res.status(404).json({ success: false, message: "Video not found" });
         }
