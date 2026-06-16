@@ -10,7 +10,7 @@ export const VideoIndv = (props) => {
     console.log(videoIdSelected)
 
     {/* owner's other videos are present here */ }
-    const { videos } = useQuery({
+    const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
@@ -28,7 +28,7 @@ export const VideoIndv = (props) => {
     };
     useEffect(() => {
             channelVideo(videoIdSelected.owner._id);
-    }, [videos]);
+    }, [data]);
     return (
         <>
             <div className="my-2 ">
