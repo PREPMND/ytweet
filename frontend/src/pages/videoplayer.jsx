@@ -123,7 +123,7 @@ export const VideoIndv = (props) => {
                                             poster={video.thumbnail}
                                             
                                             className="w-full rounded-lg  aspect-video h-full object-cover"
-                                            controls
+                                            
                                             onLoadedMetadata={(e) => {
                                                 const duration = e.target.duration; // in seconds
                                                 videos.durationFormatted = formatDuration(duration);
@@ -132,7 +132,7 @@ export const VideoIndv = (props) => {
                                         />
                                         {/* Duration overlay */}
                                         <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 z-50 text-white text-xs px-2 py-1 rounded">
-                                            {video.durationFormatted}
+                                            {videos.durationFormatted}
                                         </span>
 
                                     </div>
