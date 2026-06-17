@@ -28,13 +28,13 @@ export default function AppRoutes(props){
             <Route path="/:username" element={<ChannelIndv profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setvideoIdSelected={setvideoIdSelected} videoIdSelected={videoIdSelected} />}/>
             <Route path="/watchvideo/:id" element={<VideoIndv videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected}
             />}/>
-            <Route path="/currentuserdetails" element={<AccountPage />} />
-            <Route path="/updateuserdetails" element={<UpdateProfile />} />
-            <Route path="/updateuserdetails/changeavatar" element={<ChangeAvatar />} />
-            <Route path="/changepassword" element={<ChangePassword />} />
-            <Route path="/managevideo" element={<ManageVideo />}/>
-            <Route path="/updatevideo/:id" element={<UpdateVideo />}/>
-            <Route path="/createvideo" element={<Createvideo />}/>
+            <Route path="/currentuserdetails" element={<AccountPage darkMode={darkMode}/>} />
+            <Route path="/updateuserdetails" element={<UpdateProfile darkMode={darkMode} />} />
+            <Route path="/updateuserdetails/changeavatar" element={<ChangeAvatar darkMode={darkMode} />} />
+            <Route path="/changepassword" element={<ChangePassword darkMode={darkMode} />} />
+            <Route path="/managevideo" element={<ManageVideo darkMode={darkMode}/>} />
+            <Route path="/updatevideo/:id" element={<UpdateVideo darkMode={darkMode} />}/>
+            <Route path="/createvideo" element={<Createvideo darkMode={darkMode}/>} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register setisLoggedIn={setisLoggedIn}  />}/>
             </Route>
