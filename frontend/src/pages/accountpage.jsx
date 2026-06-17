@@ -102,7 +102,7 @@ const AccountPage = ({ darkMode }) => {
                                 : "bg-white border-gray-300 hover:border-yellow-500"
                             }`}
                     >
-                        <h2 className="text-xl font-semibold mb-2">
+                        <h2 className="text-xl font-[500]mb-2">
                             Password
                         </h2>
                         <p className="text-sm opacity-70">
@@ -117,7 +117,7 @@ const AccountPage = ({ darkMode }) => {
                                 : "bg-white border-gray-300 hover:border-green-500"
                             }`}
                     >
-                        <h2 className="text-xl font-semibold mb-2">
+                        <h2 className="text-xl font-[500] mb-2">
                             Avatar
                         </h2>
                         <p className="text-sm opacity-70">
@@ -132,7 +132,7 @@ const AccountPage = ({ darkMode }) => {
                                 : "bg-white border-gray-300 hover:border-purple-500"
                             }`}
                     >
-                        <h2 className="text-xl font-semibold mb-2">
+                        <h2 className="text-xl font-[500] mb-2">
                             Cover Image
                         </h2>
                         <p className="text-sm opacity-70">
