@@ -162,5 +162,25 @@ const AccountPage = ({ darkMode }) => {
     </div>
   );
 };
+const handleDelete = async (id,title) => {
+  const confirmed = window.confirm(
+    `Delete "${title}"?\n\nThis action cannot be undone.`
+  );
+
+  if (!confirmed) return;
+
+  try {
+    await api.delete(`/videos/deletevideo/${id}`);
+
+    setVideos((prev) =>
+      prev.filter((video) => video._id !== id)
+    );
+
+    alert("Video deleted successfully");
+  } catch (err) {
+    console.log(err);
+    alert("Failed to delete video");
+  }
+};
 
 export default AccountPage;
