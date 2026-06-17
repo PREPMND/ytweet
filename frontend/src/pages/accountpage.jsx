@@ -187,11 +187,11 @@ const AccountPage = ({ darkMode }) => {
                                         {video.title}
                                     </h3>
 
-                                    <p className="opacity-70 mt-2">
+                                    <p className="opacity-70 font-[400] mt-2">
                                         {video.description}
                                     </p>
 
-                                    <p className="mt-2 text-sm opacity-60">
+                                    <p className="mt-2 text-sm  opacity-60">
                                         {video.views} views
                                     </p>
 
