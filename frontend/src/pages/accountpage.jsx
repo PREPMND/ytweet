@@ -82,8 +82,8 @@ const AccountPage = ({ darkMode }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
 
                     <div
-                        className={`cursor-pointer p-5 rounded-2xl border transition-all hover:scale-105 ${darkMode
-                                ? "bg-zinc-900 font-[Saira] border-zinc-700 hover:border-blue-500"
+                        className={`cursor-pointer p-5 font-[Saira] rounded-2xl border transition-all hover:scale-105 ${darkMode
+                                ? "bg-zinc-900  border-zinc-700 hover:border-blue-500"
                                 : "bg-white border-gray-300 hover:border-blue-500"
                             }`}
                     >
