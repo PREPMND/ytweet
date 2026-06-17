@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import getCurrentUser from "../api/currentuser";
 
-const ManageVideos = ({ darkMode }) => {
+const AccountPage = ({ darkMode }) => {
   const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
@@ -163,4 +163,4 @@ const ManageVideos = ({ darkMode }) => {
   );
 };
 
-export default ManageVideos;
+export default AccountPage;
