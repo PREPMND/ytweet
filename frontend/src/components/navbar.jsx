@@ -157,7 +157,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                                     {data?.user.fullName}
                                 </div>
                                 <button className={`border-2 px-3 md:px-3 mt-2 md:mt-3 py-1 rounded-[12px] mb-2 md:mb-0 text-[15px]  md:text-[18px] text-neutral-900 font-[500] hover:text-black transition-all duration-300 ease-in-out hover:scale-105  hover:shadow-sm ${darkMode ? "text-black bg-white  hover:shadow-fuchsia-400 hover:shadow-md" : "hover:shadow-stone-500"}`} >
-                                    <span className={`${isLoggedIn == true ? "flex" : "hidden"}`}>Account Details</span>
+                                    <span 
+                                    onClick={() => { navigating("/currentuserdetails") }}
+                                    className={`${isLoggedIn == true ? "flex" : "hidden"}`}>Account Details</span>
                                     <span
                                         onClick={() => { navigating("/login") }}
                                         className={`${isLoggedIn == false ? "flex" : "hidden"}`}>Log In</span>
