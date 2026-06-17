@@ -37,7 +37,7 @@ const ChangePassword = ({ darkMode }) => {
       setNewPassword("");
       setConfirmPassword("");
 
-      navigate("/-1");
+      navigate(-1);
     } catch (err) {
       console.log(err);
       alert(
@@ -144,7 +144,7 @@ const ChangePassword = ({ darkMode }) => {
             <button
               type="button"
               onClick={() =>
-                navigate("/")
+                navigate(-1)
               }
               className="px-5 py-3 rounded-lg bg-gray-600 text-white"
             >
