@@ -56,7 +56,7 @@ const ChangePassword = ({ darkMode }) => {
       }`}
     >
       <div
-        className={`max-w-2xl *:font-[Saira] mx-auto rounded-2xl p-6 border ${
+        className={`max-w-2xl  mx-auto rounded-2xl p-6 border ${
           darkMode
             ? "bg-zinc-900 border-zinc-700"
             : "bg-white border-gray-300"
@@ -68,7 +68,7 @@ const ChangePassword = ({ darkMode }) => {
 
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-5"
+          className="flex *:font-[Saira] flex-col gap-5"
         >
           <div>
             <label className="block mb-2 font-semibold">
