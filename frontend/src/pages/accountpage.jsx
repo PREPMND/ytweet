@@ -195,12 +195,12 @@ const AccountPage = ({ darkMode }) => {
                                         {video.views} views
                                     </p>
 
-                                    <div className="flex gap-3 mt-5">
+                                    <div className="flex gap-3 font-[Saira] mt-5">
                                         <button
                                             onClick={() =>
                                                 handleUpdate(video._id)
                                             }
-                                            className="px-4 py-2 rounded-lg bg-blue-600 text-white"
+                                            className="px-4 hover:scale-[1.02] py-2 rounded-lg bg-blue-600 text-white"
                                         >
                                             Update
                                         </button>
