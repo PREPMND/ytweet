@@ -28,6 +28,7 @@ export default function AppRoutes(props){
             />}/>
             <Route path="/currentuserdetails" element={<AccountPage />} />
             <Route path="/updateuserdetails" element={<UpdateProfile />} />
+            <Route path="/changepassword" element={<ChangePassword />} />
             <Route path="/managevideo" element={<ManageVideo />}/>
             <Route path="/updatevideo/:id" element={<UpdateVideo />}/>
             <Route path="/createvideo" element={<Createvideo />}/>
