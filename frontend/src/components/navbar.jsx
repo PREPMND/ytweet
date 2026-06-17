@@ -4,7 +4,7 @@ import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
 import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown } from "lucide-react"
 import { useState, useEffect, useEffectEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import axios from "axios";
 
 const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode, isLoggedIn, setisLoggedIn }) => {
@@ -14,6 +14,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
     const [hoverAirplay, setHoverAirplay] = useState(false)
     const queryClient = useQueryClient();
     const navigating = useNavigate();
+    const location = useLocation();
     console.log(isLoggedIn)
     const { data, error } = useQuery({
         queryKey: ["currentUser"],
