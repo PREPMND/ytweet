@@ -38,7 +38,7 @@ const ChangeAvatar = ({ darkMode }) => {
       );
 
       alert("Avatar Updated Successfully");
-      navigate("/userdetails/videos");
+      navigate("/updateuserdetails");
     } catch (err) {
       console.log(err);
       alert("Failed To Update Avatar");
@@ -80,7 +80,7 @@ const ChangeAvatar = ({ darkMode }) => {
 
             <button
               type="button"
-              onClick={() => navigate("/userdetails/videos")}
+              onClick={() => navigate("/updateuserdetails")}
               className="px-5 py-3 bg-gray-600 text-white rounded-lg"
             >
               Cancel
