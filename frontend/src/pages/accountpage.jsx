@@ -200,7 +200,7 @@ const AccountPage = ({ darkMode }) => {
                                             onClick={() =>
                                                 handleUpdate(video._id)
                                             }
-                                            className="px-4 hover:scale-[1.05] transition-transform duration-400 ease-in-out py-2 rounded-lg bg-blue-600 text-white"
+                                            className="px-4 hover:scale-[1.04] transition-transform duration-600 ease-in-out py-2 rounded-lg bg-blue-600 text-white"
                                         >
                                             Update
                                         </button>
@@ -209,7 +209,7 @@ const AccountPage = ({ darkMode }) => {
                                             onClick={() =>
                                                 handleDelete(video._id, video.title)
                                             }
-                                            className="px-4 hover:scale-[1.05] transition-transform duration-400 ease-in-out py-2 rounded-lg bg-red-600 text-white"
+                                            className="px-4 hover:scale-[1.04] transition-transform duration-600 ease-in-out py-2 rounded-lg bg-red-600 text-white"
                                         >
                                             Delete
                                         </button>
