@@ -240,7 +240,7 @@ const changeCurrentPassword = asyncHandler(async (req, res, next) => {
         throw new apiError(401,"Unauthorized Request")
     }}*/
     const { oldPassword, newPassword } = req.body
-    const user = User.findById(req.user?._id)
+    const user = await User.findById(req.user?._id)
     const isPasswordValid = await user.isPasswordCorrect(oldPassword)
     //await before isPasswordCorrect because its a async function
     if (!isPasswordValid) {
