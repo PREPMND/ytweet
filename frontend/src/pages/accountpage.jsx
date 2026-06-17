@@ -128,7 +128,7 @@ const AccountPage = ({ darkMode }) => {
 
                     <div
                         onClick={() => navigate("/updateuserdetails/coverimage")}
-                        className={`cursor-pointer p-5 rounded-2xl border transition-all hover:scale-105 ${darkMode
+                        className={`cursor-pointer font-[Saira] p-5 rounded-2xl border transition-all hover:scale-105 ${darkMode
                                 ? "bg-zinc-900 border-zinc-700 hover:border-purple-500"
                                 : "bg-white border-gray-300 hover:border-purple-500"
                             }`}
