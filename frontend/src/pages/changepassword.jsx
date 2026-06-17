@@ -37,7 +37,7 @@ const ChangePassword = ({ darkMode }) => {
       setNewPassword("");
       setConfirmPassword("");
 
-      navigate("/userdetails/videos");
+      navigate("/accountpage");
     } catch (err) {
       console.log(err);
       alert(
