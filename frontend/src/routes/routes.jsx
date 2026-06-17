@@ -9,7 +9,7 @@ import VideoList from "../pages/getvideo.jsx"
 import ChannelIndv from "../pages/channelindv.jsx"
 import { VideoIndv } from "../pages/videoplayer.jsx"
 import ManageVideo from "../pages/managevideo.jsx"
-
+import UpdateVideo from "../pages/updatevideo.jsx"
 export default function AppRoutes(props){
     const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode,profileSelected,setProfileSelected, setisLoggedIn,isLoggedIn,videoIdSelected,setvideoIdSelected } = props;
     return(
@@ -25,6 +25,7 @@ export default function AppRoutes(props){
             <Route path="/watchvideo/:id" element={<VideoIndv videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected}
             />}/>
             <Route path="/managevideo" element={<ManageVideo />}/>
+            <Route path="/updatevideo/:id" element={<UpdateVideo />}/>
             <Route path="/createvideo" element={<Createvideo />}/>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register setisLoggedIn={setisLoggedIn}  />}/>
