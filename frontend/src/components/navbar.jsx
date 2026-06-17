@@ -26,7 +26,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
     useEffect(() => {
         // Whenever the route changes to "/", reset menu state
         if (location.pathname === "/") {
-            setNavigate(false);
+            setMenubar(false);
         }
     }, [location])
     useEffect(() => {
