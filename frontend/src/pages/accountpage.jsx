@@ -4,183 +4,161 @@ import api from "../api/api";
 import getCurrentUser from "../api/currentuser";
 
 const AccountPage = ({ darkMode }) => {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const [user, setUser] = useState(null);
-  const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(null);
+    const [videos, setVideos] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const currentUser = await getCurrentUser();
-        setUser(currentUser.user);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const currentUser = await getCurrentUser();
+                setUser(currentUser.user);
 
-        const res = await api.post("/videos/any", {
-          owner: currentUser.user._id,
-        });
+                const res = await api.post("/videos/any", {
+                    owner: currentUser.user._id,
+                });
 
-        setVideos(res.data.data || []);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setLoading(false);
-      }
+                setVideos(res.data.data || []);
+            } catch (err) {
+                console.log(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const handleUpdate = (id) => {
+        const proceed = window.confirm(
+            "You are about to update this video. Continue?"
+        );
+
+        if (proceed) {
+            navigate(`/updatevideo/${id}`);
+        }
     };
 
-    fetchData();
-  }, []);
+    const handleDelete = async (id) => {
+        const proceed = window.confirm(
+            "This action cannot be undone. Delete this video?"
+        );
 
-  const handleUpdate = (id) => {
-    const proceed = window.confirm(
-      "You are about to update this video. Continue?"
-    );
+        if (!proceed) return;
 
-    if (proceed) {
-      navigate(`/updatevideo/${id}`);
+        try {
+            await api.delete(`/videos/deletevideo/${id}`);
+
+            setVideos((prev) =>
+                prev.filter((video) => video._id !== id)
+            );
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                Loading...
+            </div>
+        );
     }
-  };
 
-  const handleDelete = async (id) => {
-    const proceed = window.confirm(
-      "This action cannot be undone. Delete this video?"
-    );
-
-    if (!proceed) return;
-
-    try {
-      await api.delete(`/videos/deletevideo/${id}`);
-
-      setVideos((prev) =>
-        prev.filter((video) => video._id !== id)
-      );
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        Loading...
-      </div>
-    );
-  }
-
-  return (
-    <div
-      className={`min-h-screen p-5 ${
-        darkMode
-          ? "bg-black text-white"
-          : "bg-gray-100 text-black"
-      }`}
-    >
-      <div
-        className={`max-w-5xl mx-auto rounded-2xl p-6 ${
-          darkMode ? "bg-zinc-900" : "bg-white"
-        }`}
-      >
-        <div className="flex items-center gap-5 mb-8">
-          <img
-            src={user?.avatar}
-            alt="avatar"
-            className="w-20 h-20 rounded-full object-cover"
-          />
-
-          <div>
-            <h1 className="text-2xl font-bold">
-              {user?.username}
-            </h1>
-
-            <p className="opacity-70">
-              {user?.email}
-            </p>
-          </div>
-        </div>
-
-        <h2 className="text-2xl font-bold mb-6">
-          Your Videos
-        </h2>
-
-        <div className="grid gap-5">
-          {videos.length === 0 ? (
-            <p>No videos uploaded.</p>
-          ) : (
-            videos.map((video) => (
-              <div
-                key={video._id}
-                className={`rounded-xl overflow-hidden border ${
-                  darkMode
-                    ? "border-zinc-700"
-                    : "border-gray-300"
+        <div
+            className={`min-h-screen p-5 ${darkMode
+                    ? "bg-black text-white"
+                    : "bg-gray-100 text-black"
                 }`}
-              >
-                <img
-                  src={video.thumbnail}
-                  alt={video.title}
-                  className="w-full h-56 object-cover"
-                />
+        >
+            <div
+                className={`max-w-5xl mx-auto rounded-2xl p-6 ${darkMode ? "bg-zinc-900" : "bg-white"
+                    }`}
+            >
+                <div className="flex items-center gap-5 mb-8">
+                    <img
+                        src={user?.avatar}
+                        alt="avatar"
+                        className="w-20 h-20 rounded-full object-cover"
+                    />
 
-                <div className="p-4">
-                  <h3 className="text-xl font-semibold">
-                    {video.title}
-                  </h3>
+                    <div>
+                        <h1 className="text-2xl font-bold">
+                            {user?.username}
+                        </h1>
 
-                  <p className="opacity-70 mt-2">
-                    {video.description}
-                  </p>
-
-                  <p className="mt-2 text-sm opacity-60">
-                    {video.views} views
-                  </p>
-
-                  <div className="flex gap-3 mt-5">
-                    <button
-                      onClick={() =>
-                        handleUpdate(video._id)
-                      }
-                      className="px-4 py-2 rounded-lg bg-blue-600 text-white"
-                    >
-                      Update
-                    </button>
-
-                    <button
-                      onClick={() =>
-                        handleDelete(video._id)
-                      }
-                      className="px-4 py-2 rounded-lg bg-red-600 text-white"
-                    >
-                      Delete
-                    </button>
-                  </div>
+                        <p className="opacity-70">
+                            {user?.email}
+                        </p>
+                    </div>
                 </div>
-              </div>
-            ))
-          )}
+
+                <h2 className="text-2xl font-bold mb-6">
+                    Your Videos
+                </h2>
+
+                <div className="grid gap-5">
+                    {videos.length === 0 ? (
+                        <p>No videos uploaded.</p>
+                    ) : (
+                        videos.map((video) => (
+                            <div
+                                key={video._id}
+                                className={`rounded-xl overflow-hidden border ${darkMode
+                                        ? "border-zinc-700"
+                                        : "border-gray-300"
+                                    }`}
+                            >
+                                <img
+                                    src={video.thumbnail}
+                                    alt={video.title}
+                                    className="w-full h-56 object-cover"
+                                />
+
+                                <div className="p-4">
+                                    <h3 className="text-xl font-semibold">
+                                        {video.title}
+                                    </h3>
+
+                                    <p className="opacity-70 mt-2">
+                                        {video.description}
+                                    </p>
+
+                                    <p className="mt-2 text-sm opacity-60">
+                                        {video.views} views
+                                    </p>
+
+                                    <div className="flex gap-3 mt-5">
+                                        <button
+                                            onClick={() =>
+                                                handleUpdate(video._id)
+                                            }
+                                            className="px-4 py-2 rounded-lg bg-blue-600 text-white"
+                                        >
+                                            Update
+                                        </button>
+
+                                        <button
+                                            onClick={() =>
+                                                handleDelete(video._id, video.title)
+                                            }
+                                            className="px-4 py-2 rounded-lg bg-red-600 text-white"
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))
+                    )}
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
-};
-const handleDelete = async (id,title) => {
-  const confirmed = window.confirm(
-    `Delete "${title}"?\n\nThis action cannot be undone.`
-  );
-
-  if (!confirmed) return;
-
-  try {
-    await api.delete(`/videos/deletevideo/${id}`);
-
-    setVideos((prev) =>
-      prev.filter((video) => video._id !== id)
     );
-
-    alert("Video deleted successfully");
-  } catch (err) {
-    console.log(err);
-    alert("Failed to delete video");
-  }
 };
+
 
 export default AccountPage;
