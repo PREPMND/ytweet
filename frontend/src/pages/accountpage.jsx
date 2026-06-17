@@ -87,7 +87,7 @@ const AccountPage = ({ darkMode }) => {
                                 : "bg-white border-gray-300 hover:border-blue-500"
                             }`}
                     >
-                        <h2 className="text-xl font-semibold mb-2">
+                        <h2 className="text-xl font-[500] mb-2">
                             Profile
                         </h2>
                         <p className="text-sm opacity-70">
