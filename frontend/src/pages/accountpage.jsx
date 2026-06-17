@@ -70,10 +70,73 @@ const AccountPage = ({ darkMode }) => {
     return (
         <div
             className={`min-h-screen p-5 ${darkMode
-                    ? "bg-black text-white"
-                    : "bg-gray-100 text-black"
+                ? "bg-black text-white"
+                : "bg-gray-100 text-black"
                 }`}
         >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+
+                <div
+                    onClick={() => navigate("/userdetails/profile")}
+                    className={`cursor-pointer p-5 rounded-2xl border transition-all hover:scale-105 ${darkMode
+                            ? "bg-zinc-900 border-zinc-700 hover:border-blue-500"
+                            : "bg-white border-gray-300 hover:border-blue-500"
+                        }`}
+                >
+                    <h2 className="text-xl font-semibold mb-2">
+                        Profile
+                    </h2>
+                    <p className="text-sm opacity-70">
+                        Update your name and email address.
+                    </p>
+                </div>
+
+                <div
+                    onClick={() => navigate("/userdetails/password")}
+                    className={`cursor-pointer p-5 rounded-2xl border transition-all hover:scale-105 ${darkMode
+                            ? "bg-zinc-900 border-zinc-700 hover:border-yellow-500"
+                            : "bg-white border-gray-300 hover:border-yellow-500"
+                        }`}
+                >
+                    <h2 className="text-xl font-semibold mb-2">
+                        Password
+                    </h2>
+                    <p className="text-sm opacity-70">
+                        Change account password securely.
+                    </p>
+                </div>
+
+                <div
+                    onClick={() => navigate("/userdetails/avatar")}
+                    className={`cursor-pointer p-5 rounded-2xl border transition-all hover:scale-105 ${darkMode
+                            ? "bg-zinc-900 border-zinc-700 hover:border-green-500"
+                            : "bg-white border-gray-300 hover:border-green-500"
+                        }`}
+                >
+                    <h2 className="text-xl font-semibold mb-2">
+                        Avatar
+                    </h2>
+                    <p className="text-sm opacity-70">
+                        Upload a new profile picture.
+                    </p>
+                </div>
+
+                <div
+                    onClick={() => navigate("/userdetails/cover")}
+                    className={`cursor-pointer p-5 rounded-2xl border transition-all hover:scale-105 ${darkMode
+                            ? "bg-zinc-900 border-zinc-700 hover:border-purple-500"
+                            : "bg-white border-gray-300 hover:border-purple-500"
+                        }`}
+                >
+                    <h2 className="text-xl font-semibold mb-2">
+                        Cover Image
+                    </h2>
+                    <p className="text-sm opacity-70">
+                        Customize your channel banner.
+                    </p>
+                </div>
+
+            </div>
             <div
                 className={`max-w-5xl mx-auto rounded-2xl p-6 ${darkMode ? "bg-zinc-900" : "bg-white"
                     }`}
@@ -108,8 +171,8 @@ const AccountPage = ({ darkMode }) => {
                             <div
                                 key={video._id}
                                 className={`rounded-xl overflow-hidden border ${darkMode
-                                        ? "border-zinc-700"
-                                        : "border-gray-300"
+                                    ? "border-zinc-700"
+                                    : "border-gray-300"
                                     }`}
                             >
                                 <img
