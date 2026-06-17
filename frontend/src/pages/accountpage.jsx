@@ -182,8 +182,8 @@ const AccountPage = ({ darkMode }) => {
                                     className="w-full h-56 object-cover"
                                 />
 
-                                <div className="p-4">
-                                    <h3 className="text-xl font-semibold">
+                                <div className="p-4 font-[500]">
+                                    <h3 className="text-xl font-[Saira] ">
                                         {video.title}
                                     </h3>
 
