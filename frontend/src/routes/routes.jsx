@@ -12,6 +12,8 @@ import ManageVideo from "../pages/managevideo.jsx"
 import UpdateVideo from "../pages/updatevideo.jsx"
 import AccountPage from "../pages/accountpage.jsx"
 import UpdateProfile from "../pages/updateuserdetails.jsx"
+import ChangeAvatar from "../pages/updateavatar.jsx"
+import ChangePassword from "../pages/changepassword.jsx"
 export default function AppRoutes(props){
     const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode,profileSelected,setProfileSelected, setisLoggedIn,isLoggedIn,videoIdSelected,setvideoIdSelected } = props;
     return(
