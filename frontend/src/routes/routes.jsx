@@ -26,6 +26,7 @@ export default function AppRoutes(props){
             <Route path="/watchvideo/:id" element={<VideoIndv videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected}
             />}/>
             <Route path="/currentuserdetails" element={<AccountPage />} />
+            <Route path="/updateuserdetails" element={<UpdateProfile />} />
             <Route path="/managevideo" element={<ManageVideo />}/>
             <Route path="/updatevideo/:id" element={<UpdateVideo />}/>
             <Route path="/createvideo" element={<Createvideo />}/>
