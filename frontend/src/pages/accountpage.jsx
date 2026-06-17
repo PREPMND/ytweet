@@ -112,7 +112,7 @@ const AccountPage = ({ darkMode }) => {
                     </div>
 
                     <div
-                        onClick={() => navigate("/userdetails/avatar")}
+                        onClick={() => navigate("/updateuserdetails/changeavatar")}
                         className={`cursor-pointer p-5 rounded-2xl border transition-all hover:scale-105 ${darkMode
                                 ? "bg-zinc-900 border-zinc-700 hover:border-green-500"
                                 : "bg-white border-gray-300 hover:border-green-500"
