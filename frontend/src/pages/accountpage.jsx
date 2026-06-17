@@ -160,7 +160,7 @@ const AccountPage = ({ darkMode }) => {
                     </div>
                 </div>
 
-                <h2 className="text-2xl font-bold mb-6">
+                <h2 className="text-2xl font-[Saira] font-bold mb-6">
                     Your Videos
                 </h2>
 
