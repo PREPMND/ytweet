@@ -37,7 +37,7 @@ const ChangePassword = ({ darkMode }) => {
       setNewPassword("");
       setConfirmPassword("");
 
-      navigate("/accountpage");
+      navigate("/currentuserdetails");
     } catch (err) {
       console.log(err);
       alert(
@@ -56,7 +56,7 @@ const ChangePassword = ({ darkMode }) => {
       }`}
     >
       <div
-        className={`max-w-2xl mx-auto rounded-2xl p-6 border ${
+        className={`max-w-2xl *:font-[Saira] mx-auto rounded-2xl p-6 border ${
           darkMode
             ? "bg-zinc-900 border-zinc-700"
             : "bg-white border-gray-300"
