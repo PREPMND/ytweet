@@ -44,7 +44,7 @@ const UpdateProfile = ({ darkMode }) => {
       });
 
       alert("Profile Updated Successfully");
-      navigate("/updateuserdetails");
+      navigate("/currentuserdetails");
     } catch (err) {
       console.log(err);
       alert("Failed To Update Profile");
@@ -150,7 +150,7 @@ const UpdateProfile = ({ darkMode }) => {
             <button
               type="button"
               onClick={() =>
-                navigate("/updateuserdetails")
+                navigate("/currentuserdetails")
               }
               className="px-5 py-3 rounded-lg bg-gray-600 text-white"
             >
