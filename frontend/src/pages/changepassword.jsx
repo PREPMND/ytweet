@@ -144,7 +144,7 @@ const ChangePassword = ({ darkMode }) => {
             <button
               type="button"
               onClick={() =>
-                navigate("/userdetails/videos")
+                navigate("/updateuserdetails")
               }
               className="px-5 py-3 rounded-lg bg-gray-600 text-white"
             >
