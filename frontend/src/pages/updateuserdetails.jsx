@@ -71,6 +71,7 @@ const UpdateProfile = ({ darkMode }) => {
         darkMode ? "bg-black text-white" : "bg-gray-100 text-black"
       }`}
     >
+        
       <div
         className={`max-w-2xl mx-auto rounded-2xl p-6 border ${
           darkMode
