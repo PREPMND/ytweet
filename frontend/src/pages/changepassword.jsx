@@ -71,7 +71,7 @@ const ChangePassword = ({ darkMode }) => {
           className="flex *:font-[Saira] flex-col gap-5"
         >
           <div>
-            <label className="block mb-2 font-semibold">
+            <label className="block font-[Saira] mb-2 font-semibold">
               Current Password
             </label>
 
@@ -91,7 +91,7 @@ const ChangePassword = ({ darkMode }) => {
           </div>
 
           <div>
-            <label className="block mb-2 font-semibold">
+            <label className="block font-[Saira] mb-2 font-semibold">
               New Password
             </label>
 
@@ -111,7 +111,7 @@ const ChangePassword = ({ darkMode }) => {
           </div>
 
           <div>
-            <label className="block mb-2 font-semibold">
+            <label className="block font-[Saira] mb-2 font-semibold">
               Confirm New Password
             </label>
 
