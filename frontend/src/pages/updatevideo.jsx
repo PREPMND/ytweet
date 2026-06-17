@@ -41,7 +41,7 @@ export default function UpdateVideo({ darkMode }) {
                 description,
             });
 
-            navigate(`/video/${id}`);
+            navigate(`/watchvideo/${id}`);
         } catch (err) {
             console.log(err);
         } finally {
