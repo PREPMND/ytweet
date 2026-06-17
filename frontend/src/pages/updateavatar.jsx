@@ -56,7 +56,7 @@ const ChangeAvatar = ({ darkMode }) => {
 
         <form onSubmit={handleSubmit}>
           <input
-            className={`w-full p-3 rounded-lg border ${darkMode ? "bg-zinc-800 border-zinc-700" : "bg-white border-gray-300"}`}
+            className={`w-full p-3 rounded-lg border ${darkMode ? "bg-zinc-800 border-zinc-700 text-black" : "bg-white border-gray-300"}`}
             type="file"
             accept="image/*"
             onChange={handleFile}
