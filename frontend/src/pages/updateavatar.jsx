@@ -1,0 +1,95 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../api/api";
+
+const ChangeAvatar = ({ darkMode }) => {
+  const navigate = useNavigate();
+
+  const [avatar, setAvatar] = useState(null);
+  const [preview, setPreview] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleFile = (e) => {
+    const file = e.target.files[0];
+
+    if (!file) return;
+
+    setAvatar(file);
+    setPreview(URL.createObjectURL(file));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!avatar) {
+      alert("Select an image");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const formData = new FormData();
+      formData.append("avatar", avatar);
+
+      await api.patch(
+        "/users/changeavatar",
+        formData
+      );
+
+      alert("Avatar Updated Successfully");
+      navigate("/userdetails/videos");
+    } catch (err) {
+      console.log(err);
+      alert("Failed To Update Avatar");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className={`min-h-screen p-6 ${darkMode ? "bg-black text-white" : "bg-gray-100 text-black"}`}>
+      <div className={`max-w-2xl mx-auto p-6 rounded-2xl border ${darkMode ? "bg-zinc-900 border-zinc-700" : "bg-white border-gray-300"}`}>
+        <h1 className="text-3xl font-bold mb-6">
+          Change Avatar
+        </h1>
+
+        <form onSubmit={handleSubmit}>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleFile}
+          />
+
+          {preview && (
+            <img
+              src={preview}
+              alt="preview"
+              className="w-32 h-32 rounded-full object-cover mt-5"
+            />
+          )}
+
+          <div className="flex gap-3 mt-6">
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-5 py-3 bg-blue-600 text-white rounded-lg"
+            >
+              {loading ? "Uploading..." : "Update Avatar"}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => navigate("/userdetails/videos")}
+              className="px-5 py-3 bg-gray-600 text-white rounded-lg"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default ChangeAvatar;
