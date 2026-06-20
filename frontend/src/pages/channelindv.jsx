@@ -177,7 +177,7 @@ ${yangSelected
                 {videos.map((video, index) => (
 
                     <div
-                        className="flex md:flex-row flex-col justify-between mb-4"
+                        className="flex md:flex-row flex-col justify-between pb-4"
                         key={video._id || index}>
 
                         <div className={`w-full relative px-3 md:mx-0 flex `}>
