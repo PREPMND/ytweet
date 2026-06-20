@@ -93,7 +93,7 @@ export const VideoIndv = ({ darkMode }) => {
             <div className="mt-4">
                 <h2 className="text-xl font-semibold ml-3 mt-6 mb-1">More from this channel</h2>
                 {loadingVideos ? (
-                    <p className="m-auto">Loading videos...</p>
+                    <p className="m-auto text-center mt-2">Loading videos...</p>
                 ) : (
                     <div className="flex overflow-x-auto flex-col gap-4 p-3">
                         {videos.map((v) => (
