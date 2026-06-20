@@ -239,7 +239,8 @@ ${darkMode ? "text-white" : "text-black"}`}
                                     e.stopPropagation();
                                     toggleMenu(video._id);
                                 }}
-                                className="text-[18px]  cursor-pointer md:hidden absolute right-2 mt-3" />
+                                className={`text-[18px] cursor-pointer md:hidden absolute right-2 mt-3 ${darkMode ? "text-white" : "text-black"
+                                    }`} />
                         </div>
 
                     </div>
