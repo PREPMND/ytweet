@@ -61,9 +61,9 @@ const AccountPage = ({ darkMode }) => {
 
     if (true) {
         return (
-            <div className="flex relative justify-center items-center h-screen">
+            <div className="flex relative justify-center w-full items-center h-screen">
                 <GridScan darkMode={darkMode} />
-                <h1 className="text-2xl absolute z-40 font-[Saira] font-bold flex justify-center items-center animate-pulse mt-4">
+                <h1 className="text-2xl absolute text-white z-40 font-[Saira] font-bold animate-pulse mt-4">
                     Loading 
                 </h1>
             </div>
