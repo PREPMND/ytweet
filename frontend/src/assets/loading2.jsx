@@ -10,7 +10,7 @@ const messages = [
   "Preparing Content...",
 ];
 
-export default function Loader() {
+export default function LoaderTwo() {
   const theme = useMemo(
     () => themes[Math.floor(Math.random() * themes.length)],
     []
