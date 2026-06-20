@@ -3,8 +3,9 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import api from "../api/api";
+import LoaderTwo from "../assets/loading2";
 
-export const VideoIndv = () => {
+export const VideoIndv = ({ darkMode }) => {
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ export const VideoIndv = () => {
         fetchVideo();
     }, [id]);
 
-    if (!video) return <p>Loading...</p>;
+    if (!video) return <LoaderTwo darkMode={darkMode} text="Loading.." />;
 
     return (
         <div className="my-2">
