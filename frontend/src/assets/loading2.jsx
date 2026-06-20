@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 
 export default function LoaderTwo({
     text = "Loading...",
-    username,
     darkMode
 }) {
     const theme = useMemo(() => {
