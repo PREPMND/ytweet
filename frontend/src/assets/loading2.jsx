@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 import Particles from "@tsparticles/react";
 
-export default function LoaderTwo({ dark, text }) {
+export default function LoaderTwo({ dark, text , username }) {
   const particleOptions = useMemo(
     () => ({
       fullScreen: false,
@@ -57,7 +57,7 @@ export default function LoaderTwo({ dark, text }) {
         />
 
         <h1 className="mt-6 text-white text-3xl font-bold tracking-[0.3em]">
-          SOCIAL
+          {username}
         </h1>
 
         <p className="mt-3 text-white/60 tracking-widest">
