@@ -134,7 +134,7 @@ const ChangePassword = ({ darkMode }) => {
             <button
               type="submit"
               disabled={updating}
-              className="px-5 py-3 rounded-lg bg-blue-600 text-white"
+              className="px-5 py-3 hover:bg-blue-700 hover:scale-105 transition-all duration-300 ease-in-out rounded-lg bg-blue-600 text-white"
             >
               {updating
                 ? "Updating..."
