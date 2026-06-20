@@ -62,7 +62,7 @@ const ChangePassword = ({ darkMode }) => {
             : "bg-white border-gray-300"
         }`}
       >
-        <h1 className="text-2xl font-bold mb-6">
+        <h1 className="text-2xl md:text-3xl font-bold mb-6">
           Change Password
         </h1>
 
