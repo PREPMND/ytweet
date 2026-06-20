@@ -24,7 +24,7 @@ export const VideoIndv = ({ darkMode }) => {
                 // fetch owner's other videos
                 setTimeout(() => {
                     setLoadingVideos(true);
-                }, 1000);
+                }, 5000);
                 const res2 = await api.post("/videos/any", { owner: res.data.data.owner._id, excludeId: id, limit: 10 });
                 setVideos(res2.data.data);
                 console.log("Owner's other videos:", res2.data.data);
