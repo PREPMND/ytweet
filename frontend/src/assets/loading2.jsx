@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 import Particles from "@tsparticles/react";
 
-export default function Loader() {
+export default function LoaderTwo({ dark, text }) {
   const particleOptions = useMemo(
     () => ({
       fullScreen: false,
@@ -61,7 +61,7 @@ export default function Loader() {
         </h1>
 
         <p className="mt-3 text-white/60 tracking-widest">
-          Loading Feed...
+          {text}
         </p>
       </div>
     </div>
