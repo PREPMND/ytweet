@@ -130,11 +130,11 @@ const ChangePassword = ({ darkMode }) => {
             />
           </div>
 
-          <div className="flex gap-3 mt-4">
+          <div className="flex gap-12 justify-evenly mt-4">
             <button
               type="submit"
               disabled={updating}
-              className="px-5 py-3 hover:bg-blue-700 hover:scale-105 transition-all duration-300 ease-in-out rounded-lg bg-blue-600 text-white"
+              className="md:px-5 md:py-3 py-2 px-3 hover:bg-blue-700 hover:scale-105 transition-all duration-300 ease-in-out rounded-lg bg-blue-600 text-white"
             >
               {updating
                 ? "Updating..."
@@ -146,7 +146,7 @@ const ChangePassword = ({ darkMode }) => {
               onClick={() =>
                 navigate(-1)
               }
-              className="px-5 py-3 rounded-lg bg-gray-600 text-white"
+              className="md:px-5 md:py-3 py-2 px-3 hover:bg-gray-700 hover:scale-105 transition-all duration-300 ease-in-out rounded-lg bg-gray-600 text-white"
             >
               Cancel
             </button>
