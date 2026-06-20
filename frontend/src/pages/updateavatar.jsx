@@ -74,7 +74,7 @@ const ChangeAvatar = ({ darkMode }) => {
             <button
               type="submit"
               disabled={loading}
-              className="px-5 py-3 hover:bg-blue-700 hover:scale-105 transition-colors duration-300 ease-in-out bg-blue-600 text-white rounded-lg"
+              className="px-5 py-3 hover:bg-blue-700 hover:scale-[1.02] transition-colors duration-300 ease-in-out bg-blue-600 text-white rounded-lg"
             >
               {loading ? "Uploading..." : "Update Avatar"}
             </button>
