@@ -88,8 +88,8 @@ const ChannelIndv = (props) => {
 
         <div className={`relative ${darkMode ? "bg-black text-white" : "bg-white text-black"
             }`}>
-            {(true && !false) && (
-                <div className="px-3 space-y-5">
+            {(loadingVideos && !imageLoaded) && (
+                <div className="px-3 pt-9 space-y-5">
                     {/* Mobile layout */}
                     <div className="md:hidden space-y-5">
                         {[...Array(4)].map((_, i) => (
