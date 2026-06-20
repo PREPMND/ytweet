@@ -1,7 +1,8 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
 import Particles from "@tsparticles/react";
-
+import { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "tsparticles-slim";
 export default function LoaderTwo({ dark, text, username }) {
     const particleOptions = useMemo(() => {
         const themes = [
