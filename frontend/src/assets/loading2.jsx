@@ -73,7 +73,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                                 top: "110%",
                             }}
                             transition={{
-                                duration: 5 + p.duration,
+                                duration: 3 + p.duration,
                                 repeat: Infinity,
                                 ease: "linear",
                                 delay: p.delay,
@@ -105,7 +105,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                                 y: [-10, 10, -10],
                             }}
                             transition={{
-                                duration: p.duration + 2,
+                                duration: p.duration + 1.5,
                                 repeat: Infinity,
                                 delay: p.delay,
                             }}
