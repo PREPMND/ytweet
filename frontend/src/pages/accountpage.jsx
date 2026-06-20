@@ -62,7 +62,7 @@ const AccountPage = ({ darkMode }) => {
     if (loading) {
         return (
             <div className="flex justify-center items-center h-screen">
-                Loading...
+                <GridScan darkMode={darkMode} />
             </div>
         );
     }
