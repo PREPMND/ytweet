@@ -1,132 +1,153 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { motion } from "framer-motion";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim";
 
-export default function LoaderTwo({ text = "Loading...", username }) {
-  const [init, setInit] = useState(false);
-
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
+export default function LoaderTwo({
+  text = "Loading...",
+  username,
+}) {
+  const theme = useMemo(() => {
+    const themes = ["stars", "snow", "fireflies", "meteors"];
+    return themes[Math.floor(Math.random() * themes.length)];
   }, []);
 
-  const particleOptions = useMemo(() => {
-    const themes = [
-      // Stars
-      {
-        particles: {
-          number: { value: 120 },
-          color: { value: "#ffffff" },
-          size: { value: { min: 1, max: 3 } },
-          move: {
-            enable: true,
-            speed: 0.3,
-          },
-          opacity: {
-            value: { min: 0.2, max: 1 },
-            animation: {
-              enable: true,
-              speed: 0.5,
-            },
-          },
-        },
-      },
-
-      // Snow
-      {
-        particles: {
-          number: { value: 150 },
-          color: { value: "#ffffff" },
-          size: {
-            value: { min: 1, max: 5 },
-          },
-          move: {
-            enable: true,
-            direction: "bottom",
-            speed: 2,
-          },
-        },
-      },
-
-      // Fireflies
-      {
-        particles: {
-          number: { value: 50 },
-          color: { value: "#ffffff" },
-          size: {
-            value: { min: 2, max: 6 },
-          },
-          move: {
-            enable: true,
-            speed: 1,
-          },
-          opacity: {
-            value: { min: 0.1, max: 1 },
-            animation: {
-              enable: true,
-              speed: 2,
-            },
-          },
-        },
-      },
-
-      // Meteors
-      {
-        particles: {
-          number: { value: 25 },
-          color: { value: "#ffffff" },
-          shape: {
-            type: "line",
-          },
-          move: {
-            enable: true,
-            direction: "bottom-right",
-            speed: 8,
-          },
-        },
-      },
-    ];
-
-    const selected =
-      themes[Math.floor(Math.random() * themes.length)];
-
-    return {
-      fullScreen: false,
-      fpsLimit: 60,
-      background: {
-        color: "#000000",
-      },
-      ...selected,
-    };
-  }, []);
-
-  if (!init) return null;
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 80 }, (_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: 2 + Math.random() * 4,
+        delay: Math.random() * 3,
+        size: 1 + Math.random() * 3,
+      })),
+    []
+  );
 
   return (
     <div className="fixed inset-0 bg-black overflow-hidden flex items-center justify-center z-[9999]">
-      <Particles
-        id="tsparticles"
-        options={particleOptions}
-        className="absolute inset-0"
-      />
 
-      <div className="relative z-10 flex flex-col items-center">
+      {theme === "stars" && (
+        <>
+          {particles.map((p) => (
+            <motion.div
+              key={p.id}
+              className="absolute rounded-full bg-white"
+              style={{
+                left: `${p.left}%`,
+                top: `${p.top}%`,
+                width: `${p.size}px`,
+                height: `${p.size}px`,
+              }}
+              animate={{
+                opacity: [0.2, 1, 0.2],
+                scale: [1, 1.8, 1],
+              }}
+              transition={{
+                duration: p.duration,
+                repeat: Infinity,
+                delay: p.delay,
+              }}
+            />
+          ))}
+        </>
+      )}
+
+      {theme === "snow" && (
+        <>
+          {particles.map((p) => (
+            <motion.div
+              key={p.id}
+              className="absolute rounded-full bg-white"
+              style={{
+                left: `${p.left}%`,
+                width: `${p.size + 2}px`,
+                height: `${p.size + 2}px`,
+              }}
+              initial={{
+                top: "-10%",
+              }}
+              animate={{
+                top: "110%",
+              }}
+              transition={{
+                duration: 5 + p.duration,
+                repeat: Infinity,
+                ease: "linear",
+                delay: p.delay,
+              }}
+            />
+          ))}
+        </>
+      )}
+
+      {theme === "fireflies" && (
+        <>
+          {particles.map((p) => (
+            <motion.div
+              key={p.id}
+              className="absolute rounded-full bg-white"
+              style={{
+                left: `${p.left}%`,
+                top: `${p.top}%`,
+                width: `${p.size + 2}px`,
+                height: `${p.size + 2}px`,
+                boxShadow: "0 0 12px white",
+              }}
+              animate={{
+                opacity: [0.1, 1, 0.2],
+                x: [-20, 20, -20],
+                y: [-10, 10, -10],
+              }}
+              transition={{
+                duration: p.duration + 2,
+                repeat: Infinity,
+                delay: p.delay,
+              }}
+            />
+          ))}
+        </>
+      )}
+
+      {theme === "meteors" && (
+        <>
+          {Array.from({ length: 12 }, (_, i) => (
+            <motion.div
+              key={i}
+              className="absolute h-[2px] w-24 bg-white"
+              style={{
+                top: `${10 + i * 6}%`,
+                left: "-20%",
+                rotate: "-25deg",
+              }}
+              animate={{
+                x: ["0vw", "130vw"],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: i * 0.4,
+                ease: "linear",
+              }}
+            />
+          ))}
+        </>
+      )}
+
+      {/* Center Content */}
+      <div className="relative z-20 flex flex-col items-center">
+
         <motion.div
           animate={{
             rotate: 360,
           }}
           transition={{
-            duration: 3,
+            duration: 2.5,
             repeat: Infinity,
             ease: "linear",
           }}
           className="relative w-20 h-20"
         >
-          <div className="absolute inset-0 rounded-full border border-white/10" />
+          <div className="absolute inset-0 rounded-full border border-white/20" />
           <div className="absolute inset-0 rounded-full border-t-2 border-white" />
         </motion.div>
 
@@ -139,6 +160,7 @@ export default function LoaderTwo({ text = "Loading...", username }) {
             Welcome back {username}
           </p>
         )}
+
       </div>
     </div>
   );
