@@ -99,14 +99,19 @@ export default function LoaderTwo({ dark, text, username }) {
 
             <div className="relative z-10 flex flex-col items-center">
                 <motion.div
-                    animate={{ rotate: 360 }}
+                    animate={{
+                        rotate: 360,
+                    }}
                     transition={{
-                        duration: 1.5,
+                        duration: 3,
                         repeat: Infinity,
                         ease: "linear",
                     }}
-                    className="w-16 h-16 rounded-full border-2 border-white/20 border-t-white"
-                />
+                    className="relative w-20 h-20"
+                >
+                    <div className="absolute inset-0 rounded-full border border-white/10" />
+                    <div className="absolute inset-0 rounded-full border-t-2 border-white" />
+                </motion.div>
 
                 <h1 className="mt-6 text-white text-3xl font-bold tracking-[0.3em]">
                     {text}
