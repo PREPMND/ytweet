@@ -89,13 +89,16 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                     {particles.map((p) => (
                         <motion.div
                             key={p.id}
-                            className="absolute rounded-full bg-white"
+                            className={`absolute rounded-full ${darkMode ? "bg-white" : "bg-black"
+                                }`}
                             style={{
                                 left: `${p.left}%`,
                                 top: `${p.top}%`,
                                 width: `${p.size + 2}px`,
                                 height: `${p.size + 2}px`,
-                                boxShadow: "0 0 12px white",
+                                boxShadow: darkMode
+                                    ? "0 0 12px white"
+                                    : "0 0 12px black"
                             }}
                             animate={{
                                 opacity: [0.1, 1, 0.2],
@@ -117,7 +120,9 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                     {Array.from({ length: 12 }, (_, i) => (
                         <motion.div
                             key={i}
-                            className="absolute h-[2px] w-24 bg-white"
+                            className={`absolute h-[2px] w-24 ${
+  darkMode ? "bg-white" : "bg-black"
+}`}
                             style={{
                                 top: `${10 + i * 6}%`,
                                 left: "-20%",
