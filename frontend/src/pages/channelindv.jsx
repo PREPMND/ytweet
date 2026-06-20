@@ -118,7 +118,7 @@ const ChannelIndv = (props) => {
                 </div>
             )}
 
-            <div className={`relative w-full ${imageLoaded ? '' : 'animate-pulse hidden'}`}>
+            <div className={`relative w-full ${!imageLoaded ? 'animate-pulse' : ''}`}>
                 <img
                     onLoad={() => { setimageLoaded(true) }}
                     className=" -mt-5 inset-0 rounded-b-lg w-full h-[140px] object-cover " src={coverImage} />
