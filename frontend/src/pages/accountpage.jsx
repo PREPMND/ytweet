@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import getCurrentUser from "../api/currentuser";
 import { GridScan } from "../assets/gridscan.jsx"
-import Loader2 from "../assets/loading2.jsx";
+import LoaderTwo from "../assets/loading2.jsx";
 const AccountPage = ({ darkMode }) => {
     const navigate = useNavigate();
 
@@ -66,7 +66,7 @@ const AccountPage = ({ darkMode }) => {
         return (
             <div className="flex relative justify-center w-full items-center h-screen">
                 
-                <Loader2 dark={darkMode} text="Loading Your Account..." />
+                <LoaderTwo dark={darkMode} text="Loading Your Account..." />
                 
             </div>
         );
