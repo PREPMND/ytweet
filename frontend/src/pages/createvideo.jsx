@@ -4,7 +4,6 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { LoaderPinwheel } from "lucide-react";
-import LoaderTwo from "../assets/loading2.jsx";
 const Createvideo = () => {
     const { data } = useQuery({
         queryKey: ["currentUser"],
@@ -156,11 +155,7 @@ const Createvideo = () => {
                     </button>
                 </div>
             )}
-            {loading && (
-                <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center z-50">
-                    <LoaderTwo dark={true} text="Uploading Your Video..." />
-                </div>
-            )}
+            <LoaderPinwheel className={`${loading?"block":"hidden"} z-40 absolute left-1/2 top-10 animate-spin text-neutral-950`} size={28} />
         </div>
     );
 };
