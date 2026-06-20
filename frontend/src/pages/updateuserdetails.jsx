@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../api/api";
 import getCurrentUser from "../api/currentuser";
 import { useNavigate } from "react-router-dom";
-
+import LoaderTwo from "../assets/loading2";
 const UpdateProfile = ({ darkMode }) => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
