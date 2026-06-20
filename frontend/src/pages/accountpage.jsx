@@ -62,7 +62,7 @@ const AccountPage = ({ darkMode }) => {
         }
     };
 
-    if (loading) {
+    if (true) {
         return (
             <div className="flex relative justify-center w-full items-center h-screen">
                 
