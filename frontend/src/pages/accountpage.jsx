@@ -24,7 +24,9 @@ const AccountPage = ({ darkMode }) => {
             } catch (err) {
                 console.log(err);
             } finally {
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                }, 2000);
             }
         };
 
@@ -59,7 +61,7 @@ const AccountPage = ({ darkMode }) => {
         }
     };
 
-    if (true) {
+    if (loading) {
         return (
             <div className="flex relative justify-center w-full items-center h-screen">
                 <GridScan className={"w-full object-cover"} darkMode={darkMode} />
