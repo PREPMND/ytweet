@@ -120,9 +120,8 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                     {Array.from({ length: 12 }, (_, i) => (
                         <motion.div
                             key={i}
-                            className={`absolute h-[2px] w-24 ${
-  darkMode ? "bg-white" : "bg-black"
-}`}
+                            className={`absolute h-[2px] w-24 ${darkMode ? "bg-white" : "bg-black"
+                                }`}
                             style={{
                                 top: `${10 + i * 6}%`,
                                 left: "-20%",
