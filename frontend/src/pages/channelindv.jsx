@@ -134,7 +134,7 @@ const ChannelIndv = (props) => {
                         <div className={`${darkMode ? "text-white" : "text-black"}`}>
                             {profileSelected.owner.username}
                         </div>
-                        <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[18px] w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
+                        <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
                             {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
                         </button>
                     </div>
