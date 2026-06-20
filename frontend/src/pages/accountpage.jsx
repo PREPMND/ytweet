@@ -64,7 +64,7 @@ const AccountPage = ({ darkMode }) => {
     if (loading) {
         return (
             <div className="flex relative justify-center w-full items-center h-screen">
-                <div style={{ width: '100%',position: 'relative' }}>
+                <div style={{ width: '100%',position: 'relative',height: 'screen' }}>
                     <GridScan
                         sensitivity={0.55}
                         lineThickness={1}
