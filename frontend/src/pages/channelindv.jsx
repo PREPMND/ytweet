@@ -148,7 +148,15 @@ const ChannelIndv = (props) => {
                             setVideoSelected(true);
                             setYangSelected(false);
                         }}
-                        className={`w-[50%] h-[2px] border-[2px] ${videoSelected ? "border-black h-[1.5px]" : "border-red-300"}  `}></div>
+                        className={`w-[50%] h-[2px] border-[2px]
+${videoSelected
+                                ? darkMode
+                                    ? "border-white"
+                                    : "border-black"
+                                : darkMode
+                                    ? "border-neutral-700"
+                                    : "border-neutral-300"
+                            }`}></div>
                     <div
                         onClick={() => {
                             setVideoSelected(false);
