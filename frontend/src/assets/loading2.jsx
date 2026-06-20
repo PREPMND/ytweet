@@ -1,117 +1,42 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
-import { motion, useMotionValue, useAnimationFrame, useTransform } from 'motion/react';
+import React from "react";
 
-const ShinyText = ({
-  text,
-  disabled = false,
-  speed = 2,
-  className = '',
-  color = '#b5b5b5',
-  shineColor = '#ffffff',
-  spread = 120,
-  yoyo = false,
-  pauseOnHover = false,
-  direction = 'left',
-  delay = 0
-}) => {
-  const [isPaused, setIsPaused] = useState(false);
-  const progress = useMotionValue(0);
-  const elapsedRef = useRef(0);
-  const lastTimeRef = useRef(null);
-  const directionRef = useRef(direction === 'left' ? 1 : -1);
-
-  const animationDuration = speed * 1000;
-  const delayDuration = delay * 1000;
-
-  useAnimationFrame(time => {
-    if (disabled || isPaused) {
-      lastTimeRef.current = null;
-      return;
-    }
-
-    if (lastTimeRef.current === null) {
-      lastTimeRef.current = time;
-      return;
-    }
-
-    const deltaTime = time - lastTimeRef.current;
-    lastTimeRef.current = time;
-
-    elapsedRef.current += deltaTime;
-
-    // Animation goes from 0 to 100
-    if (yoyo) {
-      const cycleDuration = animationDuration + delayDuration;
-      const fullCycle = cycleDuration * 2;
-      const cycleTime = elapsedRef.current % fullCycle;
-
-      if (cycleTime < animationDuration) {
-        // Forward animation: 0 -> 100
-        const p = (cycleTime / animationDuration) * 100;
-        progress.set(directionRef.current === 1 ? p : 100 - p);
-      } else if (cycleTime < cycleDuration) {
-        // Delay at end
-        progress.set(directionRef.current === 1 ? 100 : 0);
-      } else if (cycleTime < cycleDuration + animationDuration) {
-        // Reverse animation: 100 -> 0
-        const reverseTime = cycleTime - cycleDuration;
-        const p = 100 - (reverseTime / animationDuration) * 100;
-        progress.set(directionRef.current === 1 ? p : 100 - p);
-      } else {
-        // Delay at start
-        progress.set(directionRef.current === 1 ? 0 : 100);
-      }
-    } else {
-      const cycleDuration = animationDuration + delayDuration;
-      const cycleTime = elapsedRef.current % cycleDuration;
-
-      if (cycleTime < animationDuration) {
-        // Animation phase: 0 -> 100
-        const p = (cycleTime / animationDuration) * 100;
-        progress.set(directionRef.current === 1 ? p : 100 - p);
-      } else {
-        // Delay phase - hold at end (shine off-screen)
-        progress.set(directionRef.current === 1 ? 100 : 0);
-      }
-    }
-  });
-
-  useEffect(() => {
-    directionRef.current = direction === 'left' ? 1 : -1;
-    elapsedRef.current = 0;
-    progress.set(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [direction]);
-
-  // Transform: p=0 -> 150% (shine off right), p=100 -> -50% (shine off left)
-  const backgroundPosition = useTransform(progress, p => `${150 - p * 2}% center`);
-
-  const handleMouseEnter = useCallback(() => {
-    if (pauseOnHover) setIsPaused(true);
-  }, [pauseOnHover]);
-
-  const handleMouseLeave = useCallback(() => {
-    if (pauseOnHover) setIsPaused(false);
-  }, [pauseOnHover]);
-
-  const gradientStyle = {
-    backgroundImage: `linear-gradient(${spread}deg, ${color} 0%, ${color} 35%, ${shineColor} 50%, ${color} 65%, ${color} 100%)`,
-    backgroundSize: '200% auto',
-    WebkitBackgroundClip: 'text',
-    backgroundClip: 'text',
-    WebkitTextFillColor: 'transparent'
-  };
-
+const Loader = ({ dark = true, text = "Loading..." }) => {
   return (
-    <motion.span
-      className={`inline-block ${className}`}
-      style={{ ...gradientStyle, backgroundPosition }}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+    <div
+      className={`fixed inset-0 flex flex-col items-center justify-center z-[9999] transition-all duration-300 ${
+        dark ? "bg-black text-white" : "bg-white text-black"
+      }`}
     >
-      {text}
-    </motion.span>
+      <div className="relative w-24 h-24">
+        {/* Center Dot */}
+        <div
+          className={`absolute top-1/2 left-1/2 w-4 h-4 rounded-full -translate-x-1/2 -translate-y-1/2 ${
+            dark ? "bg-white" : "bg-black"
+          }`}
+        />
+
+        {/* Orbit Ring */}
+        <div
+          className={`absolute inset-0 border-2 rounded-full ${
+            dark ? "border-gray-700" : "border-gray-300"
+          }`}
+        />
+
+        {/* Orbiting Ball */}
+        <div className="absolute inset-0 animate-spin">
+          <div
+            className={`absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full ${
+              dark ? "bg-cyan-400" : "bg-blue-600"
+            }`}
+          />
+        </div>
+      </div>
+
+      <h2 className="mt-6 text-lg font-medium tracking-widest animate-pulse">
+        {text}
+      </h2>
+    </div>
   );
 };
 
-export default ShinyText;
+export default Loader;
