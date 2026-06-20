@@ -20,7 +20,7 @@ export const VideoIndv = ({ darkMode }) => {
                 const res = await api.get(`/videos/getvideo/${id}`);
                 setTimeout(() => {
                     setVideo(res.data.data);
-                }, 4000);
+                }, 3000);
                 console.log("Fetched video data:", res.data);
 
                 // fetch owner's other videos
