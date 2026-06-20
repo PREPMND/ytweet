@@ -63,7 +63,7 @@ const UpdateProfile = ({ darkMode }) => {
           darkMode ? "bg-black text-white" : "bg-gray-100 text-black"
         }`}
       >
-        <LoderTwo darkMode={darkMode} text="Loading.." />
+        <LoaderTwo darkMode={darkMode} text="Loading.." />
       </div>
     );
   }
