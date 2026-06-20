@@ -66,7 +66,7 @@ const ChangeAvatar = ({ darkMode }) => {
             <img
               src={preview}
               alt="preview"
-              className="w-32 h-32 rounded-full object-cover mt-5"
+              className="w-32 m-auto h-32 rounded-full object-cover mt-5"
             />
           )}
 
