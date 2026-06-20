@@ -56,7 +56,7 @@ const ChangeAvatar = ({ darkMode }) => {
 
         <form onSubmit={handleSubmit}>
           <input
-            className={`w-[80%] md:w-full m-auto p-2 md:p-4 rounded-lg border ${darkMode ? "bg-zinc-800 border-zinc-700 text-black" : "bg-white border-gray-300"}`}
+            className={`w-[80%] md:w-full m-auto p-2 md:p-4 rounded-lg border ${darkMode ? "bg-zinc-800 text-[16px] md:text-[24px] border-zinc-700 text-black" : "bg-white border-gray-300"}`}
             type="file"
             accept="image/*"
             onChange={handleFile}
@@ -74,7 +74,7 @@ const ChangeAvatar = ({ darkMode }) => {
             <button
               type="submit"
               disabled={loading}
-              className="px-5 py-3 hover:bg-blue-700 hover:scale-[1.02] transition-colors duration-300 ease-in-out bg-blue-600 text-white rounded-lg"
+              className="px-5 py-3  hover:bg-blue-700 hover:scale-[1.02] transition-colors duration-300 ease-in-out bg-blue-600 text-white rounded-lg"
             >
               {loading ? "Uploading..." : "Update Avatar"}
             </button>
