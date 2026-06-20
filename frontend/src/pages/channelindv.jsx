@@ -162,7 +162,15 @@ ${videoSelected
                             setVideoSelected(false);
                             setYangSelected(true);
                         }}
-                        className={`w-[50%] h-[2px] border-[2px]  ${yangSelected ? "border-black h-[1.5px]" : "border-amber-200"}  `}></div>
+                        className={`w-[50%] h-[2px] border-[2px]
+${yangSelected
+                                ? darkMode
+                                    ? "border-white"
+                                    : "border-black"
+                                : darkMode
+                                    ? "border-neutral-700"
+                                    : "border-neutral-300"
+                            }`}></div>
 
                 </div>)}
             <div>
