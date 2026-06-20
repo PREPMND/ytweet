@@ -64,7 +64,25 @@ const AccountPage = ({ darkMode }) => {
     if (loading) {
         return (
             <div className="flex relative justify-center w-full items-center h-screen">
-                <GridScan className={"w-full object-cover text-black"} darkMode={darkMode} />
+                <div style={{ width: '100%', height: '600px', position: 'relative' }}>
+  <GridScan
+    sensitivity={0.55}
+    lineThickness={1}
+    linesColor="#2a2730"
+    gridScale={0.1}
+    scanColor="#FF9FFC"
+    scanOpacity={0.4}
+    enablePost
+    bloomIntensity={0.6}
+    chromaticAberration={0.002}
+    noiseIntensity={0.01}
+    lineJitter={0.1}
+    scanGlow={0.5}
+    scanSoftness={2}
+    enableWebcam={false}
+    showPreview={false}
+/>
+</div>
                 <h1 className="text-3xl absolute text-white z-40 font-[Saira] font-bold animate-pulse mt-4">
                     Loading 
                 </h1>
