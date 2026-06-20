@@ -83,7 +83,7 @@ const AccountPage = ({ darkMode }) => {
                         showPreview={false}
                     />
                 </div>
-                <h1 className="text-3xl absolute text-white z-40 font-[Saira] font-bold animate-pulse mt-4">
+                <h1 className="text-3xl absolute text-white z-40 font-[Saira] font-bold animate-pulse  mt-4">
                     Loading
                 </h1>
             </div>
