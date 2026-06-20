@@ -99,7 +99,7 @@ export const VideoIndv = ({ darkMode }) => {
                         {videos.map((v) => (
                             <div
                                 key={v._id}
-                                className="flex-shrink-0 w-full md:flex relative cursor-pointer"
+                                className="flex-shrink-0 w-full md:flex mt-4 relative cursor-pointer"
                                 onClick={() => navigate(`/watchvideo/${v._id}`)}
                             >
                                 <img
