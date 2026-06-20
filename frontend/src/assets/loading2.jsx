@@ -1,34 +1,32 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
 
-const themes = ["snow", "stars", "rain"];
+export default function Loader() {
+  const themes = ["stars", "snow", "meteor"];
 
-const messages = [
-  "Loading Feed...",
-  "Fetching Posts...",
-  "Connecting Friends...",
-  "Preparing Content...",
-];
-
-export default function LoaderTwo() {
   const theme = useMemo(
     () => themes[Math.floor(Math.random() * themes.length)],
     []
   );
 
-  const message = useMemo(
-    () => messages[Math.floor(Math.random() * messages.length)],
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 80 }, () => ({
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        duration: 2 + Math.random() * 4,
+      })),
     []
   );
 
   return (
     <div className="fixed inset-0 bg-black overflow-hidden flex items-center justify-center z-[9999]">
 
-      {theme === "snow" && <SnowTheme />}
-      {theme === "stars" && <StarsTheme />}
-      {theme === "rain" && <RainTheme />}
+      {theme === "stars" && <Stars particles={particles} />}
+      {theme === "snow" && <Snow particles={particles} />}
+      {theme === "meteor" && <Meteor />}
 
-      <div className="relative z-20 flex flex-col items-center">
+      <div className="relative z-10 flex flex-col items-center">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{
@@ -36,64 +34,38 @@ export default function LoaderTwo() {
             repeat: Infinity,
             ease: "linear",
           }}
-          className="w-16 h-16 rounded-full border border-white/20 border-t-white"
+          className="w-16 h-16 rounded-full border-2 border-white/20 border-t-white"
         />
 
-        <h1 className="text-white text-3xl font-bold mt-6 tracking-[0.25em]">
+        <h1 className="mt-6 text-white text-3xl font-bold tracking-[0.3em]">
           SOCIAL
         </h1>
 
-        <p className="text-white/70 mt-3 tracking-widest">
-          {message}
+        <p className="mt-3 text-white/60 tracking-widest">
+          Loading Feed...
         </p>
       </div>
     </div>
   );
 }
 
-function SnowTheme() {
+function Stars({ particles }) {
   return (
     <>
-      {[...Array(80)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-white rounded-full"
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: -20,
-          }}
-          animate={{
-            y: window.innerHeight + 50,
-            x: Math.random() * window.innerWidth,
-          }}
-          transition={{
-            duration: 5 + Math.random() * 8,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      ))}
-    </>
-  );
-}
-
-function StarsTheme() {
-  return (
-    <>
-      {[...Array(100)].map((_, i) => (
+      {particles.map((p, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-white rounded-full"
           style={{
-            top: `${Math.random() * 100}%`,
-            left: `${Math.random() * 100}%`,
+            left: `${p.x}%`,
+            top: `${p.y}%`,
           }}
           animate={{
             opacity: [0.2, 1, 0.2],
             scale: [1, 1.8, 1],
           }}
           transition={{
-            duration: 2 + Math.random() * 3,
+            duration: p.duration,
             repeat: Infinity,
           }}
         />
@@ -102,23 +74,55 @@ function StarsTheme() {
   );
 }
 
-function RainTheme() {
+function Snow({ particles }) {
   return (
     <>
-      {[...Array(100)].map((_, i) => (
+      {particles.map((p, i) => (
         <motion.div
           key={i}
-          className="absolute w-[1px] h-10 bg-white/60"
+          className="absolute w-1.5 h-1.5 bg-white rounded-full"
+          style={{
+            left: `${p.x}%`,
+          }}
           initial={{
-            x: Math.random() * window.innerWidth,
-            y: -100,
+            top: "-10%",
           }}
           animate={{
-            y: window.innerHeight + 100,
+            top: "110%",
           }}
           transition={{
-            duration: 0.6 + Math.random(),
+            duration: 5 + Math.random() * 5,
             repeat: Infinity,
+            ease: "linear",
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
+    </>
+  );
+}
+
+function Meteor() {
+  const meteors = Array.from({ length: 15 });
+
+  return (
+    <>
+      {meteors.map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute h-[1px] w-24 bg-white"
+          style={{
+            top: `${Math.random() * 80}%`,
+            left: "-10%",
+            rotate: "-25deg",
+          }}
+          animate={{
+            x: ["0vw", "120vw"],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            delay: i * 0.4,
             ease: "linear",
           }}
         />
