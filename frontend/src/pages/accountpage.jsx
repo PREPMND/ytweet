@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import getCurrentUser from "../api/currentuser";
-import GridScan from "../assets/gridscan.jsx"
+import{ GridScan} from "../assets/gridscan.jsx"
 const AccountPage = ({ darkMode }) => {
     const navigate = useNavigate();
 
