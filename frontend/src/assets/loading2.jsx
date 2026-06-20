@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
-import {Math} from "mathjs";
+
 const themes = ["snow", "stars", "rain"];
 
 const messages = [
