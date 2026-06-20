@@ -12,8 +12,8 @@ const ChannelIndv = (props) => {
     const [yangSelected, setYangSelected] = useState(false);
     const [loadingVideos, setLoadingVideos] = useState(false);
     const [menuOpenId, setMenuOpenId] = useState(null);
-    const [coverImage,setcoverImage]=useState(null);
-    const [imageLoaded,setimageLoaded]=useState(false);
+    const [coverImage, setcoverImage] = useState(null);
+    const [imageLoaded, setimageLoaded] = useState(false);
     const [videos, setVideos] = useState([]);
     const { data } = useQuery({
         queryKey: ["currentUser"],
@@ -33,7 +33,7 @@ const ChannelIndv = (props) => {
     const fetchuserById = async (Id) => {
         if (!Id) return;
         try {
-            const res = await api.post("/users/userbyid", { Id});
+            const res = await api.post("/users/userbyid", { Id });
             setcoverImage(res.data.data.coverImage)
         }
         catch (err) {
@@ -51,9 +51,9 @@ const ChannelIndv = (props) => {
             console.error(err);
         }
     };
-    useEffect(()=>{
+    useEffect(() => {
         subcriptionStatus();
-    },[profileSelected])
+    }, [profileSelected])
     useEffect(() => {
         channelVideo(profileSelected.owner._id);
     }, [data]);
@@ -86,7 +86,8 @@ const ChannelIndv = (props) => {
     }
     return (
 
-        <div className={`relative`}>
+        <div className={`relative ${darkMode ? "bg-black text-white" : "bg-white text-black"
+            }`}>
             {(loadingVideos && !imageLoaded) && (
                 <div className="px-3 space-y-5">
                     {/* Mobile layout */}
@@ -116,13 +117,13 @@ const ChannelIndv = (props) => {
                     </div>
                 </div>
             )}
-        
-                <div className={`relative w-full ${imageLoaded ? '' : 'animate-pulse hidden'}`}>
-                    <img 
-                    onLoad={()=>{setimageLoaded(true)}}
+
+            <div className={`relative w-full ${imageLoaded ? '' : 'animate-pulse hidden'}`}>
+                <img
+                    onLoad={() => { setimageLoaded(true) }}
                     className=" -mt-5 inset-0 rounded-b-lg w-full h-[140px] object-cover " src={coverImage} />
-                </div>
-        
+            </div>
+
             {(!loadingVideos && imageLoaded) && (
                 <div className="flex mt-2 z-40 items-center ">
                     {/* the channel description */}
