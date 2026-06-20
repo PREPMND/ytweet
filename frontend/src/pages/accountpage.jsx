@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import getCurrentUser from "../api/currentuser";
-import{ GridScan} from "../assets/gridscan.jsx"
+import { GridScan } from "../assets/gridscan.jsx"
 const AccountPage = ({ darkMode }) => {
     const navigate = useNavigate();
 
@@ -64,27 +64,27 @@ const AccountPage = ({ darkMode }) => {
     if (loading) {
         return (
             <div className="flex relative justify-center w-full items-center h-screen">
-                <div style={{ width: '100%', height: '600px', position: 'relative' }}>
-  <GridScan
-    sensitivity={0.55}
-    lineThickness={1}
-    linesColor="#2a2730"
-    gridScale={0.1}
-    scanColor="#FF9FFC"
-    scanOpacity={0.4}
-    enablePost
-    bloomIntensity={0.6}
-    chromaticAberration={0.002}
-    noiseIntensity={0.01}
-    lineJitter={0.1}
-    scanGlow={0.5}
-    scanSoftness={2}
-    enableWebcam={false}
-    showPreview={false}
-/>
-</div>
+                <div style={{ width: '100%',position: 'relative' }}>
+                    <GridScan
+                        sensitivity={0.55}
+                        lineThickness={1}
+                        linesColor="#2a2730"
+                        gridScale={0.1}
+                        scanColor="#FF9FFC"
+                        scanOpacity={0.4}
+                        enablePost
+                        bloomIntensity={0.6}
+                        chromaticAberration={0.002}
+                        noiseIntensity={0.01}
+                        lineJitter={0.1}
+                        scanGlow={0.5}
+                        scanSoftness={2}
+                        enableWebcam={false}
+                        showPreview={false}
+                    />
+                </div>
                 <h1 className="text-3xl absolute text-white z-40 font-[Saira] font-bold animate-pulse mt-4">
-                    Loading 
+                    Loading
                 </h1>
             </div>
         );
@@ -107,8 +107,8 @@ const AccountPage = ({ darkMode }) => {
                     <div
                         onClick={() => navigate("/updateuserdetails")}
                         className={`cursor-pointer p-5 font-[Saira] rounded-2xl border transition-all hover:scale-105 ${darkMode
-                                ? "bg-zinc-900  border-zinc-700 hover:border-blue-500"
-                                : "bg-white border-gray-300 hover:border-blue-500"
+                            ? "bg-zinc-900  border-zinc-700 hover:border-blue-500"
+                            : "bg-white border-gray-300 hover:border-blue-500"
                             }`}
                     >
                         <h2 className="text-xl font-[500] mb-2">
@@ -122,8 +122,8 @@ const AccountPage = ({ darkMode }) => {
                     <div
                         onClick={() => navigate("/changepassword")}
                         className={`cursor-pointer p-5 font-[Saira] rounded-2xl border transition-all hover:scale-105 ${darkMode
-                                ? "bg-zinc-900 border-zinc-700 hover:border-yellow-500"
-                                : "bg-white border-gray-300 hover:border-yellow-500"
+                            ? "bg-zinc-900 border-zinc-700 hover:border-yellow-500"
+                            : "bg-white border-gray-300 hover:border-yellow-500"
                             }`}
                     >
                         <h2 className="text-xl font-[500] mb-2">
@@ -137,8 +137,8 @@ const AccountPage = ({ darkMode }) => {
                     <div
                         onClick={() => navigate("/updateuserdetails/changeavatar")}
                         className={`cursor-pointer font-[Saira] p-5 rounded-2xl border transition-all hover:scale-105 ${darkMode
-                                ? "bg-zinc-900 border-zinc-700 hover:border-green-500"
-                                : "bg-white border-gray-300 hover:border-green-500"
+                            ? "bg-zinc-900 border-zinc-700 hover:border-green-500"
+                            : "bg-white border-gray-300 hover:border-green-500"
                             }`}
                     >
                         <h2 className="text-xl font-[500] mb-2">
@@ -152,8 +152,8 @@ const AccountPage = ({ darkMode }) => {
                     <div
                         onClick={() => navigate("/updateuserdetails/coverimage")}
                         className={`cursor-pointer font-[Saira] p-5 rounded-2xl border transition-all hover:scale-105 ${darkMode
-                                ? "bg-zinc-900 border-zinc-700 hover:border-purple-500"
-                                : "bg-white border-gray-300 hover:border-purple-500"
+                            ? "bg-zinc-900 border-zinc-700 hover:border-purple-500"
+                            : "bg-white border-gray-300 hover:border-purple-500"
                             }`}
                     >
                         <h2 className="text-xl font-[500] mb-2">
