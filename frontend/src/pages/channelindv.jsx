@@ -107,7 +107,7 @@ const ChannelIndv = (props) => {
                     <div className="hidden md:grid md:grid-cols-1 aspect-video md:max-w-[40%] md:gap-6">
                         {[...Array(2)].map((_, i) => (
                             <div key={i} className="animate-pulse">
-                                <div className={`${darkMode ? "bg-neutral-800" : "bg-neutral-300"} *:rounded-md w-full aspect-video`}></div>
+                                <div className={`${darkMode ? "*:bg-neutral-600 bg-neutral-800" : "bg-neutral-300"} *:rounded-md w-full aspect-video`}></div>
                                 <div className="mt-3 space-y-2">
                                     <div className="h-4 bg-neutral-300 rounded w-[80%]"></div>
                                     <div className="h-4 bg-neutral-300 rounded w-[60%]"></div>
