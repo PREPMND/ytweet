@@ -1,6 +1,6 @@
 import React from "react";
 
-const Loader = ({ dark = true, text = "Loading..." }) => {
+const LoaderTwo = ({ dark = true, text = "Loading..." }) => {
   return (
     <div
       className={`fixed inset-0 flex flex-col items-center justify-center z-[9999] transition-all duration-300 ${
