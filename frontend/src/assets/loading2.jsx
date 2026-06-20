@@ -57,12 +57,10 @@ export default function LoaderTwo({ dark, text , username }) {
         />
 
         <h1 className="mt-6 text-white text-3xl font-bold tracking-[0.3em]">
-          
+          {text}
         </h1>
 
-        <p className="mt-3 text-white/60 tracking-widest">
-          {text}
-        </p>
+        
       </div>
     </div>
   );
