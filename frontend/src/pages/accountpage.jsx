@@ -66,7 +66,7 @@ const AccountPage = ({ darkMode }) => {
         return (
             <div className="flex relative justify-center w-full items-center h-screen">
                 
-                <LoaderTwo dark={darkMode} text="Loading.." />
+                <LoaderTwo darkMode={darkMode} text="Loading.." />
                 
             </div>
         );
