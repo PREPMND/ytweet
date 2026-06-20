@@ -51,12 +51,12 @@ const ChangePassword = ({ darkMode }) => {
 
   return (
     <div
-      className={`min-h-screen *:select-none p-6 ${
+      className={`min-h-screen  *:select-none p-6 ${
         darkMode ? "bg-black text-white" : "bg-gray-100 text-black"
       }`}
     >
       <div
-        className={`max-w-2xl  mx-auto rounded-2xl p-6 border ${
+        className={`max-w-2xl *:select-none mx-auto rounded-2xl p-6 border ${
           darkMode
             ? "bg-zinc-900 border-zinc-700"
             : "bg-white border-gray-300"
