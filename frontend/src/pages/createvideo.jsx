@@ -56,7 +56,7 @@ const Createvideo = () => {
     };
 
     return (
-        <div className="max-w-2xl mx-auto mt-12 p-8 bg-white/20 rounded-2xl text-neutral-800 shadow-lg">
+        <div className="max-w-2xl mx-auto mt-12 p-8 bg-white/20 rounded-2xl text-neutral-800 shadow-lg *:select-none">
             {step === 1 && (
                 <div className="flex flex-col gap-6">
                     <h2 className="text-2xl font-semibold">Upload Video</h2>

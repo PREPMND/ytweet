@@ -51,7 +51,7 @@ const ChangePassword = ({ darkMode }) => {
 
   return (
     <div
-      className={`min-h-screen p-6 ${
+      className={`min-h-screen *:select-none p-6 ${
         darkMode ? "bg-black text-white" : "bg-gray-100 text-black"
       }`}
     >
