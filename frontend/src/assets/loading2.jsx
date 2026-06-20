@@ -154,21 +154,25 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                     className="relative w-20 h-20"
                 >
                     <div className={`absolute inset-0 rounded-full border ${darkMode
-                            ? "border-white/20"
-                            : "border-black/20"
+                        ? "border-white/20"
+                        : "border-black/20"
                         }`} />
 
                     <div className={`absolute inset-0 rounded-full border-t-2 ${darkMode
-                            ? "border-t-white"
-                            : "border-t-black"
+                        ? "border-t-white"
+                        : "border-t-black"
                         }`} />
                 </motion.div>
 
-                <h1 className="mt-6 text-white text-3xl font-bold tracking-[0.3em]">
+                <h1
+                    className={`mt-6 text-3xl font-bold tracking-[0.3em]
+                    ${darkMode ? 
+                    "text-white" : "text-black"}`}
+                >
                     {text}
                 </h1>
 
-                
+
 
             </div>
         </div>
