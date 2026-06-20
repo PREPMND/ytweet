@@ -2,66 +2,118 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 import Particles from "@tsparticles/react";
 
-export default function LoaderTwo({ dark, text , username }) {
-  const particleOptions = useMemo(
-    () => ({
-      fullScreen: false,
-      background: {
-        color: "#000000",
-      },
-      fpsLimit: 60,
-      particles: {
-        number: {
-          value: 80,
-        },
-        color: {
-          value: "#ffffff",
-        },
-        opacity: {
-          value: { min: 0.2, max: 1 },
-          animation: {
-            enable: true,
-            speed: 0.5,
-          },
-        },
-        size: {
-          value: { min: 1, max: 3 },
-        },
-        move: {
-          enable: true,
-          speed: 0.3,
-        },
-      },
-    }),
-    []
-  );
+export default function LoaderTwo({ dark, text, username }) {
+    const particleOptions = useMemo(() => {
+        const themes = [
+            // Stars
+            {
+                particles: {
+                    number: { value: 100 },
+                    color: { value: "#ffffff" },
+                    size: { value: { min: 1, max: 3 } },
+                    move: { enable: true, speed: 0.2 },
+                    opacity: {
+                        value: { min: 0.2, max: 1 },
+                        animation: {
+                            enable: true,
+                            speed: 0.3,
+                        },
+                    },
+                },
+            },
 
-  return (
-    <div className="fixed inset-0 bg-black flex items-center justify-center overflow-hidden">
+            // Snow
+            {
+                particles: {
+                    number: { value: 120 },
+                    color: { value: "#ffffff" },
+                    size: { value: { min: 1, max: 5 } },
+                    move: {
+                        enable: true,
+                        direction: "bottom",
+                        speed: 2,
+                    },
+                },
+            },
 
-      <Particles
-        id="tsparticles"
-        options={particleOptions}
-        className="absolute inset-0"
-      />
+            // Meteors
+            {
+                particles: {
+                    number: { value: 25 },
+                    color: { value: "#ffffff" },
+                    shape: {
+                        type: "line",
+                    },
+                    move: {
+                        enable: true,
+                        direction: "bottom-right",
+                        speed: 8,
+                    },
+                },
+            },
 
-      <div className="relative z-10 flex flex-col items-center">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="w-16 h-16 rounded-full border-2 border-white/20 border-t-white"
-        />
+            // Fireflies
+            {
+                particles: {
+                    number: { value: 40 },
+                    color: { value: "#ffffff" },
+                    size: {
+                        value: { min: 2, max: 6 },
+                    },
+                    move: {
+                        enable: true,
+                        speed: 1,
+                    },
+                    opacity: {
+                        value: { min: 0.1, max: 1 },
+                        animation: {
+                            enable: true,
+                            speed: 2,
+                        },
+                    },
+                },
+            },
+        ];
 
-        <h1 className="mt-6 text-white text-3xl font-bold tracking-[0.3em]">
-          {text}
-        </h1>
+        const selected =
+            themes[Math.floor(Math.random() * themes.length)];
 
-        
-      </div>
-    </div>
-  );
+        return {
+            fullScreen: false,
+            fpsLimit: 60,
+            background: {
+                color: "#000000",
+            },
+            ...selected,
+        };
+    }, []);
+
+    return (
+        <div className="fixed inset-0 bg-black flex items-center justify-center overflow-hidden">
+
+            <Particles
+                id="tsparticles"
+                options={particleOptions}
+                className="absolute inset-0"
+            />
+
+            <div className="relative z-10 flex flex-col items-center">
+                <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "linear",
+                    }}
+                    className="w-16 h-16 rounded-full border-2 border-white/20 border-t-white"
+                />
+
+                <h1 className="mt-6 text-white text-3xl font-bold tracking-[0.3em]">
+                    {text}
+                </h1>
+
+
+            </div>
+        </div>
+    );
 }
