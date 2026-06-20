@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import getCurrentUser from "../api/currentuser";
 import { GridScan } from "../assets/gridscan.jsx"
+import Loader2 from "../assets/loading2.jsx";
 const AccountPage = ({ darkMode }) => {
     const navigate = useNavigate();
 
@@ -64,28 +65,9 @@ const AccountPage = ({ darkMode }) => {
     if (loading) {
         return (
             <div className="flex relative justify-center w-full items-center h-screen">
-                <div style={{ width: '100%',position: 'relative',height: '100%' }}>
-                    <GridScan
-                        sensitivity={0.55}
-                        lineThickness={1}
-                        linesColor="#2a2730"
-                        gridScale={0.1}
-                        scanColor="#FF9FFC"
-                        scanOpacity={0.4}
-                        enablePost
-                        bloomIntensity={0.6}
-                        chromaticAberration={0.002}
-                        noiseIntensity={0.01}
-                        lineJitter={0.1}
-                        scanGlow={0.5}
-                        scanSoftness={2}
-                        enableWebcam={false}
-                        showPreview={false}
-                    />
-                </div>
-                <h1 className="text-3xl absolute text-white z-40 font-[Saira] font-bold animate-pulse mt-4">
-                    Loading
-                </h1>
+                
+                <Loader2 dark={darkMode} text="Loading Your Account..." />
+                
             </div>
         );
     }
