@@ -131,14 +131,17 @@ const ChannelIndv = (props) => {
                     <img className="ml-4 md:ml-9 rounded-full object-cover aspect-square
                 w-[100px] h-[100px] md:h-[20%] md:w-[20%]" src={profileSelected.owner.avatar} alt={profileSelected.owner.username} />
                     <div className="flex pl-6 md:pl-10 justify-between font-[Saira] text-[20px] md:text-[28px] font-[500] -mt-4 w-[70%] items-center h-[120px] ">
-                        <div className="">{profileSelected.owner.username}</div>
+                        <div className={`${darkMode ? "text-white" : "text-black"}`}>
+                            {profileSelected.owner.username}
+                        </div>
                         <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[18px] w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
                             {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
                         </button>
                     </div>
                 </div>)}
             {(!loadingVideos && imageLoaded) && (
-                <div className="flex gap-2 mb-9 mt-9 text-black">
+                <div className={`flex gap-2 mb-9 mt-9 ${darkMode ? "text-white" : "text-black"
+                    }`}>
                     {/* some other thing */}
                     <div
                         onClick={() => {
