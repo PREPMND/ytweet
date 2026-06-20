@@ -25,7 +25,10 @@ const UpdateProfile = ({ darkMode }) => {
       } catch (err) {
         console.log(err);
       } finally {
-        setLoading(false);
+        setTimeout(()=>{
+          setLoading(false);
+        })
+        
       }
     };
 
