@@ -74,14 +74,14 @@ const AccountPage = ({ darkMode }) => {
 
     return (
         <div
-            className={`min-h-screen p-5 ${darkMode
+            className={`min-h-screen  p-5 ${darkMode
                 ? "bg-black text-white"
                 : "bg-gray-100 text-black"
                 }`}
         >
 
             <div
-                className={`max-w-5xl mx-auto rounded-2xl p-6 ${darkMode ? "bg-neutral-900" : "bg-white"
+                className={`max-w-5xl *:select-none mx-auto rounded-2xl p-6 ${darkMode ? "bg-neutral-900" : "bg-white"
                     }`}
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
