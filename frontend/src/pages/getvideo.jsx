@@ -170,7 +170,7 @@ const VideoList = (props) => {
                                     loop
                                     playsInline
                                     preload="metadata"
-                                    className="w-full aspect-video object-cover"
+                                    className="w-full object-cover"
                                 />
                             ) : (
                                 <img
