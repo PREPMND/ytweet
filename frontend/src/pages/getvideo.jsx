@@ -128,7 +128,7 @@ const VideoList = (props) => {
         return () => {
             window.removeEventListener("scroll", optimizedScroll);
         };
-    }, [loading, hasMore]);
+    }, [isFetchingNextPage, hasMore]);
     useEffect(() => {
         if (location.state?.scrollY !== undefined) {
             window.scrollTo(0, location.state.scrollY);
@@ -303,7 +303,7 @@ const VideoList = (props) => {
                     ))}
             </div>
 
-            {loading && (
+            {isFetchingNextPage && (
                 <div className="flex justify-center items-cente h-screen  py-10">
                     <LoaderPinwheel
                         className={`animate-spin ${darkMode
