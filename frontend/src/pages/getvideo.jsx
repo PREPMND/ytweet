@@ -26,6 +26,7 @@ const VideoList = (props) => {
             lastPage.page < lastPage.totalPages
                 ? lastPage.page + 1
                 : undefined,
+        staleTime: 1000*30*10,
     });
     const preloadImages = (urls) => {
         return Promise.all(
