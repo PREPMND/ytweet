@@ -173,7 +173,7 @@ ${yangSelected
                             }`}></div>
 
                 </div>)}
-            <div>
+            <div >
                 {videos.map((video, index) => (
 
                     <div
@@ -229,7 +229,7 @@ ${yangSelected
                             />
                         </div>
 
-                        <div className="flex md:hidden h-full items-start md:h-auto h-12 md:px-0 px-2 mb-6 md:mb-0 justify-between md:w-auto w-full gap-2 ">
+                        <div className="flex md:hidden items-start md:h-auto h-12 md:px-0 px-2 mb-6 md:mb-0 justify-between md:w-auto w-full gap-2 ">
                             <h3
                                 className={`mt-4 font-[Saira] pl-[10px] w-[95%] font-[500] md:hidden flex text-[17px]
 ${darkMode ? "text-white" : "text-black"}`}
