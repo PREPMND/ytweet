@@ -41,41 +41,7 @@ const VideoList = (props) => {
         );
     };
 
-    const fetchVideos = async (pageNum = 1) => {
-        if (loading || !has) return;
-
-        try {
-            setLoading(true);
-
-            const res = await fetch(
-                `${import.meta.env.VITE_BACKEND}/api/v1/videos/getvideos?page=${pageNum}&limit=6`,
-            );
-
-            const data = await res.json();
-            if (data.success) {
-                const newVideos = data.data.docs;
-                await preloadImages(newVideos.map((v) => v.thumbnail));
-
-                setVideos((prev) => {
-                    const existingIds = new Set(prev.map(v => v._id));
-                    const filtered = data.data.docs.filter(
-                        v => !existingIds.has(v._id)
-                    );
-
-                    return [...prev, ...filtered];
-                });
-
-                setHasMore(pageNum < data.data.totalPages);
-            } else {
-                console.error("Backend error:", data.message);
-            }
-
-        } catch (err) {
-            console.error("Error fetching videos:", err);
-        } finally {
-            setLoading(false);
-        }
-    };
+    
 
     useEffect(() => {
         fetchNextPage();
@@ -129,7 +95,7 @@ const VideoList = (props) => {
         return () => {
             window.removeEventListener("scroll", optimizedScroll);
         };
-    }, [isFetchingNextPage, hasMore]);
+    }, [isFetchingNextPage, hasNextPage]);
     useEffect(() => {
         if (location.state?.scrollY !== undefined) {
             window.scrollTo(0, location.state.scrollY);
