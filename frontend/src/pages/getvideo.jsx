@@ -27,6 +27,7 @@ const VideoList = (props) => {
                 ? lastPage.page + 1
                 : undefined,
         staleTime: 1000*60*10,
+        refetchOnWindowFocus:true,
     });
     const preloadImages = (urls) => {
         return Promise.all(
