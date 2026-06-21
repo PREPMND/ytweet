@@ -124,7 +124,7 @@ const ChannelIndv = (props) => {
                     className={` -mt-5 inset-0  rounded-b-lg w-full h-[140px] object-cover `} src={coverImage} />
             </div>
 
-            {(!loadingVideos && imageLoaded) && (
+            {(imageLoaded && !loadingVideos) && (
                 <div className="flex mt-4 z-40 items-center ">
                     {/* the channel description */}
 
@@ -139,7 +139,7 @@ const ChannelIndv = (props) => {
                         </button>
                     </div>
                 </div>)}
-            {(!loadingVideos && imageLoaded) && (
+            {( imageLoaded && !loadingVideos ) && (
                 <div className={`flex gap-2 mb-9 mt-9 ${darkMode ? "text-white" : "text-black"
                     }`}>
                     {/* some other thing */}
