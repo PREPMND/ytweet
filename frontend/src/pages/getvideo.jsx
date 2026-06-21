@@ -154,7 +154,7 @@ const VideoList = (props) => {
                                         loop
                                         playsInline
                                         preload="metadata"
-                                        className="w-full object-cover"
+                                        className="w-full h-full object-cover"
                                     />
                                 ) : (
                                     <img
@@ -164,7 +164,7 @@ const VideoList = (props) => {
                                         fetchPriority="low"
                                         src={video.thumbnail}
                                         alt={video.title}
-                                        className="w-full aspect-video object-cover transition-transform duration-500 ease-out hover:scale-[1.02]"
+                                        className="w-full object-cover transition-transform duration-500 ease-out hover:scale-[1.02]"
                                     />
                                 )}
 
