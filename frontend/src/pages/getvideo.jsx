@@ -1,6 +1,6 @@
 import { LoaderPinwheel } from "lucide-react";
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation } from "react-router-dom";
 import { EllipsisVertical } from "lucide-react";
 
 import { MenuDropdown } from "../utils/videoMenu";
