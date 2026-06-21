@@ -86,7 +86,7 @@ const ChannelIndv = (props) => {
     }
     return (
 
-        <div className={`relative min-h-svh ${darkMode ? "bg-black text-white" : "bg-white text-black"
+        <div className={`relative min-h-screen mb-0 ${darkMode ? "bg-black text-white" : "bg-white text-black"
             }`}>
             {(!imageLoaded && loadingVideos  ) && (
                 <div className="px-3 pt-9 space-y-5">
