@@ -42,7 +42,7 @@ const VideoList = (props) => {
     };
 
     const fetchVideos = async (pageNum = 1) => {
-        if (loading || !hasMore) return;
+        if (loading || !has) return;
 
         try {
             setLoading(true);
