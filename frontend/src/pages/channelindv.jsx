@@ -229,7 +229,7 @@ ${yangSelected
                             />
                         </div>
 
-                        <div className="flex md:hidden items-start md:h-auto h-12 md:px-0 px-2 mb-3 md:mb-0 justify-between md:w-auto w-full gap-2 ">
+                        <div className="flex md:hidden items-start md:h-auto h-12 md:px-0 px-2 mb-5 md:mb-0 justify-between md:w-auto w-full gap-2 ">
                             <h3
                                 className={`mt-3 pl-[10px] w-[95%] font-[600] md:hidden flex text-[16px]
 ${darkMode ? "text-white" : "text-black"}`}
