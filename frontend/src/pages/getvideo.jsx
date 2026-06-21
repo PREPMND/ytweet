@@ -119,7 +119,11 @@ const VideoList = (props) => {
             window.removeEventListener("scroll", optimizedScroll);
         };
     }, [loading, hasMore]);
-
+    useEffect(()=>{
+        if(location.state?.scrollY !== undefined){
+            window.scrollTo(0,location.state.scrollY);
+        }
+    },[])
     function Handle(channelId, channelUsername, channel) {
         setProfileSelected(channel);
         navigate(`/${channelUsername}`);
