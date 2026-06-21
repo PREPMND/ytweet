@@ -130,7 +130,9 @@ const VideoList = (props) => {
     
     function GoToVideo(vidDetails) {
         console.log("Selected Video Details:", vidDetails);
-        navigate(`/watchvideo/${vidDetails._id}`);
+        navigate(`/watchvideo/${vidDetails._id}`,{
+            state:{ scrollY: window.scrollY }
+        });
     }
     
     return (
