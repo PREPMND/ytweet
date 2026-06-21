@@ -89,7 +89,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                             onMouseLeave={() => setHoverAirplay(false)}
                         >
                             <Airplay className={`${hoverAirplay ? "text-yellow-400" : "text-gray-400"}`} />
-                            <span className={`text-[12px] mt-1 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"} ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+                            <span className={`text-[12px]  mt-1 font-[600] transition-opacity duration-300 ${hoverAirplay ? "opacity-100" : "opacity-0"} ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
                                 JoinEdge
                             </span>
                         </div>
