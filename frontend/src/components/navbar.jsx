@@ -19,6 +19,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
     const { data, error } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
+        staleTime: 1000* 60* 10,
         retry: false,
         refetchOnWindowFocus: true,
         refetchInterval: false,
