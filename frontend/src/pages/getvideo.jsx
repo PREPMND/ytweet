@@ -69,7 +69,7 @@ const VideoList = (props) => {
             const documentHeight = document.documentElement.scrollHeight;
 
             if (scrollTop + windowHeight >= documentHeight - 500) {
-                setPage((prev) ;
+                fetchNextPage();
             }
         };
 
