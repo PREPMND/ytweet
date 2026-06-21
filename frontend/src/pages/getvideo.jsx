@@ -269,7 +269,7 @@ const VideoList = (props) => {
                     ))}
             </div>
 
-            { true && (
+            { isLoading || isFetchingNextPage && (
                 <div className="flex justify-center items-cente h-screen  py-10">
                     <LoaderPinwheel
                         className={`animate-spin ${darkMode
