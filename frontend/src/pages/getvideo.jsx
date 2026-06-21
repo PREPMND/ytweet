@@ -10,6 +10,7 @@ const VideoList = (props) => {
     const timeoutRef = useRef(null);
     const [playingId, setPlayingId] = useState(null);
     const navigate = useNavigate();
+    const location = useLocation();
     const [menuOpenId, setMenuOpenId] = useState(null);
     const [videos, setVideos] = useState([]);
     const [page, setPage] = useState(1);
