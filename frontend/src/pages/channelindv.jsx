@@ -177,7 +177,7 @@ ${yangSelected
                 {videos.map((video, index) => (
 
                     <div
-                        className="flex md:flex-row flex-col justify-between pb-4"
+                        className="flex md:flex-row flex-col  justify-between pb-4"
                         key={video._id || index}>
 
                         <div className={`w-full relative px-3 md:mx-0 flex `}>
@@ -189,7 +189,7 @@ ${yangSelected
                                 alt={video.title}
                             />
                             <h3
-                                className={`md:mt-[2px] ml-5 hidden md:flex font-[600] text-[18px]
+                                className={`md:mt-[1px] ml-5 hidden md:flex font-[600] text-[18px]
                                 ${darkMode ? "text-white" : "text-black"}
                                 ${video.title.length > 70 ? "whitespace-pre-wrap" : ""}`}
                             >{video.title}</h3>
