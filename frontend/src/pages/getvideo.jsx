@@ -43,9 +43,7 @@ const VideoList = (props) => {
 
     
 
-    useEffect(() => {
-        fetchNextPage();
-    }, [page]);
+    
     function handleWatchLater(video) {
         console.log("Watch later:", video);
     }
@@ -71,7 +69,7 @@ const VideoList = (props) => {
             const documentHeight = document.documentElement.scrollHeight;
 
             if (scrollTop + windowHeight >= documentHeight - 500) {
-                setPage((prev) => prev + 1);
+                setPage((prev) ;
             }
         };
 
