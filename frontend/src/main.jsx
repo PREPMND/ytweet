@@ -10,7 +10,7 @@ createRoot(document.getElementById('root')).render(
   <>
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-    
+      <ScrollToTop/>
       <App/>
     </BrowserRouter>
   </QueryClientProvider>
