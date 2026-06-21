@@ -77,7 +77,7 @@ const VideoList = (props) => {
     };
 
     useEffect(() => {
-        fetchNextPage()
+        fetchNextPage();
     }, [page]);
     function handleWatchLater(video) {
         console.log("Watch later:", video);
