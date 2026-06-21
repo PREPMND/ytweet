@@ -1,6 +1,6 @@
-import axios from "axios";
+import api from "./api";
 export const fetchVideos = async ({ pageParam = 1 }) => {
-  const res = await axios.get(
+  const res = await api.get(
     `/videos/getvideos?page=${pageParam}&limit=6`
   );
 
