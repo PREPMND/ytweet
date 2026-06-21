@@ -217,8 +217,8 @@ const VideoList = (props) => {
                                                 );
                                             }}
                                             className={`text-[15px] md:text-sm mt-1 hover:underline truncate ${darkMode
-                                                ? "text-neutral-400"
-                                                : "text-neutral-600"
+                                                ? "text-neutral-300"
+                                                : "text-neutral-700"
                                                 }`}
                                         >
                                             {video.owner.username}
