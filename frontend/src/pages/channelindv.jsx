@@ -189,7 +189,7 @@ ${yangSelected
                                 alt={video.title}
                             />
                             <h3
-                                className={`md:mt-[1px] ml-5 hidden md:flex font-[600] text-[18px]
+                                className={`md:mt-[1px] mt-3 ml-5 hidden md:flex font-[600] text-[18px]
                                 ${darkMode ? "text-white" : "text-black"}
                                 ${video.title.length > 70 ? "whitespace-pre-wrap" : ""}`}
                             >{video.title}</h3>
