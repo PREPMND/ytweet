@@ -173,7 +173,7 @@ ${yangSelected
                             }`}></div>
 
                 </div>)}
-            <div >
+            <div className="">
                 {videos.map((video, index) => (
 
                     <div
