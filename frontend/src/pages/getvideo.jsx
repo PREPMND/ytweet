@@ -1,21 +1,31 @@
 import { LoaderPinwheel } from "lucide-react";
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate , useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { EllipsisVertical } from "lucide-react";
 
 import { MenuDropdown } from "../utils/videoMenu";
 const VideoList = (props) => {
-    const { darkMode, setProfileSelected, setvideoIdSelected,videoIdSelected } = props;
+    const { darkMode, setProfileSelected, setvideoIdSelected, videoIdSelected } = props;
 
     const timeoutRef = useRef(null);
     const [playingId, setPlayingId] = useState(null);
     const navigate = useNavigate();
     const location = useLocation();
     const [menuOpenId, setMenuOpenId] = useState(null);
-    const [videos, setVideos] = useState([]);
-    const [page, setPage] = useState(1);
-    const [hasMore, setHasMore] = useState(true);
-    const [loading, setLoading] = useState(false);
+    const {
+        data,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+        isLoading,
+    } = useInfiniteQuery({
+        queryKey: ["videos"],
+        queryFn: fetchVideos,
+        getNextPageParam: (lastPage) =>
+            lastPage.page < lastPage.totalPages
+                ? lastPage.page + 1
+                : undefined,
+    });
     const preloadImages = (urls) => {
         return Promise.all(
             urls.map(
@@ -24,7 +34,7 @@ const VideoList = (props) => {
                         const img = new Image();
                         img.src = url;
                         img.onload = resolve;
-                        img.onerror = resolve; 
+                        img.onerror = resolve;
                     })
             )
         );
@@ -119,11 +129,11 @@ const VideoList = (props) => {
             window.removeEventListener("scroll", optimizedScroll);
         };
     }, [loading, hasMore]);
-    useEffect(()=>{
-        if(location.state?.scrollY !== undefined){
-            window.scrollTo(0,location.state.scrollY);
+    useEffect(() => {
+        if (location.state?.scrollY !== undefined) {
+            window.scrollTo(0, location.state.scrollY);
         }
-    },[])
+    }, [])
     function Handle(channelId, channelUsername, channel) {
         setProfileSelected(channel);
         navigate(`/${channelUsername}`);
@@ -132,14 +142,14 @@ const VideoList = (props) => {
     function toggleMenu(id) {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
-    
+
     function GoToVideo(vidDetails) {
         console.log("Selected Video Details:", vidDetails);
-        navigate(`/watchvideo/${vidDetails._id}`,{
-            state:{ scrollY: window.scrollY }
+        navigate(`/watchvideo/${vidDetails._id}`, {
+            state: { scrollY: window.scrollY }
         });
     }
-    
+
     return (
         <div
             className={`relative overflow-hidden cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
@@ -170,7 +180,7 @@ const VideoList = (props) => {
                         <div className="relative aspect-video select-none overflow-hidden rounded-xl bg-black">
                             {playingId === video._id ? (
                                 <video
-                                    
+
                                     src={video.videoFile}
                                     autoPlay
                                     muted
@@ -181,7 +191,7 @@ const VideoList = (props) => {
                                 />
                             ) : (
                                 <img
-                                    onClick={()=>{GoToVideo(video)}}
+                                    onClick={() => { GoToVideo(video) }}
                                     loading="lazy"
                                     decoding="async"
                                     fetchPriority="low"
@@ -213,7 +223,7 @@ const VideoList = (props) => {
                                 loading="lazy"
                             />
                             <div
-                                
+
                                 className="flex justify-between items-start gap-2 w-full min-w-0">
 
                                 <div
