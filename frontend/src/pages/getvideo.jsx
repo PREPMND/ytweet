@@ -77,7 +77,7 @@ const VideoList = (props) => {
     };
 
     useEffect(() => {
-        fetchVideos(page);
+        fetchNextPage()
     }, [page]);
     function handleWatchLater(video) {
         console.log("Watch later:", video);
@@ -97,7 +97,7 @@ const VideoList = (props) => {
     useEffect(() => {
         const handleScroll = () => {
 
-            if (loading || !hasMore) return;
+            if (isFetchingNextPage || !hasNextPage) return;
 
             const scrollTop = window.scrollY;
             const windowHeight = window.innerHeight;
