@@ -190,7 +190,7 @@ const AccountPage = ({ darkMode }) => {
 
                                 <div className="p-4 md:w-[50%] font-[500]">
                                     <h3 
-                                    onClick={navigate(`/watchvideo/${video._id}`)}
+                                    onClick={()=>navigate(`/watchvideo/${video._id}`)}
                                     className="text-[18px] font-[Saira] ">
 
                                         {video.title}
