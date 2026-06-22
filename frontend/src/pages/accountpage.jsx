@@ -81,10 +81,10 @@ const AccountPage = ({ darkMode }) => {
         >
 
             <div
-                className={`*:select-none mx-auto rounded-2xl p-6 ${darkMode ? "bg-neutral-900" : "bg-white"
+                className={`*:select-none mx-auto rounded-2xl  ${darkMode ? "bg-neutral-900" : "bg-white"
                     }`}
             >
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 p-6 lg:grid-cols-4 gap-4 mb-8">
 
                     <div
                         onClick={() => navigate("/updateuserdetails")}
@@ -147,7 +147,7 @@ const AccountPage = ({ darkMode }) => {
                     </div>
 
                 </div>
-                <div className="flex items-center gap-5 mb-8">
+                <div className="flex items-center md:p-6 gap-5 mb-8">
                     <img
                         src={user?.avatar}
                         alt="avatar"
