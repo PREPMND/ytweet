@@ -147,7 +147,7 @@ const AccountPage = ({ darkMode }) => {
                     </div>
 
                 </div>
-                <div className="flex items-center p-6 gap-5 mb-8">
+                <div className="flex items-center p-6 gap-5 mb-2 md:mb-8">
                     <img
                         src={user?.avatar}
                         alt="avatar"
@@ -165,7 +165,7 @@ const AccountPage = ({ darkMode }) => {
                     </div>
                 </div>
 
-                <h2 className="text-[21px] p-6 md:text-2xl font-[Saira] font-bold mb-6">
+                <h2 className="text-[21px] p-6 md:text-2xl font-[Saira] font-bold mb-3 md:mb-6">
                     Your Videos
                 </h2>
 
