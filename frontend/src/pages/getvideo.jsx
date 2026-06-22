@@ -217,7 +217,7 @@ const VideoList = (props) => {
                                                     video
                                                 );
                                             }}
-                                            className={`text-[15px] md:text-sm mt-1 hover:underline truncate ${darkMode
+                                            className={`text-[14px] md:text-[15px] font-[300] md:text-sm mt-1 hover:underline truncate ${darkMode
                                                 ? "text-neutral-300"
                                                 : "text-neutral-700"
                                                 }`}
