@@ -184,7 +184,7 @@ const AccountPage = ({ darkMode }) => {
                                 <img
                                     src={video.thumbnail}
                                     alt={video.title}
-                                    className="w-full h-5 object-cover"
+                                    className="w-60 h-60 object-cover"
                                 />
 
                                 <div className="p-4 font-[500]">
