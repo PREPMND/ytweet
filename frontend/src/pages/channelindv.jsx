@@ -139,6 +139,16 @@ const ChannelIndv = (props) => {
                         </button>
                     </div>
                 </div>)}
+                {(imageLoaded && !loadingVideos) && (
+                    <div className="flex mt-4 justify-evenly">
+                        <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
+                            {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
+                        </button>
+                        <button className={` text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px]`}>
+                            Follow
+                        </button>
+                    </div>    
+                )}
             {( imageLoaded && !loadingVideos ) && (
                 <div className={`flex gap-2 mb-9 mt-9 ${darkMode ? "text-white" : "text-black"
                     }`}>
@@ -173,16 +183,7 @@ ${yangSelected
                             }`}></div>
 
                 </div>)}
-                {(imageLoaded && !loadingVideos) && (
-                    <div>
-                        <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
-                            {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
-                        </button>
-                        <button className={` text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px]`}>
-                            Follow
-                        </button>
-                    </div>    
-                )}
+                
             <div className="">
                 {videos.map((video, index) => (
 
