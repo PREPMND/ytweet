@@ -201,7 +201,7 @@ const VideoList = (props) => {
                                     >
                                         <h3
 
-                                            className={`md:text-[14px] text-[16px] leading-5 font-medium line-clamp-2 break-words ${darkMode
+                                            className={`md:text-[14px] text-[15px] leading-5 font-medium line-clamp-2 break-words ${darkMode
                                                 ? "text-white"
                                                 : "text-black"
                                                 }`}
