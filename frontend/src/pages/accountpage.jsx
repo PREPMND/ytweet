@@ -84,7 +84,7 @@ const AccountPage = ({ darkMode }) => {
                 className={`*:select-none mx-auto rounded-2xl  ${darkMode ? "bg-neutral-900" : "bg-white"
                     }`}
             >
-                <div className="grid grid-cols-1 md:grid-cols-2 p-6 lg:grid-cols-4 gap-4 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 p-6 lg:grid-cols-4 gap-4 md:mb-8 mb-4">
 
                     <div
                         onClick={() => navigate("/updateuserdetails")}
