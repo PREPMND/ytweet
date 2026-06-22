@@ -189,9 +189,9 @@ ${yangSelected
                                 alt={video.title}
                             />
                             <h3
-                                className={`md:mt-[1px] mt-3 ml-5 hidden  md:flex font-[600] text-[15px] 
+                                className={`md:mt-[1px] mt-3 ml-5 hidden  md:flex font-[600] text-[16px] line-clamp-2 
                                 ${darkMode ? "text-white" : "text-black"}
-                                ${video.title.length > 70 ? "whitespace-pre-wrap" : ""}`}
+                                `}
                             >{video.title}</h3>
                             <EllipsisVertical
                                 onClick={(e) => {
