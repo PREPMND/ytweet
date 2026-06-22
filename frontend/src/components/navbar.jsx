@@ -20,7 +20,6 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
         staleTime: 1000* 60* 10,
-        retry: true,
         refetchOnWindowFocus: true,
     
     });
