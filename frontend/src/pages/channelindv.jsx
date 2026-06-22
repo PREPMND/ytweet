@@ -210,7 +210,7 @@ ${yangSelected
                                     toggleMenu(video._id);
                                 }}
                                 className={` cursor-pointer hidden md:flex absolute right-1 mt-3 ${darkMode ? "text-white" : "text-black"
-                                    }`} size={12}/>
+                                    }`} size={18}/>
                             <MenuDropdown
                                 className="bottom-[-10px] md:bottom-[40px] lg:right-5"
                                 isOpen={menuOpenId === video._id}
@@ -250,8 +250,8 @@ ${darkMode ? "text-white" : "text-black"}`}
                                     e.stopPropagation();
                                     toggleMenu(video._id);
                                 }}
-                                className={`text-[18px] cursor-pointer md:hidden absolute right-2 mt-3 ${darkMode ? "text-white" : "text-black"
-                                    }`} />
+                                className={` cursor-pointer md:hidden absolute right-2 mt-4 ${darkMode ? "text-white" : "text-black"
+                                    }`} size={20} />
                         </div>
 
                     </div>
