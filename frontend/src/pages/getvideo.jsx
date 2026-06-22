@@ -171,7 +171,7 @@ const VideoList = (props) => {
                                 )}
 
                                 <span
-                                    className="absolute bottom-2 right-2 bg-black/90 text-white text-[14px] md:text-[12px]  font-semibold px-2 py-[2px] rounded"
+                                    className="absolute bottom-2 right-2 bg-black/90 text-white text-[13px] md:text-[12px]  font-[500] px-2 py-[2px] rounded"
                                 >
                                     {video.durationFormatted}
                                 </span>
