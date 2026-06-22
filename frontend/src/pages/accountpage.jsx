@@ -147,7 +147,7 @@ const AccountPage = ({ darkMode }) => {
                     </div>
 
                 </div>
-                <div className="flex items-center md:p-6 gap-5 mb-8">
+                <div className="flex items-center p-6 gap-5 mb-8">
                     <img
                         src={user?.avatar}
                         alt="avatar"
@@ -165,11 +165,11 @@ const AccountPage = ({ darkMode }) => {
                     </div>
                 </div>
 
-                <h2 className="text-[21px] md:text-2xl font-[Saira] font-bold mb-6">
+                <h2 className="text-[21px] p-6 md:text-2xl font-[Saira] font-bold mb-6">
                     Your Videos
                 </h2>
 
-                <div className=" flex flex-col gap-12 w-full ">
+                <div className=" flex flex-col md:p-6 p-2 gap-12 w-full ">
                     {videos.length === 0 ? (
                         <p>No videos uploaded.</p>
                     ) : (
