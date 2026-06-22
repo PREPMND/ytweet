@@ -164,7 +164,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                 </motion.div>
 
                 <h1
-                    className={`mt-6 text-xl md:text-3xl font-bold tracking-[0.3em]
+                    className={`mt-6 text-xl md:text-2xl font-bold tracking-[0.3em]
                     ${darkMode ? 
                     "text-white" : "text-black"}`}
                 >
