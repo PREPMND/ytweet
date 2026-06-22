@@ -20,9 +20,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
         staleTime: 1000* 60* 10,
-        retry: false,
+        retry: true,
         refetchOnWindowFocus: true,
-        refetchInterval: false,
+    
     });
     useEffect(() => {
         // Whenever the route changes to "/", reset menu state
