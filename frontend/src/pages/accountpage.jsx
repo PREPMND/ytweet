@@ -182,7 +182,7 @@ const AccountPage = ({ darkMode }) => {
                                     }`}
                             >
                                 <img
-                                 
+                                    onClick={navigate()} 
                                     src={video.thumbnail}
                                     alt={video.title}
                                     className="w-full md:w-[50%]  h-48 md:h-56 object-cover"
