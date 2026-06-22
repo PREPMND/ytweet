@@ -192,7 +192,7 @@ const AccountPage = ({ darkMode }) => {
                                         {video.title}
                                     </h3>
 
-                                    <p className="opacity-70 font-[400] mt-2">
+                                    <p className="opacity-70 line-clamp-3 font-[400] mt-2">
                                         {video.description}
                                     </p>
 
