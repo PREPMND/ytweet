@@ -176,7 +176,7 @@ const AccountPage = ({ darkMode }) => {
                         videos.map((video) => (
                             <div
                                 key={video._id}
-                                className={`rounded-xl overflow-hidden border ${darkMode
+                                className={`rounded-xl overflow-hidden w-full border ${darkMode
                                     ? "border-zinc-700"
                                     : "border-gray-300"
                                     }`}
