@@ -188,7 +188,7 @@ const AccountPage = ({ darkMode }) => {
                                 />
 
                                 <div className="p-4 font-[500]">
-                                    <h3 className="text-xl font-[Saira] ">
+                                    <h3 className="text-[18px] font-[Saira] ">
                                         {video.title}
                                     </h3>
 
