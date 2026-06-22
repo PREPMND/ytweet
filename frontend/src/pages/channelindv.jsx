@@ -240,7 +240,7 @@ ${yangSelected
 
                         <div className="flex md:hidden items-start md:h-auto h-12 md:px-0 px-2 mb-5 md:mb-0 justify-between md:w-auto w-full gap-2 ">
                             <h3
-                                className={`mt-4 mb-2 font-[Saira] pl-[10px] w-[95%] font-[500] md:hidden flex text-[16px]
+                                className={`mt-4 mb-2 font-[Saira] pl-[10px] w-[95%] font-[500] md:hidden line-clamp-2 flex text-[16px]
 ${darkMode ? "text-white" : "text-black"}`}
                             >{video.title}</h3>
                             <EllipsisVertical
