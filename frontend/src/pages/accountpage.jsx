@@ -169,7 +169,7 @@ const AccountPage = ({ darkMode }) => {
                     Your Videos
                 </h2>
 
-                <div className="grid gap-5">
+                <div className="grid w-full gap-5">
                     {videos.length === 0 ? (
                         <p>No videos uploaded.</p>
                     ) : (
@@ -184,7 +184,7 @@ const AccountPage = ({ darkMode }) => {
                                 <img
                                     src={video.thumbnail}
                                     alt={video.title}
-                                    className="w-full h-56 object-cover"
+                                    className="w-full h-5 object-cover"
                                 />
 
                                 <div className="p-4 font-[500]">
