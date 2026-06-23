@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo,useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function LoaderTwo({
@@ -22,6 +22,12 @@ export default function LoaderTwo({
             })),
         []
     );
+    useEffect(() => {
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = "auto";
+        };
+    }, []);
 
     return (
         <div className={`fixed inset-0 overflow-hidden max-w-full flex items-center justify-center z-[9999]
@@ -165,8 +171,8 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
 
                 <h1
                     className={`mt-6 text-xl md:text-2xl font-bold tracking-[0.3em]
-                    ${darkMode ? 
-                    "text-white" : "text-black"}`}
+                    ${darkMode ?
+                            "text-white" : "text-black"}`}
                 >
                     {text}
                 </h1>
