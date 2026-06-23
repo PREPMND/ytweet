@@ -142,9 +142,12 @@ const VideoList = (props) => {
                                 }`}
                         >
                             <div className="relative aspect-video select-none overflow-hidden rounded-xl bg-black">
-                                {loadingMap[video._id] !== true ? (
-                                    <div className="w-full h-full bg-neutral-800 animate-pulse rounded-xl" />
-                                ) : playingId === video._id ? (
+
+                                {!loadingMap[video._id] && (
+                                    <div className="absolute inset-0 bg-neutral-800 animate-pulse" />
+                                )}
+
+                                {playingId === video._id ? (
                                     <video
                                         src={video.videoFile}
                                         autoPlay
@@ -156,24 +159,23 @@ const VideoList = (props) => {
                                     />
                                 ) : (
                                     <img
-                                        onLoad={() => handleImageLoad(video._id)}  
+                                        onLoad={() => handleImageLoad(video._id)}
                                         onClick={() => GoToVideo(video)}
                                         loading="lazy"
                                         decoding="async"
                                         fetchPriority="low"
                                         src={video.thumbnail}
                                         alt={video.title}
-                                        className="w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-[1.02] cursor-pointer"
+                                        className={`w-full h-full object-cover transition-all duration-300 hover:scale-[1.02]
+      ${loadingMap[video._id] ? "opacity-100" : "opacity-0"}`}
                                     />
                                 )}
 
-                                {loadingMap[video._id] === false && (
-                                    <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                                        {video.durationFormatted}
-                                    </span>
-                                )}
-                            </div>
+                                <span className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
+                                    {video.durationFormatted}
+                                </span>
 
+                            </div>
 
                             <div className="flex items-start gap-3 px-2 py-3">
                                 <img
