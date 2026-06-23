@@ -203,12 +203,12 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
 
                             <button
                                 onClick={() => setDarkMode(!darkMode)}
-                                className="w-32 h-8 ml-[19px] md:ml-5 text-sm text-center flex py-2 font-[400] md:font-[300] justify-center items-center mt-3 rounded bg-gray-800 text-white hover:bg-gray-700"
+                                className="w-32 h-8 ml-[16px] md:ml-5 text-sm text-center flex py-2 font-[400] md:font-[300] justify-center items-center mt-3 rounded bg-gray-800 text-white hover:bg-gray-700"
                             >
                                 Toggle Dark Mode
                             </button>
 
-                            <div className="w-full mb-3 ml-[19px] md:ml-5">
+                            <div className="w-full mb-3 ml-[16px] md:ml-5">
                                 <button
                                     onClick={HandleLogout}
                                     className={`w-32 py-2 h-8 font-[400] md:font-[300] text-sm text-center flex justify-center items-center mt-4 rounded bg-red-600 text-white hover:bg-red-500 ${isLoggedIn ? "flex" : "hidden"}`}
