@@ -143,7 +143,7 @@ const VideoList = (props) => {
                         >
                             <div className="relative aspect-video select-none overflow-hidden rounded-xl bg-black">
 
-                                {!loadingMap[video._id] && (
+                                {false && (
                                     <div className="absolute z-40 inset-0 bg-neutral-800 animate-pulse" />
                                 )}
 
