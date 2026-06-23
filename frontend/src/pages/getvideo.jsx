@@ -13,6 +13,7 @@ const VideoList = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [menuOpenId, setMenuOpenId] = useState(null);
+    const []
     const {
         data,
         fetchNextPage,
@@ -116,7 +117,9 @@ const VideoList = (props) => {
             state: { scrollY: window.scrollY }
         });
     }
-    function 
+    function handleImageLoading(vidDetails){
+
+    }
     return (
         <div
             className={`relative overflow-hidden min-h-screen cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
