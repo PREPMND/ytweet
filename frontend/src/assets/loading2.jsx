@@ -45,6 +45,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                                 top: `${p.top}%`,
                                 width: `${p.size}px`,
                                 height: `${p.size}px`,
+                                willChange:"transform"
                             }}
                             animate={{
                                 opacity: [0.2, 1, 0.2],
@@ -71,6 +72,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                                 left: `${p.left}%`,
                                 width: `${p.size + 2}px`,
                                 height: `${p.size + 2}px`,
+                                willChange:"transfrom"
                             }}
                             initial={{
                                 top: "-10%",
