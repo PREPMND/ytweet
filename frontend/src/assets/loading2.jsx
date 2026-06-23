@@ -72,7 +72,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                                 left: `${p.left}%`,
                                 width: `${p.size + 2}px`,
                                 height: `${p.size + 2}px`,
-                                willChange:"transfrom"
+                                willChange:"transform"
                             }}
                             initial={{
                                 top: "-10%",
