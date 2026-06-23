@@ -13,7 +13,7 @@ const VideoList = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [menuOpenId, setMenuOpenId] = useState(null);
-    const []
+    const [thumbnailLoading,setthumbnailLoading]=useState(true);
     const {
         data,
         fetchNextPage,
