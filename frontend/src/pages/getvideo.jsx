@@ -161,7 +161,7 @@ const VideoList = (props) => {
                                         preload="metadata"
                                         className="w-full h-full object-cover"
                                     />
-                                ) : ({thumbnailLoading(
+                                ) : ({{!thumbnailLoading }&& (
                                     <img
 
                                         onClick={() => { GoToVideo(video) }}
