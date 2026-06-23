@@ -148,7 +148,7 @@ const VideoList = (props) => {
                                 }`}
                         >
                             <div className="relative aspect-video select-none overflow-hidden rounded-xl bg-black">
-                                {!thumbnailLoading ? (
+                                {thumbnailLoading ? (
                                     // Loader placeholder
                                     <div className="w-full h-full bg-neutral-800 animate-pulse rounded-xl" />
                                 ) : playingId === video._id ? (
