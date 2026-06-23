@@ -78,7 +78,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                                 top: "-10%",
                             }}
                             animate={{
-                                top: "110%",
+                                top: "100%",
                             }}
                             transition={{
                                 duration: 3 + p.duration,
