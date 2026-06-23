@@ -14,6 +14,12 @@ const VideoList = (props) => {
     const location = useLocation();
     const [menuOpenId, setMenuOpenId] = useState(null);
     const [thumbnailLoading, setthumbnailLoading] = useState(true);
+    const [loadingMap, setLoadingMap] = useState({});
+    // initially all true, or empty object
+
+    function handleImageLoad(id) {
+        setLoadingMap(prev => ({ ...prev, [id]: false }));
+    }
     const {
         data,
         fetchNextPage,
@@ -30,7 +36,7 @@ const VideoList = (props) => {
         staleTime: 1000 * 60 * 10,
         refetchOnWindowFocus: true,
     });
-    
+
 
 
 
@@ -105,7 +111,7 @@ const VideoList = (props) => {
             state: { scrollY: window.scrollY }
         });
     }
-    
+
     return (
         <div
             className={`relative overflow-hidden min-h-screen cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
@@ -152,7 +158,7 @@ const VideoList = (props) => {
                                 ) : (
 
                                     <img
-                                        onLoad={()=> setthumbnailLoading(false)}
+                                        onLoad={() => setthumbnailLoading(false)}
                                         onClick={() => GoToVideo(video)}
                                         loading="lazy"
                                         decoding="async"
