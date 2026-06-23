@@ -24,7 +24,7 @@ export default function LoaderTwo({
     );
 
     return (
-        <div className={`fixed inset-0 overflow-hidden flex items-center justify-center z-[9999]
+        <div className={`fixed inset-0 overflow-hidden max-w-full flex items-center justify-center z-[9999]
 ${darkMode ? "bg-black" : "bg-white"}`}>
 
             {theme === "stars" && (
