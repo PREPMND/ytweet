@@ -142,8 +142,7 @@ const VideoList = (props) => {
                                 }`}
                         >
                             <div className="relative aspect-video select-none overflow-hidden rounded-xl bg-black">
-                                {thumbnailLoading ? (
-                                    // Loader placeholder
+                                {loadingMap[video._id] !== false ? (
                                     <div className="w-full h-full bg-neutral-800 animate-pulse rounded-xl" />
                                 ) : playingId === video._id ? (
                                     <video
@@ -156,9 +155,8 @@ const VideoList = (props) => {
                                         className="w-full h-full object-cover"
                                     />
                                 ) : (
-
                                     <img
-                                        onLoad={() => setthumbnailLoading(false)}
+                                        onLoad={() => handleImageLoad(video._id)}   // 👈 mark this one as loaded
                                         onClick={() => GoToVideo(video)}
                                         loading="lazy"
                                         decoding="async"
@@ -169,10 +167,11 @@ const VideoList = (props) => {
                                     />
                                 )}
 
-                                {/* Duration overlay */}
-                                <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                                    {video.durationFormatted}
-                                </span>
+                                {loadingMap[video._id] === false && (
+                                    <span className="absolute bottom-2 right-2 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
+                                        {video.durationFormatted}
+                                    </span>
+                                )}
                             </div>
 
 
