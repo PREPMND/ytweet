@@ -167,7 +167,7 @@ const VideoList = (props) => {
                                         fetchPriority="low"
                                         src={video.thumbnail}
                                         alt={video.title}
-                                        className={`w-full h-full object-cover transition-all duration-300 hover:scale-[1.02]
+                                        className={`w-full absolute inset-0 h-full object-cover transition-all duration-300 hover:scale-[1.02]
       ${loadingMap[video._id] ? "opacity-100" : "opacity-0"}`}
                                     />
                                 )}
