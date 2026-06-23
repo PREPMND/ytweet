@@ -116,7 +116,7 @@ const VideoList = (props) => {
             state: { scrollY: window.scrollY }
         });
     }
-
+    function 
     return (
         <div
             className={`relative overflow-hidden min-h-screen cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
@@ -160,7 +160,7 @@ const VideoList = (props) => {
                                     />
                                 ) : (
                                     <img
-                                    
+
                                         onClick={() => { GoToVideo(video) }}
                                         loading="lazy"
                                         decoding="async"
