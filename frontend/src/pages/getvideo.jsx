@@ -117,9 +117,7 @@ const VideoList = (props) => {
             state: { scrollY: window.scrollY }
         });
     }
-    function handleImageLoading(vidDetails) {
-        setthumbnailLoading(false);
-    }
+    
     return (
         <div
             className={`relative overflow-hidden min-h-screen cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
@@ -164,8 +162,9 @@ const VideoList = (props) => {
                                         className="w-full h-full object-cover"
                                     />
                                 ) : (
-                                    
+
                                     <img
+                                        onLoad={()=> setthumbnailLoading(false)}
                                         onClick={() => GoToVideo(video)}
                                         loading="lazy"
                                         decoding="async"
