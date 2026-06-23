@@ -164,6 +164,7 @@ const VideoList = (props) => {
                                         className="w-full h-full object-cover"
                                     />
                                 ) : (
+                                    
                                     <img
                                         onClick={() => GoToVideo(video)}
                                         loading="lazy"
