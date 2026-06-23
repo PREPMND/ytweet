@@ -18,7 +18,8 @@ const VideoList = (props) => {
     // initially all true, or empty object
 
     function handleImageLoad(id) {
-        setLoadingMap(prev => ({ ...prev, [id]: false }));
+        console.log(id, loadingMap[id]);
+        setLoadingMap(prev => ({ ...prev, [id]: true }));
     }
     const {
         data,
