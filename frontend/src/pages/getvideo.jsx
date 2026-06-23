@@ -128,7 +128,7 @@ const VideoList = (props) => {
                     ?.flatMap((page) => page.docs)
                     .map((video, idx) => (
                         <div
-                            key={`${video._id}-${idx}`}
+                            key={video._id}
                             onMouseEnter={() => {
                                 timeoutRef.current = setTimeout(() => {
                                     setPlayingId(video._id);
