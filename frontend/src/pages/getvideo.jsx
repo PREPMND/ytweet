@@ -146,7 +146,7 @@ const VideoList = (props) => {
                                 clearTimeout(timeoutRef.current);
                                 setPlayingId(null);
                             }}
-                            className={`overflow-hidden rounded-2xl cursor-pointer transition-all duration-300 ease-out will-change-transform transform-gpu ${darkMode ? "bg-black" : "bg-white"
+                            className={`overflow-hidden rounded-2xl cursor-pointer transition-all duration-300 ease-out ${darkMode ? "bg-black" : "bg-white"
                                 }`}
                         >
                             <div className="relative aspect-video select-none overflow-hidden rounded-xl bg-black">
