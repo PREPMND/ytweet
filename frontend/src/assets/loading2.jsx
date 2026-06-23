@@ -97,6 +97,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                             className={`absolute rounded-full ${darkMode ? "bg-white" : "bg-black"
                                 }`}
                             style={{
+                                willChange:"transform",
                                 left: `${p.left}%`,
                                 top: `${p.top}%`,
                                 width: `${p.size + 2}px`,
@@ -131,6 +132,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                                 top: `${10 + i * 6}%`,
                                 left: "-20%",
                                 rotate: "-25deg",
+                                willChange:"transform"
                             }}
                             animate={{
                                 x: ["0vw", "100vw"],
