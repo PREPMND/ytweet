@@ -119,7 +119,7 @@ const VideoList = (props) => {
 
     return (
         <div
-            className={`relative overflow-hidden h-screen cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
+            className={`relative overflow-hidden min-h-screen cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
                 }`}
         >
             <div
