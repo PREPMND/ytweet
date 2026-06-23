@@ -49,7 +49,7 @@ const ChangeAvatar = ({ darkMode }) => {
 
   return (
     <div className={`min-h-screen p-6 ${darkMode ? "bg-black text-white" : "bg-gray-100 text-black"}`}>
-      <div className={`max-w-xl md:max-w-2xl mt-6  mx-auto p-6 rounded-2xl border ${darkMode ? "bg-zinc-900 border-zinc-700" : "bg-white border-gray-300"}`}>
+      <div className={`max-w-xl md:max-w-2xl mt-[20%]  mx-auto p-6 rounded-2xl border ${darkMode ? "bg-zinc-900 border-zinc-700" : "bg-white border-gray-300"}`}>
         <h1 className="text-2xl md:text-3xl font-bold mb-6">
           Change Avatar
         </h1>
