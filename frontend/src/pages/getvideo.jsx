@@ -149,9 +149,11 @@ const VideoList = (props) => {
                             className={`overflow-hidden rounded-2xl cursor-pointer transition-all duration-300 ease-out ${darkMode ? "bg-black" : "bg-white"
                                 }`}
                         >
+                            
                             <div className="relative aspect-video select-none overflow-hidden rounded-xl bg-black">
                                 {playingId === video._id ? (
-                                    <video
+                                    {{!thumbnailLoading} && (
+                                        <video
 
                                         src={video.videoFile}
                                         autoPlay
@@ -161,7 +163,7 @@ const VideoList = (props) => {
                                         preload="metadata"
                                         className="w-full h-full object-cover"
                                     />
-                                ) : ({{!thumbnailLoading } && (
+                                ) : (
                                     <img
 
                                         onClick={() => { GoToVideo(video) }}
@@ -171,8 +173,8 @@ const VideoList = (props) => {
                                         src={video.thumbnail}
                                         alt={video.title}
                                         className="w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-[1.02]"
-                                    />)}
-                                )}
+                                    />
+                                )})}
 
                                 <span
                                     className="absolute bottom-2 right-2 bg-black/90 text-white text-[13px] md:text-[12px]  font-[500] px-2 py-[2px] rounded"
