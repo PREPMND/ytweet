@@ -13,14 +13,7 @@ const VideoList = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [menuOpenId, setMenuOpenId] = useState(null);
-    const [thumbnailLoading, setthumbnailLoading] = useState(true);
-    const [loadingMap, setLoadingMap] = useState({});
-    // initially all true, or empty object
-
-    function handleImageLoad(id) {
-        console.log(id, loadingMap[id]);
-        setLoadingMap(prev => ({ ...prev, [id]: true }));
-    }
+    
     const {
         data,
         fetchNextPage,
