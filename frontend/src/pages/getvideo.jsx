@@ -13,7 +13,7 @@ const VideoList = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [menuOpenId, setMenuOpenId] = useState(null);
-    const [thumbnailLoading, setthumbnailLoading] = useState(true);
+    const [thumbnailLoading,setthumbnailLoading]=useState(true);
     const {
         data,
         fetchNextPage,
@@ -27,8 +27,8 @@ const VideoList = (props) => {
             lastPage.page < lastPage.totalPages
                 ? lastPage.page + 1
                 : undefined,
-        staleTime: 1000 * 60 * 10,
-        refetchOnWindowFocus: true,
+        staleTime: 1000*60*10,
+        refetchOnWindowFocus:true,
     });
     const preloadImages = (urls) => {
         return Promise.all(
@@ -44,9 +44,9 @@ const VideoList = (props) => {
         );
     };
 
+    
 
-
-
+    
     function handleWatchLater(video) {
         console.log("Watch later:", video);
     }
@@ -117,7 +117,7 @@ const VideoList = (props) => {
             state: { scrollY: window.scrollY }
         });
     }
-    function handleImageLoading(vidDetails) {
+    function handleImageLoading(vidDetails){
         setthumbnailLoading(false);
     }
     return (
@@ -150,11 +150,9 @@ const VideoList = (props) => {
                                 }`}
                         >
                             <div className="relative aspect-video select-none overflow-hidden rounded-xl bg-black">
-                                {thumbnailLoading ? (
-                                    // Loader placeholder
-                                    <div className="w-full h-full bg-neutral-800 animate-pulse rounded-xl" />
-                                ) : playingId === video._id ? (
+                                {playingId === video._id ? (
                                     <video
+
                                         src={video.videoFile}
                                         autoPlay
                                         muted
@@ -163,19 +161,25 @@ const VideoList = (props) => {
                                         preload="metadata"
                                         className="w-full h-full object-cover"
                                     />
-                                ) : (
+                                ) : !thumbnailLoading && (
                                     <img
-                                        onClick={() => GoToVideo(video)}
+
+                                        onClick={() => { GoToVideo(video) }}
                                         loading="lazy"
                                         decoding="async"
                                         fetchPriority="low"
                                         src={video.thumbnail}
                                         alt={video.title}
-                                        className="w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-[1.02] cursor-pointer"
+                                        className="w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-[1.02]"
                                     />
                                 )}
-                            </div>
 
+                                <span
+                                    className="absolute bottom-2 right-2 bg-black/90 text-white text-[13px] md:text-[12px]  font-[500] px-2 py-[2px] rounded"
+                                >
+                                    {video.durationFormatted}
+                                </span>
+                            </div>
 
                             <div className="flex items-start gap-3 px-2 py-3">
                                 <img
@@ -270,7 +274,7 @@ const VideoList = (props) => {
                     ))}
             </div>
 
-            {(isFetchingNextPage || isLoading) && (
+            {  (isFetchingNextPage || isLoading) && (
                 <div className="flex justify-center items-cente py-10">
                     <LoaderPinwheel
                         className={`animate-spin ${darkMode
