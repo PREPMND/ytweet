@@ -156,7 +156,7 @@ const VideoList = (props) => {
                                     />
                                 ) : (
                                     <img
-                                        onLoad={() => handleImageLoad(video._id)}   // 👈 mark this one as loaded
+                                        onLoad={() => handleImageLoad(video._id)}  
                                         onClick={() => GoToVideo(video)}
                                         loading="lazy"
                                         decoding="async"
