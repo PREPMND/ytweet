@@ -142,7 +142,7 @@ const VideoList = (props) => {
                                 }`}
                         >
                             <div className="relative aspect-video select-none overflow-hidden rounded-xl bg-black">
-                                {loadingMap[video._id] !== false ? (
+                                {loadingMap[video._id] !== true ? (
                                     <div className="w-full h-full bg-neutral-800 animate-pulse rounded-xl" />
                                 ) : playingId === video._id ? (
                                     <video
