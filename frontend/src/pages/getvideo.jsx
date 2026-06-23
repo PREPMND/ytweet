@@ -155,7 +155,7 @@ const VideoList = (props) => {
                                         loop
                                         playsInline
                                         preload="metadata"
-                                        className="w-full h-full object-cover"
+                                        className="w-full absolute inset-0 h-full object-cover"
                                     />
                                 ) :  (
                                     
