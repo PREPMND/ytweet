@@ -74,7 +74,7 @@ const AccountPage = ({ darkMode }) => {
 
     return (
         <div
-            className={`h-screen max-w-full p-5 ${darkMode
+            className={`h-full max-w-full ${darkMode
                 ? "bg-black text-white"
                 : "bg-gray-100 text-black"
                 }`}
