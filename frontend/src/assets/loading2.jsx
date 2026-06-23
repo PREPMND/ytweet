@@ -1,4 +1,4 @@
-import { useMemo,useEffect } from "react";
+import { useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 
 export default function LoaderTwo({
@@ -30,8 +30,10 @@ export default function LoaderTwo({
     }, []);
 
     return (
-        <div className={`fixed inset-0 overflow-hidden max-w-full flex items-center justify-center z-[9999]
-${darkMode ? "bg-black" : "bg-white"}`}>
+        <div className={`fixed inset-0 z-[9999] flex items-center justify-center
+${darkMode ? "bg-black" : "bg-white"}`}
+            style={{ transform: "translateZ(0)" }}>
+
 
             {theme === "stars" && (
                 <>
@@ -45,7 +47,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                                 top: `${p.top}%`,
                                 width: `${p.size}px`,
                                 height: `${p.size}px`,
-                                willChange:"transform"
+                                willChange: "transform"
                             }}
                             animate={{
                                 opacity: [0.2, 1, 0.2],
@@ -72,7 +74,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                                 left: `${p.left}%`,
                                 width: `${p.size + 2}px`,
                                 height: `${p.size + 2}px`,
-                                willChange:"transform"
+                                willChange: "transform"
                             }}
                             initial={{
                                 top: "-10%",
@@ -99,7 +101,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                             className={`absolute rounded-full ${darkMode ? "bg-white" : "bg-black"
                                 }`}
                             style={{
-                                willChange:"transform",
+                                willChange: "transform",
                                 left: `${p.left}%`,
                                 top: `${p.top}%`,
                                 width: `${p.size + 2}px`,
@@ -134,7 +136,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                                 top: `${10 + i * 6}%`,
                                 left: "-20%",
                                 rotate: "-25deg",
-                                willChange:"transform"
+                                willChange: "transform"
                             }}
                             animate={{
                                 x: ["0vw", "100vw"],
