@@ -137,9 +137,7 @@ const VideoList = (props) => {
                         >
                             <div className="relative aspect-video select-none overflow-hidden rounded-xl bg-black">
 
-                                {!loadingMap[video._id] && (
-                                    <div className="absolute z-40 inset-0 bg-neutral-800 animate-pulse" />
-                                )}
+                                
 
                                 {playingId === video._id ? (
                                     <video
@@ -154,15 +152,13 @@ const VideoList = (props) => {
                                 ) :  (
                                     
                                     <img
-                                        onLoad={() => handleImageLoad(video._id)}
                                         onClick={() => GoToVideo(video)}
                                         loading="lazy"
                                         decoding="async"
                                         fetchPriority="low"
                                         src={video.thumbnail}
                                         alt={video.title}
-                                        className={`w-full absolute inset-0 h-full object-cover transition-all duration-300 hover:scale-[1.02]
-      ${loadingMap[video._id] ? "opacity-100" : "opacity-0"}`}
+                                        className={`w-full absolute inset-0 h-full object-cover transition-all duration-300 hover:scale-[1.02]`}
                                     />
                                 )}
 
