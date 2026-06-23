@@ -161,7 +161,7 @@ const VideoList = (props) => {
                                         preload="metadata"
                                         className="w-full h-full object-cover"
                                     />
-                                ) : (
+                                ) : ({(
                                     <img
 
                                         onClick={() => { GoToVideo(video) }}
@@ -171,7 +171,7 @@ const VideoList = (props) => {
                                         src={video.thumbnail}
                                         alt={video.title}
                                         className="w-full h-full object-cover transition-transform duration-500 ease-out hover:scale-[1.02]"
-                                    />
+                                    />)}
                                 )}
 
                                 <span
