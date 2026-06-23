@@ -118,7 +118,7 @@ const VideoList = (props) => {
         });
     }
     function handleImageLoading(vidDetails){
-
+        setthumbnailLoading(false);
     }
     return (
         <div
