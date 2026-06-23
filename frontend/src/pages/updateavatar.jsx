@@ -49,12 +49,12 @@ const ChangeAvatar = ({ darkMode }) => {
 
   return (
     <div className={`min-h-screen p-6 ${darkMode ? "bg-black text-white" : "bg-gray-100 text-black"}`}>
-      <div className={`max-w-2xl mx-auto p-6 rounded-2xl border ${darkMode ? "bg-zinc-900 border-zinc-700" : "bg-white border-gray-300"}`}>
+      <div className={`max-w-xl md:max-w-2xl mt-6  mx-auto p-6 rounded-2xl border ${darkMode ? "bg-zinc-900 border-zinc-700" : "bg-white border-gray-300"}`}>
         <h1 className="text-2xl md:text-3xl font-bold mb-6">
           Change Avatar
         </h1>
 
-        <form className="w-[80%]" onSubmit={handleSubmit}>
+        <form className="w-[80%]" mt-3 onSubmit={handleSubmit}>
           <input
             className={`w-[70%] md:w-full m-auto p-2 md:p-4 rounded-lg border ${darkMode ? "bg-zinc-800 text-[13px] md:text-[24px] border-zinc-700 text-black" : "bg-white border-gray-300"}`}
             type="file"
