@@ -133,7 +133,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}>
                                 rotate: "-25deg",
                             }}
                             animate={{
-                                x: ["0vw", "130vw"],
+                                x: ["0vw", "100vw"],
                             }}
                             transition={{
                                 duration: 2,
