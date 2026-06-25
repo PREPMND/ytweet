@@ -1,5 +1,6 @@
 import AppRoutes from './routes/routes.jsx';
 import { useState, useEffect } from 'react';
+import { socket } from './socket.jsx';
 const App = () => {
   {/*const [username,setUsername]=useState("")
   async function loginUser(credentials) {
@@ -41,16 +42,17 @@ const App = () => {
   const [profileSelected, setProfileSelected] = useState(null);
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [videoIdSelected, setvideoIdSelected] = useState({});
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log(socket.id);
+    });
+  }, []);
   return (
-    useEffect(() => {
-      socket.on("connect", () => {
-        console.log(socket.id);
-      });
-    }, [])
-  <div>
-    <AppRoutes isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav}
-      videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected} />
-  </div>
+
+    <div>
+      <AppRoutes isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav}
+        videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected} />
+    </div>
   )
 }
 
