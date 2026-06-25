@@ -193,11 +193,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     if (incomingRefreshToken !== user.refreshToken) {
         throw new apiError(401, "Refresh token is expired or used");
     }
-    console.log("cookie:", incomingRefreshToken);
-    console.log("db:", user.refreshToken);
-    console.log("equal:", incomingRefreshToken === user.refreshToken);
-    console.log("AAAAAAAAAAAA");
-    console.log("before generate");
     const isProd = process.env.NODE_ENV === "production";
 
     res.cookie("refreshToken", token, {
