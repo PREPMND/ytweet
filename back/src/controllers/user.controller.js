@@ -141,30 +141,26 @@ const loginUser = asyncHandler(async (req, res, next) => {
         )
 })
 const logOutUser = asyncHandler(async (req, res, next) => {
-    await User.findByIdAndUpdate(
-        req.user._id,
-        {
-            $set: {
-                refreshToken: undefined
-            }
-        },
-        {
-            new: true
-        }
-    )
-    const isProd = process.env.NODE_ENV === "production";
+    const logOutUser = asyncHandler(async (req, res, next) => {
+        await User.findByIdAndUpdate(
+            req.user._id,
+            { $set: { refreshToken: undefined } },
+            { new: true }
+        );
 
-    res.cookie("refreshToken", token, {
-        httpOnly: true,                     // always true
-        secure: isProd,                     // only true in production
-        sameSite: isProd ? "none" : "lax",  // "none" for prod cross-domain, "lax" for localhost
+        const isProd = process.env.NODE_ENV === "production";
+        const cookieOptions = {
+            httpOnly: true,
+            secure: isProd,
+            sameSite: isProd ? "none" : "lax",
+        };
+
+        res.clearCookie("refreshToken", cookieOptions);
+        res.clearCookie("accessToken", cookieOptions);
+
+        return res.status(200).json({ message: "User Logged Out Successfully" });
     });
 
-    return res
-        .status(200)
-        .clearCookie("accessToken", options)
-        .clearCookie("refreshToken", options)
-        .json(200, {}, "User Logged Out Succesfully")
 })
 const refreshAccessToken = asyncHandler(async (req, res) => {
     console.log("refresh route hit");
