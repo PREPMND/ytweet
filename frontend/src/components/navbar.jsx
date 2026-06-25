@@ -6,6 +6,7 @@ import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle
 import { useState, useEffect, useEffectEvent } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import api from "../api/api.jsx";
 
 const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode, isLoggedIn, setisLoggedIn }) => {
     const [navigate, setNavigate] = useState(false);
@@ -51,12 +52,12 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
 
     }, [data]);
     const HandleLogout = async () => {
-        const confirmLogout = await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/users/logout`, {}, { withCredentials: true });
+        const confirmLogout = await api.post(`${import.meta.env.VITE_BACKEND}/api/v1/users/logout`, {}, { withCredentials: true });
         if (confirmLogout.status === 200) {
             queryClient.removeQueries(["currentUser"]);
             setisLoggedIn(false);
             setNavigate(true);
-            
+            window.location.reload();
         }
     }
     return (
