@@ -14,7 +14,6 @@ export const any = asyncHandler(async (req, res) => {
             },
         },
     ]);
-    console.log("Pipelines result in /any route:", pipelines);
     return res.status(200).json({ success: true, data: pipelines });
 });
 export const createVideo = async (req, res) => {
@@ -82,7 +81,6 @@ export const getVideos = async (req, res) => {
                 },
             },
         ]);
-        console.log("AGGREGATE:", aggregate);
 
         // Use aggregatePaginate for proper pagination
         const options = {
