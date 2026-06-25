@@ -161,7 +161,6 @@ const logOutUser = asyncHandler(async (req, res, next) => {
 });
 
 const refreshAccessToken = asyncHandler(async (req, res) => {
-    console.log("refresh route hit");
 
     const incomingRefreshToken =
         req.cookies?.refreshToken || req.body?.refreshToken;
