@@ -46,7 +46,7 @@ const App = () => {
       socket.on("connect", () => {
         console.log(socket.id);
       });
-    }, []);
+    }, [])
   <div>
     <AppRoutes isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav}
       videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected} />
