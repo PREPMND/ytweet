@@ -82,9 +82,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     <div className="w-fit sm:flex absolute hidden left-1/2 top-3">
                         <img className="w-12 h-12 object-cover" src={darkMode ? logodark : logolight} />
                     </div>
-                    <div className="h-full flex items-center">
-                        <SquareDashedText/>
-                    </div>
+                    
                     <div className="flex items-center mt-4 gap-11 z-20 pr-4 sm:pr-9">
 
                         <div
@@ -123,6 +121,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                 </div>
 
                 <div className={`w-full border-t ${darkMode ? "border-gray-800" : ""}`}></div>
+                <div className="h-[10%] absolute bottom-0 w-full flex items-center">
+                        <SquareDashedText/>
+                </div>
             </div>
 
             {navigate && (
