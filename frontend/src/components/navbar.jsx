@@ -239,7 +239,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     </div>
                 </div>
             )}
-            <div className={{darkMode ? "bg-black  text-white" : ""}}>
+            <div className={` hidden md:static  ${darkMode ? "bg-black  text-white" : ""}`}>
                 <form>
                     <input className="w-[70%]" type="text"/>
                 </form>
