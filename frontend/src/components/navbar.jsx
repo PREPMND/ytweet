@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
-import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown, MessageCircleCode, SquareDashedText } from "lucide-react"
+import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown, MessageCircleCode, SquareDashedText, ScanSearch } from "lucide-react"
 import { useState, useEffect, useEffectEvent } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
@@ -123,10 +123,21 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                 <div className={`w-full border-t ${darkMode ? "border-gray-800" : ""}`}></div>
                 
             </div>
-            <div className="md:hidden h-[7%] z-50 bg-neutral-900 fixed bottom-0 w-full flex items-center">
-                    <SquareDashedText className={`text-yellow-50 `}/>
-                    
+
+
+
+            <div className="md:hidden h-[7%] z-50 bg-neutral-900 fixed bottom-0 w-full flex items-center justify-evenly">
+
+                    <SquareDashedText className={ `hover:scale-[1.02] transition-transform duration-300 ease-in-out text-yellow-50 `}/>
+
+
+                    <ScanSearch className={`text-white `}/>
             </div>
+
+
+
+
+
             {navigate && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center">
                     <div className="absolute inset-0 bg-black opacity-60"></div>
