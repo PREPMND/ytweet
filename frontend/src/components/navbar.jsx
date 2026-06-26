@@ -239,9 +239,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     </div>
                 </div>
             )}
-            <div >
+            <div className={{darkMode ? "bg-black  text-white" : ""}}>
                 <form>
-                    <input className="w-[50%]" type="text"/>
+                    <input className="w-[70%]" type="text"/>
                 </form>
             </div>
         </>
