@@ -131,7 +131,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     <SquareDashedText className={ `hover:scale-[1.05] transition-transform duration-300 ease-in-out text-yellow-50 `}/>
 
 
-                    <ScanSearch className={`text-white `}/>
+                    <ScanSearch className={`hover:scale-[1.05] transition-transform duration-300 ease-in-out text-white `}/>
             </div>
 
 
