@@ -239,13 +239,13 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     </div>
                 </div>
             )}
-            <div className={`hidden md:flex items-center w-full pb-1  px-10 ${darkMode ? "bg-black  text-white" : ""}`}>
+            <div className={`hidden md:flex items-center w-full pt-1 pb-1  px-10 ${darkMode ? "bg-black  text-white" : ""}`}>
                 <form className="w-full flex items-center">
                     <input className={`w-[70%] pl-8 h-9 ${darkMode?"bg-neutral-800 text-white":"text-black bg-slate-300"}`} type="text"/>
-                    <ScanSearch className="" size={28}/>
+                    <ScanSearch className="ml-3" size={28}/>
                 </form>
                 <div className="text-[18px] font-[Saira]">Messages</div>
-                <MessageCircleDashedIcon className="hover:scale-110 hover:text-amber-200 mr-1 ml-4"/>
+                <MessageCircleDashedIcon className={`hover:scale-115 hover:text-amber-200 mr-1 ml-4`}/>
             </div>
         </>
     )
