@@ -244,7 +244,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     <input className={`w-[70%] pl-8 h-9 ${darkMode?"bg-neutral-800 text-white":"text-black bg-slate-300"}`} type="text"/>
                     <ScanSearch className="" size={28}/>
                 </form>
-                <div>Messages</div>
+                <div className="text-[18px] font-[Saira]">Messages</div>
                 <MessageCircleDashedIcon className="hover:scale-105 hover:text-amber-200 mr-1 ml-4"/>
             </div>
         </>
