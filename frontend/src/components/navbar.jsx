@@ -123,7 +123,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                 <div className={`w-full border-t ${darkMode ? "border-gray-800" : ""}`}></div>
                 
             </div>
-            <div className="h-[10%] z-50 bg-neutral-800 fixed bottom-0 w-full flex items-center">
+            <div className="md:h-[%] h-[7%] z-50 bg-neutral-800 fixed bottom-0 w-full flex items-center">
                         <SquareDashedText/>
             </div>
             {navigate && (
