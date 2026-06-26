@@ -5,11 +5,30 @@ const socketSchema=new Schema(
         sender:{
             type:Schema.Types.ObjectId,
             ref:"User",
+            required:true
         },
         receiver:{
             type:Schema.Types.ObjectId,
             ref:"User",
+            required:true
         },
-        conver
+        conversationId:{
+            type:String,
+            required:true,
+            index:true,
+        },
+        text:{
+            type:String,
+            trim:true,
+        },
+        messageType:{
+            type:String,
+            enum:["text","image","video","file"],
+            default:"text"
+        },
+        seen:{
+            type:Boolean,
+            default:false,
+        }
     },{timestamps:"true"}
 )
