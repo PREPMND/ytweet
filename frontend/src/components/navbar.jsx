@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
-import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown } from "lucide-react"
+import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown, MessageCircleCode } from "lucide-react"
 import { useState, useEffect, useEffectEvent } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
@@ -82,7 +82,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     <div className="w-fit sm:flex absolute hidden left-1/2 top-3">
                         <img className="w-12 h-12 object-cover" src={darkMode ? logodark : logolight} />
                     </div>
-
+                    <div className="h-full flex items-center">
+                        <MessageCircleCode/>
+                    </div>
                     <div className="flex items-center mt-4 gap-11 z-20 pr-4 sm:pr-9">
 
                         <div
