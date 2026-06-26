@@ -124,7 +124,8 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                 
             </div>
             <div className="md:hidden h-[7%] z-50 bg-neutral-900 fixed bottom-0 w-full flex items-center">
-                    <SquareDashedText className={`text-yellow-50`}/>
+                    <SquareDashedText className={`text-yellow-50 `}/>
+                    
             </div>
             {navigate && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center">
