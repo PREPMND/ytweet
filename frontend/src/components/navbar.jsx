@@ -241,7 +241,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
             )}
             <div className={` hidden md:flex w-full  px-10 ${darkMode ? "bg-black  text-white" : ""}`}>
                 <form className="w-full">
-                    <input className="w-full" type="text"/>
+                    <input className={`w-full h-9 ${darkMode?"bg-neutral-900 text-white":"text-black bg-slate-300"}`} type="text"/>
                 </form>
             </div>
         </>
