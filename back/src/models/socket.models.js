@@ -1,2 +1,2 @@
-import {Schema,model} from "mongoose";
-const s
+import {Mongoose, Schema,model} from "mongoose";
+const socketSchema=new Schema
