@@ -75,13 +75,13 @@ const ChangeAvatar = ({ darkMode }) => {
             />
           )}
 
-          <div className="flex gap-3 mt-6">
+          <div className="flex gap-7 mt-6">
             <button
               type="submit"
               disabled={loading}
               className="px-5 py-3  hover:bg-blue-700 hover:scale-[1.02] transition-colors duration-300 ease-in-out bg-blue-600 text-white rounded-lg"
             >
-              {loading ? "Uploading..." : "Update Avatar"}
+              {loading ? "Uploading..." : "Update"}
             </button>
 
             <button
