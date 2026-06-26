@@ -240,9 +240,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                 </div>
             )}
             <div>
-                <div className={`border-1 text-left pl-9 rounded-lg w-[80%]`}>
-                    Search.....
-                </div>
+                <form>
+                    <input className="w-[50%]" type="text"/>
+                </form>
             </div>
         </>
     )
