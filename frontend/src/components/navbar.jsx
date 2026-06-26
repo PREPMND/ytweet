@@ -239,7 +239,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     </div>
                 </div>
             )}
-            <div>
+            <div >
                 <form>
                     <input className="w-[50%]" type="text"/>
                 </form>
