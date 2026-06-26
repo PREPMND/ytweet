@@ -1,4 +1,4 @@
-import {Mongoose, Schema,model} from "mongoose";
+import mongoose, {Mongoose, Schema,model} from "mongoose";
 import { User } from "./user.models";
 const socketSchema=new Schema(
     {
@@ -31,4 +31,5 @@ const socketSchema=new Schema(
             default:false,
         }
     },{timestamps:"true"}
-)
+);
+export const Message=model("Message",socketSchema);
