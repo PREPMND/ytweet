@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
-import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown, MessageCircleCode, SquareDashedText, ScanSearch } from "lucide-react"
+import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown, MessageCircleCode, SquareDashedText, ScanSearch, MessageCircleDashedIcon } from "lucide-react"
 import { useState, useEffect, useEffectEvent } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
@@ -239,10 +239,12 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     </div>
                 </div>
             )}
-            <div className={`hidden md:flex w-full pb-1  px-10 ${darkMode ? "bg-black  text-white" : ""}`}>
+            <div className={`hidden md:flex items-center w-full pb-1  px-10 ${darkMode ? "bg-black  text-white" : ""}`}>
                 <form className="w-full">
                     <input className={`w-[60%] pl-8 h-9 ${darkMode?"bg-neutral-800 text-white":"text-black bg-slate-300"}`} type="text"/>
                 </form>
+                <ScanSearch/>
+                <MessageCircleDashedIcon/>
             </div>
         </>
     )
