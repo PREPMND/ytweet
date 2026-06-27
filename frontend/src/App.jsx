@@ -42,11 +42,6 @@ const App = () => {
   const [profileSelected, setProfileSelected] = useState(null);
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [videoIdSelected, setvideoIdSelected] = useState({});
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log(socket.id);
-    });
-  }, []);
   return (
 
     <div>

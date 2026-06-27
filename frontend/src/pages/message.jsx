@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { socket } from "../socket";
 export default function Messages(){
     useEffect(() => {
+        socket.connect();
         socket.on("connect", () => {
           console.log(socket.id);
         });
