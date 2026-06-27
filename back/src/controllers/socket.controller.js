@@ -6,8 +6,6 @@ export const getConversationId = (user1, user2) => {
     return [user1.toString(), user2.toString()].sort().join("_");
 };
 export const sendMessage = asyncHandler(async (req, res) => {
-    console.log(req.body)
-    console.log(req.user)
     const sender = req.user?._id;
     const { receiver, text, messageType = "text" } = req.body;
 
@@ -15,12 +13,10 @@ export const sendMessage = asyncHandler(async (req, res) => {
     if (!receiver || !conversationId) {
         throw new apiError(400, "Receiver and conversationId are required");
     }
-    console.log("test")
 
     if (!text?.trim() && messageType === "text") {
         throw new apiError(400, "Message cannot be empty");
     }
-    console.log("test")
     const message = await Message.create({
         sender,
         receiver,
