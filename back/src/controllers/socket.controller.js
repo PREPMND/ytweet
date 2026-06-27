@@ -31,7 +31,10 @@ export const sendMessage = asyncHandler(async (req, res) => {
 });
 
 export const getMessages = asyncHandler(async (req, res) => {
-    const { conversationId } = req.params;
+    const sender = req.user._id;
+    const { receiver, text, messageType = "text" } = req.body;
+
+    const conversationId = getConversationId(sender, receiver);
 
     const messages = await Message.find({
         conversationId,
