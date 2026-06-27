@@ -26,7 +26,7 @@ export const sendMessage = asyncHandler(async (req, res) => {
     });
 
     return res.status(201).json(
-        new piResponse(201, message, "Message sent successfully")
+        new apiResponse(201, message, "Message sent successfully")
     );
 });
 
@@ -55,6 +55,6 @@ export const getConversations = asyncHandler(async (req, res) => {
     }).sort({ createdAt: -1 });
 
     return res.status(200).json(
-        new piResponse(200, conversations)
+        new apiResponse(200, conversations)
     );
 });
