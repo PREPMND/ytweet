@@ -5,7 +5,7 @@ import {
   getMessages,
   getConversations,
   getConversationId
-} from "../controllers/message.controller.js";
+} from "../controllers/socket.controller.js";
 
 const routerSocket = Router();
 
