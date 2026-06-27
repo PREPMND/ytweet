@@ -27,3 +27,29 @@ export const sendMessage = asyncHandler(async (req, res) => {
         new ApiResponse(201, message, "Message sent successfully")
     );
 });
+
+export const getMessages = asyncHandler(async (req, res) => {
+    const { conversationId } = req.params;
+
+    const messages = await Message.find({
+        conversationId,
+    }).sort({ createdAt: 1 });
+
+    return res.status(200).json(
+        new ApiResponse(200, messages)
+    );
+});
+export const getConversations = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+
+    const conversations = await Message.find({
+        $or: [
+            { sender: userId },
+            { receiver: userId }
+        ]
+    }).sort({ createdAt: -1 });
+
+    return res.status(200).json(
+        new ApiResponse(200, conversations)
+    );
+});
