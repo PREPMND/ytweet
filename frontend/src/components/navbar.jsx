@@ -25,8 +25,8 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
     
     });
     useEffect(()=>{
-        setcurrentId(data)
-    })
+        setcurrentId(data?.user._id);
+    },[data])
     useEffect(() => {
         // Whenever the route changes to "/", reset menu state
         if (location.pathname === "/") {
