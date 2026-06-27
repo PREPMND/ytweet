@@ -30,6 +30,6 @@ const socketSchema=new Schema(
             type:Boolean,
             default:false,
         }
-    },{timestamps:"true"}
+    },{timestamps:true}
 );
 export const Message=model("Message",socketSchema);
