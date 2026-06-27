@@ -42,10 +42,11 @@ const App = () => {
   const [profileSelected, setProfileSelected] = useState(null);
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [videoIdSelected, setvideoIdSelected] = useState({});
+  const [currentId,setcurrentId]=useState(null);
   return (
 
     <div>
-      <AppRoutes isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav}
+      <AppRoutes isLoggedIn={isLoggedIn} currentId={currentId} setcurrentId={setcurrentId} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav}
         videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected} />
     </div>
   )
