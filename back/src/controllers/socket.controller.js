@@ -13,6 +13,7 @@ export const sendMessage = asyncHandler(async (req, res) => {
     if (!receiver || !conversationId) {
         throw new apiError(400, "Receiver and conversationId are required");
     }
+    console.log("test")
 
     if (!text?.trim() && messageType === "text") {
         throw new apiError(400, "Message cannot be empty");
