@@ -88,7 +88,7 @@ const ChannelIndv = (props) => {
 
         <div className={`relative min-h-screen ${darkMode ? "bg-black text-white" : "bg-white text-black"
             }`}>
-            {(!imageLoaded && loadingVideos  ) && (
+            {(!imageLoaded && loadingVideos) && (
                 <div className="px-3 pt-9 space-y-5">
                     {/* Mobile layout */}
                     <div className="md:hidden space-y-5">
@@ -134,20 +134,20 @@ const ChannelIndv = (props) => {
                         <div className={`${darkMode ? "text-white" : "text-black"}`}>
                             {profileSelected.owner.username}
                         </div>
-                        
+
                     </div>
                 </div>)}
-                {(imageLoaded && !loadingVideos) && (
-                    <div className="flex mt-4 justify-evenly">
-                        <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
-                            {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
-                        </button>
-                        <button className={` text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px]`}>
-                            Follow
-                        </button>
-                    </div>    
-                )}
-            {( imageLoaded && !loadingVideos ) && (
+            {(imageLoaded && !loadingVideos) && (
+                <div className="flex mt-4 justify-evenly">
+                    <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
+                        {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
+                    </button>
+                    <button className={` text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px]`}>
+                        Follow
+                    </button>
+                </div>
+            )}
+            {(imageLoaded && !loadingVideos) && (
                 <div className={`flex gap-2 mb-9 mt-9 ${darkMode ? "text-white" : "text-black"
                     }`}>
                     {/* some other thing */}
@@ -181,7 +181,7 @@ ${yangSelected
                             }`}></div>
 
                 </div>)}
-                
+
             {(imageLoaded && !loadingVideos) && (<div className="">
                 {videos.map((video, index) => (
 
@@ -208,7 +208,7 @@ ${yangSelected
                                     toggleMenu(video._id);
                                 }}
                                 className={` cursor-pointer hidden md:flex absolute right-1 mt-3 ${darkMode ? "text-white" : "text-black"
-                                    }`} size={18}/>
+                                    }`} size={18} />
                             <MenuDropdown
                                 className="bottom-[-10px] md:bottom-[40px] lg:right-5"
                                 isOpen={menuOpenId === video._id}
@@ -257,7 +257,9 @@ ${darkMode ? "text-white" : "text-black"}`}
                 ))}
 
             </div>
+            )}
         </div>
+
     )
 
 };
