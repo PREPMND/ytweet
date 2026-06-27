@@ -6,6 +6,7 @@ export const getConversationId = (user1, user2) => {
     return [user1.toString(), user2.toString()].sort().join("_");
 };
 export const sendMessage = asyncHandler(async (req, res) => {
+    console.log(req.user)
     const sender = req.user?._id;
     const { receiver, conversationId, text, messageType = "text" } = req.body;
 
