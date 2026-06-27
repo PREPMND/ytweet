@@ -1,26 +1,40 @@
 import { useEffect } from "react";
 import { socket } from "../socket";
+
+const roomId = "fwrge";
+
 export default function Messages() {
-    const roomId = "fwrge"
+
     useEffect(() => {
         socket.connect();
-        socket.on("connect", () => {
 
+        socket.on("connect", () => {
+            console.log(socket.id);
+
+            socket.emit("join-room", roomId);
         });
-        socket.emit("join-room", roomId);
-        socket.emit("send-message", roomId, "hey hello")
+
         socket.on("receive-message", (message) => {
-            console.log(message);
+            console.log("Received:", message);
         });
+
+        return () => {
+            socket.off("receive-message");
+            socket.off("connect");
+            socket.disconnect();
+        };
     }, []);
+
+    const sendMessage = () => {
+        socket.emit("send-message", {
+            roomId,
+            message: "Hello from React",
+        });
+    };
+
     return (
-        <>
-            <div className=" flex justify center mt-10 mb-10">
-                <input type="text" className="m-auto bg-black text-white h-11 " />
-            </div>
-            <div className="text-center">
-                IHWGEUH
-            </div>
-        </>
-    )
+        <button onClick={sendMessage}>
+            Send
+        </button>
+    );
 }
