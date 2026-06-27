@@ -18,5 +18,5 @@ routerSocket.get("/:conversationId", getMessages);
 
 // Get all conversations of current user
 routerSocket.get("/", getConversations);
-
+routerSocket.get("/generateConvoId",generate)
 export default routerSocket;
