@@ -246,7 +246,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                 </form>
                 <div className="text-[18px] font-[Saira]">Messages</div>
                 <MessageCircleDashedIcon 
-                onClick={()=>navigating(/)}
+                onClick={()=>navigating("/message")}
                 className={`hover:scale-110 transition-transform duration-200 ease-in hover:shadow-lg hover:shadow-amber-200 hover:text-blue-400 mr-1 ml-4`}/>
             </div>
         </>
