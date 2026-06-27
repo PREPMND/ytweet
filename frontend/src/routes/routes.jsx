@@ -16,7 +16,7 @@ import ChangeAvatar from "../pages/updateavatar.jsx"
 import ChangePassword from "../pages/changepassword.jsx"
 import Messages from "../pages/message.jsx"
 export default function AppRoutes(props){
-    const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode,profileSelected, setProfileSelected, setisLoggedIn,isLoggedIn,videoIdSelected,setvideoIdSelected } = props;
+    const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode,profileSelected,currentId,setcurrentId, setProfileSelected, setisLoggedIn,isLoggedIn,videoIdSelected,setvideoIdSelected } = props;
     return(
         <Routes>
             <Route element={<MainLayout  menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setMenubar={setMenubar} darkModenav={darkModenav} setDarkModenav={setDarkModenav} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />}>
