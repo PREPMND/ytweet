@@ -21,6 +21,8 @@ application.get("/debug", (req, res) => res.send("debug works"));
 application.use("/api/v1/users", router)
 import routerVideo from './routes/video.routes.js'
 application.use("/api/v1/videos", routerVideo)
+import routerSocket from "./routes/socket.route.js"
+application.use("/api/v1/socket",routerSocket)
 // Global error handler
 application.use((err, req, res, next) => {
     const status = err.statusCode || 500;
