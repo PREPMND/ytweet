@@ -5,6 +5,7 @@ import {
   getMessages,
   getConversations,
 } from "../controllers/message.controller.js";
+import { getConversationId } from "../controllers/socket.controller.js";
 
 const routerSocket = Router();
 
@@ -18,5 +19,5 @@ routerSocket.get("/:conversationId", getMessages);
 
 // Get all conversations of current user
 routerSocket.get("/", getConversations);
-routerSocket.get("/generateConvoId",generate)
+routerSocket.get("/generateConvoId",getConversationId);
 export default routerSocket;
