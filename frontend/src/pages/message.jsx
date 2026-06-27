@@ -5,6 +5,9 @@ export default function Messages(){
         socket.on("connect", () => {
           console.log(socket.id);
         });
+        return()=>{
+            socket.disconnect();
+        }
       }, []);
     return(
         <>
