@@ -182,7 +182,7 @@ ${yangSelected
 
                 </div>)}
                 
-            <div className="">
+            {(imageLoaded && !loadingVideos) && (<div className="">
                 {videos.map((video, index) => (
 
                     <div
