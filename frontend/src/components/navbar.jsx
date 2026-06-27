@@ -8,7 +8,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import api from "../api/api.jsx";
 
-const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, setDarkMode, isLoggedIn, setisLoggedIn }) => {
+const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav, darkMode, setDarkMode, isLoggedIn, setisLoggedIn }) => {
     const [navigate, setNavigate] = useState(false);
     const [hoverBolt, setHoverBolt] = useState(false)
     const [hoverAlbum, setHoverAlbum] = useState(false);
@@ -24,6 +24,9 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
         refetchOnWindowFocus: true,
     
     });
+    useEffect(()=>{
+        setcurrentId(data)
+    })
     useEffect(() => {
         // Whenever the route changes to "/", reset menu state
         if (location.pathname === "/") {
