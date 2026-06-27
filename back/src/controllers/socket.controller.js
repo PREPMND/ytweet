@@ -10,7 +10,6 @@ export const sendMessage = asyncHandler(async (req, res) => {
     console.log(req.user)
     const sender = req.user?._id;
     const { receiver, conversationId, text, messageType = "text" } = req.body;
-    console.log("test")
     if (!receiver || !conversationId) {
         throw new apiError(400, "Receiver and conversationId are required");
     }
