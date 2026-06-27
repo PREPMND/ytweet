@@ -1,5 +1,11 @@
-
+import { useEffect } from "react";
+import { socket } from "../socket";
 export default function Messages(){
+    useEffect(() => {
+        socket.on("connect", () => {
+          console.log(socket.id);
+        });
+      }, []);
     return(
         <>
         <div className=" flex justify center mt-10 mb-10">
