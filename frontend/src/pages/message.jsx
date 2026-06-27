@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../api/api";
 import { socket } from "../socket";
 
-export default function Messages({currentId}) {
+export default function Messages({ currentId }) {
 
     // TODO: Replace with actual logged-in user
     const receiver = "6a2f87bc7070714778cb14eb";
@@ -11,10 +11,23 @@ export default function Messages({currentId}) {
     const [message, setMessage] = useState("");
 
     // Backend generates the same conversationId
-    const conversationId = [currentId , receiver]
+    const conversationId = [currentId, receiver]
         .sort()
         .join("_");
+    async function loadMessages() {
 
+        try {
+
+            const res = await api.get(`/socket/${receiver}`);
+
+            setMessages(res.data.data);
+
+        }
+        catch (err) {
+            console.log(err);
+        }
+
+    }
     useEffect(() => {
 
         socket.connect();
@@ -38,20 +51,7 @@ export default function Messages({currentId}) {
 
     }, []);
 
-    async function loadMessages() {
 
-        try {
-
-            const res = await api.get(`/socket/${receiver}`);
-
-            setMessages(res.data.data);
-
-        }
-        catch (err) {
-            console.log(err);
-        }
-
-    }
 
     async function sendMessage() {
 
