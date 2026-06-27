@@ -5,10 +5,10 @@ export default function Messages(){
     useEffect(() => {
         socket.connect();
         socket.on("connect", () => {
-          console.log(socket.id);
+          
         });
         socket.emit("join-room", roomId);
-        socket.emit("send-message","hey hello")
+        socket.emit("send-message",roomId,"hey hello")
         
       }, []);
     return(
