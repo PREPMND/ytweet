@@ -2,7 +2,9 @@ import { Message } from "../models/message.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-
+export const getConversationId = (user1, user2) => {
+    return [user1.toString(), user2.toString()].sort().join("_");
+};
 export const sendMessage = asyncHandler(async (req, res) => {
     const sender = req.user?._id;
     const { receiver, conversationId, text, messageType = "text" } = req.body;
