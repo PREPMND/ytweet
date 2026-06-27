@@ -1,4 +1,5 @@
 import {express} from "express";
 const routerSocket=express.Router();
 
-export routerSocket;
+routerSocket.post()
+export default routerSocket;
