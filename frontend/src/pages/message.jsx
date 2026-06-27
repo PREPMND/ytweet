@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import api from "../api/api";
 import { socket } from "../socket";
 
-export default function Messages() {
+export default function Messages({currentId}) {
 
     // TODO: Replace with actual logged-in user
-    const receiver = "RECEIVER_USER_ID";
+    const receiver = currentId;
 
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
