@@ -1,2 +1,3 @@
-const routerSocket=express.
+import {express} from "express";
+const routerSocket=express.Router();
 
