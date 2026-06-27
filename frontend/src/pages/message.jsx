@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { socket } from "../socket";
 export default function Messages(){
+    const roomId="fwrge"
     useEffect(() => {
         socket.connect();
         socket.on("connect", () => {
