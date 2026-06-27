@@ -8,7 +8,7 @@ export default function Messages(){
           console.log(socket.id);
         });
         socket.emit("join-room", roomId);
-        socket.emit("send-message")
+        socket.emit("send-message","hey hello")
         
       }, []);
     return(
