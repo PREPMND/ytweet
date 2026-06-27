@@ -245,7 +245,7 @@ const Navbar = ({ menubar, setMenubar, darkModenav, setDarkModenav, darkMode, se
                     <ScanSearch className="ml-3" size={28}/>
                 </form>
                 <div className="text-[18px] font-[Saira]">Messages</div>
-                <MessageCircleDashedIcon className={`hover:scale-110 transition-transform duration-300 ease-in hover:text-amber-200 mr-1 ml-4`}/>
+                <MessageCircleDashedIcon className={`hover:scale-110 transition-transform duration-200 ease-in hover:text-amber-200 mr-1 ml-4`}/>
             </div>
         </>
     )
