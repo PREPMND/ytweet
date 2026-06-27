@@ -26,7 +26,8 @@ export const sendMessage = asyncHandler(async (req, res) => {
         text,
         messageType,
     });
-
+    console.log("fwg");
+    console.log(message)
     return res.status(201).json(
         new apiResponse(201, message, "Message sent successfully")
     );
