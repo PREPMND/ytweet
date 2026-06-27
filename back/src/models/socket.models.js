@@ -1,5 +1,4 @@
 import mongoose, {Mongoose, Schema,model} from "mongoose";
-import { User } from "./user.models";
 const socketSchema=new Schema(
     {
         sender:{
