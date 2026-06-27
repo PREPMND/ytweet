@@ -18,7 +18,7 @@ export const sendMessage = asyncHandler(async (req, res) => {
     if (!text?.trim() && messageType === "text") {
         throw new apiError(400, "Message cannot be empty");
     }
-
+    console.log("test")
     const message = await Message.create({
         sender,
         receiver,
