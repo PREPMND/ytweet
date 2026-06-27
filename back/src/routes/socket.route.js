@@ -4,8 +4,8 @@ import {
   sendMessage,
   getMessages,
   getConversations,
+  getConversationId
 } from "../controllers/message.controller.js";
-import { getConversationId } from "../controllers/socket.controller.js";
 
 const routerSocket = Router();
 
