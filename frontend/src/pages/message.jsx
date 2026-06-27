@@ -6,6 +6,7 @@ export default function Messages(){
         socket.on("connect", () => {
           console.log(socket.id);
         });
+        socket.emit("join-room", roomId);
         
       }, []);
     return(
