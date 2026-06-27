@@ -11,7 +11,7 @@ export default function Messages({currentId}) {
     const [message, setMessage] = useState("");
 
     // Backend generates the same conversationId
-    const conversationId = ["CURRENT_USER_ID", receiver]
+    const conversationId = [currentId , receiver]
         .sort()
         .join("_");
 
@@ -65,7 +65,7 @@ export default function Messages({currentId}) {
             });
 
             const newMessage = {
-                sender: "CURRENT_USER_ID",
+                sender: currentId,
                 receiver,
                 conversationId,
                 text: message,
