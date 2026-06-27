@@ -3,9 +3,13 @@ SocialSphere - Full Stack Social Media Platform
 A modern full-stack social media platform built with the MERN stack, designed to provide a seamless content-sharing experience with secure authentication, video management, subscriptions, and real-time user interactions.
 ## Live Demo
 
-🔗 Frontend: https://preytweet.netlify.app
+🔗 Frontend: 
 
-🔗 Backend API: https://render-jr65.onrender.com
+https://preytweet.netlify.app
+
+🔗 Backend API: 
+
+https://render-jr65.onrender.com
 
 ---
 Overview
