@@ -59,7 +59,7 @@ export default function Messages() {
 
         try {
 
-            await api.post("/messages/send", {
+            await api.post("/socket/send", {
                 receiver,
                 text: message,
             });
