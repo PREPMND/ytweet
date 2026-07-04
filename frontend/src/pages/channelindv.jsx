@@ -136,7 +136,7 @@ const ChannelIndv = (props) => {
                         </div>
 
                     </div>
-                    <Mails className={`mr-4`}/>
+                    <Mails className={`mr-4 `} size={28} />
                 </div>)}
             {(imageLoaded && !loadingVideos) && (
                 <div className="flex mt-4 justify-evenly">
