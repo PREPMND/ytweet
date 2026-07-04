@@ -43,9 +43,9 @@ export default function Messages({ currentId }) {
         socket.on("receive-message", (msg) => {
             setMessages(prev => [...prev, msg]);
         });
-        console.log(messages);
+    
         loadMessages();
-
+        
         return () => {
             socket.off("receive-message");
             socket.disconnect();
