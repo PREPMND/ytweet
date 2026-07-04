@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 export default function Messages({ currentId }) {
     const { receiverId } = useParams();
 
-    const receiver = receiverId;
+    const receiver = receiverId? receiverId : null;
     console.log("receiverId:", receiver);
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
