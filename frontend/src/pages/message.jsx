@@ -102,12 +102,12 @@ export default function Messages({ currentId }) {
 
             </div>
 
-            <div className={`flex w-full justify-items-start sm:min-h-[25px] md:min-h-[39px]  md:bottom-4 absolute bottom-2`}>
+            <div className={`flex w-full justify-items-start sm:min-h-[25px] md:min-h-[39px]  md:bottom-5 absolute bottom-2`}>
                 <input
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type..."
-                    className={`mx-5 border md:w-[60%] w-[70%] border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+                    className={`mx-7 border md:w-[60%] w-[70%] border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                 />
 
                 <button onClick={sendMessage}>
