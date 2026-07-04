@@ -62,22 +62,16 @@ export default function Messages({ currentId }) {
 
         try {
 
-            await api.post("/socket/send", {
+            const res = await api.post("/socket/send", {
                 receiver,
                 text: message,
             });
 
-            const newMessage = {
-                sender: currentId,
-                receiver,
-                conversationId,
-                text: message,
-                createdAt: new Date(),
-            };
+            const savedMessage = res.data.data;
 
-            setMessages(prev => [...prev, newMessage]);
+            setMessages(prev => [...prev, savedMessage]);
 
-            socket.emit("send-message", newMessage);
+            socket.emit("send-message", savedMessage);
 
             setMessage("");
 
