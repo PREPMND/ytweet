@@ -102,11 +102,12 @@ export default function Messages({ currentId }) {
 
             </div>
 
-            <div classname={`flex md:bottom-4 absolute bottom-2`}>
+            <div className={`flex sm:min-h-[25px] md:min-h-[39px]  md:bottom-4 absolute bottom-2`}>
                 <input
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type..."
+                    className={`w-full md:bottom-4 absolute bottom-2 border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                 />
 
                 <button onClick={sendMessage}>
