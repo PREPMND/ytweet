@@ -90,7 +90,7 @@ export default function Messages({ currentId }) {
 
             <h2 className={`mt-2 ml-2`}>Messages</h2>
 
-            <div className={`w-full h-[calc(100%-50px)] overflow-y-auto flex flex-col gap-2 p-2`}>
+            <div className={`w-full h-[calc(100%-50px)] overflow-y-auto flex flex-col gap-2 p-2 pl-3`}>
 
                 {messages.map((msg, i) => (
 
