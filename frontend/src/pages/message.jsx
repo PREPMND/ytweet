@@ -111,7 +111,7 @@ export default function Messages({ currentId }) {
                 />
 
                 <button onClick={sendMessage}>
-                    Send
+                    
                 </button>
             </div>
 
