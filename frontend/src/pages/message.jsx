@@ -86,11 +86,11 @@ export default function Messages({ currentId }) {
 
     return (
 
-        <div className={`w-full h-full`}   >
+        <div className={`w-full  h-full`}   >
 
-            <h2>Messages</h2>
+            <h2 className={`mt-2 ml-2`}>Messages</h2>
 
-            <div>
+            <div className={`w-full h-[calc(100%-50px)] overflow-y-auto flex flex-col gap-2 p-2`}>
 
                 {messages.map((msg, i) => (
 
