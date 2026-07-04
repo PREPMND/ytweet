@@ -1,4 +1,5 @@
-import React, { useEffect, useState,useN } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { EllipsisVertical, Mails } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
@@ -15,6 +16,7 @@ const ChannelIndv = (props) => {
     const [coverImage, setcoverImage] = useState(null);
     const [imageLoaded, setimageLoaded] = useState(false);
     const [videos, setVideos] = useState([]);
+    const navigate = useNavigate();
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
