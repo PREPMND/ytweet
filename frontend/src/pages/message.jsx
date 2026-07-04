@@ -23,7 +23,7 @@ export default function Messages({ currentId }) {
         try {
 
             const res = await api.get(`/socket/${receiver}`);
-
+            console.log("Messages:", res.data.data);
             setMessages(res.data.data);
 
         }
