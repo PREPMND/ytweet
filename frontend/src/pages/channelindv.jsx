@@ -136,6 +136,7 @@ const ChannelIndv = (props) => {
                         </div>
 
                     </div>
+                    <Message/>
                 </div>)}
             {(imageLoaded && !loadingVideos) && (
                 <div className="flex mt-4 justify-evenly">
