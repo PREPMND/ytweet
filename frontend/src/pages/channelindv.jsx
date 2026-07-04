@@ -136,7 +136,9 @@ const ChannelIndv = (props) => {
                         </div>
 
                     </div>
-                    <Mails className={`mr-4 `} size={28} />
+                    <Mails
+                    onClick={() => messageUser(profileSelected.owner._id)}
+                    className={`mr-4 `} size={28} />
                 </div>)}
             {(imageLoaded && !loadingVideos) && (
                 <div className="flex mt-4 justify-evenly">
