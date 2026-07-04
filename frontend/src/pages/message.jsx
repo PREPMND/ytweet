@@ -9,7 +9,7 @@ export default function Messages({ currentId }) {
     const { receiverId } = useParams();
 
     const receiver = receiverId;
-
+    console.log("receiverId:", receiverId);
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
 
