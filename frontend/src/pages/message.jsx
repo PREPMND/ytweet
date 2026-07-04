@@ -86,7 +86,7 @@ export default function Messages({ currentId }) {
 
     return (
 
-        <div>
+        <div className={`w-full h-full`}   >
 
             <h2>Messages</h2>
 
@@ -102,7 +102,7 @@ export default function Messages({ currentId }) {
 
             </div>
 
-            <div classname={`flex md:bottom-4 bottom-2`}>
+            <div classname={`flex md:bottom-4 absolute bottom-2`}>
                 <input
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
