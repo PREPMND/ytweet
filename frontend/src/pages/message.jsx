@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import { socket } from "../socket";
-import { Send} from "lucide-react";
-export default function Messages({ currentId }) {
+import { Send } from "lucide-react";
+import { useParams } from "react-router-dom";
 
-    const receiver = "6a2f87bc7070714778cb14eb";
+
+export default function Messages({ currentId }) {
+    const { receiverId } = useParams();
+
+    const receiver = receiverId;
 
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
