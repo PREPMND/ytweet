@@ -14,9 +14,10 @@ export default function Messages({ currentId }) {
     const [message, setMessage] = useState("");
 
     // Backend generates the same conversationId
-    const conversationId = [currentId, receiver]
-        .sort()
-        .join("_");
+    const conversationId =
+    receiver
+        ? [currentId, receiver].sort().join("_")
+        : "";
     async function loadMessages() {
 
         try {
