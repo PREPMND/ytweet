@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import { socket } from "../socket";
-
+import Send from "lucide-react";
 export default function Messages({ currentId }) {
 
     const receiver = "6a2f87bc7070714778cb14eb";
@@ -111,7 +111,7 @@ export default function Messages({ currentId }) {
                 />
 
                 <button onClick={sendMessage}>
-                    
+                    <Send />
                 </button>
             </div>
 
