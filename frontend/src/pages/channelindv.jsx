@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { EllipsisVertical } from "lucide-react";
+import { EllipsisVertical ,Mails } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
@@ -136,7 +136,7 @@ const ChannelIndv = (props) => {
                         </div>
 
                     </div>
-                    <Message/>
+                    <Mails/>
                 </div>)}
             {(imageLoaded && !loadingVideos) && (
                 <div className="flex mt-4 justify-evenly">
