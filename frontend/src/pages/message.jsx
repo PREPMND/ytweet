@@ -33,26 +33,24 @@ export default function Messages({ currentId }) {
     }
     useEffect(() => {
 
+        if (!receiver) return;
+
         socket.connect();
 
         socket.emit("join-room", conversationId);
 
         socket.on("receive-message", (msg) => {
-
             setMessages(prev => [...prev, msg]);
-
         });
 
         loadMessages();
 
         return () => {
-
             socket.off("receive-message");
             socket.disconnect();
+        };
 
-        }
-
-    }, []);
+    }, [receiver]);
 
 
 
