@@ -87,7 +87,7 @@ const ChannelIndv = (props) => {
         console.log("Report:", video);
     }
     const messageUser = (receiverId) => {
-        navigate(`/messages/${receiverId}`);
+        navigate(`/message/${receiverId}`);
     };
     return (
 
