@@ -107,7 +107,7 @@ export default function Messages({ currentId }) {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type..."
-                    className={`mx-7 border md:w-[60%] w-[70%] border-gray-400 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+                    className={`md:mx-10  border md:w-[60%] w-[70%] border-gray-400 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                 />
 
                 <button onClick={sendMessage}>
