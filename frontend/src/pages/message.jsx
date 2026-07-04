@@ -111,7 +111,7 @@ export default function Messages({ currentId }) {
                 />
 
                 <button onClick={sendMessage}>
-                    <Send />
+                    <Send className="hover:scale-110 transition-transform duration-200 ease-in-out hover:text-" />
                 </button>
             </div>
 
