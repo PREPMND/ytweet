@@ -107,11 +107,11 @@ export default function Messages({ currentId }) {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type..."
-                    className={`mx-7 border md:w-[60%] w-[70%] border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+                    className={`mx-7 border md:w-[60%] w-[70%] border-gray-400 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
                 />
 
                 <button onClick={sendMessage}>
-                    <Send className="hover:scale-110 transition-transform duration-200 ease-in-out hover:text-" />
+                    <Send className="hover:scale-110 transition-all duration-200 ease-in-out hover:text-amber-200" />
                 </button>
             </div>
 
