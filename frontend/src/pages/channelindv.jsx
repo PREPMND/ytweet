@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { EllipsisVertical ,Mails } from "lucide-react";
+import React, { useEffect, useState,useN } from "react";
+import { EllipsisVertical, Mails } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
@@ -84,6 +84,9 @@ const ChannelIndv = (props) => {
     function handleReport(video) {
         console.log("Report:", video);
     }
+    const messageUser = (receiverId) => {
+        navigate(`/messages/${receiverId}`);
+    };
     return (
 
         <div className={`relative min-h-screen ${darkMode ? "bg-black text-white" : "bg-white text-black"
@@ -137,8 +140,8 @@ const ChannelIndv = (props) => {
 
                     </div>
                     <Mails
-                    onClick={() => messageUser(profileSelected.owner._id)}
-                    className={`mr-4 `} size={28} />
+                        onClick={() => messageUser(profileSelected.owner._id)}
+                        className={`mr-4 `} size={28} />
                 </div>)}
             {(imageLoaded && !loadingVideos) && (
                 <div className="flex mt-4 justify-evenly">
