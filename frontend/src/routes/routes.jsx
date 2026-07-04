@@ -26,7 +26,7 @@ export default function AppRoutes(props){
                 </>}/>
             </Route>
             <Route element={<AuthLayout />}>
-            <Route path="/message" element={<Messages currentId={currentId} darkMode={darkMode}/>}/>
+            <Route path="/message/:id" element={<Messages currentId={currentId} darkMode={darkMode}/>}/>
             <Route path="/:username" element={<ChannelIndv profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setvideoIdSelected={setvideoIdSelected} videoIdSelected={videoIdSelected} />}/>
             <Route path="/watchvideo/:id" element={<VideoIndv videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected} darkMode={darkMode} />} />
             <Route path="/currentuserdetails" element={<AccountPage darkMode={darkMode}/>} />
