@@ -4,7 +4,6 @@ import { socket } from "../socket";
 
 export default function Messages({ currentId }) {
 
-    // TODO: Replace with actual logged-in user
     const receiver = "6a2f87bc7070714778cb14eb";
 
     const [messages, setMessages] = useState([]);
