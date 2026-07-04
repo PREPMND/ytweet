@@ -92,6 +92,9 @@ export default function Messages({ currentId }) {
                 {messages.map((msg, i) => (
 
                     <div key={i}>
+                        if (ms) {
+                            
+                        }
                         {msg.text}
                     </div>
 
