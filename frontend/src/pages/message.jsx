@@ -102,15 +102,17 @@ export default function Messages({ currentId }) {
 
             </div>
 
-            <input
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="Type..."
-            />
+            <div classname={`flex md:bottom-4 bottom-2`}>
+                <input
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Type..."
+                />
 
-            <button onClick={sendMessage}>
-                Send
-            </button>
+                <button onClick={sendMessage}>
+                    Send
+                </button>
+            </div>
 
         </div>
 
