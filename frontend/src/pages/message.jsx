@@ -104,7 +104,7 @@ export default function Messages({ currentId }) {
             </div>
 
 
-            <div className="flex items-center sm:w-full pb-24 gap-2 p-3 border-t bg-white sticky bottom-0">
+            <div className="fixed bottom-0 left-0 right-0 bg-white border-t p-3 flex items-center gap-2 z-50">
 
                 <input
                     onKeyDown={(e) => {
