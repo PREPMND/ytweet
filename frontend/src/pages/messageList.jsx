@@ -14,11 +14,7 @@ export default function MessageList() {
 
         try {
 
-            const res = await api.get("/socket/convo", {
-                headers: {
-                    "Cache-Control": "no-cache",
-                },
-            });
+            const res = await api.get("/socket/convo"_;
 
             setConversations(res.data.data);
             console.log(res.data.data)
