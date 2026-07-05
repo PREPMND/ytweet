@@ -30,8 +30,46 @@ export default function MessageList() {
 
     return (
         <div>
+            <div className="flex flex-col gap-2">
 
+                {conversations.map((chat) => (
 
+                    <div
+                        key={chat.conversationId}
+                        onClick={() => navigate(`/message/${chat.otherUser._id}`)}
+                        className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer hover:bg-gray-100 transition"
+                    >
+
+                        <img
+                            src={chat.otherUser.avatar}
+                            alt={chat.otherUser.username}
+                            className="w-12 h-12 rounded-full object-cover"
+                        />
+
+                        <div className="flex flex-col flex-1 overflow-hidden">
+
+                            <h2 className="font-semibold">
+                                {chat.otherUser.username}
+                            </h2>
+
+                            <p className="text-sm text-gray-500 truncate">
+                                {chat.lastMessage}
+                            </p>
+
+                        </div>
+
+                        <p className="text-xs text-gray-400">
+                            {new Date(chat.createdAt).toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            })}
+                        </p>
+
+                    </div>
+
+                ))}
+
+            </div>
         </div>
     );
 }
