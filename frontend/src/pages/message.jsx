@@ -8,16 +8,16 @@ import { useParams } from "react-router-dom";
 export default function Messages({ currentId }) {
     const { receiverId } = useParams();
     console.log(useParams());
-    const receiver = receiverId? receiverId : null;
+    const receiver = receiverId ? receiverId : null;
     console.log("receiverId:", receiver);
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
 
     // Backend generates the same conversationId
     const conversationId =
-    receiver
-        ? [currentId, receiver].sort().join("_")
-        : "";
+        receiver
+            ? [currentId, receiver].sort().join("_")
+            : "";
     async function loadMessages() {
 
         try {
@@ -43,9 +43,9 @@ export default function Messages({ currentId }) {
         socket.on("receive-message", (msg) => {
             setMessages(prev => [...prev, msg]);
         });
-    
+
         loadMessages();
-        
+
         return () => {
             socket.off("receive-message");
             socket.disconnect();
@@ -91,11 +91,11 @@ export default function Messages({ currentId }) {
 
                 {messages.map((msg, i) => (
 
-                    <div 
-                    
-                    className={`w-fit max-w-[70%] break-words px-2 py-1 rounded-md ${msg.sender == currentId ? "bg-blue-500 text-white self-end" : "bg-gray-300 text-black self-start"}`}
-                    key={i}>
-                        
+                    <div
+
+                        className={`w-fit max-w-[70%] break-words px-2 py-1 rounded-md ${msg.sender == currentId ? "bg-blue-500 text-white self-end" : "bg-gray-300 text-black self-start"}`}
+                        key={i}>
+
                         {msg.text}
                     </div>
 
@@ -103,18 +103,20 @@ export default function Messages({ currentId }) {
 
             </div>
 
-            
-            <div className={`flex w-full justify-items-start sm:min-h-[28px] md:min-h-[39px] md:bottom-5 absolute bottom-3`}>
+
+            <div className="flex items-center gap-2 p-3 border-t bg-white sticky bottom-0">
+
                 <input
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type..."
-                    className={`md:mx-10 mx-4   border md:w-[60%] w-[70%] border-gray-400 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`}
+                    className="flex-1 border rounded-md px-3 py-2"
                 />
 
                 <button onClick={sendMessage}>
-                    <Send className="hover:scale-110 transition-all duration-200 ease-in-out hover:text-amber-200" />
+                    <Send />
                 </button>
+
             </div>
 
         </div>
