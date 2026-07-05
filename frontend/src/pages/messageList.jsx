@@ -34,7 +34,7 @@ export default function MessageList() {
             {conversations.map((chat) => (
 
                 <div
-                    onCLick={() => navigate(`/message/${chat.receiverId}`)}
+                    onClick={() => navigate(`/message/${chat.receiverId}`)}
                     key={chat._id}
                     className="border p-3 mb-2 cursor-pointer"
                 >
