@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
-import 
+import { useNavigate } from "react-router-dom";
 export default function MessageList() {
 
     const [conversations, setConversations] = useState([]);
     const [loading, setLoading] = useState(true);
-
+    const navigate = useNavigate();
     useEffect(() => {
         getConversations();
     }, []);
@@ -34,6 +34,7 @@ export default function MessageList() {
             {conversations.map((chat) => (
 
                 <div
+                    onCLick={() => navigate(`/message/${chat.receiverId}`)}
                     key={chat._id}
                     className="border p-3 mb-2 cursor-pointer"
                 >
