@@ -83,7 +83,7 @@ export default function Messages({ currentId }) {
 
     return (
 
-        <div className={`w-full  h-full`}   >
+        <div className={`w-full  h-screen scroll`}   >
 
             <h2 className={`mt-2 ml-2`}>Messages</h2>
 
