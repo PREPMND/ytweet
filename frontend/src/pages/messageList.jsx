@@ -49,7 +49,7 @@ export default function MessageList() {
 
                         <div className="flex flex-col flex-1 overflow-hidden">
 
-                            <h2 className="font-semibold">
+                            <h2 className="font-[500] text-[16px] font-[Saira] truncate">
                                 {chat.otherUser.username}
                             </h2>
 
