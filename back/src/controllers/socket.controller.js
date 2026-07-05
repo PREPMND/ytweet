@@ -56,7 +56,7 @@ export const getMessages = asyncHandler(async (req, res) => {
 });
 
 export const getConversations = asyncHandler(async (req, res) => {
-
+    console.log("NEW getConversations");
     const userId = new mongoose.Types.ObjectId(req.user._id);
 
     const conversations = await Message.aggregate([
