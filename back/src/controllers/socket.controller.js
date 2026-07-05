@@ -32,30 +32,6 @@ export const sendMessage = asyncHandler(async (req, res) => {
     );
 });
 
-export const getMessages = asyncHandler(async (req, res) => {
-
-    console.log(req.params);
-
-    const { receiverId } = req.params;
-
-    const sender = req.user._id;
-
-    const conversationId = getConversationId(sender, receiverId);
-
-    console.log(conversationId);
-
-    const messages = await Message.find({
-        conversationId
-    }).sort({ createdAt: 1 });
-
-    console.log(messages);
-
-    return res.status(200).json(
-        new apiResponse(200, messages, "Messages fetched")
-    );
-
-});
-
 export const getConversations = asyncHandler(async (req, res) => {
     console.log("NEW getConversations");
     const userId = new mongoose.Types.ObjectId(req.user._id);
@@ -136,6 +112,29 @@ export const getConversations = asyncHandler(async (req, res) => {
             conversations,
             "Conversations fetched successfully"
         )
+    );
+
+});
+export const getMessages = asyncHandler(async (req, res) => {
+
+    console.log(req.params);
+
+    const { receiverId } = req.params;
+
+    const sender = req.user._id;
+
+    const conversationId = getConversationId(sender, receiverId);
+
+    console.log(conversationId);
+
+    const messages = await Message.find({
+        conversationId
+    }).sort({ createdAt: 1 });
+
+    console.log(messages);
+
+    return res.status(200).json(
+        new apiResponse(200, messages, "Messages fetched")
     );
 
 });
