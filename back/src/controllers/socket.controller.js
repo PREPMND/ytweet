@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Message } from "../models/socket.models.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { apiError } from "../utils/apiError.js";
