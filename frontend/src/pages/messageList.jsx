@@ -40,9 +40,6 @@ export default function MessageList() {
                 >
 
                     <p>{chat.text}</p>
-
-                    <small>{chat.conversationId}</small>
-
                 </div>
 
             ))}
