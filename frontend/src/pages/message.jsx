@@ -93,7 +93,7 @@ export default function Messages({ currentId }) {
 
                     <div
 
-                        className={`w-fit max-w-[70%]  break-words px-2 py-1 rounded-md ${msg.sender == currentId ? "bg-blue-400 border-[1.5px] border-cyan-400  text-white self-end" : "bg-gray-300 bor text-black self-start"} text-[17px] `}
+                        className={`w-fit max-w-[70%]  break-words px-2 py-1 rounded-md ${msg.sender == currentId ? "bg-blue-400 border-[1.5px] border-cyan-400  text-white self-end" : "bg-gray-300 border- text-black self-start"} text-[17px] border-[1.5px]`}
                         key={i}>
 
                         {msg.text}
