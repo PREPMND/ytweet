@@ -103,7 +103,8 @@ export default function Messages({ currentId }) {
 
             </div>
 
-            <div className={`flex w-full justify-items-start sm:min-h-[28px] md:min-h-[39px]  md:bottom-5 absolute bottom-3`}>
+            
+            <div className={`flex w-full justify-items-start sm:min-h-[28px] md:min-h-[39px] md:bottom-5 absolute bottom-3`}>
                 <input
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
