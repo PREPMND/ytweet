@@ -103,7 +103,6 @@ export const getConversations = asyncHandler(async (req, res) => {
 
         ]);
 
-        console.log(conversations);
 
         return res.status(200).json(
             new apiResponse(200, conversations, "Conversations fetched")
