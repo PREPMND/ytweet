@@ -35,7 +35,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
         }
     }, [location])
     useEffect(() => {
-        if (error?.response?.status === 401 && !navigate) {
+        if (error?.response?.status === 401  !navigate) {
             setNavigate(true);
         }
         if (error) { setisLoggedIn(false) }
