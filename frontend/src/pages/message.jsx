@@ -110,11 +110,16 @@ export default function Messages({ currentId }) {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type..."
-                    className="flex-1 border rounded-md px-3 py-2"
+                    className="flex-1 hover:border-lime-100 border rounded-md px-3 py-2"
                 />
-
-                <button onClick={sendMessage}>
-                    <Send />
+                <button
+                    onClick={sendMessage}
+                    className="p-2 rounded-full transition-all duration-150 "
+                >
+                    <Send
+                        className="transition-all duration-200 hover:scale-110 hover:text-amber-300"
+                        size={22}
+                    />
                 </button>
 
             </div>
