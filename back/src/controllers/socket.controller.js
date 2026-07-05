@@ -36,6 +36,20 @@ export const getConversations = asyncHandler(async (req, res) => {
     const userId = new mongoose.Types.ObjectId(req.user._id);
     console.log(req.user._id);
 
+    try {
+    const conversations = await Message.aggregate([
+        // pipeline
+    ]);
+
+    console.log(conversations);
+
+    return res.status(200).json(
+        new apiResponse(200, conversations, "Conversations fetched")
+    );
+} catch (err) {
+    console.error(err);
+    throw err;
+}
     const conversations = await Message.aggregate([
 
         {
