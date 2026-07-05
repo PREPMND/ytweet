@@ -47,7 +47,7 @@ export default function MessageList() {
                             className="w-12 h-12 rounded-full object-cover"
                         />
 
-                        <div className="flex flex-col flex-1 overflow-hidden">
+                        <div className="flex ml-2 flex-col flex-1 overflow-hidden">
 
                             <h2 className="font-[500] text-[16px] font-[Saira] truncate">
                                 {chat.otherUser.username}
