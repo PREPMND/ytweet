@@ -83,7 +83,7 @@ export default function Messages({ currentId }) {
 
     return (
 
-        <div className={`w-full  h-screen no-scrollbar overflow-y-auto`}   >
+        <div className={`w-full h-[100dvh] flex flex-col no-scrollbar`}   >
 
             <h2 className={`mt-2 ml-4 text-xl font-[Saira]`}>Messages</h2>
 
