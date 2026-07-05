@@ -30,6 +30,7 @@ export default function MessageList() {
 
     return (
         <div>
+            <div className="text-2xl ml-3 mt-3 font-semibold mb-4">Conversations</div>
             <div className="flex flex-col gap-2">
 
                 {conversations.map((chat) => (
