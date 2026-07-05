@@ -13,12 +13,7 @@ routerSocket.use(verifyJWT);
 
 // Send a message
 routerSocket.post("/send", sendMessage);
-routerSocket.get("/convo", (req, res) => {
-    console.log("I AM THE ROUTE");
-    return res.json({
-        working: true
-    });
-});
+routerSocket.get("/convo", getConversations);
 // Get all messages of a conversation
 routerSocket.get("/:receiverId", getMessages);
 // Get all conversations of current user

@@ -14,7 +14,11 @@ export default function MessageList() {
 
         try {
 
-            const res = await api.get("/socket/convo");
+            const res = await api.get("/socket/convo", {
+                headers: {
+                    "Cache-Control": "no-cache",
+                },
+            });
 
             setConversations(res.data.data);
             console.log(res.data.data)
