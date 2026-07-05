@@ -13,11 +13,9 @@ routerSocket.use(verifyJWT);
 
 // Send a message
 routerSocket.post("/send", sendMessage);
-console.log("NEW routerSocket");
 routerSocket.get("/convo", getConversations);
 // Get all messages of a conversation
 routerSocket.get("/:receiverId", getMessages);
-
 // Get all conversations of current user
 
 routerSocket.get("/generateConvoId",getConversationId);
