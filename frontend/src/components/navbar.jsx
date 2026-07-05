@@ -17,17 +17,17 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
     const navigating = useNavigate();
     const location = useLocation();
     console.log(isLoggedIn)
-    const { data, error } = useQuery({
+    const { data, error, isLoading, isSuccess, isError } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
-        staleTime: 1000* 60* 10,
+        staleTime: 1000 * 60 * 10,
         refetchOnWindowFocus: true,
-    
+
     });
-    useEffect(()=>{
+    useEffect(() => {
         setcurrentId(data?.user._id);
         console.log(data?.user._id);
-    },[data])
+    }, [data])
     useEffect(() => {
         // Whenever the route changes to "/", reset menu state
         if (location.pathname === "/") {
@@ -35,13 +35,16 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
         }
     }, [location])
     useEffect(() => {
-        if (error?.response?.status === 401 || error) {
-            setNavigate(true);
+        if (isLoading) return;
+
+        if (isSuccess) {
+            setisLoggedIn(true);
         }
-        if (error) { setisLoggedIn(false) }
-        if (!error) { setisLoggedIn(true) }
-        console.log(error);
-    }, [error]);
+
+        if (isError && error?.response?.status === 401) {
+            setisLoggedIn(false);
+        }
+    }, [isLoading, isSuccess, isError, error]);
     useEffect(() => {
 
         const interval = setInterval(() => {
@@ -61,7 +64,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
             queryClient.removeQueries(["currentUser"]);
             setisLoggedIn(false);
             setNavigate(true);
-            
+
         }
     }
     return (
@@ -86,7 +89,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                     <div className="w-fit sm:flex absolute hidden left-1/2 top-3">
                         <img className="w-12 h-12 object-cover" src={darkMode ? logodark : logolight} />
                     </div>
-                    
+
                     <div className="flex items-center mt-4 gap-11 z-20 pr-4 sm:pr-9">
 
                         <div
@@ -125,20 +128,20 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                 </div>
 
                 <div className={`w-full border-t ${darkMode ? "border-gray-800" : ""}`}></div>
-                
+
             </div>
 
 
 
             <div className="md:hidden h-[7%] z-50 bg-neutral-900 fixed bottom-0 w-full flex items-center justify-evenly">
-                    <SquareDashedText 
-                    onClick={()=>navigating("/message")}
-                    className={ `hover:scale-[1.05] transition-transform duration-300 ease-in-out text-yellow-50 `}
-                    />
+                <SquareDashedText
+                    onClick={() => navigating("/message")}
+                    className={`hover:scale-[1.05] transition-transform duration-300 ease-in-out text-yellow-50 `}
+                />
 
 
 
-                    <ScanSearch className={`hover:scale-[1.05] transition-transform duration-300 ease-in-out text-white `}/>
+                <ScanSearch className={`hover:scale-[1.05] transition-transform duration-300 ease-in-out text-white `} />
             </div>
 
 
@@ -247,13 +250,13 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
             )}
             <div className={`hidden md:flex items-center w-full pt-1 pb-1  px-10 ${darkMode ? "bg-black  text-white" : ""}`}>
                 <form className="w-full flex items-center">
-                    <input className={`w-[70%] hover:bg-neutral-700 transition-colors ease-in pl-8 h-9 ${darkMode?"bg-neutral-800 text-white":"text-black bg-slate-300"}`} type="text"/>
-                    <ScanSearch className="ml-3" size={28}/>
+                    <input className={`w-[70%] hover:bg-neutral-700 transition-colors ease-in pl-8 h-9 ${darkMode ? "bg-neutral-800 text-white" : "text-black bg-slate-300"}`} type="text" />
+                    <ScanSearch className="ml-3" size={28} />
                 </form>
                 <div className="text-[18px] font-[Saira]">Messages</div>
-                <MessageCircleDashedIcon 
-                onClick={()=>navigating("/message")}
-                className={`hover:scale-110 transition-transform duration-200 ease-in hover:shadow-lg hover:shadow-amber-200 hover:text-blue-400 mr-1 ml-4`}/>
+                <MessageCircleDashedIcon
+                    onClick={() => navigating("/message")}
+                    className={`hover:scale-110 transition-transform duration-200 ease-in hover:shadow-lg hover:shadow-amber-200 hover:text-blue-400 mr-1 ml-4`} />
             </div>
         </>
     )
