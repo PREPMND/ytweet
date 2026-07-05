@@ -18,6 +18,6 @@ routerSocket.post("/send", sendMessage);
 routerSocket.get("/:receiverId", getMessages);
 
 // Get all conversations of current user
-routerSocket.get("/", getConversations);
+routerSocket.get("/convo", getConversations);
 routerSocket.get("/generateConvoId",getConversationId);
 export default routerSocket;
