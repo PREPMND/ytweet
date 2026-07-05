@@ -39,7 +39,7 @@ export default function MessageList() {
                     className="border p-3 mb-2 cursor-pointer"
                 >
 
-                    <p>{chat.text}</p>
+                    
                 </div>
 
             ))}
