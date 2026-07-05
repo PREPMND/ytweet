@@ -16,7 +16,7 @@ routerSocket.post("/send", sendMessage);
 
 // Get all messages of a conversation
 routerSocket.get("/:receiverId", getMessages);
-
+console.log(getConversations())
 // Get all conversations of current user
 routerSocket.get("/", getConversations);
 routerSocket.get("/generateConvoId",getConversationId);
