@@ -61,7 +61,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
             queryClient.removeQueries(["currentUser"]);
             setisLoggedIn(false);
             setNavigate(true);
-            window.location.reload();
+            
         }
     }
     return (
