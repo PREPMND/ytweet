@@ -17,7 +17,7 @@ export default function MessageList() {
             const res = await api.get("/socket");
 
             setConversations(res.data.data);
-
+            console.log(res.data.data)
         } catch (err) {
             console.log(err);
         } finally {
