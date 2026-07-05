@@ -39,7 +39,6 @@ export const getConversations = asyncHandler(async (req, res) => {
     const userId = new mongoose.Types.ObjectId(req.user._id);
     console.log(req.user._id);
 
-    const all = await Message.find();
     console.log(all);
     const conversations = await Message.aggregate([
 
