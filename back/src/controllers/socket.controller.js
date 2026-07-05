@@ -54,17 +54,84 @@ export const getMessages = asyncHandler(async (req, res) => {
     );
 
 });
-export const getConversations = asyncHandler(async (req, res) => {
-    const userId = req.user._id;
 
-    const conversations = await Message.find({
-        $or: [
-            { sender: userId },
-            { receiver: userId }
-        ]
-    }).sort({ createdAt: -1 });
+export const getConversations = asyncHandler(async (req, res) => {
+
+    const userId = new mongoose.Types.ObjectId(req.user._id);
+
+    const conversations = await Message.aggregate([
+
+        {
+            $match: {
+                $or: [
+                    { sender: userId },
+                    { receiver: userId }
+                ]
+            }
+        },
+
+        {
+            $sort: {
+                createdAt: -1
+            }
+        },
+
+        {
+            $group: {
+                _id: "$conversationId",
+                lastMessage: { $first: "$$ROOT" }
+            }
+        },
+
+        {
+            $addFields: {
+                otherUser: {
+                    $cond: [
+                        { $eq: ["$lastMessage.sender", userId] },
+                        "$lastMessage.receiver",
+                        "$lastMessage.sender"
+                    ]
+                }
+            }
+        },
+
+        {
+            $lookup: {
+                from: "users",
+                localField: "otherUser",
+                foreignField: "_id",
+                as: "otherUser"
+            }
+        },
+
+        {
+            $unwind: "$otherUser"
+        },
+
+        {
+            $project: {
+                _id: 0,
+                conversationId: "$lastMessage.conversationId",
+                lastMessage: "$lastMessage.text",
+                createdAt: "$lastMessage.createdAt",
+
+                otherUser: {
+                    _id: "$otherUser._id",
+                    username: "$otherUser.username",
+                    avatar: "$otherUser.avatar",
+                    fullName: "$otherUser.fullName"
+                }
+            }
+        }
+
+    ]);
 
     return res.status(200).json(
-        new apiResponse(200, conversations)
+        new apiResponse(
+            200,
+            conversations,
+            "Conversations fetched successfully"
+        )
     );
+
 });
