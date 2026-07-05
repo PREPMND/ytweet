@@ -115,7 +115,7 @@ export default function Messages({ currentId }) {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type..."
-                    className=" md:max-w-[70%] bg-black  hover:border-slate-700 hover:border-1 border-1 border-neutral-900 rounded-md px-3 py-2"
+                    className=" bg-black  hover:border-slate-700 hover:border-1 border-1 border-neutral-900 rounded-md px-3 py-2"
                 />
                 <button
                     onClick={sendMessage}
