@@ -39,3 +39,4 @@ application.use((err, req, res, next) => {
 export { application }
 
 
+//taskkill //F //IM node.exe
