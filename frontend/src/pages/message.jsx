@@ -107,6 +107,7 @@ export default function Messages({ currentId }) {
             <div className="flex items-center gap-2 p-3 border-t bg-white sticky bottom-0">
 
                 <input
+                    onKeyDown={("Spac")}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type..."
