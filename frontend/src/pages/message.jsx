@@ -85,15 +85,15 @@ export default function Messages({ currentId }) {
 
         <div className={`w-full  h-screen no-scrollbar overflow-y-auto`}   >
 
-            <h2 className={`mt-2 ml-2`}></h2>
+            <h2 className={`mt-2 ml-4 text-xl font-[Saira]`}>Messages</h2>
 
-            <div className={`w-full h-[calc(100%-50px)] overflow-y-auto flex flex-col gap-2 p-2 pl-3`}>
+            <div className={`w-full h-[calc(100%-50px)] overflow-y-auto flex flex-col gap-2 p-2 pl-4 pr-4`}>
 
                 {messages.map((msg, i) => (
 
                     <div
 
-                        className={`w-fit max-w-[70%]  break-words px-2 py-1 rounded-md ${msg.sender == currentId ? "bg-blue-500  text-white self-end" : "bg-gray-300 text-black self-start"} text-[18px] `}
+                        className={`w-fit max-w-[70%]  break-words px-2 py-1 rounded-md ${msg.sender == currentId ? "bg-blue-500  text-white self-end" : "bg-gray-300 text-black self-start"} text-[17px] `}
                         key={i}>
 
                         {msg.text}
