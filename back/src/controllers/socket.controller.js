@@ -34,7 +34,6 @@ export const sendMessage = asyncHandler(async (req, res) => {
 
 export const getConversations = asyncHandler(async (req, res) => {
     const userId = new mongoose.Types.ObjectId(req.user._id);
-    console.log(req.user._id);
 
     try {
         const conversations = await Message.aggregate([
@@ -135,7 +134,6 @@ export const getMessages = asyncHandler(async (req, res) => {
         conversationId
     }).sort({ createdAt: 1 });
 
-    console.log(messages);
 
     return res.status(200).json(
         new apiResponse(200, messages, "Messages fetched")
