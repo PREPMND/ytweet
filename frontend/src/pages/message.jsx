@@ -85,7 +85,7 @@ export default function Messages({ currentId }) {
 
         <div className={`w-full  h-screen no-scrollbar overflow-y-auto`}   >
 
-            <h2 className={`mt-2 ml-2`}>Messages</h2>
+            <h2 className={`mt-2 ml-2`}></h2>
 
             <div className={`w-full h-[calc(100%-50px)] overflow-y-auto flex flex-col gap-2 p-2 pl-3`}>
 
