@@ -14,7 +14,7 @@ export default function MessageList() {
 
         try {
 
-            const res = await api.get("/socket/messageList");
+            const res = await api.get("/socket");
 
             setConversations(res.data.data);
             console.log(res.data.data)
