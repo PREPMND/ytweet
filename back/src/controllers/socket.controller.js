@@ -116,7 +116,8 @@ export const getConversations = asyncHandler(async (req, res) => {
 
 });
 export const getMessages = asyncHandler(async (req, res) => {
-
+    console.log("GET MESSAGES HIT");
+console.log(req.originalUrl);
     console.log(req.params);
 
     const { receiverId } = req.params;
