@@ -51,7 +51,7 @@ const Register = (props) => {
             );
             setLoading(false);
             queryClient.invalidateQueries(["currentUser"]);
-            navigate("/");
+            navigate("/login");
             setisLoggedIn(true);
 
             return res;
