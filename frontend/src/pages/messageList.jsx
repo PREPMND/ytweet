@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 
-export default function () {
+export default function MessageList() {
 
     const [conversations, setConversations] = useState([]);
     const [loading, setLoading] = useState(true);
