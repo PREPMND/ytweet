@@ -104,7 +104,7 @@ export default function Messages({ currentId }) {
             </div>
 
 
-            <div className="flex items-center md:w-full md:left-3 gap-2 p-3 border-t bg-white sticky bottom-0">
+            <div className="flex items-center sm:w-full md:left-3 gap-2 p-3 border-t bg-white sticky bottom-0">
 
                 <input
                     onKeyDown={(e) => {
@@ -115,11 +115,11 @@ export default function Messages({ currentId }) {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Type..."
-                    className=" bg-black  hover:border-slate-700 hover:border-1 border-1 border-neutral-900 rounded-md px-3 py-2"
+                    className=" sm:min-w-[70%] sm:ml-4  hover:border-slate-700 hover:border-1 border-1 border-neutral-900 rounded-md px-3 py-2"
                 />
                 <button
                     onClick={sendMessage}
-                    className="p-2 rounded-full transition-all duration-150 "
+                    className="p-2 rounded-full sm:ml-6 transition-all duration-150 "
                 >
                     <Send
                         className="transition-all duration-200 hover:scale-110 hover:text-amber-300"
