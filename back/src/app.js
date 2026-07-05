@@ -35,6 +35,17 @@ application.use((err, req, res, next) => {
         errors: err.errors || []
     });
 });
+application._router.stack.forEach((layer) => {
+    if (layer.route) {
+        console.log(layer.route.path);
+    } else if (layer.name === "router") {
+        layer.handle.stack.forEach((handler) => {
+            if (handler.route) {
+                console.log(handler.route.path);
+            }
+        });
+    }
+});
 export { application }
 
 
