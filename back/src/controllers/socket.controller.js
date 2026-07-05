@@ -33,13 +33,9 @@ export const sendMessage = asyncHandler(async (req, res) => {
 });
 
 export const getConversations = asyncHandler(async (req, res) => {
-    console.log("GET MESSAGES HIT");
-    console.log(req.originalUrl);
-    console.log("NEW getConversations");
     const userId = new mongoose.Types.ObjectId(req.user._id);
     console.log(req.user._id);
 
-    console.log(all);
     const conversations = await Message.aggregate([
 
         {
@@ -117,9 +113,6 @@ export const getConversations = asyncHandler(async (req, res) => {
 
 });
 export const getMessages = asyncHandler(async (req, res) => {
-    console.log("GET MESSAGES HIT");
-    console.log(req.originalUrl);
-    console.log(req.params);
 
     const { receiverId } = req.params;
 
