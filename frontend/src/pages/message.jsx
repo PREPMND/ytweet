@@ -92,6 +92,7 @@ export default function Messages({ currentId }) {
                 {messages.map((msg, i) => (
 
                     <div 
+                    
                     className={`w-fit max-w-[70%] break-words px-2 py-1 rounded-md ${msg.sender == currentId ? "bg-blue-500 text-white self-end" : "bg-gray-300 text-black self-start"}`}
                     key={i}>
                         
