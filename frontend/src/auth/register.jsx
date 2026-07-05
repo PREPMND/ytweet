@@ -50,7 +50,7 @@ const Register = (props) => {
                 { withCredentials: true }
             );
             
-            await axios.post("/api/v1/users/login", {
+            await axios.post("api/v1/login", {
                 email,
                 password,
             }, { withCredentials: true });
