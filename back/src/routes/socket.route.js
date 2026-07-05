@@ -18,6 +18,9 @@ routerSocket.post("/send", sendMessage);
 routerSocket.get("/:receiverId", getMessages);
 
 // Get all conversations of current user
-routerSocket.get("/convo", getConversations);
+routerSocket.get("/convo", (req, res) => {
+    console.log("CONVERSATIONS ROUTE HIT");
+    res.json({ ok: true });
+});
 routerSocket.get("/generateConvoId",getConversationId);
 export default routerSocket;
