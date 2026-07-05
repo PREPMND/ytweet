@@ -49,6 +49,11 @@ const Register = (props) => {
                 formData,
                 { withCredentials: true }
             );
+            
+            await axios.post("/api/v1/users/login", {
+                email,
+                password,
+            }, { withCredentials: true });
             setLoading(false);
             queryClient.invalidateQueries(["currentUser"]);
             navigate("/login");
