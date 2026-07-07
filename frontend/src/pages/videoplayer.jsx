@@ -77,7 +77,7 @@ export const VideoIndv = ({ darkMode }) => {
                         </div>
 
                         <h2 className="text-md my-4 text-[16px] md:text-[23px] font-[Saira] font-[500] mb-2">Description</h2>
-                        <p className="text-sm text-gray-600 text-[13px] md:text-[16px] overflow-y-auto no-scrollbar max-h-[50vh]">
+                        <p className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"} text-[13px] md:text-[16px] overflow-y-auto no-scrollbar max-h-[50vh]`}>
                             {video.description}
                         </p>
                     </div>
