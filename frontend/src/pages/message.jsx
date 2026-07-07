@@ -16,25 +16,27 @@ export default function Messages({ currentId }) {
             : "";
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
+    const [receiverInfo, setReceiverInfo] = useState(null);
 
-    // Backend generates the same conversationId
-    
     async function loadMessages() {
-
         try {
-
             const res = await api.get(`/socket/${receiver}`);
-            console.log("Messages:", res.data.data);
             setMessages(res.data.data);
-
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err);
         }
-
     }
-    useEffect(() => {
 
+    async function loadReceiver() {
+        try {
+            const res = await api.get(`/users/${receiver}`);
+            setReceiverInfo(res.data.data);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
         if (!receiver) return;
 
         socket.connect();
@@ -42,27 +44,35 @@ export default function Messages({ currentId }) {
         socket.emit("register-user", currentId);
         socket.emit("join-room", conversationId);
 
+        loadMessages();
+        loadReceiver();
+
         socket.on("receive-message", (msg) => {
             setMessages(prev => [...prev, msg]);
         });
 
-        loadMessages();
+        socket.on("user-status", (status) => {
+            if (status.userId === receiver) {
+                setReceiverInfo(prev => ({
+                    ...prev,
+                    isOnline: status.isOnline,
+                    lastSeen: status.lastSeen,
+                }));
+            }
+        });
 
         return () => {
             socket.off("receive-message");
+            socket.off("user-status");
             socket.disconnect();
         };
 
-    }, [receiver]);
-
-
+    }, [receiver, currentId]);
 
     async function sendMessage() {
-
         if (!message.trim()) return;
 
         try {
-
             const res = await api.post("/socket/send", {
                 receiver,
                 text: message,
@@ -76,13 +86,10 @@ export default function Messages({ currentId }) {
 
             setMessage("");
 
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err);
         }
-
     }
-
     return (
 
         <div className={`w-full h-[100dvh] flex flex-col no-scrollbar`}   >
