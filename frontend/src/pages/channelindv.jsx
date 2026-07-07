@@ -288,13 +288,12 @@ ${darkMode ? "text-white" : "text-black"}`}
 
                 </div>
             </div>)}
-            
-        </div>
+                                        }        </div>
 
-    )
-}
     
 
-};
+    
+
+
 
 export default ChannelIndv;
