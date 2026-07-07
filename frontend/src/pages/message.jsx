@@ -29,7 +29,9 @@ export default function Messages({ currentId }) {
 
     async function loadReceiver() {
         try {
-            const res = await api.get(`/users/${receiver}`);
+            const res = await api.post("/users/userbyid", {
+                userId: receiver,
+            });
             setReceiverInfo(res.data.data);
         } catch (err) {
             console.log(err);
