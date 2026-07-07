@@ -16,6 +16,7 @@ const ChannelIndv = (props) => {
     const [coverImage, setcoverImage] = useState(null);
     const [imageLoaded, setimageLoaded] = useState(false);
     const [videos, setVideos] = useState([]);
+    const [pageLoading, setPageLoading] = useState(true);
     const navigate = useNavigate();
     const { data } = useQuery({
         queryKey: ["currentUser"],
@@ -67,6 +68,16 @@ const ChannelIndv = (props) => {
         fetchuserById(profileSelected.owner._id);
 
     }, [profileSelected]);
+    useEffect(() => {
+    if (
+        imageLoaded &&
+        !loadingVideos &&
+        coverImage &&
+        videos.length > 0
+    ) {
+        setPageLoading(false);
+    }
+}, [imageLoaded, loadingVideos, coverImage, videos]);
     function toggleMenu(id) {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
