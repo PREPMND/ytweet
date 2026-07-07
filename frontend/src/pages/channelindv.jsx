@@ -69,15 +69,15 @@ const ChannelIndv = (props) => {
 
     }, [profileSelected]);
     useEffect(() => {
-    if (
-        imageLoaded &&
-        !loadingVideos &&
-        coverImage &&
-        videos.length > 0
-    ) {
-        setPageLoading(false);
-    }
-}, [imageLoaded, loadingVideos, coverImage, videos]);
+        if (
+            imageLoaded &&
+            !loadingVideos &&
+            coverImage &&
+            videos.length > 0
+        ) {
+            setPageLoading(false);
+        }
+    }, [imageLoaded, loadingVideos, coverImage, videos]);
     function toggleMenu(id) {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
