@@ -286,8 +286,9 @@ ${darkMode ? "text-white" : "text-black"}`}
 
                     </div>
 
-                </div>
-            </div>)}
+                
+                ))}
+            </div>
                                         }        </div>
 
     
