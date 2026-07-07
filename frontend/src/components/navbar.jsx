@@ -248,7 +248,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                     </div>
                 </div>
             )}
-            <div className={`hidden md:flex items-center w-full pt-1 pb-1  px-10 ${darkMode ? "bg-black  text-white" : ""}`}>
+            <div className={`hidden md:flex z-50 fixed  items-center w-full pt-1 pb-1  px-10 ${darkMode ? "bg-black  text-white" : ""}`}>
                 <form className="w-full flex items-center">
                     <input className={`w-[70%] hover:bg-neutral-700 transition-colors ease-in pl-8 h-9 ${darkMode ? "bg-neutral-800 text-white" : "text-black bg-slate-300"}`} type="text" />
                     <ScanSearch className="ml-3" size={28} />
