@@ -101,7 +101,7 @@ export default function Messages({ currentId, darkMode }) {
                 <h2 className={` ml-4 text-xl font-[Saira]`}>{receiverInfo?.fullName || "User"}</h2>
                 <div>
                     {receiverInfo?.isOnline ? (
-                        <span className="ml-2 text-sm text-green-500">Online</span>
+                        <span className="ml-2 animate-pulse text-sm text-green-500">Online</span>
                     ) : ( 
                         <span className="ml-2 text-sm text-gray-500">Offline</span>
                     )}
