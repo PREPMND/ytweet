@@ -10,14 +10,15 @@ export default function Messages({ currentId }) {
     console.log(useParams());
     const receiver = receiverId ? receiverId : null;
     console.log("receiverId:", receiver);
-    const [messages, setMessages] = useState([]);
-    const [message, setMessage] = useState("");
-
-    // Backend generates the same conversationId
     const conversationId =
         receiver
             ? [currentId, receiver].sort().join("_")
             : "";
+    const [messages, setMessages] = useState([]);
+    const [message, setMessage] = useState("");
+
+    // Backend generates the same conversationId
+    
     async function loadMessages() {
 
         try {
