@@ -32,10 +32,10 @@ const ChannelIndv = (props) => {
         }
 
     }
-    const fetchuserById = async (Id) => {
-        if (!Id) return;
+    const fetchuserById = async (userId) => {
+        if (!userId) return;
         try {
-            const res = await api.post("/users/userbyid", { Id });
+            const res = await api.post("/users/userbyid", { userId });
             setcoverImage(res.data.data.coverImage)
         }
         catch (err) {
