@@ -7,14 +7,14 @@ import jwt from "jsonwebtoken"
 import mongoose from "mongoose";
 const userById = async (req, res) => {
     try {
-        const { Id } = req.body;
-        if (!Id) {
+        const { userId } = req.body;
+        if (!userId) {
             return res.status(400).json({
                 success: false,
                 message: "No ID received"
             });
         }
-        const userDetails = await User.findById(Id);
+        const userDetails = await User.findById(userId);
         return res.status(200).json({
             success: true,
             data: userDetails
