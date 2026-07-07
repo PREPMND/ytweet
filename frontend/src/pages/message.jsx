@@ -37,7 +37,6 @@ export default function Messages({ currentId }) {
         if (!receiver) return;
 
         socket.connect();
-        socket.connect();
 
         socket.emit("register-user", currentId);
         socket.emit("join-room", conversationId);
