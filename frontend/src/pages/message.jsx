@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useRef} from "react";
 import api from "../api/api";
 import { socket } from "../socket";
 import { Send } from "lucide-react";
@@ -17,7 +17,7 @@ export default function Messages({ currentId, darkMode }) {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
     const [receiverInfo, setReceiverInfo] = useState(null);
-
+    const bottomRef = useRef(null);
     async function loadMessages() {
         try {
             const res = await api.get(`/socket/${receiver}`);
