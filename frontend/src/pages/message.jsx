@@ -5,7 +5,7 @@ import { Send } from "lucide-react";
 import { useParams } from "react-router-dom";
 
 
-export default function Messages({ currentId }) {
+export default function Messages({ currentId, darkMode }) {
     const { receiverId } = useParams();
     console.log(useParams());
     const receiver = receiverId ? receiverId : null;
