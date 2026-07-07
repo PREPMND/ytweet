@@ -40,7 +40,7 @@ export const VideoIndv = ({ darkMode }) => {
     if (!video) return <LoaderTwo darkMode={darkMode} text="Loading.." />;
 
     return (
-        <div className="my-2">
+        <div className={`my-2 ${darkMode ? "bg-neutral-800 text-white" : "bg-white"}`}>
             {/* Video player */}
             <div className="h-[70%]">
                 <video
