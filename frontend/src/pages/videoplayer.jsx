@@ -60,7 +60,8 @@ export const VideoIndv = ({ darkMode }) => {
             </div>
             {desOpen && (
                 <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-40"
+                    className={`fixed inset-0 bg-black bg-opacity-50 z-40
+                        ${darkMode ? "bg-opacity-70" : "bg-opacity-50"} transition-opacity duration-300 ease-in-out`}
                     onClick={() => setDesOpen(false)}
                 >
                     <div
