@@ -69,6 +69,17 @@ const ChannelIndv = (props) => {
 
     }, [profileSelected]);
     useEffect(() => {
+        if (!coverImage) return;
+
+        const img = new Image();
+
+        img.src = coverImage;
+
+        img.onload = () => {
+            setimageLoaded(true);
+        };
+    }, [coverImage]);
+    useEffect(() => {
         if (
             imageLoaded &&
             !loadingVideos &&
@@ -78,6 +89,7 @@ const ChannelIndv = (props) => {
             setPageLoading(false);
         }
     }, [imageLoaded, loadingVideos, coverImage, videos]);
+
     function toggleMenu(id) {
         setMenuOpenId((prev) => (prev === id ? null : id));
     }
@@ -133,7 +145,7 @@ const ChannelIndv = (props) => {
                         ))}
                     </div>
                 </div>
-            ):(
+            ) : (
 
             <div className={`relative w-full ${!imageLoaded ? 'animate-pulse' : ''}`}>
                 <img
@@ -280,7 +292,8 @@ ${darkMode ? "text-white" : "text-black"}`}
             
         </div>
 
-        )}
+    )
+}
     
 
 };
