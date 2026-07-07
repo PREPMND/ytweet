@@ -1,4 +1,4 @@
-import { useEffect, useState ,useRef} from "react";
+import { useEffect, useState, useRef } from "react";
 import api from "../api/api";
 import { socket } from "../socket";
 import { Send } from "lucide-react";
@@ -94,10 +94,10 @@ export default function Messages({ currentId, darkMode }) {
         }
     }
     useEffect(() => {
-    bottomRef.current?.scrollIntoView({
-        behavior: "smooth",
-    });
-}, [messages]);
+        bottomRef.current?.scrollIntoView({
+            behavior: "smooth",
+        });
+    }, [messages]);
     return (
 
         <div className={`w-full h-[100dvh] flex flex-col no-scrollbar`}   >
@@ -107,11 +107,11 @@ export default function Messages({ currentId, darkMode }) {
                 <div>
                     {receiverInfo?.isOnline ? (
                         <span className="ml-2 animate-pulse text-sm text-green-500">Online</span>
-                    ) : ( 
+                    ) : (
                         <span className="ml-2 text-sm text-gray-500">Offline</span>
                     )}
                 </div>
-                
+
             </div>
 
             <div className={`w-full h-[calc(100%-50px)] overflow-y-auto flex flex-col gap-2 p-2 pl-4 pr-4 pb-20 no-scrollbar`} ref={bottomRef}>
