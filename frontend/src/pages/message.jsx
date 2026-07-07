@@ -97,10 +97,6 @@ export default function Messages({ currentId, darkMode }) {
 
         <div className={`w-full h-[100dvh] flex flex-col no-scrollbar`}   >
             <div className={`w-full h-[65px] md:pl-8 flex items-center border-b ${darkMode ? "bg-black text-white border-neutral-700" : "bg-white text-black border-neutral-300"}`}>
-                <div className={`w-3 h-3 rounded-full ${receiverInfo?.isOnline ? "bg-green-500" : "bg-gray-400"} ml-4`}></div>
-                <div className={`ml-2 text-sm ${darkMode ? "text-white" : "text-black"}`}>
-                    {receiverInfo?.isOnline ? "Online" : `Last seen: ${new Date(receiverInfo?.lastSeen).toLocaleString()}`}
-                </div>
                 <div className="flex items-center">
                 <img src={receiverInfo?.avatar || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"} alt={receiverInfo?.fullName || "User"} className="w-10 h-10 rounded-full object-cover ml-4 " />
                 <h2 className={` ml-4 text-xl font-[Saira]`}>{receiverInfo?.fullName || "User"}</h2>
