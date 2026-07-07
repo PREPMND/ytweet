@@ -33,6 +33,7 @@ export default function Messages({ currentId }) {
                 userId: receiver,
             });
             setReceiverInfo(res.data.data);
+            console.log("Receiver Info:", res.data.data);
         } catch (err) {
             console.log(err);
         }
