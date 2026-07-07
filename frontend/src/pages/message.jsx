@@ -97,7 +97,7 @@ export default function Messages({ currentId }) {
 
         <div className={`w-full h-[100dvh] flex flex-col no-scrollbar`}   >
 
-            <h2 className={`mt-2 ml-4 text-xl font-[Saira]`}>Messages</h2>
+            <h2 className={`mt-2 ml-4 text-xl font-[Saira]`}>{receiverInfo?.fullName || "User"}</h2>
 
             <div className={`w-full h-[calc(100%-50px)] overflow-y-auto flex flex-col gap-2 p-2 pl-4 pr-4 pb-20 no-scrollbar`}>
 
