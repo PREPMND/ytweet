@@ -133,7 +133,7 @@ const ChannelIndv = (props) => {
                         ))}
                     </div>
                 </div>
-            ):
+            ):(
 
             <div className={`relative w-full ${!imageLoaded ? 'animate-pulse' : ''}`}>
                 <img
@@ -141,7 +141,7 @@ const ChannelIndv = (props) => {
                     className={` -mt-5 inset-0  rounded-b-lg w-full h-[140px] object-cover `} src={coverImage} />
             </div>
 
-            {(imageLoaded && !loadingVideos) && (
+            
                 <div className="flex mt-4 z-40 items-center ">
                     {/* the channel description */}
 
@@ -156,8 +156,8 @@ const ChannelIndv = (props) => {
                     <Mails
                         onClick={() => messageUser(profileSelected.owner._id)}
                         className={`mr-4 `} size={28} />
-                </div>)}
-            {(imageLoaded && !loadingVideos) && (
+                </div>
+            
                 <div className="flex mt-4 justify-evenly">
                     <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
                         {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
@@ -166,8 +166,8 @@ const ChannelIndv = (props) => {
                         Follow
                     </button>
                 </div>
-            )}
-            {(imageLoaded && !loadingVideos) && (
+            
+            
                 <div className={`flex gap-2 mb-9 mt-9 ${darkMode ? "text-white" : "text-black"
                     }`}>
                     {/* some other thing */}
@@ -200,9 +200,9 @@ ${yangSelected
                                     : "border-neutral-300"
                             }`}></div>
 
-                </div>)}
+                </div>
 
-            {(imageLoaded && !loadingVideos) && (<div className="">
+            <div className="">
                 {videos.map((video, index) => (
 
                     <div
@@ -274,13 +274,14 @@ ${darkMode ? "text-white" : "text-black"}`}
 
                     </div>
 
-                ))}
+                
 
             </div>
-            )}
+            
         </div>
 
-    )
+        )}
+    
 
 };
 
