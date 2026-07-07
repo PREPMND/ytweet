@@ -105,7 +105,7 @@ const ChannelIndv = (props) => {
 
         <div className={`relative min-h-screen ${darkMode ? "bg-black text-white" : "bg-white text-black"
             }`}>
-            {(!imageLoaded && loadingVideos) && (
+            {pageLoading ? (
                 <div className="px-3 pt-9 space-y-5">
                     {/* Mobile layout */}
                     <div className="md:hidden space-y-5">
@@ -133,7 +133,7 @@ const ChannelIndv = (props) => {
                         ))}
                     </div>
                 </div>
-            )}
+            ):
 
             <div className={`relative w-full ${!imageLoaded ? 'animate-pulse' : ''}`}>
                 <img
