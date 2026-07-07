@@ -97,8 +97,8 @@ export default function Messages({ currentId, darkMode }) {
 
         <div className={`w-full h-[100dvh] flex flex-col no-scrollbar`}   >
             <div className={`w-full h-[65px] md:pl-8 flex items-center border-b ${darkMode ? "bg-black text-white border-neutral-700" : "bg-white text-black border-neutral-300"}`}>
-                <img src={receiverInfo?.avatar || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"} alt={receiverInfo?.fullName || "User"} className="w-10 h-10 rounded-full object-cover ml-4 mt-4" />
-                <h2 className={`mt-2 ml-4 text-xl font-[Saira]`}>{receiverInfo?.fullName || "User"}</h2>
+                <img src={receiverInfo?.avatar || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"} alt={receiverInfo?.fullName || "User"} className="w-10 h-10 rounded-full object-cover ml-4 " />
+                <h2 className={` ml-4 text-xl font-[Saira]`}>{receiverInfo?.fullName || "User"}</h2>
             </div>
 
             <div className={`w-full h-[calc(100%-50px)] overflow-y-auto flex flex-col gap-2 p-2 pl-4 pr-4 pb-20 no-scrollbar`}>
