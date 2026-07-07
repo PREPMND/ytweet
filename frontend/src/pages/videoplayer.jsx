@@ -61,11 +61,11 @@ export const VideoIndv = ({ darkMode }) => {
             {desOpen && (
                 <div
                     className={`fixed inset-0 bg-black bg-opacity-50 z-40
-                        ${darkMode ? "bg-opacity-70 bg-neutral-950 text-white" : "bg-opacity-50"} `}
+                        `}
                     onClick={() => setDesOpen(false)}
                 >
                     <div
-                        className={`absolute bottom-0 w-[100%] left-0 right-0 md:top-[30%] md:h-auto h-[60%] md:mx-auto md:w-[80%] pt-4 pl-5  bg-white rounded-t-lg p-4 z-50
+                        className={`absolute bottom-0 w-[100%] left-0 right-0 md:top-[30%] md:h-auto h-[60%] md:mx-auto md:w-[80%] pt-4 pl-5 ${darkMode ? " bg-neutral-950 text-white" : "bg-white"}   bg-white rounded-t-lg p-4 z-50
                                     ${desOpen ? 'translate-y-0' : 'translate-y-full'} transition-transform  duration-1000 ease-in-out`}
                         onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
                     >
