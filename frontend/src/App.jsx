@@ -60,11 +60,23 @@ const App = () => {
   const [videoIdSelected, setvideoIdSelected] = useState({});
   const [currentId, setcurrentId] = useState(null);
   return (
-
-    <div>
-      <AppRoutes isLoggedIn={isLoggedIn} currentId={currentId} setcurrentId={setcurrentId} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav}
-        videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected} />
-    </div>
+    <>
+      <div>
+        <AppRoutes isLoggedIn={isLoggedIn} currentId={currentId} setcurrentId={setcurrentId} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav}
+          videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected} />
+      </div>
+      {
+        show && (
+          <div
+            className="fixed bottom-6 left-1/2 -translate-x-1/2
+               bg-black text-white px-4 py-2 rounded-lg
+               shadow-lg z-[9999] animate-fade-in"
+          >
+            {message}
+          </div>
+        )
+      }
+    </>
   )
 }
 
