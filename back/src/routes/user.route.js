@@ -27,7 +27,7 @@ router.route("/login").post(rateLimiter,
 //secured routes
 router.route("/logout").post(verifyJWT, logOutUser)
 router.route("/refreshtoken").post(refreshAccessToken)
-router.route("/changedpsw").post(verifyJWT,rateLimiter,changeCurrentPassword)
+router.route("/changedpsw").post(verifyJWT,changeCurrentPassword)
 //router.route("/currentuser").get(verifyJWT,getCurrentUser)
 router.get("/currentuser", verifyJWT, (req, res) => {
     res.json({ user: req.user || null });
