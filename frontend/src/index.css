@@ -6,9 +6,38 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+@keyframes toast {
+  0% {
+    transform: translate(-50%, 40px);
+    opacity: 0;
+  }
+
+  15% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  85% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, 20px);
+    opacity: 0;
+  }
+}
+
+.animate-toast {
+  animation: toast 2s ease forwards;
 }
 
 .saira-Saira {
@@ -29,19 +58,22 @@ body {
 }
 
 .input {
-  border: 2px solid #dddddd;  
-  border-radius: 6px;          
-  padding: 8px 12px;         
-  outline: none;             
+  border: 2px solid #dddddd;
+  border-radius: 6px;
+  padding: 8px 12px;
+  outline: none;
   transition: border-color 0.3s ease;
 }
+
 .input:focus {
-  border-color: rgb(238, 231, 231);   
+  border-color: rgb(238, 231, 231);
   box-shadow: 0 0 4px rgba(96, 185, 94, 0.6);
 }
+
 .input:hover {
   border-color: #58c069;
 }
+
 input[type="file"] {
   padding: 6px;
   border: 2px solid #4CAF50;
@@ -78,6 +110,7 @@ input[type="file"]:hover {
   border-color: #4CAF50;
   background-color: #f9fff9;
 }
+
 .video-grid {
   display: grid;
   gap: 20px;
