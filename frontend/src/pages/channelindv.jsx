@@ -53,9 +53,6 @@ const ChannelIndv = (props) => {
             setLoadingVideos(false);
         } catch (err) {
             console.error(err);
-        } finally {
-            setLoadingVideos(false);
-            setPageLoading(false);
         }
     };
     useEffect(() => {
