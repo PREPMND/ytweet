@@ -17,6 +17,7 @@ export default function Messages({ currentId, darkMode }) {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
     const [receiverInfo, setReceiverInfo] = useState(null);
+    const [rateLimitMessage, setRateLimitMessage] = useState(false);
     const bottomRef = useRef(null);
     async function loadMessages() {
         try {
