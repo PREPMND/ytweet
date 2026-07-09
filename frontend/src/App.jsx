@@ -29,6 +29,8 @@ const App = () => {
 */}
 
   const [menubar, setMenubar] = useState(false);
+  const [message, setMessage] = useState("");
+  const [show, setShow] = useState(false);
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("darkMode")) ?? false
   );
@@ -37,12 +39,26 @@ const App = () => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     document.body.className = darkMode ? "dark" : "light";
   }, [darkMode]);
+  useEffect(() => {
+    const handler = (e) => {
+      setMessage(e.detail);
+      setShow(true);
+
+      setTimeout(() => {
+        setShow(false);
+      }, 2000);
+    };
+
+    window.addEventListener("rate-limit", handler);
+
+    return () => window.removeEventListener("rate-limit", handler);
+  }, []);
 
   const [darkModenav, setDarkModenav] = useState(true);
   const [profileSelected, setProfileSelected] = useState(null);
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [videoIdSelected, setvideoIdSelected] = useState({});
-  const [currentId,setcurrentId]=useState(null);
+  const [currentId, setcurrentId] = useState(null);
   return (
 
     <div>
