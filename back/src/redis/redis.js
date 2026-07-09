@@ -8,9 +8,9 @@ client.on("error", (err) => {
     console.log("Redis Error:", err);
 });
 
-export async function connectRedis() {
+export const connectRedis = async () => {
     await client.connect();
     console.log("Redis Connected");
-}
+};
 
 export default client;
