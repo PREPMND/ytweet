@@ -9,7 +9,15 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    if (error.response?.status === 429) {
+      window.dispatchEvent(
+        new CustomEvent("rate-limit", {
+          detail: "You're requesting too quickly. Please wait a moment.",
+        })
+      );
 
+      return Promise.reject(error);
+    }
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
