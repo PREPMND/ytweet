@@ -167,7 +167,21 @@ export default function Messages({ currentId, darkMode }) {
 
             </div>
             {rateLimitMessage && (
-                <div className="fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-md z-50">
+                <div
+                    className="
+    fixed bottom-20 left-1/2
+    -translate-x-1/2
+    bg-neutral-900
+    text-white
+    px-5
+    py-3
+    rounded-xl
+    shadow-2xl
+    border
+    border-neutral-700
+    z-[9999]
+    animate-toast
+">
                     You're sending messages too quickly. Please wait a moment.
                 </div>
             )}
