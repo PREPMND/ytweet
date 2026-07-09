@@ -12,7 +12,7 @@ const routerSocket = Router();
 routerSocket.use(verifyJWT);
 
 // Send a message
-routerSocket.post("/send", sendMessage);
+routerSocket.post("/send",rat sendMessage);
 routerSocket.get("/convo", getConversations);
 // Get all messages of a conversation
 routerSocket.get("/:receiverId", getMessages);

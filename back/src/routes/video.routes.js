@@ -21,6 +21,6 @@ routerVideo.post("/any", any);
 routerVideo.get("/getvideos", getVideos);
 routerVideo.get("/getvideo/:id",  getVideoById);
 // use :id as a path param
-routerVideo.put("/updatevideo/:id", verifyJWT, updateVideo);
-routerVideo.delete("/deletevideo/:id", verifyJWT,deleteVideo);
+routerVideo.put("/updatevideo/:id", verifyJWT, rateLimiter, updateVideo);
+routerVideo.delete("/deletevideo/:id", verifyJWT,rateLimiter, deleteVideo);
 export default routerVideo;
