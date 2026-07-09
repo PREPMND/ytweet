@@ -48,6 +48,7 @@ const App = () => {
       setTimeout(() => {
         setShow(false);
       }, 2000);
+      
     };
 
     window.addEventListener("rate-limit", handler);
