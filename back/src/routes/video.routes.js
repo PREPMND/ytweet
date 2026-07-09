@@ -4,7 +4,7 @@ import { createVideo, getVideos, getVideoById, updateVideo, deleteVideo, any} fr
 import { upload } from "../middlewares/multer.middleware.js";
 const routerVideo = express.Router();
 
-routerVideo.post("/createvideo", verifyJWT,
+routerVideo.post("/createvideo", verifyJWT,rateLimiter,
     upload.fields([
         {
             name: "videoFile",
