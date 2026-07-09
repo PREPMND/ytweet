@@ -40,22 +40,7 @@ const App = () => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     document.body.className = darkMode ? "dark" : "light";
   }, [darkMode]);
-  useEffect(() => {
-    const handler = (e) => {
-      setMessage(e.detail.message || "You're requesting too quickly.");
-      setShow(true);
-
-      setTimeout(() => {
-        setShow(false);
-      }, 2000);
-      
-    };
-
-    window.addEventListener("rate-limit", handler);
-
-    return () =>
-      window.removeEventListener("rate-limit", handler);
-  }, []);
+  
   const [darkModenav, setDarkModenav] = useState(true);
   const [profileSelected, setProfileSelected] = useState(null);
   const [isLoggedIn, setisLoggedIn] = useState(false);
@@ -67,17 +52,7 @@ const App = () => {
         <AppRoutes isLoggedIn={isLoggedIn} currentId={currentId} setcurrentId={setcurrentId} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav}
           videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected} />
       </div>
-      {
-        show && (
-          <div
-            className="fixed bottom-6 left-1/2 -translate-x-1/2
-               bg-black text-white px-4 py-2 rounded-lg
-               shadow-lg z-[9999] animate-fade-in"
-          >
-            {message}
-          </div>
-        )
-      }
+      
     </>
   )
 }
