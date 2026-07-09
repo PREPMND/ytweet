@@ -17,10 +17,10 @@ routerVideo.post("/createvideo", verifyJWT,rateLimiter,
         }
     ]),
     createVideo);
-routerVideo.post("/any",rateLimiter, any);
-routerVideo.get("/getvideos",rateLimiter, getVideos);
-routerVideo.get("/getvideo/:id", rateLimiter, getVideoById);
+routerVideo.post("/any", any);
+routerVideo.get("/getvideos", getVideos);
+routerVideo.get("/getvideo/:id",  getVideoById);
 // use :id as a path param
-routerVideo.put("/updatevideo/:id", verifyJWT, rateLimiter, updateVideo);
-routerVideo.delete("/deletevideo/:id", verifyJWT, rateLimiter, deleteVideo);
+routerVideo.put("/updatevideo/:id", verifyJWT, updateVideo);
+routerVideo.delete("/deletevideo/:id", verifyJWT,deleteVideo);
 export default routerVideo;
