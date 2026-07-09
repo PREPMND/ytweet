@@ -20,7 +20,7 @@ router.route("/register").post(
 
 router.post("/debug", (req,res) => res.send("debug route works"))
 
-router.route("/login").post(
+router.route("/login").post(rateLimiter,
     loginUser)
 
 //secured routes
