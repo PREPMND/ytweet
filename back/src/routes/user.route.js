@@ -33,12 +33,12 @@ router.get("/currentuser", verifyJWT, (req, res) => {
     res.json({ user: req.user || null });
 });
 router.route("/userbyid").post(rateLimiter, userById)
-router.route("/updateaccount").patch(verifyJWT,rateLimiter,updateAccountDetails)
-router.route("/changeavatar").patch(verifyJWT,rateLimiter,upload.single("avatar"),updateUserAvatar)
-router.route("/getchannel").post(verifyJWT,rateLimiter,getUserChannelProfile)
-router.route("/changecoverimage").patch(verifyJWT,rateLimiter,upload.single("coverImage"),updateUserCoverImage)
-router.route("/c/:username").get(verifyJWT,rateLimiter,getUserChannelProfile)
-router.route("/history").get(verifyJWT,rateLimiter,getWatchHistory)
+router.route("/updateaccount").patch(verifyJWT,updateAccountDetails)
+router.route("/changeavatar").patch(verifyJWT,upload.single("avatar"),updateUserAvatar)
+router.route("/getchannel").post(verifyJWT,getUserChannelProfile)
+router.route("/changecoverimage").patch(verifyJWT,upload.single("coverImage"),updateUserCoverImage)
+router.route("/c/:username").get(verifyJWT,getUserChannelProfile)
+router.route("/history").get(verifyJWT,getWatchHistory)
 
 router.route("/subscriptions/:channelId").post(verifyJWT, rateLimiter, toggleSubscription);
 
