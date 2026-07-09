@@ -18,7 +18,7 @@ routerVideo.post("/createvideo", verifyJWT,rateLimiter,
     ]),
     createVideo);
 routerVideo.post("/any",any);
-routerVideo.get("/getvideos",rateLimiter, getVideos);
+routerVideo.get("/getvideos", getVideos);
 routerVideo.get("/getvideo/:id", rateLimiter, getVideoById);
 // use :id as a path param
 routerVideo.put("/updatevideo/:id", verifyJWT, rateLimiter, updateVideo);
