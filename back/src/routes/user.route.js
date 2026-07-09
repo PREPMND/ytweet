@@ -6,7 +6,7 @@ import { upload } from "../middlewares/multer.middleware.js"
 import { rateLimiter } from "../middlewares/ratelimiter.middleware.js";
 const router = Router();
 //checkingroute
-router.route("/register").post(
+router.route("/register").post(rateLimiter,
     upload.fields([
         {
             name:"avatar",
