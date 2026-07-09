@@ -82,6 +82,9 @@ const ChannelIndv = (props) => {
         img.onload = () => {
             setimageLoaded(true);
         };
+        img.onerror = () => {
+            setimageLoaded(true);
+        };
     }, [coverImage]);
     useEffect(() => {
         if (
