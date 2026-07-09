@@ -182,7 +182,7 @@ export default function Messages({ currentId, darkMode }) {
     z-[9999]
     animate-toast
 ">
-                    You're sending messages too quickly. Please wait a moment.
+                    You're sending messages too quickly.
                 </div>
             )}
         </div>
