@@ -40,27 +40,21 @@ const App = () => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     document.body.className = darkMode ? "dark" : "light";
   }, [darkMode]);
-  const navigate = useNavigate();
   useEffect(() => {
     const handler = (e) => {
-      setMessage(e.detail.message);
+      setMessage(e.detail);
       setShow(true);
 
       setTimeout(() => {
         setShow(false);
-
-        if (e.detail.goBack) {
-          navigate(-1);
-        }
       }, 2000);
     };
 
     window.addEventListener("rate-limit", handler);
 
-    return () => {
+    return () =>
       window.removeEventListener("rate-limit", handler);
-    };
-  }, [navigate]);
+  }, []);
   const [darkModenav, setDarkModenav] = useState(true);
   const [profileSelected, setProfileSelected] = useState(null);
   const [isLoggedIn, setisLoggedIn] = useState(false);
