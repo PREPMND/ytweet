@@ -14,7 +14,6 @@ api.interceptors.response.use(
         new CustomEvent("rate-limit", {
           detail: {
             message: "You're requesting too quickly.",
-            goBack: true,
           },
         })
       );
