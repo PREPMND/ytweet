@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import listEndpoints from 'express-list-endpoints';
+import { connectRedis } from "./redis/redis.js";
 dotenv.config({
     path:'./.env'
 })
