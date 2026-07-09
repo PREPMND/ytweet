@@ -40,34 +40,27 @@ const App = () => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     document.body.className = darkMode ? "dark" : "light";
   }, [darkMode]);
+  const navigate = useNavigate();
   useEffect(() => {
     const handler = (e) => {
-      setMessage(e.detail);
+      setMessage(e.detail.message);
       setShow(true);
 
       setTimeout(() => {
         setShow(false);
+
+        if (e.detail.goBack) {
+          navigate(-1);
+        }
       }, 2000);
     };
 
     window.addEventListener("rate-limit", handler);
 
-    return () => window.removeEventListener("rate-limit", handler);
-  }, []);
-  const navigate = useNavigate();
-
-  const handler = (e) => {
-    setMessage(e.detail.message);
-    setShow(true);
-
-    setTimeout(() => {
-      setShow(false);
-
-      if (e.detail.goBack) {
-        navigate(-1); // or navigate("/")
-      }
-    }, 2000);
-  };
+    return () => {
+      window.removeEventListener("rate-limit", handler);
+    };
+  }, [navigate]);
   const [darkModenav, setDarkModenav] = useState(true);
   const [profileSelected, setProfileSelected] = useState(null);
   const [isLoggedIn, setisLoggedIn] = useState(false);
