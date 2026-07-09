@@ -6,6 +6,7 @@ dotenv.config({
 import { MongoConnection } from "./db/index.js";
 import { application } from "./app.js";
 MongoConnection();
+await connectRedis();
 application.use((req, res, next) => {
     next();
 });
