@@ -1,6 +1,7 @@
 import AppRoutes from './routes/routes.jsx';
 import { useState, useEffect } from 'react';
 import { socket } from './socket.jsx';
+import { useNavigate } from 'react-router-dom';
 const App = () => {
   {/*const [username,setUsername]=useState("")
   async function loginUser(credentials) {
@@ -53,7 +54,20 @@ const App = () => {
 
     return () => window.removeEventListener("rate-limit", handler);
   }, []);
+  const navigate = useNavigate();
 
+  const handler = (e) => {
+    setMessage(e.detail.message);
+    setShow(true);
+
+    setTimeout(() => {
+      setShow(false);
+
+      if (e.detail.goBack) {
+        navigate(-1); // or navigate("/")
+      }
+    }, 2000);
+  };
   const [darkModenav, setDarkModenav] = useState(true);
   const [profileSelected, setProfileSelected] = useState(null);
   const [isLoggedIn, setisLoggedIn] = useState(false);

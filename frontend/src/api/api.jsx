@@ -12,7 +12,10 @@ api.interceptors.response.use(
     if (error.response?.status === 429) {
       window.dispatchEvent(
         new CustomEvent("rate-limit", {
-          detail: "You're requesting too quickly. Please wait a moment.",
+          detail: {
+            message: "You're requesting too quickly.",
+            goBack: true,
+          },
         })
       );
 
