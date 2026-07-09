@@ -3,6 +3,7 @@ import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { loginUser, logOutUser, refreshAccessToken, registerUser ,changeCurrentPassword, getCurrentUser ,updateAccountDetails,updateUserAvatar,updateUserCoverImage, getUserChannelProfile,getWatchHistory, userById} from "../controllers/user.controller.js"
 import {toggleSubscription} from "../controllers/subscription.controller.js"
 import { upload } from "../middlewares/multer.middleware.js"
+import { rateLimiter } from "../middlewares/ratelimiter.middleware.js";
 const router = Router();
 //checkingroute
 router.route("/register").post(
