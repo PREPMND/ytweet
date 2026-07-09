@@ -42,7 +42,7 @@ const App = () => {
   }, [darkMode]);
   useEffect(() => {
     const handler = (e) => {
-      setMessage(e.detail);
+      setMessage(e.detail.message || "You're requesting too quickly.");
       setShow(true);
 
       setTimeout(() => {
