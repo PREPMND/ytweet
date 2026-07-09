@@ -93,12 +93,12 @@ export default function Messages({ currentId, darkMode }) {
         } catch (err) {
             if (err.response?.status === 429) {
                 setRateLimitMessage(true);
-                window.dispatchEvent(
-                    new CustomEvent("rate-limit", {
-                        detail: "You're requesting too quickly. Please wait a moment.",
-                    })
-                );
-                setTimeout(() => setRateLimitMessage(false), 2000);
+
+                clearTimeout(window.rateLimitTimer);
+
+                window.rateLimitTimer = setTimeout(() => {
+                    setRateLimitMessage(false);
+                }, 2000);
                 return;
             }
             console.log(err);
