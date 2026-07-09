@@ -12,36 +12,37 @@ api.interceptors.response.use(
     if (error.response?.status === 429) {
       window.dispatchEvent(
         new CustomEvent("rate-limit", {
-          detail: "You're requesting too quickly. Please wait a moment.",
+          detail: {
+            message: "You're requesting too quickly.",
+          },
         })
       );
 
       return Promise.reject(error);
     }
-  }
     if (
-  error.response?.status === 401 &&
-  !originalRequest._retry &&
-  !originalRequest.url.includes("/users/refreshtoken")
-) {
-  originalRequest._retry = true;
-  try {
-    if (!refreshPromise) {
-      refreshPromise = api.post("/users/refreshtoken");
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url.includes("/users/refreshtoken")
+    ) {
+      originalRequest._retry = true;
+      try {
+        if (!refreshPromise) {
+          refreshPromise = api.post("/users/refreshtoken");
+        }
+
+        await refreshPromise;
+        refreshPromise = null;
+
+        return api(originalRequest);
+      } catch (refreshError) {
+        refreshPromise = null;
+        window.dispatchEvent(new Event("logout"));
+        return Promise.reject(refreshError);
+      }
     }
 
-    await refreshPromise;
-    refreshPromise = null;
-
-    return api(originalRequest);
-  } catch (refreshError) {
-    refreshPromise = null;
-    window.dispatchEvent(new Event("logout"));
-    return Promise.reject(refreshError);
-  }
-}
-
-return Promise.reject(error);
+    return Promise.reject(error);
   }
 );
 
