@@ -62,14 +62,21 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
     const HandleLogout = async () => {
         const confirmLogout = await api.post(`${import.meta.env.VITE_BACKEND}/api/v1/users/logout`, {}, { withCredentials: true });
         if (confirmLogout.status === 200) {
+            setLoggingOut(true);
             queryClient.removeQueries(["currentUser"]);
             setisLoggedIn(false);
             setNavigate(true);
-
+            setLoggingOut(false);
         }
     }
+    
     return (
         <>
+            <div className={`z-50 ${loggingOut ? "block" : "hidden"} fixed inset-0 flex items-center justify-center bg-black bg-opacity-50`}>
+                <div className="bg-white dark:bg-neutral-900 p-6 rounded-lg shadow-lg flex items-center justify-center">
+                    <PlayCircle className="animate-spin text-blue-200" size={48} />
+                </div>
+            </div>
             <div className={darkMode ? "bg-black  text-white" : ""}>
                 <div className="flex items-center inset-0 z-0 h-[80px] justify-between select-none border-gray-700">
 
