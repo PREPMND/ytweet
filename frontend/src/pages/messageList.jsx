@@ -23,8 +23,8 @@ export default function MessageList() {
         } catch (err) {
             console.log(err);
         } finally {
-            setLoading(false);
-            setLoaderScreen(false);
+            setTimeout(() => {
+            setLoading(false);}, 1000);
         }
 
     }
