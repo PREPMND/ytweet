@@ -149,20 +149,25 @@ export default function Messages({ currentId, darkMode }) {
 
             <div className={`w-full h-[calc(100%-50px)] overflow-y-auto flex flex-col gap-2 p-2 pl-4 pr-4 pb-20 no-scrollbar`}>
 
-                {messages.map((msg, i) => (
+                {messages.map((msg, i) => {
                     const senderId =
                         typeof msg.sender === "object"
                             ? msg.sender._id
                             : msg.sender;
-                <div
-                    ref={bottomRef}
-                    className={`w-fit max-w-[75%]  break-words px-2 py-1 rounded-md ${senderId == currentId ? "bg-blue-400 border-[1.5px] border-cyan-400  text-white self-end" : "bg-gray-300 border-slate-400 text-black self-start"} text-[17px] border-[1.5px]`}
-                    key={i}>
 
-                    {msg.text}
-                </div>
-
-                ))}
+                    return (
+                        <div
+                            key={i}
+                            ref={bottomRef}
+                            className={`w-fit max-w-[75%] break-words px-2 py-1 rounded-md ${senderId === currentId
+                                    ? "bg-blue-400 border-[1.5px] border-cyan-400 text-white self-end"
+                                    : "bg-gray-300 border-slate-400 text-black self-start"
+                                } text-[17px] border-[1.5px]`}
+                        >
+                            {msg.text}
+                        </div>
+                    );
+                })}
 
             </div>
 
