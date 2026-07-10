@@ -20,31 +20,29 @@ const Login = () => {
 
     async function HandleSubmit(e) {
         e.preventDefault();
+
         try {
-            setLoading(true);
-            if ((email.trim() != '' || username.trim() != '') && password.trim() != '') {
-                const res = await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/users/login`,
+            if ((email.trim() || username.trim()) && password.trim()) {
+                const res = await axios.post(
+                    `${import.meta.env.VITE_BACKEND}/api/v1/users/login`,
                     { email, username, password },
-                    {
-                        withCredentials: true,
-                    });
+                    { withCredentials: true }
+                );
+
                 setCurrentUser(res.data.data.user.username);
-                setEmail('');
-                setUsername('');
-                setPassword('');
+                setEmail("");
+                setUsername("");
+                setPassword("");
                 setError(false);
 
-                console.log(res.data.data.user.username)
-                setLoading(false);
-                navigate('/');
-            }
-            else {
-                setLoading(false);
+                navigate("/");
+            } else {
                 setError(true);
             }
+
         } catch (err) {
-            setLoading(false);
-            if (err.response && err.response.status === 429) {
+
+            if (err.response?.status === 429) {
                 setRateLimitMessage(true);
 
                 clearTimeout(window.rateLimitTimer);
@@ -52,11 +50,15 @@ const Login = () => {
                 window.rateLimitTimer = setTimeout(() => {
                     setRateLimitMessage(false);
                 }, 2000);
+
                 return;
             }
+
             setError(true);
-            
-            console.error("Login failed:", err.response?.data || err.message);
+            console.error(err);
+
+        } finally {
+            setLoading(false);
         }
     }
     return (
@@ -159,7 +161,7 @@ const Login = () => {
                         You're requesting too quickly.
                     </div>
                 )}
-        </div >
+            </div >
         </>
     )
 }
