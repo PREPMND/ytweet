@@ -39,7 +39,8 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     document.body.className = darkMode ? "dark" : "light";
-  }, [darkMode]);
+    localStorage.setItem("profileSelected", JSON.stringify(profileSelected));
+  }, [darkMode],[profileSelected]);
   
   const [darkModenav, setDarkModenav] = useState(true);
   const [profileSelected, setProfileSelected] = useState(null);
