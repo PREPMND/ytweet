@@ -43,6 +43,10 @@ const Login = () => {
                 setError(true);
             }
         } catch (err) {
+            if (err.response && err.response.status === 429) {
+                
+            }
+
             setError(true);
             setLoading(false);
             console.error("Login failed:", err.response?.data || err.message);
