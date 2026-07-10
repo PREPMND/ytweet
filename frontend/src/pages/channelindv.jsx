@@ -220,6 +220,7 @@ ${yangSelected
                                 <div className={`w-full relative px-3 md:mx-0 flex `}>
 
                                     <img
+                                        onClick={() => navigate(`/watchvideo/${video._id}`)}
                                         loading="lazy"
                                         className="object-cover aspect-video rounded-md w-full md:w-[50%]"
                                         src={video.thumbnail}
