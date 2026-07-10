@@ -161,7 +161,7 @@ const ChannelIndv = (props) => {
 
                         </div>
                         <Mails
-                            onClick={() => messageUser(channel?.ownerId)}
+                            onClick={() => messageUser(channel?._id)}
                             className={`mr-4 `} size={28} />
                     </div>
 
