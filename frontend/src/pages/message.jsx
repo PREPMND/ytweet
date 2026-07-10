@@ -18,13 +18,14 @@ export default function Messages({ currentId, darkMode }) {
     const [message, setMessage] = useState("");
     const [receiverInfo, setReceiverInfo] = useState(null);
     const [rateLimitMessage, setRateLimitMessage] = useState(false);
-    const [loading, setLoading] = useState(true);
-    
+    const [loaded, setLoaded] = useState(false);
+    const [receiverLoaded, setReceiverLoaded] = useState(false);
     const bottomRef = useRef(null);
     async function loadMessages() {
         try {
             const res = await api.get(`/socket/${receiver}`);
             setMessages(res.data.data);
+            setLoaded(true);
         } catch (err) {
             console.log(err);
         }
@@ -36,6 +37,7 @@ export default function Messages({ currentId, darkMode }) {
                 userId: receiver,
             });
             setReceiverInfo(res.data.data);
+            setReceiverLoaded(true);
             console.log("Receiver Info:", res.data.data);
         } catch (err) {
             console.log(err);
