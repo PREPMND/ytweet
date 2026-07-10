@@ -36,7 +36,7 @@ const ChannelIndv = (props) => {
     const fetchuserById = async (userId) => {
         if (!userId) return;
         try {
-            const res = await api.post("/users/userbyid", { userId:profileSelected.owner._id });
+            const res = await api.post("/users/userbyid", { userId });
             setcoverImage(res.data.data.coverImage)
         }
         catch (err) {
@@ -46,7 +46,7 @@ const ChannelIndv = (props) => {
     const channelVideo = async (ownerId) => {
         setLoadingVideos(true);
         try {
-            const res = await api.post("/videos/any", { owner: profileSelected.owner._id });
+            const res = await api.post("/videos/any", { owner: ownerId });
             setVideos(res.data.data);
             // match backend response structure
             setLoadingVideos(false);
