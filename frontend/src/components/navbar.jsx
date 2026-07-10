@@ -138,9 +138,6 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                     onClick={() => navigating("/message")}
                     className={`hover:scale-[1.05] transition-transform duration-300 ease-in-out text-yellow-50 `}
                 />
-
-
-
                 <ScanSearch className={`hover:scale-[1.05] transition-transform duration-300 ease-in-out text-white `} />
             </div>
 
