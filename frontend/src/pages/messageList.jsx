@@ -38,46 +38,44 @@ export default function MessageList() {
             
             className="flex flex-col gap-2">
 
-                {conversations.map((chat) => (
-                    if (chat.length === 0) {
-                        return (
-                            <div key={chat.conversationId} className="text-center font-[500] font-[Saira] text-gray-500 py-3">No conversations yet</div>
-                        );
-                    }
-                    <div
-                        key={chat.conversationId}
-                        onClick={() => navigate(`/message/${chat.otherUser._id}`)}
-                        className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer hover:bg-gray-100 transition"
-                    >
+                {conversations.length === 0 ? (
+                    <div className="text-center font-[500] font-[Saira] text-gray-500 py-3">No conversations yet</div>
+                ) : (
+                    conversations.map((chat) => (
+                        <div
+                            key={chat.conversationId}
+                            onClick={() => navigate(`/message/${chat.otherUser._id}`)}
+                            className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer hover:bg-gray-100 transition"
+                        >
 
-                        <img
-                            src={chat.otherUser.avatar}
-                            alt={chat.otherUser.username}
-                            className="w-12 h-12 rounded-full object-cover"
-                        />
+                            <img
+                                src={chat.otherUser.avatar}
+                                alt={chat.otherUser.username}
+                                className="w-12 h-12 rounded-full object-cover"
+                            />
 
-                        <div className="flex ml-2 flex-col flex-1 overflow-hidden">
+                            <div className="flex ml-2 flex-col flex-1 overflow-hidden">
 
-                            <h2 className="font-[500] text-[16px] font-[Saira] truncate">
-                                {chat.otherUser.username}
-                            </h2>
+                                <h2 className="font-[500] text-[16px] font-[Saira] truncate">
+                                    {chat.otherUser.username}
+                                </h2>
 
-                            <p className="text-sm text-gray-500 truncate">
-                                {chat.lastMessage}
+                                <p className="text-sm text-gray-500 truncate">
+                                    {chat.lastMessage}
+                                </p>
+
+                            </div>
+
+                            <p className="text-xs text-gray-400">
+                                {new Date(chat.createdAt).toLocaleTimeString([], {
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                })}
                             </p>
 
                         </div>
-
-                        <p className="text-xs text-gray-400">
-                            {new Date(chat.createdAt).toLocaleTimeString([], {
-                                hour: "2-digit",
-                                minute: "2-digit",
-                            })}
-                        </p>
-
-                    </div>
-
-                ))}
+                    ))
+                )}
                 <div className="text-center font-[500] font-[Saira] text-gray-500 py-3">End of conversations</div>
             </div>
         </div>
