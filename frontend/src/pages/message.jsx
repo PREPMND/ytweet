@@ -42,7 +42,7 @@ export default function Messages({ currentId, darkMode }) {
 
         } catch (err) {
 
-            
+
             console.log(err);
 
         } finally {
@@ -146,14 +146,18 @@ export default function Messages({ currentId, darkMode }) {
                         typeof msg.sender === "object"
                             ? msg.sender._id
                             : msg.sender;
-
+                    console.log({
+                        senderId,
+                        currentId,
+                        equal: senderId === currentId,
+                    });
                     return (
                         <div
                             key={i}
                             ref={bottomRef}
                             className={`w-fit max-w-[75%] break-words px-2 py-1 rounded-md ${senderId === currentId
-                                    ? "bg-blue-400 border-[1.5px] border-cyan-400 text-white self-end"
-                                    : "bg-gray-300 border-slate-400 text-black self-start"
+                                ? "bg-blue-400 border-[1.5px] border-cyan-400 text-white self-end"
+                                : "bg-gray-300 border-slate-400 text-black self-start"
                                 } text-[17px] border-[1.5px]`}
                         >
                             {msg.text}
