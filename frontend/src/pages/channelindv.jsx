@@ -56,9 +56,11 @@ const ChannelIndv = (props) => {
         } finally {
             setLoadingVideos(false);
         }
-    }
+    } 
     useEffect(() => {
-        subcriptionStatus();
+        if (!username) return;
+
+        loadChannel();
     }, [username]);
     useEffect(() => {
         if (!channel?._id) return;
