@@ -114,8 +114,8 @@ export default function Messages({ currentId, darkMode }) {
         });
     }, [messages]);
     if(!loaded || !receiverLoaded) return <h2>
-        <div>
-            
+        <div className={`h-[65px] z-9999 bg-zinc-400 animate-pulse`}>
+
         </div>
         <LoaderTwo  text="Loading..." darkMode={false} />
         </h2>;
