@@ -210,13 +210,15 @@ ${yangSelected
                     </div>
 
                     <div className="min-h-[50vh]">
-                        {videos.map((video, index) => (
-                            if(video.length === 0) {
-                                return <p className={`m-auto ${darkMode ? "text-gray-400 bg-neutral-800" : "text-gray-600"} text-center h-[70vw] md:h-[10vw]  mt-2`}>No videos found.</p>;
-                            }:(
-                            <div
-                                className="flex md:flex-row flex-col  justify-between pb-4"
-                                key={video._id || index}>
+                        {videos.length === 0 ? (
+                            <p className={`m-auto ${darkMode ? "text-gray-400 bg-neutral-800" : "text-gray-600"} text-center h-[70vw] md:h-[10vw] mt-2`}>
+                                No videos found.
+                            </p>
+                        ) : (
+                            videos.map((video, index) => (
+                                <div
+                                    className="flex md:flex-row flex-col  justify-between pb-4"
+                                    key={video._id || index}>
 
                                 <div className={`w-full relative px-3 md:mx-0 flex `}>
 
