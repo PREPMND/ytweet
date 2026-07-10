@@ -6,7 +6,6 @@ export default function MessageList() {
 
     const [conversations, setConversations] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [loaderScreen,setLoaderScreen] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
         getConversations();
