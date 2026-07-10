@@ -32,28 +32,18 @@ const App = () => {
   const [menubar, setMenubar] = useState(false);
   const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
-  const storedProfile = localStorage.getItem("profileSelected");
-
-  const [profileSelected, setProfileSelected] = useState(
-    storedProfile ? JSON.parse(storedProfile) : null
-  );
+  const [profileSelected, setProfileSelected] = useState(null);
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("darkMode")) ?? false
   );
+
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     document.body.className = darkMode ? "dark" : "light";
   }, [darkMode]);
-
-  useEffect(() => {
-    localStorage.setItem(
-      "profileSelected",
-      JSON.stringify(profileSelected)
-    );
-  }, [profileSelected]);
-
+  
   const [darkModenav, setDarkModenav] = useState(true);
-
+  
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [videoIdSelected, setvideoIdSelected] = useState({});
   const [currentId, setcurrentId] = useState(null);
@@ -63,7 +53,7 @@ const App = () => {
         <AppRoutes isLoggedIn={isLoggedIn} currentId={currentId} setcurrentId={setcurrentId} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav}
           videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected} />
       </div>
-
+      
     </>
   )
 }
