@@ -156,7 +156,7 @@ export default function Messages({ currentId, darkMode }) {
                             : msg.sender;
                 <div
                     ref={bottomRef}
-                    className={`w-fit max-w-[75%]  break-words px-2 py-1 rounded-md ${msg.sender == currentId ? "bg-blue-400 border-[1.5px] border-cyan-400  text-white self-end" : "bg-gray-300 border-slate-400 text-black self-start"} text-[17px] border-[1.5px]`}
+                    className={`w-fit max-w-[75%]  break-words px-2 py-1 rounded-md ${senderId == currentId ? "bg-blue-400 border-[1.5px] border-cyan-400  text-white self-end" : "bg-gray-300 border-slate-400 text-black self-start"} text-[17px] border-[1.5px]`}
                     key={i}>
 
                     {msg.text}
