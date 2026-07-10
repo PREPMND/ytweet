@@ -43,6 +43,18 @@ export default function UpdateVideo({ darkMode }) {
 
             navigate(`/watchvideo/${id}`);
         } catch (err) {
+            
+            if (err.response?.status === 429) {
+                setRateLimitMessage(true);
+
+                clearTimeout(window.rateLimitTimer);
+
+                window.rateLimitTimer = setTimeout(() => {
+                    setRateLimitMessage(false);
+                }, 2000);
+
+                return;
+            }
             console.log(err);
         } finally {
             setUpdating(false);
