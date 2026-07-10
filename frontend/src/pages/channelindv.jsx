@@ -7,8 +7,7 @@ import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
 import { MenuDropdown } from "../utils/videoMenu";
 const ChannelIndv = (props) => {
-    const { profileSelected, darkMode } = props;
-    const [subscribers, setSubscribers] = useState(0);
+    const {  darkMode } = props;
     const [localSubscriptionStatus, setLocalSubscriptionStatus] = useState(false);
     const [videoSelected, setVideoSelected] = useState(true);
     const [yangSelected, setYangSelected] = useState(false);
