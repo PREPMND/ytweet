@@ -36,17 +36,25 @@ const ChannelIndv = (props) => {
         setcoverImage(res.data.data.coverImage);
     }
 
+
     const subcriptionStatus = async () => {
         if (!data?.user) return;
+
         try {
-            const res = await api.post(`/users/getchannel`, { username: username }, { withCredentials: true });
-            console.log(res.data.data);
-        }
-        catch (err) {
+            const res = await api.post(
+                "/users/getchannel",
+                { username },
+                { withCredentials: true }
+            );
+
+            setChannel(res.data.data);
+            setLocalSubscriptionStatus(res.data.data.isSubscribed);
+            setSubscribers(res.data.data.subscriberCount);
+
+        } catch (err) {
             console.log(err);
         }
-
-    }
+    };
     const fetchuserById = async (userId) => {
         if (!userId) return;
         try {
