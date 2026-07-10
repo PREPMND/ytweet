@@ -50,19 +50,16 @@ const ChannelIndv = (props) => {
             setChannel(res.data.data);
             setLocalSubscriptionStatus(res.data.data.isSubscribed);
             setSubscribers(res.data.data.subscriberCount);
-
         } catch (err) {
             console.log(err);
         }
     };
     const channelVideo = async (ownerId) => {
         setLoadingVideos(true);
-
         try {
             const res = await api.post("/videos/any", {
                 owner: ownerId,
             });
-
             setVideos(res.data.data);
         } catch (err) {
             console.log(err);
@@ -75,24 +72,13 @@ const ChannelIndv = (props) => {
     }, [username]);
     useEffect(() => {
         if (!channel?._id) return;
-
         channelVideo(channel._id);
     }, [channel]);
     // dependency should be user id, not videos
     useEffect(() => {
-
-        if (!username) return;
-
-        fetchuserById(username);
-
-    }, [profileSelected]);
-    useEffect(() => {
         if (!coverImage) return;
-
         const img = new Image();
-
         img.src = coverImage;
-
         img.onload = () => {
             setimageLoaded(true);
         };
