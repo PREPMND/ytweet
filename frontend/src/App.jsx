@@ -32,7 +32,9 @@ const App = () => {
   const [menubar, setMenubar] = useState(false);
   const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
-  const [profileSelected, setProfileSelected] = useState(null);
+  const [profileSelected, setProfileSelected] = useState(
+    JSON.parse(localStorage.getItem("profileSelected")) ?? null
+  );
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("darkMode")) ?? false
   );
