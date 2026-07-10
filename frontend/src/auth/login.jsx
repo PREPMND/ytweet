@@ -37,7 +37,6 @@ const Login = () => {
                 console.log(res.data.data.user.username)
                 setLoading(false);
                 navigate('/');
-                return res.data.data.user.username;
             }
             else {
                 setLoading(false);
