@@ -173,7 +173,7 @@ export default function Messages({ currentId, darkMode }) {
     -translate-x-1/2
     bg-neutral-900
     text-white
-    px-5
+    px-5 max-w-[50%]
     py-3
     rounded-xl
     shadow-2xl
