@@ -28,7 +28,7 @@ export const VideoIndv = ({ darkMode }) => {
                 const res2 = await api.post("/videos/any", { owner: res.data.data.owner._id, excludeId: id, limit: 10 });
                 setVideos(res2.data.data);
                 console.log("Owner's other videos:", res2.data.data);
-                
+
                 setLoadingVideos(false);
             } catch (err) {
                 console.error(err);
@@ -65,9 +65,14 @@ export const VideoIndv = ({ darkMode }) => {
                     onClick={() => setDesOpen(false)}
                 >
                     <div
-                        className={`absolute bottom-0 ${darkMode ? "bg-neutral-900 " : "bg-white"} w-[100%] left-0 right-0 md:top-[30%] md:h-auto h-[60%] md:mx-auto md:w-[80%] pt-4 pl-5 ${darkMode ? " bg-neutral-950 text-white" : "bg-white"}   bg-white rounded-t-lg p-4 z-50
-                                    ${desOpen ? 'translate-y-0' : 'translate-y-full'} transition-transform  duration-1000 ease-in-out`}
-                        onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+                        className={`absolute bottom-0 left-0 right-0 w-full
+                        md:top-[30%] md:h-auto h-[60%] md:mx-auto md:w-[80%]
+                        pt-4 pl-5 p-4 rounded-t-lg z-50
+                        ${darkMode? "bg-neutral-950 text-white": "bg-white text-black"
+                        }
+                        ${desOpen ? "translate-y-0" : "translate-y-full"
+                        } transition-transform duration-1000 ease-in-out`}
+                        onClick={(e) => e.stopPropagation()}
                     >
                         <div>
                             <h2 className="text-2xl font-[500] text-[20px] md:text-[30px] font-[Saira]">
