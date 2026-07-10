@@ -32,7 +32,7 @@ router.route("/changedpsw").post(verifyJWT,changeCurrentPassword)
 router.get("/currentuser", verifyJWT, (req, res) => {
     res.json({ user: req.user || null });
 });
-router.route("/userbyid").post(rateLimiter, userById)
+router.route("/userbyid").post( userById)
 router.route("/updateaccount").patch(verifyJWT,updateAccountDetails)
 router.route("/changeavatar").patch(verifyJWT,upload.single("avatar"),updateUserAvatar)
 router.route("/getchannel").post(verifyJWT,getUserChannelProfile)
