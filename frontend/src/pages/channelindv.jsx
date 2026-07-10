@@ -41,37 +41,22 @@ const ChannelIndv = (props) => {
         }
     }
 
-
-    const subcriptionStatus = async () => {
-        if (!data?.user) return;
-
-        try {
-            const res = await api.post(
-                "/users/getchannel",
-                { username },
-                { withCredentials: true }
-            );
-
-            setChannel(res.data.data);
-            setLocalSubscriptionStatus(res.data.data.isSubscribed);
-            setSubscribers(res.data.data.subscriberCount);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-    const channelVideo = async (ownerId) => {
+    async function channelVideo(ownerId) {
         setLoadingVideos(true);
+
         try {
             const res = await api.post("/videos/any", {
                 owner: ownerId,
             });
+
             setVideos(res.data.data);
+
         } catch (err) {
             console.log(err);
         } finally {
             setLoadingVideos(false);
         }
-    };
+    }
     useEffect(() => {
         subcriptionStatus();
     }, [username]);
