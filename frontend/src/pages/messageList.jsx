@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
+
 export default function MessageList() {
 
     const [conversations, setConversations] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [loaderScreen,setLoaderScreen] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
         getConversations();
@@ -13,7 +15,7 @@ export default function MessageList() {
     async function getConversations() {
 
         try {
-
+            
             const res = await api.get("/socket/convo");
 
             setConversations(res.data.data);
@@ -22,6 +24,7 @@ export default function MessageList() {
             console.log(err);
         } finally {
             setLoading(false);
+            setLoaderScreen(false);
         }
 
     }
@@ -31,7 +34,9 @@ export default function MessageList() {
     return (
         <div>
             <div className="text-2xl font-[Saira] ml-3 mt-3 font-semibold mb-4">Conversations</div>
-            <div className="flex flex-col gap-2">
+            <div 
+            
+            className="flex flex-col gap-2">
 
                 {conversations.map((chat) => (
 
