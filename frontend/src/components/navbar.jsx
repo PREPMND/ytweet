@@ -20,9 +20,9 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
     const { data, error, isLoading, isSuccess, isError } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
-        staleTime: 1000 * 60 * 10,
+        staleTime: 1000 * 60,
         refetchOnWindowFocus: true,
-        
+
     });
     useEffect(() => {
         setcurrentId(data?.user._id);
