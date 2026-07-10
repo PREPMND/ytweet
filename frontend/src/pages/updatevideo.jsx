@@ -11,7 +11,7 @@ export default function UpdateVideo({ darkMode }) {
     const [thumbnail, setThumbnail] = useState("");
     const [loading, setLoading] = useState(true);
     const [updating, setUpdating] = useState(false);
-    const [rateLimitMessage,setRateLimitMessage]=useState(false);
+    const [rateLimitMessage, setRateLimitMessage] = useState(false);
     useEffect(() => {
         const fetchVideo = async () => {
             try {
@@ -43,7 +43,7 @@ export default function UpdateVideo({ darkMode }) {
 
             navigate(`/watchvideo/${id}`);
         } catch (err) {
-            
+
             if (err.response?.status === 429) {
                 setRateLimitMessage(true);
 
@@ -97,8 +97,8 @@ export default function UpdateVideo({ darkMode }) {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         className={`w-full p-3 rounded-lg border ${darkMode
-                                ? "bg-zinc-800 border-zinc-700"
-                                : "bg-white border-gray-300"
+                            ? "bg-zinc-800 border-zinc-700"
+                            : "bg-white border-gray-300"
                             }`}
                     />
                 </div>
@@ -113,8 +113,8 @@ export default function UpdateVideo({ darkMode }) {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         className={`w-full p-3 rounded-lg border ${darkMode
-                                ? "bg-zinc-800 border-zinc-700"
-                                : "bg-white border-gray-300"
+                            ? "bg-zinc-800 border-zinc-700"
+                            : "bg-white border-gray-300"
                             }`}
                     />
                 </div>
@@ -137,7 +137,15 @@ export default function UpdateVideo({ darkMode }) {
                     </button>
                 </div>
             </form>
-            
+            <div>
+                {rateLimitMessage && (
+                    <div
+                        className="text-[14px] font-[Saira] md:text-[17px] fixed bottom-20 left-1/2 -translate-x-1/2 bg-neutral-900
+    text-white  px-5 max-w-[50%] py-3 rounded-xl shadow-2xl border border-neutral-700 z-[9999] animate-toast">
+                        You're requesting too quickly.
+                    </div>
+                )}
+            </div >
         </div>
     );
 }
