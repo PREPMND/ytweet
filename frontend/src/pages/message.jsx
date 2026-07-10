@@ -113,7 +113,12 @@ export default function Messages({ currentId, darkMode }) {
             behavior: "smooth",
         });
     }, [messages]);
-    if(!loaded || !receiverLoaded) return <h2><LoaderTwo  text="Loading..." darkMode={false} /></h2>;
+    if(!loaded || !receiverLoaded) return <h2>
+        <div>
+            
+        </div>
+        <LoaderTwo  text="Loading..." darkMode={false} />
+        </h2>;
     return (
 
         <div className={`w-full h-[100dvh] flex flex-col no-scrollbar`}   >
