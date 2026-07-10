@@ -154,21 +154,9 @@ const Login = () => {
             <div>
                 {rateLimitMessage && (
                     <div
-                        className="text-[14px] font-[Saira] md:text-[17px]
-    fixed bottom-20 left-1/2
-    -translate-x-1/2
-    bg-neutral-900
-    text-white
-    px-5 max-w-[50%]
-    py-3
-    rounded-xl
-    shadow-2xl
-    border
-    border-neutral-700
-    z-[9999]
-    animate-toast
-">
-                        You're sending messages too quickly.
+                        className="text-[14px] font-[Saira] md:text-[17px] fixed bottom-20 left-1/2 -translate-x-1/2 bg-neutral-900
+    text-white  px-5 max-w-[50%] py-3 rounded-xl shadow-2xl border border-neutral-700 z-[9999] animate-toast">
+                        You're requesting too quickly.
                     </div>
                 )}
         </div >
