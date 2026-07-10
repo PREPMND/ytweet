@@ -32,6 +32,7 @@ const App = () => {
   const [menubar, setMenubar] = useState(false);
   const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
+  const [profileSelected, setProfileSelected] = useState(null);
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("darkMode")) ?? false
   );
@@ -43,7 +44,7 @@ const App = () => {
   }, [darkMode],[profileSelected]);
   
   const [darkModenav, setDarkModenav] = useState(true);
-  const [profileSelected, setProfileSelected] = useState(null);
+  
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [videoIdSelected, setvideoIdSelected] = useState({});
   const [currentId, setcurrentId] = useState(null);
