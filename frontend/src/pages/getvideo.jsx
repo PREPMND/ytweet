@@ -231,7 +231,7 @@ const VideoList = (props) => {
                                     </button>
                                 </div>
                                 <MenuDropdown 
-                                    className="z-50 min-h-[40%] absolute right-2 bottom-3"
+                                    className="z-50  absolute right-2 bottom-3"
 
                                     isOpen={menuOpenId === video._id}
                                     darkMode={darkMode}
