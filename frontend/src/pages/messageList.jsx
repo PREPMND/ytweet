@@ -78,7 +78,7 @@ export default function MessageList() {
                 )}
                 
             </div>
-        <div className="mt-5 border-b-[2px] w-full border-zinc-400 "></div>
+        <div className="mt-10 border-b-[1.5px] w-full border-zinc-400 "></div>
             
         </div>
     );
