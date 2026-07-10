@@ -41,16 +41,7 @@ export default function Messages({ currentId, darkMode }) {
 
         } catch (err) {
 
-            if (err.response?.status === 429) {
-                setRateLimitMessage(true);
-
-                clearTimeout(window.rateLimitTimer);
-
-                window.rateLimitTimer = setTimeout(() => {
-                    setRateLimitMessage(false);
-                }, 2000);
-            }
-
+            
             console.log(err);
 
         } finally {
