@@ -55,33 +55,29 @@ const ChannelIndv = (props) => {
             console.log(err);
         }
     };
-    const fetchuserById = async (userId) => {
-        if (!userId) return;
-        try {
-            const res = await api.post("/users/userbyid", { userId: username });
-            setcoverImage(res.data.data.coverImage)
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
-    const channelVideo = async (username) => {
+    const channelVideo = async (ownerId) => {
         setLoadingVideos(true);
+
         try {
-            const res = await api.post("/videos/any", { owner: username });
+            const res = await api.post("/videos/any", {
+                owner: ownerId,
+            });
+
             setVideos(res.data.data);
-            // match backend response structure
-            setLoadingVideos(false);
         } catch (err) {
-            console.error(err);
+            console.log(err);
+        } finally {
+            setLoadingVideos(false);
         }
     };
     useEffect(() => {
         subcriptionStatus();
-    }, [username])
+    }, [username]);
     useEffect(() => {
-        channelVideo(username;
-    }, [data]);
+        if (!channel?._id) return;
+
+        channelVideo(channel._id);
+    }, [channel]);
     // dependency should be user id, not videos
     useEffect(() => {
 
