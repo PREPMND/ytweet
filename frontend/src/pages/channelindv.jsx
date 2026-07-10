@@ -58,7 +58,7 @@ const ChannelIndv = (props) => {
     };
     useEffect(() => {
         subcriptionStatus();
-    }, [profileSelected])
+    }, [username])
     useEffect(() => {
         channelVideo(username;
     }, [data]);
