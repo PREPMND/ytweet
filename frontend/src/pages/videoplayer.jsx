@@ -40,7 +40,7 @@ export const VideoIndv = ({ darkMode }) => {
     if (!video) return <LoaderTwo darkMode={darkMode} text="Loading.." />;
 
     return (
-        <div className={`py-2 ${darkMode ? "bg-neutral-800 text-white" : "bg-white"}`}>
+        <div className={`py-2 ${darkMode ? "bg-neutral-900 text-white" : "bg-white"}`}>
             {/* Video player */}
             <div className="h-[70%]">
                 <video
@@ -52,7 +52,7 @@ export const VideoIndv = ({ darkMode }) => {
 
             {/* Title + description toggle */}
             <div className={` ${desOpen ? "opacity-0" : ""} flex w-full justify-between md:w-[70%] mt-4 h-[40px] items-center gap-5`}>
-                <h2 className={`text-xl ml-3 w-[88%] truncate font-bold ${darkMode ? "text-white" : "text-black"}`}>{video.title}</h2>
+                <h2 className={`text-xl ml-3 w-[88%] truncate font-bold ${darkMode ? "text-white bg-neutral-900" : "text-black"}`}>{video.title}</h2>
                 <ChevronDown
                     className={`mr-2 cursor-pointer ${desOpen ? "rotate-180" : ""}`}
                     onClick={() => setDesOpen(!desOpen)}
