@@ -40,9 +40,11 @@ const Login = () => {
                 return res.data.data.user.username;
             }
             else {
+                setLoading(false);
                 setError(true);
             }
         } catch (err) {
+            setLoading(false);
             if (err.response && err.response.status === 429) {
                 setRateLimitMessage(true);
 
@@ -53,9 +55,8 @@ const Login = () => {
                 }, 2000);
                 return;
             }
-
             setError(true);
-            setLoading(false);
+            
             console.error("Login failed:", err.response?.data || err.message);
         }
     }
