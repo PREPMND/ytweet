@@ -26,6 +26,7 @@ export default function Messages({ currentId, darkMode }) {
             const res = await api.get(`/socket/${receiver}`);
             setMessages(res.data.data);
             setLoaded(true);
+            console.log("messages:", res.data.data);
         } catch (err) {
             console.log(err);
         }
