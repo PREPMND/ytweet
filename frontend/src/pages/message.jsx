@@ -129,7 +129,7 @@ export default function Messages({ darkMode }) {
         });
     }, [messages]);
     if (!loaded || !receiverLoaded) return <h2>
-        <LoaderTwo text="Loading..." darkMode={false} />
+        <LoaderTwo text="Loading..." darkMode={darkMode} />
     </h2>;
     return (
 
