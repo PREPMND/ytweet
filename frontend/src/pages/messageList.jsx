@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
-
+import LoaderTwo from "../assets/loading2";
 export default function MessageList() {
 
     const [conversations, setConversations] = useState([]);
@@ -33,7 +33,7 @@ export default function MessageList() {
 
     return (
         <div>
-            <Loade
+            <LoaderTwo text="Loading..." darkMode={false} />
             <div className="text-2xl font-[Saira] ml-3 mt-3 font-semibold mb-4">Conversations</div>
             <div 
             
