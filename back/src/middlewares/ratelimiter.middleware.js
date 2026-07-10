@@ -8,7 +8,7 @@ export const rateLimiter = async (req, res, next) => {
         if (requests === 1) {
             await client.expire(key, 60); // 20 seconds
         }
-        if (requests > 10) {
+        if (requests > 5) {
             return res.status(429).json({
                 success: false,
                 message: "Too many requests. Please try again later.",
