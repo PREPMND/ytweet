@@ -11,7 +11,7 @@ export default function UpdateVideo({ darkMode }) {
     const [thumbnail, setThumbnail] = useState("");
     const [loading, setLoading] = useState(true);
     const [updating, setUpdating] = useState(false);
-    const [rateLimitMessage,setRateLimitMessage]
+    const [rateLimitMessage,setRateLimitMessage]=useState(false);
     useEffect(() => {
         const fetchVideo = async () => {
             try {
