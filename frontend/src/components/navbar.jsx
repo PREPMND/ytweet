@@ -74,7 +74,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
         <>
             <div className={`z-50 ${loggingOut ? "block" : "hidden"} fixed inset-0 flex items-center justify-center bg-black bg-opacity-50`}>
                 <div className="bg-white dark:bg-neutral-900 p-6 rounded-lg shadow-lg flex items-center justify-center">
-                    <PlayCircle className="animate-spin text-blue-200" size={48} />
+                    <PlayCircle className="animate-spin font-[400] text-blue-200" size={32} />
                 </div>
             </div>
             <div className={darkMode ? "bg-black  text-white" : ""}>
