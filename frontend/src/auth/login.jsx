@@ -15,7 +15,7 @@ const Login = () => {
     const [error, setError] = useState(false);
     const [bgLoaded, setbgLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
-
+    const [rateLimitMessage, setRateLimitMessage] = useState(false);
     const navigate=useNavigate();
 
     async function HandleSubmit(e) {
@@ -44,7 +44,14 @@ const Login = () => {
             }
         } catch (err) {
             if (err.response && err.response.status === 429) {
-                
+                setRateLimitMessage(true);
+
+                clearTimeout(window.rateLimitTimer);
+
+                window.rateLimitTimer = setTimeout(() => {
+                    setRateLimitMessage(false);
+                }, 2000);
+                return;
             }
 
             setError(true);
