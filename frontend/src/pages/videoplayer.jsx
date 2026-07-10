@@ -98,7 +98,7 @@ export const VideoIndv = ({ darkMode }) => {
             </div>
 
             {/* More from this channel */}
-            <div className="mt-4">
+            <div className="mt-4 h-full">
                 <h2 className="text-xl font-semibold ml-3 mt-6 mb-1">More from this channel</h2>
                 {loadingVideos ? (
                     <p className="m-auto text-center mt-2">Loading videos..</p>
