@@ -6,6 +6,14 @@ import { useParams } from "react-router-dom";
 import LoaderTwo from "../assets/loading2";
 
 export default function Messages({ currentId, darkMode }) {
+    const { data } = useQuery({
+        queryKey: ["currentUser"],
+        queryFn: getCurrentUser,
+        staleTime: 1000 * 60 * 10,
+    });
+
+    const currentId = data?.user?._id;
+
     const { receiverId } = useParams();
     console.log(useParams());
     const receiver = receiverId ? receiverId : null;
