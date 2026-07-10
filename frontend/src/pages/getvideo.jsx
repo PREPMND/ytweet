@@ -168,7 +168,7 @@ const VideoList = (props) => {
 
                             </div>
 
-                            <div className="flex items-start gap-3 px-2 py-3">
+                            <div className="flex items-start relative gap-3 px-2 py-3">
                                 <img
                                     onClick={() => {
                                         Handle(
@@ -231,7 +231,8 @@ const VideoList = (props) => {
                                     </button>
                                 </div>
                                 <MenuDropdown 
-                                
+                                    className="z-50 absolute right-2 top-10"
+
                                     isOpen={menuOpenId === video._id}
                                     darkMode={darkMode}
                                     items={[
