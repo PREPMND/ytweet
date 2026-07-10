@@ -125,7 +125,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}
                 </>
             )}
 
-            {theme === "meteors" && (
+            {/*theme === "meteors" && (
                 <>
                     {Array.from({ length: 12 }, (_, i) => (
                         <motion.div
@@ -150,7 +150,7 @@ ${darkMode ? "bg-black" : "bg-white"}`}
                         />
                     ))}
                 </>
-            )}
+            )*/}
 
             {/* Center Content */}
             <div className="relative z-20 flex flex-col items-center">
