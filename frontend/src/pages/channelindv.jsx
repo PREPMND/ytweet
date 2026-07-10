@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 import { EllipsisVertical, Mails } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+
 import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
 import { MenuDropdown } from "../utils/videoMenu";
@@ -18,6 +19,7 @@ const ChannelIndv = (props) => {
     const [videos, setVideos] = useState([]);
     const [pageLoading, setPageLoading] = useState(true);
     const navigate = useNavigate();
+    const { username } = useParams();
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
@@ -25,7 +27,7 @@ const ChannelIndv = (props) => {
     const subcriptionStatus = async () => {
         if (!data?.user) return;
         try {
-            const res = await api.post(`/users/getchannel`, { username: profileSelected.owner.username }, { withCredentials: true });
+            const res = await api.post(`/users/getchannel`, { username: username }, { withCredentials: true });
             console.log(res.data.data);
         }
         catch (err) {
@@ -36,17 +38,17 @@ const ChannelIndv = (props) => {
     const fetchuserById = async (userId) => {
         if (!userId) return;
         try {
-            const res = await api.post("/users/userbyid", { userId });
+            const res = await api.post("/users/userbyid", { userId:username });
             setcoverImage(res.data.data.coverImage)
         }
         catch (err) {
             console.log(err);
         }
     }
-    const channelVideo = async (ownerId) => {
+    const channelVideo = async (username) => {
         setLoadingVideos(true);
         try {
-            const res = await api.post("/videos/any", { owner: ownerId });
+            const res = await api.post("/videos/any", { owner: username });
             setVideos(res.data.data);
             // match backend response structure
             setLoadingVideos(false);
