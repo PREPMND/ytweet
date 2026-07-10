@@ -369,6 +369,7 @@ const getUserChannelProfile = asyncHandler(async (req, res, next) => {
         },
         {
             $project: {
+                _id: 1,
                 username: 1,
                 avatar: 1,
                 subscriberCount: 1,
