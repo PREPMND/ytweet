@@ -72,11 +72,11 @@ export default function MessageList() {
                                     minute: "2-digit",
                                 })}
                             </p>
-
+                            
                         </div>
                     ))
                 )}
-                <div className="text-center font-[500] font-[Saira] text-gray-500 py-3">End of conversations</div>
+                
             </div>
         </div>
     );
