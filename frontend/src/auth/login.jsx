@@ -16,7 +16,7 @@ const Login = () => {
     const [bgLoaded, setbgLoaded] = useState(false);
     const [loading, setLoading] = useState(false);
     const [rateLimitMessage, setRateLimitMessage] = useState(false);
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     async function HandleSubmit(e) {
         e.preventDefault();
@@ -151,6 +151,27 @@ const Login = () => {
                 </div>
                 <LoaderPinwheel className={`${loading ? "block" : "hidden"} z-40 absolute left-1/2 top-10 animate-spin text-yellow-50`} size={28} />
             </div>)}
+            <div>
+                {rateLimitMessage && (
+                    <div
+                        className="text-[14px] font-[Saira] md:text-[17px]
+    fixed bottom-20 left-1/2
+    -translate-x-1/2
+    bg-neutral-900
+    text-white
+    px-5 max-w-[50%]
+    py-3
+    rounded-xl
+    shadow-2xl
+    border
+    border-neutral-700
+    z-[9999]
+    animate-toast
+">
+                        You're sending messages too quickly.
+                    </div>
+                )}
+        </div >
         </>
     )
 }
