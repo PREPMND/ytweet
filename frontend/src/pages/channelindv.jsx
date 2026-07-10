@@ -60,14 +60,14 @@ const ChannelIndv = (props) => {
         subcriptionStatus();
     }, [profileSelected])
     useEffect(() => {
-        channelVideo(profileSelected.owner._id);
+        channelVideo(username;
     }, [data]);
     // dependency should be user id, not videos
     useEffect(() => {
 
-        if (!profileSelected?.owner?._id) return;
+        if (!username) return;
 
-        fetchuserById(profileSelected.owner._id);
+        fetchuserById(username);
 
     }, [profileSelected]);
     useEffect(() => {
