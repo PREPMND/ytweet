@@ -28,12 +28,17 @@ const ChannelIndv = (props) => {
     const [channel, setChannel] = useState(null);
 
     async function loadChannel() {
-        const res = await api.post("/users/getchannel", {
-            username,
-        });
+        try {
+            const res = await api.post("/users/getchannel", {
+                username,
+            });
 
-        setChannel(res.data.data);
-        setcoverImage(res.data.data.coverImage);
+            setChannel(res.data.data);
+            setcoverImage(res.data.data.coverImage);
+
+        } catch (err) {
+            console.log(err);
+        }
     }
 
 
