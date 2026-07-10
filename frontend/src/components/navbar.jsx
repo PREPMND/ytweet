@@ -134,7 +134,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
 
 
             <div className="md:hidden h-[7%] z-50 bg-neutral-900 fixed bottom-0 w-full flex items-center justify-evenly">
-                <MessageCircleDashedIcon
+                <MessageCircle
                     onClick={() => navigating("/message")}
                     className={`hover:scale-[1.05] transition-transform duration-300 ease-in-out text-yellow-50 `}
                 />
