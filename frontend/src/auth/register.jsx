@@ -16,6 +16,7 @@ const Register = (props) => {
     const [avatar, setAvatar] = useState('');
     const [fullName, setFullName] = useState('');
     const [coverImage, setCoverImage] = useState('');
+    const [rateLimitMessage, setRateLimitMessage] = useState(false);
     const navigate = useNavigate()
     const queryClient = useQueryClient();
     const { setisLoggedIn } = props;
@@ -49,7 +50,7 @@ const Register = (props) => {
                 formData,
                 { withCredentials: true }
             );
-            
+
             await axios.post(`${import.meta.env.VITE_BACKEND}/api/v1/users/login`, {
                 email,
                 password,
@@ -61,7 +62,19 @@ const Register = (props) => {
             return res;
         } catch (err) {
             setLoading(false);
+            if (err.response?.status === 429) {
+                setRateLimitMessage(true);
+
+                clearTimeout(window.rateLimitTimer);
+
+                window.rateLimitTimer = setTimeout(() => {
+                    setRateLimitMessage(false);
+                }, 2000);
+
+                return;
+            }
             console.error("Register failed:", err.response?.data || err.message);
+            
         }
     }
     function HandlingNext(e) {
