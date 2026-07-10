@@ -3,7 +3,7 @@ import api from "../api/api";
 import { socket } from "../socket";
 import { Send } from "lucide-react";
 import { useParams } from "react-router-dom";
-
+import LoaderTwo from "../assets/loading2";
 
 export default function Messages({ currentId, darkMode }) {
     const { receiverId } = useParams();
