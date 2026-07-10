@@ -154,11 +154,7 @@ export default function Messages({ darkMode }) {
                         typeof msg.sender === "object"
                             ? msg.sender._id
                             : msg.sender;
-                    console.log({
-                        senderId,
-                        currentId,
-                        equal: senderId === currentId,
-                    });
+                    
                     return (
                         <div
                             key={i}
