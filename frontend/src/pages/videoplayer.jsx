@@ -103,11 +103,11 @@ export const VideoIndv = ({ darkMode }) => {
                 {true? (
                     <p className={`m-auto ${darkMode ? "text-gray-400 bg-neutral-800" : "text-gray-600"} text-center min-h-[50%]  mt-2`}>Loading videos..</p>
                 ) : (
-                    <div className="flex overflow-x-auto minh-[50%] flex-col gap-4 p-3">
+                    <div className="flex overflow-x-auto min-h-screen flex-col gap-4 p-3">
                         {videos.map((v) => (
                             <div
                                 key={v._id}
-                                className="flex-shrink-0 w-full md:flex mt-4 relative cursor-pointer"
+                                className="flex-shrink-0 w-full h-full md:flex mt-4 relative cursor-pointer"
                                 onClick={() => navigate(`/watchvideo/${v._id}`)}
                             >
                                 <img
