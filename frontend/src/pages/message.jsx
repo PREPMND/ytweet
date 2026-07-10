@@ -168,7 +168,7 @@ export default function Messages({ currentId, darkMode }) {
             </div>
             {rateLimitMessage && (
                 <div
-                    className="text-[13px] md:text-[17px]
+                    className="text-[14px] font-[Saira] md:text-[17px]
     fixed bottom-20 left-1/2
     -translate-x-1/2
     bg-neutral-900
