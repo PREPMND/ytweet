@@ -154,7 +154,7 @@ const ChannelIndv = (props) => {
                         {/* the channel description */}
 
                         <img className="ml-4 md:ml-9 mb-4 rounded-full object-cover aspect-square
-                w-[100px] h-[100px] md:h-[20%] md:w-[20%]" src={profileSelected.owner.avatar} alt={profileSelected.owner.username} />
+                w-[100px] h-[100px] md:h-[20%] md:w-[20%]" src={channel?.avatar} alt={profileSelected.owner.username} />
                         <div className="flex pl-4 md:pl-10 justify-between font-[Saira] text-[20px] md:text-[28px] font-[500]  w-[70%] items-center h-[120px] ">
                             <div className={`${darkMode ? "text-white" : "text-black"}`}>
                                 {profileSelected.owner.username}
