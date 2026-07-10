@@ -79,8 +79,7 @@ const ChannelIndv = (props) => {
         if (
             imageLoaded &&
             !loadingVideos &&
-            coverImage &&
-            videos.length > 0
+            coverImage
         ) {
             setPageLoading(false);
         }
