@@ -139,7 +139,7 @@ const Login = () => {
                                 </form>
 
                             </div>
-                            <div className={`${error ? "block" : "opacity-0"} mt-2 text-red-500`}>Login Failed. Please check your credentials.</div>
+                            <div className={`${error ? "block" : "opacity-0"} mt-2 text-center text-red-500`}>Login Failed. Please check your credentials.</div>
                             <div
                                 onClick={() => navigate("/register")}
                                 className={`
