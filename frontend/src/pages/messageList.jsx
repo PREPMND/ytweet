@@ -29,11 +29,11 @@ export default function MessageList() {
 
     }
 
-    if (loading) return <h2>Loading...</h2>;
+    if (loading) return <h2><LoaderTwo  text="Loading..." darkMode={false} /></h2>;
 
     return (
         <div>
-            <LoaderTwo text="Loading..." darkMode={false} />
+            
             <div className="text-2xl font-[Saira] ml-3 mt-3 font-semibold mb-4">Conversations</div>
             <div 
             
