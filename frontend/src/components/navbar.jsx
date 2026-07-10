@@ -22,7 +22,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
         queryFn: getCurrentUser,
         staleTime: 1000 * 60 * 10,
         refetchOnWindowFocus: true,
-
+        
     });
     useEffect(() => {
         setcurrentId(data?.user._id);
