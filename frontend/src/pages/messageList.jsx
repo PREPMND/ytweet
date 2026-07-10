@@ -39,7 +39,11 @@ export default function MessageList() {
             className="flex flex-col gap-2">
 
                 {conversations.map((chat) => (
-
+                    if (chat.length === 0) {
+                        return (
+                            <div key={chat.conversationId} className="text-center font-[500] font-[Saira] text-gray-500 py-3">No conversations yet</div>
+                        );
+                    }
                     <div
                         key={chat.conversationId}
                         onClick={() => navigate(`/message/${chat.otherUser._id}`)}
