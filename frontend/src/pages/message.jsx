@@ -60,7 +60,8 @@ export default function Messages({ currentId, darkMode }) {
 
     useEffect(() => {
         if (!receiver) return;
-
+        setLoaded(false);
+        setReceiverLoaded(false);
         socket.connect();
 
         socket.emit("register-user", currentId);
