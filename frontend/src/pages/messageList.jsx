@@ -72,12 +72,14 @@ export default function MessageList() {
                                     minute: "2-digit",
                                 })}
                             </p>
-                            
+
                         </div>
                     ))
                 )}
                 
             </div>
+        <div className="mt-5 border-b-2 w-full border- "></div>
+            
         </div>
     );
 }
