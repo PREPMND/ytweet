@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import LoaderTwo from "../assets/loading2";
-export default function MessageList() {
+export default function MessageList({darkMode}) {
 
     const [conversations, setConversations] = useState([]);
     const [loading, setLoading] = useState(true);
