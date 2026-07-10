@@ -28,7 +28,7 @@ export default function MessageList() {
 
     }
 
-    if (loading) return <h2><LoaderTwo  text="Loading..." darkMode={false} /></h2>;
+    if (loading) return <h2><LoaderTwo  text="Loading..." darkMode={darkMode} /></h2>;
 
     return (
         <div>
