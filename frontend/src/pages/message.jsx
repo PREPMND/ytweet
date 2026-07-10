@@ -4,8 +4,9 @@ import { socket } from "../socket";
 import { Send } from "lucide-react";
 import { useParams } from "react-router-dom";
 import LoaderTwo from "../assets/loading2";
-
-export default function Messages({ currentId, darkMode }) {
+import { useQuery } from "@tanstack/react-query";
+import getCurrentUser from "../api/currentuser";
+export default function Messages({ darkMode }) {
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
