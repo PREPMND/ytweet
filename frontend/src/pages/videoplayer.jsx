@@ -90,7 +90,9 @@ export const VideoIndv = ({ darkMode }) => {
             )}
 
             {/* Owner info */}
-            <div className="flex items-center gap-3 ml-3 mt-4">
+            <div 
+            onClick={() => navigate(`/${video.owner.username}`)}
+            className="flex items-center gap-3 ml-3 mt-4">
                 <img className="w-10 h-10 rounded-full object-cover" src={video.owner.avatar} alt="Profile" />
                 <h3 className="font-semibold text-lg">{video.owner.username}</h3>
             </div>
