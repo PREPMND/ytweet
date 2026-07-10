@@ -113,6 +113,7 @@ export default function Messages({ currentId, darkMode }) {
             behavior: "smooth",
         });
     }, [messages]);
+    
     return (
 
         <div className={`w-full h-[100dvh] flex flex-col no-scrollbar`}   >
