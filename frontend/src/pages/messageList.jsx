@@ -75,7 +75,7 @@ export default function MessageList() {
                     </div>
 
                 ))}
-
+                <div className="text-center font-[400] font-[Saira] text-gray-500 py-3">End of conversations</div>
             </div>
         </div>
     );
