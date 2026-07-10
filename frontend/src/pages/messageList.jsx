@@ -51,7 +51,7 @@ export default function MessageList() {
                             <img
                                 src={chat.otherUser.avatar}
                                 alt={chat.otherUser.username}
-                                className="w-12 h-12 hover:scale-[1.02] transition-transform duration-200 ease-in rounded-full object-cover"
+                                className="w-12 h-12 hover:scale-[1.04] hover:shadow-lg hover:shadow- transition-transform duration-200 ease-in rounded-full object-cover"
                             />
 
                             <div className="flex ml-2 flex-col flex-1 overflow-hidden">
