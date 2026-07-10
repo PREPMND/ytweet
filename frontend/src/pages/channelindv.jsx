@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { EllipsisVertical, Mails } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -24,6 +24,18 @@ const ChannelIndv = (props) => {
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
     });
+
+    const [channel, setChannel] = useState(null);
+
+    async function loadChannel() {
+        const res = await api.post("/users/getchannel", {
+            username,
+        });
+
+        setChannel(res.data.data);
+        setcoverImage(res.data.data.coverImage);
+    }
+
     const subcriptionStatus = async () => {
         if (!data?.user) return;
         try {
@@ -38,7 +50,7 @@ const ChannelIndv = (props) => {
     const fetchuserById = async (userId) => {
         if (!userId) return;
         try {
-            const res = await api.post("/users/userbyid", { userId:username });
+            const res = await api.post("/users/userbyid", { userId: username });
             setcoverImage(res.data.data.coverImage)
         }
         catch (err) {
@@ -148,158 +160,158 @@ const ChannelIndv = (props) => {
                     </div>
                 </div>
             ) : (
-            <div>
-            <div className={`relative w-full`}>
-                <img
-                    onLoad={() => { setimageLoaded(true) }}
-                    className={` -mt-5 inset-0  rounded-b-lg w-full h-[140px] object-cover `} src={coverImage} />
-            </div>
+                <div>
+                    <div className={`relative w-full`}>
+                        <img
+                            onLoad={() => { setimageLoaded(true) }}
+                            className={` -mt-5 inset-0  rounded-b-lg w-full h-[140px] object-cover `} src={coverImage} />
+                    </div>
 
-            
-                <div className="flex mt-4 z-40 items-center ">
-                    {/* the channel description */}
 
-                    <img className="ml-4 md:ml-9 mb-4 rounded-full object-cover aspect-square
+                    <div className="flex mt-4 z-40 items-center ">
+                        {/* the channel description */}
+
+                        <img className="ml-4 md:ml-9 mb-4 rounded-full object-cover aspect-square
                 w-[100px] h-[100px] md:h-[20%] md:w-[20%]" src={profileSelected.owner.avatar} alt={profileSelected.owner.username} />
-                    <div className="flex pl-4 md:pl-10 justify-between font-[Saira] text-[20px] md:text-[28px] font-[500]  w-[70%] items-center h-[120px] ">
-                        <div className={`${darkMode ? "text-white" : "text-black"}`}>
-                            {profileSelected.owner.username}
+                        <div className="flex pl-4 md:pl-10 justify-between font-[Saira] text-[20px] md:text-[28px] font-[500]  w-[70%] items-center h-[120px] ">
+                            <div className={`${darkMode ? "text-white" : "text-black"}`}>
+                                {profileSelected.owner.username}
+                            </div>
+
                         </div>
+                        <Mails
+                            onClick={() => messageUser(profileSelected.owner._id)}
+                            className={`mr-4 `} size={28} />
+                    </div>
+
+                    <div className="flex mt-4 justify-evenly">
+                        <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
+                            {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
+                        </button>
+                        <button className={` text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px]`}>
+                            Follow
+                        </button>
+                    </div>
+
+
+                    <div className={`flex gap-2 mb-9 mt-9 ${darkMode ? "text-white" : "text-black"
+                        }`}>
+                        {/* some other thing */}
+                        <div
+                            onClick={() => {
+                                setVideoSelected(true);
+                                setYangSelected(false);
+                            }}
+                            className={`w-[50%] h-[2px] border-[2px]
+${videoSelected
+                                    ? darkMode
+                                        ? "border-white"
+                                        : "border-black"
+                                    : darkMode
+                                        ? "border-neutral-700"
+                                        : "border-neutral-300"
+                                }`}></div>
+                        <div
+                            onClick={() => {
+                                setVideoSelected(false);
+                                setYangSelected(true);
+                            }}
+                            className={`w-[50%] h-[2px] border-[2px]
+${yangSelected
+                                    ? darkMode
+                                        ? "border-white"
+                                        : "border-black"
+                                    : darkMode
+                                        ? "border-neutral-700"
+                                        : "border-neutral-300"
+                                }`}></div>
 
                     </div>
-                    <Mails
-                        onClick={() => messageUser(profileSelected.owner._id)}
-                        className={`mr-4 `} size={28} />
-                </div>
-            
-                <div className="flex mt-4 justify-evenly">
-                    <button onClick={() => setLocalSubscriptionStatus(!localSubscriptionStatus)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
-                        {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
-                    </button>
-                    <button className={` text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px]`}>
-                        Follow
-                    </button>
-                </div>
-            
-            
-                <div className={`flex gap-2 mb-9 mt-9 ${darkMode ? "text-white" : "text-black"
-                    }`}>
-                    {/* some other thing */}
-                    <div
-                        onClick={() => {
-                            setVideoSelected(true);
-                            setYangSelected(false);
-                        }}
-                        className={`w-[50%] h-[2px] border-[2px]
-${videoSelected
-                                ? darkMode
-                                    ? "border-white"
-                                    : "border-black"
-                                : darkMode
-                                    ? "border-neutral-700"
-                                    : "border-neutral-300"
-                            }`}></div>
-                    <div
-                        onClick={() => {
-                            setVideoSelected(false);
-                            setYangSelected(true);
-                        }}
-                        className={`w-[50%] h-[2px] border-[2px]
-${yangSelected
-                                ? darkMode
-                                    ? "border-white"
-                                    : "border-black"
-                                : darkMode
-                                    ? "border-neutral-700"
-                                    : "border-neutral-300"
-                            }`}></div>
 
-                </div>
+                    <div className="h-full">
+                        {videos.map((video, index) => (
 
-            <div className="h-full">
-                {videos.map((video, index) => (
+                            <div
+                                className="flex md:flex-row flex-col  justify-between pb-4"
+                                key={video._id || index}>
 
-                    <div
-                        className="flex md:flex-row flex-col  justify-between pb-4"
-                        key={video._id || index}>
+                                <div className={`w-full relative px-3 md:mx-0 flex `}>
 
-                        <div className={`w-full relative px-3 md:mx-0 flex `}>
-
-                            <img
-                                loading="lazy"
-                                className="object-cover aspect-video rounded-md w-full md:w-[50%]"
-                                src={video.thumbnail}
-                                alt={video.title}
-                            />
-                            <h3
-                                className={`md:mt-[1px] mt-3 ml-5 hidden  md:flex font-[600] text-[16px] line-clamp-2 
+                                    <img
+                                        loading="lazy"
+                                        className="object-cover aspect-video rounded-md w-full md:w-[50%]"
+                                        src={video.thumbnail}
+                                        alt={video.title}
+                                    />
+                                    <h3
+                                        className={`md:mt-[1px] mt-3 ml-5 hidden  md:flex font-[600] text-[16px] line-clamp-2 
                                 ${darkMode ? "text-white" : "text-black"}
                                 `}
-                            >{video.title}</h3>
-                            <EllipsisVertical
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    toggleMenu(video._id);
-                                }}
-                                className={` cursor-pointer hidden md:flex absolute right-1 mt-3 ${darkMode ? "text-white" : "text-black"
-                                    }`} size={18} />
-                            <MenuDropdown
-                                className="bottom-[-10px] md:bottom-[40px] lg:right-5"
-                                isOpen={menuOpenId === video._id}
-                                darkMode={darkMode}
-                                items={[
-                                    {
-                                        label: "Watch later",
-                                        onClick: () => handleWatchLater(video),
-                                    },
-                                    {
-                                        label: "Save to playlist",
-                                        onClick: () => handlePlaylist(video),
-                                    },
-                                    {
-                                        label: "Share",
-                                        onClick: () => handleShare(video),
-                                    },
-                                    {
-                                        label: "Not interested",
-                                        onClick: () => handleNotInterested(video),
-                                    },
-                                    {
-                                        label: "Report",
-                                        onClick: () => handleReport(video),
-                                    },
-                                ]}
-                            />
-                        </div>
+                                    >{video.title}</h3>
+                                    <EllipsisVertical
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleMenu(video._id);
+                                        }}
+                                        className={` cursor-pointer hidden md:flex absolute right-1 mt-3 ${darkMode ? "text-white" : "text-black"
+                                            }`} size={18} />
+                                    <MenuDropdown
+                                        className="bottom-[-10px] md:bottom-[40px] lg:right-5"
+                                        isOpen={menuOpenId === video._id}
+                                        darkMode={darkMode}
+                                        items={[
+                                            {
+                                                label: "Watch later",
+                                                onClick: () => handleWatchLater(video),
+                                            },
+                                            {
+                                                label: "Save to playlist",
+                                                onClick: () => handlePlaylist(video),
+                                            },
+                                            {
+                                                label: "Share",
+                                                onClick: () => handleShare(video),
+                                            },
+                                            {
+                                                label: "Not interested",
+                                                onClick: () => handleNotInterested(video),
+                                            },
+                                            {
+                                                label: "Report",
+                                                onClick: () => handleReport(video),
+                                            },
+                                        ]}
+                                    />
+                                </div>
 
-                        <div className="flex md:hidden items-start md:h-auto h-12 md:px-0 px-2 mb-5 md:mb-0 justify-between md:w-auto w-full gap-2 ">
-                            <h3
-                                className={`mt-4 mb-2 font-[Saira] pl-[10px] w-[95%] font-[500] md:hidden line-clamp-2 flex text-[16px]
+                                <div className="flex md:hidden items-start md:h-auto h-12 md:px-0 px-2 mb-5 md:mb-0 justify-between md:w-auto w-full gap-2 ">
+                                    <h3
+                                        className={`mt-4 mb-2 font-[Saira] pl-[10px] w-[95%] font-[500] md:hidden line-clamp-2 flex text-[16px]
 ${darkMode ? "text-white" : "text-black"}`}
-                            >{video.title}</h3>
-                            <EllipsisVertical
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    toggleMenu(video._id);
-                                }}
-                                className={` cursor-pointer md:hidden absolute right-2 mt-4 ${darkMode ? "text-white" : "text-black"
-                                    }`} size={20} />
-                        </div>
+                                    >{video.title}</h3>
+                                    <EllipsisVertical
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            toggleMenu(video._id);
+                                        }}
+                                        className={` cursor-pointer md:hidden absolute right-2 mt-4 ${darkMode ? "text-white" : "text-black"
+                                            }`} size={20} />
+                                </div>
 
+                            </div>
+
+
+                        ))}
                     </div>
-
-                
-                ))}
-            </div>
-            </div>
+                </div>
             )}
         </div>
     );
 }
 
-    
 
-    
+
+
 
 
 
