@@ -18,8 +18,7 @@ const ChannelIndv = (props) => {
     const [imageLoaded, setimageLoaded] = useState(false);
     const [videos, setVideos] = useState([]);
     const [pageLoading, setPageLoading] = useState(true);
-    const navigate = useNavigate();
-    const { username } = useParams();
+    const navigate = useNachannel?.username } = useParams();
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
@@ -29,8 +28,7 @@ const ChannelIndv = (props) => {
 
     async function loadChannel() {
         try {
-            const res = await api.post("/users/getchannel", {
-                username,
+            const res = await api.post("/users/getchannechannel?.username,
             });
 
             setChannel(res.data.data);
@@ -57,11 +55,9 @@ const ChannelIndv = (props) => {
             setLoadingVideos(false);
         }
     } 
-    useEffect(() => {
-        if (!username) return;
+    useEffectchannel?.username) return;
 
-        loadChannel();
-    }, [username]);
+        lchannel?.username]);
     useEffect(() => {
         if (!channel?._id) return;
         channelVideo(channel._id);
@@ -154,15 +150,15 @@ const ChannelIndv = (props) => {
                         {/* the channel description */}
 
                         <img className="ml-4 md:ml-9 mb-4 rounded-full object-cover aspect-square
-                w-[100px] h-[100px] md:h-[20%] md:w-[20%]" src={channel?.avatar} alt={profileSelected.owner.username} />
+                w-[100px] h-[100px] md:h-[20%] md:w-[20%]" src={channel?.avatar} alt={channel?.username} />
                         <div className="flex pl-4 md:pl-10 justify-between font-[Saira] text-[20px] md:text-[28px] font-[500]  w-[70%] items-center h-[120px] ">
                             <div className={`${darkMode ? "text-white" : "text-black"}`}>
-                                {profileSelected.owner.username}
+                                {channel?.username}
                             </div>
 
                         </div>
                         <Mails
-                            onClick={() => messageUser(profileSelected.owner._id)}
+                            onClick={() => messageUser(channel?.ownerId)}
                             className={`mr-4 `} size={28} />
                     </div>
 
