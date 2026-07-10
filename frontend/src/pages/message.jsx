@@ -36,11 +36,25 @@ export default function Messages({ currentId, darkMode }) {
             const res = await api.post("/users/userbyid", {
                 userId: receiver,
             });
+
             setReceiverInfo(res.data.data);
-            setReceiverLoaded(true);
-            console.log("Receiver Info:", res.data.data);
+
         } catch (err) {
+
+            if (err.response?.status === 429) {
+                setRateLimitMessage(true);
+
+                clearTimeout(window.rateLimitTimer);
+
+                window.rateLimitTimer = setTimeout(() => {
+                    setRateLimitMessage(false);
+                }, 2000);
+            }
+
             console.log(err);
+
+        } finally {
+            setReceiverLoaded(true);
         }
     }
 
@@ -113,9 +127,9 @@ export default function Messages({ currentId, darkMode }) {
             behavior: "smooth",
         });
     }, [messages]);
-    if(!loaded || !receiverLoaded) return <h2>
-        <LoaderTwo  text="Loading..." darkMode={false} />
-        </h2>;
+    if (!loaded || !receiverLoaded) return <h2>
+        <LoaderTwo text="Loading..." darkMode={false} />
+    </h2>;
     return (
 
         <div className={`w-full h-[100dvh] flex flex-col no-scrollbar`}   >
