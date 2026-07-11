@@ -205,14 +205,7 @@ const ChannelIndv = (props) => {
                             onClick={() => messageUser(channel?._id)}
                             className={`mr-4 `} size={28} />
                     </div>
-                    <div className="flex justify-evenly">
-                        <div>
-                            {subscribers}
-                        </div>
-                        <div>
-                            underway..
-                        </div>   
-                    </div>   
+                      
                     <div className="flex mt-4 justify-evenly">
                         
                         <button onClick={() => handleSubscription(channel?._id)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
@@ -258,7 +251,14 @@ ${yangSelected
                                 }`}></div>
 
                     </div>
-
+                    <div className="flex justify-evenly">
+                        <div>
+                            {subscribers}
+                        </div>
+                        <div>
+                            underway..
+                        </div>   
+                    </div> 
                     <div className="min-h-[50vh]">
                         {videos.length === 0 ? (
                             <p className={`m-auto ${darkMode ? "text-gray-400 bg-neutral-800" : "text-gray-600"} text-center h-[70vw] md:h-[10vw] mt-2`}>
