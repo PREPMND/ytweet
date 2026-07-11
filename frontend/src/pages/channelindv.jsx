@@ -75,7 +75,7 @@ const ChannelIndv = (props) => {
             setSubscribers((prev) =>
                 subscribed ? prev + 1 : Math.max(prev - 1, 0)
             );
-
+            console.log(subscribers);
         } catch (err) {
             console.log(err);
         }
