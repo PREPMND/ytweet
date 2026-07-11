@@ -65,7 +65,7 @@ const ChannelIndv = (props) => {
 
         try {
             const res = await api.post(
-                `users/subscriptions/${channel._id}`
+                `/users/subscriptions/${channel._id}`
             );
 
             const subscribed = res.data.subscribed;
