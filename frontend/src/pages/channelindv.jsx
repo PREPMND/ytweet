@@ -252,9 +252,9 @@ ${yangSelected
 
                     </div>
                     <div className={`${darkMode ? "text-gray-200 bg-neutral-900" : "text-gray-700"} pb-5 pt-6 pl-4`}>
-                        <div className="flex gap-3">
+                        <div className="flex  gap-6">
                             <div
-                                className={`px-4 py-2 rounded-xl border font-[Saira]
+                                className={`px-4 py-[6px] rounded-[10px] border font-[Saira]
                                 ${darkMode
                                         ? "bg-neutral-800 border-neutral-700"
                                         : "bg-neutral-100 border-neutral-200 shadow-sm"
@@ -265,7 +265,7 @@ ${yangSelected
                             </div>
 
                             <div
-                                className={`px-4 py-2 rounded-xl border font-[Saira]
+                                className={`px-4 py-[6px] rounded-[10px] border font-[Saira]
             ${darkMode
                                         ? "bg-neutral-800 border-neutral-700"
                                         : "bg-neutral-100 border-neutral-200 shadow-sm"
