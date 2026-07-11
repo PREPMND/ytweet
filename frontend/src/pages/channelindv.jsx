@@ -70,7 +70,7 @@ const ChannelIndv = (props) => {
 
             const subscribed = res.data.subscribed;
             console.log(subscribed);
-            
+
             setLocalSubscriptionStatus(subscribed);
 
             setSubscribers((prev) =>
@@ -81,6 +81,12 @@ const ChannelIndv = (props) => {
             console.log(err);
         }
     }
+    useEffect(() => {
+        if (!channel) return;
+
+        setLocalSubscriptionStatus(channel.isSubscribed);
+        setSubscribers(channel.subscriberCount);
+    }, [channel]);
     useEffect(() => {
         if (!username) return;
 
