@@ -66,15 +66,25 @@ const ChannelIndv = (props) => {
                 `/users/subscriptions/${channel._id}`
             );
 
-            const subscribed = res.data.subscribed;
-            console.log(subscribed);
+            const subscribed = res.data.subscribed === true;
+
+            console.log(
+                "subscribed:",
+                res.data.subscribed,
+                "type:",
+                typeof res.data.subscribed
+            );
 
             setLocalSubscriptionStatus(subscribed);
 
-            setSubscribers((prev) =>
-                subscribed ? prev + 1 : Math.max(prev - 1, 0)
-            );
-            console.log(subscribers);
+            setSubscribers((prev) => {
+                if (subscribed === true) {
+                    return prev + 1;
+                }
+
+                return Math.max(prev - 1, 0);
+            });
+
         } catch (err) {
             console.log(err);
         }
