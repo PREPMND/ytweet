@@ -17,6 +17,9 @@ const ChannelIndv = (props) => {
     const [imageLoaded, setimageLoaded] = useState(false);
     const [videos, setVideos] = useState([]);
     const [pageLoading, setPageLoading] = useState(true);
+
+    const [subscribers, setSubscribers] = useState(0);
+    
     const navigate = useNavigate();
     const { username } = useParams();
     const { data } = useQuery({
