@@ -205,9 +205,13 @@ const ChannelIndv = (props) => {
                             onClick={() => messageUser(channel?._id)}
                             className={`mr-4 `} size={28} />
                     </div>
-                    <div>
+                    <div className="flex justify-evenly">
                         <div>
-                            </div>
+                            {subscribers}
+                        </div>
+                        <div>
+                            underway..
+                        </div>   
                     </div>   
                     <div className="flex mt-4 justify-evenly">
                         
