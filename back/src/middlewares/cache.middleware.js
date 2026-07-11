@@ -10,10 +10,10 @@ export const cache = (expiry = 300) => {
             const cachedData = await redisClient.get(key);
 
             if (cachedData) {
-                console.log(key);
+                console.log("hit",key);
                 return res.status(200).json(JSON.parse(cachedData));
             }
-            console.log(key);
+            console.log("miss",key);
             const originalJson = res.json.bind(res);
 
             res.json = async (data) => {
