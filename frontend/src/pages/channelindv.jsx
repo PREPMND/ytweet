@@ -253,7 +253,7 @@ ${yangSelected
                     </div>
                     <div className={`${darkMode ? "text-gray-200 bg-neutral-900" : "text-gray-700"} pb-5 pt-6 pl-4 `}>
                         <div>
-                            Subscirbers - {subscribers}
+                            Subscribers - {subscribers}
                         </div>
                         <div>
                             Total Videos - {videos.length}
