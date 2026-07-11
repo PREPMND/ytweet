@@ -7,14 +7,14 @@ import {
   getConversationId
 } from "../controllers/socket.controller.js";
 import { rateLimiter } from "../middlewares/ratelimiter.middleware.js";
-
+import { cache } from "../middlewares/cache.middleware.js";
 const routerSocket = Router();
 
 routerSocket.use(verifyJWT);
 
 // Send a message
 routerSocket.post("/send",rateLimiter, sendMessage);
-routerSocket.get("/convo", getConversations);
+routerSocket.get("/convo", cache(300), getConversations);
 // Get all messages of a conversation
 routerSocket.get("/:receiverId", getMessages);
 // Get all conversations of current user
