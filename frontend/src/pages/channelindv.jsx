@@ -84,6 +84,7 @@ const ChannelIndv = (props) => {
 
                 return Math.max(prev - 1, 0);
             });
+            console.log(subscribers)
 
         } catch (err) {
             console.log(err);
