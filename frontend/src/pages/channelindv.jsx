@@ -90,7 +90,9 @@ const ChannelIndv = (props) => {
         }
     }
     useEffect(() => {
+        if(subscribers>1000) setSubscribers(subscribers/1000 + "k")
         console.log("UPDATED COUNT:", subscribers);
+
     }, [subscribers]);
     useEffect(() => {
         if (!channel) return;
