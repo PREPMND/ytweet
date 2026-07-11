@@ -256,8 +256,8 @@ ${yangSelected
                             <div
                                 className={`px-4 py-[6px] rounded-[10px] border font-[Saira]
                                 ${darkMode
-                                        ? "bg-neutral-800 border-neutral-700"
-                                        : "bg-neutral-100 border-neutral-200 shadow-sm"
+                                        ? "bg-neutral-800 text-red-300 border-neutral-700"
+                                        : "bg-neutral-100 text-red-700 border-neutral-200 shadow-sm"
                                     }`}
                             >
                                 <span className="font-[600]">{subscribers}</span>
@@ -267,8 +267,8 @@ ${yangSelected
                             <div
                                 className={`px-4 py-[6px] rounded-[10px] border font-[Saira]
             ${darkMode
-                                        ? "bg-neutral-800 border-neutral-700"
-                                        : "bg-neutral-100 border-neutral-200 shadow-sm"
+                                        ? "bg-neutral-800 text-amber-200 border-neutral-700"
+                                        : "bg-neutral-100 text-amber-500 border-neutral-200 shadow-sm"
                                     }`}
                             >
                                 <span className="font-[600]">{videos.length}</span>
