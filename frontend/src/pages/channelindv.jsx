@@ -7,7 +7,7 @@ import getCurrentUser from "../api/currentuser";
 import api from "../api/api";
 import { MenuDropdown } from "../utils/videoMenu";
 const ChannelIndv = (props) => {
-    const {  darkMode } = props;
+    const { darkMode } = props;
     const [localSubscriptionStatus, setLocalSubscriptionStatus] = useState(false);
     const [videoSelected, setVideoSelected] = useState(true);
     const [yangSelected, setYangSelected] = useState(false);
@@ -54,6 +54,26 @@ const ChannelIndv = (props) => {
             console.log(err);
         } finally {
             setLoadingVideos(false);
+        }
+    }
+    async function handleSubscription() {
+        if (!channel?._id) return;
+
+        try {
+            const res = await api.post(
+                `/subscriptions/toggle/${channel._id}`
+            );
+
+            const subscribed = res.data.subscribed;
+
+            setLocalSubscriptionStatus(subscribed);
+
+            setSubscribers((prev) =>
+                subscribed ? prev + 1 : Math.max(prev - 1, 0)
+            );
+
+        } catch (err) {
+            console.log(err);
         }
     }
     useEffect(() => {
@@ -219,74 +239,74 @@ ${yangSelected
                                     className="flex md:flex-row flex-col  justify-between pb-4"
                                     key={video._id || index}>
 
-                                <div className={`w-full relative px-3 md:mx-0 flex `}>
+                                    <div className={`w-full relative px-3 md:mx-0 flex `}>
 
-                                    <img
-                                        onClick={() => navigate(`/watchvideo/${video._id}`)}
-                                        loading="lazy"
-                                        className="object-cover aspect-video rounded-md w-full md:w-[50%]"
-                                        src={video.thumbnail}
-                                        alt={video.title}
-                                    />
-                                    <h3
-                                        className={`md:mt-[1px] mt-3 ml-5 hidden  md:flex font-[600] text-[16px] line-clamp-2 
+                                        <img
+                                            onClick={() => navigate(`/watchvideo/${video._id}`)}
+                                            loading="lazy"
+                                            className="object-cover aspect-video rounded-md w-full md:w-[50%]"
+                                            src={video.thumbnail}
+                                            alt={video.title}
+                                        />
+                                        <h3
+                                            className={`md:mt-[1px] mt-3 ml-5 hidden  md:flex font-[600] text-[16px] line-clamp-2 
                                 ${darkMode ? "text-white" : "text-black"}
                                 `}
-                                    >{video.title}</h3>
-                                    <EllipsisVertical
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            toggleMenu(video._id);
-                                        }}
-                                        className={` cursor-pointer hidden md:flex absolute right-1 mt-3 ${darkMode ? "text-white" : "text-black"
-                                            }`} size={18} />
-                                    <MenuDropdown
-                                        className="bottom-[-10px] md:bottom-[40px] lg:right-5"
-                                        isOpen={menuOpenId === video._id}
-                                        darkMode={darkMode}
-                                        items={[
-                                            {
-                                                label: "Watch later",
-                                                onClick: () => handleWatchLater(video),
-                                            },
-                                            {
-                                                label: "Save to playlist",
-                                                onClick: () => handlePlaylist(video),
-                                            },
-                                            {
-                                                label: "Share",
-                                                onClick: () => handleShare(video),
-                                            },
-                                            {
-                                                label: "Not interested",
-                                                onClick: () => handleNotInterested(video),
-                                            },
-                                            {
-                                                label: "Report",
-                                                onClick: () => handleReport(video),
-                                            },
-                                        ]}
-                                    />
-                                </div>
+                                        >{video.title}</h3>
+                                        <EllipsisVertical
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleMenu(video._id);
+                                            }}
+                                            className={` cursor-pointer hidden md:flex absolute right-1 mt-3 ${darkMode ? "text-white" : "text-black"
+                                                }`} size={18} />
+                                        <MenuDropdown
+                                            className="bottom-[-10px] md:bottom-[40px] lg:right-5"
+                                            isOpen={menuOpenId === video._id}
+                                            darkMode={darkMode}
+                                            items={[
+                                                {
+                                                    label: "Watch later",
+                                                    onClick: () => handleWatchLater(video),
+                                                },
+                                                {
+                                                    label: "Save to playlist",
+                                                    onClick: () => handlePlaylist(video),
+                                                },
+                                                {
+                                                    label: "Share",
+                                                    onClick: () => handleShare(video),
+                                                },
+                                                {
+                                                    label: "Not interested",
+                                                    onClick: () => handleNotInterested(video),
+                                                },
+                                                {
+                                                    label: "Report",
+                                                    onClick: () => handleReport(video),
+                                                },
+                                            ]}
+                                        />
+                                    </div>
 
-                                <div className="flex md:hidden items-start md:h-auto h-12 md:px-0 px-2 mb-5 md:mb-0 justify-between md:w-auto w-full gap-2 ">
-                                    <h3
-                                        className={`mt-4 mb-2 font-[Saira] pl-[10px] w-[95%] font-[500] md:hidden line-clamp-2 flex text-[16px]
+                                    <div className="flex md:hidden items-start md:h-auto h-12 md:px-0 px-2 mb-5 md:mb-0 justify-between md:w-auto w-full gap-2 ">
+                                        <h3
+                                            className={`mt-4 mb-2 font-[Saira] pl-[10px] w-[95%] font-[500] md:hidden line-clamp-2 flex text-[16px]
 ${darkMode ? "text-white" : "text-black"}`}
-                                    >{video.title}</h3>
-                                    <EllipsisVertical
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            toggleMenu(video._id);
-                                        }}
-                                        className={` cursor-pointer md:hidden absolute right-2 mt-4 ${darkMode ? "text-white" : "text-black"
-                                            }`} size={20} />
+                                        >{video.title}</h3>
+                                        <EllipsisVertical
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                toggleMenu(video._id);
+                                            }}
+                                            className={` cursor-pointer md:hidden absolute right-2 mt-4 ${darkMode ? "text-white" : "text-black"
+                                                }`} size={20} />
+                                    </div>
+
                                 </div>
 
-                            </div>
 
-
-                        )))}
+                            )))}
                     </div>
                 </div>
             )}
