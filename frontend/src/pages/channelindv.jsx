@@ -69,7 +69,8 @@ const ChannelIndv = (props) => {
             );
 
             const subscribed = res.data.subscribed;
-
+            console.log(subscribed);
+            
             setLocalSubscriptionStatus(subscribed);
 
             setSubscribers((prev) =>
