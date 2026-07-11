@@ -205,12 +205,12 @@ const ChannelIndv = (props) => {
                             onClick={() => messageUser(channel?._id)}
                             className={`mr-4 `} size={28} />
                     </div>
-                      
+
                     <div className="flex mt-4 justify-evenly">
-                        
+
                         <button onClick={() => handleSubscription(channel?._id)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
                             {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
-                            
+
                         </button>
                         <button className={` text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px]`}>
                             Follow
@@ -251,14 +251,31 @@ ${yangSelected
                                 }`}></div>
 
                     </div>
-                    <div className={`${darkMode ? "text-gray-200 bg-neutral-900" : "text-gray-700"} pb-5 pt-6 pl-4 `}>
-                        <div>
-                            Subscribers - {subscribers}
+                    <div className={`${darkMode ? "text-gray-200 bg-neutral-900" : "text-gray-700"} pb-5 pt-6 pl-4`}>
+                        <div className="flex gap-3">
+                            <div
+                                className={`px-4 py-2 rounded-xl border font-[Saira]
+                                ${darkMode
+                                        ? "bg-neutral-800 border-neutral-700"
+                                        : "bg-neutral-100 border-neutral-200 shadow-sm"
+                                    }`}
+                            >
+                                <span className="font-[600]">{subscribers}</span>
+                                <span className="ml-2 text-sm opacity-70">Subscribers</span>
+                            </div>
+
+                            <div
+                                className={`px-4 py-2 rounded-xl border font-[Saira]
+            ${darkMode
+                                        ? "bg-neutral-800 border-neutral-700"
+                                        : "bg-neutral-100 border-neutral-200 shadow-sm"
+                                    }`}
+                            >
+                                <span className="font-[600]">{videos.length}</span>
+                                <span className="ml-2 text-sm opacity-70">Videos</span>
+                            </div>
                         </div>
-                        <div>
-                            Total Videos - {videos.length}
-                        </div>   
-                    </div> 
+                    </div>
                     <div className="min-h-[50vh]">
                         {videos.length === 0 ? (
                             <p className={`m-auto ${darkMode ? "text-gray-400 bg-neutral-800" : "text-gray-600"} text-center h-[70vw] md:h-[10vw] mt-2`}>
