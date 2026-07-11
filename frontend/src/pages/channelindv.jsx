@@ -251,7 +251,7 @@ ${yangSelected
                                 }`}></div>
 
                     </div>
-                    <div className="flex justify-evenly">
+                    <div className={`${darkMode ? "text-gray-400 bg-neutral-900" : "text-gray-600"} `}>
                         <div>
                             {subscribers}
                         </div>
