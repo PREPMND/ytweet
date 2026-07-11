@@ -209,6 +209,7 @@ const ChannelIndv = (props) => {
                     <div className="flex mt-4 justify-evenly">
                         <button onClick={() => handleSubscription(channel?._id)} className={`bg-[#cc0000] ${localSubscriptionStatus ? "bg-neutral-700" : ""} text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px] `}>
                             {localSubscriptionStatus ? "Unsubscribe " : "Subscribe"}
+                            <span> {subscribers} </span>
                         </button>
                         <button className={` text-white text-[15px] w-[100px] md:w-[120px] text-center md:text-[18px] px-2 mr-2 md:mr-4 transition-all duration-500 ease-in-out py-1 rounded-[12px]`}>
                             Follow
