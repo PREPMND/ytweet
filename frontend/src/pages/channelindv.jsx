@@ -19,7 +19,7 @@ const ChannelIndv = (props) => {
     const [pageLoading, setPageLoading] = useState(true);
 
     const [subscribers, setSubscribers] = useState(0);
-    
+
     const navigate = useNavigate();
     const { username } = useParams();
     const { data } = useQuery({
@@ -52,7 +52,8 @@ const ChannelIndv = (props) => {
             });
 
             setVideos(res.data.data);
-
+            setLocalSubscriptionStatus(channel.isSubscribed);
+            setSubscribers(channel.subscriberCount);
         } catch (err) {
             console.log(err);
         } finally {
