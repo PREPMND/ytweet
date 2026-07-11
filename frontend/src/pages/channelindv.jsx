@@ -218,7 +218,7 @@ const ChannelIndv = (props) => {
                     </div>
 
 
-                    <div className={`flex gap-2 mb-9 mt-9 ${darkMode ? "text-white" : "text-black"
+                    <div className={`flex gap-2 mt-9 ${darkMode ? "text-white" : "text-black"
                         }`}>
                         {/* some other thing */}
                         <div
@@ -251,12 +251,12 @@ ${yangSelected
                                 }`}></div>
 
                     </div>
-                    <div className={`${darkMode ? "text-gray-400 bg-neutral-900" : "text-gray-600"} `}>
+                    <div className={`${darkMode ? "text-gray-200 bg-neutral-900" : "text-gray-700"} pb-5 pt-6 pl-4 `}>
                         <div>
-                            {subscribers}
+                            Subscirbers - {subscribers}
                         </div>
                         <div>
-                            underway..
+                            Total Videos - {videos.length}
                         </div>   
                     </div> 
                     <div className="min-h-[50vh]">
