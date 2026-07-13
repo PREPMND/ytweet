@@ -8,9 +8,9 @@ services:
       - "8000:8000"
 
   socket:
-    build: ./socket
+    build: ./SocketConn
     container_name: preytweet-socket
     env_file:
-      - ./socket/.env
+      - ./SocketConn/.env
     ports:
       - "9000:9000"
