@@ -1,0 +1,16 @@
+services:
+  backend:
+    build: ./backend
+    container_name: preytweet-backend
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8000:8000"
+
+  socket:
+    build: ./socket
+    container_name: preytweet-socket
+    env_file:
+      - ./socket/.env
+    ports:
+      - "9000:9000"
