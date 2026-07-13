@@ -20,7 +20,7 @@ const Login = () => {
 
     async function HandleSubmit(e) {
         e.preventDefault();
-
+        setLoading(true);
         try {
             if ((email.trim() || username.trim()) && password.trim()) {
                 const res = await axios.post(
@@ -34,7 +34,7 @@ const Login = () => {
                 setUsername("");
                 setPassword("");
                 setError(false);
-
+                
                 navigate("/");
             } else {
                 setError(true);
