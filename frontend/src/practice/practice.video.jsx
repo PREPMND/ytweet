@@ -11,9 +11,9 @@ const PracticeVideoPagination=()=>{
         const limit=3;
         console.log(limit);
         
-        const res= await api.get(`videos/getvideos?page=${page}&limit=${limit}`);
-        setVideoData(res.data.data.docs);
-        console.log(res.data.data.docs);
+        const res= await api.get(`videos/practicevideo?page=${page}&limit=${limit}`);
+        setVideoData(res.data.data.videos);
+        console.log(res.data.data);
         
     }
     useEffect(()=>{
@@ -24,10 +24,14 @@ const PracticeVideoPagination=()=>{
         <div>
             {videoData.map((video)=>{
                 return (
-                <div key={video._id}>
+                <div 
+                className="flex items-center flex-row-reverse justify-center "
+                key={video._id}>
                     <div>{video._id}</div>
-                    <div> 
-                        <img src={video.thumbnail}/>
+                    <div className="w-[60%]"> 
+                        <img
+                        className="w-[40%] aspect-[16/9] object-cover"
+                        src={video.thumbnail}/>
                     </div>
                 </div>);
             })}

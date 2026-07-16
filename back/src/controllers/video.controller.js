@@ -4,6 +4,7 @@ import { User } from "../models/user.models.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if needed
 import { apiError } from "../utils/apiError.js"; // adjust path if needed
 import { asyncHandler } from "../utils/asyncHandler.js";
+import { apiResponse } from "../utils/apiResponse.js";
 export const any = asyncHandler(async (req, res) => {
     const { owner } = req.body;
     const pipelines = await Video.aggregate([
@@ -172,3 +173,34 @@ export const deleteVideo = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+export const PracticeVideo = async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 6;
+        const skip = (page - 1) * limit;
+        const search= (req.query.search) || ""
+        if (page < 1 || limit < 1 || limit > 12) {
+            throw new apiError(401, "Invalid Query Parameters");
+        }
+        const filter = {};
+        if (search.trim()) {
+            filter.title = {
+                $regex: search,
+                $options: "i"
+            };
+        }
+        const [videos, totalVideos] = await Promise.all([
+            Video.find(filter)
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(limit),
+            Video.countDocuments(filter)
+        ]);
+        const totalPages = Math.ceil(totalVideos / limit);
+        return res.status(200).json(
+            new apiResponse(200, { videos, totalVideos, totalPages }, "The Video Feed Has Been Fetched")
+        );
+    } catch (error) {
+        throw new apiError(400,"Could'nt fetch ")
+    }
+}
