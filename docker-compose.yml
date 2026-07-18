@@ -6,6 +6,9 @@ services:
       - ./back/.env
     ports:
       - "8000:8000"
+    volumes:
+      - ./back:/app
+      - /app/node_modules
 
   socket:
     build: ./SocketConn
@@ -14,3 +17,6 @@ services:
       - ./SocketConn/.env
     ports:
       - "9000:9000"
+    volumes:
+      - ./SocketConn:/app
+      - /app/node_modules

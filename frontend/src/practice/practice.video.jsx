@@ -7,11 +7,11 @@ const PracticeVideoPagination=()=>{
         const getVideos=async ()=>{
         console.log("ewgwg");
         
-        const page=3;
-        const limit=3;
+        const page=1;
+        const limit=4;
         console.log(limit);
         
-        const res= await api.get(`videos/practicevideo?page=${page}&limit=${limit}`);
+        const res= await api.get(`videos/practicevideo?page=${page}&limit=${limit}&sort=${"latest"}`);
         setVideoData(res.data.data.videos);
         console.log(res.data.data);
         

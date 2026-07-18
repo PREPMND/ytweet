@@ -1,6 +1,6 @@
 import redisClient from "../redis/redis.js";
 
-export const cache = (expiry = 300) => {
+export const cache = (expiry = 20) => {
     return async (req, res, next) => {
 
         const key = `${req.method}:${req.originalUrl}:user:${req.user?._id ?? "public"}:${JSON.stringify(req.body ?? {})}`;

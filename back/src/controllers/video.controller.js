@@ -52,9 +52,20 @@ export const createVideo = async (req, res) => {
     }
 };
 export const getVideos = async (req, res) => {
+    console.log("ewgrhetjehwrhejsr")
     try {
-        const { page = 1, limit = 6 } = req.query;
-
+        const { page= 1, limit = 6 } = req.query;
+        const sort=req.query.sort || "latest";
+        
+        let sortOption={};
+        switch (sort){
+            case "latest":
+                sortOption={createdAt:-1};
+                break;
+            case "oldest":
+                sortOption={createdAt:1};
+                break;    
+        }
         const aggregate = Video.aggregate([
             { $match: { isPublished: true } },
             {
@@ -73,6 +84,7 @@ export const getVideos = async (req, res) => {
                     videoFile: 1,
                     thumbnail: 1,
                     duration: 1,
+                    createdAt:1,
                     "owner._id": 1,
                     "owner.username": 1,
                     "owner.email": 1,
@@ -80,12 +92,14 @@ export const getVideos = async (req, res) => {
                     "owner.coverImage": 1
                 },
             },
+            { $sort: sortOption }
         ]);
 
         // Use aggregatePaginate for proper pagination
         const options = {
-            page: parseInt(page, 20),
-            limit: parseInt(limit, 20)
+            page: parseInt(page, 10),
+            limit: parseInt(limit, 10),
+            sort: sortOption
         };
 
         const videos = await Video.aggregatePaginate(aggregate, options);
@@ -174,11 +188,13 @@ export const deleteVideo = async (req, res) => {
     }
 };
 export const PracticeVideo = async (req, res) => {
+    
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 6;
         const skip = (page - 1) * limit;
-        const search= (req.query.search) || ""
+        const search= (req.query.search) || "";
+        const sort= (req.query.sort) || "latest";
         if (page < 1 || limit < 1 || limit > 12) {
             throw new apiError(401, "Invalid Query Parameters");
         }
@@ -189,9 +205,19 @@ export const PracticeVideo = async (req, res) => {
                 $options: "i"
             };
         }
+        let sortOption={};
+        switch(sort){
+            case "latest":
+                sortOption={createdAt:-1};
+                break;
+            case "oldest":
+                sortOption={createdAt:1};
+                break;
+            
+        }
         const [videos, totalVideos] = await Promise.all([
             Video.find(filter)
-                .sort({ createdAt: -1 })
+                .sort(sortOption)
                 .skip(skip)
                 .limit(limit),
             Video.countDocuments(filter)
