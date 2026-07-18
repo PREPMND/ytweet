@@ -230,3 +230,35 @@ export const PracticeVideo = async (req, res) => {
         throw new apiError(400,"Could'nt fetch ")
     }
 }
+/*
+Q4. Build this Controller
+
+Implement:
+GET /api/v1/videos/trending
+Requirements:
+PaginationOnly published videosSort by views (highest first)Return:videos currentPage totalVideos totalPages */
+export const Trending=async(req,res)=>{
+    try {
+        const page=(req.query.page)|| 1;
+        const limit=(req.query.limit)||6;
+        if(page<1 || limit>10) {
+            throw new apiError(422,"Unprocessable or wrong parameters given, try again");
+        }
+    
+        const sortOption={createdAt:-1};
+        const [videos,totalVideos]= await Promise.all([
+            Video.find({}).sort(sortOption).skip((page-1)*limit).limit(limit),
+            Video.countDocuments()
+        ])
+        return res.status(200).json(
+            new apiResponse(200,{
+                videos,
+                currentPage:page,
+                totalVideos:totalVideos,
+                totalPages:Math.ceil(totalVideos/limit)
+            }),"Data fetched succesfully"
+        )
+    } catch (error) {
+        throw new apiError(401,"Cannot really fetch the desired output")
+    }
+}

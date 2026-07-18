@@ -1,13 +1,13 @@
 import express from "express";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { createVideo, getVideos, getVideoById, updateVideo, deleteVideo, any, PracticeVideo} from "../controllers/video.controller.js";
+import { createVideo, getVideos, getVideoById, updateVideo, deleteVideo, any, PracticeVideo, Trending} from "../controllers/video.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { rateLimiter } from "../middlewares/ratelimiter.middleware.js";
 import { cache } from "../middlewares/cache.middleware.js";
 const routerVideo = express.Router();
 console.log("wefwr")
 routerVideo.get("/practicevideo",PracticeVideo);
-
+routerVideo.get("/practicetrending",Trending)
 routerVideo.post("/createvideo", verifyJWT,rateLimiter,
     upload.fields([
         {

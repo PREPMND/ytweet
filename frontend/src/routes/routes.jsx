@@ -17,6 +17,7 @@ import ChangePassword from "../pages/changepassword.jsx"
 import Messages from "../pages/message.jsx"
 import MessageList from "../pages/messageList.jsx"
 import PracticeVideoPagination from "../practice/practice.video.jsx"
+import { TrendingPractice } from "../practice/practice.trending.jsx"
 export default function AppRoutes(props){
     const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode,profileSelected,currentId,setcurrentId, setProfileSelected, setisLoggedIn,isLoggedIn,videoIdSelected,setvideoIdSelected } = props;
     return(
@@ -44,6 +45,7 @@ export default function AppRoutes(props){
 
             //praticing routes
             <Route path="practice/videos" element ={<PracticeVideoPagination/>}/>
+            <Route path="practice/trending" element={<TrendingPractice/>}/>
             </Route>
         </Routes>
     )
