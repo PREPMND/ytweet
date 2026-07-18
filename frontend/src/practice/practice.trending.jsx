@@ -8,7 +8,7 @@ export const TrendingPractice=()=>{
         try {
             const page=1;
             const limit=3;
-            const res=await api.get(`/videos/practicetrending?page=${page}&limit=${limit}`);
+            const res=await api.get(`/videos/practicetrending?search=${"onlyfans"}`);
             console.log(res.data.data);
         } catch (error) {
             return error.status;

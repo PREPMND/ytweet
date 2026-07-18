@@ -2,11 +2,12 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
-import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown, MessageCircleCode, SquareDashedText, ScanSearch, MessageCircleDashedIcon } from "lucide-react"
+import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown, MessageCircleCode, SquareDashedText, ScanSearch, MessageCircleDashedIcon, CrossIcon } from "lucide-react"
 import { useState, useEffect, useEffectEvent } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import api from "../api/api.jsx";
+import { DBVideoSearch } from "../api/allcalls.jsx";
 
 const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav, darkMode, setDarkMode, isLoggedIn, setisLoggedIn }) => {
     const [navigate, setNavigate] = useState(false);
@@ -14,6 +15,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
     const [hoverAlbum, setHoverAlbum] = useState(false);
     const [hoverAirplay, setHoverAirplay] = useState(false);
     const [loggingOut, setLoggingOut] = useState(false);
+    const [searchTerm, setSearchTerm] = useState("");
     const queryClient = useQueryClient();
     const navigating = useNavigate();
     const location = useLocation();
@@ -25,6 +27,13 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
         refetchOnWindowFocus: true,
 
     });
+    const { data: data1, error: error1, isLoading: isLoading1 } = useQuery({
+        queryKey: ["searchResults", searchTerm],
+        queryFn: () => DBVideoSearch(searchTerm),
+        enabled: !!searchTerm,
+    })
+    console.log(data1);
+
     useEffect(() => {
         setcurrentId(data?.user._id);
         console.log(data?.user._id);
@@ -69,7 +78,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
             setLoggingOut(false);
         }
     }
-    
+
     return (
         <>
             <div className={`z-50 ${loggingOut ? "block" : "hidden"} fixed inset-0 flex items-center justify-center bg-black bg-opacity-50`}>
@@ -254,14 +263,62 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                 </div>
             )}
             <div className={`hidden md:flex z-50  items-center w-full pt-1 pb-1  px-10 ${darkMode ? "bg-black  text-white" : ""}`}>
-                <form className="w-full flex items-center">
-                    <input className={`w-[70%] hover:bg-neutral-700 transition-colors ease-in pl-8 h-9 ${darkMode ? "bg-neutral-800 text-white" : "text-black bg-slate-300"}`} type="text" />
-                    <ScanSearch className="ml-3" size={28} />
+                <form
+                    className="w-full flex items-center"
+                    onSubmit={(e) => { e.preventDefault() }}>
+                    <div className="relative w-[90%] flex items-center">
+                        <input className={`w-[70%] hover:bg-neutral-700 transition-colors ease-in pl-8 h-9 ${darkMode ? "bg-neutral-800 text-white" : "text-black bg-slate-300"}`}
+                            type="text"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <CrossIcon 
+                        onClick={()=>setSearchTerm("")}
+                        className={`
+                            rotate-45 ml-2
+                            ${searchTerm?"opacity-100":"opacity-0"} ` } size={12}/>
+                        <ScanSearch className="ml-2" size={28} />
+
+                        <div
+                            className={` w-[80%] ${searchTerm?"block":"hidden"} pt-2 pb-2 rounded-md top-full mt-2 left-0 flex flex-col absolute z-50 gap-3 bg-neutral-900`}>
+                            {isLoading1 &&
+                                <div className="items-center flex justify-center mt-2 py-1 w-full gap-3 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 cursor-pointer bg-neutral-900">
+                                    <div>Loading...Wait</div>
+                                </div>
+
+                            }
+                            {error1 && <p>Error loading results</p>}
+
+                            {data1?.videos?.slice(0, 5).map((video) => (
+                                <div
+                                    key={video._id}
+                                    onClick={()=>navigating(`/watchvideo/${video._id}`)}
+                                    className="flex py-2 transition-transform duration-100 ease-in items-center gap-3 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 cursor-pointer"
+                                >
+                                    <img
+                                        src={video.thumbnail}
+                                        alt={video.title}
+                                        className="w-16 ml-1 h-10 aspect-video object-cover rounded"
+                                    />
+                                    <div className="flex flex-col">
+                                        <span className="font-semibold line-clamp-1 text-sm">{video.title}</span>
+                                        <span className="text-xs mr-2 line-clamp-1 text-gray-500 hover:underline dark:text-gray-400">
+                                            {video.description}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+
+                        </div>
+
+                    </div>
                 </form>
-                <div className="text-[18px] font-[Saira]">Messages</div>
+                <div 
+                onClick={() => navigating("/message")}
+                className="text-[18px] font-[Saira] cursor-pointer">Messages</div>
                 <MessageCircleDashedIcon
                     onClick={() => navigating("/message")}
-                    className={`hover:scale-110 transition-transform duration-200 ease-in hover:shadow-lg hover:shadow-amber-200 hover:text-blue-400 mr-1 ml-4`} />
+                    className={`hover:scale-110 transition-transform cursor-pointer duration-200 ease-in hover:shadow-lg hover:shadow-amber-200 hover:text-blue-400 mr-1 ml-4`} />
             </div>
         </>
     )
