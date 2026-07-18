@@ -272,15 +272,15 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
-                        <CrossIcon 
-                        onClick={()=>setSearchTerm("")}
-                        className={`
+                        <CrossIcon
+                            onClick={() => setSearchTerm("")}
+                            className={`
                             rotate-45 ml-2
-                            ${searchTerm?"opacity-100":"opacity-0"} ` } size={12}/>
+                            ${searchTerm ? "opacity-100" : "opacity-0"} `} size={12} />
                         <ScanSearch className="ml-2" size={28} />
 
                         <div
-                            className={` w-[80%] ${searchTerm?"block":"hidden"} pt-2 pb-2 rounded-md top-full mt-2 left-0 flex flex-col absolute z-50 gap-3 bg-neutral-900`}>
+                            className={` w-[80%] ${searchTerm ? "block" : "hidden"} pt-2 pb-2 rounded-[10px] top-full mt-2 left-0 flex flex-col absolute z-50 gap-3 bg-neutral-900`}>
                             {isLoading1 &&
                                 <div className="items-center flex justify-center mt-2 py-1 w-full gap-3 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 cursor-pointer bg-neutral-900">
                                     <div>Loading...Wait</div>
@@ -288,21 +288,25 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
 
                             }
                             {error1 && <p>Error loading results</p>}
+                            {data1?.videos?.length === 0 && (
+                                <div className="p-2 text-sm text-gray-400">No results</div>
+                            )}
 
                             {data1?.videos?.slice(0, 5).map((video) => (
+
                                 <div
                                     key={video._id}
-                                    onClick={()=>navigating(`/watchvideo/${video._id}`)}
+                                    onClick={() => navigating(`/watchvideo/${video._id}`)}
                                     className="flex py-2 transition-transform duration-100 ease-in items-center gap-3 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 cursor-pointer"
                                 >
                                     <img
                                         src={video.thumbnail}
                                         alt={video.title}
-                                        className="w-16 ml-1 h-10 aspect-video object-cover rounded"
+                                        className="w-17 ml-1 h-12 aspect-video object-cover rounded"
                                     />
                                     <div className="flex flex-col">
-                                        <span className="font-semibold line-clamp-1 text-sm">{video.title}</span>
-                                        <span className="text-xs mr-2 line-clamp-1 text-gray-500 hover:underline dark:text-gray-400">
+                                        <span className="font-[500] font-[Saira] line-clamp-1 text-sm">{video.title}</span>
+                                        <span className="text-[12px] mr-2 line-clamp-1 text-gray-500 hover:underline dark:text-gray-400">
                                             {video.description}
                                         </span>
                                     </div>
@@ -313,9 +317,9 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
 
                     </div>
                 </form>
-                <div 
-                onClick={() => navigating("/message")}
-                className="text-[18px] font-[Saira] cursor-pointer">Messages</div>
+                <div
+                    onClick={() => navigating("/message")}
+                    className="text-[18px] font-[Saira] cursor-pointer">Messages</div>
                 <MessageCircleDashedIcon
                     onClick={() => navigating("/message")}
                     className={`hover:scale-110 transition-transform cursor-pointer duration-200 ease-in hover:shadow-lg hover:shadow-amber-200 hover:text-blue-400 mr-1 ml-4`} />
