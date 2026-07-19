@@ -54,17 +54,17 @@ export const createVideo = async (req, res) => {
 export const getVideos = async (req, res) => {
     console.log("ewgrhetjehwrhejsr")
     try {
-        const { page= 1, limit = 6 } = req.query;
-        const sort=req.query.sort || "latest";
-        
-        let sortOption={};
-        switch (sort){
+        const { page = 1, limit = 6 } = req.query;
+        const sort = req.query.sort || "latest";
+
+        let sortOption = {};
+        switch (sort) {
             case "latest":
-                sortOption={createdAt:-1};
+                sortOption = { createdAt: -1 };
                 break;
             case "oldest":
-                sortOption={createdAt:1};
-                break;    
+                sortOption = { createdAt: 1 };
+                break;
         }
         const aggregate = Video.aggregate([
             { $match: { isPublished: true } },
@@ -84,7 +84,7 @@ export const getVideos = async (req, res) => {
                     videoFile: 1,
                     thumbnail: 1,
                     duration: 1,
-                    createdAt:1,
+                    createdAt: 1,
                     "owner._id": 1,
                     "owner.username": 1,
                     "owner.email": 1,
@@ -187,33 +187,82 @@ export const deleteVideo = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 };
+{/*Task 1 (Main)
+
+Implement the controller.
+
+Requirements:
+
+page default = 1
+limit default = 6
+search optional
+sort: latest oldest mostViewed published filter pagination return videos currentPage totalPages totalVideos hasNextPage hasPrevPage
+*/}
 export const PracticeVideo = async (req, res) => {
-    
+
     try {
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 6;
         const skip = (page - 1) * limit;
-        const search= (req.query.search) || "";
-        const sort= (req.query.sort) || "latest";
+        const sort = (req.query.sort) || "latest";
         if (page < 1 || limit < 1 || limit > 12) {
             throw new apiError(401, "Invalid Query Parameters");
         }
-        const filter = {};
-        if (search.trim()) {
-            filter.title = {
-                $regex: search,
-                $options: "i"
-            };
+        let search = req.query.search || "";
+        let owner = "";
+        const words = search.trim().split(/\s+/);
+        const ownerToken = words.find(word => word.startsWith("o/"));
+        if (ownerToken) {
+            if (ownerToken && ownerToken.length > 2) {
+                owner = ownerToken.slice(2);
+            }
+            search = words
+                .filter(word => word !== ownerToken)
+                .join(" ");
         }
-        let sortOption={};
-        switch(sort){
+        let ownerIds = [];
+        if (owner.trim()) {
+            const users = await User.find({
+                username: {
+                    $regex: owner,
+                    $options: "i"
+                }
+            });
+            ownerIds = users.map(user => user._id);
+        }
+        const filter = {
+            isPublished: true,
+        };
+        if (search.trim()) {
+            filter.$or = [
+                {
+                    title: {
+                        $regex: search,
+                        $options: "i"
+                    }
+                },
+                {
+                    description: {
+                        $regex: search,
+                        $options: "i"
+                    }
+                },
+            ];
+        }
+        if (owner.trim()) {
+            filter.owner = {
+                $in: ownerIds,
+            }
+        }
+        let sortOption = {};
+        switch (sort) {
             case "latest":
-                sortOption={createdAt:-1};
+                sortOption = { createdAt: -1 };
                 break;
             case "oldest":
-                sortOption={createdAt:1};
+                sortOption = { createdAt: 1 };
                 break;
-            
+
         }
         const [videos, totalVideos] = await Promise.all([
             Video.find(filter)
@@ -227,7 +276,7 @@ export const PracticeVideo = async (req, res) => {
             new apiResponse(200, { videos, totalVideos, totalPages }, "The Video Feed Has Been Fetched")
         );
     } catch (error) {
-        throw new apiError(400,"Could'nt fetch ")
+        throw new apiError(400, "Could'nt fetch ")
     }
 }
 /*
@@ -237,26 +286,64 @@ Implement:
 GET /api/v1/videos/trending
 Requirements:
 PaginationOnly published videosSort by views (highest first)Return:videos currentPage totalVideos totalPages */
-export const Trending=async(req,res)=>{
+export const Trending = async (req, res) => {
     try {
 
-        const search=(req.query.search) || "";
-        const filter={};
-        if(search.trim()){
-            filter.title={
-                $regex:search,
-                $options:"i",
-            };
+        let search = req.query.search || "";
+        let owner = "";
+        const words = search.trim().split(/\s+/);
+        const ownerToken = words.find(word => word.startsWith("o/"));
+        if (ownerToken) {
+            if (ownerToken && ownerToken.length > 2) {
+                owner = ownerToken.slice(2);
+            }
+            search = words
+                .filter(word => word !== ownerToken)
+                .join(" ");
+        }
+        let ownerIds = [];
+        if (owner.trim()) {
+            const users = await User.find({
+                username: {
+                    $regex: owner,
+                    $options: "i"
+                }
+            });
+            ownerIds = users.map(user => user._id);
+        }
+        const filter = {
+            isPublished: true,
         };
+        if (search.trim()) {
+            filter.$or = [
+                {
+                    title: {
+                        $regex: search,
+                        $options: "i"
+                    }
+                },
+                {
+                    description: {
+                        $regex: search,
+                        $options: "i"
+                    }
+                },
+            ];
+        }
+        if (owner.trim()) {
+            filter.owner = {
+                $in: ownerIds,
+            }
+        }
 
-        const [videos,totalVideos]= await Promise.all([
+        const [videos, totalVideos] = await Promise.all([
             Video.find(filter),
             Video.countDocuments(filter)
         ])
         return res.status(200).json(
-            new apiResponse(200, { videos, totalVideos}, "The Search Results Has Been Fetched")
+            new apiResponse(200, { videos, totalVideos }, "The Search Results Has Been Fetched")
         );
     } catch (error) {
-        throw new apiError(401,"Cannot really fetch the desired output")
+        throw new apiError(401, "Cannot really fetch the desired output")
     }
 }

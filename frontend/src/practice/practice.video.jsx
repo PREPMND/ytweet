@@ -1,43 +1,44 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import api from "../api/api";
-import axios from "axios";
-const PracticeVideoPagination=()=>{
-    const [videoData,setVideoData]=useState([])
-        const getVideos=async ()=>{
-        console.log("ewgwg");
-        
-        const page=1;
-        const limit=4;
-        console.log(limit);
-        
-        const res= await api.get(`videos/practicevideo?page=${page}&limit=${limit}&sort=${"latest"}`);
-        setVideoData(res.data.data.videos);
-        console.log(res.data.data);
-        
-    }
-    useEffect(()=>{
-        getVideos();
-    },[])
-    return (
-        <>
-        <div>
-            {videoData.map((video)=>{
-                return (
-                <div 
-                className="flex items-center flex-row-reverse justify-center "
-                key={video._id}>
-                    <div>{video._id}</div>
-                    <div className="w-[60%]"> 
-                        <img
-                        className="w-[40%] aspect-[16/9] object-cover"
-                        src={video.thumbnail}/>
-                    </div>
-                </div>);
-            })}
-        </div>
-        </>
-    )
+const PracticeVideoPagination = () => {
+  const [videoData, setVideoData] = useState([])
+  const getVideos = async () => {
+    console.log("ewgwg");
+
+    const page = 1;
+    const limit = 4;
+    console.log(limit);
+    const searchText = "o/vsvibex only"
+    const res =await api.get(
+      `videos/practicevideo?page=${page}&limit=${limit}&sort=latest&search=${encodeURIComponent(searchText)}`
+    );;
+    setVideoData(res.data.data.videos);
+    console.log(res.data.data.videos);
+  }
+  useEffect(() => {
+    getVideos();
+  }, [])
+  return (
+    <>
+      <div>
+
+        {videoData.map((video) => {
+          console.log(videoData);
+          return (
+            <div
+              className="flex items-center flex-row-reverse justify-center "
+              key={video._id}>
+              <div>{video._id}</div>
+              <div className="w-[60%]">
+                <img
+                  className="w-[40%] aspect-[16/9] object-cover"
+                  src={video.thumbnail} />
+              </div>
+            </div>);
+        })}
+      </div>
+    </>
+  )
 }
 export default PracticeVideoPagination
 {/*

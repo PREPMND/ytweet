@@ -35,8 +35,8 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
     console.log(data1);
 
     useEffect(() => {
-        setcurrentId(data?.user._id);
-        console.log(data?.user._id);
+        setcurrentId(data?.user?._id);
+        console.log(data?.user?._id);
     }, [data])
     useEffect(() => {
         // Whenever the route changes to "/", reset menu state
@@ -267,7 +267,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                     className="w-full flex items-center"
                     onSubmit={(e) => { e.preventDefault() }}>
                     <div className="relative w-[90%] flex items-center">
-                        <input className={`w-[70%] hover:bg-neutral-700 transition-colors ease-in pl-8 h-9 ${darkMode ? "bg-neutral-800 text-white" : "text-black bg-slate-300"}`}
+                        <input className={`w-[70%] hover:bg-neutral-700 transition-colors ease-in pl-8 h-9 ${darkMode ? "bg-neutral-800 text-white" : "text-black hover:bg-slate-200 bg-slate-300"}`}
                             type="text"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
@@ -304,7 +304,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                                         alt={video.title}
                                         className="w-17 ml-1 h-12 aspect-video object-cover rounded"
                                     />
-                                    <div className="flex flex-col">
+                                    <div className={`flex flex-col ${darkMode?"text-white":"text-white"}`}>
                                         <span className="font-[500] font-[Saira] line-clamp-1 text-sm">{video.title}</span>
                                         <span className="text-[12px] mr-2 line-clamp-1 text-gray-500 hover:underline dark:text-gray-400">
                                             {video.description}
