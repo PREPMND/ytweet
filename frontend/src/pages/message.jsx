@@ -57,18 +57,28 @@ export default function Messages({ darkMode }) {
             setReceiverLoaded(true);
         }
     }
-
+    async function markMessagesAsSeen() {
+        try {
+            await api.patch(`/socket/seen/${conversationId}`);
+        } catch (err) {
+            console.log(err);
+        }
+    }
     useEffect(() => {
-        if (!receiver) return;
+        if (!receiver || !currentId) return;
         setLoaded(false);
         setReceiverLoaded(false);
         socket.connect();
 
         socket.emit("register-user", currentId);
         socket.emit("join-room", conversationId);
+        const initializeChat = async () => {
+            await loadMessages();          // Fetch messages first
+            await markMessagesAsSeen();    // Then mark them as seen
+            await loadReceiver();
+        };
 
-        loadMessages();
-        loadReceiver();
+        initializeChat();
 
         socket.on("receive-message", (msg) => {
             setMessages(prev => [...prev, msg]);
@@ -82,6 +92,23 @@ export default function Messages({ darkMode }) {
                     lastSeen: status.lastSeen,
                 }));
             }
+        });
+        socket.on("messages-seen", ({ conversationId }) => {
+            setMessages(prev =>
+                prev.map(msg => {
+                    if (
+                        msg.conversationId === conversationId &&
+                        msg.sender === currentId
+                    ) {
+                        return {
+                            ...msg,
+                            status: "seen",
+                        };
+                    }
+
+                    return msg;
+                })
+            );
         });
 
         return () => {
@@ -154,7 +181,7 @@ export default function Messages({ darkMode }) {
                         typeof msg.sender === "object"
                             ? msg.sender._id
                             : msg.sender;
-                    
+
                     return (
                         <div
                             key={i}

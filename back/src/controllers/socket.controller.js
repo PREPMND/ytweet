@@ -90,7 +90,7 @@ export const getConversations = asyncHandler(async (req, res) => {
                     conversationId: "$lastMessage.conversationId",
                     lastMessage: "$lastMessage.text",
                     createdAt: "$lastMessage.createdAt",
-
+                    lastSeen: "$lastMessage.lastSeen",
                     otherUser: {
                         _id: "$otherUser._id",
                         username: "$otherUser.username",
@@ -98,6 +98,9 @@ export const getConversations = asyncHandler(async (req, res) => {
                         fullName: "$otherUser.fullName"
                     }
                 }
+            },
+            {
+                $sort: { createdAt: -1 }
             }
 
         ]);
@@ -140,3 +143,43 @@ export const getMessages = asyncHandler(async (req, res) => {
     );
 
 });
+export const markMessagesAsSeen = async (req, res) => {
+    try {
+
+        const { conversationId } = req.params;
+
+        const receiver = req.user._id;
+
+        await Message.updateMany(
+            {
+                conversationId,
+                receiver: req.user._id,
+                status: "sent",
+            },
+            {
+                $set: {
+                    status: "seen",
+                },
+            }
+        );
+
+        const io = req.app.get("io");
+
+        io.to(conversationId).emit("messages-seen", {
+            conversationId,
+        });
+
+        return res.status(200).json({
+            success: true,
+            message: "Messages marked as seen"
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+};

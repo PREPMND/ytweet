@@ -25,7 +25,7 @@ const socketSchema=new Schema(
             enum:["text","image","video","file"],
             default:"text"
         },
-        seen:{
+        lastSeen:{
             type:Boolean,
             default:false,
         }

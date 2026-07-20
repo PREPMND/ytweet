@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import redis from "../redis/redis.js";
 import { Video } from "../models/video.models.js"; // adjust path if needed
 import { User } from "../models/user.models.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if needed
@@ -18,6 +19,7 @@ export const any = asyncHandler(async (req, res) => {
 });
 export const createVideo = async (req, res) => {
     try {
+
         const { title, description } = req.body;
 
         const videoLocalPath = req.files?.videoFile?.[0]?.path;
@@ -45,7 +47,10 @@ export const createVideo = async (req, res) => {
             duration: Math.floor(videoUpload.duration),
             thumbnail: thumbnailUpload?.secure_url,
         });
-
+        const keys = await redis.keys("videos:*");
+        if (keys.length > 0) {
+            await redis.del(keys);
+        }
         res.status(201).json({ success: true, data: videoDoc });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -56,7 +61,14 @@ export const getVideos = async (req, res) => {
     try {
         const { page = 1, limit = 6 } = req.query;
         const sort = req.query.sort || "latest";
+        const cacheKey = `videos:${page}:${limit}:${sort}`;
+        const cachedVideos = await redis.get(cacheKey);
 
+        if (cachedVideos) {
+            console.log("Cache Hit");
+
+            return res.status(200).json(JSON.parse(cachedVideos));
+        }
         let sortOption = {};
         switch (sort) {
             case "latest":
@@ -103,7 +115,7 @@ export const getVideos = async (req, res) => {
         };
 
         const videos = await Video.aggregatePaginate(aggregate, options);
-
+        
         function formatDuration(seconds) {
             const hours = Math.floor(seconds / 3600);
             const minutes = Math.floor((seconds % 3600) / 60);
@@ -116,7 +128,16 @@ export const getVideos = async (req, res) => {
             ...v,
             durationFormatted: formatDuration(v.duration || 0),
         }));
-
+        await redis.set(
+            cacheKey,
+            JSON.stringify({
+                success: true,
+                data: videos
+            }),
+            {
+                EX: 300
+            }
+        );
         res.status(200).json({ success: true, data: videos });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -125,6 +146,15 @@ export const getVideos = async (req, res) => {
 // Get single video by ID
 export const getVideoById = async (req, res) => {
     try {
+        const cacheKey = `video:${req.params.id}`;
+
+        const cachedVideo = await redis.get(cacheKey);
+
+        if (cachedVideo) {
+            console.log("Video Cache Hit");
+
+            return res.status(200).json(JSON.parse(cachedVideo));
+        }
         const video = await Video.findById(req.params.id).populate("owner", "username avatar email");
         function formatDuration(seconds) {
             const hours = Math.floor(seconds / 3600);
@@ -138,7 +168,16 @@ export const getVideoById = async (req, res) => {
         if (!video) {
             return res.status(404).json({ success: false, message: "Video not found" });
         }
-
+        await redis.set(
+            cacheKey,
+            JSON.stringify({
+                success: true,
+                data: video
+            }),
+            {
+                EX: 300
+            }
+        );
         res.status(200).json({ success: true, data: video });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -160,7 +199,11 @@ export const updateVideo = async (req, res) => {
 
         Object.assign(video, req.body);
         await video.save();
-
+        await redis.del(`video:${video._id}`);
+        const keys = await redis.keys("videos:*");
+        if (keys.length > 0) {
+            await redis.del(keys);
+        }
         res.status(200).json({ success: true, data: video });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -181,7 +224,12 @@ export const deleteVideo = async (req, res) => {
         }
 
         await video.deleteOne();
+        await redis.del(`video:${video._id}`);
+        const keys = await redis.keys("videos:*");
 
+        if (keys.length > 0) {
+            await redis.del(keys);
+        }
         res.status(200).json({ success: true, message: "Video deleted successfully" });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });

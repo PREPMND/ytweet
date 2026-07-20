@@ -4,7 +4,8 @@ import {
   sendMessage,
   getMessages,
   getConversations,
-  getConversationId
+  getConversationId,
+  markMessagesAsSeen
 } from "../controllers/socket.controller.js";
 import { rateLimiter } from "../middlewares/ratelimiter.middleware.js";
 import { cache } from "../middlewares/cache.middleware.js";
@@ -14,6 +15,11 @@ routerSocket.use(verifyJWT);
 
 // Send a message
 routerSocket.post("/send",rateLimiter, sendMessage);
+routerSocket.patch(
+    "/seen/:conversationId",
+    verifyJWT,
+    markMessagesAsSeen
+);
 routerSocket.get("/convo", cache(300), getConversations);
 // Get all messages of a conversation
 routerSocket.get("/:receiverId", getMessages);
