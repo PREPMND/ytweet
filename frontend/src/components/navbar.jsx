@@ -86,7 +86,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                     <PlayCircle className="animate-spin font-[400] text-blue-200" size={32} />
                 </div>
             </div>
-            <div className={darkMode ? "bg-black  text-white" : ""}>
+            <div className={`${darkMode ? "bg-black  text-white" : ""} w-full`}>
                 <div className="flex items-center inset-0 z-0 h-[80px] justify-between select-none border-gray-700">
 
                     <div className="flex items-center h-[80px] gap-4 pl-5">
@@ -147,7 +147,61 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                 <div className={`w-full border-t ${darkMode ? "border-gray-800" : ""}`}></div>
 
             </div>
+            <div className={`flex md:hidden z-50  items-center w-full pt-1 pb-1  px-6 ${darkMode ? "bg-black  text-white" : ""}`}>
+                <form
+                    className="w-full flex items-center"
+                    onSubmit={(e) => { e.preventDefault() }}>
+                    <div className="relative w-[100%] flex items-center">
+                        <input className={`min-w-full rounded-md hover:bg-neutral-700 transition-colors ease-in pl-3 h-8 ${darkMode ? "bg-neutral-800 text-white" : "text-black hover:bg-slate-200 bg-slate-300"}`}
+                            type="text"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <CrossIcon
+                            onClick={() => setSearchTerm("")}
+                            className={`
+                            absolute right-1
+                            rotate-45 ml-1
+                            ${searchTerm ? "opacity-100" : "opacity-0"} `} size={12} />
+                        <div
+                            className={` w-full ${searchTerm ? "block" : "hidden"} pt-2 pb-2 rounded-[10px] top-full mt-2 left-0 flex flex-col absolute z-50 gap-3 bg-neutral-900`}>
+                            {isLoading1 &&
+                                <div className="items-center flex justify-center mt-2 py-1 w-full gap-3 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 cursor-pointer bg-neutral-900">
+                                    <div>Loading...Wait</div>
+                                </div>
 
+                            }
+                            {error1 && <p>Error loading results</p>}
+                            {data1?.videos?.length === 0 && (
+                                <div className="p-2 text-sm text-gray-400">No results</div>
+                            )}
+
+                            {data1?.videos?.slice(0, 5).map((video) => (
+
+                                <div
+                                    key={video._id}
+                                    onClick={() => navigating(`/watchvideo/${video._id}`)}
+                                    className="flex py-1  transition-transform duration-100 ease-in items-center gap-3 rounded hover:bg-neutral-200 dark:hover:bg-neutral-700 cursor-pointer"
+                                >
+                                    <img
+                                        src={video.thumbnail}
+                                        alt={video.title}
+                                        className="w-15 ml-1 h-10 aspect-video object-cover rounded"
+                                    />
+                                    <div className={`flex flex-col ${darkMode ? "text-white" : "text-white"}`}>
+                                        <span className="font-[500] font-[Saira] line-clamp-1 text-[14px]">{video.title}</span>
+                                        <span className="text-[13px] mr-2 line-clamp-1 text-gray-500 hover:underline dark:text-gray-400">
+                                            {video.description}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
 
 
             <div className="md:hidden h-[7%] z-50 bg-neutral-900 fixed bottom-0 w-full flex items-center justify-evenly">
@@ -157,11 +211,6 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                 />
                 <ScanSearch className={`hover:scale-[1.05] transition-transform duration-300 ease-in-out text-white `} />
             </div>
-
-
-
-
-
             {navigate && (
                 <div className="fixed inset-0 z-40 flex items-center justify-center">
                     <div className="absolute inset-0 bg-black opacity-60"></div>
@@ -183,15 +232,13 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
             )}
 
             {menubar && (
-                <div className="fixed inset-0 z-50  flex">
+                <div className="fixed inset-0 z-50 rounded-r-md flex">
                     <div
                         className="absolute inset-0 bg-black opacity-60"
                         onClick={() => setMenubar(false)}
                     ></div>
-
                     <div
-
-                        className={`relative sm:w-[45%] w-[60%] md:w-[40%] lg:w-[30%] h-full shadow-lg flex flex-col pl-[30px] md:pl-[44px] pt-5 gap-6 z-50 ${darkMode ? "bg-neutral-900 shadow-lg shadow-neutral-200 no-scrollbar  text-white" : "bg-white"} select-none overflow-x-hidden overflow-y-scroll`}>
+                        className={`relative sm:w-[45%] rounded-r-lg w-[60%] md:w-[40%] lg:w-[30%] h-full shadow-lg flex flex-col pl-[30px] md:pl-[44px] pt-5 gap-6 z-50 ${darkMode ? "bg-neutral-900 shadow-lg shadow-neutral-200 no-scrollbar  text-white" : "bg-white"} select-none overflow-x-hidden overflow-y-scroll`}>
                         <div>
 
                             <div className="flex items-center mt-4 flex-col justify-center mr-[40px] mb-4">
@@ -207,7 +254,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                                 <button className={`border-2 px-3 md:px-3 mt-2 md:mt-3 py-1 rounded-[12px] mb-2 md:mb-0 text-[15px]  md:text-[18px] text-neutral-900 font-[500] hover:text-black transition-all duration-300 ease-in-out hover:scale-105  hover:shadow-sm ${darkMode ? "text-black bg-white  hover:shadow-fuchsia-400 hover:shadow-md" : "hover:shadow-stone-500"}`} >
                                     <span
                                         onClick={() => { navigating("/currentuserdetails") }}
-                                        className={`${isLoggedIn == true ? "flex" : "hidden"}`}>Account Details</span>
+                                        className={`${isLoggedIn == true ? "flex" : "hidden"} text-[13px] md:text-[16px] whitespace-nowrap`}>Account Details</span>
                                     <span
                                         onClick={() => { navigating("/login") }}
                                         className={`${isLoggedIn == false ? "flex" : "hidden"}`}>Log In</span>
@@ -304,7 +351,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                                         alt={video.title}
                                         className="w-17 ml-1 h-12 aspect-video object-cover rounded"
                                     />
-                                    <div className={`flex flex-col ${darkMode?"text-white":"text-white"}`}>
+                                    <div className={`flex flex-col ${darkMode ? "text-white" : "text-white"}`}>
                                         <span className="font-[500] font-[Saira] line-clamp-1 text-sm">{video.title}</span>
                                         <span className="text-[12px] mr-2 line-clamp-1 text-gray-500 hover:underline dark:text-gray-400">
                                             {video.description}
