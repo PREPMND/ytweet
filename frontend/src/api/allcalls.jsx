@@ -15,3 +15,13 @@ export const DBVideoSearch=async(search)=>{
     return error.status;
   }
 }
+
+export const searchUsers = async (query) => {
+    if (!query.trim()) return [];
+
+    const res = await api.post(
+        `/users/searchelastic?q=${encodeURIComponent(query)}`
+    );
+
+    return res.data.data;
+};

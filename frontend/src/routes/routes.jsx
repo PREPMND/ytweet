@@ -18,6 +18,7 @@ import Messages from "../pages/message.jsx"
 import MessageList from "../pages/messageList.jsx"
 import PracticeVideoPagination from "../practice/practice.video.jsx"
 import { TrendingPractice } from "../practice/practice.trending.jsx"
+import  SearchPage  from "../pages/searchIndv.jsx"
 export default function AppRoutes(props){
     const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode,profileSelected,currentId,setcurrentId, setProfileSelected, setisLoggedIn,isLoggedIn,videoIdSelected,setvideoIdSelected } = props;
     return(
@@ -29,6 +30,7 @@ export default function AppRoutes(props){
                 </>}/>
             </Route>
             <Route element={<AuthLayout />}>
+            <Route path="/search" element={<SearchPage/>}/>
             <Route path="/message/:receiverId" element={<Messages darkMode={darkMode} currentId={currentId} />}  />
             <Route path="/message" element={<MessageList currentId={currentId} darkMode={darkMode}/>}/>
             <Route path="/:username" element={<ChannelIndv profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setvideoIdSelected={setvideoIdSelected} videoIdSelected={videoIdSelected} />}/>

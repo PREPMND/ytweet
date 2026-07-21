@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import { connectRedis } from "./redis/redis.js";
+import { createIndex } from "./utils/elasticsearch.js";
 dotenv.config({
     path:'./.env'
 })
@@ -7,6 +8,11 @@ import { MongoConnection } from "./db/index.js";
 import { application } from "./app.js";
 MongoConnection();
 await connectRedis();
+try {
+    await createIndex();
+} catch (err) {
+    console.error("Elasticsearch not ready:", err.message);
+}
 application.use((req, res, next) => {
     next();
 });

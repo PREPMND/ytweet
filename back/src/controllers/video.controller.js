@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
 import redis from "../redis/redis.js";
+import elastic from "../utils/elasticsearch.js";
 import { Video } from "../models/video.models.js"; // adjust path if needed
 import { User } from "../models/user.models.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if needed
 import { apiError } from "../utils/apiError.js"; // adjust path if needed
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { apiResponse } from "../utils/apiResponse.js";
+
 export const any = asyncHandler(async (req, res) => {
     const { owner } = req.body;
     const pipelines = await Video.aggregate([
@@ -47,9 +49,24 @@ export const createVideo = async (req, res) => {
             duration: Math.floor(videoUpload.duration),
             thumbnail: thumbnailUpload?.secure_url,
         });
+        try {
+            await elastic.index({
+                index: "videos",
+                id: videoDoc._id.toString(),
+                document: {
+                    title: videoDoc.title,
+                    description: videoDoc.description,
+                    owner: videoDoc.owner.toString(),
+                    thumbnail: videoDoc.thumbnail,
+                    createdAt: videoDoc.createdAt,
+                },
+            });
+        } catch (err) {
+            console.error("Elasticsearch indexing failed:", err.message);
+        }
         const keys = await redis.keys("videos:*");
         if (keys.length > 0) {
-            await redis.del(keys);
+            await redis.del(...keys);
         }
         res.status(201).json({ success: true, data: videoDoc });
     } catch (error) {
@@ -115,7 +132,7 @@ export const getVideos = async (req, res) => {
         };
 
         const videos = await Video.aggregatePaginate(aggregate, options);
-        
+
         function formatDuration(seconds) {
             const hours = Math.floor(seconds / 3600);
             const minutes = Math.floor((seconds % 3600) / 60);
@@ -200,6 +217,14 @@ export const updateVideo = async (req, res) => {
         Object.assign(video, req.body);
         await video.save();
         await redis.del(`video:${video._id}`);
+        await elastic.update({
+            index: "videos",
+            id: video._id.toString(),
+            doc: {
+                title: video.title,
+                description: video.description
+            }
+        });
         const keys = await redis.keys("videos:*");
         if (keys.length > 0) {
             await redis.del(keys);
@@ -225,6 +250,10 @@ export const deleteVideo = async (req, res) => {
 
         await video.deleteOne();
         await redis.del(`video:${video._id}`);
+        await elastic.delete({
+            index: "videos",
+            id: video._id.toString()
+        });
         const keys = await redis.keys("videos:*");
 
         if (keys.length > 0) {
@@ -395,3 +424,48 @@ export const Trending = async (req, res) => {
         throw new apiError(401, "Cannot really fetch the desired output")
     }
 }
+export const searchElastic = async (req, res) => {
+    try {
+
+        const { q } = req.query;
+
+        if (!q || !q.trim()) {
+            return res.status(400).json({
+                success: false,
+                message: "Search query is required"
+            });
+        }
+
+        const result = await elastic.search({
+            index: "videos",
+            query: {
+                multi_match: {
+                    query: q,
+                    fields: [
+                        "title^2",
+                        "description"
+                    ],
+                    fuzziness: "AUTO"
+                }
+            }
+        });
+
+        const videos = result.hits.hits.map(hit => ({
+            _id: hit._id,
+            ...hit._source
+        }));
+
+        return res.status(200).json({
+            success: true,
+            data: videos
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+};

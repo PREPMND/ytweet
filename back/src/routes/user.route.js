@@ -5,6 +5,7 @@ import {toggleSubscription} from "../controllers/subscription.controller.js"
 import { upload } from "../middlewares/multer.middleware.js"
 import { rateLimiter } from "../middlewares/ratelimiter.middleware.js";
 import { cache } from "../middlewares/cache.middleware.js";
+import { searchElastic } from "../controllers/video.controller.js";
 const router = Router();
 //checkingroute
 router.route("/register").post(rateLimiter,
@@ -28,6 +29,7 @@ router.route("/login").post(
 
 //secured routes
 router.route("/logout").post(verifyJWT, logOutUser)
+router.route("/searchelastic").post(searchElastic);
 router.route("/refreshtoken").post(refreshAccessToken)
 router.route("/changedpsw").post(verifyJWT,changeCurrentPassword)
 //router.route("/currentuser").get(verifyJWT,getCurrentUser)
