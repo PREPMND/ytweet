@@ -1,8 +1,24 @@
 import { Client } from "@elastic/elasticsearch";
 
-const elastic = new Client({
-    node: process.env.ELASTIC_URL,
-});
+let elastic = null;
+
+if (process.env.ELASTIC_URL) {
+    const config = {
+        node: process.env.ELASTIC_URL,
+    };
+
+    if (
+        process.env.ELASTIC_USERNAME &&
+        process.env.ELASTIC_PASSWORD
+    ) {
+        config.auth = {
+            username: process.env.ELASTIC_USERNAME,
+            password: process.env.ELASTIC_PASSWORD,
+        };
+    }
+
+    elastic = new Client(config);
+}
 
 export async function createIndex() {
     const exists = await elastic.indices.exists({
@@ -15,8 +31,6 @@ export async function createIndex() {
         });
 
         console.log("Videos index created");
-    } else {
-        console.log("Videos index already exists");
     }
 }
 

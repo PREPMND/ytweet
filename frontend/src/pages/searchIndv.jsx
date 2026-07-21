@@ -23,7 +23,8 @@ export default function SearchPage() {
                 const data = await searchUsers(query);
 
                 setResults(data);
-
+                console.log(results);
+                
             }
             catch (err) {
 
