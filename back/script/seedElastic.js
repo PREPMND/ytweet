@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
 
-import { Client } from "@elastic/elasticsearch";
 import { MongoConnection } from "../src/db/index.js";
 import { Video } from "../src/models/video.models.js";
 

@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import redis from "../redis/redis.js";
-import elastic from "../utils/elasticsearch.js";
 import { Video } from "../models/video.models.js"; // adjust path if needed
 import { User } from "../models/user.models.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if needed
@@ -49,7 +48,7 @@ export const createVideo = async (req, res) => {
             duration: Math.floor(videoUpload.duration),
             thumbnail: thumbnailUpload?.secure_url,
         });
-        if (elastic) {
+        {/* if (elastic) {
             try {
                 await elastic.index({
                     index: "videos",
@@ -65,7 +64,7 @@ export const createVideo = async (req, res) => {
             } catch (err) {
                 console.error("Elasticsearch indexing failed:", err.message);
             }
-        }
+        }*/}
         const keys = await redis.keys("videos:*");
         if (keys.length > 0) {
             await redis.del(...keys);
@@ -219,7 +218,7 @@ export const updateVideo = async (req, res) => {
         Object.assign(video, req.body);
         await video.save();
         await redis.del(`video:${video._id}`);
-        if (elastic) {
+        {/* if (elastic) {
             try {
                 await elastic.update({
                     index: "videos",
@@ -232,7 +231,7 @@ export const updateVideo = async (req, res) => {
             } catch (err) {
                 console.error("Elastic update failed:", err.message);
             }
-        }
+        }*/}
         const keys = await redis.keys("videos:*");
         if (keys.length > 0) {
             await redis.del(keys);
@@ -258,7 +257,7 @@ export const deleteVideo = async (req, res) => {
 
         await video.deleteOne();
         await redis.del(`video:${video._id}`);
-        if (elastic) {
+        {/*if (elastic) {
             try {
                 await elastic.delete({
                     index: "videos",
@@ -267,7 +266,7 @@ export const deleteVideo = async (req, res) => {
             } catch (err) {
                 console.error("Elastic delete failed:", err.message);
             }
-        }
+        }*/ }
         const keys = await redis.keys("videos:*");
 
         if (keys.length > 0) {

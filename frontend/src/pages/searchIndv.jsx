@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { searchUsers } from "../api/allcalls";
 
 export default function SearchPage() {
 
