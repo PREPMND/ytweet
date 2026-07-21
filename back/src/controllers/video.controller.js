@@ -49,20 +49,22 @@ export const createVideo = async (req, res) => {
             duration: Math.floor(videoUpload.duration),
             thumbnail: thumbnailUpload?.secure_url,
         });
-        try {
-            await elastic.index({
-                index: "videos",
-                id: videoDoc._id.toString(),
-                document: {
-                    title: videoDoc.title,
-                    description: videoDoc.description,
-                    owner: videoDoc.owner.toString(),
-                    thumbnail: videoDoc.thumbnail,
-                    createdAt: videoDoc.createdAt,
-                },
-            });
-        } catch (err) {
-            console.error("Elasticsearch indexing failed:", err.message);
+        if (elastic) {
+            try {
+                await elastic.index({
+                    index: "videos",
+                    id: videoDoc._id.toString(),
+                    document: {
+                        title: videoDoc.title,
+                        description: videoDoc.description,
+                        owner: videoDoc.owner.toString(),
+                        thumbnail: videoDoc.thumbnail,
+                        createdAt: videoDoc.createdAt,
+                    },
+                });
+            } catch (err) {
+                console.error("Elasticsearch indexing failed:", err.message);
+            }
         }
         const keys = await redis.keys("videos:*");
         if (keys.length > 0) {
@@ -217,14 +219,20 @@ export const updateVideo = async (req, res) => {
         Object.assign(video, req.body);
         await video.save();
         await redis.del(`video:${video._id}`);
-        await elastic.update({
-            index: "videos",
-            id: video._id.toString(),
-            doc: {
-                title: video.title,
-                description: video.description
+        if (elastic) {
+            try {
+                await elastic.update({
+                    index: "videos",
+                    id: video._id.toString(),
+                    doc: {
+                        title: video.title,
+                        description: video.description,
+                    },
+                });
+            } catch (err) {
+                console.error("Elastic update failed:", err.message);
             }
-        });
+        }
         const keys = await redis.keys("videos:*");
         if (keys.length > 0) {
             await redis.del(keys);
@@ -250,10 +258,16 @@ export const deleteVideo = async (req, res) => {
 
         await video.deleteOne();
         await redis.del(`video:${video._id}`);
-        await elastic.delete({
-            index: "videos",
-            id: video._id.toString()
-        });
+        if (elastic) {
+            try {
+                await elastic.delete({
+                    index: "videos",
+                    id: video._id.toString(),
+                });
+            } catch (err) {
+                console.error("Elastic delete failed:", err.message);
+            }
+        }
         const keys = await redis.keys("videos:*");
 
         if (keys.length > 0) {

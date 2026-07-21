@@ -21,6 +21,11 @@ if (process.env.ELASTIC_URL) {
 }
 
 export async function createIndex() {
+    if (!elastic) {
+        console.log("Elasticsearch disabled");
+        return;
+    }
+
     const exists = await elastic.indices.exists({
         index: "videos",
     });
