@@ -23,7 +23,7 @@ export default function AppRoutes(props){
     const {menubar,setMenubar,darkModenav,setDarkModenav,darkMode,setDarkMode,profileSelected,currentId,setcurrentId, setProfileSelected, setisLoggedIn,isLoggedIn,videoIdSelected,setvideoIdSelected } = props;
     return(
         <Routes>
-            <Route element={<MainLayout currentId={currentId} setcurrentId={setcurrentId}  menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setMenubar={setMenubar} darkModenav={darkModenav} setDarkModenav={setDarkModenav} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />}>
+            <Route element={<MainLayout class="no-scrollbar" currentId={currentId} setcurrentId={setcurrentId}  menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setDarkMode={setDarkMode} setMenubar={setMenubar} darkModenav={darkModenav} setDarkModenav={setDarkModenav} isLoggedIn={isLoggedIn} setisLoggedIn={setisLoggedIn} />}>
             <Route path="/" element={
                 <>
                 <VideoList setDarkMode={setDarkMode}  profileSelected={profileSelected} setProfileSelected={setProfileSelected} darkMode={darkMode} setvideoIdSelected={setvideoIdSelected} videoIdSelected={videoIdSelected} />

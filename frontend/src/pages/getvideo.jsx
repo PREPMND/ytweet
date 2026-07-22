@@ -13,7 +13,7 @@ const VideoList = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
     const [menuOpenId, setMenuOpenId] = useState(null);
-    
+    const loadMoreRef = useRef(null);
     const {
         data,
         fetchNextPage,
@@ -51,40 +51,37 @@ const VideoList = (props) => {
         console.log("Report:", video);
     }
     useEffect(() => {
-        const handleScroll = () => {
+        const scrollContainer = document.getElementById("feed-scroll");
 
-            if (isFetchingNextPage || !hasNextPage) return;
-
-            const scrollTop = window.scrollY;
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
-
-            if (scrollTop + windowHeight >= documentHeight - 500) {
-                fetchNextPage();
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (
+                    entry.isIntersecting &&
+                    hasNextPage &&
+                    !isFetchingNextPage
+                ) {
+                    fetchNextPage();
+                }
+            },
+            {
+                root: scrollContainer,
+                threshold: 0.1,
+                rootMargin: "400px",
             }
-        };
+        );
 
-        let ticking = false;
+        const current = loadMoreRef.current;
 
-        const optimizedScroll = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    handleScroll();
-                    ticking = false;
-                });
-
-                ticking = true;
-            }
-        };
-
-        window.addEventListener("scroll", optimizedScroll, {
-            passive: true,
-        });
+        if (current) {
+            observer.observe(current);
+        }
 
         return () => {
-            window.removeEventListener("scroll", optimizedScroll);
+            if (current) {
+                observer.unobserve(current);
+            }
         };
-    }, [isFetchingNextPage, hasNextPage]);
+    }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
     useEffect(() => {
         if (location.state?.scrollY !== undefined) {
             window.scrollTo(0, location.state.scrollY);
@@ -105,10 +102,10 @@ const VideoList = (props) => {
             state: { scrollY: window.scrollY }
         });
     }
-    
+
     return (
         <div
-            className={`relative overflow-hidden md:pb-[70px] pb-[50px] min-h-screen cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
+            className={`relative overflow-hidden no-scrollbar md:pb-[70px] min-h-screen pb-[50px] cursor-pointer transition-all duration-300 ease-out will-change-transform pt-9 transform-gpu ${darkMode ? "bg-black" : "bg-white"
                 }`}
         >
             <div
@@ -123,6 +120,7 @@ const VideoList = (props) => {
                     .map((video, idx) => (
                         <div
                             key={video._id}
+                            ref={loadMoreRef}
                             onMouseEnter={() => {
                                 timeoutRef.current = setTimeout(() => {
                                     setPlayingId(video._id);
@@ -137,7 +135,7 @@ const VideoList = (props) => {
                         >
                             <div className="relative aspect-video select-none overflow-hidden rounded-xl bg-black">
 
-                                
+
 
                                 {playingId === video._id ? (
                                     <video
@@ -149,8 +147,8 @@ const VideoList = (props) => {
                                         preload="metadata"
                                         className="w-full absolute inset-0 h-full object-cover"
                                     />
-                                ) :  (
-                                    
+                                ) : (
+
                                     <img
                                         onClick={() => GoToVideo(video)}
                                         loading="lazy"
@@ -230,7 +228,7 @@ const VideoList = (props) => {
                                         <EllipsisVertical size={18} />
                                     </button>
                                 </div>
-                                <MenuDropdown 
+                                <MenuDropdown
                                     className="z-50  absolute right-2 bottom-3"
 
                                     isOpen={menuOpenId === video._id}

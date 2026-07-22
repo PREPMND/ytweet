@@ -212,8 +212,8 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                 <ScanSearch className={`hover:scale-[1.05] transition-transform duration-300 ease-in-out text-white `} />
             </div>
             {navigate && (
-                <div className="fixed inset-0 z-40 flex items-center justify-center">
-                    <div className="absolute inset-0 bg-black opacity-60"></div>
+                <div className="fixed inset-0 z-50 flex items-center justify-center">
+                    <div className="absolute inset-0 z-30 bg-black opacity-60"></div>
 
                     <div className={`relative w-[80%] h-[35%] md:w-[50%] md:h-[40%] rounded-lg shadow-lg flex flex-col items-center justify-center gap-6 z-50 ${darkMode ? "bg-gray-900 text-white" : "bg-white"}`}>
                         <h2 className="text-xl font-bold">Please log in to continue</h2>
@@ -234,7 +234,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
             {menubar && (
                 <div className="fixed inset-0 z-50 rounded-r-md flex">
                     <div
-                        className="absolute inset-0 bg-black opacity-60"
+                        className="absolute z-30 inset-0 bg-black opacity-60"
                         onClick={() => setMenubar(false)}
                     ></div>
                     <div
@@ -309,7 +309,7 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                     </div>
                 </div>
             )}
-            <div className={`hidden md:flex z-50  items-center w-full pt-1 pb-1  px-10 ${darkMode ? "bg-black  text-white" : ""}`}>
+            <div className={`hidden md:flex z-30  items-center w-full pt-1 pb-1  px-10 ${darkMode ? "bg-black  text-white" : ""}`}>
                 <form
                     className="w-full flex items-center"
                     onSubmit={(e) => { e.preventDefault() }}>
