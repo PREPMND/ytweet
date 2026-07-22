@@ -7,9 +7,7 @@ export default function MessageList({darkMode}) {
     const [conversations, setConversations] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
-    useEffect(() => {
-        getConversations();
-    }, []);
+    
 
     async function getConversations() {
 
@@ -27,7 +25,9 @@ export default function MessageList({darkMode}) {
         }
 
     }
-
+    useEffect(() => {
+        getConversations();
+    }, []);
     if (loading) return <h2><LoaderTwo  text="Loading..." darkMode={darkMode} /></h2>;
 
     return (
@@ -45,7 +45,7 @@ export default function MessageList({darkMode}) {
                         <div
                             key={chat.conversationId}
                             onClick={() => navigate(`/message/${chat.otherUser._id}`)}
-                            className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer hover:bg-gray-100 transition"
+                            className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer "
                         >
 
                             <img

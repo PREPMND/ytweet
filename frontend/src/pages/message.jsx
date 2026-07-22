@@ -59,7 +59,10 @@ export default function Messages({ darkMode }) {
     }
     async function markMessagesAsSeen() {
         try {
-            await api.patch(`/socket/seen/${conversationId}`);
+            await api.patch(`/socket/seen/${conversationId}?&receiver=${receiver}`);
+            socket.emit("messages-seen", {
+                conversationId,
+            });
         } catch (err) {
             console.log(err);
         }

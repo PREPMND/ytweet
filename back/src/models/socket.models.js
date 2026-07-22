@@ -25,9 +25,12 @@ const socketSchema=new Schema(
             enum:["text","image","video","file"],
             default:"text"
         },
+        status:{
+            type:String,
+            default:"sent",
+        },
         lastSeen:{
-            type:Boolean,
-            default:false,
+            type:Date,
         }
     },{timestamps:true}
 );
