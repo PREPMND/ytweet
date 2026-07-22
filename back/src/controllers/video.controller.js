@@ -376,7 +376,7 @@ Implement:
 GET /api/v1/videos/trending
 Requirements:
 PaginationOnly published videosSort by views (highest first)Return:videos currentPage totalVideos totalPages */
-export const Trending = async (req, res) => {
+{/*export const Trending = async (req, res) => {
     try {
 
         let search = req.query.search || "";
@@ -436,7 +436,7 @@ export const Trending = async (req, res) => {
     } catch (error) {
         throw new apiError(401, "Cannot really fetch the desired output")
     }
-}
+}*/}
 export const searchElastic = async (req, res) => {
     try {
 
@@ -482,7 +482,7 @@ export const searchElastic = async (req, res) => {
         });
     }
 };
-const Solve = async({page, limit, sort, search}) => {
+const Solve = async ({ page, limit, sort, search }) => {
     const skip = (page - 1) * limit;
     const words = search.trim().split(/\s+/);
     let owner = "";
@@ -503,7 +503,7 @@ const Solve = async({page, limit, sort, search}) => {
         })
         ownerIds = users.map(user => user._id);
     }
-    
+
     const filter = {
         isPublished: true,
     };
@@ -538,13 +538,13 @@ const Solve = async({page, limit, sort, search}) => {
             break;
 
     }
-    const [videos,totalVideos]=await Promise.all([
+    const [videos, totalVideos] = await Promise.all([
         Video.find(filter).skip(skip).limit(limit).sort(sortOption),
         Video.countDocuments(filter)
     ])
-    return [videos,totalVideos];
+    return [videos, totalVideos];
 }
-export const BackendScale =async (req, res) => {
+export const BackendScale = async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     if (page < 1) {
         throw new apiError(401, "Page paramters are wrong.");
@@ -559,8 +559,139 @@ export const BackendScale =async (req, res) => {
     }
     const search = (req.query.search) || "";
 
-    const [videos,totalVideos] =await Solve({page, limit, sort, search});
+    const [videos, totalVideos] = await Solve({ page, limit, sort, search });
     return res.status(200).json(
-        new apiResponse(200, { videos, totalVideos}, "the operation is successfull")
+        new apiResponse(200, { videos, totalVideos }, "the operation is successfull")
     );
+}
+export const buildVideoQuery = async (query) => {
+    try {
+        const { page = 1,
+            limit = 6,
+            search = "",
+            sort = "latest",
+            published = "true",
+            owner,
+            category,
+            minViews,
+            maxViews,
+            minDuration,
+            maxDuration,
+            createdAfter,
+            createdBefore } = query;
+        const filter = {};
+        let ownerIds = [];
+        if (owner.trim()) {
+            const users = await User.find({
+                username: {
+                    $regex: owner,
+                    $options: "i",
+                }
+            })
+            ownerIds = users.map(user => user._id);
+        }//assuming like the base datao of video documents have only ids of owner and ntg else. hence one did use ids. unless if owner filed or username filed was there it wouldhabe been a simple filter.owner and regex+options? right
+        if (search.trim()) {
+            filter.$or = [{
+                title: {
+                    $regex: search,
+                    $options: "i",
+                }
+            },
+            {
+                description: {
+                    $regex: search,
+                    $options:"i",
+                }
+            }
+            ]
+        }
+        if (ownerIds.length > 0) {
+            filter.owner = {
+                $in: ownerIds,
+            }
+        }
+        let sortOption = {};
+        switch (sort) {
+            case "latest":
+                sortOption = { createdAt: -1 };
+                break;
+            case "oldest":
+                sortOption = { createdAt: 1 };
+                break;
+        }
+        if (minViews || maxViews) {
+            filter.views = {};
+    
+            if (minViews) filter.views.$gte = Number(minViews);
+    
+            if (maxViews) filter.views.$lte = Number(maxViews);
+        }
+        if (maxDuration || minDuration) {
+            filter.duration = {};
+            if (minDuration) filter.duration.$gte = Number(minDuration);
+            if (maxDuration) filter.duration.$lte = Number(maxDuration);
+        }
+        if (createdAfter || createdBefore) {
+            filter.createdAt = {};
+            if (createdAfter) filter.createdAt.$gte = new Date(createdAfter);
+            if (createdBefore) filter.createdAt.$lte = new Date(createdBefore);
+        }
+        const pageNumber = Number(page);
+        const limitNumber = Number(limit);
+        const skip = (pageNumber - 1) * limitNumber;
+        return {
+            pageNumber,
+            limitNumber,
+            skip,
+            filter,
+            sortOption
+        };
+    } catch (error) {
+        throw new apiError(401,"The buildVideoQuery helper went through an error")
+    }
+}
+export const getVideosService = async (req) => {
+    try {
+        const { pageNumber:page, limitNumber:limit, skip, filter, sortOption:sort } =
+            await buildVideoQuery(req.query);
+        const [videos, totalVideos] = await Promise.all([
+            Video.find(filter).skip(skip).limit(limit).sort(sort),
+            Video.countDocuments(filter)
+        ])
+        return {
+            videos,
+            currentPage: pageNumber,
+            totalPages: Math.ceil(totalVideos / limitNumber),
+            totalVideos,
+            hasNextPage: pageNumber * limitNumber < totalVideos,
+            hasPrevPage: pageNumber > 1
+        };
+    } catch (error) {
+        throw new apiError(401,"getVideoService went through an error")
+    }
+}
+export const videoController = async (req, res) => {
+    try {
+        const {
+            videos,
+            currentPage,
+            totalPages,
+            totalVideos,
+            hasNextPage,
+            hasPrevPage
+        } = await getVideosService(req);
+    
+        return res.status(200).json(
+            new apiResponse(200, {
+                videos,
+                currentPage,
+                totalPages,
+                totalVideos,
+                hasNextPage,
+                hasPrevPage
+            },"The Video fetching process is succesfull")
+        )
+    } catch (error) {
+        throw new apiError(401,"The video controller went through an error");
+    }
 }
