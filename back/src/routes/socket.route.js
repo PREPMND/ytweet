@@ -17,7 +17,6 @@ routerSocket.use(verifyJWT);
 routerSocket.post("/send",rateLimiter, sendMessage);
 routerSocket.patch(
     "/seen/:conversationId",
-    verifyJWT,
     markMessagesAsSeen
 );
 routerSocket.get("/convo", getConversations);

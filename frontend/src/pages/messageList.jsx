@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import LoaderTwo from "../assets/loading2";
+import { Check, CheckCheck } from "lucide-react";
 export default function MessageList({darkMode}) {
 
     const [conversations, setConversations] = useState([]);
@@ -72,6 +73,18 @@ export default function MessageList({darkMode}) {
                                     minute: "2-digit",
                                 })}
                             </p>
+                            <div>
+                                {chat.status=="seen" && (
+                                    <div>
+                                        <CheckCheck className="text-sky-500"/>
+                                    </div>
+                                )}
+                                {
+                                    chat.status=="sent" && (
+                                        <Check className="text-red-400"/>
+                                    )
+                                }
+                            </div>
 
                         </div>
                     ))

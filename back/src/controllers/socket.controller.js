@@ -188,13 +188,13 @@ export const markMessagesAsSeen = async (req, res) => {
 
         const { conversationId } = req.params;
 
-        const receiver = req.receiver;
+        const receiver = req.query.receiver;
         const sender = req.user._id
-        
-        await Message.updateMany(
+        console.log(receiver+"_"+ sender)
+        const result=await Message.updateMany(
             {
                 conversationId,
-                receiver: req.receiver,
+                receiver: sender,
                 status: "sent",
             },
             {
@@ -203,6 +203,8 @@ export const markMessagesAsSeen = async (req, res) => {
                 },
             }
         );
+        console.log(result);
+        
         
     const senderKey = `conversations:${sender}`;
     const receiverKey = `conversations:${receiver}`;

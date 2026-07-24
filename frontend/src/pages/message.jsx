@@ -35,6 +35,7 @@ export default function Messages({ darkMode }) {
             const res = await api.get(`/socket/${receiver}`);
             setMessages(res.data.data);
             setLoaded(true);
+            console.log(res.data.data);
         } catch (err) {
             console.log(err);
         }
@@ -47,6 +48,7 @@ export default function Messages({ darkMode }) {
             });
 
             setReceiverInfo(res.data.data);
+            
 
         } catch (err) {
 
@@ -59,7 +61,8 @@ export default function Messages({ darkMode }) {
     }
     async function markMessagesAsSeen() {
         try {
-            await api.patch(`/socket/seen/${conversationId}?&receiver=${receiver}`);
+            await api.patch(`/socket/seen/${conversationId}`);
+            console.log("seeing")
             socket.emit("messages-seen", {
                 conversationId,
             });
@@ -82,9 +85,16 @@ export default function Messages({ darkMode }) {
         };
 
         initializeChat();
-
+        console.log("done")
         socket.on("receive-message", (msg) => {
-            setMessages(prev => [...prev, msg]);
+            setMessages(prev =>
+                prev.map(msg =>
+                    msg.conversationId === conversationId &&
+                        msg.sender === currentId
+                        ? { ...msg, status: "seen" }
+                        : msg
+                )
+            );
         });
 
         socket.on("user-status", (status) => {
@@ -96,31 +106,27 @@ export default function Messages({ darkMode }) {
                 }));
             }
         });
+        console.log("entering")
         socket.on("messages-seen", ({ conversationId }) => {
+            console.log("haha");
             setMessages(prev =>
-                prev.map(msg => {
-                    if (
-                        msg.conversationId === conversationId &&
+                prev.map(msg =>
+                    msg.conversationId === conversationId &&
                         msg.sender === currentId
-                    ) {
-                        return {
-                            ...msg,
-                            status: "seen",
-                        };
-                    }
-
-                    return msg;
-                })
+                        ? { ...msg, status: "seen" }
+                        : msg
+                )
             );
         });
 
         return () => {
             socket.off("receive-message");
             socket.off("user-status");
+            socket.off("message-seen")
             socket.disconnect();
         };
 
-    }, [receiver, currentId]);
+    }, [receiver, currentId, conversationId]);
 
     async function sendMessage() {
         if (!message.trim()) return;
@@ -157,6 +163,7 @@ export default function Messages({ darkMode }) {
         bottomRef.current?.scrollIntoView({
             behavior: "smooth",
         });
+        console.log(messages);
     }, [messages]);
     if (!loaded || !receiverLoaded) return <h2>
         <LoaderTwo text="Loading..." darkMode={darkMode} />
