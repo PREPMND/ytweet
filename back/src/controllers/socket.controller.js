@@ -7,18 +7,24 @@ import redis from "../redis/redis.js"
 export const getConversationId = (user1, user2) => {
     return [user1.toString(), user2.toString()].sort().join("_");
 };
+const emitToConversation = (req, conversationId, event, payload) => {
+    const io = req.app.get("io");
+    io.to(conversationId).emit(event, payload);
+};
 export const sendMessage = asyncHandler(async (req, res) => {
     const sender = req.user?._id;
     const { receiver, text, messageType = "text" } = req.body;
-    console.log(receiver);
+
     const conversationId = getConversationId(sender, receiver);
-    if (!receiver || !conversationId) {
-        throw new apiError(400, "Receiver and conversationId are required");
+
+    if (!receiver) {
+        throw new apiError(400, "Receiver is required");
     }
 
     if (!text?.trim() && messageType === "text") {
         throw new apiError(400, "Message cannot be empty");
     }
+
     const message = await Message.create({
         sender,
         receiver,
@@ -26,23 +32,7 @@ export const sendMessage = asyncHandler(async (req, res) => {
         text,
         messageType,
     });
-    // console.log("fwg");
-    // console.log(message)
-    // const a=await redis.del(`conversations:${toString(sender)}`);
-    // const b=await redis.del(`conversations:${toString(receiver)}`);
-    // console.log(a,b)
-    // console.log("Deleting cache...");
-    // console.log("Deleted");//
-    const senderKey = `conversations:${sender.toString()}`;
-    const receiverKey = `conversations:${receiver.toString()}`;
 
-    console.log("DEL SENDER:", senderKey);
-    console.log("DEL RECEIVER:", receiverKey);
-
-    const d1 = await redis.del(senderKey);
-    const d2 = await redis.del(receiverKey);
-
-    console.log("DEL RESULT:", d1, d2);
     return res.status(201).json(
         new apiResponse(201, message, "Message sent successfully")
     );
@@ -55,20 +45,20 @@ export const getConversations = asyncHandler(async (req, res) => {
     try {
         //const cacheKey = `conversations:${req.user._id.toString()}`;
         //const cached = await redis.get(cacheKey);
-        const cacheKey = `conversations:${req.user._id.toString()}`;
-        console.log("GET KEY:", cacheKey);
+        // const cacheKey = `conversations:${req.user._id.toString()}`;
+        // console.log("GET KEY:", cacheKey);
 
-        const cached = await redis.get(cacheKey);
-        console.log("GET RESULT:", cached ? "HIT" : "MISS");
-         if (cached) {
-             return res.status(200).json(
-                 new apiResponse(
-                     200,
-                     JSON.parse(cached),
-                     "Conversations fetched from cache"
-                 )
-             );
-         }
+        // const cached = await redis.get(cacheKey);
+        // console.log("GET RESULT:", cached ? "HIT" : "MISS");
+        //  if (cached) {
+        //      return res.status(200).json(
+        //          new apiResponse(
+        //              200,
+        //              JSON.parse(cached),
+        //              "Conversations fetched from cache"
+        //          )
+        //      );
+        //  }
         const conversations = await Message.aggregate([
             {
                 $match: {
@@ -124,7 +114,7 @@ export const getConversations = asyncHandler(async (req, res) => {
                     lastMessage: "$lastMessage.text",
                     createdAt: "$lastMessage.createdAt",
                     lastSeen: "$lastMessage.lastSeen",
-                    status:"$lastMessage.status",
+                    status: "$lastMessage.status",
                     otherUser: {
                         _id: "$otherUser._id",
                         username: "$otherUser.username",
@@ -140,11 +130,11 @@ export const getConversations = asyncHandler(async (req, res) => {
         ]);
         //console.log("SET KEY:", cacheKey);
         //console.log("Cached:", !!cached);
-        console.log("SET KEY:", cacheKey);
+        // console.log("SET KEY:", cacheKey);
 
-        await redis.set(cacheKey, JSON.stringify(conversations), {
-            EX: 300,
-        });
+        // await redis.set(cacheKey, JSON.stringify(conversations), {
+        //     EX: 300,
+        // });
         // await redis.set(
         //     cacheKey,
         //     JSON.stringify(conversations),
@@ -183,15 +173,12 @@ export const getMessages = asyncHandler(async (req, res) => {
     );
 
 });
-export const markMessagesAsSeen = async (req, res) => {
+export const markMessagesAsSeen = asyncHandler(async (req, res) => {
     try {
-
         const { conversationId } = req.params;
+        const sender = req.user._id;
 
-        const receiver = req.query.receiver;
-        const sender = req.user._id
-        console.log(receiver+"_"+ sender)
-        const result=await Message.updateMany(
+        await Message.updateMany(
             {
                 conversationId,
                 receiver: sender,
@@ -203,29 +190,15 @@ export const markMessagesAsSeen = async (req, res) => {
                 },
             }
         );
-        console.log(result);
-        
-        
-    const senderKey = `conversations:${sender}`;
-    const receiverKey = `conversations:${receiver}`;
-
-    console.log("DEL SENDER:", senderKey);
-    console.log("DEL RECEIVER:", receiverKey);
-
-    const d1 = await redis.del(senderKey);
-    const d2 = await redis.del(receiverKey);
 
         return res.status(200).json({
             success: true,
-            message: "Messages marked as seen"
+            message: "Messages marked as seen",
         });
-
     } catch (error) {
-
         return res.status(500).json({
             success: false,
-            message: error.message
+            message: error.message,
         });
-
     }
-};
+});

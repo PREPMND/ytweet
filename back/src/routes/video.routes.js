@@ -1,6 +1,6 @@
 import express from "express";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { createVideo, getVideos, getVideoById, updateVideo, deleteVideo, any, PracticeVideo} from "../controllers/video.controller.js";
+import { createVideo, getVideos, getVideoById, updateVideo, deleteVideo, any, PracticeVideo, Trending} from "../controllers/video.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { rateLimiter } from "../middlewares/ratelimiter.middleware.js";
 import { cache } from "../middlewares/cache.middleware.js";
@@ -24,7 +24,7 @@ routerVideo.post("/createvideo", verifyJWT,rateLimiter,
 routerVideo.post("/any",cache(300), any);
 routerVideo.get("/getvideos",cache(300), getVideos);
 console.log("Practice route registered");
-
+routerVideo.get("/practicetrending",Trending);
 routerVideo.get("/getvideo/:id",cache(300),  getVideoById);
 // use :id as a path param
 routerVideo.put("/updatevideo/:id", verifyJWT, rateLimiter, updateVideo);

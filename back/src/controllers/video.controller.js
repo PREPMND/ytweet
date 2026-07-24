@@ -376,7 +376,7 @@ Implement:
 GET /api/v1/videos/trending
 Requirements:
 PaginationOnly published videosSort by views (highest first)Return:videos currentPage totalVideos totalPages */
-{/*export const Trending = async (req, res) => {
+export const Trending = async (req, res) => {
     try {
 
         let search = req.query.search || "";
@@ -436,7 +436,7 @@ PaginationOnly published videosSort by views (highest first)Return:videos curren
     } catch (error) {
         throw new apiError(401, "Cannot really fetch the desired output")
     }
-}*/}
+}
 export const searchElastic = async (req, res) => {
     try {
 

@@ -3,41 +3,90 @@ import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import LoaderTwo from "../assets/loading2";
 import { Check, CheckCheck } from "lucide-react";
-export default function MessageList({darkMode}) {
+import { socket } from "../socket";
+import { useQuery } from "@tanstack/react-query";
+import getCurrentUser from "../api/currentuser";
+
+export default function MessageList({ darkMode }) {
+    const navigate = useNavigate();
 
     const [conversations, setConversations] = useState([]);
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
-    
+
+    const { data } = useQuery({
+        queryKey: ["currentUser"],
+        queryFn: getCurrentUser,
+        staleTime: 1000 * 60 * 10,
+    });
+
+    const currentId = data?.user?._id;
 
     async function getConversations() {
-
         try {
-
             const res = await api.get("/socket/convo");
-
             setConversations(res.data.data);
-            console.log(res.data.data)
         } catch (err) {
             console.log(err);
         } finally {
-            setTimeout(() => {
-            setLoading(false);}, 1000);
+            setLoading(false);
+        }
+    }
+
+    useEffect(() => {
+        if (!currentId) return;
+
+        if (!socket.connected) {
+            socket.connect();
         }
 
-    }
-    useEffect(() => {
+        socket.emit("register-user", currentId);
+
         getConversations();
-    }, []);
-    if (loading) return <h2><LoaderTwo  text="Loading..." darkMode={darkMode} /></h2>;
+
+        const handleReceive = async () => {
+            await getConversations();
+        };
+
+        const handleSeen = async () => {
+            await getConversations();
+        };
+
+        const handleStatus = ({ userId, isOnline, lastSeen }) => {
+            setConversations((prev) =>
+                prev.map((chat) =>
+                    chat.otherUser._id === userId
+                        ? {
+                              ...chat,
+                              otherUser: {
+                                  ...chat.otherUser,
+                                  isOnline,
+                                  lastSeen,
+                              },
+                          }
+                        : chat
+                )
+            );
+        };
+
+        socket.on("receive-message", handleReceive);
+        socket.on("messages-seen", handleSeen);
+        socket.on("user-status", handleStatus);
+
+        return () => {
+            socket.off("receive-message", handleReceive);
+            socket.off("messages-seen", handleSeen);
+            socket.off("user-status", handleStatus);
+        };
+    }, [currentId]);
+    if (loading) return <h2><LoaderTwo text="Loading..." darkMode={darkMode} /></h2>;
 
     return (
         <div>
-            
+
             <div className="text-2xl font-[Saira] ml-3 mt-3 font-semibold mb-4">Conversations</div>
-            <div 
-            
-            className="flex flex-col gap-2">
+            <div
+
+                className="flex flex-col gap-2">
 
                 {conversations.length === 0 ? (
                     <div className="text-center font-[500] font-[Saira] text-gray-500 py-3">No conversations yet</div>
@@ -74,14 +123,14 @@ export default function MessageList({darkMode}) {
                                 })}
                             </p>
                             <div>
-                                {chat.status=="seen" && (
+                                {chat.status == "seen" && (
                                     <div>
-                                        <CheckCheck className="text-sky-500"/>
+                                        <CheckCheck className="text-sky-500" />
                                     </div>
                                 )}
                                 {
-                                    chat.status=="sent" && (
-                                        <Check className="text-red-400"/>
+                                    chat.status == "sent" && (
+                                        <Check className="text-red-400" />
                                     )
                                 }
                             </div>
@@ -89,10 +138,10 @@ export default function MessageList({darkMode}) {
                         </div>
                     ))
                 )}
-                
+
             </div>
-        <div className="mt-10 border-b-[1.5px] w-full border-zinc-400 "></div>
-            
+            <div className="mt-10 border-b-[1.5px] w-full border-zinc-400 "></div>
+
         </div>
     );
 }
