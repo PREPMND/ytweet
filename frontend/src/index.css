@@ -12,14 +12,7 @@
   -ms-overflow-style: none; /* IE & Edge */
   scrollbar-width: none; /* Firefox */
 }
-body.dark {
-  background: #000;
-  color:#dddddd;
-}
 
-body.light {
-  background: #fff;
-}
 @keyframes toast {
   0% {
     transform: translate(-50%, 40px);
