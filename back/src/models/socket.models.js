@@ -31,6 +31,10 @@ const socketSchema=new Schema(
         },
         lastSeen:{
             type:Date,
+        },
+        isOnline:{
+            type:Boolean,
+            default:false
         }
     },{timestamps:true}
 );

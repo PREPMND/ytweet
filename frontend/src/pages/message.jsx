@@ -13,14 +13,10 @@ export default function Messages({ darkMode }) {
         queryFn: getCurrentUser,
         staleTime: 1000 * 60 * 10,
     });
-
     const { state } = useLocation();
 
     const [receiver, setReceiver] = useState(state?.receiver || null);
     const { receiverId } = useParams()
-    // ----------------------
-    // STATE
-    // ----------------------
 
     const [messages, setMessages] = useState([]);
 
@@ -36,61 +32,28 @@ export default function Messages({ darkMode }) {
             .sort()
             .join("_");
     }, [data, receiverId]);
-    console.log("conversationId:", conversationId);
-    console.log("receiverId:", receiverId);
-    console.log("current user:", data);
-
-    // ----------------------
-    // LOAD RECEIVER
-    // ----------------------
-
-    // const loadReceiver = async () => {
-    //     try {
-    //         const { data } = await api.get(`/socket/${receiverId}`);
-    //         setReceiver(data.data);
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // };
-
-
-    // ----------------------
-    // LOAD MESSAGES
-    // ----------------------
-
     const loadMessages = async () => {
         if (!conversationId) return;
-
         try {
             setLoading(true);
-
             const { data } = await api.get(
                 `/socket/${receiverId}`
             );
 
             setMessages(data.data || []);
-            console.log(messages)
         } catch (err) {
             console.log(err);
         } finally {
             setLoading(false);
         }
     };
-
-
-    // ----------------------
-    // MARK AS SEEN
-    // ----------------------
-
     const markMessagesAsSeen = async () => {
         if (!conversationId) return;
-
         try {
 
             await api.patch(
                 `/socket/seen/${conversationId}`
             );
-
             socket.emit("messages-seen", {
                 conversationId,
                 readerId: data._id
@@ -100,47 +63,30 @@ export default function Messages({ darkMode }) {
             console.log(err);
         }
     };
-
-
-    // ----------------------
-    // SEND MESSAGE
-    // ----------------------
-
     const sendMessage = async () => {
-
         if (!text.trim()) return;
-
         try {
-
             setSending(true);
-
             const { data } = await api.post("/socket/send", {
                 receiver: receiverId,
                 text,
             });
-
-
             const savedMessage = data.data;
-
             // avoid duplicate
             setMessages(prev => {
-
                 if (
                     prev.some(
                         msg => msg._id === savedMessage._id
                     )
                 ) return prev;
-
                 return [...prev, savedMessage];
             });
-
             // notify socket microservice
-            console.log('emiited')
             socket.emit(
                 "send-message",
                 savedMessage
             );
-            console.log("emit odne")
+            settext("");
         } catch (err) {
 
             console.log(err);
@@ -152,52 +98,14 @@ export default function Messages({ darkMode }) {
         }
     };
 
-
-    // ----------------------
-    // INITIAL LOAD
-    // ----------------------
-
-    // useEffect(() => {
-
-
-    // }, []);
-
-
     useEffect(() => {
 
         if (!conversationId) return;
-
         loadMessages();
 
     }, [conversationId]);
 
-
-    // ----------------------
-    // SOCKET CONNECT
-    // ----------------------
-
     useEffect(() => {
-
-        if (!data?.user?._id) return;
-
-        if (!socket.connected) {
-            socket.connect();
-        }
-
-        socket.emit("register-user", data.user._id);
-
-        return () => {
-            socket.disconnect();
-        };
-
-    }, [data]);
-
-    // ----------------------
-    // JOIN ROOM
-    // ----------------------
-
-    useEffect(() => {
-
         if (!conversationId) return;
 
         socket.emit(
@@ -206,56 +114,41 @@ export default function Messages({ darkMode }) {
         );
         console.log(conversationId)
     }, [conversationId]);
-
-
-    // ----------------------
-    // RECEIVE MESSAGE
-    // ----------------------
-
     useEffect(() => {
 
         const receiveMessage = (message) => {
+            console.log("RECEIVED:", message);
 
-            if (
-                message.conversationId !== conversationId
-            ) return;
-
+            if (message.conversationId !== conversationId) return;
             setMessages(prev => {
 
-                if (
-                    prev.some(
-                        msg => msg._id === message._id
-                    )
-                ) return prev;
+                if (prev.some(msg => msg._id === message._id))
+                    return prev;
 
                 return [...prev, message];
-
             });
-
             markMessagesAsSeen();
         };
-
-        socket.on(
-            "receive-message",
-            receiveMessage
-        );
-
+        socket.on("receive-message", receiveMessage);
         return () => {
-
-            socket.off(
-                "receive-message",
-                receiveMessage
-            );
-
+            socket.off("receive-message", receiveMessage);
         };
 
     }, [conversationId]);
+    useEffect(() => {
 
+        if (!receiver) return;
 
-    // ----------------------
-    // USER STATUS
-    // ----------------------
+        setOnlineUsers(prev => ({
+            ...prev,
+            [receiver._id]: {
+                userId: receiver._id,
+                isOnline: receiver.isOnline,
+                lastSeen: receiver.lastSeen,
+            }
+        }));
 
+    }, [receiver]);
     useEffect(() => {
 
         const handleStatus = (payload) => {
@@ -271,9 +164,7 @@ export default function Messages({ darkMode }) {
             "user-status",
             handleStatus
         );
-
         return () => {
-
             socket.off(
                 "user-status",
                 handleStatus
@@ -282,12 +173,6 @@ export default function Messages({ darkMode }) {
         };
 
     }, []);
-
-
-    // ----------------------
-    // SEEN EVENT
-    // ----------------------
-
     useEffect(() => {
 
         const handleSeen = ({ conversationId }) => {
@@ -316,30 +201,18 @@ export default function Messages({ darkMode }) {
         };
 
     }, []);
-
-
-    // ----------------------
-    // OPTIONAL TYPING
-    // ----------------------
-
     useEffect(() => {
-
         const handleTyping = ({ userId }) => {
 
             if (userId === receiver?._id)
                 setTyping(true);
 
         };
-
         const handleStopTyping = () => {
-
             setTyping(false);
-
         };
-
         socket.on("typing", handleTyping);
         socket.on("stop-typing", handleStopTyping);
-
         return () => {
 
             socket.off("typing", handleTyping);
@@ -353,11 +226,8 @@ export default function Messages({ darkMode }) {
             behavior: "smooth",
         });
     }, [messages]);
-    console.log(receiver)
     return (
         <div className="w-full h-[100dvh] flex flex-col">
-
-            {/* Header */}
 
             <div
                 className={`fixed top-0 left-0 right-0 h-[65px] z-50 flex items-center px-5 border-b
@@ -398,8 +268,6 @@ export default function Messages({ darkMode }) {
                 </div>
 
             </div>
-
-            {/* Messages */}
 
             <div
                 className={`flex-1 mt-[65px] mb-[78px] overflow-y-auto no-scrollbar flex flex-col gap-3 p-4
@@ -520,6 +388,7 @@ export default function Messages({ darkMode }) {
                         if (e.key === "Enter" && !sending) {
 
                             e.preventDefault();
+                            settext("");
                             sendMessage();
 
                         }
@@ -535,7 +404,9 @@ export default function Messages({ darkMode }) {
 
                 <button
                     disabled={sending}
-                    onClick={sendMessage}
+                    onClick={()=>{
+                        sendMessage();
+                    }}
                     className="bg-blue-500 hover:bg-blue-600 transition rounded-full p-3 text-white disabled:opacity-50"
                 >
 

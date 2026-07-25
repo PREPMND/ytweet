@@ -10,67 +10,29 @@ import getCurrentUser from "../api/currentuser";
 export default function MessageList({ darkMode }) {
     const navigate = useNavigate();
 
-
     const { data } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
         staleTime: 1000 * 60 * 10,
     });
-
-
-
-    // --------------------
-    // STATE
-    // --------------------
-
     const [conversations, setConversations] = useState([]);
     const [loading, setLoading] = useState(true);
-
-
-    // --------------------
-    // LOAD CONVERSATIONS
-    // --------------------
-
     const loadConversations = async () => {
-
         try {
-
             setLoading(true);
-
             const { data } = await api.get("/socket/convo");
-
             setConversations(data.data || []);
             console.log(
-
             )
         } catch (err) {
-
             console.log(err);
-
         } finally {
-
             setLoading(false);
-
         }
-
     };
-
-
-    // --------------------
-    // INITIAL FETCH
-    // --------------------
-
     useEffect(() => {
-
         loadConversations();
-
     }, []);
-
-
-    // --------------------
-    // RECEIVE MESSAGE
-    // --------------------
-
     useEffect(() => {
         const currentUser = data?.user;
         const handleReceiveMessage = (message) => {
@@ -81,7 +43,6 @@ export default function MessageList({ darkMode }) {
                     convo => convo.conversationId === message.conversationId
                 );
 
-                // Existing conversation
                 if (index !== -1) {
 
                     const updated = {
@@ -102,7 +63,6 @@ export default function MessageList({ darkMode }) {
                         ...prev.filter((_, i) => i !== index)
                     ];
                 }
-                // First conversation
                 return [
                     {
                         conversationId: message.conversationId,
@@ -130,112 +90,54 @@ export default function MessageList({ darkMode }) {
         };
 
     }, [data]);
-
-
-    // --------------------
-    // MESSAGE SEEN
-    // --------------------
-
     useEffect(() => {
 
         const handleSeen = ({ conversationId }) => {
-
             setConversations(prev =>
-
                 prev.map(convo => {
-
                     if (convo.conversationId !== conversationId)
                         return convo;
-
                     return {
-
                         ...convo,
-
                         unreadCount: 0,
-
                         lastMessage: {
-
                             ...convo.lastMessage,
-
                             status: "seen"
-
                         }
-
                     };
-
                 })
-
             );
-
         };
-
         socket.on("messages-seen", handleSeen);
-
         return () => {
-
             socket.off("messages-seen", handleSeen);
-
         };
-
     }, []);
-
-
-    // --------------------
-    // USER STATUS
-    // --------------------
-
     useEffect(() => {
-
         const handleStatus = (payload) => {
-
             setConversations(prev =>
-
                 prev.map(convo => {
-
                     if (
                         convo.participant?._id !== payload.userId
                     )
                         return convo;
-
                     return {
-
                         ...convo,
-
                         participant: {
-
                             ...convo.participant,
-
                             online: payload.online,
-
                             lastSeen: payload.lastSeen
-
                         }
-
                     };
-
                 })
-
             );
-
         };
-
         socket.on("user-status", handleStatus);
-
         return () => {
-
             socket.off("user-status", handleStatus);
-
         };
 
     }, []);
-
-
-    // --------------------
-    // OPTIONAL
-    // Reset unread count
-    // when user opens chat
-    // --------------------
-
     const clearUnread = (conversationId) => {
 
         setConversations(prev =>
@@ -259,7 +161,7 @@ export default function MessageList({ darkMode }) {
         );
 
     };
-    // if (loading) return <h2><LoaderTwo text="Loading..." darkMode={darkMode} /></h2>;
+    if (loading) return <h2><LoaderTwo text="Loading..." darkMode={darkMode} /></h2>;
 
     return (
         <div>

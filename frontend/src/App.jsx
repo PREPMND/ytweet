@@ -2,6 +2,8 @@ import AppRoutes from './routes/routes.jsx';
 import { useState, useEffect } from 'react';
 import { socket } from './socket.jsx';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from "@tanstack/react-query";
+import getCurrentUser from "./api/currentuser";
 const App = () => {
   {/*const [username,setUsername]=useState("")
   async function loginUser(credentials) {
@@ -28,7 +30,11 @@ const App = () => {
     fetchUser();
   }, []);
 */}
-
+  const { data } = useQuery({
+    queryKey: ["currentUser"],
+    queryFn: getCurrentUser,
+    staleTime: 1000 * 60 * 10,
+  });
   const [menubar, setMenubar] = useState(false);
   const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
@@ -41,9 +47,32 @@ const App = () => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     document.body.className = darkMode ? "dark" : "light";
   }, [darkMode]);
-  
+  useEffect(() => {
+
+    if (!data?.user?._id) return;
+
+    if (!socket.connected) {
+      socket.connect();
+    }
+
+    const register = () => {
+      console.log("EMIT REGISTER", data.user._id);
+      socket.emit("register-user", data.user._id);
+    };
+
+    if (socket.connected) {
+      register();
+    }
+
+    socket.on("connect", register);
+
+    return () => {
+      socket.off("connect", register);
+    };
+
+  }, [data]);
   const [darkModenav, setDarkModenav] = useState(true);
-  
+
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const [videoIdSelected, setvideoIdSelected] = useState({});
   const [currentId, setcurrentId] = useState(null);
@@ -53,7 +82,7 @@ const App = () => {
         <AppRoutes isLoggedIn={isLoggedIn} currentId={currentId} setcurrentId={setcurrentId} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav}
           videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected} />
       </div>
-      
+
     </>
   )
 }
