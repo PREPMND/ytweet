@@ -12,7 +12,6 @@
   -ms-overflow-style: none; /* IE & Edge */
   scrollbar-width: none; /* Firefox */
 }
-
 @keyframes toast {
   0% {
     transform: translate(-50%, 40px);
