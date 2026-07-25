@@ -272,11 +272,11 @@ export default function Messages({ darkMode, themeSelected }) {
             </div>
 
             <div
-                className={`flex-1 mt-[65px] mb-[78px] relative overflow-y-auto no-scrollbar flex flex-col gap-3 p-4
+                className={`flex-1 mt-[65px]  relative overflow-y-auto no-scrollbar flex flex-col gap-3 p-4
             `}
                 style={{
                     backgroundImage: `url(${themeSelected})`,
-                    backgroundSize: isDesktop ? "cover" : "contain",
+                    backgroundSize: isDesktop ? "contain" : "contain",
                     backgroundPosition: "center",
                     backgroundRepeat: "repeat",
                 }}
@@ -297,16 +297,13 @@ export default function Messages({ darkMode, themeSelected }) {
                                 : msg.sender;
 
                         const mine = senderId === data?.user?._id;
-
                         return (
                             <div>
-
                                 <div
                                     key={msg._id}
                                     className={`flex ${mine ? "justify-end" : "justify-start"
                                         }`}
                                 >
-
                                     <div
                                         className={`max-w-[75%] rounded-2xl px-4 py-2 break-words shadow
                                 ${mine

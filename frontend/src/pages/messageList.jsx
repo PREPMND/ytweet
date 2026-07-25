@@ -184,7 +184,7 @@ export default function MessageList({ darkMode, setthemeSelected, themeSelected 
         <div className="">
             <div className=" mb-1">
                 {/* Appearance Section */}
-                <div className="bg-zinc-900 rounded-2xl p-4 border border-zinc-800">
+                <div className="bg-white rounded-2xl p-4 border border-zinc-800">
 
                     <h2 className="text-lg font-semibold mb-4">
                         Message Background
@@ -213,13 +213,13 @@ export default function MessageList({ darkMode, setthemeSelected, themeSelected 
                     {/* Open Bottom Sheet */}
                     <button
                         onClick={() => setOpenThemeSelector(true)}
-                        className="mt-4 w-full flex items-center justify-between rounded-xl bg-zinc-800 hover:bg-zinc-700 transition p-4"
+                        className="mt-4 w-full flex items-center text-black justify-between rounded-xl bg-zinc-300 hover:bg-zinc-200 transition p-4"
                     >
                         <div>
                             <p className="font-medium text-left">
                                 Change Background
                             </p>
-                            <p className="text-sm text-zinc-400">
+                            <p className="text-sm text-zinc-800">
                                 Browse built-in themes
                             </p>
                         </div>
@@ -236,7 +236,7 @@ export default function MessageList({ darkMode, setthemeSelected, themeSelected 
                         className="fixed inset-0 bg-black/60 z-40"
                     />
 
-                    <div className="fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 rounded-t-3xl p-5 h-[70vh] animate-slideUp">
+                    <div className="fixed bottom-0 left-0 text-white right-0 z-50 bg-zinc-900 rounded-t-3xl p-5 h-[70vh] animate-slideUp">
 
                         <div className="mx-auto mb-5 h-1.5 w-12 rounded-full bg-zinc-600" />
 
