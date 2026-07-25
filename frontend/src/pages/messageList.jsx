@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import LoaderTwo from "../assets/loading2";
-import { Check, CheckCheck } from "lucide-react";
+import { Check, CheckCheck, ChevronRight } from "lucide-react";
 import { socket } from "../socket";
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
-
-export default function MessageList({ darkMode }) {
+import { themeObject } from "../utils/themeObject";
+export default function MessageList({ darkMode, setthemeSelected, themeSelected }) {
     const navigate = useNavigate();
 
     const { data } = useQuery({
@@ -15,6 +15,23 @@ export default function MessageList({ darkMode }) {
         queryFn: getCurrentUser,
         staleTime: 1000 * 60 * 10,
     });
+
+    const [currentThemes, setCurrentThemes] = useState(themeObject.Small);
+    const [openThemeSelector, setOpenThemeSelector] = useState(false);
+    useEffect(() => {
+        const media = window.matchMedia("(min-width: 640px)");
+        const updateThemeCollection = (e) => {
+            setthemeSelected(e.matches ? themeObject.PC[1] : themeObject.Small[1]);
+        };
+        updateThemeCollection(media);
+        media.addEventListener("change", updateThemeCollection);
+        return () => {
+            media.removeEventListener("change", updateThemeCollection);
+        };
+    }, []);
+    const themes = window.innerWidth >= 640
+        ? themeObject.PC
+        : themeObject.Small;
     const [conversations, setConversations] = useState([]);
     const [loading, setLoading] = useState(true);
     const loadConversations = async () => {
@@ -164,8 +181,90 @@ export default function MessageList({ darkMode }) {
     if (loading) return <h2><LoaderTwo text="Loading..." darkMode={darkMode} /></h2>;
 
     return (
-        <div>
+        <div className="">
+            <div className=" mb-1">
+                {/* Appearance Section */}
+                <div className="bg-zinc-900 rounded-2xl p-4 border border-zinc-800">
 
+                    <h2 className="text-lg font-semibold mb-4">
+                        Message Background
+                    </h2>
+
+                    {/* Current Theme Preview */}
+                    <div className="relative h-40 rounded-xl overflow-hidden">
+                        <img
+                            src={themeSelected}
+                            alt="Current Theme"
+                            className="w-full h-full object-cover"
+                        />
+
+                        <div className="absolute inset-0 bg-black/30" />
+
+                        <div className="absolute bottom-4 left-4">
+                            <h3 className="text-white font-semibold">
+                                Current Theme
+                            </h3>
+                            <p className="text-sm text-zinc-300">
+                                Applied to all conversations
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Open Bottom Sheet */}
+                    <button
+                        onClick={() => setOpenThemeSelector(true)}
+                        className="mt-4 w-full flex items-center justify-between rounded-xl bg-zinc-800 hover:bg-zinc-700 transition p-4"
+                    >
+                        <div>
+                            <p className="font-medium text-left">
+                                Change Background
+                            </p>
+                            <p className="text-sm text-zinc-400">
+                                Browse built-in themes
+                            </p>
+                        </div>
+
+                        <ChevronRight className="w-5 h-5 text-zinc-400" />
+                    </button>
+
+                </div>
+            </div>
+            {openThemeSelector && (
+                <>
+                    <div
+                        onClick={() => setOpenThemeSelector(false)}
+                        className="fixed inset-0 bg-black/60 z-40"
+                    />
+
+                    <div className="fixed bottom-0 left-0 right-0 z-50 bg-zinc-900 rounded-t-3xl p-5 h-[70vh] animate-slideUp">
+
+                        <div className="mx-auto mb-5 h-1.5 w-12 rounded-full bg-zinc-600" />
+
+                        <h2 className="text-xl font-semibold">
+                            Choose a Background
+                        </h2>
+
+                        <p className="text-zinc-400 text-sm mb-6">
+                            Select a background for your chats.
+                        </p>
+
+                        <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                            {Object.entries(themes).map(([id, src]) => (
+                                <button
+                                    key={id}
+                                    onClick={() => setthemeSelected(src)}
+                                >
+                                    <img
+                                        src={src}
+                                        className="w-full h-28 object-cover"
+                                    />
+                                </button>
+                            ))}
+                        </div>
+
+                    </div>
+                </>
+            )}
             <div className="text-2xl font-[Saira] ml-3 mt-3 font-semibold mb-4">Conversations</div>
             <div
 

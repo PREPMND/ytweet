@@ -6,7 +6,7 @@ import { useParams, useLocation } from "react-router-dom";
 import LoaderTwo from "../assets/loading2";
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "../api/currentuser";
-export default function Messages({ darkMode }) {
+export default function Messages({ darkMode, themeSelected }) {
     const bottomRef = useRef(null);
     const { data } = useQuery({
         queryKey: ["currentUser"],
@@ -14,7 +14,7 @@ export default function Messages({ darkMode }) {
         staleTime: 1000 * 60 * 10,
     });
     const { state } = useLocation();
-
+    console.log(themeSelected)
     const [receiver, setReceiver] = useState(state?.receiver || null);
     const { receiverId } = useParams()
 
@@ -221,10 +221,12 @@ export default function Messages({ darkMode }) {
         };
 
     }, [receiver]);
+    const isDesktop = window.innerWidth >= 640;
     useEffect(() => {
         bottomRef.current?.scrollIntoView({
             behavior: "smooth",
         });
+        
     }, [messages]);
     return (
         <div className="w-full h-[100dvh] flex flex-col">
@@ -270,11 +272,15 @@ export default function Messages({ darkMode }) {
             </div>
 
             <div
-                className={`flex-1 mt-[65px] mb-[78px] overflow-y-auto no-scrollbar flex flex-col gap-3 p-4
-            ${darkMode ? "bg-black" : "bg-white"}
+                className={`flex-1 mt-[65px] mb-[78px] relative overflow-y-auto no-scrollbar flex flex-col gap-3 p-4
             `}
+                style={{
+                    backgroundImage: `url(${themeSelected})`,
+                    backgroundSize: isDesktop ? "cover" : "contain",
+                    backgroundPosition: "center",
+                    backgroundRepeat: "repeat",
+                }}
             >
-
                 {loading ? (
 
                     <div className="flex justify-center mt-20">
@@ -293,53 +299,54 @@ export default function Messages({ darkMode }) {
                         const mine = senderId === data?.user?._id;
 
                         return (
-
-                            <div
-                                key={msg._id}
-                                className={`flex ${mine ? "justify-end" : "justify-start"
-                                    }`}
-                            >
+                            <div>
 
                                 <div
-                                    className={`max-w-[75%] rounded-2xl px-4 py-2 break-words shadow
-                                ${mine
-                                            ? "bg-blue-500 text-white"
-                                            : darkMode
-                                                ? "bg-neutral-800 text-white"
-                                                : "bg-neutral-200 text-black"
+                                    key={msg._id}
+                                    className={`flex ${mine ? "justify-end" : "justify-start"
                                         }`}
                                 >
 
-                                    <p>{msg.text}</p>
+                                    <div
+                                        className={`max-w-[75%] rounded-2xl px-4 py-2 break-words shadow
+                                ${mine
+                                                ? "bg-blue-500 text-white"
+                                                : darkMode
+                                                    ? "bg-neutral-800 text-white"
+                                                    : "bg-neutral-200 text-black"
+                                            }`}
+                                    >
 
-                                    <div className="flex justify-end items-center gap-1 mt-1 text-[10px] opacity-70">
+                                        <p>{msg.text}</p>
 
-                                        <span>
-                                            {new Date(msg.createdAt).toLocaleTimeString([], {
-                                                hour: "2-digit",
-                                                minute: "2-digit",
-                                            })}
-                                        </span>
+                                        <div className="flex justify-end items-center gap-1 mt-1 text-[10px] opacity-70">
 
-                                        {mine && (
-                                            msg.status === "seen" ? (
-                                                <CheckCheck
-                                                    size={13}
-                                                    className="text-sky-300"
-                                                />
-                                            ) : (
-                                                <Check
-                                                    size={13}
-                                                />
-                                            )
-                                        )}
+                                            <span>
+                                                {new Date(msg.createdAt).toLocaleTimeString([], {
+                                                    hour: "2-digit",
+                                                    minute: "2-digit",
+                                                })}
+                                            </span>
+
+                                            {mine && (
+                                                msg.status === "seen" ? (
+                                                    <CheckCheck
+                                                        size={13}
+                                                        className="text-sky-300"
+                                                    />
+                                                ) : (
+                                                    <Check
+                                                        size={13}
+                                                    />
+                                                )
+                                            )}
+
+                                        </div>
 
                                     </div>
 
                                 </div>
-
                             </div>
-
                         );
 
                     })
@@ -404,7 +411,7 @@ export default function Messages({ darkMode }) {
 
                 <button
                     disabled={sending}
-                    onClick={()=>{
+                    onClick={() => {
                         sendMessage();
                     }}
                     className="bg-blue-500 hover:bg-blue-600 transition rounded-full p-3 text-white disabled:opacity-50"
