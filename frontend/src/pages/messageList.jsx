@@ -10,8 +10,6 @@ import getCurrentUser from "../api/currentuser";
 export default function MessageList({ darkMode }) {
     const navigate = useNavigate();
 
-    const [conversations, setConversations] = useState([]);
-    const [loading, setLoading] = useState(true);
 
     const { data } = useQuery({
         queryKey: ["currentUser"],
@@ -19,66 +17,249 @@ export default function MessageList({ darkMode }) {
         staleTime: 1000 * 60 * 10,
     });
 
-    const currentId = data?.user?._id;
 
-    async function getConversations() {
+
+    // --------------------
+    // STATE
+    // --------------------
+
+    const [conversations, setConversations] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+
+    // --------------------
+    // LOAD CONVERSATIONS
+    // --------------------
+
+    const loadConversations = async () => {
+
         try {
-            const res = await api.get("/socket/convo");
-            setConversations(res.data.data);
+
+            setLoading(true);
+
+            const { data } = await api.get("/socket/convo");
+
+            setConversations(data.data || []);
+            console.log(
+
+            )
         } catch (err) {
+
             console.log(err);
+
         } finally {
+
             setLoading(false);
+
         }
-    }
+
+    };
+
+
+    // --------------------
+    // INITIAL FETCH
+    // --------------------
 
     useEffect(() => {
-        if (!currentId) return;
 
-        if (!socket.connected) {
-            socket.connect();
-        }
+        loadConversations();
 
-        socket.emit("register-user", currentId);
+    }, []);
 
-        getConversations();
 
-        const handleReceive = async () => {
-            await getConversations();
+    // --------------------
+    // RECEIVE MESSAGE
+    // --------------------
+
+    useEffect(() => {
+        const currentUser = data?.user;
+        const handleReceiveMessage = (message) => {
+
+            setConversations(prev => {
+
+                const index = prev.findIndex(
+                    convo => convo.conversationId === message.conversationId
+                );
+
+                // Existing conversation
+                if (index !== -1) {
+
+                    const updated = {
+
+                        ...prev[index],
+
+                        lastMessage: message,
+
+                        updatedAt: message.createdAt,
+
+                        unreadCount:
+                            message.sender.toString() === currentUser._id
+                                ? prev[index].unreadCount
+                                : (prev[index].unreadCount || 0) + 1
+                    };
+                    return [
+                        updated,
+                        ...prev.filter((_, i) => i !== index)
+                    ];
+                }
+                // First conversation
+                return [
+                    {
+                        conversationId: message.conversationId,
+                        participant: message.senderDetails,
+                        lastMessage: message,
+                        updatedAt: message.createdAt,
+                        unreadCount:
+                            message.sender.toString() === currentUser._id
+                                ? 0
+                                : 1
+                    },
+                    ...prev
+                ];
+
+            });
+
         };
 
-        const handleSeen = async () => {
-            await getConversations();
+        socket.on("receive-message", handleReceiveMessage);
+
+        return () => {
+
+            socket.off("receive-message", handleReceiveMessage);
+
         };
 
-        const handleStatus = ({ userId, isOnline, lastSeen }) => {
-            setConversations((prev) =>
-                prev.map((chat) =>
-                    chat.otherUser._id === userId
-                        ? {
-                              ...chat,
-                              otherUser: {
-                                  ...chat.otherUser,
-                                  isOnline,
-                                  lastSeen,
-                              },
-                          }
-                        : chat
-                )
+    }, [data]);
+
+
+    // --------------------
+    // MESSAGE SEEN
+    // --------------------
+
+    useEffect(() => {
+
+        const handleSeen = ({ conversationId }) => {
+
+            setConversations(prev =>
+
+                prev.map(convo => {
+
+                    if (convo.conversationId !== conversationId)
+                        return convo;
+
+                    return {
+
+                        ...convo,
+
+                        unreadCount: 0,
+
+                        lastMessage: {
+
+                            ...convo.lastMessage,
+
+                            status: "seen"
+
+                        }
+
+                    };
+
+                })
+
             );
+
         };
 
-        socket.on("receive-message", handleReceive);
         socket.on("messages-seen", handleSeen);
+
+        return () => {
+
+            socket.off("messages-seen", handleSeen);
+
+        };
+
+    }, []);
+
+
+    // --------------------
+    // USER STATUS
+    // --------------------
+
+    useEffect(() => {
+
+        const handleStatus = (payload) => {
+
+            setConversations(prev =>
+
+                prev.map(convo => {
+
+                    if (
+                        convo.participant?._id !== payload.userId
+                    )
+                        return convo;
+
+                    return {
+
+                        ...convo,
+
+                        participant: {
+
+                            ...convo.participant,
+
+                            online: payload.online,
+
+                            lastSeen: payload.lastSeen
+
+                        }
+
+                    };
+
+                })
+
+            );
+
+        };
+
         socket.on("user-status", handleStatus);
 
         return () => {
-            socket.off("receive-message", handleReceive);
-            socket.off("messages-seen", handleSeen);
+
             socket.off("user-status", handleStatus);
+
         };
-    }, [currentId]);
-    if (loading) return <h2><LoaderTwo text="Loading..." darkMode={darkMode} /></h2>;
+
+    }, []);
+
+
+    // --------------------
+    // OPTIONAL
+    // Reset unread count
+    // when user opens chat
+    // --------------------
+
+    const clearUnread = (conversationId) => {
+
+        setConversations(prev =>
+
+            prev.map(convo =>
+
+                convo.conversationId === conversationId
+
+                    ? {
+
+                        ...convo,
+
+                        unreadCount: 0
+
+                    }
+
+                    : convo
+
+            )
+
+        );
+
+    };
+    // if (loading) return <h2><LoaderTwo text="Loading..." darkMode={darkMode} /></h2>;
 
     return (
         <div>
@@ -94,7 +275,13 @@ export default function MessageList({ darkMode }) {
                     conversations.map((chat) => (
                         <div
                             key={chat.conversationId}
-                            onClick={() => navigate(`/message/${chat.otherUser._id}`)}
+                            onClick={() =>
+                                navigate(`/message/${chat.otherUser?._id}`, {
+                                    state: {
+                                        receiver: chat.otherUser,
+                                    },
+                                })
+                            }
                             className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer "
                         >
 
