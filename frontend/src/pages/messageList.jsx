@@ -207,7 +207,7 @@ export default function MessageList({ darkMode, setthemeSelected, themeSelected 
                 {/* Appearance Section */}
                 <div className="bg-white rounded-2xl p-4 border border-zinc-800">
 
-                    <h2 className="text-lg font-semibold mb-4">
+                    <h2 className="text-lg font-[Saira] font-semibold mb-4">
                         Message Background
                     </h2>
 
@@ -234,7 +234,7 @@ export default function MessageList({ darkMode, setthemeSelected, themeSelected 
                     {/* Open Bottom Sheet */}
                     <button
                         onClick={() => setOpenThemeSelector(true)}
-                        className="mt-4 w-full flex items-center text-black justify-between rounded-xl bg-zinc-300 hover:bg-zinc-200 transition p-4"
+                        className="mt-4 font-[Saira] w-full flex items-center text-black justify-between rounded-xl bg-zinc-300 hover:bg-zinc-200 transition p-4"
                     >
                         <div>
                             <p className="font-medium text-left">
