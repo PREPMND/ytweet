@@ -222,6 +222,7 @@ export default function Messages({ darkMode, themeSelected }) {
 
     }, [receiver]);
     const isDesktop = window.innerWidth >= 640;
+    
     useEffect(() => {
         bottomRef.current?.scrollIntoView({
             behavior: "smooth",
