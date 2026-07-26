@@ -1,5 +1,5 @@
 import { apiError } from "../utils/apiError.js";
-export const validatePagination=async(req,res)=>{
+export const validatePagination=async(req,res,next)=>{
     try {
         const page=Number(req.query.page)||1;
         if(page<1 || isNaN(Number(page))){
@@ -14,7 +14,7 @@ export const validatePagination=async(req,res)=>{
             page,
             limit
         }
-        next(req,res,next);
+        next();
     } catch (error) {
         next(new apiError(`${error.status}`,`The request responded with ${error.message}`));
     }

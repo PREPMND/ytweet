@@ -600,7 +600,7 @@ export const buildVideoQuery = async (query) => {
             {
                 description: {
                     $regex: search,
-                    $options:"i",
+                    $options: "i",
                 }
             }
             ]
@@ -621,9 +621,9 @@ export const buildVideoQuery = async (query) => {
         }
         if (minViews || maxViews) {
             filter.views = {};
-    
+
             if (minViews) filter.views.$gte = Number(minViews);
-    
+
             if (maxViews) filter.views.$lte = Number(maxViews);
         }
         if (maxDuration || minDuration) {
@@ -647,12 +647,12 @@ export const buildVideoQuery = async (query) => {
             sortOption
         };
     } catch (error) {
-        throw new apiError(401,"The buildVideoQuery helper went through an error")
+        throw new apiError(401, "The buildVideoQuery helper went through an error")
     }
 }
 export const getVideosService = async (req) => {
     try {
-        const { pageNumber:page, limitNumber:limit, skip, filter, sortOption:sort } =
+        const { pageNumber: page, limitNumber: limit, skip, filter, sortOption: sort } =
             await buildVideoQuery(req.query);
         const [videos, totalVideos] = await Promise.all([
             Video.find(filter).skip(skip).limit(limit).sort(sort),
@@ -667,7 +667,7 @@ export const getVideosService = async (req) => {
             hasPrevPage: pageNumber > 1
         };
     } catch (error) {
-        throw new apiError(401,"getVideoService went through an error")
+        throw new apiError(401, "getVideoService went through an error")
     }
 }
 export const videoController = async (req, res) => {
@@ -680,7 +680,7 @@ export const videoController = async (req, res) => {
             hasNextPage,
             hasPrevPage
         } = await getVideosService(req);
-    
+
         return res.status(200).json(
             new apiResponse(200, {
                 videos,
@@ -689,9 +689,45 @@ export const videoController = async (req, res) => {
                 totalVideos,
                 hasNextPage,
                 hasPrevPage
-            },"The Video fetching process is succesfull")
+            }, "The Video fetching process is succesfull")
         )
     } catch (error) {
-        throw new apiError(401,"The video controller went through an error");
+        throw new apiError(401, "The video controller went through an error");
+    }
+}
+export const queryBuilder = async (query, options) => {
+    //query here is req.validatedQuery
+    const {
+        searchableFields = [],
+        allowedSort = []
+    } = options;
+    const filter = {};
+    filter.isPublished = query.isPublished;
+    if (query.search) {
+        filter.$or = searchableFields.map(fields => ({
+            [fileds]: {
+                $regex: fields,
+                $options: "i"
+            }
+        }))
+    }
+    if (query.owner) {
+        filter.owner = {
+            $regex: owner,
+            $options: "i"
+        }//assuming that base data has owner field in it(the odcuments)
+    }
+    const sortMap = {
+        latest: { createdAt: -1 },
+        oldest: { createdAt: 1 },
+        mostViewed: { views: -1 },
+    }
+    const sortOption = allowedSort.includes(query.sort) ? sortMap[query.sort] : sortMap.latest;
+    return {
+        filter,
+        sortOption,
+        page:query.page,
+        limit:query.limit,
+        skip: (query.page - 1)*query.limit
     }
 }

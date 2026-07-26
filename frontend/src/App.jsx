@@ -55,11 +55,15 @@ const App = () => {
   const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
   const [profileSelected, setProfileSelected] = useState(null);
-  const [themeSelected,setthemeSelected]=useState(`PCSmall1`);
+  const [themeSelected, setthemeSelected] = useState(() => {
+    return localStorage.getItem("themeSelected") || PCSmall1;
+  });
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem("darkMode")) ?? false
   );
-
+  useEffect(() => {
+    localStorage.setItem("themeSelected", themeSelected);
+  }, [themeSelected]);
   useEffect(() => {
     localStorage.setItem("darkMode", JSON.stringify(darkMode));
     document.body.className = darkMode ? "dark" : "light";

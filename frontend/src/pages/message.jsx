@@ -272,7 +272,7 @@ export default function Messages({ darkMode, themeSelected }) {
             </div>
 
             <div
-                className={`flex-1 mt-[65px]  relative overflow-y-auto no-scrollbar flex flex-col gap-3 p-4
+                className={`flex-1 mt-[65px] pb-[78px] relative overflow-y-auto no-scrollbar flex flex-col gap-3 p-4
             `}
                 style={{
                     backgroundImage: `url(${themeSelected})`,

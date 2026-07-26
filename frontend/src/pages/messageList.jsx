@@ -21,7 +21,11 @@ export default function MessageList({ darkMode, setthemeSelected, themeSelected 
     useEffect(() => {
         const media = window.matchMedia("(min-width: 640px)");
         const updateThemeCollection = (e) => {
-            setthemeSelected(e.matches ? themeObject.PC[1] : themeObject.Small[1]);
+            setCurrentThemes(e.matches ? themeObject.PC : themeObject.Small);
+            const savedTheme = localStorage.getItem("themeSelected");
+            if (!savedTheme) {
+                setthemeSelected(e.matches ? themeObject.PC[1] : themeObject.Small[1]);
+            }
         };
         updateThemeCollection(media);
         media.addEventListener("change", updateThemeCollection);
@@ -233,10 +237,10 @@ export default function MessageList({ darkMode, setthemeSelected, themeSelected 
                 <>
                     <div
                         onClick={() => setOpenThemeSelector(false)}
-                        className="fixed inset-0 bg-black/60 z-40"
+                        className="fixed inset-0  bg-black/60 z-40"
                     />
 
-                    <div className="fixed bottom-0 left-0 text-white right-0 z-50 bg-zinc-900 rounded-t-3xl p-5 h-[70vh] animate-slideUp">
+                    <div className="fixed bottom-0 no-scrollbar overflow-y-scroll left-0 text-white right-0 z-50 bg-zinc-900 rounded-t-3xl p-5 h-[70vh] animate-slideUp">
 
                         <div className="mx-auto mb-5 h-1.5 w-12 rounded-full bg-zinc-600" />
 

@@ -6,7 +6,8 @@ import Small5 from "../../public/Small5.jpg";
 import Small6 from "../../public/Small6.jpg";
 import Small7 from "../../public/Small7.jpg";
 import Small8 from "../../public/Small8.jpg";
-
+import Small9 from "../../public/Small9.jpg";
+import Small10 from "../../public/Small10.jpg";
 import PCSmall1 from "../../public/PCSmall1.jpg";
 import PCSmall2 from "../../public/PCSmall2.jpg";
 
@@ -25,6 +26,8 @@ export const themeObject = {
     6: Small6,
     7: Small7,
     8: Small8,
+    9: Small9,
+    10: Small10
   },
 
   PCSmall: {
