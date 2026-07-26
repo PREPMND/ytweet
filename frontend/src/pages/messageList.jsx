@@ -21,18 +21,35 @@ export default function MessageList({ darkMode, setthemeSelected, themeSelected 
     useEffect(() => {
         const media = window.matchMedia("(min-width: 640px)");
         const updateThemeCollection = (e) => {
-            setCurrentThemes(e.matches ? themeObject.PC : themeObject.Small);
-            const savedTheme = localStorage.getItem("themeSelected");
-            if (!savedTheme) {
-                setthemeSelected(e.matches ? themeObject.PC[1] : themeObject.Small[1]);
+            setCurrentThemes(
+                e.matches
+                    ? themeObject.PC
+                    : { ...themeObject.Small, ...themeObject.PCSmall }
+            );
+
+            const collection = e.matches
+                ? { ...themeObject.Small, ...themeObject.PCSmall }
+                : themeObject.PC;
+
+            const key = Object.keys(collection).find(
+                (k) => collection[k] === themeSelected
+            );
+
+            if (key) {
+                setthemeSelected(
+                    e.matches
+                        ? themeObject.PC[key]
+                        : (themeObject.Small[key] || themeObject.PCSmall[key])
+                );
             }
         };
+
         updateThemeCollection(media);
+
         media.addEventListener("change", updateThemeCollection);
-        return () => {
-            media.removeEventListener("change", updateThemeCollection);
-        };
-    }, []);
+
+        return () => media.removeEventListener("change", updateThemeCollection);
+    }, [themeSelected]);
     const themes = window.innerWidth >= 640
         ? themeObject.PC
         : themeObject.Small;

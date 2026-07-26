@@ -276,7 +276,7 @@ export default function Messages({ darkMode, themeSelected }) {
             `}
                 style={{
                     backgroundImage: `url(${themeSelected})`,
-                    backgroundSize: isDesktop ? "contain" : "contain",
+                    backgroundSize: isDesktop ? "cover" : "contain",
                     backgroundPosition: "center",
                     backgroundRepeat: "repeat",
                 }}
