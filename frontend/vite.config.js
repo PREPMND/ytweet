@@ -3,13 +3,14 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
+  logLevel:'error',
   plugins: [
     react(),
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
         name: 'PREP',
-        short_name: 'PREYTWEET',
+        short_name: 'PREP',
         description: 'Social media application',
         theme_color: '#111827',
         background_color: '#111827',
