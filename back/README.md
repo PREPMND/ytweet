@@ -49,7 +49,7 @@ The project focuses on authentication, caching, realtime communication, search, 
 - JWT Authentication
 - Access & Refresh Tokens
 - Secure HTTP-only Cookies
-- OAuth Login (Google) *(if implemented)*
+- OAuth Login (Google)
 
 ## Social Features
 
