@@ -4,7 +4,6 @@ import { connectRedis } from "./redis/redis.js";
 dotenv.config({
     path:'./.env'
 })
-import elastic from "./utils/elasticsearch.js";
 import { MongoConnection } from "./db/index.js";
 import { application } from "./app.js";
     
