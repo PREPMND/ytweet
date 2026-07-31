@@ -306,7 +306,7 @@ export default function Messages({ darkMode, themeSelected }) {
                                         }`}
                                 >
                                     <div
-                                        className={`max-w-[75%] rounded-2xl px-4 py-2 break-words shadow
+                                        className={`max-w-[80%] min-w-[20%] min-h-[10%] rounded-2xl px-4 py-2 break-words shadow
                                 ${mine
                                                 ? "bg-blue-500 text-white"
                                                 : darkMode
@@ -315,7 +315,7 @@ export default function Messages({ darkMode, themeSelected }) {
                                             }`}
                                     >
 
-                                        <p>{msg.text}</p>
+                                        <p className="line-clamp-6">{msg.text}</p>
 
                                         <div className="flex justify-end items-center gap-1 mt-1 text-[10px] opacity-70">
 

@@ -8,6 +8,15 @@ import Small7 from "../../public/Small7.jpg";
 import Small8 from "../../public/Small8.jpg";
 import Small9 from "../../public/Small9.jpg";
 import Small10 from "../../public/Small10.jpg";
+import Small11 from "../../public/Small11.jpg";
+import Small12 from "../../public/Small12.jpg";
+import Small13 from "../../public/Small13.jpg";
+import Small14 from "../../public/Small14.jpg";
+import Small15 from "../../public/Small15.jpg";
+import Small16 from "../../public/Small16.jpg";
+import Small17 from "../../public/Small17.jpg";
+
+
 import PCSmall1 from "../../public/PCSmall1.jpg";
 import PCSmall2 from "../../public/PCSmall2.jpg";
 
@@ -27,7 +36,14 @@ export const themeObject = {
     7: Small7,
     8: Small8,
     9: Small9,
-    10: Small10
+    10: Small10,
+    11:Small11,
+    12:Small12,
+    13:Small13,
+    14:Small14,
+    15:Small15,
+    16:Small16,
+    17:Small17
   },
 
   PCSmall: {
