@@ -1,204 +1,208 @@
 import mongoose from "mongoose";
+
 import { Message } from "../models/socket.models.js";
+import { User } from "../models/user.models.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { apiError } from "../utils/apiError.js";
 import { apiResponse } from "../utils/apiResponse.js";
-import redis from "../redis/redis.js"
-export const getConversationId = (user1, user2) => {
-    return [user1.toString(), user2.toString()].sort().join("_");
-};
 
-export const sendMessage = asyncHandler(async (req, res) => {
-    const sender = req.user?._id;
-    const { receiver, text, messageType = "text" } = req.body;
+/**
+ * A conversation id is derived, not stored on its own document: sort the two
+ * user ids and join them. Deriving it means "A -> B" and "B -> A" always
+ * produce the same key without a lookup, and there is no row to keep in sync.
+ */
+export const buildConversationId = (user1, user2) =>
+    [String(user1), String(user2)].sort().join("_");
 
-    const conversationId = getConversationId(sender, receiver);
+/** Exposed as GET /api/v1/socket/conversation-id?receiverId=... */
+export const getConversationId = asyncHandler(async (req, res) => {
+    const receiverId = req.query.receiverId ?? req.body?.receiverId;
 
-    if (!receiver) {
-        throw new apiError(400, "Receiver is required");
+    if (!mongoose.isValidObjectId(receiverId)) {
+        throw new apiError(400, "`receiverId` must be a valid user id");
     }
 
-    if (!text?.trim() && messageType === "text") {
+    return res.status(200).json(
+        new apiResponse(
+            200,
+            { conversationId: buildConversationId(req.user._id, receiverId) },
+            "Conversation id"
+        )
+    );
+});
+
+export const sendMessage = asyncHandler(async (req, res) => {
+    const sender = req.user._id;
+    const { receiver, text, messageType = "text" } = req.body;
+
+    // Validate FIRST. The original built the conversation id before checking
+    // `receiver`, so a missing receiver threw "Cannot read properties of
+    // undefined (reading 'toString')" -- a 500 where a 400 belonged.
+    if (!receiver) {
+        throw new apiError(400, "`receiver` is required");
+    }
+
+    if (!mongoose.isValidObjectId(receiver)) {
+        throw new apiError(400, "`receiver` must be a valid user id");
+    }
+
+    if (String(receiver) === String(sender)) {
+        throw new apiError(400, "You cannot message yourself");
+    }
+
+    if (messageType === "text" && !text?.trim()) {
         throw new apiError(400, "Message cannot be empty");
+    }
+
+    if (text && text.length > 4000) {
+        throw new apiError(400, "Message is too long (4000 characters max)");
+    }
+
+    const receiverExists = await User.exists({ _id: receiver });
+
+    if (!receiverExists) {
+        throw new apiError(404, "Recipient not found");
     }
 
     const message = await Message.create({
         sender,
         receiver,
-        conversationId,
-        text,
+        conversationId: buildConversationId(sender, receiver),
+        text: text?.trim(),
         messageType,
     });
 
-    return res.status(201).json(
-        new apiResponse(201, message, "Message sent successfully")
-    );
+    return res
+        .status(201)
+        .json(new apiResponse(201, message, "Message sent successfully"));
 });
 
+/** Inbox: one row per conversation, carrying the last message + unread count. */
 export const getConversations = asyncHandler(async (req, res) => {
-    console.log("===== GET CONVERSATIONS =====");
     const userId = new mongoose.Types.ObjectId(req.user._id);
 
-    try {
-        //const cacheKey = `conversations:${req.user._id.toString()}`;
-        //const cached = await redis.get(cacheKey);
-        // const cacheKey = `conversations:${req.user._id.toString()}`;
-        // console.log("GET KEY:", cacheKey);
-
-        // const cached = await redis.get(cacheKey);
-        // console.log("GET RESULT:", cached ? "HIT" : "MISS");
-        //  if (cached) {
-        //      return res.status(200).json(
-        //          new apiResponse(
-        //              200,
-        //              JSON.parse(cached),
-        //              "Conversations fetched from cache"
-        //          )
-        //      );
-        //  }
-        const conversations = await Message.aggregate([
-            {
-                $match: {
-                    $or: [
-                        { sender: userId },
-                        { receiver: userId }
-                    ]
-                }
-            },
-
-            {
-                $sort: {
-                    createdAt: -1
-                }
-            },
-
-            {
-                $group: {
-                    _id: "$conversationId",
-                    lastMessage: { $first: "$$ROOT" }
-                }
-            },
-
-            {
-                $addFields: {
-                    otherUser: {
+    const conversations = await Message.aggregate([
+        { $match: { $or: [{ sender: userId }, { receiver: userId }] } },
+        { $sort: { createdAt: -1 } },
+        {
+            $group: {
+                _id: "$conversationId",
+                lastMessage: { $first: "$$ROOT" },
+                // Count messages addressed to me that I haven't opened yet.
+                unreadCount: {
+                    $sum: {
                         $cond: [
-                            { $eq: ["$lastMessage.sender", userId] },
-                            "$lastMessage.receiver",
-                            "$lastMessage.sender"
-                        ]
-                    }
-                }
+                            {
+                                $and: [
+                                    { $eq: ["$receiver", userId] },
+                                    { $ne: ["$status", "seen"] },
+                                ],
+                            },
+                            1,
+                            0,
+                        ],
+                    },
+                },
             },
-
-            {
-                $lookup: {
-                    from: "users",
-                    localField: "otherUser",
-                    foreignField: "_id",
-                    as: "otherUser"
-                }
+        },
+        {
+            $addFields: {
+                otherUser: {
+                    $cond: [
+                        { $eq: ["$lastMessage.sender", userId] },
+                        "$lastMessage.receiver",
+                        "$lastMessage.sender",
+                    ],
+                },
             },
-
-            {
-                $unwind: "$otherUser"
+        },
+        {
+            $lookup: {
+                from: "users",
+                localField: "otherUser",
+                foreignField: "_id",
+                as: "otherUser",
+                pipeline: [
+                    {
+                        $project: {
+                            username: 1,
+                            fullName: 1,
+                            avatar: 1,
+                            isOnline: 1,
+                            lastSeen: 1,
+                        },
+                    },
+                ],
             },
-
-            {
-                $project: {
-                    _id: 0,
-                    conversationId: "$lastMessage.conversationId",
-                    lastMessage: "$lastMessage.text",
-                    createdAt: "$lastMessage.createdAt",
-                    lastSeen: "$lastMessage.lastSeen",
-                    status: "$lastMessage.status",
-                    otherUser: {
-                        _id: "$otherUser._id",
-                        username: "$otherUser.username",
-                        avatar: "$otherUser.avatar",
-                        fullName: "$otherUser.fullName",
-                        isOnline:"$otherUser.isOnline"
-                    }
-                }
+        },
+        { $unwind: "$otherUser" },
+        {
+            $project: {
+                _id: 0,
+                conversationId: "$_id",
+                lastMessage: "$lastMessage.text",
+                lastMessageSender: "$lastMessage.sender",
+                messageType: "$lastMessage.messageType",
+                createdAt: "$lastMessage.createdAt",
+                status: "$lastMessage.status",
+                unreadCount: 1,
+                otherUser: 1,
             },
-            {
-                $sort: { createdAt: -1 }
-            }
+        },
+        { $sort: { createdAt: -1 } },
+    ]);
 
-        ]);
-        //console.log("SET KEY:", cacheKey);
-        //console.log("Cached:", !!cached);
-        // console.log("SET KEY:", cacheKey);
-
-        // await redis.set(cacheKey, JSON.stringify(conversations), {
-        //     EX: 300,
-        // });
-        // await redis.set(
-        //     cacheKey,
-        //     JSON.stringify(conversations),
-        //     {
-        //         EX: 300 // 5 minutes
-        //     }
-        // );
-
-        return res.status(200).json(
-            new apiResponse(200, conversations, "Conversations fetched")
-        );
-    } catch (err) {
-        console.error(err);
-        throw err;
-    }
-
-
+    return res
+        .status(200)
+        .json(new apiResponse(200, conversations, "Conversations fetched"));
 });
-export const getMessages = asyncHandler(async (req, res) => {
 
+/** Message history for one thread, newest page first, oldest-first within it. */
+export const getMessages = asyncHandler(async (req, res) => {
     const { receiverId } = req.params;
 
-    const sender = req.user._id;
+    if (!mongoose.isValidObjectId(receiverId)) {
+        throw new apiError(400, "`receiverId` must be a valid user id");
+    }
 
-    const conversationId = getConversationId(sender, receiverId);
+    const limit = Math.min(100, Math.max(1, Number(req.query.limit) || 50));
+    const before = req.query.before ? new Date(req.query.before) : null;
 
-    console.log(conversationId);
+    const conversationId = buildConversationId(req.user._id, receiverId);
 
-    const messages = await Message.find({
-        conversationId
-    }).sort({ createdAt: 1 });
+    const query = { conversationId };
+    if (before && !Number.isNaN(before.getTime())) {
+        query.createdAt = { $lt: before };
+    }
 
+    // Fetch the newest `limit`, then reverse so the UI can append top-to-bottom.
+    const page = await Message.find(query).sort({ createdAt: -1 }).limit(limit).lean();
+    const messages = page.reverse();
 
     return res.status(200).json(
-        new apiResponse(200, messages, "Messages fetched")
+        new apiResponse(
+            200,
+            messages,
+            "Messages fetched"
+        )
+    );
+});
+
+export const markMessagesAsSeen = asyncHandler(async (req, res) => {
+    const { conversationId } = req.params;
+
+    if (!conversationId) {
+        throw new apiError(400, "`conversationId` is required");
+    }
+
+    // Only messages addressed to the caller may be marked seen -- otherwise
+    // anyone could mark someone else's inbox as read by guessing an id.
+    const result = await Message.updateMany(
+        { conversationId, receiver: req.user._id, status: { $ne: "seen" } },
+        { $set: { status: "seen" } }
     );
 
-});
-export const markMessagesAsSeen = asyncHandler(async (req, res) => {
-    try {
-        const { conversationId } = req.params;
-        const sender = req.user._id;
-
-        await Message.updateMany(
-            {
-                conversationId,
-                receiver: sender,
-                status: {
-                    $ne: "seen",
-                }
-            },
-            {
-                $set: {
-                    status: "seen",
-                },
-            }
-        );
-
-        return res.status(200).json({
-            success: true,
-            message: "Messages marked as seen",
-        });
-    } catch (error) {
-        return res.status(500).json({
-            success: false,
-            message: error.message,
-        });
-    }
+    return res.status(200).json(
+        new apiResponse(200, { updated: result.modifiedCount }, "Messages marked as seen")
+    );
 });

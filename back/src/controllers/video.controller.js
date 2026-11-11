@@ -1,733 +1,508 @@
 import mongoose from "mongoose";
-import redis from "../redis/redis.js";
-import { Video } from "../models/video.models.js"; // adjust path if needed
-import { User } from "../models/user.models.js";
-import { uploadOnCloudinary } from "../utils/cloudinary.js"; // adjust path if needed
-import { apiError } from "../utils/apiError.js"; // adjust path if needed
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { apiResponse } from "../utils/apiResponse.js";
 
-export const any = asyncHandler(async (req, res) => {
-    const { owner } = req.body;
-    const pipelines = await Video.aggregate([
+import redis from "../redis/redis.js";
+import { invalidate } from "../middlewares/cache.middleware.js";
+import { Video } from "../models/video.models.js";
+import { User } from "../models/user.models.js";
+import { uploadOnCloudinary, destroyByUrl } from "../utils/cloudinary.js";
+import { apiError } from "../utils/apiError.js";
+import { apiResponse } from "../utils/apiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { SORT_MAP } from "../middlewares/validatePagination.middleware.js";
+import elastic, { indexVideo, removeVideoFromIndex } from "../utils/elasticsearch.js";
+
+const FEED_CACHE_PREFIX = "videos";
+
+/* ------------------------------------------------------------------------- */
+/* shared helpers                                                            */
+/* ------------------------------------------------------------------------- */
+
+/** "1h 5m" / "5m" / "42s" -- a derived display value, never stored. */
+function formatDuration(seconds = 0) {
+    const total = Math.max(0, Math.floor(Number(seconds) || 0));
+    const hours = Math.floor(total / 3600);
+    const minutes = Math.floor((total % 3600) / 60);
+    const secs = total % 60;
+
+    if (total < 60) return `${secs}s`;
+    if (total < 3600) return `${minutes}m ${String(secs).padStart(2, "0")}s`;
+    return `${hours}h ${minutes}m`;
+}
+
+/** Escape user input before it reaches a $regex, or it IS the regex. */
+function escapeRegex(value = "") {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+/**
+ * Supports a tiny query language in ?search=
+ *   "react hooks"        -> text match on title/description
+ *   "o/srijan hooks"     -> same, but only from owners whose username
+ *                           matches "srijan"
+ */
+async function buildFilter(rawSearch = "") {
+    const filter = { isPublished: true };
+
+    const words = String(rawSearch).trim().split(/\s+/).filter(Boolean);
+    const ownerToken = words.find((word) => word.startsWith("o/"));
+
+    let owner = "";
+    let search = rawSearch;
+
+    if (ownerToken) {
+        owner = ownerToken.slice(2);
+        search = words.filter((word) => word !== ownerToken).join(" ");
+    }
+
+    if (owner.trim()) {
+        const users = await User.find({
+            username: { $regex: escapeRegex(owner), $options: "i" },
+        }).select("_id");
+
+        // An owner filter that matches nobody must return nothing, not
+        // everything -- hence the explicit empty $in.
+        filter.owner = { $in: users.map((user) => user._id) };
+    }
+
+    if (search.trim()) {
+        const safe = escapeRegex(search.trim());
+        filter.$or = [
+            { title: { $regex: safe, $options: "i" } },
+            { description: { $regex: safe, $options: "i" } },
+        ];
+    }
+
+    return filter;
+}
+
+/** One pagination envelope for every list endpoint. */
+function paginationMeta({ page, limit, total }) {
+    const totalPages = Math.max(1, Math.ceil(total / limit));
+    return {
+        currentPage: page,
+        page,
+        limit,
+        totalVideos: total,
+        totalPages,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+    };
+}
+
+/* ------------------------------------------------------------------------- */
+/* create                                                                    */
+/* ------------------------------------------------------------------------- */
+
+export const createVideo = asyncHandler(async (req, res) => {
+    const { title, description } = req.body;
+
+    if (!title?.trim()) throw new apiError(400, "`title` is required");
+    if (!description?.trim()) throw new apiError(400, "`description` is required");
+
+    const videoLocalPath = req.files?.videoFile?.[0]?.path;
+    const thumbnailLocalPath = req.files?.thumbnail?.[0]?.path;
+
+    if (!videoLocalPath) {
+        throw new apiError(400, "A video file is required");
+    }
+
+    // The Video schema marks `thumbnail` as required, so rejecting here gives
+    // a 400 with a useful message instead of a 500 from Mongoose later.
+    if (!thumbnailLocalPath) {
+        throw new apiError(400, "A thumbnail image is required");
+    }
+
+    const videoUpload = await uploadOnCloudinary(videoLocalPath, "socialsphere/videos");
+    const thumbnailUpload = await uploadOnCloudinary(
+        thumbnailLocalPath,
+        "socialsphere/thumbnails"
+    );
+
+    if (!videoUpload?.secure_url) {
+        throw new apiError(502, "The video could not be uploaded");
+    }
+
+    const videoDoc = await Video.create({
+        title: title.trim(),
+        description: description.trim(),
+        // Store the id, not the whole user document. Mongoose would cast it,
+        // but passing a document here is how stale snapshots get embedded.
+        owner: req.user._id,
+        isPublished: true,
+        videoFile: videoUpload.secure_url,
+        duration: Math.floor(videoUpload.duration ?? 0),
+        thumbnail: thumbnailUpload.secure_url,
+    });
+
+    void indexVideo(videoDoc);
+    await invalidate(`${FEED_CACHE_PREFIX}:*`);
+
+    return res
+        .status(201)
+        .json(new apiResponse(201, videoDoc, "Video published successfully"));
+});
+
+/* ------------------------------------------------------------------------- */
+/* read                                                                      */
+/* ------------------------------------------------------------------------- */
+
+/**
+ * Main feed. Uses aggregatePaginate so `totalPages` comes from a $facet
+ * count rather than a second round trip.
+ */
+export const getVideos = asyncHandler(async (req, res) => {
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const limit = Math.min(24, Math.max(1, Number(req.query.limit) || 6));
+    const sort = SORT_MAP[req.query.sort] ? req.query.sort : "latest";
+    const sortOption = SORT_MAP[sort];
+
+    const cacheKey = `${FEED_CACHE_PREFIX}:${page}:${limit}:${sort}`;
+
+    const cachedVideos = await redis.get(cacheKey).catch(() => null);
+    if (cachedVideos) {
+        res.setHeader("X-Cache", "HIT");
+        return res.status(200).json(JSON.parse(cachedVideos));
+    }
+
+    const aggregate = Video.aggregate([
+        { $match: { isPublished: true } },
         {
-            $match: {
-                owner: new mongoose.Types.ObjectId(owner),
+            $lookup: {
+                from: "users",
+                localField: "owner",
+                foreignField: "_id",
+                as: "owner",
+                pipeline: [{ $project: { username: 1, fullName: 1, avatar: 1 } }],
+            },
+        },
+        // preserveNull keeps a video visible if its owner row vanished,
+        // instead of silently dropping it from the feed.
+        { $unwind: { path: "$owner", preserveNullAndEmptyArrays: true } },
+        {
+            $project: {
+                title: 1,
+                description: 1,
+                videoFile: 1,
+                thumbnail: 1,
+                duration: 1,
+                views: 1,
+                createdAt: 1,
+                owner: 1,
             },
         },
     ]);
-    return res.status(200).json({ success: true, data: pipelines });
+
+    const videos = await Video.aggregatePaginate(aggregate, {
+        page,
+        limit,
+        sort: sortOption,
+    });
+
+    videos.docs = videos.docs.map((video) => ({
+        ...video,
+        durationFormatted: formatDuration(video.duration),
+    }));
+
+    const payload = { statusCode: 200, data: videos, message: "Videos fetched", success: true };
+
+    res.setHeader("X-Cache", "MISS");
+    res.status(200).json(payload);
+
+    // Write the cache after responding so the client never waits on Redis.
+    redis
+        .set(cacheKey, JSON.stringify(payload), { EX: 300 })
+        .catch((err) => console.warn(`[cache] feed write failed: ${err.message}`));
 });
-export const createVideo = async (req, res) => {
-    try {
 
-        const { title, description } = req.body;
+/** Single video. Also bumps `views` and the viewer's watch history. */
+export const getVideoById = asyncHandler(async (req, res) => {
+    const { id } = req.params;
 
-        const videoLocalPath = req.files?.videoFile?.[0]?.path;
-        const thumbnailLocalPath = req.files?.thumbnail?.[0]?.path;
+    if (!mongoose.isValidObjectId(id)) {
+        throw new apiError(400, "That is not a valid video id");
+    }
 
-        if (!videoLocalPath) {
-            throw new apiError(400, "Video File Is Required");
-        }
+    const video = await Video.findById(id).populate("owner", "username fullName avatar");
 
-        const videoUpload = await uploadOnCloudinary(videoLocalPath);
-        const thumbnailUpload = await uploadOnCloudinary(thumbnailLocalPath);
+    // The null check has to come BEFORE anything touches `video`; the old
+    // code assigned `video.durationFormatted` first and crashed with
+    // "Cannot set property of null" for every missing id.
+    if (!video) {
+        throw new apiError(404, "Video not found");
+    }
 
-        if (!videoUpload) {
-            throw new apiError(400, "Video cannot be uploaded");
-        }
-        const loggedInUser = await User.findById(req.user._id).select(
-            "-password -refreshToken -email -createdAt -updatedAt"
+    // Fire-and-forget: a view counter must never slow down or fail playback.
+    Video.updateOne({ _id: video._id }, { $inc: { views: 1 } }).catch(() => {});
+
+    if (req.user?._id) {
+        // $pull then $push keeps the most recent watch at the front without
+        // duplicating entries. Two writes because Mongo cannot do both in one.
+        User.updateOne({ _id: req.user._id }, { $pull: { watchHistory: video._id } })
+            .then(() =>
+                User.updateOne(
+                    { _id: req.user._id },
+                    { $push: { watchHistory: { $each: [video._id], $position: 0, $slice: 100 } } }
+                )
+            )
+            .catch(() => {});
+    }
+
+    const payload = {
+        ...video.toObject(),
+        views: (video.views ?? 0) + 1,
+        durationFormatted: formatDuration(video.duration),
+    };
+
+    return res.status(200).json(new apiResponse(200, payload, "Video fetched"));
+});
+
+/** Videos belonging to one owner. Replaces the old untyped `any` handler. */
+export const getVideosByOwner = asyncHandler(async (req, res) => {
+    const owner = req.body?.owner || req.query?.owner || req.params?.owner;
+
+    if (!mongoose.isValidObjectId(owner)) {
+        throw new apiError(400, "`owner` must be a valid user id");
+    }
+
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const limit = Math.min(24, Math.max(1, Number(req.query.limit) || 12));
+
+    const [videos, total] = await Promise.all([
+        Video.find({ owner })
+            .sort({ createdAt: -1 })
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .lean(),
+        Video.countDocuments({ owner }),
+    ]);
+
+    return res.status(200).json(
+        new apiResponse(
+            200,
+            {
+                videos: videos.map((video) => ({
+                    ...video,
+                    durationFormatted: formatDuration(video.duration),
+                })),
+                ...paginationMeta({ page, limit, total }),
+            },
+            "Owner videos fetched"
         )
-        const videoDoc = await Video.create({
-            title,
-            description,
-            owner: loggedInUser,
-            isPublished: true,
-            videoFile: videoUpload.secure_url,
-            duration: Math.floor(videoUpload.duration),
-            thumbnail: thumbnailUpload?.secure_url,
-        });
-        {/* if (elastic) {
-            try {
-                await elastic.index({
-                    index: "videos",
-                    id: videoDoc._id.toString(),
-                    document: {
-                        title: videoDoc.title,
-                        description: videoDoc.description,
-                        owner: videoDoc.owner.toString(),
-                        thumbnail: videoDoc.thumbnail,
-                        createdAt: videoDoc.createdAt,
-                    },
-                });
-            } catch (err) {
-                console.error("Elasticsearch indexing failed:", err.message);
-            }
-        }*/}
-        const keys = await redis.keys("videos:*");
-        if (keys.length > 0) {
-            await redis.del(...keys);
-        }
-        res.status(201).json({ success: true, data: videoDoc });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+    );
+});
+
+/** Keeps the old `POST /any` contract alive for existing frontend calls. */
+export const any = getVideosByOwner;
+
+/**
+ * Paginated + searchable feed (`/practicevideo`).
+ *
+ * This was a plain async function whose catch block did `throw new apiError`.
+ * Express 4 cannot see a rejected promise from a non-wrapped handler, so the
+ * request HUNG and the process logged an unhandled rejection. Wrapping it in
+ * asyncHandler is the whole fix.
+ */
+export const PracticeVideo = asyncHandler(async (req, res) => {
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const limit = Number(req.query.limit) || 6;
+
+    if (limit < 1 || limit > 24) {
+        throw new apiError(400, "`limit` must be between 1 and 24");
     }
-};
-export const getVideos = async (req, res) => {
-    console.log("ewgrhetjehwrhejsr")
-    try {
-        const { page = 1, limit = 6 } = req.query;
-        const sort = req.query.sort || "latest";
-        const cacheKey = `videos:${page}:${limit}:${sort}`;
-        const cachedVideos = await redis.get(cacheKey);
 
-        if (cachedVideos) {
-            console.log("Cache Hit");
+    const sort = SORT_MAP[req.query.sort] ? req.query.sort : "latest";
+    const filter = await buildFilter(req.query.search || "");
 
-            return res.status(200).json(JSON.parse(cachedVideos));
-        }
-        let sortOption = {};
-        switch (sort) {
-            case "latest":
-                sortOption = { createdAt: -1 };
-                break;
-            case "oldest":
-                sortOption = { createdAt: 1 };
-                break;
-        }
-        const aggregate = Video.aggregate([
-            { $match: { isPublished: true } },
+    const [videos, total] = await Promise.all([
+        Video.find(filter)
+            .sort(SORT_MAP[sort])
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .populate("owner", "username fullName avatar")
+            .lean(),
+        Video.countDocuments(filter),
+    ]);
+
+    return res.status(200).json(
+        new apiResponse(
+            200,
             {
-                $lookup: {
-                    from: "users",
-                    localField: "owner",
-                    foreignField: "_id",
-                    as: "owner"
-                }
+                videos: videos.map((video) => ({
+                    ...video,
+                    durationFormatted: formatDuration(video.duration),
+                })),
+                ...paginationMeta({ page, limit, total }),
             },
-            { $unwind: "$owner" },
+            "The video feed has been fetched"
+        )
+    );
+});
+
+/**
+ * Trending / search (`/practicetrending`). The navbar typeahead hits this.
+ * The comment in the original said "pagination, sort by views" but the code
+ * did `Video.find(filter)` with no limit at all -- every keystroke pulled the
+ * entire collection.
+ */
+export const Trending = asyncHandler(async (req, res) => {
+    const page = Math.max(1, Number(req.query.page) || 1);
+    const limit = Math.min(24, Math.max(1, Number(req.query.limit) || 10));
+    const hasSearch = Boolean((req.query.search || "").trim());
+
+    const filter = await buildFilter(req.query.search || "");
+
+    // No query -> genuine "trending" (most viewed). With a query, relevance
+    // is approximated by recency.
+    const sortOption = hasSearch ? SORT_MAP.latest : SORT_MAP.mostViewed;
+
+    const [videos, total] = await Promise.all([
+        Video.find(filter)
+            .sort(sortOption)
+            .skip((page - 1) * limit)
+            .limit(limit)
+            .populate("owner", "username fullName avatar")
+            .lean(),
+        Video.countDocuments(filter),
+    ]);
+
+    return res.status(200).json(
+        new apiResponse(
+            200,
             {
-                $project: {
-                    title: 1,
-                    description: 1,
-                    videoFile: 1,
-                    thumbnail: 1,
-                    duration: 1,
-                    createdAt: 1,
-                    "owner._id": 1,
-                    "owner.username": 1,
-                    "owner.email": 1,
-                    "owner.avatar": 1,
-                    "owner.coverImage": 1
-                },
+                videos: videos.map((video) => ({
+                    ...video,
+                    durationFormatted: formatDuration(video.duration),
+                })),
+                ...paginationMeta({ page, limit, total }),
             },
-            { $sort: sortOption }
-        ]);
+            "The search results have been fetched"
+        )
+    );
+});
 
-        // Use aggregatePaginate for proper pagination
-        const options = {
-            page: parseInt(page, 10),
-            limit: parseInt(limit, 10),
-            sort: sortOption
-        };
+/* ------------------------------------------------------------------------- */
+/* update / delete                                                           */
+/* ------------------------------------------------------------------------- */
 
-        const videos = await Video.aggregatePaginate(aggregate, options);
+// Only these may be changed through the API. The old code did
+// `Object.assign(video, req.body)` -- a mass-assignment hole that let a
+// client set `views`, `owner`, or `_id` on their own video.
+const UPDATABLE_FIELDS = ["title", "description", "isPublished"];
 
-        function formatDuration(seconds) {
-            const hours = Math.floor(seconds / 3600);
-            const minutes = Math.floor((seconds % 3600) / 60);
-            if (seconds < 60) return `${seconds}s`;
-            if (seconds < 3600) return `${minutes}m`;
-            return `${hours}h ${minutes}m`;
-        }
+export const updateVideo = asyncHandler(async (req, res) => {
+    const { id } = req.params;
 
-        videos.docs = videos.docs.map((v) => ({
-            ...v,
-            durationFormatted: formatDuration(v.duration || 0),
-        }));
-        await redis.set(
-            cacheKey,
-            JSON.stringify({
-                success: true,
-                data: videos
-            }),
-            {
-                EX: 300
-            }
-        );
-        res.status(200).json({ success: true, data: videos });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+    if (!mongoose.isValidObjectId(id)) {
+        throw new apiError(400, "That is not a valid video id");
     }
-};
-// Get single video by ID
-export const getVideoById = async (req, res) => {
-    try {
-        const cacheKey = `video:${req.params.id}`;
 
-        const cachedVideo = await redis.get(cacheKey);
+    const video = await Video.findById(id);
 
-        if (cachedVideo) {
-            console.log("Video Cache Hit");
+    if (!video) throw new apiError(404, "Video not found");
 
-            return res.status(200).json(JSON.parse(cachedVideo));
-        }
-        const video = await Video.findById(req.params.id).populate("owner", "username avatar email");
-        function formatDuration(seconds) {
-            const hours = Math.floor(seconds / 3600);
-            const minutes = Math.floor((seconds % 3600) / 60);
-            if (seconds < 60) return `${seconds}s`;
-            if (seconds < 3600) return `${minutes}m`;
-            return `${hours}h ${minutes}m`;
-        }
-
-        video.durationFormatted = formatDuration(video.duration || 0);
-        if (!video) {
-            return res.status(404).json({ success: false, message: "Video not found" });
-        }
-        await redis.set(
-            cacheKey,
-            JSON.stringify({
-                success: true,
-                data: video
-            }),
-            {
-                EX: 300
-            }
-        );
-        res.status(200).json({ success: true, data: video });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+    if (video.owner.toString() !== req.user._id.toString()) {
+        throw new apiError(403, "You can only edit your own videos");
     }
-};
-// Update video
-export const updateVideo = async (req, res) => {
-    try {
-        const video = await Video.findById(req.params.id);
 
-        if (!video) {
-            return res.status(404).json({ success: false, message: "Video not found" });
-        }
+    let changed = false;
 
-        // Only owner can update
-        if (video.owner.toString() !== req.user._id.toString()) {
-            return res.status(403).json({ success: false, message: "Unauthorized" });
+    for (const field of UPDATABLE_FIELDS) {
+        if (Object.hasOwn(req.body, field) && req.body[field] !== undefined) {
+            video[field] = req.body[field];
+            changed = true;
         }
-
-        Object.assign(video, req.body);
-        await video.save();
-        await redis.del(`video:${video._id}`);
-        {/* if (elastic) {
-            try {
-                await elastic.update({
-                    index: "videos",
-                    id: video._id.toString(),
-                    doc: {
-                        title: video.title,
-                        description: video.description,
-                    },
-                });
-            } catch (err) {
-                console.error("Elastic update failed:", err.message);
-            }
-        }*/}
-        const keys = await redis.keys("videos:*");
-        if (keys.length > 0) {
-            await redis.del(keys);
-        }
-        res.status(200).json({ success: true, data: video });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
     }
-};
 
-// Delete video
-export const deleteVideo = async (req, res) => {
-    try {
-        const video = await Video.findById(req.params.id);
-
-        if (!video) {
-            return res.status(404).json({ success: false, message: "Video not found" });
-        }
-
-        if (video.owner.toString() !== req.user._id.toString()) {
-            return res.status(403).json({ success: false, message: "Unauthorized" });
-        }
-
-        await video.deleteOne();
-        await redis.del(`video:${video._id}`);
-        {/*if (elastic) {
-            try {
-                await elastic.delete({
-                    index: "videos",
-                    id: video._id.toString(),
-                });
-            } catch (err) {
-                console.error("Elastic delete failed:", err.message);
-            }
-        }*/ }
-        const keys = await redis.keys("videos:*");
-
-        if (keys.length > 0) {
-            await redis.del(keys);
-        }
-        res.status(200).json({ success: true, message: "Video deleted successfully" });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message });
+    if (!changed) {
+        throw new apiError(400, `Nothing to update. Allowed: ${UPDATABLE_FIELDS.join(", ")}`);
     }
-};
-{/*Task 1 (Main)
 
-Implement the controller.
+    if (!video.title?.trim()) throw new apiError(400, "`title` cannot be empty");
+    if (!video.description?.trim()) throw new apiError(400, "`description` cannot be empty");
 
-Requirements:
+    await video.save();
 
-page default = 1
-limit default = 6
-search optional
-sort: latest oldest mostViewed published filter pagination return videos currentPage totalPages totalVideos hasNextPage hasPrevPage
-*/}
-export const PracticeVideo = async (req, res) => {
+    void indexVideo(video);
+    await Promise.all([
+        redis.del(`video:${video._id}`).catch(() => {}),
+        invalidate(`${FEED_CACHE_PREFIX}:*`),
+    ]);
+
+    return res.status(200).json(new apiResponse(200, video, "Video updated"));
+});
+
+export const deleteVideo = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.isValidObjectId(id)) {
+        throw new apiError(400, "That is not a valid video id");
+    }
+
+    const video = await Video.findById(id);
+
+    if (!video) throw new apiError(404, "Video not found");
+
+    if (video.owner.toString() !== req.user._id.toString()) {
+        throw new apiError(403, "You can only delete your own videos");
+    }
+
+    const { videoFile, thumbnail, _id } = video;
+
+    await video.deleteOne();
+
+    // Free the Cloudinary assets too, otherwise the account fills up with
+    // files no row points at any more.
+    void destroyByUrl(videoFile, "video");
+    void destroyByUrl(thumbnail, "image");
+    void removeVideoFromIndex(_id);
+
+    await Promise.all([
+        redis.del(`video:${_id}`).catch(() => {}),
+        invalidate(`${FEED_CACHE_PREFIX}:*`),
+    ]);
+
+    return res.status(200).json(new apiResponse(200, { _id }, "Video deleted successfully"));
+});
+
+/* ------------------------------------------------------------------------- */
+/* optional Elasticsearch search                                             */
+/* ------------------------------------------------------------------------- */
+
+/**
+ * Fuzzy search via Elasticsearch, falling back to the Mongo path when the
+ * cluster is absent. The original referenced `elastic` without importing it,
+ * so this endpoint was a guaranteed ReferenceError.
+ */
+export const searchElastic = asyncHandler(async (req, res, next) => {
+    const q = (req.query.q ?? req.query.search ?? "").trim();
+
+    if (!q) {
+        throw new apiError(400, "A search query is required");
+    }
+
+    if (!elastic) {
+        req.query.search = q;
+        return Trending(req, res, next);
+    }
 
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 6;
-        const skip = (page - 1) * limit;
-        const sort = (req.query.sort) || "latest";
-        if (page < 1 || limit < 1 || limit > 12) {
-            throw new apiError(401, "Invalid Query Parameters");
-        }
-        let search = req.query.search || "";
-        let owner = "";
-        const words = search.trim().split(/\s+/);
-        const ownerToken = words.find(word => word.startsWith("o/"));
-        if (ownerToken) {
-            if (ownerToken && ownerToken.length > 2) {
-                owner = ownerToken.slice(2);
-            }
-            search = words
-                .filter(word => word !== ownerToken)
-                .join(" ");
-        }
-        let ownerIds = [];
-        if (owner.trim()) {
-            const users = await User.find({
-                username: {
-                    $regex: owner,
-                    $options: "i"
-                }
-            });
-            ownerIds = users.map(user => user._id);
-        }
-        const filter = {
-            isPublished: true,
-        };
-        if (search.trim()) {
-            filter.$or = [
-                {
-                    title: {
-                        $regex: search,
-                        $options: "i"
-                    }
-                },
-                {
-                    description: {
-                        $regex: search,
-                        $options: "i"
-                    }
-                },
-            ];
-        }
-        if (owner.trim()) {
-            filter.owner = {
-                $in: ownerIds,
-            }
-        }
-        let sortOption = {};
-        switch (sort) {
-            case "latest":
-                sortOption = { createdAt: -1 };
-                break;
-            case "oldest":
-                sortOption = { createdAt: 1 };
-                break;
-
-        }
-        const [videos, totalVideos] = await Promise.all([
-            Video.find(filter)
-                .sort(sortOption)
-                .skip(skip)
-                .limit(limit),
-            Video.countDocuments(filter)
-        ]);
-        const totalPages = Math.ceil(totalVideos / limit);
-        return res.status(200).json(
-            new apiResponse(200, { videos, totalVideos, totalPages }, "The Video Feed Has Been Fetched")
-        );
-    } catch (error) {
-        throw new apiError(400, "Could'nt fetch ")
-    }
-}
-/*
-Q4. Build this Controller
-
-Implement:
-GET /api/v1/videos/trending
-Requirements:
-PaginationOnly published videosSort by views (highest first)Return:videos currentPage totalVideos totalPages */
-export const Trending = async (req, res) => {
-    try {
-
-        let search = req.query.search || "";
-        let owner = "";
-        const words = search.trim().split(/\s+/);
-        const ownerToken = words.find(word => word.startsWith("o/"));
-        if (ownerToken) {
-            if (ownerToken && ownerToken.length > 2) {
-                owner = ownerToken.slice(2);
-            }
-            search = words
-                .filter(word => word !== ownerToken)
-                .join(" ");
-        }
-        let ownerIds = [];
-        if (owner.trim()) {
-            const users = await User.find({
-                username: {
-                    $regex: owner,
-                    $options: "i"
-                }
-            });
-            ownerIds = users.map(user => user._id);
-        }
-        const filter = {
-            isPublished: true,
-        };
-        if (search.trim()) {
-            filter.$or = [
-                {
-                    title: {
-                        $regex: search,
-                        $options: "i"
-                    }
-                },
-                {
-                    description: {
-                        $regex: search,
-                        $options: "i"
-                    }
-                },
-            ];
-        }
-        if (owner.trim()) {
-            filter.owner = {
-                $in: ownerIds,
-            }
-        }
-
-        const [videos, totalVideos] = await Promise.all([
-            Video.find(filter),
-            Video.countDocuments(filter)
-        ])
-        return res.status(200).json(
-            new apiResponse(200, { videos, totalVideos }, "The Search Results Has Been Fetched")
-        );
-    } catch (error) {
-        throw new apiError(401, "Cannot really fetch the desired output")
-    }
-}
-export const searchElastic = async (req, res) => {
-    try {
-
-        const { q } = req.query;
-
-        if (!q || !q.trim()) {
-            return res.status(400).json({
-                success: false,
-                message: "Search query is required"
-            });
-        }
-
         const result = await elastic.search({
             index: "videos",
             query: {
                 multi_match: {
                     query: q,
-                    fields: [
-                        "title^2",
-                        "description"
-                    ],
-                    fuzziness: "AUTO"
-                }
-            }
+                    fields: ["title^2", "description"],
+                    fuzziness: "AUTO",
+                },
+            },
         });
 
-        const videos = result.hits.hits.map(hit => ({
-            _id: hit._id,
-            ...hit._source
-        }));
+        const videos = result.hits.hits.map((hit) => ({ _id: hit._id, ...hit._source }));
 
-        return res.status(200).json({
-            success: true,
-            data: videos
-        });
-
-    } catch (error) {
-        console.log(error);
-
-        return res.status(500).json({
-            success: false,
-            message: error.message,
-        });
+        return res.status(200).json(new apiResponse(200, { videos }, "Search results"));
+    } catch (err) {
+        console.warn(`[elastic] search failed, falling back to Mongo: ${err.message}`);
+        req.query.search = q;
+        return Trending(req, res, next);
     }
-};
-const Solve = async ({ page, limit, sort, search }) => {
-    const skip = (page - 1) * limit;
-    const words = search.trim().split(/\s+/);
-    let owner = "";
-    const ownerToken = words.find(word => word.startsWith("o/"));
-    if (ownerToken) {
-        if (ownerToken.length > 2) {
-            owner = ownerToken.slice(2);
-        }
-        search = words.filter(word => word !== ownerToken).join(" ");
-    }
-    let ownerIds = [];
-    if (owner.trim()) {
-        const users = await User.find({
-            username: {
-                $regex: owner,
-                $options: "i"
-            }
-        })
-        ownerIds = users.map(user => user._id);
-    }
-
-    const filter = {
-        isPublished: true,
-    };
-    if (search.trim()) {
-        filter.$or = [
-            {
-                title: {
-                    $regex: search,
-                    $options: "i"
-                }
-            },
-            {
-                description: {
-                    $regex: search,
-                    $options: "i"
-                }
-            },
-        ];
-    }
-    if (owner.trim()) {
-        filter.owner = {
-            $in: ownerIds,
-        }
-    }
-    let sortOption = {};
-    switch (sort) {
-        case "latest":
-            sortOption = { createdAt: -1 };
-            break;
-        case "oldest":
-            sortOption = { createdAt: 1 };
-            break;
-
-    }
-    const [videos, totalVideos] = await Promise.all([
-        Video.find(filter).skip(skip).limit(limit).sort(sortOption),
-        Video.countDocuments(filter)
-    ])
-    return [videos, totalVideos];
-}
-export const BackendScale = async (req, res) => {
-    const page = parseInt(req.query.page) || 1;
-    if (page < 1) {
-        throw new apiError(401, "Page paramters are wrong.");
-    }
-    const limit = parseInt(req.query.limit) || 6;
-    if (limit > 10) {
-        throw new apiError(401, "Limit paramters are wrong.");
-    }
-    const sort = (req.query.sort) || "latest";
-    if (sort !== "latest" && sort !== "oldest") {
-        throw new apiError(401, "Sort paramters are wrong.");
-    }
-    const search = (req.query.search) || "";
-
-    const [videos, totalVideos] = await Solve({ page, limit, sort, search });
-    return res.status(200).json(
-        new apiResponse(200, { videos, totalVideos }, "the operation is successfull")
-    );
-}
-export const buildVideoQuery = async (query) => {
-    try {
-        const { page = 1,
-            limit = 6,
-            search = "",
-            sort = "latest",
-            published = "true",
-            owner,
-            category,
-            minViews,
-            maxViews,
-            minDuration,
-            maxDuration,
-            createdAfter,
-            createdBefore } = query;
-        const filter = {};
-        let ownerIds = [];
-        if (owner.trim()) {
-            const users = await User.find({
-                username: {
-                    $regex: owner,
-                    $options: "i",
-                }
-            })
-            ownerIds = users.map(user => user._id);
-        }//assuming like the base datao of video documents have only ids of owner and ntg else. hence one did use ids. unless if owner filed or username filed was there it wouldhabe been a simple filter.owner and regex+options? right
-        if (search.trim()) {
-            filter.$or = [{
-                title: {
-                    $regex: search,
-                    $options: "i",
-                }
-            },
-            {
-                description: {
-                    $regex: search,
-                    $options: "i",
-                }
-            }
-            ]
-        }
-        if (ownerIds.length > 0) {
-            filter.owner = {
-                $in: ownerIds,
-            }
-        }
-        let sortOption = {};
-        switch (sort) {
-            case "latest":
-                sortOption = { createdAt: -1 };
-                break;
-            case "oldest":
-                sortOption = { createdAt: 1 };
-                break;
-        }
-        if (minViews || maxViews) {
-            filter.views = {};
-
-            if (minViews) filter.views.$gte = Number(minViews);
-
-            if (maxViews) filter.views.$lte = Number(maxViews);
-        }
-        if (maxDuration || minDuration) {
-            filter.duration = {};
-            if (minDuration) filter.duration.$gte = Number(minDuration);
-            if (maxDuration) filter.duration.$lte = Number(maxDuration);
-        }
-        if (createdAfter || createdBefore) {
-            filter.createdAt = {};
-            if (createdAfter) filter.createdAt.$gte = new Date(createdAfter);
-            if (createdBefore) filter.createdAt.$lte = new Date(createdBefore);
-        }
-        const pageNumber = Number(page);
-        const limitNumber = Number(limit);
-        const skip = (pageNumber - 1) * limitNumber;
-        return {
-            pageNumber,
-            limitNumber,
-            skip,
-            filter,
-            sortOption
-        };
-    } catch (error) {
-        throw new apiError(401, "The buildVideoQuery helper went through an error")
-    }
-}
-export const getVideosService = async (req) => {
-    try {
-        const { pageNumber: page, limitNumber: limit, skip, filter, sortOption: sort } =
-            await buildVideoQuery(req.query);
-        const [videos, totalVideos] = await Promise.all([
-            Video.find(filter).skip(skip).limit(limit).sort(sort),
-            Video.countDocuments(filter)
-        ])
-        return {
-            videos,
-            currentPage: pageNumber,
-            totalPages: Math.ceil(totalVideos / limitNumber),
-            totalVideos,
-            hasNextPage: pageNumber * limitNumber < totalVideos,
-            hasPrevPage: pageNumber > 1
-        };
-    } catch (error) {
-        throw new apiError(401, "getVideoService went through an error")
-    }
-}
-export const videoController = async (req, res) => {
-    try {
-        const {
-            videos,
-            currentPage,
-            totalPages,
-            totalVideos,
-            hasNextPage,
-            hasPrevPage
-        } = await getVideosService(req);
-
-        return res.status(200).json(
-            new apiResponse(200, {
-                videos,
-                currentPage,
-                totalPages,
-                totalVideos,
-                hasNextPage,
-                hasPrevPage
-            }, "The Video fetching process is succesfull")
-        )
-    } catch (error) {
-        throw new apiError(401, "The video controller went through an error");
-    }
-}
-export const queryBuilder = async (query, options) => {
-    //query here is req.validatedQuery
-    const {
-        searchableFields = [],
-        allowedSort = []
-    } = options;
-    const filter = {};
-    filter.isPublished = query.isPublished;
-    if (query.search) {
-        filter.$or = searchableFields.map(fields => ({
-            [fileds]: {
-                $regex: fields,
-                $options: "i"
-            }
-        }))
-    }
-    if (query.owner) {
-        filter.owner = {
-            $regex: owner,
-            $options: "i"
-        }//assuming that base data has owner field in it(the odcuments)
-    }
-    const sortMap = {
-        latest: { createdAt: -1 },
-        oldest: { createdAt: 1 },
-        mostViewed: { views: -1 },
-    }
-    const sortOption = allowedSort.includes(query.sort) ? sortMap[query.sort] : sortMap.latest;
-    return {
-        filter,
-        sortOption,
-        page:query.page,
-        limit:query.limit,
-        skip: (query.page - 1)*query.limit
-    }
-}
+});

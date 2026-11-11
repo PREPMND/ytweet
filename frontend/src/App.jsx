@@ -4,21 +4,30 @@ import { socket } from './socket.jsx';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from "@tanstack/react-query";
 import getCurrentUser from "./api/currentuser";
-import Small1 from "../public/Small1.jpg";
-import Small2 from "../public/Small2.jpg";
-import Small3 from "../public/Small3.jpg";
-import Small4 from "../public/Small4.jpg";
-import Small5 from "../public/Small5.jpg";
-import Small6 from "../public/Small6.jpg";
-import Small7 from "../public/Small7.jpg";
-import Small8 from "../public/Small8.jpg";
+// Only the default chat wallpaper is needed here; the full set lives in
+// utils/themeObject.jsx. The other 13 imports were unused but still pulled
+// every one of those JPEGs into the bundle graph.
+import { themeObject } from "./utils/themeObject.jsx";
+import ToastHost from "./components/toast.jsx";
 
-import PCSmall1 from "../public/PCSmall1.jpg";
-import PCSmall2 from "../public/PCSmall2.jpg";
-import PC1 from "../public/PC1.jpg";
-import PC2 from "../public/PC2.jpg";
-import PC3 from "../public/PC3.jpg";
-import PC4 from "../public/PC4.jpg";
+const DEFAULT_THEME = themeObject.PCSmall[1];
+
+/**
+ * The persisted value is an asset URL, and asset URLs change between a dev
+ * server and a production build (Vite fingerprints them). A stale URL left
+ * the chat wallpaper pointing at a 404, so validate it against the themes
+ * that actually exist right now and fall back when it no longer resolves.
+ */
+function readStoredTheme() {
+    try {
+        const stored = localStorage.getItem("themeSelected");
+        const known = Object.values(themeObject).flatMap((group) => Object.values(group));
+        return known.includes(stored) ? stored : DEFAULT_THEME;
+    } catch {
+        // Private mode / blocked storage: just use the default.
+        return DEFAULT_THEME;
+    }
+}
 
 const App = () => {
   {/*const [username,setUsername]=useState("")
@@ -55,17 +64,27 @@ const App = () => {
   const [message, setMessage] = useState("");
   const [show, setShow] = useState(false);
   const [profileSelected, setProfileSelected] = useState(null);
-  const [themeSelected, setthemeSelected] = useState(() => {
-    return localStorage.getItem("themeSelected") || PCSmall1;
+  const [themeSelected, setthemeSelected] = useState(readStoredTheme);
+  const [darkMode, setDarkMode] = useState(() => {
+    try {
+      // `JSON.parse(null)` is null (fine), but `JSON.parse("undefined")`
+      // THROWS -- and a throw in a useState initialiser blanks the whole app.
+      return JSON.parse(localStorage.getItem("darkMode")) ?? false;
+    } catch {
+      return false;
+    }
   });
-  const [darkMode, setDarkMode] = useState(
-    JSON.parse(localStorage.getItem("darkMode")) ?? false
-  );
+
   useEffect(() => {
-    localStorage.setItem("themeSelected", themeSelected);
+    try {
+      localStorage.setItem("themeSelected", themeSelected);
+    } catch { /* storage unavailable */ }
   }, [themeSelected]);
+
   useEffect(() => {
-    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+    try {
+      localStorage.setItem("darkMode", JSON.stringify(darkMode));
+    } catch { /* storage unavailable */ }
     document.body.className = darkMode ? "dark" : "light";
   }, [darkMode]);
   useEffect(() => {
@@ -99,6 +118,10 @@ const App = () => {
   const [currentId, setcurrentId] = useState(null);
   return (
     <>
+      {/* One host for the whole app; anything can raise a toast with
+          `toast("...")` from components/toast.jsx, including non-React code
+          such as the axios interceptor. */}
+      <ToastHost />
       <div>
         <AppRoutes themeSelected={themeSelected} setthemeSelected={setthemeSelected} isLoggedIn={isLoggedIn} currentId={currentId} setcurrentId={setcurrentId} setisLoggedIn={setisLoggedIn} menubar={menubar} profileSelected={profileSelected} setProfileSelected={setProfileSelected} setMenubar={setMenubar} darkMode={darkMode} setDarkMode={setDarkMode} darkModenav={darkModenav} setDarkModenav={setDarkModenav}
           videoIdSelected={videoIdSelected} setvideoIdSelected={setvideoIdSelected} />

@@ -109,11 +109,12 @@ const Register = (props) => {
                         <h1 className='text-2xl font-[700] text-center text-neutral-800 mb-2'>Register</h1>
                         <input className='input' type='text' value={fullName} placeholder='Full Name'
                             onChange={(e) => setFullName(e.target.value)} />
-                        <input className='input' type='text' value={email} placeholder='Email'
+                        <input className='input' type='email' autoComplete='email' value={email} placeholder='Email'
                             onChange={(e) => setEmail(e.target.value)} />
-                        <input className='input' type='text' value={username} placeholder='UserName'
+                        <input className='input' type='text' autoComplete='username' value={username} placeholder='UserName'
                             onChange={(e) => setUsername(e.target.value)} />
-                        <input className='input' type='text' value={password} placeholder='Password'
+                        {/* was type='text': the password rendered in the clear */}
+                        <input className='input' type='password' autoComplete='new-password' value={password} placeholder='Password'
                             onChange={(e) => setPassword(e.target.value)} />
                     </div>
                     <button

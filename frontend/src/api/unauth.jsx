@@ -7,7 +7,10 @@ const Api=axios.create({
 Api.interceptors.response.use(
     (response)=>response,
     (error)=>{
-        if(error.response.status==401){
+        // `error.response` is undefined for network errors / timeouts, so the
+        // old `error.response.status` threw inside the interceptor and masked
+        // the real failure. Optional-chain it.
+        if(error.response?.status===401){
             window.location.href="/login"
         }
         return Promise.reject(error)

@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 import getCurrentUser from "../api/currentuser";
-import { GridScan } from "../assets/gridscan.jsx"
+// GridScan was imported but never rendered on this page. It depends on
+// three.js, face-api.js and postprocessing -- roughly 600 kB of JavaScript
+// that every visitor downloaded for a component that was never on screen.
+// import { GridScan } from "../assets/gridscan.jsx"
 import LoaderTwo from "../assets/loading2.jsx";
 const AccountPage = ({ darkMode }) => {
     const navigate = useNavigate();

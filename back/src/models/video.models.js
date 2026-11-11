@@ -35,5 +35,14 @@ const videoSchema= new Schema({
         ref:"User"
     }
 },{timestamps:true});
+// Indexes matching the actual query shapes:
+//  - feed:     { isPublished: true } sorted by createdAt / views
+//  - channel:  { owner } sorted by createdAt
+//  - search:   text index so title/description search isn't a collection scan
+videoSchema.index({ isPublished: 1, createdAt: -1 });
+videoSchema.index({ isPublished: 1, views: -1 });
+videoSchema.index({ owner: 1, createdAt: -1 });
+videoSchema.index({ title: "text", description: "text" });
+
 videoSchema.plugin(mongooseAggregatePaginate);
 export const Video=model("Video",videoSchema);

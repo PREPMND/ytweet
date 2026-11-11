@@ -1,28 +1,32 @@
 import { Router } from "express";
+
 import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { rateLimit } from "../middlewares/ratelimiter.middleware.js";
 import {
-  sendMessage,
-  getMessages,
-  getConversations,
-  getConversationId,
-  markMessagesAsSeen
+    sendMessage,
+    getMessages,
+    getConversations,
+    getConversationId,
+    markMessagesAsSeen,
 } from "../controllers/socket.controller.js";
-import { rateLimiter } from "../middlewares/ratelimiter.middleware.js";
-import { cache } from "../middlewares/cache.middleware.js";
+
 const routerSocket = Router();
 
 routerSocket.use(verifyJWT);
 
-// Send a message
-routerSocket.post("/send",rateLimiter, sendMessage);
-routerSocket.patch(
-    "/seen/:conversationId",
-    markMessagesAsSeen
-);
+/*
+ * ROUTE ORDER MATTERS. Express matches top-to-bottom, so every STATIC path
+ * must be registered before the "/:receiverId" wildcard -- otherwise
+ * GET /convo is swallowed by the param route and `receiverId` becomes the
+ * literal string "convo". The original file registered
+ * "/generateConvoId" AFTER "/:receiverId", so it was unreachable.
+ */
+routerSocket.post("/send", rateLimit, sendMessage);
+routerSocket.patch("/seen/:conversationId", markMessagesAsSeen);
 routerSocket.get("/convo", getConversations);
-// Get all messages of a conversation
-routerSocket.get("/:receiverId", getMessages);
-// Get all conversations of current user
+routerSocket.get("/conversation-id", getConversationId);
 
-routerSocket.get("/generateConvoId",getConversationId);
+// Wildcard last.
+routerSocket.get("/:receiverId", getMessages);
+
 export default routerSocket;

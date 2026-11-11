@@ -17,20 +17,34 @@ export const VideoIndv = ({ darkMode }) => {
         const fetchVideo = async () => {
             try {
                 const res = await api.get(`/videos/getvideo/${id}`);
-                setTimeout(() => {
-                    setVideo(res.data.data);
-                }, 1000);
-                console.log("Fetched video data:", res.data);
+                // The artificial 1s delay made every video feel slow to open
+                // and, worse, left the component showing a loader after the
+                // data had already arrived.
+                setVideo(res.data.data);
 
                 // fetch owner's other videos
                 setLoadingVideos(true);
-                const res2 = await api.post("/videos/any", { owner: res.data.data.owner._id, excludeId: id, limit: 10 });
-                setVideos(res2.data.data);
-                console.log("Owner's other videos:", res2.data.data);
+                const res2 = await api.post("/videos/any", {
+                    owner: res.data.data.owner._id,
+                    excludeId: id,
+                    limit: 10,
+                });
 
-                setLoadingVideos(false);
+                // `/videos/any` now returns a paginated envelope
+                // ({ videos, totalPages, ... }) rather than a bare array.
+                // Accept both so this keeps working either way, and always
+                // hand `setVideos` an array -- `videos.map` crashed the whole
+                // page when it received an object.
+                const payload = res2.data?.data;
+                const list = Array.isArray(payload) ? payload : payload?.videos ?? [];
+
+                // Don't recommend the video you're already watching.
+                setVideos(list.filter((v) => v._id !== id));
             } catch (err) {
                 console.error(err);
+                setVideos([]);
+            } finally {
+                setLoadingVideos(false);
             }
         };
         fetchVideo();

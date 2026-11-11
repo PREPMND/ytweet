@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import axios from 'axios';
-import Aurora from "../assets/aurora.jsx"
+// `Aurora` was imported and never rendered, and `Particles` is only used
+// inside a commented-out block below. Both pull in `ogl` (a WebGL library),
+// so the dead imports alone were shipping it to every visitor. Re-add the
+// import next to the JSX if you switch the particle background back on.
 import '../assets/particles.css'
-import Particles from '../assets/particles.jsx';
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
+import { useQueryClient } from "@tanstack/react-query"
+import { resetAuthState } from "../api/api"
 import { LoaderPinwheel } from "lucide-react"
 import orange from '../assets/orange.jpg'
 const Login = () => {
@@ -17,6 +21,8 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
     const [rateLimitMessage, setRateLimitMessage] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+    const queryClient = useQueryClient();
 
     async function HandleSubmit(e) {
         e.preventDefault();
@@ -29,13 +35,24 @@ const Login = () => {
                     { withCredentials: true }
                 );
 
+                // Clear the refresh circuit breaker -- there IS a session now.
+                resetAuthState();
+
                 setCurrentUser(res.data.data.user.username);
                 setEmail("");
                 setUsername("");
                 setPassword("");
                 setError(false);
-                
-                navigate("/");
+
+                // The cached "currentUser" is still the signed-OUT result, and
+                // its staleTime means react-query would happily serve it for
+                // another minute -- so the navbar and <Protected> would still
+                // think nobody is logged in. Invalidate before navigating.
+                await queryClient.invalidateQueries({ queryKey: ["currentUser"] });
+
+                // <Protected> stores where the user was headed before the
+                // redirect, so send them back there instead of always home.
+                navigate(location.state?.from || "/", { replace: true });
             } else {
                 setError(true);
             }
@@ -116,20 +133,24 @@ const Login = () => {
                                     className='h-full *:text-lg w-full flex flex-col items-center justify-center gap-4'
                                     onSubmit={HandleSubmit}>
                                     <input
-                                        className={`${way == "email" ? "flex" : "hidden"} border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 placeholder:text-neutral-700 focus:ring-blue-500 focus:border-transparent
+                                        className={`${way == "email" ? "flex" : "hidden"} border border-gray-300 bg-white text-neutral-900 rounded px-3 py-1 focus:outline-none focus:ring-2 placeholder:text-neutral-700 focus:ring-blue-500 focus:border-transparent
                         w-[200px] md:w-[250px]`}
                                         type='text'
                                         placeholder='Email' value={email}
                                         name='email' onChange={(e) => { setEmail(e.target.value) }} />
                                     <input
-                                        className={`${way == "email" ? "hidden" : "flex"} border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring-2 placeholder:text-neutral-700 focus:ring-blue-500 focus:border-transparent
+                                        className={`${way == "email" ? "hidden" : "flex"} border border-gray-300 bg-white text-neutral-900 rounded px-3 py-1 focus:outline-none focus:ring-2 placeholder:text-neutral-700 focus:ring-blue-500 focus:border-transparent
                         w-[200px] md:w-[250px]`}
                                         type='text'
                                         placeholder='Username' value={username}
                                         name='username' onChange={(e) => { setUsername(e.target.value) }} />
+                                    {/* type="password" -- it was "text", so the
+                                        password was shown in the clear and
+                                        browsers wouldn't offer to save it. */}
                                     <input
-                                        className='border border-gray-300  placeholder:text-neutral-700 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-[200px] md:w-[250px]'
-                                        type='text'
+                                        className='border border-gray-300 bg-white text-neutral-900 placeholder:text-neutral-700 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-[200px] md:w-[250px]'
+                                        type='password'
+                                        autoComplete='current-password'
                                         value={password} placeholder='Password'
 
                                         onChange={(e) => { setPassword(e.target.value) }}

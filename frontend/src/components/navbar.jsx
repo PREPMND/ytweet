@@ -3,7 +3,10 @@ import getCurrentUser from '../api/currentuser.jsx';
 import logolight from "../assets/logolight.jpg"
 import logodark from "../assets/logodark..jpg"
 import { Album, Airplay, Bolt, CirclePlus, VideotapeIcon, PlayCircle, PlusCircle, ToggleRight, LucideToggleLeft, ChevronDown, MessageCircleCode, SquareDashedText, ScanSearch, MessageCircleDashedIcon, CrossIcon } from "lucide-react"
-import { useState, useEffect, useEffectEvent } from "react";
+// `useEffectEvent` is still experimental and is NOT exported from the stable
+// react build, so importing it yielded `undefined` (silently, because React
+// is CJS and Vite's interop doesn't throw on a missing named export).
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import api from "../api/api.jsx";
@@ -16,28 +19,42 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
     const [hoverAirplay, setHoverAirplay] = useState(false);
     const [loggingOut, setLoggingOut] = useState(false);
     const [searchTerm, setSearchTerm] = useState("");
+    // `searchTerm` drives the input (so typing stays instant); `debouncedTerm`
+    // drives the query. Without this split every keystroke fired a request and
+    // tripped the server's rate limiter after ~10 characters.
+    const [debouncedTerm, setDebouncedTerm] = useState("");
     const queryClient = useQueryClient();
     const navigating = useNavigate();
     const location = useLocation();
-    console.log(isLoggedIn)
     const { data, error, isLoading, isSuccess, isError } = useQuery({
         queryKey: ["currentUser"],
         queryFn: getCurrentUser,
         staleTime: 1000 * 60,
         refetchOnWindowFocus: true,
-
+        // A 401 here just means "not signed in". Retrying it three times on
+        // every mount only delays the first paint.
+        retry: false,
     });
-    const { data: data1, error: error1, isLoading: isLoading1 } = useQuery({
-        queryKey: ["searchResults", searchTerm],
-        queryFn: () => DBVideoSearch(searchTerm),
-        enabled: !!searchTerm,
-    })
-    console.log(data1);
 
     useEffect(() => {
-        setcurrentId(data?.user?._id);
-        console.log(data?.user?._id);
-    }, [data])
+        const timer = setTimeout(() => setDebouncedTerm(searchTerm.trim()), 350);
+        return () => clearTimeout(timer);
+    }, [searchTerm]);
+
+    const { data: data1, error: error1, isLoading: isLoading1 } = useQuery({
+        queryKey: ["searchResults", debouncedTerm],
+        queryFn: () => DBVideoSearch(debouncedTerm),
+        enabled: debouncedTerm.length > 0,
+        // Keep the previous list visible while the next one loads instead of
+        // flashing an empty dropdown between keystrokes.
+        placeholderData: (previous) => previous,
+        staleTime: 1000 * 30,
+        retry: false,
+    })
+
+    useEffect(() => {
+        setcurrentId?.(data?.user?._id ?? null);
+    }, [data, setcurrentId])
     useEffect(() => {
         // Whenever the route changes to "/", reset menu state
         if (location.pathname === "/") {
@@ -55,27 +72,44 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
             setisLoggedIn(false);
         }
     }, [isLoading, isSuccess, isError, error]);
+    // The old code popped a "Please log in" modal on a 5-minute interval for
+    // anyone browsing anonymously, which interrupted them mid-scroll forever.
+    // The feed is public, so prompt on an actual 401 instead -- api.jsx emits
+    // a "logout" event once a refresh attempt has failed.
     useEffect(() => {
+        const onLogout = () => {
+            // Only interrupt someone who actually HAD a session. A first-time
+            // anonymous visitor also triggers this event (currentuser 401 ->
+            // refresh fails), and greeting them with a modal is hostile --
+            // the feed is public.
+            const hadSession = Boolean(queryClient.getQueryData(["currentUser"])?.user);
 
-        const interval = setInterval(() => {
+            setisLoggedIn?.(false);
+            queryClient.setQueryData(["currentUser"], { user: null });
 
-            if (!data?.user) {
-                setNavigate(true);
-            }
+            if (hadSession) setNavigate(true);
+        };
 
-        }, 300000);
+        window.addEventListener("logout", onLogout);
+        return () => window.removeEventListener("logout", onLogout);
+    }, [queryClient, setisLoggedIn]);
 
-        return () => clearInterval(interval);
-
-    }, [data]);
     const HandleLogout = async () => {
-        const confirmLogout = await api.post(`${import.meta.env.VITE_BACKEND}/api/v1/users/logout`, {}, { withCredentials: true });
-        if (confirmLogout.status === 200) {
-            setLoggingOut(true);
-            queryClient.removeQueries(["currentUser"]);
-            setisLoggedIn(false);
-            setNavigate(true);
+        setLoggingOut(true);
+        try {
+            // `api` already has the baseURL and withCredentials, so passing an
+            // absolute URL here only risked drifting out of sync with it.
+            await api.post("/users/logout");
+        } catch (err) {
+            // Even if the call fails the local session is gone; don't trap the
+            // user in a half-logged-in state.
+            console.warn("logout request failed", err);
+        } finally {
+            queryClient.removeQueries({ queryKey: ["currentUser"] });
+            setisLoggedIn?.(false);
+            setMenubar?.(false);
             setLoggingOut(false);
+            navigating("/login");
         }
     }
 
@@ -121,7 +155,8 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                         </div>
 
                         <div
-                            className="flex flex-col items-center"
+                            className="flex cursor-pointer flex-col items-center"
+                            onClick={() => navigating("/saved")}
                             onMouseEnter={() => setHoverAlbum(true)}
                             onMouseLeave={() => setHoverAlbum(false)}
                         >
@@ -245,11 +280,11 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                                 <div>
                                     <img
                                         className={`${darkMode ? "shadow-white" : ""} hover:ring-2 ring-fuchsia-400 shadow-md shadow-stone-500 rounded-full h-[100px] w-[100px] md:h-[140px] md:w-[140px] object-cover mb-2 transition-transform duration-300 ease-in-out hover:bg-white/20 hover:scale-[1.04]`}
-                                        src={data?.user.avatar || "https://i.sstatic.net/lsh78.jpg"}
+                                        src={data?.user?.avatar || "https://i.sstatic.net/lsh78.jpg"}
                                     />
                                 </div>
                                 <div className={`${darkMode ? "text-white" : "text-neutral-900"} font-[500] text-[12px] md:text-[16px]`}>
-                                    {data?.user.fullName}
+                                    {data?.user?.fullName}
                                 </div>
                                 <button className={`border-2 px-3 md:px-3 mt-2 md:mt-3 py-1 rounded-[12px] mb-2 md:mb-0 text-[15px]  md:text-[18px] text-neutral-900 font-[500] hover:text-black transition-all duration-300 ease-in-out hover:scale-105  hover:shadow-sm ${darkMode ? "text-black bg-white  hover:shadow-fuchsia-400 hover:shadow-md" : "hover:shadow-stone-500"}`} >
                                     <span
@@ -270,9 +305,11 @@ const Navbar = ({ menubar, setMenubar, setcurrentId, darkModenav, setDarkModenav
                                         className="ml-2 hover:scale-105 transition-transform duration-200 ease-out md:text-[20px] text-[15px] font-[500]">Create Videos</span>
                                     <PlusCircle className={`ml-10 hover:scale-105  transition-transform hidden md:flex duration-200 ease-in-out ${darkMode ? "text-white/90 hover:text-white" : "text-black"} `} size={28} />
                                 </div>
-                                <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/95" : "text-slate-900 hover:text-black"}`}>
+                                <div
+                                    onClick={() => { setMenubar(false); navigating("/saved"); }}
+                                    className={`flex cursor-pointer items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/95" : "text-slate-900 hover:text-black"}`}>
                                     <Album className="mr-5 md:mr-7" size={24} />
-                                    <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out md:text-[20px] text-[15px] font-[500]">Saved Topics</span>
+                                    <span className="ml-2 hover:scale-105 transition-transform duration-200 ease-out md:text-[20px] text-[15px] font-[500]">Saved</span>
 
                                 </div>
                                 <div className={`flex items-center transition-colors duration-100 ease-in-out mt-5 ${darkMode ? "text-white hover:text-white/95" : "text-slate-900 hover:text-black"}`}>

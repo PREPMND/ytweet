@@ -1,21 +1,52 @@
 import { apiError } from "../utils/apiError.js";
-export const validatePagination=async(req,res,next)=>{
-    try {
-        const page=Number(req.query.page)||1;
-        if(page<1 || isNaN(Number(page))){
-            throw new apiError(401,"Page parameters are wrong.");
+
+const SORTS = new Set(["latest", "oldest", "mostViewed"]);
+
+/**
+ * Normalises ?page / ?limit / ?sort into `req.validatedQuery`.
+ *
+ * The old version did `next(new apiError(\`${error.status}\`, ...))`, which
+ * produced a *string* status code (and "undefined" at that), so the error
+ * handler fell through to 500. Status codes must stay numbers.
+ */
+export const validatePagination = ({ maxLimit = 24, defaultLimit = 6 } = {}) => {
+    return (req, res, next) => {
+        const rawPage = req.query.page ?? 1;
+        const rawLimit = req.query.limit ?? defaultLimit;
+
+        const page = Number(rawPage);
+        const limit = Number(rawLimit);
+
+        if (!Number.isInteger(page) || page < 1) {
+            return next(new apiError(400, "`page` must be an integer >= 1"));
         }
-        const limit=Number(req.query.limit) || 6;
-        if(limit>10 || limit<1 || isNaN(Number(limit))){
-            throw new apiError(401,"Limit should'nt exceed 10 and should be a number");
+
+        if (!Number.isInteger(limit) || limit < 1 || limit > maxLimit) {
+            return next(new apiError(400, `\`limit\` must be an integer between 1 and ${maxLimit}`));
         }
-        req.validatedQuery={
-            ...req.validatedQuery,
+
+        const sort = req.query.sort ?? "latest";
+
+        if (!SORTS.has(sort)) {
+            return next(
+                new apiError(400, `\`sort\` must be one of: ${[...SORTS].join(", ")}`)
+            );
+        }
+
+        req.validatedQuery = {
             page,
-            limit
-        }
+            limit,
+            skip: (page - 1) * limit,
+            sort,
+            search: typeof req.query.search === "string" ? req.query.search : "",
+        };
+
         next();
-    } catch (error) {
-        next(new apiError(`${error.status}`,`The request responded with ${error.message}`));
-    }
-}
+    };
+};
+
+export const SORT_MAP = {
+    latest: { createdAt: -1 },
+    oldest: { createdAt: 1 },
+    mostViewed: { views: -1, createdAt: -1 },
+};
