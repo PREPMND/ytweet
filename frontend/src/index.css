@@ -162,7 +162,14 @@ body {
   overrode the first (same specificity, later wins), so the solid green border
   and the 200px width were dead rules. One block now, theme-aware.
 */
-input[type="file"] {
+/* Opt-out for inputs that style themselves with Tailwind `file:` utilities.
+   Without this the global rule below fought with them (dashed border, fixed
+   width, its own padding) and the result looked broken. */
+input[type="file"].no-global-file-style {
+  all: revert;
+}
+
+input[type="file"]:not(.no-global-file-style) {
   width: 100%;
   max-width: 320px;
   padding: 16px;
@@ -175,12 +182,12 @@ input[type="file"] {
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
-input[type="file"]:hover {
+input[type="file"]:not(.no-global-file-style):hover {
   border-color: var(--accent);
   background-color: var(--surface);
 }
 
-input[type="file"]::file-selector-button {
+input[type="file"]:not(.no-global-file-style)::file-selector-button {
   background: var(--accent);
   color: #fff;
   font-weight: 500;
@@ -192,7 +199,7 @@ input[type="file"]::file-selector-button {
   transition: background 0.2s ease;
 }
 
-input[type="file"]::file-selector-button:hover {
+input[type="file"]:not(.no-global-file-style)::file-selector-button:hover {
   background: var(--accent-hover);
 }
 
