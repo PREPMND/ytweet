@@ -1,0 +1,2386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SocialSphere — Interview Preparation</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+
+  :root {
+    --ink: #16181d;
+    --muted: #5b616e;
+    --line: #dfe3e8;
+    --accent: #1f4ed8;
+    --code-bg: #f6f7f9;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: "Segoe UI", -apple-system, system-ui, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  h1, h2, h3, h4 { line-height: 1.25; font-weight: 650; margin: 1.4em 0 .5em; }
+  h1 { font-size: 20pt; color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: .25em; }
+  h2 { font-size: 14pt; margin-top: 1.6em; border-bottom: 1px solid var(--line); padding-bottom: .2em; }
+  h3 { font-size: 11.5pt; }
+  h4 { font-size: 10.5pt; color: var(--muted); }
+
+  /* Keep a heading with the text that follows it. */
+  h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+
+  p { margin: .55em 0; }
+  a { color: var(--accent); text-decoration: none; }
+
+  code {
+    font-family: "Cascadia Mono", Consolas, "SF Mono", monospace;
+    font-size: 9pt;
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: .08em .32em;
+  }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    border-radius: 5px;
+    padding: .7em .9em;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin: .8em 0;
+  }
+  pre code { background: none; border: 0; padding: 0; font-size: 8.6pt; line-height: 1.45; }
+
+  blockquote {
+    margin: .9em 0;
+    padding: .5em .95em;
+    border-left: 3px solid var(--accent);
+    background: #f4f7ff;
+    border-radius: 0 5px 5px 0;
+  }
+  blockquote p { margin: .35em 0; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: .9em 0;
+    font-size: 9.2pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  th, td { border: 1px solid var(--line); padding: .4em .6em; text-align: left; vertical-align: top; }
+  th { background: var(--code-bg); font-weight: 650; }
+
+  ul, ol { margin: .55em 0; padding-left: 1.5em; }
+  li { margin: .22em 0; }
+
+  hr { border: 0; border-top: 1px solid var(--line); margin: 1.6em 0; }
+
+  .cover {
+    height: 247mm;
+    display: flex; flex-direction: column; justify-content: center;
+    text-align: center;
+    break-after: page; page-break-after: always;
+  }
+  .cover h1 { border: 0; font-size: 30pt; margin-bottom: .1em; }
+  .cover .sub { font-size: 13pt; color: var(--muted); }
+  .cover .meta { margin-top: 2.5em; font-size: 10pt; color: var(--muted); }
+
+  .toc { break-after: page; page-break-after: always; }
+  .toc ol { font-size: 11pt; line-height: 2; }
+
+  .part { break-before: page; page-break-before: always; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>SocialSphere</h1>
+  <div class="sub">Full-Stack Interview Preparation</div>
+  <div class="sub" style="font-size:11pt;margin-top:.6em">
+    React &middot; Node &middot; Express &middot; MongoDB &middot; Redis &middot; Socket.IO
+  </div>
+  <div class="meta">
+    Architecture, language fundamentals, every bug explained,<br>
+    design decisions and interview Q&amp;A<br><br>
+    Generated 2026-11-11
+  </div>
+</div>
+
+<div class="toc">
+  <h1>Contents</h1>
+  <ol><li><a href="#part-0">1 — Architecture & Running It</a></li>
+<li><a href="#part-1">2 — The JavaScript This Project Depends On</a></li>
+<li><a href="#part-2">3 — Node & Express</a></li>
+<li><a href="#part-3">4 — MongoDB & Mongoose</a></li>
+<li><a href="#part-4">5 — React & The Frontend</a></li>
+<li><a href="#part-5">6 — Authentication</a></li>
+<li><a href="#part-6">7 — Caching, Rate Limiting, Realtime & Scale</a></li>
+<li><a href="#part-7">8 — Every Bug, Explained</a></li>
+<li><a href="#part-8">9 — Design Decisions</a></li>
+<li><a href="#part-9">10 — Interview Q&A</a></li></ol>
+</div>
+
+<section class="part" id="part-0"><h1 id="1-architecture-running-it">1 — Architecture & Running It</h1>
+<blockquote><p>Part 1 of the SocialSphere / preytweet interview-prep series.</p><p><code>01</code> architecture · <code>02</code> JavaScript · <code>03</code> Node & Express · <code>04</code> MongoDB</p><p><code>05</code> React · <code>06</code> Auth · <code>07</code> Caching & scale · <code>08</code> Every bug, explained</p><p><code>09</code> Design decisions · <code>10</code> Interview Q&A</p></blockquote>
+<hr>
+<h2 id="1-1-what-this-project-actually-is">1.1 What this project actually is</h2>
+<p>Three deployable units sharing one MongoDB Atlas cluster.</p>
+<pre class="lang-text"><code>                    ┌───────────────────────────────┐
+  browser  ────────▶│  frontend  (Vite + React 19)  │   :5173
+                    │  SPA, cookies, TanStack Query │
+                    └──────────┬────────────┬───────┘
+                               │ HTTP       │ WebSocket
+                               │ (cookies)  │
+                    ┌──────────▼──────┐  ┌──▼──────────────┐
+                    │  back  (:8000)  │  │ SocketConn      │  :9000
+                    │  Express 5 REST │  │ Socket.IO       │
+                    │  JWT, uploads   │  │ presence, typing│
+                    └────┬────────┬───┘  └────────┬────────┘
+                         │        │               │
+              ┌──────────▼──┐  ┌──▼────────┐      │
+              │ MongoDB     │◀─┼───────────┼──────┘
+              │ Atlas       │  │ Upstash   │
+              │ (db: test)  │  │ Redis     │
+              └─────────────┘  └───────────┘
+                               │ Cloudinary │  ← video / image CDN
+                               └────────────┘</code></pre>
+<table><thead><tr><th>Unit</th><th>Folder</th><th>Port</th><th>Responsibility</th></tr></thead><tbody><tr><td>Frontend</td><td><code>frontend/</code></td><td>5173</td><td>React SPA</td></tr><tr><td>REST API</td><td><code>back/</code></td><td>8000</td><td>auth, users, videos, message persistence</td></tr><tr><td>Realtime</td><td><code>SocketConn/</code></td><td>9000</td><td>presence, typing, live delivery</td></tr></tbody></table>
+<p><strong>The split to be able to defend in an interview:</strong> messages are <em>written</em></p>
+<p>through the REST API (so they are validated, rate-limited and durably stored)</p>
+<p>and <em>delivered</em> through the socket service. The socket layer is a transport,</p>
+<p>not a source of truth. If the socket service dies, nothing is lost — the next</p>
+<p><code>GET /api/v1/socket/:receiverId</code> still returns every message. That is the</p>
+<p>whole reason the two are separate processes.</p>
+<hr>
+<h2 id="1-2-running-it-locally">1.2 Running it locally</h2>
+<p>Three terminals.</p>
+<pre class="lang-bash"><code>cd back &amp;&amp; npm run dev</code></pre>
+<pre class="lang-bash"><code>cd SocketConn &amp;&amp; npm run dev</code></pre>
+<pre class="lang-bash"><code>cd frontend &amp;&amp; npm run dev</code></pre>
+<p>Then open <http://localhost:5173>.</p>
+<h3 id="demo-account">Demo account</h3>
+<pre class="lang-text"><code>username: demouser
+password: demo1234</code></pre>
+<p>Recreate or reset it any time:</p>
+<pre class="lang-bash"><code>cd back &amp;&amp; node script/seed-test-user.js</code></pre>
+<p>That script writes straight to Mongo, so it does not need Cloudinary. It</p>
+<p>assigns the plaintext password and calls <code>.save()</code>, which means the model's</p>
+<p><code>pre("save")</code> hook hashes it exactly as a real registration would.</p>
+<h3 id="health-checks">Health checks</h3>
+<pre class="lang-bash"><code>curl http://localhost:8000/health</code></pre>
+<pre class="lang-bash"><code>curl http://localhost:9000/health</code></pre>
+<p>The API's <code>/health</code> reports whether Mongo is connected and whether Redis is</p>
+<p>live or has degraded to the in-memory fallback. That distinction matters: the</p>
+<p>API will happily serve traffic with Redis down, and without this endpoint you</p>
+<p>would not know you were running uncached.</p>
+<hr>
+<h2 id="1-3-environment-configuration">1.3 Environment configuration</h2>
+<p><code>back/.env</code></p>
+<table><thead><tr><th>Key</th><th>Purpose</th></tr></thead><tbody><tr><td><code>PORT</code></td><td>API port (8000)</td></tr><tr><td><code>CORS_ORIGIN</code></td><td>comma-separated allow-list</td></tr><tr><td><code>MONGODB_URL</code></td><td>Atlas connection string</td></tr><tr><td><code>DB_NAME</code></td><td>database name — defaults to <code>test</code></td></tr><tr><td><code>ACCESS_TOKEN_SECURITY</code> / <code>_EXPIRY</code></td><td>access-JWT signing</td></tr><tr><td><code>REFRESH_TOKEN_SECURITY</code> / <code>_EXPIRY</code></td><td>refresh-JWT signing</td></tr><tr><td><code>CLOUD_NAME</code>, <code>CLOUDINARY_API_KEY</code>, <code>CLOUDINARY_SECRET_KEY</code></td><td>media uploads</td></tr><tr><td><code>REDIS_URL</code></td><td>Upstash; optional — falls back to memory</td></tr><tr><td><code>ELASTIC_URL</code></td><td>optional; falls back to Mongo regex search</td></tr></tbody></table>
+<p><code>frontend/.env.local</code> (gitignored, overrides <code>.env</code>):</p>
+<pre class="lang-text"><code>VITE_BACKEND=http://localhost:8000
+VITE_SOCKET_BACKEND=http://localhost:9000</code></pre>
+<p><strong>Why <code>.env.local</code> instead of editing <code>.env</code>:</strong> Vite loads <code>.env</code> then</p>
+<p><code>.env.local</code>, and the latter wins. So <code>.env</code> can keep pointing at the deployed</p>
+<p>Render services for <code>npm run build</code>, while local development silently</p>
+<p>overrides it. No more commenting lines in and out.</p>
+<h3 id="the-db-name-trap">The <code>DB_NAME</code> trap</h3>
+<p>The original code built the connection string like this:</p>
+<pre class="lang-js"><code>mongoose.connect(`${process.env.MONGODB_URL}/${DBNAME}`)</code></pre>
+<p>with <code>DBNAME = "TEST VERSION"</code>. But <code>MONGODB_URL</code> already ends in a query</p>
+<p>string:</p>
+<pre class="lang-text"><code>mongodb://user:pass@host:27017/?ssl=true&amp;replicaSet=...&amp;appName=Cluster0</code></pre>
+<p>Appending <code>/TEST VERSION</code> lands it <strong>after</strong> the <code>?</code>, so it became part of the</p>
+<p><code>appName</code> parameter. The driver saw an empty path and silently used its</p>
+<p>default database, <code>test</code>.</p>
+<p>So <code>DBNAME</code> never did anything, and all the real data lives in <code>test</code>. The fix</p>
+<p>passes the name as an option instead — and deliberately keeps <code>test</code> as the</p>
+<p>default so no data is orphaned:</p>
+<pre class="lang-js"><code>mongoose.connect(env.MONGODB_URL, { dbName: env.DB_NAME })  // DB_NAME = "test"</code></pre>
+<p><strong>Interview point:</strong> a connection string is a URI. Concatenating onto a URI</p>
+<p>that already has a query string is always a bug. Use the library's options</p>
+<p>object, or <code>new URL()</code>.</p>
+<hr>
+<h2 id="1-4-request-lifecycle">1.4 Request lifecycle</h2>
+<p>Walk this end-to-end in an interview; it shows you understand the whole stack.</p>
+<pre class="lang-text"><code>POST /api/v1/videos/createvideo
+   │
+   ├─▶ cors()                     origin in allow-list? echo it back
+   ├─▶ express.json()             (skipped — multipart body)
+   ├─▶ cookieParser()             req.cookies.accessToken
+   │
+   ├─▶ verifyJWT                  jwt.verify → User.findById → req.user
+   ├─▶ rateLimit                  INCR rate:user:&lt;id&gt;, EXPIRE 20s
+   ├─▶ multer.fields()            stream files → tmp/uploads/&lt;random&gt;
+   │
+   ├─▶ createVideo controller
+   │      ├ validate title/description/files
+   │      ├ uploadOnCloudinary ×2  (then always unlink the temp file)
+   │      ├ Video.create
+   │      ├ indexVideo             (fire-and-forget → Elasticsearch)
+   │      └ invalidate("videos:*") (drop cached feed pages)
+   │
+   ├─▶ res.status(201).json(apiResponse)
+   │
+   └─▶ (on throw) asyncHandler → next(err) → global error handler</code></pre>
+<p>Everything after <code>verifyJWT</code> can assume <code>req.user</code> exists. Everything that</p>
+<p>throws lands in one error handler. That uniformity is the point of the</p>
+<p><code>asyncHandler</code> + <code>apiError</code> pair, and it is covered in part 3.</p>
+<hr>
+<h2 id="1-5-repository-map">1.5 Repository map</h2>
+<pre class="lang-text"><code>social/
+├─ back/                          REST API
+│  ├─ src/
+│  │  ├─ env.js                   dotenv bootstrap + validated config
+│  │  ├─ index.js                 connect, listen, graceful shutdown
+│  │  ├─ app.js                   middleware chain, routes, error handler
+│  │  ├─ db/index.js              mongoose.connect
+│  │  ├─ redis/redis.js           Redis client + in-memory fallback
+│  │  ├─ models/                  User, Video, Subscription, Message
+│  │  ├─ controllers/             user, video, subscription, socket, library
+│  │  ├─ routes/                  three routers
+│  │  ├─ middlewares/             auth, cache, multer, ratelimiter, pagination
+│  │  └─ utils/                   apiError, apiResponse, asyncHandler,
+│  │                              cloudinary, cookies, elasticsearch
+│  └─ script/seed-test-user.js    demo account
+│
+├─ SocketConn/                    Socket.IO presence service
+│  ├─ src/server.js
+│  ├─ database/index.js
+│  └─ models/user.models.js
+│
+└─ frontend/
+   └─ src/
+      ├─ main.jsx                 providers (QueryClient, Router)
+      ├─ App.jsx                  theme, socket registration, ToastHost
+      ├─ routes/routes.jsx        route table, lazy chunks, auth gates
+      ├─ api/                     axios instance + interceptors, endpoints
+      ├─ components/              navbar, toast, loader, protected, boundary
+      ├─ layout/                  MainLayout (with navbar) / AuthLayout (bare)
+      ├─ pages/                   feed, watch, channel, messages, saved, …
+      └─ utils/                   format helpers, theme map, video menu</code></pre>
+<hr>
+<p>Next: <strong><a href="./02-JAVASCRIPT.md">02 — JavaScript the project depends on</a></strong></p></section>
+<section class="part" id="part-1"><h1 id="2-the-javascript-this-project-depends-on">2 — The JavaScript This Project Depends On</h1>
+<blockquote><p>Language-level concepts, each anchored to real code in this repo.</p><p>If you can explain every section here from the code, you can handle a</p><p>JavaScript interview round.</p></blockquote>
+<hr>
+<h2 id="2-1-es-modules-imports-are-hoisted-and-evaluated-first">2.1 ES modules: imports are hoisted and evaluated first</h2>
+<p>This caused the single most confusing bug in the codebase.</p>
+<pre class="lang-js"><code>// back/src/index.js — THE ORIGINAL, BROKEN
+import dotenv from "dotenv";
+import { connectRedis } from "./redis/redis.js";   // ← evaluated NOW
+
+dotenv.config({ path: "./.env" });                 // ← runs LATER</code></pre>
+<pre class="lang-js"><code>// back/src/redis/redis.js
+const client = createClient({ url: process.env.REDIS_URL });  // undefined!</code></pre>
+<h3 id="why">Why</h3>
+<p>An ES module is processed in three phases:</p>
+<ol>
+<li><strong>Construction</strong> — parse, resolve every <code>import</code> specifier, fetch the files.</li>
+<li><strong>Instantiation</strong> — allocate the bindings, wire exports to imports.</li>
+<li><strong>Evaluation</strong> — run the module bodies, <strong>in depth-first post-order</strong>.</li>
+</ol>
+<p>Crucially, *every imported module body runs to completion before a single</p>
+<p>statement of the importing module runs*. Imports are not statements that</p>
+<p>execute in place. They are declarations, hoisted like <code>function</code>.</p>
+<p>So the real order was:</p>
+<pre class="lang-text"><code>redis.js body     → process.env.REDIS_URL is undefined → localhost:6379
+app.js body       → cors({ origin: undefined })
+cloudinary.js     → cloudinary.config({ cloud_name: undefined })
+index.js body     → dotenv.config()      ← far too late</code></pre>
+<p>The symptom: <code>ECONNREFUSED 127.0.0.1:6379</code> even though <code>REDIS_URL</code> pointed at</p>
+<p>Upstash. <code>createClient</code> defaults to localhost when <code>url</code> is <code>undefined</code>.</p>
+<h3 id="the-fix">The fix</h3>
+<p>Put <code>dotenv.config()</code> in its own module and import it <strong>first</strong>. Module bodies</p>
+<p>evaluate in source order, so this is deterministic:</p>
+<pre class="lang-js"><code>// back/src/index.js — FIXED
+import env, { assertRequiredEnv } from "./env.js";   // dotenv runs here
+import { MongoConnection } from "./db/index.js";
+import { connectRedis } from "./redis/redis.js";     // env is populated now</code></pre>
+<h3 id="why-commonjs-didn-t-have-this-problem">Why CommonJS didn't have this problem</h3>
+<pre class="lang-js"><code>const dotenv = require("dotenv");
+dotenv.config();                       // runs HERE
+const redis = require("./redis.js");   // runs AFTER</code></pre>
+<p><code>require()</code> is a <em>function call</em> — synchronous, in place. <code>import</code> is a static</p>
+<p>declaration resolved before execution. This is the difference that lets ESM do</p>
+<p>tree-shaking and circular-import resolution, and it is the difference that bit</p>
+<p>us.</p>
+<p><strong>Interview answer:</strong> "ESM imports are hoisted and the dependency graph is</p>
+<p>evaluated depth-first before the importing module's body. So any module that</p>
+<p>reads <code>process.env</code> at the top level sees it before <code>dotenv.config()</code> runs</p>
+<p>unless you load dotenv in a module that is imported first — or use</p>
+<p><code>node --env-file</code> / <code>node -r dotenv/config</code>."</p>
+<hr>
+<h2 id="2-2-optional-chaining-stops-at-the-not-after-it">2.2 Optional chaining stops at the <code>?.</code>, not after it</h2>
+<pre class="lang-js"><code>// BROKEN — back/src/controllers/user.controller.js
+const avatarLocalPath     = req.files?.avatar[0]?.path;
+const coverImageLocalPath = req.files?.coverImage[0]?.path;</code></pre>
+<p><code>?.</code> only guards the link it sits on. <code>req.files?.avatar</code> is safe, but the</p>
+<p><code>[0]</code> that follows is <strong>not</strong>. Cover image is optional, so registering without</p>
+<p>one threw:</p>
+<pre class="lang-text"><code>TypeError: Cannot read properties of undefined (reading '0')</code></pre>
+<p>...a 500 on a perfectly valid request.</p>
+<pre class="lang-js"><code>// FIXED
+const avatarLocalPath     = req.files?.avatar?.[0]?.path;
+const coverImageLocalPath = req.files?.coverImage?.[0]?.path;</code></pre>
+<h3 id="short-circuiting">Short-circuiting</h3>
+<p>When the left side is <code>null</code>/<code>undefined</code>, the <strong>whole chain</strong> short-circuits to</p>
+<p><code>undefined</code> — the rest is never evaluated:</p>
+<pre class="lang-js"><code>data?.user.avatar
+// data == null      → undefined        (`.user.avatar` skipped entirely)
+// data = {user:null} → TypeError!       (data is fine, so `.user` evaluates)</code></pre>
+<p>That second case is exactly why the navbar crashed for a user whose session</p>
+<p>had half-expired, and why it now reads <code>data?.user?.avatar</code>.</p>
+<hr>
+<h2 id="2-3-vs">2.3 <code>??</code> vs <code>||</code></h2>
+<pre class="lang-js"><code>// back/src/middlewares/cache.middleware.js
+`user:${req.user?._id ?? "public"}`</code></pre>
+<table><thead><tr><th></th><th>falls back on</th></tr></thead><tbody><tr><td>`\</td><td>\</td><td>`</td><td>every falsy value: <code>0</code>, <code>""</code>, <code>false</code>, <code>NaN</code>, <code>null</code>, <code>undefined</code></td></tr><tr><td><code>??</code></td><td>only <code>null</code> and <code>undefined</code></td></tr></tbody></table>
+<p>The bug this prevents, straight from the practice code:</p>
+<pre class="lang-js"><code>if (minViews) filter.views.$gte = Number(minViews);   // ?minViews=0 ignored!</code></pre>
+<p><code>0</code> is falsy, so "at least 0 views" silently disappeared. For numeric query</p>
+<p>parameters the test must be <code>!== undefined</code>:</p>
+<pre class="lang-js"><code>if (minViews !== undefined) filter.views.$gte = Number(minViews);</code></pre>
+<p><code>??</code> cannot be mixed with <code>&amp;&amp;</code>/<code>||</code> without parentheses — that is a syntax</p>
+<p>error by design, because the precedence would be ambiguous.</p>
+<hr>
+<h2 id="2-4-closures-what-the-rate-limiter-and-the-cache-middleware-are">2.4 Closures — what the rate limiter and the cache middleware are</h2>
+<pre class="lang-js"><code>// back/src/middlewares/ratelimiter.middleware.js
+export const rateLimiter = ({ limit = 30, windowSeconds = 20 } = {}) =&gt; {
+    return async (req, res, next) =&gt; {
+        //     ↑ this inner function still sees `limit` and `windowSeconds`
+        //       after rateLimiter() has already returned
+    };
+};
+
+export const rateLimit     = rateLimiter();
+export const authRateLimit = rateLimiter({ limit: 10, windowSeconds: 60 });</code></pre>
+<p>A <strong>closure</strong> is a function plus the lexical environment it was created in.</p>
+<p><code>rateLimit</code> and <code>authRateLimit</code> are two separate function objects, each</p>
+<p>holding its own captured <code>limit</code>. This is the standard "middleware factory"</p>
+<p>pattern — <code>cache(300)</code> and <code>validatePagination({ maxLimit: 24 })</code> are the</p>
+<p>same idea.</p>
+<p>Note <code>= {}</code> on the parameter: without it, calling <code>rateLimiter()</code> with no</p>
+<p>argument would destructure <code>undefined</code> and throw.</p>
+<h3 id="the-classic-closure-interview-question">The classic closure interview question</h3>
+<pre class="lang-js"><code>for (var i = 0; i &lt; 3; i++) setTimeout(() =&gt; console.log(i), 0);  // 3 3 3
+for (let i = 0; i &lt; 3; i++) setTimeout(() =&gt; console.log(i), 0);  // 0 1 2</code></pre>
+<p><code>var</code> is function-scoped: one binding, shared by all three closures, read</p>
+<p>after the loop finished. <code>let</code> is block-scoped and the spec re-binds it per</p>
+<p>iteration, so each closure captures its own <code>i</code>.</p>
+<p>React's stale-closure bugs are this exact mechanism — see part 5.</p>
+<hr>
+<h2 id="2-5-this-and-why-arrow-functions-break-mongoose-hooks">2.5 <code>this</code> and why arrow functions break Mongoose hooks</h2>
+<pre class="lang-js"><code>// back/src/models/user.models.js
+userSchema.pre("save", async function () {
+    if (!this.isModified("password")) return;      // `this` = the document
+    this.password = await bcrypt.hash(this.password, 10);
+});
+
+userSchema.methods.isPasswordCorrect = async function (password) {
+    return await bcrypt.compare(password, this.password);
+};</code></pre>
+<p>These <strong>must</strong> be <code>function</code> declarations. An arrow function has no <code>this</code> of</p>
+<p>its own — it closes over the <code>this</code> of the enclosing scope, which at module</p>
+<p>level is <code>undefined</code> in ESM. Mongoose calls the hook with the document as</p>
+<p><code>this</code>, and an arrow function ignores that entirely.</p>
+<p><code>this</code> is determined by <strong>how a function is called</strong>:</p>
+<table><thead><tr><th>Call form</th><th><code>this</code></th></tr></thead><tbody><tr><td><code>obj.fn()</code></td><td><code>obj</code></td></tr><tr><td><code>fn()</code></td><td><code>undefined</code> (strict / ESM)</td></tr><tr><td><code>fn.call(x)</code> / <code>.apply</code> / <code>.bind(x)</code></td><td><code>x</code></td></tr><tr><td><code>new Fn()</code></td><td>the new instance</td></tr><tr><td>arrow</td><td>lexical — inherited, never rebindable</td></tr></tbody></table>
+<hr>
+<h2 id="2-6-promises-async-await-and-the-two-swallowed-error-bugs">2.6 Promises, async/await, and the two "swallowed error" bugs</h2>
+<h3 id="promise-all-vs-promise-allsettled"><code>Promise.all</code> vs <code>Promise.allSettled</code></h3>
+<pre class="lang-js"><code>// back/src/controllers/video.controller.js — two independent queries
+const [videos, total] = await Promise.all([
+    Video.find(filter).sort(sortOption).skip(skip).limit(limit).lean(),
+    Video.countDocuments(filter),
+]);</code></pre>
+<p>Running them sequentially would take <code>t1 + t2</code>. In parallel it is</p>
+<p><code>max(t1, t2)</code>. They do not depend on each other, so there is no reason to wait.</p>
+<p><code>Promise.all</code> rejects as soon as <strong>any</strong> input rejects. For shutdown, where</p>
+<p>each cleanup should be attempted regardless, use <code>allSettled</code>:</p>
+<pre class="lang-js"><code>// back/src/index.js
+await Promise.allSettled([disconnectRedis(), MongoDisconnect()]);</code></pre>
+<table><thead><tr><th></th><th>behaviour</th></tr></thead><tbody><tr><td><code>all</code></td><td>first rejection wins; others keep running but are ignored</td></tr><tr><td><code>allSettled</code></td><td>waits for all; returns `{status, value \</td><td>reason}[]`</td></tr><tr><td><code>race</code></td><td>first to settle, fulfilled or rejected</td></tr><tr><td><code>any</code></td><td>first to <em>fulfil</em>; rejects with <code>AggregateError</code> only if all reject</td></tr></tbody></table>
+<h3 id="fire-and-forget-deliberately">Fire-and-forget, deliberately</h3>
+<pre class="lang-js"><code>// A view counter must never slow down or break playback.
+Video.updateOne({ _id: video._id }, { $inc: { views: 1 } }).catch(() =&gt; {});</code></pre>
+<p>The <code>.catch()</code> is <strong>mandatory</strong>. An unhandled rejection in Node crashes the</p>
+<p>process by default from Node 15 onwards. The <code>void</code> keyword used elsewhere</p>
+<p>(<code>void indexVideo(videoDoc)</code>) documents "I am intentionally not awaiting this"</p>
+<p>— it does not handle errors, so the function itself must never reject.</p>
+<h3 id="the-bug-throwing-from-a-non-wrapped-async-handler">The bug: throwing from a non-wrapped async handler</h3>
+<pre class="lang-js"><code>// BROKEN — this route HUNG instead of erroring
+export const PracticeVideo = async (req, res) =&gt; {
+    try { /* ... */ }
+    catch (error) { throw new apiError(400, "Could'nt fetch"); }
+};</code></pre>
+<p>Express 4 does not understand promises. When an <code>async</code> handler rejects,</p>
+<p>Express never sees it: no response is sent, the socket stays open, and the</p>
+<p>client waits until it times out. Meanwhile Node logs an unhandled rejection.</p>
+<p>The fix is one word — wrap it:</p>
+<pre class="lang-js"><code>export const PracticeVideo = asyncHandler(async (req, res) =&gt; { ... });</code></pre>
+<h3 id="the-other-bug-catch-that-destroys-the-error">The other bug: <code>catch</code> that destroys the error</h3>
+<pre class="lang-js"><code>catch (error) {
+    throw new apiError(401, "The buildVideoQuery helper went through an error");
+}</code></pre>
+<p>The original error — a <code>CastError</code>, a timeout, a typo — is gone. Production</p>
+<p>gives you a meaningless 401 and no stack. Either let it propagate, or attach</p>
+<p>the cause:</p>
+<pre class="lang-js"><code>catch (error) {
+    throw new apiError(500, `Query build failed: ${error.message}`, [], error.stack);
+}</code></pre>
+<hr>
+<h2 id="2-7-the-event-loop-and-why-ordering-questions-get-asked">2.7 The event loop (and why ordering questions get asked)</h2>
+<pre class="lang-js"><code>console.log("1");
+setTimeout(() =&gt; console.log("2"), 0);     // macrotask
+Promise.resolve().then(() =&gt; console.log("3"));  // microtask
+queueMicrotask(() =&gt; console.log("4"));
+console.log("5");
+// 1 5 3 4 2</code></pre>
+<p>The rule: <strong>the entire microtask queue is drained between every macrotask.</strong></p>
+<p>Promise callbacks, <code>queueMicrotask</code> and <code>process.nextTick</code> are microtasks;</p>
+<p>timers, I/O and <code>setImmediate</code> are macrotasks.</p>
+<p>Node's phases, in order: timers → pending callbacks → poll → check</p>
+<p>(<code>setImmediate</code>) → close callbacks. <code>process.nextTick</code> jumps the queue ahead of</p>
+<p>promises.</p>
+<p>Practical consequence for this codebase: a long synchronous loop (a huge</p>
+<p><code>JSON.stringify</code>, an unbounded <code>Video.find()</code> with no <code>.limit()</code>) blocks the</p>
+<p><em>entire</em> server — Node is single-threaded for JavaScript. That is why the</p>
+<p><code>Trending</code> endpoint returning the whole collection was a real availability</p>
+<p>risk, not just a slow query.</p>
+<hr>
+<h2 id="2-8-spread-rest-and-shallow-copies">2.8 Spread, rest, and shallow copies</h2>
+<pre class="lang-js"><code>// Adding a derived field without mutating the source document
+videos.docs = videos.docs.map((v) =&gt; ({
+    ...v,
+    durationFormatted: formatDuration(v.duration),
+}));</code></pre>
+<p><code>...</code> copies <strong>one level</strong>. Nested objects are shared by reference:</p>
+<pre class="lang-js"><code>const a = { user: { name: "x" } };
+const b = { ...a };
+b.user.name = "y";
+a.user.name;        // "y"  — same object!</code></pre>
+<p>For a real deep copy use <code>structuredClone(a)</code> (built into Node 17+ and modern</p>
+<p>browsers).</p>
+<p>This matters in React: <code>setState({ ...state })</code> only triggers a re-render if</p>
+<p>the top-level reference changes, and only propagates a nested change if you</p>
+<p>copy that level too.</p>
+<pre class="lang-js"><code>// frontend — correct nested update
+setLoadedThumbs((prev) =&gt; (prev[id] ? prev : { ...prev, [id]: true }));
+//                        ↑ returning the SAME reference skips the re-render</code></pre>
+<p>That guard is deliberate: returning <code>prev</code> unchanged tells React nothing</p>
+<p>happened, avoiding an infinite render loop from the <code>ref</code> callback.</p>
+<hr>
+<h2 id="2-9-object-hasown-and-the-mass-assignment-fix">2.9 <code>Object.hasOwn</code> and the mass-assignment fix</h2>
+<pre class="lang-js"><code>// back/src/controllers/video.controller.js
+const UPDATABLE_FIELDS = ["title", "description", "isPublished"];
+
+for (const field of UPDATABLE_FIELDS) {
+    if (Object.hasOwn(req.body, field) &amp;&amp; req.body[field] !== undefined) {
+        video[field] = req.body[field];
+    }
+}</code></pre>
+<p>This replaced <code>Object.assign(video, req.body)</code>, which let a client send</p>
+<p><code>{"views": 999999, "owner": "&lt;someone else&gt;"}</code> and have it written.</p>
+<p><code>Object.hasOwn(obj, key)</code> is the modern replacement for</p>
+<p><code>Object.prototype.hasOwnProperty.call(obj, key)</code>. Plain <code>obj.hasOwnProperty(k)</code></p>
+<p>is unsafe because an object can be created with <code>Object.create(null)</code> (no</p>
+<p>prototype, so no method) or can have <code>hasOwnProperty</code> overwritten by an</p>
+<p>attacker-controlled key.</p>
+<p>It also beats <code>key in obj</code>, which walks the prototype chain — so</p>
+<p><code>"toString" in {}</code> is <code>true</code>.</p>
+<hr>
+<h2 id="2-10-regex-injection-user-input-is-not-a-pattern">2.10 Regex injection — user input is not a pattern</h2>
+<pre class="lang-js"><code>// BROKEN
+{ title: { $regex: search, $options: "i" } }</code></pre>
+<p>A user typing <code>(((((</code> makes Mongo throw. A user typing <code>.*</code> or</p>
+<p><code>(a+)+$</code> turns the query into a full collection scan or a catastrophic</p>
+<p>backtracking hang (ReDoS).</p>
+<pre class="lang-js"><code>// FIXED
+function escapeRegex(value = "") {
+    return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&amp;");
+}</code></pre>
+<p><code>$&amp;</code> in a replacement string means "the whole match", so each metacharacter is</p>
+<p>prefixed with a backslash. Same principle as SQL parameterisation: **never</p>
+<p>concatenate user input into a language you then execute.**</p>
+<hr>
+<h2 id="2-11-intl-formatting-without-a-date-library">2.11 <code>Intl</code> — formatting without a date library</h2>
+<pre class="lang-js"><code>// frontend/src/utils/format.jsx
+new Intl.NumberFormat(undefined, { notation: "compact" }).format(1234);  // "1.2K"
+new Intl.RelativeTimeFormat(undefined, { numeric: "auto" })
+    .format(-3, "hour");                                                  // "3 hours ago"</code></pre>
+<p>Built into every modern browser and into Node. Zero bundle cost, and it</p>
+<p>follows the user's locale automatically. Reaching for <code>moment</code> (290 kB) or</p>
+<p>even <code>date-fns</code> to render "3 hours ago" is a bundle-size answer worth having</p>
+<p>ready.</p>
+<p><code>undefined</code> as the first argument means "use the runtime's default locale" —</p>
+<p>better than hardcoding <code>"en-US"</code>.</p>
+<hr>
+<h2 id="2-12-labelled-quick-reference">2.12 Labelled quick-reference</h2>
+<table><thead><tr><th>Concept</th><th>Where in this repo</th></tr></thead><tbody><tr><td>ESM hoisting</td><td><code>back/src/env.js</code>, <code>index.js</code></td></tr><tr><td>Optional chaining depth</td><td><code>registerUser</code>, <code>navbar.jsx</code></td></tr><tr><td><code>??</code> vs `\</td><td>\</td><td>`</td><td><code>cache.middleware.js</code>, numeric filters</td></tr><tr><td>Closures / factories</td><td><code>rateLimiter</code>, <code>cache</code>, <code>validatePagination</code></td></tr><tr><td><code>this</code> binding</td><td><code>user.models.js</code> hooks and methods</td></tr><tr><td><code>Promise.all</code> / <code>allSettled</code></td><td><code>video.controller.js</code>, <code>index.js</code></td></tr><tr><td>Unhandled rejection</td><td><code>PracticeVideo</code> before the fix</td></tr><tr><td>Event loop</td><td>fire-and-forget view counter</td></tr><tr><td>Shallow copy</td><td><code>setLoadedThumbs</code>, <code>videos.docs.map</code></td></tr><tr><td><code>Object.hasOwn</code></td><td><code>updateVideo</code> whitelist</td></tr><tr><td>Regex escaping</td><td><code>escapeRegex</code> in <code>video.controller.js</code></td></tr><tr><td><code>Intl</code></td><td><code>utils/format.jsx</code></td></tr></tbody></table>
+<hr>
+<p>Next: <strong><a href="./03-NODE-EXPRESS.md">03 — Node & Express</a></strong></p></section>
+<section class="part" id="part-2"><h1 id="3-node-express">3 — Node & Express</h1>
+<hr>
+<h2 id="3-1-asynchandler-the-single-most-important-6-lines">3.1 <code>asyncHandler</code> — the single most important 6 lines</h2>
+<pre class="lang-js"><code>// back/src/utils/asyncHandler.js
+const asyncHandler = (requestHandler) =&gt; {
+    return (req, res, next) =&gt; {
+        Promise.resolve(requestHandler(req, res, next)).catch(next);
+    };
+};</code></pre>
+<h3 id="the-problem-it-solves">The problem it solves</h3>
+<p>Express 4's router wraps each handler in a <code>try/catch</code>. That catches</p>
+<p><strong>synchronous</strong> throws only:</p>
+<pre class="lang-js"><code>app.get("/a", (req, res) =&gt; { throw new Error("caught"); });          // ✅ 500
+app.get("/b", async (req, res) =&gt; { throw new Error("NOT caught"); }); // ❌ hangs</code></pre>
+<p>An <code>async</code> function never throws to its caller — it returns a rejected</p>
+<p>promise. Express ignores the return value, so the rejection is unobserved: no</p>
+<p>response is ever sent, the connection hangs until the client times out, and</p>
+<p>Node logs <code>UnhandledPromiseRejection</code>.</p>
+<h3 id="how-the-wrapper-fixes-it">How the wrapper fixes it</h3>
+<p><code>Promise.resolve(x)</code> normalises <em>anything</em> into a promise. <code>.catch(next)</code></p>
+<p>forwards the rejection into Express's error pipeline, where the global error</p>
+<p>handler turns it into a JSON response.</p>
+<p><code>Promise.resolve</code> rather than just <code>.catch</code> on the call matters: it works</p>
+<p>whether the handler is <code>async</code>, returns a promise, or returns nothing at all.</p>
+<h3 id="express-5-note">Express 5 note</h3>
+<p>Express 5 (which this project uses — <code>"express": "^5.2.1"</code>) forwards rejected</p>
+<p>promises to <code>next</code> automatically. So <code>asyncHandler</code> is now belt-and-braces</p>
+<p>rather than strictly required. <strong>Say this in an interview</strong> — knowing <em>why</em> it</p>
+<p>existed and that v5 changed it is the interesting part.</p>
+<h3 id="the-bug-it-would-have-prevented">The bug it would have prevented</h3>
+<pre class="lang-js"><code>// BROKEN: plain async, throws inside catch
+export const Trending = async (req, res) =&gt; {
+    try { /* ... */ }
+    catch (error) { throw new apiError(401, "Cannot fetch"); }
+};</code></pre>
+<p>The navbar's typeahead hits this route. Any error meant a hung request per</p>
+<p>keystroke. One word — <code>asyncHandler(...)</code> — fixed it.</p>
+<hr>
+<h2 id="3-2-the-error-pipeline">3.2 The error pipeline</h2>
+<pre class="lang-js"><code>// back/src/utils/apiError.js
+class apiError extends Error {
+    constructor(statusCode, message = "Something Went Wrong", errors = [], stack) {
+        super(message);
+        this.statusCode = statusCode;
+        this.data = null;
+        this.success = false;
+        this.errors = errors;
+
+        if (stack) this.stack = stack;
+        else Error.captureStackTrace(this, this.constructor);
+    }
+}</code></pre>
+<h3 id="the-bug-in-the-original">The bug in the original</h3>
+<pre class="lang-js"><code>constructor(statusCode, message, errors = [], stack = " ") {   // ← note the space
+    ...
+    if (stack) { this.stack = stack; }      // " " is TRUTHY
+    else { Error.captureStackTrace(...); }
+}</code></pre>
+<p><code>" "</code> is a non-empty string, therefore truthy. **Every error in the entire</p>
+<p>application** had its stack trace replaced with a single space. Debugging</p>
+<p>anything in production would have been impossible.</p>
+<p>Defaulting to <code>undefined</code> restores <code>Error.captureStackTrace</code>, which also omits</p>
+<p>the constructor frame so the trace starts at the actual throw site.</p>
+<h3 id="error-handling-middleware">Error-handling middleware</h3>
+<pre class="lang-js"><code>// back/src/app.js
+application.use((err, req, res, next) =&gt; { ... });</code></pre>
+<p>Express identifies an error handler <strong>by arity</strong> — a function with exactly</p>
+<p>four parameters. Three parameters makes it ordinary middleware, and your error</p>
+<p>handler silently never runs. You cannot drop the unused <code>next</code>.</p>
+<p>It must also be registered <strong>last</strong>, after all routes, because Express walks</p>
+<p>the stack in registration order.</p>
+<h3 id="404s-as-errors">404s as errors</h3>
+<pre class="lang-js"><code>application.use((req, res, next) =&gt; {
+    next(new apiError(404, `Route ${req.method} ${req.originalUrl} not found`));
+});</code></pre>
+<p>A middleware with no path matches everything. Placed after all routes, it only</p>
+<p>runs when nothing matched. Routing it through <code>apiError</code> means a 404 has the</p>
+<p>same response shape as every other failure — the frontend never needs a</p>
+<p>special case.</p>
+<hr>
+<h2 id="3-3-route-ordering">3.3 Route ordering</h2>
+<pre class="lang-js"><code>// back/src/routes/socket.route.js
+routerSocket.get("/convo", getConversations);
+routerSocket.get("/conversation-id", getConversationId);
+routerSocket.get("/:receiverId", getMessages);   // ← wildcard LAST</code></pre>
+<p>Express matches <strong>top to bottom, first match wins</strong>. The original had</p>
+<p><code>/:receiverId</code> registered before <code>/generateConvoId</code>, so <code>GET /generateConvoId</code></p>
+<p>was captured by the param route with <code>receiverId = "generateConvoId"</code> — the</p>
+<p>endpoint was unreachable.</p>
+<p><strong>Rule: static paths before dynamic ones.</strong> React Router v6+ is different — it</p>
+<p><em>ranks</em> routes by specificity rather than using source order — but Express is</p>
+<p>strictly ordered.</p>
+<p>The same file also had:</p>
+<pre class="lang-js"><code>routerSocket.get("/generateConvoId", getConversationId);</code></pre>
+<p>where <code>getConversationId</code> was <code>(user1, user2) =&gt; ...</code> — a <em>utility</em>, not an</p>
+<p>Express handler. Called as <code>(req, res)</code> it would compute</p>
+<p><code>[req, res].sort().join("_")</code> and return a string. Returning a value from a</p>
+<p>handler does nothing; the request hangs forever. Handlers must call</p>
+<p><code>res.send</code>/<code>res.json</code>/<code>next</code>.</p>
+<hr>
+<h2 id="3-4-cors-with-credentials">3.4 CORS with credentials</h2>
+<pre class="lang-js"><code>// back/src/app.js
+cors({
+    origin(origin, callback) {
+        if (!origin) return callback(null, true);          // curl, same-origin
+        if (env.CORS_ORIGINS.includes(origin)) return callback(null, true);
+        return callback(new Error(`Origin ${origin} not allowed by CORS`));
+    },
+    credentials: true,
+})</code></pre>
+<h3 id="the-rules-you-must-know">The rules you must know</h3>
+<ol>
+<li><code>Access-Control-Allow-Origin: *</code> is <strong>forbidden</strong> with</li>
+</ol>
+<p>   <code>Access-Control-Allow-Credentials: true</code>. The browser rejects the response.</p>
+<p>   So the origin has to be echoed back from an allow-list.</p>
+<ol>
+<li>The server must send <code>Access-Control-Allow-Credentials: true</code>, <em>and</em> the</li>
+</ol>
+<p>   client must send <code>withCredentials: true</code>. Both, or cookies are dropped.</p>
+<ol>
+<li>Non-simple requests (PATCH, DELETE, JSON content-type, custom headers)</li>
+</ol>
+<p>   trigger a <strong>preflight</strong> <code>OPTIONS</code>. If preflight fails, the real request is</p>
+<p>   never sent.</p>
+<ol>
+<li>Requests with no <code>Origin</code> header (curl, server-to-server, same-origin) are</li>
+</ol>
+<p>   not subject to CORS at all.</p>
+<h3 id="what-was-broken">What was broken</h3>
+<pre class="lang-js"><code>cors({ origin: process.env.CORS_ORIGIN, credentials: true })</code></pre>
+<p>Because of the ESM hoisting bug (part 2.1), <code>process.env.CORS_ORIGIN</code> was</p>
+<p><code>undefined</code> at module-evaluation time. <code>cors</code> then produced no</p>
+<p><code>Access-Control-Allow-Origin</code> header and every browser request failed.</p>
+<p>Verify it from a terminal:</p>
+<pre class="lang-bash"><code>curl -i -X OPTIONS http://localhost:8000/api/v1/users/login -H "Origin: http://localhost:5173" -H "Access-Control-Request-Method: POST"</code></pre>
+<p>You want <code>204</code> plus <code>Access-Control-Allow-Origin: http://localhost:5173</code> and</p>
+<p><code>Access-Control-Allow-Credentials: true</code>.</p>
+<p><strong>CORS is enforced by the browser, not the server.</strong> It is not a security</p>
+<p>boundary against scripted clients — it protects <em>users</em> from other <em>sites</em></p>
+<p>reading their authenticated responses.</p>
+<hr>
+<h2 id="3-5-file-uploads-multer-cloudinary-unlink">3.5 File uploads: multer → Cloudinary → unlink</h2>
+<pre class="lang-js"><code>// back/src/middlewares/multer.middleware.js
+filename(req, file, cb) {
+    const ext = path.extname(file.originalname).toLowerCase().slice(0, 10);
+    const safeExt = /^\.[a-z0-9]+$/.test(ext) ? ext : "";
+    cb(null, `${Date.now()}-${crypto.randomBytes(8).toString("hex")}${safeExt}`);
+}</code></pre>
+<h3 id="two-bugs-in-the-original">Two bugs in the original</h3>
+<pre class="lang-js"><code>filename(req, file, cb) { cb(null, file.originalname); }
+destination(req, file, cb) { cb(null, "./public"); }</code></pre>
+<ol>
+<li><strong>Collisions.</strong> Two users uploading <code>video.mp4</code> at the same moment</li>
+</ol>
+<p>   overwrite each other. User A gets User B's file.</p>
+<ol>
+<li><strong>Path traversal.</strong> <code>originalname</code> is attacker-controlled. A name like</li>
+</ol>
+<p>   <code>../../src/app.js</code> can escape the directory. (Multer sanitises this in</p>
+<p>   recent versions, but relying on that is not a defence you want to explain.)</p>
+<p>Files also went to <code>./public</code>, which <code>express.static("public")</code> was serving —</p>
+<p>so every upload was briefly a publicly-readable URL on the API host.</p>
+<h3 id="disk-vs-memory-storage">Disk vs memory storage</h3>
+<table><thead><tr><th></th><th>pros</th><th>cons</th></tr></thead><tbody><tr><td><code>diskStorage</code></td><td>constant memory, handles 200 MB video</td><td>needs cleanup, needs disk</td></tr><tr><td><code>memoryStorage</code></td><td>no cleanup, simple</td><td>a 200 MB upload is 200 MB of RAM</td></tr></tbody></table>
+<p>Video uploads mean disk storage is the only sane choice here.</p>
+<h3 id="guaranteed-cleanup-with-finally">Guaranteed cleanup with <code>finally</code></h3>
+<pre class="lang-js"><code>// back/src/utils/cloudinary.js
+try {
+    return await cloudinary.uploader.upload(localfilepath, { resource_type: "auto", folder });
+} catch (error) {
+    throw new Error(`Cloudinary upload failed: ${error.message}`);
+} finally {
+    await removeLocal(localfilepath);     // runs on BOTH paths
+}</code></pre>
+<p>The original called <code>fs.unlinkSync</code> in both the <code>try</code> and the <code>catch</code>. If the</p>
+<p>file was already gone, the <code>catch</code> block's own unlink threw <code>ENOENT</code>, masking</p>
+<p>the real upload error. <code>finally</code> + a <code>.catch(() =&gt; {})</code> on the unlink makes</p>
+<p>cleanup unconditional and silent.</p>
+<p>It also now <strong>throws</strong> instead of returning <code>null</code>, so the caller can report</p>
+<p><em>why</em> ("Cloudinary not configured") rather than a generic "upload failed".</p>
+<hr>
+<h2 id="3-6-graceful-shutdown">3.6 Graceful shutdown</h2>
+<pre class="lang-js"><code>// back/src/index.js
+async function shutdown(signal) {
+    if (shuttingDown) return;            // SIGINT twice shouldn't double-run
+    shuttingDown = true;
+
+    server.close(async () =&gt; {           // stop accepting NEW connections,
+        await Promise.allSettled([       // let in-flight ones finish
+            disconnectRedis(),
+            MongoDisconnect(),
+        ]);
+        process.exit(0);
+    });
+
+    setTimeout(() =&gt; process.exit(1), 10000).unref();   // hard cap
+}
+
+process.on("SIGINT",  () =&gt; shutdown("SIGINT"));
+process.on("SIGTERM", () =&gt; shutdown("SIGTERM"));</code></pre>
+<p>The original was <code>process.on("SIGINT", () =&gt; process.exit())</code> — instant exit,</p>
+<p>killing in-flight requests and leaving sockets to Mongo and Redis open.</p>
+<ul>
+<li><code>server.close(cb)</code> stops new connections; the callback fires once existing</li>
+</ul>
+<p>  ones drain.</p>
+<ul>
+<li><code>.unref()</code> on the timeout means that timer alone will not keep the process</li>
+</ul>
+<p>  alive — if everything closes in 200 ms, we exit in 200 ms.</p>
+<ul>
+<li><strong>SIGTERM is what Docker/Kubernetes/Render send.</strong> Handling only SIGINT</li>
+</ul>
+<p>  means your container is <code>SIGKILL</code>ed after the grace period.</p>
+<hr>
+<h2 id="3-7-middleware-order-in-app-js">3.7 Middleware order in <code>app.js</code></h2>
+<pre class="lang-js"><code>application.use(cors(...));                       // 1 — before anything that can fail
+application.use(express.json({ limit: "16kb" })); // 2 — parse JSON bodies
+application.use(express.urlencoded({ extended: true, limit: "16kb" }));
+application.use(cookieParser());                  // 3 — req.cookies
+
+application.get("/health", ...);                  // 4 — cheap, unauthenticated
+
+application.use("/api/v1/users", router);         // 5 — routes
+application.use("/api/v1/videos", routerVideo);
+application.use("/api/v1/socket", routerSocket);
+
+application.use(notFoundHandler);                 // 6 — nothing matched
+application.use(errorHandler);                    // 7 — four args, LAST</code></pre>
+<p>Order is semantics, not style:</p>
+<ul>
+<li><strong>CORS first.</strong> An error thrown before CORS runs produces a response with no</li>
+</ul>
+<p>  CORS headers, and the browser reports it as a generic "network error" rather</p>
+<p>  than your actual 500.</p>
+<ul>
+<li><strong>Body parsers before routes</strong>, or <code>req.body</code> is <code>undefined</code>.</li>
+<li><code>limit: "16kb"</code> caps JSON bodies — the default is 100 kb, and an unbounded</li>
+</ul>
+<p>  parser is a trivial memory-exhaustion vector. Files bypass this entirely</p>
+<p>  because multer handles <code>multipart/form-data</code>.</p>
+<ul>
+<li><code>express.static("public")</code> was <strong>removed</strong>: it was serving the upload temp</li>
+</ul>
+<p>  directory.</p>
+<ul>
+<li><code>app.set("trust proxy", 1)</code> was added so <code>req.ip</code> is the real client IP</li>
+</ul>
+<p>  behind Render's load balancer — otherwise the rate limiter buckets every</p>
+<p>  user under the proxy's single IP.</p>
+<hr>
+<h2 id="3-8-config-validation-at-boot">3.8 Config validation at boot</h2>
+<pre class="lang-js"><code>// back/src/env.js
+export function assertRequiredEnv() {
+    const required = [
+        ["MONGODB_URL", env.MONGODB_URL],
+        ["ACCESS_TOKEN_SECURITY", env.ACCESS_TOKEN_SECRET],
+        ["REFRESH_TOKEN_SECURITY", env.REFRESH_TOKEN_SECRET],
+    ];
+    const missing = required.filter(([, v]) =&gt; !v).map(([n]) =&gt; n);
+    if (missing.length) {
+        console.error(`[env] Missing required variables: ${missing.join(", ")}`);
+        process.exit(1);
+    }
+}</code></pre>
+<p><strong>Fail fast.</strong> Without this, a missing <code>ACCESS_TOKEN_SECURITY</code> means</p>
+<p><code>jwt.sign(payload, undefined)</code> throws on the <em>first login attempt</em> — a 500 in</p>
+<p>production, hours after deploy, with a confusing message. Crashing at boot</p>
+<p>means the deploy fails and the old version keeps serving.</p>
+<p>Note also that only the genuinely-required variables are checked. Redis and</p>
+<p>Elasticsearch are optional by design (part 7), so they must not be in this</p>
+<p>list.</p>
+<hr>
+<p>Next: <strong><a href="./04-MONGODB.md">04 — MongoDB & Mongoose</a></strong></p></section>
+<section class="part" id="part-3"><h1 id="4-mongodb-mongoose">4 — MongoDB & Mongoose</h1>
+<hr>
+<h2 id="4-1-the-data-model">4.1 The data model</h2>
+<pre class="lang-text"><code>User                      Video                   Subscription
+──────────                ──────────              ──────────────
+_id                       _id                     _id
+username   (unique, idx)  title                   subscriber ─┐ unique
+email      (unique)       description             channel    ─┘ compound
+fullName                  videoFile  (Cloudinary)
+avatar                    thumbnail
+coverImage                duration   (seconds)    Message
+password   (bcrypt)       views                   ──────────────
+refreshToken              isPublished             _id
+watchHistory  [Video]     owner ──────▶ User      sender    ──▶ User
+watchLater    [Video]     createdAt               receiver  ──▶ User
+notInterested [Video]                             conversationId (idx)
+isOnline                                          text
+lastSeen                                          messageType
+                                                  status (sent|seen)</code></pre>
+<h3 id="embed-or-reference">Embed or reference?</h3>
+<table><thead><tr><th>Relation</th><th>Choice</th><th>Why</th></tr></thead><tbody><tr><td>Video → owner</td><td><strong>reference</strong></td><td>A user has unbounded videos; embedding would duplicate the profile into every video and make an avatar change a mass update.</td></tr><tr><td>User → watchHistory</td><td><strong>reference array, capped at 100</strong></td><td>Bounded by <code>$slice</code>, read with the user, never queried in reverse.</td></tr><tr><td>User → watchLater</td><td><strong>reference array</strong></td><td>Small, personal, always read with the user. Nobody asks "who saved this video?".</td></tr><tr><td>Subscription</td><td><strong>separate collection</strong></td><td>A many-to-many that must be queried from <em>both</em> directions (my subs, my subscribers) and counted.</td></tr><tr><td>Message</td><td><strong>separate collection</strong></td><td>Unbounded growth. Embedding would hit the 16 MB document limit.</td></tr></tbody></table>
+<p><strong>The 16 MB document limit is the hard constraint behind all of this.</strong> Any</p>
+<p>unbounded list must be its own collection, or capped.</p>
+<h3 id="why-conversationid-is-derived-not-stored">Why <code>conversationId</code> is derived, not stored</h3>
+<pre class="lang-js"><code>export const buildConversationId = (user1, user2) =&gt;
+    [String(user1), String(user2)].sort().join("_");</code></pre>
+<p>Sorting makes it symmetric: A→B and B→A produce the same key. So there is no</p>
+<p><code>Conversation</code> collection to create, look up, or keep in sync — the key is a</p>
+<p>pure function of the participants. One indexed field answers "give me this</p>
+<p>thread".</p>
+<p>The trade-off: it does not generalise to group chats. For those you <em>would</em></p>
+<p>need a real <code>Conversation</code> document with a participants array. Worth saying</p>
+<p>out loud in an interview — it shows you know the limit of your own design.</p>
+<hr>
+<h2 id="4-2-indexes">4.2 Indexes</h2>
+<pre class="lang-js"><code>// back/src/models/video.models.js
+videoSchema.index({ isPublished: 1, createdAt: -1 });   // the feed
+videoSchema.index({ isPublished: 1, views: -1 });       // trending
+videoSchema.index({ owner: 1, createdAt: -1 });         // channel page
+videoSchema.index({ title: "text", description: "text" });
+
+// back/src/models/subscription.models.js
+subscriptionSchema.index({ subscriber: 1, channel: 1 }, { unique: true });
+subscriptionSchema.index({ channel: 1 });</code></pre>
+<h3 id="the-esr-rule">The ESR rule</h3>
+<p>Compound index field order: <strong>Equality, Sort, Range.</strong></p>
+<p>The feed query is <code>{ isPublished: true }</code> sorted by <code>createdAt: -1</code>.</p>
+<p><code>isPublished</code> is the equality match, <code>createdAt</code> is the sort → index</p>
+<p><code>{ isPublished: 1, createdAt: -1 }</code>. Getting the order wrong means Mongo must</p>
+<p>fetch and sort in memory, and an in-memory sort over 32 MB <strong>fails outright</strong>.</p>
+<p>A compound index also serves any <strong>prefix</strong> of itself:</p>
+<p><code>{a:1, b:1, c:1}</code> covers <code>{a}</code> and <code>{a,b}</code> — but not <code>{b}</code> or <code>{b,c}</code>.</p>
+<h3 id="why-the-unique-index-on-subscription-matters">Why the unique index on Subscription matters</h3>
+<p>Without it, a double-click on Subscribe creates two documents and</p>
+<p><code>$size: "$subscribers"</code> is permanently wrong. Application-level</p>
+<p>"check-then-insert" cannot prevent this — two requests can both read "not</p>
+<p>subscribed" before either writes. <strong>Only the database can enforce it</strong>, which</p>
+<p>is why the controller catches error code <code>11000</code>:</p>
+<pre class="lang-js"><code>try {
+    await Subscription.create(filter);
+    subscribed = true;
+} catch (err) {
+    if (err?.code !== 11000) throw err;   // duplicate key — someone won the race
+    subscribed = true;
+}</code></pre>
+<p>That is a textbook check-then-act race, and the textbook fix.</p>
+<hr>
+<h2 id="4-3-the-aggregation-pipeline">4.3 The aggregation pipeline</h2>
+<pre class="lang-js"><code>// back/src/controllers/socket.controller.js — the inbox
+Message.aggregate([
+    { $match:  { $or: [{ sender: userId }, { receiver: userId }] } },
+    { $sort:   { createdAt: -1 } },
+    { $group:  { _id: "$conversationId",
+                 lastMessage: { $first: "$$ROOT" },
+                 unreadCount: { $sum: { $cond: [ ... , 1, 0] } } } },
+    { $addFields: { otherUser: { $cond: [...] } } },
+    { $lookup: { from: "users", localField: "otherUser", foreignField: "_id",
+                 as: "otherUser",
+                 pipeline: [{ $project: { username: 1, avatar: 1, ... } }] } },
+    { $unwind: "$otherUser" },
+    { $project: { ... } },
+    { $sort:   { createdAt: -1 } },
+])</code></pre>
+<p>Stage by stage:</p>
+<table><thead><tr><th>Stage</th><th>Does</th></tr></thead><tbody><tr><td><code>$match</code></td><td>filter — <strong>put it first</strong> so it can use an index</td></tr><tr><td><code>$sort</code> + <code>$group</code>+<code>$first</code></td><td>the "latest per group" idiom</td></tr><tr><td><code>$cond</code> inside <code>$sum</code></td><td>conditional counting — 1 when unread, else 0</td></tr><tr><td><code>$addFields</code></td><td>computed field, keeps all existing ones (<code>$project</code> does not)</td></tr><tr><td><code>$lookup</code></td><td>left outer join</td></tr><tr><td><code>$unwind</code></td><td>array → one document per element</td></tr></tbody></table>
+<h3 id="three-rules-worth-memorising">Three rules worth memorising</h3>
+<ol>
+<li><strong><code>$match</code> as early as possible.</strong> Only a <code>$match</code> at the very start can</li>
+</ol>
+<p>   use an index; after <code>$group</code> the documents are synthetic.</p>
+<ol>
+<li><strong><code>$lookup</code> always returns an array</strong>, even for a one-to-one join. Flatten</li>
+</ol>
+<p>   it with <code>$unwind</code> or <code>{ $first: "$field" }</code>.</p>
+<ol>
+<li><strong><code>$project</code> inside the <code>$lookup</code> sub-pipeline</strong>, not after. Projecting</li>
+</ol>
+<p>   afterwards means the full joined documents (including <code>password</code> and</p>
+<p>   <code>refreshToken</code>) were already pulled into memory.</p>
+<h3 id="unwind-silently-drops-documents"><code>$unwind</code> silently drops documents</h3>
+<pre class="lang-js"><code>{ $unwind: { path: "$owner", preserveNullAndEmptyArrays: true } }</code></pre>
+<p>Default <code>$unwind</code> removes any document whose array is empty. In the feed, a</p>
+<p>video whose owner row was deleted would <strong>vanish from the feed with no error</strong>.</p>
+<p><code>preserveNullAndEmptyArrays: true</code> keeps it. This is one of the most common</p>
+<p>real-world aggregation bugs.</p>
+<h3 id="the-bug-pipeline-must-be-an-array">The bug: <code>pipeline</code> must be an array</h3>
+<pre class="lang-js"><code>// BROKEN — back/src/controllers/user.controller.js
+$lookup: {
+    from: "videos", localField: "watchHistory", foreignField: "_id",
+    as: "watchhistory",
+    pipeline: { $lookup: { ... } }        // ← an OBJECT
+}</code></pre>
+<p><code>pipeline</code> takes an <strong>array of stages</strong>. Passing an object made the whole</p>
+<p>watch-history endpoint error out. The nested <code>$addFields</code> was also misplaced</p>
+<p><em>inside</em> the inner <code>$project</code> pipeline, where it could not see <code>$owner</code>.</p>
+<pre class="lang-js"><code>// FIXED
+pipeline: [
+    { $lookup: { from: "users", localField: "owner", foreignField: "_id",
+                 as: "owner",
+                 pipeline: [{ $project: { username: 1, fullName: 1, avatar: 1 } }] } },
+    { $addFields: { owner: { $first: "$owner" } } },
+]</code></pre>
+<hr>
+<h2 id="4-4-pagination-skip-limit-vs-cursor">4.4 Pagination: skip/limit vs cursor</h2>
+<pre class="lang-js"><code>Video.find(filter).sort({ createdAt: -1 }).skip((page - 1) * limit).limit(limit)</code></pre>
+<p><code>skip(n)</code> <strong>walks and discards</strong> n documents. At page 1000 with limit 20 the</p>
+<p>database reads 20,020 documents to return 20. It is O(n) in the offset.</p>
+<p>There is a second, subtler problem: if a new video is inserted between the</p>
+<p>user loading page 1 and page 2, everything shifts down and they see the same</p>
+<p>item twice.</p>
+<p><strong>Cursor (keyset) pagination</strong> fixes both:</p>
+<pre class="lang-js"><code>// Instead of ?page=3, pass the last item you saw:
+Video.find({ ...filter, createdAt: { $lt: new Date(req.query.before) } })
+     .sort({ createdAt: -1 })
+     .limit(limit)</code></pre>
+<p>O(log n) via the index, and stable under inserts. The cost is that you lose</p>
+<p>"jump to page 7" — which is exactly the right trade for an infinite-scroll</p>
+<p>feed. The chat history already uses this shape (<code>?before=&lt;ISO date&gt;</code>).</p>
+<h3 id="the-unstable-sort-bug">The unstable-sort bug</h3>
+<pre class="lang-js"><code>switch (sort) {
+    case "latest": sortOption = { createdAt: -1 }; break;
+    case "oldest": sortOption = { createdAt:  1 }; break;
+    // no default → sortOption = {}
+}</code></pre>
+<p>An unrecognised <code>?sort=</code> value produced <code>{}</code> — "natural order", which MongoDB</p>
+<p>does <strong>not</strong> guarantee to be consistent between queries. Combined with</p>
+<p>skip/limit, that means duplicated and missing rows across pages. The fix</p>
+<p>validates against an allow-list and always falls back to <code>latest</code>:</p>
+<pre class="lang-js"><code>const sort = SORT_MAP[req.query.sort] ? req.query.sort : "latest";</code></pre>
+<hr>
+<h2 id="4-5-mongoose-hooks-and-the-one-i-got-wrong">4.5 Mongoose hooks — and the one I got wrong</h2>
+<pre class="lang-js"><code>// back/src/models/user.models.js
+userSchema.pre("save", async function () {
+    if (!this.isModified("password")) return;
+    this.password = await bcrypt.hash(this.password, 10);
+});</code></pre>
+<p><strong>In Mongoose 9 an <code>async</code> pre-hook receives NO <code>next</code> callback.</strong> The returned</p>
+<p>promise <em>is</em> the completion signal — resolving means continue, throwing means</p>
+<p>abort the save. I initially "fixed" this by adding <code>next()</code>, and it failed</p>
+<p>immediately with:</p>
+<pre class="lang-text"><code>TypeError: next is not a function</code></pre>
+<p>So the original <code>return</code> was correct. The lesson: a non-async hook takes</p>
+<p><code>next</code>; an async hook returns a promise. Never mix them.</p>
+<h3 id="why-ismodified-is-load-bearing">Why <code>isModified</code> is load-bearing</h3>
+<p><code>generateAccessAndRefreshTokens</code> calls <code>user.save()</code> to store a new refresh</p>
+<p>token. Without the <code>isModified("password")</code> guard, <em>that</em> save would re-hash</p>
+<p>the already-hashed password — and the user could never log in again. One line</p>
+<p>standing between working auth and a permanently locked account.</p>
+<h3 id="save-vs-findbyidandupdate"><code>save()</code> vs <code>findByIdAndUpdate()</code></h3>
+<pre class="lang-js"><code>user.password = newPassword;
+await user.save();                 // ✅ hook runs → hashed</code></pre>
+<pre class="lang-js"><code>await User.findByIdAndUpdate(id, { password: newPassword });   // ❌ no hook</code></pre>
+<p>Update operators talk to the database directly; document middleware never</p>
+<p>runs. <strong>A plaintext password would be stored.</strong> This single distinction is a</p>
+<p>very common interview question, and a very common real breach.</p>
+<p>Note the deliberate exception:</p>
+<pre class="lang-js"><code>await user.save({ validateBeforeSave: false });   // storing refreshToken only</code></pre>
+<p>Skipping validation here avoids re-running required-field validators for a</p>
+<p>write that touches one unrelated field.</p>
+<hr>
+<h2 id="4-6-lean">4.6 <code>.lean()</code></h2>
+<pre class="lang-js"><code>Video.find(filter).limit(limit).lean()</code></pre>
+<p>By default Mongoose hydrates every result into a full document with getters,</p>
+<p>setters, virtuals and change tracking. <code>.lean()</code> returns plain objects</p>
+<p>instead — typically <strong>3–5× faster and far less memory</strong>.</p>
+<p>Use it for read-only responses. Do <em>not</em> use it when you need <code>.save()</code>, a</p>
+<p>virtual, or an instance method like <code>isPasswordCorrect</code>.</p>
+<p>Note <code>getVideoById</code> deliberately does <strong>not</strong> use <code>.lean()</code>, because it calls</p>
+<p><code>video.toObject()</code> and relies on <code>populate</code> behaviour.</p>
+<hr>
+<h2 id="4-7-atomic-operators">4.7 Atomic operators</h2>
+<pre class="lang-js"><code>Video.updateOne({ _id }, { $inc: { views: 1 } });</code></pre>
+<p>Never read-modify-write a counter:</p>
+<pre class="lang-js"><code>const v = await Video.findById(id);
+v.views += 1;            // ← two concurrent requests both read 10
+await v.save();          //   both write 11; one view is lost</code></pre>
+<p><code>$inc</code> is applied atomically by the server.</p>
+<pre class="lang-js"><code>// Most-recent-first watch history, capped at 100
+User.updateOne({ _id }, { $pull: { watchHistory: videoId } })
+User.updateOne({ _id }, { $push: { watchHistory:
+    { $each: [videoId], $position: 0, $slice: 100 } } })</code></pre>
+<p><code>$pull</code> then <code>$push</code> because MongoDB cannot do both to one array in a single</p>
+<p>update. <code>$position: 0</code> puts it at the front; <code>$slice: 100</code> caps the array so</p>
+<p>it can never grow unbounded.</p>
+<pre class="lang-js"><code>$addToSet   // insert only if absent — IDEMPOTENT, so double-clicks are safe
+$push       // always appends — duplicates possible
+$unset      // removes the field entirely
+$set        // sets it, including to null</code></pre>
+<p>The logout controller uses <code>$unset: { refreshToken: 1 }</code> rather than</p>
+<p><code>$set: { refreshToken: undefined }</code> — the latter is a no-op in some driver</p>
+<p>versions, leaving the old refresh token valid after "logging out".</p>
+<hr>
+<p>Next: <strong><a href="./05-REACT.md">05 — React & the frontend</a></strong></p></section>
+<section class="part" id="part-4"><h1 id="5-react-the-frontend">5 — React & The Frontend</h1>
+<hr>
+<h2 id="5-1-rendering-reconciliation-keys">5.1 Rendering, reconciliation, keys</h2>
+<p>React re-renders a component when its state or props change. It builds a new</p>
+<p>element tree, <strong>diffs</strong> it against the previous one, and applies the minimal</p>
+<p>set of real DOM mutations.</p>
+<p>The diff uses two heuristics:</p>
+<ol>
+<li>Different element <strong>type</strong> at the same position → destroy the subtree and</li>
+</ol>
+<p>   rebuild it.</p>
+<ol>
+<li>Children are matched by <strong>key</strong>.</li>
+</ol>
+<pre class="lang-jsx"><code>{videos.map((video) =&gt; (
+    &lt;div key={video._id}&gt;…&lt;/div&gt;
+))}</code></pre>
+<h3 id="why-key-index-is-a-bug">Why <code>key={index}</code> is a bug</h3>
+<p>With index keys, deleting the first item renumbers everything. React thinks</p>
+<p>item 0 "changed from A to B" rather than "A was removed", so it **reuses the</p>
+<p>DOM node and its component state**. An input's typed value, a playing</p>
+<p><code>&lt;video&gt;</code>, a half-finished animation — all attach to the wrong row.</p>
+<p>Use a stable id from the data. Index keys are only safe for a list that is</p>
+<p>append-only and never reordered or filtered.</p>
+<p>Note the toast host:</p>
+<pre class="lang-js"><code>const id = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;</code></pre>
+<p><code>Date.now()</code> alone collides when two toasts fire in the same millisecond, and</p>
+<p>React warns about duplicate keys.</p>
+<hr>
+<h2 id="5-2-the-hooks-rules-and-why">5.2 The hooks rules, and why</h2>
+<ol>
+<li><strong>Only call hooks at the top level</strong> — never in a condition, loop or</li>
+</ol>
+<p>   nested function.</p>
+<ol>
+<li><strong>Only call hooks from React functions.</strong></li>
+</ol>
+<p>React stores hook state in a <strong>linked list per component instance</strong>, indexed by</p>
+<p>call order. There are no names — the first <code>useState</code> is slot 0, the second is</p>
+<p>slot 1. Skip one conditionally and every subsequent hook reads the wrong slot.</p>
+<pre class="lang-jsx"><code>// ❌ breaks the slot order
+if (loading) { const [x] = useState(0); }</code></pre>
+<p>This is also why <code>Protected</code> returns <em>after</em> all its hooks have run — an early</p>
+<p><code>return</code> before a hook would change the count between renders.</p>
+<hr>
+<h2 id="5-3-useeffect-dependencies-and-stale-closures">5.3 <code>useEffect</code> dependencies and stale closures</h2>
+<pre class="lang-jsx"><code>// frontend/src/components/navbar.jsx — debounce
+useEffect(() =&gt; {
+    const timer = setTimeout(() =&gt; setDebouncedTerm(searchTerm.trim()), 350);
+    return () =&gt; clearTimeout(timer);
+}, [searchTerm]);</code></pre>
+<p>The <strong>cleanup function runs before the next effect</strong> and on unmount. So each</p>
+<p>keystroke cancels the pending timer and starts a new one: the query fires only</p>
+<p>once, 350 ms after typing stops.</p>
+<p>Without it, every keystroke fired a request — and the server's rate limiter</p>
+<p>(10 requests / 20 s at the time) returned 429 after about ten characters.</p>
+<h3 id="debounce-vs-throttle">Debounce vs throttle</h3>
+<table><thead><tr><th></th><th>fires</th></tr></thead><tbody><tr><td><strong>debounce</strong></td><td>once, T after activity <em>stops</em> — search-as-you-type</td></tr><tr><td><strong>throttle</strong></td><td>at most once every T <em>during</em> activity — scroll, resize</td></tr></tbody></table>
+<h3 id="the-stale-closure-trap">The stale-closure trap</h3>
+<pre class="lang-jsx"><code>useEffect(() =&gt; {
+    const id = setInterval(() =&gt; console.log(count), 1000);
+    return () =&gt; clearInterval(id);
+}, []);        // ← `count` is captured once, at mount, forever</code></pre>
+<p>The effect closes over <code>count</code> from the first render. Fixes: add <code>count</code> to</p>
+<p>the deps, or use the functional updater <code>setCount(c =&gt; c + 1)</code>, which never</p>
+<p>needs to read the current value.</p>
+<pre class="lang-jsx"><code>// This is why the thumbnail tracker uses the updater form:
+setLoadedThumbs((prev) =&gt; (prev[id] ? prev : { ...prev, [id]: true }));</code></pre>
+<p>Returning <code>prev</code> <strong>unchanged</strong> when nothing happened is also deliberate —</p>
+<p>React bails out of the re-render when the reference is identical, which stops</p>
+<p>the <code>ref</code> callback from triggering an infinite loop.</p>
+<h3 id="useeffectevent-a-real-bug-in-this-repo"><code>useEffectEvent</code> — a real bug in this repo</h3>
+<pre class="lang-jsx"><code>import { useState, useEffect, useEffectEvent } from "react";   // ❌</code></pre>
+<p><code>useEffectEvent</code> is <strong>experimental</strong> and is not exported from the stable React</p>
+<p>build. Because React ships as CommonJS and Vite's interop does not throw on a</p>
+<p>missing named export, this silently evaluated to <code>undefined</code>. It would only</p>
+<p>have blown up at the call site. Removed.</p>
+<hr>
+<h2 id="5-4-useref-two-different-jobs">5.4 <code>useRef</code> — two different jobs</h2>
+<pre class="lang-jsx"><code>const loadMoreRef = useRef(null);   // 1. a DOM handle
+const toasted     = useRef(false);  // 2. mutable value that must NOT re-render</code></pre>
+<p>A ref is a stable box whose <code>.current</code> can change without triggering a render.</p>
+<pre class="lang-jsx"><code>// frontend/src/components/protected.jsx
+if (!checking &amp;&amp; !user &amp;&amp; !toasted.current) {
+    toasted.current = true;
+    toast("Log in to open that page");
+}</code></pre>
+<p>Using <code>useState</code> here would re-render on every toast, which would re-run the</p>
+<p>effect, which would toast again. The ref breaks that cycle.</p>
+<h3 id="the-infinite-scroll-bug">The infinite-scroll bug</h3>
+<pre class="lang-jsx"><code>// BROKEN
+{videos.map((video) =&gt; (
+    &lt;div key={video._id} ref={loadMoreRef}&gt;…&lt;/div&gt;      // ref on EVERY card
+))}</code></pre>
+<p>A ref holds one value. After rendering, <code>loadMoreRef.current</code> pointed at</p>
+<p>whichever card React committed last — and crucially, reassigning <code>.current</code></p>
+<p>does <strong>not</strong> re-run the effect that called <code>observer.observe()</code>. So the</p>
+<p>observer kept watching a node that had already scrolled far out of view, and</p>
+<p>loading page 3 onwards was unreliable.</p>
+<pre class="lang-jsx"><code>// FIXED — one sentinel below the grid
+{videos.map(...)}
+&lt;div ref={loadMoreRef} className="h-px w-full" aria-hidden="true" /&gt;</code></pre>
+<h3 id="intersectionobserver"><code>IntersectionObserver</code></h3>
+<pre class="lang-jsx"><code>const observer = new IntersectionObserver(
+    ([entry]) =&gt; {
+        if (entry.isIntersecting &amp;&amp; hasNextPage &amp;&amp; !isFetchingNextPage) fetchNextPage();
+    },
+    { root: scrollContainer, threshold: 0.1, rootMargin: "400px" }
+);</code></pre>
+<p><code>rootMargin: "400px"</code> inflates the viewport, so the next page starts loading</p>
+<p>400 px <em>before</em> the sentinel is visible — the user never sees the spinner.</p>
+<p>Far cheaper than a scroll listener, because the callback fires only on</p>
+<p>threshold crossings instead of on every scroll frame.</p>
+<p>Always <code>unobserve</code>/<code>disconnect</code> in the cleanup, or you leak the observer and</p>
+<p>the detached node it holds.</p>
+<hr>
+<h2 id="5-5-tanstack-query-server-state-is-not-ui-state">5.5 TanStack Query — server state is not UI state</h2>
+<pre class="lang-jsx"><code>const { data } = useQuery({
+    queryKey: ["currentUser"],
+    queryFn: getCurrentUser,
+    staleTime: 1000 * 60,
+    retry: false,
+});</code></pre>
+<p>The core idea: data that lives on a server is <strong>not</strong> component state. It is a</p>
+<p>cache with freshness rules. Query gives you deduplication, caching,</p>
+<p>background refetch, and loading/error states for free.</p>
+<table><thead><tr><th>Option</th><th>Meaning</th></tr></thead><tbody><tr><td><code>queryKey</code></td><td>cache identity. Same key across components = <strong>one</strong> request</td></tr><tr><td><code>staleTime</code></td><td>how long data is considered fresh (no refetch)</td></tr><tr><td><code>gcTime</code></td><td>how long unused data stays in memory</td></tr><tr><td><code>retry: false</code></td><td>don't retry — a 401 means "not logged in", not "try again"</td></tr><tr><td><code>placeholderData: prev =&gt; prev</code></td><td>keep the old list visible during the next fetch</td></tr></tbody></table>
+<p>The navbar, <code>App</code>, and <code>Protected</code> all use <code>["currentUser"]</code>. Because the key</p>
+<p>matches, that is <strong>one</strong> network request shared by three components — not</p>
+<p>three.</p>
+<h3 id="invalidatequeries-after-a-mutation"><code>invalidateQueries</code> after a mutation</h3>
+<pre class="lang-jsx"><code>// frontend/src/pages/saved.jsx
+const remove = useMutation({
+    mutationFn: toggleWatchLater,
+    onSuccess: () =&gt; {
+        queryClient.invalidateQueries({ queryKey: ["watchLater"] });
+        queryClient.invalidateQueries({ queryKey: ["library"] });
+    },
+});</code></pre>
+<p>Both must be invalidated. <code>watchLater</code> drives this page's list; <code>library</code></p>
+<p>drives the feed's "Remove from Watch later" label. Forgetting the second one</p>
+<p>leaves the two views disagreeing — a classic cache-coherence bug.</p>
+<p>The same reasoning applies after login:</p>
+<pre class="lang-jsx"><code>await queryClient.invalidateQueries({ queryKey: ["currentUser"] });
+navigate(location.state?.from || "/", { replace: true });</code></pre>
+<p>Without it, the cached <em>signed-out</em> result is still fresh for another minute,</p>
+<p>so the navbar and <code>Protected</code> would both still believe nobody is logged in.</p>
+<h3 id="optimistic-updates">Optimistic updates</h3>
+<pre class="lang-jsx"><code>function handleNotInterested(video) {
+    setHiddenIds((prev) =&gt; new Set(prev).add(video._id));   // hide immediately
+    toast("You won't see this again");
+    notInterestedMutation.mutate(video._id);
+}</code></pre>
+<p>with a rollback when the server disagrees:</p>
+<pre class="lang-jsx"><code>onError: (err, videoId) =&gt; {
+    setHiddenIds((prev) =&gt; { const next = new Set(prev); next.delete(videoId); return next; });
+}</code></pre>
+<p>The card disappears instantly instead of after a round trip. **Optimistic UI</p>
+<p>without a rollback path is just a lie** — the rollback is the non-optional</p>
+<p>half.</p>
+<hr>
+<h2 id="5-6-useinfinitequery">5.6 <code>useInfiniteQuery</code></h2>
+<pre class="lang-jsx"><code>const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+    useInfiniteQuery({
+        queryKey: ["videos"],
+        queryFn: fetchVideos,
+        getNextPageParam: (lastPage) =&gt;
+            lastPage.page &lt; lastPage.totalPages ? lastPage.page + 1 : undefined,
+    });</code></pre>
+<p><code>getNextPageParam</code> returning <code>undefined</code> is what sets <code>hasNextPage</code> to false.</p>
+<p><code>data.pages</code> is an array of page results, flattened for rendering:</p>
+<pre class="lang-jsx"><code>data?.pages?.flatMap((page) =&gt; page.docs)</code></pre>
+<hr>
+<h2 id="5-7-code-splitting-330-kb-78-kb-gzip">5.7 Code splitting — 330 kB → 78 kB gzip</h2>
+<pre class="lang-jsx"><code>const Login       = lazy(() =&gt; import("../auth/login"));
+const Register    = lazy(() =&gt; import("../auth/register"));
+const Messages    = lazy(() =&gt; import("../pages/message.jsx"));
+const MessageList = lazy(() =&gt; import("../pages/messageList.jsx"));</code></pre>
+<p><code>lazy()</code> takes a function returning a dynamic <code>import()</code>. The bundler sees the</p>
+<p>dynamic import and emits a <strong>separate chunk</strong>, fetched on first navigation.</p>
+<p><code>Suspense</code> is mandatory around lazy components — while the chunk is in flight</p>
+<p>the component suspends, and with no boundary that propagates as an error.</p>
+<pre class="lang-jsx"><code>&lt;Suspense fallback={&lt;BlockLoader darkMode={darkMode} text="Loading" /&gt;}&gt;</code></pre>
+<h3 id="the-bigger-win-dead-imports">The bigger win: dead imports</h3>
+<p>The build was 1,207 kB. Two unused imports accounted for most of it:</p>
+<pre class="lang-js"><code>import Aurora from "../assets/aurora.jsx";       // never rendered → pulls in `ogl`
+import { GridScan } from "../assets/gridscan.jsx"; // never rendered → three.js,
+                                                   // face-api.js, postprocessing</code></pre>
+<p>**A static <code>import</code> runs the module and bundles it whether or not you use the</p>
+<p>binding.** Tree-shaking cannot help: these modules have side effects and the</p>
+<p>bundler must assume they matter. Roughly 600 kB of JavaScript was downloaded</p>
+<p>by every visitor for two components that were never on screen.</p>
+<table><thead><tr><th></th><th>before</th><th>after</th></tr></thead><tbody><tr><td>main chunk</td><td>1,207 kB (330 kB gz)</td><td><strong>273 kB (80 kB gz)</strong></td></tr><tr><td>socket.io</td><td>in main</td><td>own chunk, 188 kB</td></tr><tr><td>login / register / chat</td><td>in main</td><td>5–6 kB chunks each</td></tr></tbody></table>
+<p><strong>Interview-ready claim:</strong> "I cut the initial JS payload by about 4× — mostly</p>
+<p>by deleting two imports that were never rendered, then route-level code</p>
+<p>splitting for the rest."</p>
+<hr>
+<h2 id="5-8-error-boundaries">5.8 Error boundaries</h2>
+<pre class="lang-jsx"><code>export default class ErrorBoundary extends Component {
+    static getDerivedStateFromError(error) { return { error }; }      // render phase
+    componentDidCatch(error, info) { console.error(error, info); }    // commit phase
+}</code></pre>
+<p><strong>Must be a class</strong> — there is no hook equivalent, because these two lifecycle</p>
+<p>methods have no hook API.</p>
+<table><thead><tr><th>Catches</th><th>Does not catch</th></tr></thead><tbody><tr><td>render</td><td>event handlers</td></tr><tr><td>lifecycle methods</td><td><code>setTimeout</code> / promises</td></tr><tr><td>child constructors</td><td>SSR, and errors in the boundary itself</td></tr></tbody></table>
+<p>Why it was added: <code>videos.map is not a function</code> on the watch page unmounted</p>
+<p>the <strong>entire</strong> React tree and left a blank white screen. With a boundary, the</p>
+<p>failure is contained and the user gets a "Try again" button.</p>
+<hr>
+<h2 id="5-9-the-axios-interceptor-single-flight-refresh-circuit-breaker">5.9 The axios interceptor: single-flight refresh + circuit breaker</h2>
+<pre class="lang-js"><code>// frontend/src/api/api.jsx
+let refreshPromise = null;
+let refreshBlockedUntil = 0;
+const REFRESH_COOLDOWN_MS = 30_000;</code></pre>
+<p>Three distinct problems, three mechanisms:</p>
+<p><strong>1. Thundering herd.</strong> Ten requests 401 at once. Without sharing, each fires</p>
+<p>its own refresh, each rotates the token, and nine are invalidated by the</p>
+<p>tenth — logging the user out.</p>
+<pre class="lang-js"><code>if (!refreshPromise) {
+    refreshPromise = api.post("/users/refreshtoken")
+        .finally(() =&gt; { refreshPromise = null; });
+}
+await refreshPromise;</code></pre>
+<p><code>.finally</code> rather than <code>.then</code> so a <em>failed</em> refresh also clears the slot —</p>
+<p>otherwise every later request awaits a permanently-rejected promise.</p>
+<p><strong>2. Infinite loop.</strong> The refresh call itself 401s → triggers a refresh →</p>
+<p>repeat.</p>
+<pre class="lang-js"><code>const isAuthRoute = ["/users/refreshtoken", "/users/login", "/users/register"]
+    .some((route) =&gt; url.includes(route));</code></pre>
+<p>plus <code>originalRequest._retry</code> so each request is retried at most once.</p>
+<p><strong>3. Pointless storms.</strong> An anonymous visitor produced ~90 requests per page:</p>
+<p>every page calls <code>/currentuser</code>, every 401 triggers a refresh, the refresh</p>
+<p>401s because there is no session, and the next navigation repeats it.</p>
+<pre class="lang-js"><code>catch (refreshError) {
+    refreshBlockedUntil = Date.now() + REFRESH_COOLDOWN_MS;   // trip the breaker
+    window.dispatchEvent(new Event("logout"));
+}</code></pre>
+<p>A <strong>circuit breaker</strong>: once we know there is no session, stop asking for 30</p>
+<p>seconds. <code>resetAuthState()</code> clears it on successful login.</p>
+<hr>
+<h2 id="5-10-images-the-pop-in-fix">5.10 Images: the pop-in fix</h2>
+<p>Three separate causes, worth knowing individually.</p>
+<pre class="lang-jsx"><code>&lt;img loading="lazy" decoding="async" fetchPriority="low" /&gt;   // ❌</code></pre>
+<ol>
+<li><strong><code>fetchPriority="low"</code></strong> told the browser to deprioritise every thumbnail,</li>
+</ol>
+<p>   so they arrived late while scrolling. <code>loading="lazy"</code> alone already defers</p>
+<p>   off-screen images, and the browser starts them ~1250 px ahead.</p>
+<ol>
+<li><strong>The <code>&lt;img&gt;</code> was unmounted</strong> when the hover preview started and remounted</li>
+</ol>
+<p>   on mouse-out, so the thumbnail had to decode again from scratch. It now</p>
+<p>   stays mounted and the <code>&lt;video&gt;</code> layers on top.</p>
+<ol>
+<li><strong>No placeholder</strong> — an undecoded image showed as a hard black rectangle</li>
+</ol>
+<p>   that snapped to the picture. Now it fades in over a shimmer.</p>
+<h3 id="the-cached-image-race">The cached-image race</h3>
+<pre class="lang-jsx"><code>&lt;img
+    ref={(node) =&gt; { if (node?.complete &amp;&amp; node.naturalWidth &gt; 0) markThumbLoaded(id); }}
+    onLoad={() =&gt; markThumbLoaded(id)}
+    onError={() =&gt; markThumbLoaded(id)}
+/&gt;</code></pre>
+<p>An image served from the HTTP cache can finish loading **before React attaches</p>
+<p>the <code>onLoad</code> handler**. The event never fires and the element stays at</p>
+<p><code>opacity-0</code> forever. <code>complete &amp;&amp; naturalWidth &gt; 0</code> is the reliable check —</p>
+<p><code>complete</code> alone is also true for a <em>failed</em> load.</p>
+<p><code>onError</code> is there so a broken URL doesn't leave a permanent shimmer.</p>
+<h3 id="layout-shift">Layout shift</h3>
+<pre class="lang-jsx"><code>&lt;div className="relative flex h-[102px] items-start gap-3 px-2 py-3"&gt;</code></pre>
+<p>The meta block has a fixed height and the views/age row is <code>absolute bottom-3</code>.</p>
+<p>CSS grid rows size to their tallest item, so without a reservation a one-line</p>
+<p>title made that card shorter and the whole row shifted as data streamed in.</p>
+<p>The skeleton uses the identical <code>h-[102px]</code>, so swapping placeholder for real</p>
+<p>content causes <strong>zero</strong> layout shift.</p>
+<hr>
+<h2 id="5-11-where-localstorage-goes-wrong">5.11 Where <code>localStorage</code> goes wrong</h2>
+<pre class="lang-jsx"><code>const [darkMode, setDarkMode] = useState(() =&gt; {
+    try {
+        return JSON.parse(localStorage.getItem("darkMode")) ?? false;
+    } catch {
+        return false;
+    }
+});</code></pre>
+<p>Two failure modes the original ignored:</p>
+<ol>
+<li><code>JSON.parse(null)</code> is <code>null</code> (fine), but <code>JSON.parse("undefined")</code></li>
+</ol>
+<p>   <strong>throws</strong> — and a throw inside a <code>useState</code> initialiser blanks the entire</p>
+<p>   app.</p>
+<ol>
+<li><code>localStorage</code> access itself throws in private mode or when site data is</li>
+</ol>
+<p>   blocked.</p>
+<pre class="lang-jsx"><code>function readStoredTheme() {
+    const stored = localStorage.getItem("themeSelected");
+    const known = Object.values(themeObject).flatMap((g) =&gt; Object.values(g));
+    return known.includes(stored) ? stored : DEFAULT_THEME;
+}</code></pre>
+<p>The persisted value was an <strong>asset URL</strong>, and Vite fingerprints asset URLs at</p>
+<p>build time (<code>/PCSmall1.jpg</code> in dev, <code>/assets/PCSmall1-a1b2c3.jpg</code> in prod).</p>
+<p>A URL stored before a deploy pointed at a 404 afterwards. Validating against</p>
+<p>the themes that currently exist makes it self-heal.</p>
+<p>**General rule: never persist a value whose meaning can change between</p>
+<p>builds.** Persist a stable key and resolve it at runtime.</p>
+<hr>
+<h2 id="5-12-lifting-state-vs-prop-drilling-an-honest-critique">5.12 Lifting state vs prop drilling — an honest critique</h2>
+<p><code>App.jsx</code> holds <code>menubar</code>, <code>darkMode</code>, <code>themeSelected</code>, <code>profileSelected</code>,</p>
+<p><code>currentId</code>, <code>videoIdSelected</code>, <code>isLoggedIn</code> and passes all of them through</p>
+<p><code>AppRoutes</code> into <code>MainLayout</code> into <code>Navbar</code>.</p>
+<p>That is <strong>prop drilling</strong>, and it is the main thing a reviewer would flag.</p>
+<p>The fix is Context — ideally split so unrelated updates do not re-render</p>
+<p>everything:</p>
+<pre class="lang-jsx"><code>&lt;ThemeContext.Provider value={{ darkMode, setDarkMode }}&gt;
+&lt;UIContext.Provider value={{ menubar, setMenubar }}&gt;</code></pre>
+<p>Separate contexts matter: <strong>any</strong> context value change re-renders every</p>
+<p>consumer, so one giant <code>AppContext</code> is barely better than drilling. Memoise</p>
+<p>the value object too, or a new object literal each render defeats the point.</p>
+<p>Note that <code>isLoggedIn</code> is now redundant — TanStack Query's <code>["currentUser"]</code></p>
+<p>cache is the single source of truth, and <code>Protected</code> reads it directly.</p>
+<p>Keeping a duplicate boolean in <code>App</code> state is exactly the kind of derived</p>
+<p>state that drifts out of sync.</p>
+<hr>
+<p>Next: <strong><a href="./06-AUTH.md">06 — Authentication</a></strong></p></section>
+<section class="part" id="part-5"><h1 id="6-authentication">6 — Authentication</h1>
+<p>This is the area with the highest density of interview questions, and it</p>
+<p>contained the single worst bug in the repository.</p>
+<hr>
+<h2 id="6-1-password-hashing">6.1 Password hashing</h2>
+<pre class="lang-js"><code>userSchema.pre("save", async function () {
+    if (!this.isModified("password")) return;
+    this.password = await bcrypt.hash(this.password, 10);
+});
+
+userSchema.methods.isPasswordCorrect = async function (password) {
+    return await bcrypt.compare(password, this.password);
+};</code></pre>
+<h3 id="hashing-vs-encryption">Hashing vs encryption</h3>
+<p><strong>Encryption is reversible; hashing is not.</strong> You never need the original</p>
+<p>password back — you only need to check a candidate. So hashing is correct, and</p>
+<p>"we encrypt passwords" is a red flag in an interview answer.</p>
+<h3 id="why-bcrypt-and-not-sha-256">Why bcrypt and not SHA-256</h3>
+<p>SHA-256 is designed to be <em>fast</em> — billions of guesses per second on a GPU.</p>
+<p>bcrypt is deliberately <strong>slow and tunable</strong>:</p>
+<ul>
+<li><strong>Cost factor 10</strong> = 2¹⁰ = 1024 internal iterations. Each +1 doubles the</li>
+</ul>
+<p>  work. ~100 ms per hash is the usual target: unnoticeable at login, brutal</p>
+<p>  for an attacker.</p>
+<ul>
+<li><strong>Salt is automatic and per-user</strong>, embedded in the output string:</li>
+</ul>
+<pre class="lang-text"><code>$2b$10$N9qo8uLOickgx2ZMRZoMye  IjZAgcfl7p92ldGxad68LJZdL17lhWy
+│   │  └── 22-char salt ──────┘  └────────── hash ───────────┘
+│   └───── cost 10
+└───────── algorithm</code></pre>
+<p>A per-user salt means two users with the same password get different hashes,</p>
+<p>and a precomputed rainbow table is worthless.</p>
+<ul>
+<li><strong>Argon2id</strong> is the modern recommendation (memory-hard, so it also resists</li>
+</ul>
+<p>  GPU/ASIC attacks). bcrypt remains perfectly acceptable; scrypt is a third</p>
+<p>  option. Never SHA/MD5 alone.</p>
+<h3 id="timing-attacks">Timing attacks</h3>
+<p><code>bcrypt.compare</code> is constant-time for a given hash. But note this in the</p>
+<p>login controller:</p>
+<pre class="lang-js"><code>if (!user)             throw new apiError(401, "Invalid credentials");
+if (!isPasswordValid)  throw new apiError(401, "Invalid credentials");</code></pre>
+<p><strong>Same status, same message.</strong> The original said "User Not Found, you may</p>
+<p>register" vs "Invalid Password" — which lets anyone enumerate who has an</p>
+<p>account. A fully rigorous implementation would also hash a dummy password when</p>
+<p>the user doesn't exist, so the <em>response time</em> doesn't leak it either.</p>
+<hr>
+<h2 id="6-2-access-and-refresh-tokens">6.2 Access and refresh tokens</h2>
+<pre class="lang-js"><code>userSchema.methods.generateAccessToken = function () {
+    return jwt.sign(
+        { _id: this.id, username: this.username, email: this.email, fullName: this.fullName },
+        process.env.ACCESS_TOKEN_SECURITY,
+        { expiresIn: process.env.ACCESS_TOKEN_EXPIRY }
+    );
+};
+
+userSchema.methods.generateRefreshToken = function () {
+    return jwt.sign({ _id: this.id }, process.env.REFRESH_TOKEN_SECURITY,
+                    { expiresIn: process.env.REFRESH_TOKEN_EXPIRY });
+};</code></pre>
+<table><thead><tr><th></th><th>access</th><th>refresh</th></tr></thead><tbody><tr><td>lifetime</td><td>short (1 day here; 15 min is more typical)</td><td>long (10 days)</td></tr><tr><td>payload</td><td>id + profile fields</td><td><strong>id only</strong></td></tr><tr><td>stored server-side</td><td>no</td><td><strong>yes</strong>, on the user document</td></tr><tr><td>sent with</td><td>every request</td><td>only to <code>/refreshtoken</code></td></tr></tbody></table>
+<h3 id="why-two-tokens-at-all">Why two tokens at all</h3>
+<p>A JWT cannot be revoked — it is valid until it expires, because verification</p>
+<p>is pure signature maths with no database lookup. That is the whole point (it</p>
+<p>scales horizontally) and also the whole problem.</p>
+<p>The compromise: make the <em>unrevocable</em> token short-lived, and gate renewal</p>
+<p>behind a long-lived token that <strong>is</strong> checked against the database:</p>
+<pre class="lang-js"><code>if (incomingRefreshToken !== user.refreshToken) {
+    throw new apiError(401, "Refresh token is expired or already used");
+}</code></pre>
+<p>Logging out sets <code>$unset: { refreshToken: 1 }</code>, so the refresh token dies</p>
+<p>immediately. The access token survives at most one more expiry window.</p>
+<h3 id="why-the-refresh-payload-is-id-only">Why the refresh payload is id-only</h3>
+<p>Payload is <strong>base64-encoded, not encrypted</strong> — anyone with the token can read</p>
+<p>it. Put nothing sensitive in it, and keep it small since it travels on every</p>
+<p>request.</p>
+<pre class="lang-js"><code>atob("eyJfaWQiOiI2YWY0..."); // → {"_id":"6af4...","username":"demouser",...}</code></pre>
+<h3 id="rotation">Rotation</h3>
+<p>Every successful refresh issues a <strong>new</strong> refresh token and overwrites the</p>
+<p>stored one. A stolen token is therefore single-use — and if both the attacker</p>
+<p>and the real user try to use it, the second one fails. (A production system</p>
+<p>would go further and treat that reuse as a signal to invalidate the entire</p>
+<p>token family.)</p>
+<hr>
+<h2 id="6-3-the-critical-bug-refreshaccesstoken-was-dead-on-arrival">6.3 THE critical bug: <code>refreshAccessToken</code> was dead on arrival</h2>
+<pre class="lang-js"><code>// BROKEN — back/src/controllers/user.controller.js
+const refreshAccessToken = asyncHandler(async (req, res) =&gt; {
+    // ...
+    res.cookie("refreshToken", token, {        // ← `token` is NOT DEFINED
+        httpOnly: true,
+        secure: isProd,
+        sameSite: isProd ? "none" : "lax",
+    });
+
+    const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(user._id);
+
+    return res
+        .status(200)
+        .cookie("accessToken", accessToken, options)   // ← `options` is NOT DEFINED
+        .cookie("refreshToken", refreshToken, options)
+        .json(new apiResponse(200, {}, "access token refreshed"));
+});</code></pre>
+<p>Two <code>ReferenceError</code>s. <strong>Every single call threw a 500.</strong></p>
+<h3 id="the-downstream-effect">The downstream effect</h3>
+<p>The frontend interceptor treats a failed refresh as "you are logged out":</p>
+<pre class="lang-js"><code>catch (refreshError) {
+    window.dispatchEvent(new Event("logout"));
+}</code></pre>
+<p>So the moment an access token expired, the user was silently logged out and</p>
+<p>bounced to <code>/login</code> — with no error anyone could interpret. The "persistent</p>
+<p>login sessions" feature in the README did not work at all.</p>
+<h3 id="verifying-the-fix">Verifying the fix</h3>
+<pre class="lang-bash"><code>curl -c ck -X POST localhost:8000/api/v1/users/login \
+     -H "Content-Type: application/json" \
+     -d '{"username":"demouser","password":"demo1234"}'</code></pre>
+<pre class="lang-bash"><code>curl -b ck -c ck -X POST localhost:8000/api/v1/users/refreshtoken</code></pre>
+<pre class="lang-json"><code>{"statusCode":200,"data":{},"message":"Access token refreshed","success":true}</code></pre>
+<p><strong>Lesson:</strong> this is what a linter catches for free. <code>no-undef</code> would have</p>
+<p>flagged both identifiers before the code ever ran. The project has ESLint</p>
+<p>configured but it was clearly never run against the backend.</p>
+<hr>
+<h2 id="6-4-cookies">6.4 Cookies</h2>
+<pre class="lang-js"><code>// back/src/utils/cookies.js
+const base = {
+    httpOnly: true,
+    secure: env.isProd,
+    sameSite: env.isProd ? "none" : "lax",
+    path: "/",
+};
+
+export const accessCookieOptions  = { ...base, maxAge: 1  * DAY };
+export const refreshCookieOptions = { ...base, maxAge: 10 * DAY };
+export const clearCookieOptions   = { ...base };</code></pre>
+<table><thead><tr><th>Flag</th><th>Why</th></tr></thead><tbody><tr><td><code>httpOnly</code></td><td>JavaScript cannot read it → blunts XSS token theft</td></tr><tr><td><code>secure</code></td><td>HTTPS only. <strong>Must be false on <code>http://localhost</code></strong> or the browser silently drops it</td></tr><tr><td><code>sameSite</code></td><td>CSRF control (below)</td></tr><tr><td><code>maxAge</code></td><td>matched to token lifetime, so cookie and JWT expire together</td></tr><tr><td><code>path: "/"</code></td><td>must match on <code>clearCookie</code> or logout silently fails</td></tr></tbody></table>
+<h3 id="samesite-in-detail"><code>sameSite</code> in detail</h3>
+<table><thead><tr><th>Value</th><th>Sent on cross-site requests?</th></tr></thead><tbody><tr><td><code>strict</code></td><td>never — even following a link from another site</td></tr><tr><td><code>lax</code></td><td>only on top-level GET navigations</td></tr><tr><td><code>none</code></td><td>always — <strong>requires <code>secure: true</code></strong></td></tr></tbody></table>
+<p>Production runs the API on Render and the SPA on Netlify: different sites, so</p>
+<p><code>none</code> + <code>secure</code> is mandatory. Locally both are <code>localhost</code>, so <code>lax</code> works</p>
+<p>and avoids the <code>secure</code> requirement over plain HTTP. Getting this wrong is the</p>
+<p>classic "works locally, broken in production" auth bug.</p>
+<h3 id="why-clearcookieoptions-exists-separately">Why <code>clearCookieOptions</code> exists separately</h3>
+<p><code>clearCookie</code> only removes a cookie if <code>path</code>, <code>domain</code>, <code>secure</code> and</p>
+<p><code>sameSite</code> <strong>match what was set</strong>. A mismatch means logout appears to succeed</p>
+<p>and the cookie is still there. Deriving all three option sets from one <code>base</code></p>
+<p>object makes that impossible to get wrong.</p>
+<h3 id="cookies-vs-localstorage-for-jwts">Cookies vs <code>localStorage</code> for JWTs</h3>
+<table><thead><tr><th></th><th>cookie (<code>httpOnly</code>)</th><th><code>localStorage</code></th></tr></thead><tbody><tr><td>XSS can read it</td><td><strong>no</strong></td><td><strong>yes</strong> — one injected script takes everything</td></tr><tr><td>CSRF risk</td><td>yes → mitigated by <code>sameSite</code></td><td>no</td></tr><tr><td>sent automatically</td><td>yes</td><td>no, you attach it manually</td></tr></tbody></table>
+<p>Cookies are the better default: XSS is more common than CSRF, and <code>sameSite</code></p>
+<p>is a one-line CSRF mitigation whereas there is no mitigation for "a script can</p>
+<p>read your token".</p>
+<hr>
+<h2 id="6-5-verifyjwt-and-optionaljwt">6.5 <code>verifyJWT</code> and <code>optionalJWT</code></h2>
+<pre class="lang-js"><code>export const verifyJWT = asyncHandler(async (req, res, next) =&gt; {
+    const token = readToken(req);
+    if (!token) throw new apiError(401, "Unauthorized request");
+
+    let decodedToken;
+    try {
+        decodedToken = jwt.verify(token, env.ACCESS_TOKEN_SECRET);
+    } catch (error) {
+        const message = error?.name === "TokenExpiredError"
+            ? "Access token expired" : "Invalid access token";
+        throw new apiError(401, message);
+    }
+
+    const user = await User.findById(decodedToken?._id).select("-password -refreshToken");
+    if (!user) throw new apiError(401, "Invalid access token");
+
+    req.user = user;
+    next();
+});</code></pre>
+<p>Points worth making:</p>
+<ul>
+<li><strong><code>jwt.verify</code>, never <code>jwt.decode</code>.</strong> <code>decode</code> does not check the signature —</li>
+</ul>
+<p>  an attacker can forge any payload.</p>
+<ul>
+<li>Distinguishing <code>TokenExpiredError</code> from a tampered token makes the network</li>
+</ul>
+<p>  tab readable and tells the client whether a refresh is worth attempting.</p>
+<ul>
+<li><code>.select("-password -refreshToken")</code> — <code>req.user</code> is passed around and</li>
+</ul>
+<p>  serialised into responses; the password hash must never ride along.</p>
+<ul>
+<li>The database lookup on every request is the cost of being able to revoke. A</li>
+</ul>
+<p>  higher-scale system would cache it in Redis with a short TTL.</p>
+<pre class="lang-js"><code>export const optionalJWT = asyncHandler(async (req, res, next) =&gt; {
+    const token = readToken(req);
+    if (!token) return next();
+    try { /* attach req.user if valid */ } catch { /* ignore */ }
+    next();
+});</code></pre>
+<p>Used for pages that render for everyone but show more when signed in — the</p>
+<p>channel page needs <code>isSubscribed</code>, and the watch page records watch history</p>
+<p>only if it knows who you are. Previously <code>/c/:username</code> required auth, so</p>
+<p>anonymous visitors could not view a channel at all.</p>
+<hr>
+<h2 id="6-6-other-auth-bugs-that-were-fixed">6.6 Other auth bugs that were fixed</h2>
+<h3 id="query-object-injection-in-login">Query-object injection in login</h3>
+<pre class="lang-js"><code>const user = await User.findOne({ $or: [{ email }, { username }] });   // ❌</code></pre>
+<p>If the client posts only <code>username</code>, then <code>email</code> is <code>undefined</code> and the</p>
+<p>filter becomes <code>{ $or: [ { email: undefined }, { username: "x" } ] }</code>.</p>
+<p>MongoDB treats <code>{ field: undefined }</code> as "field does not exist" — so this can</p>
+<p>match an unrelated document that happens to have no <code>email</code>.</p>
+<pre class="lang-js"><code>// ✅ build the $or from present values only
+const or = [];
+if (email?.trim())    or.push({ email: email.trim().toLowerCase() });
+if (username?.trim()) or.push({ username: username.trim().toLowerCase() });</code></pre>
+<p>Note also the normalisation: the schema stores <code>lowercase: true</code>, so a lookup</p>
+<p>with the raw input would miss <code>"DemoUser"</code>.</p>
+<h3 id="getuserchannelprofile-read-the-wrong-place"><code>getUserChannelProfile</code> read the wrong place</h3>
+<pre class="lang-js"><code>const { username } = req.body;        // ❌ route is GET /c/:username</code></pre>
+<p>A GET request has no body, so this <strong>always</strong> 404'd. Now it accepts both:</p>
+<pre class="lang-js"><code>const username = (req.params.username ?? req.body?.username ?? "").trim().toLowerCase();</code></pre>
+<h3 id="avatar-upload-always-returned-400">Avatar upload always returned 400</h3>
+<pre class="lang-js"><code>const avatarLocalPath = req.files?.path;    // ❌</code></pre>
+<p>multer's <code>.single(name)</code> populates <strong><code>req.file</code></strong> (singular). <code>.fields()</code> and</p>
+<p><code>.array()</code> populate <code>req.files</code>. The route uses <code>.single("avatar")</code>, so</p>
+<p><code>req.files</code> was always <code>undefined</code> and the endpoint could never succeed.</p>
+<pre class="lang-js"><code>const localPath = req.file?.path;           // ✅</code></pre>
+<h3 id="rate-limiting-the-credential-endpoints">Rate limiting the credential endpoints</h3>
+<pre class="lang-js"><code>export const rateLimit     = rateLimiter();                              // 30 / 20s
+export const authRateLimit = rateLimiter({ limit: 10, windowSeconds: 60 });
+
+router.route("/login").post(authRateLimit, loginUser);
+router.route("/register").post(authRateLimit, ...);</code></pre>
+<p>Login and register get a tighter budget than ordinary reads — this is the</p>
+<p>brute-force surface. A production system would additionally lock per-account</p>
+<p>after N failures, not just per-IP, since an attacker can rotate IPs.</p>
+<hr>
+<h2 id="6-7-the-full-flow-end-to-end">6.7 The full flow, end to end</h2>
+<pre class="lang-text"><code>REGISTER
+  validate → check existing → upload avatar → User.create
+  → pre("save") hashes the password
+  → issue access + refresh, set both cookies, 201
+    (new: the user is logged in immediately instead of bounced to /login)
+
+LOGIN
+  find by email OR username → bcrypt.compare
+  → issue access + refresh → store refresh on the user → set cookies
+
+AUTHENTICATED REQUEST
+  cookie → verifyJWT → jwt.verify → User.findById → req.user → handler
+
+ACCESS TOKEN EXPIRES
+  any request → 401
+  → axios interceptor → single-flight POST /refreshtoken
+  → verify refresh signature → compare against the stored one
+  → issue a NEW pair (rotation) → retry the original request
+  → on failure: trip the circuit breaker, emit "logout"
+
+LOGOUT
+  $unset refreshToken  (refresh dies now)
+  clearCookie ×2 with matching options
+  → frontend clears the ["currentUser"] cache</code></pre>
+<hr>
+<p>Next: <strong><a href="./07-SCALE.md">07 — Caching, scale & realtime</a></strong></p></section>
+<section class="part" id="part-6"><h1 id="7-caching-rate-limiting-realtime-scale">7 — Caching, Rate Limiting, Realtime & Scale</h1>
+<hr>
+<h2 id="7-1-redis-as-a-cache-that-cannot-take-you-down">7.1 Redis as a cache that cannot take you down</h2>
+<pre class="lang-js"><code>// back/src/redis/redis.js
+const memoryStore = { get, set, setEx, del, keys, incr, expire };
+
+async function withFallback(name, args) {
+    if (ready &amp;&amp; realClient) {
+        try { return await realClient[name](...args); }
+        catch (err) { console.warn(`[redis] ${name} failed, falling back`); }
+    }
+    return memoryStore[name](...args);
+}</code></pre>
+<h3 id="the-design-rule">The design rule</h3>
+<p><strong>Redis here is a cache and a counter, not a source of truth.</strong> Nothing in it</p>
+<p>is unrecoverable. So an outage must degrade performance, never availability.</p>
+<p>The original did this:</p>
+<pre class="lang-js"><code>await connectRedis();     // in index.js — throws if Redis is unreachable</code></pre>
+<p>A Redis hiccup took the entire API down. Now <code>connectRedis()</code> never throws, the</p>
+<p>client exposes one small surface, and every call silently falls back to an</p>
+<p>in-process <code>Map</code>.</p>
+<p>The in-memory fallback is deliberately <em>correct but not distributed</em>: with</p>
+<p>multiple server instances each has its own map, so the cache hit rate drops</p>
+<p>and rate limits become per-instance. That is an acceptable degraded mode, and</p>
+<p><code>/health</code> reports which mode you are in so it is never a silent surprise.</p>
+<pre class="lang-js"><code>reconnectStrategy: (retries) =&gt; (retries &gt; 5 ? false : Math.min(retries * 200, 2000))</code></pre>
+<p>Capped exponential-ish backoff, then give up — rather than retrying forever</p>
+<p>and filling the logs. We have a working fallback, so there is no reason to</p>
+<p>thrash.</p>
+<hr>
+<h2 id="7-2-cache-aside">7.2 Cache-aside</h2>
+<pre class="lang-js"><code>const cached = await redis.get(cacheKey);
+if (cached) return res.status(200).json(JSON.parse(cached));   // HIT
+
+const data = await expensiveQuery();                           // MISS
+res.status(200).json(payload);                                 // respond FIRST
+redis.set(cacheKey, JSON.stringify(payload), { EX: 300 })      // then cache
+     .catch(...);</code></pre>
+<table><thead><tr><th>Pattern</th><th>Who writes the cache</th></tr></thead><tbody><tr><td><strong>cache-aside</strong> (used here)</td><td>the application, on a miss</td></tr><tr><td>read-through</td><td>the cache library itself</td></tr><tr><td>write-through</td><td>write to cache + DB together — consistent, slower writes</td></tr><tr><td>write-behind</td><td>write to cache, flush to DB later — fast, risks data loss</td></tr></tbody></table>
+<h3 id="two-bugs-in-the-original-cache-middleware">Two bugs in the original cache middleware</h3>
+<pre class="lang-js"><code>res.json = async (data) =&gt; {
+    await redisClient.setEx(key, expiry, JSON.stringify(data));   // ❌ blocks
+    originalJson(data);
+};</code></pre>
+<ol>
+<li><strong>The client waited on Redis before receiving the body.</strong> On a miss the</li>
+</ol>
+<p>   user paid the database round trip <em>and</em> the Redis round trip. Now the</p>
+<p>   response is sent first and the cache write is fire-and-forget.</p>
+<ol>
+<li><strong>Error responses were cached.</strong> The override caught every <code>res.json</code>,</li>
+</ol>
+<p>   including 4xx and 5xx. One transient failure was then served to everyone</p>
+<p>   for the full TTL.</p>
+<pre class="lang-js"><code>if (res.statusCode &gt;= 200 &amp;&amp; res.statusCode &lt; 300) {   // ✅ only cache success
+    Promise.resolve(redisClient.setEx(key, expiry, JSON.stringify(data)))
+           .catch(...);
+}</code></pre>
+<h3 id="invalidation">Invalidation</h3>
+<pre class="lang-js"><code>export const invalidate = async (pattern) =&gt; {
+    const keys = await redisClient.keys(pattern);
+    if (keys.length) await redisClient.del(keys);
+};
+
+await invalidate("videos:*");   // after create / update / delete</code></pre>
+<p><strong><code>KEYS</code> is O(n) over the entire keyspace and blocks Redis</strong> — it is single</p>
+<p>threaded. Fine at this scale; in production you would use <code>SCAN</code> (cursor-based,</p>
+<p>non-blocking) or, better, a <strong>generation counter</strong>:</p>
+<pre class="lang-text"><code>videos:gen7:page1   ← bump `gen` to 8 and every old key is orphaned,
+                      then expires naturally. No scan at all.</code></pre>
+<p>Say this in an interview. "I used <code>KEYS</code> and here is why that doesn't scale,</p>
+<p>and here's what I'd do instead" is a much stronger answer than using <code>SCAN</code></p>
+<p>without being able to explain either.</p>
+<h3 id="key-design">Key design</h3>
+<pre class="lang-js"><code>const key = [req.method, req.originalUrl, `user:${req.user?._id ?? "public"}`,
+             JSON.stringify(req.body ?? {})].join(":");</code></pre>
+<p>The <code>user:</code> segment is a <strong>correctness requirement</strong>, not an optimisation.</p>
+<p>Without it, a personalised response cached for user A would be served to user</p>
+<p>B. That class of bug has leaked real users' private data in real products.</p>
+<hr>
+<h2 id="7-3-rate-limiting">7.3 Rate limiting</h2>
+<pre class="lang-js"><code>const requests = await client.incr(key);
+if (requests === 1) await client.expire(key, windowSeconds);
+if (requests &gt; limit) return res.status(429).json({ ... });</code></pre>
+<p><code>INCR</code> on a missing key creates it at 1, atomically. The <code>=== 1</code> check sets</p>
+<p>the TTL exactly once, which is what makes it a <em>window</em>.</p>
+<h3 id="the-boundary-burst-flaw">The boundary-burst flaw</h3>
+<p>Fixed-window counters allow <strong>2× the limit</strong> across a window boundary: 30</p>
+<p>requests at t=19.9 s and another 30 at t=20.1 s is 60 requests in 200 ms.</p>
+<table><thead><tr><th>Algorithm</th><th>Trade-off</th></tr></thead><tbody><tr><td><strong>fixed window</strong> (used here)</td><td>2 Redis ops, simple; boundary burst</td></tr><tr><td>sliding window log</td><td>exact; stores every timestamp — memory heavy</td></tr><tr><td>sliding window counter</td><td>weighted blend of two windows; good compromise</td></tr><tr><td><strong>token bucket</strong></td><td>allows deliberate bursts, smooth refill; the usual production choice</td></tr></tbody></table>
+<h3 id="fail-open-vs-fail-closed">Fail-open vs fail-closed</h3>
+<pre class="lang-js"><code>catch (err) {
+    console.warn(`[ratelimit] failing open: ${err.message}`);
+    next();                                  // let it through
+}</code></pre>
+<p>If the counter store is unreachable, we <strong>fail open</strong>. The alternative locks</p>
+<p>every user out of the whole product because a cache is down. For a rate</p>
+<p>limiter, availability beats strictness. (For an <em>authorisation</em> check the</p>
+<p>answer is the opposite — always fail closed.)</p>
+<h3 id="identity">Identity</h3>
+<pre class="lang-js"><code>const identity = req.user?._id ? `user:${req.user._id}` : `ip:${req.ip}`;</code></pre>
+<p>Per-user when known, per-IP otherwise. And <code>app.set("trust proxy", 1)</code> is</p>
+<p>essential — behind Render's load balancer, <code>req.ip</code> without it is the</p>
+<p><em>proxy's</em> IP, so every user in the world shares one bucket.</p>
+<h3 id="headers">Headers</h3>
+<pre class="lang-js"><code>res.setHeader("X-RateLimit-Limit", limit);
+res.setHeader("X-RateLimit-Remaining", Math.max(0, limit - requests));
+res.setHeader("Retry-After", windowSeconds);     // on a 429</code></pre>
+<p>Tells a well-behaved client how to back off instead of hammering.</p>
+<hr>
+<h2 id="7-4-realtime">7.4 Realtime</h2>
+<pre class="lang-js"><code>// SocketConn/src/server.js
+const onlineUsers = new Map();   // userId -&gt; Set&lt;socketId&gt;
+
+socket.on("register-user", async (userId) =&gt; {
+    socket.userId = userId;
+    socket.join(userId);                         // a room named after the user
+
+    if (!onlineUsers.has(userId)) onlineUsers.set(userId, new Set());
+    onlineUsers.get(userId).add(socket.id);
+
+    if (onlineUsers.get(userId).size === 1) {    // first tab → now online
+        await User.findByIdAndUpdate(userId, { isOnline: true, lastSeen: null });
+        io.emit("user-status", { userId, isOnline: true });
+    }
+});</code></pre>
+<h3 id="why-map-userid-set-socketid-and-not-map-userid-socketid">Why <code>Map&lt;userId, Set&lt;socketId&gt;&gt;</code> and not <code>Map&lt;userId, socketId&gt;</code></h3>
+<p>One user, many tabs and devices. Tracking a <strong>set</strong> of sockets means closing</p>
+<p>one tab does not mark you offline while another is still open. The transition</p>
+<p>only fires when the set becomes empty:</p>
+<pre class="lang-js"><code>sockets.delete(socket.id);
+if (sockets.size === 0) {
+    onlineUsers.delete(socket.userId);
+    await User.findByIdAndUpdate(socket.userId, { isOnline: false, lastSeen: new Date() });
+    io.emit("user-status", { userId: socket.userId, isOnline: false, lastSeen });
+}</code></pre>
+<p>This is a reference-counting pattern, and it is the single most common thing</p>
+<p>people get wrong in a presence system.</p>
+<h3 id="rooms">Rooms</h3>
+<p><code>socket.join(userId)</code> makes a room per user, so delivering a message is</p>
+<p><code>io.to(receiverId).emit(...)</code> with no socket-id bookkeeping and automatic</p>
+<p>multi-device fan-out. <code>socket.join(conversationId)</code> does the same for typing</p>
+<p>indicators.</p>
+<p><code>socket.to(room)</code> excludes the sender; <code>io.to(room)</code> includes everyone. Typing</p>
+<p>indicators use <code>socket.to</code> — you should not see your own.</p>
+<h3 id="known-limitations-say-these-before-you-re-asked">Known limitations (say these before you're asked)</h3>
+<ol>
+<li><strong>No authentication on the socket.</strong> Anyone can emit</li>
+</ol>
+<p>   <code>register-user</code> with any id and mark that user online, or join any</p>
+<p>   conversation room. The fix is to verify the JWT in a handshake middleware:</p>
+<p>   ```js</p>
+<p>   io.use((socket, next) => {</p>
+<p>       const token = parseCookie(socket.handshake.headers.cookie)?.accessToken;</p>
+<p>       try { socket.userId = jwt.verify(token, SECRET)._id; next(); }</p>
+<p>       catch { next(new Error("unauthorized")); }</p>
+<p>   });</p>
+<p>   ```</p>
+<p>   and then <strong>ignore</strong> any client-supplied id.</p>
+<ol>
+<li><strong><code>onlineUsers</code> is in-process memory.</strong> Two instances behind a load</li>
+</ol>
+<p>   balancer each know only their own connections. Production needs the</p>
+<p>   Socket.IO <strong>Redis adapter</strong> so rooms and broadcasts span instances, plus</p>
+<p>   sticky sessions (or <code>transports: ["websocket"]</code>, which this client already</p>
+<p>   forces) so the HTTP-polling handshake doesn't bounce between servers.</p>
+<ol>
+<li><strong><code>transports: ["websocket"]</code></strong> on the client skips the polling upgrade —</li>
+</ol>
+<p>   faster, and avoids sticky-session problems — but fails outright on networks</p>
+<p>   that block WebSocket rather than falling back.</p>
+<h3 id="why-messages-go-through-rest-not-the-socket">Why messages go through REST, not the socket</h3>
+<p>The socket emits <code>send-message</code> for <em>delivery</em>, but the message is <strong>created</strong></p>
+<p>by <code>POST /api/v1/socket/send</code>. So persistence, validation, rate limiting and</p>
+<p>auth all happen in one place, and a socket outage cannot lose data. The socket</p>
+<p>layer is a transport optimisation on top of a durable store.</p>
+<hr>
+<h2 id="7-5-search-three-tiers">7.5 Search: three tiers</h2>
+<pre class="lang-js"><code>export const searchElastic = asyncHandler(async (req, res, next) =&gt; {
+    if (!elastic) { req.query.search = q; return Trending(req, res, next); }
+    try { /* elastic multi_match with fuzziness */ }
+    catch { return Trending(req, res, next); }      // degrade, don't fail
+});</code></pre>
+<table><thead><tr><th>Tier</th><th>Cost</th><th>Quality</th></tr></thead><tbody><tr><td><code>$regex</code> (current default)</td><td>collection scan unless anchored</td><td>substring only, no ranking</td></tr><tr><td>Mongo <code>$text</code> index</td><td>indexed, stemming, <code>textScore</code></td><td>no fuzziness, one text index per collection</td></tr><tr><td>Elasticsearch</td><td>separate cluster to run and sync</td><td>fuzzy, relevance, facets, highlighting</td></tr></tbody></table>
+<p>The honest engineering answer — and the one actually taken here — is that</p>
+<p>Elasticsearch is <strong>optional</strong>, defaults to off, and the code degrades to Mongo</p>
+<p>when it is absent. Running a cluster for a few thousand videos is not worth</p>
+<p>the operational cost.</p>
+<p>A text index is already declared on the models as the sensible middle tier:</p>
+<pre class="lang-js"><code>videoSchema.index({ title: "text", description: "text" });</code></pre>
+<p>Note the original <code>searchElastic</code> referenced <code>elastic</code> **without importing</p>
+<p>it** — a guaranteed <code>ReferenceError</code> had anything ever routed to it.</p>
+<hr>
+<h2 id="7-6-n-1-queries">7.6 N+1 queries</h2>
+<pre class="lang-js"><code>// ❌ 1 + N round trips
+const videos = await Video.find();
+for (const v of videos) v.owner = await User.findById(v.owner);
+
+// ✅ 1 round trip
+const videos = await Video.find().populate("owner", "username fullName avatar");
+
+// ✅ also 1, and composable with other stages
+{ $lookup: { from: "users", localField: "owner", foreignField: "_id", as: "owner",
+             pipeline: [{ $project: { username: 1, fullName: 1, avatar: 1 } }] } }</code></pre>
+<p><code>populate</code> is a second query with <code>$in</code> (so 2 total, not N+1). <code>$lookup</code> is a</p>
+<p>true server-side join in one round trip. Either is fine; the loop is not.</p>
+<p>Always project the fields you need. <code>populate("owner")</code> with no field list</p>
+<p>fetches the <strong>password hash and refresh token</strong> into memory — one careless</p>
+<p><code>res.json(video)</code> away from a breach.</p>
+<hr>
+<h2 id="7-7-what-would-need-to-change-at-100-traffic">7.7 What would need to change at 100× traffic</h2>
+<table><thead><tr><th>Area</th><th>Now</th><th>At scale</th></tr></thead><tbody><tr><td>Pagination</td><td><code>skip</code>/<code>limit</code></td><td>cursor/keyset — <code>skip</code> is O(offset)</td></tr><tr><td>Cache invalidation</td><td><code>KEYS videos:*</code></td><td>generation counter or <code>SCAN</code></td></tr><tr><td>Rate limiting</td><td>fixed window</td><td>token bucket, per-user <strong>and</strong> per-IP</td></tr><tr><td>Sessions</td><td>DB lookup per request</td><td>Redis-cached user, short TTL</td></tr><tr><td>Presence</td><td>in-process <code>Map</code></td><td>Socket.IO Redis adapter</td></tr><tr><td>Search</td><td>regex</td><td><code>$text</code>, then Elasticsearch</td></tr><tr><td>Uploads</td><td>API proxies to Cloudinary</td><td>signed direct-to-Cloudinary upload</td></tr><tr><td>Feed</td><td>query per request</td><td>precomputed/fan-out timeline</td></tr><tr><td>Media</td><td>Cloudinary default</td><td>CDN + HLS/DASH adaptive bitrate</td></tr><tr><td>Deploy</td><td>single instance</td><td>horizontal + sticky or stateless sockets</td></tr></tbody></table>
+<p><strong>The highest-value change by far is signed direct uploads.</strong> Right now a</p>
+<p>200 MB video streams to the API, hits the disk, then streams to Cloudinary —</p>
+<p>the API server is tied up for the whole transfer and the disk is a shared,</p>
+<p>finite resource. A signed upload has the browser send bytes straight to</p>
+<p>Cloudinary and post only the resulting URL back. One change removes the</p>
+<p>largest scaling bottleneck in the system.</p>
+<hr>
+<p>Next: <strong><a href="./08-BUGS.md">08 — Every bug, explained</a></strong></p></section>
+<section class="part" id="part-7"><h1 id="8-every-bug-explained">8 — Every Bug, Explained</h1>
+<p>Each entry: what it was, why it happened, the fix, and the transferable</p>
+<p>lesson. These make excellent "tell me about a bug you found" answers.</p>
+<p>Severity: 🔴 broke a feature outright · 🟠 security/data · 🟡 correctness ·</p>
+<p>🔵 performance/UX</p>
+<hr>
+<h2 id="backend">Backend</h2>
+<h3 id="1-refreshaccesstoken-threw-on-every-call">🔴 1. <code>refreshAccessToken</code> threw on every call</h3>
+<p><strong><code>back/src/controllers/user.controller.js</code></strong></p>
+<pre class="lang-js"><code>res.cookie("refreshToken", token, { ... });          // `token` undefined
+return res.status(200)
+    .cookie("accessToken", accessToken, options)     // `options` undefined</code></pre>
+<p>Two <code>ReferenceError</code>s → 500 on every refresh. Because the axios interceptor</p>
+<p>treats a failed refresh as "logged out", **every session silently died the</p>
+<p>moment the access token expired.** The README's "persistent login sessions"</p>
+<p>never worked.</p>
+<p><em>Lesson:</em> ESLint's <code>no-undef</code> catches this for free. The project has ESLint</p>
+<p>configured for the frontend but it was never run against the backend.</p>
+<hr>
+<h3 id="2-dotenv-config-ran-after-every-module-had-already-read-process-env">🔴 2. <code>dotenv.config()</code> ran after every module had already read <code>process.env</code></h3>
+<p><strong><code>back/src/index.js</code></strong></p>
+<p>ESM imports are hoisted and evaluated before the importing module's body (see</p>
+<p>§2.1). So <code>redis.js</code>, <code>app.js</code> and <code>cloudinary.js</code> all read <code>process.env</code> while</p>
+<p>it was still empty:</p>
+<ul>
+<li>Redis connected to <code>localhost:6379</code> instead of Upstash → <code>ECONNREFUSED</code></li>
+<li><code>cors({ origin: undefined })</code> → no <code>Access-Control-Allow-Origin</code> header</li>
+<li><code>cloudinary.config({ cloud_name: undefined })</code> → uploads broken</li>
+</ul>
+<p><em>Fix:</em> <code>back/src/env.js</code>, imported first.</p>
+<p><em>Lesson:</em> <code>import</code> is a hoisted declaration, not an in-place statement.</p>
+<hr>
+<h3 id="3-updateuseravatar-updateusercoverimage-always-returned-400">🔴 3. <code>updateUserAvatar</code> / <code>updateUserCoverImage</code> always returned 400</h3>
+<pre class="lang-js"><code>const avatarLocalPath = req.files?.path;     // ❌ always undefined</code></pre>
+<p><code>multer.single(name)</code> populates <strong><code>req.file</code></strong>; only <code>.fields()</code>/<code>.array()</code></p>
+<p>populate <code>req.files</code>. The endpoint could never succeed.</p>
+<p><em>Lesson:</em> <code>.single</code> → <code>req.file</code>. <code>.fields</code>/<code>.array</code> → <code>req.files</code>.</p>
+<hr>
+<h3 id="4-getuserchannelprofile-read-req-body-on-a-get-route">🔴 4. <code>getUserChannelProfile</code> read <code>req.body</code> on a GET route</h3>
+<pre class="lang-js"><code>const { username } = req.body;     // route is GET /c/:username</code></pre>
+<p>GET requests have no body → always 404. <em>Fix:</em> accept <code>req.params.username</code></p>
+<p>with the body as a fallback.</p>
+<hr>
+<h3 id="5-getwatchhistory-pipeline-must-be-an-array">🔴 5. <code>getWatchHistory</code>: <code>pipeline</code> must be an array</h3>
+<pre class="lang-js"><code>pipeline: { $lookup: { ... } }     // ❌ object where an array is required</code></pre>
+<p>Plus <code>user[0].watchhistory</code> with no guard (crash when the aggregation returned</p>
+<p>nothing) and a case mismatch against the <code>as:</code> alias.</p>
+<hr>
+<h3 id="6-unreachable-non-functional-socket-routes">🔴 6. Unreachable + non-functional socket routes</h3>
+<pre class="lang-js"><code>routerSocket.get("/:receiverId", getMessages);
+routerSocket.get("/generateConvoId", getConversationId);   // never reached</code></pre>
+<p>Express matches in order, so <code>/:receiverId</code> swallowed it. And</p>
+<p><code>getConversationId</code> was <code>(user1, user2) =&gt; string</code> — a utility, not a handler.</p>
+<p>Called as <code>(req, res)</code> it returned a string and never responded, hanging the</p>
+<p>request.</p>
+<p><em>Lesson:</em> static routes before dynamic ones; a handler must call</p>
+<p><code>res</code>/<code>next</code>, never just return.</p>
+<hr>
+<h3 id="7-practicevideo-trending-hung-instead-of-erroring">🔴 7. <code>PracticeVideo</code> / <code>Trending</code> hung instead of erroring</h3>
+<p>Plain <code>async</code> handlers that <code>throw</code> inside <code>catch</code>. Express 4 cannot see a</p>
+<p>rejected promise, so no response was ever sent. The navbar typeahead hits</p>
+<p><code>Trending</code>, so any error meant a hung request per keystroke.</p>
+<p><em>Fix:</em> wrap in <code>asyncHandler</code>.</p>
+<hr>
+<h3 id="8-mass-assignment-in-updatevideo">🟠 8. Mass assignment in <code>updateVideo</code></h3>
+<pre class="lang-js"><code>Object.assign(video, req.body);
+await video.save();</code></pre>
+<p>A client could send <code>{"views": 999999}</code>, <code>{"owner": "&lt;another user&gt;"}</code> or</p>
+<p><code>{"_id": ...}</code>. <em>Fix:</em> an explicit <code>UPDATABLE_FIELDS</code> whitelist.</p>
+<p><em>Lesson:</em> never spread a request body onto a model. Whitelist, never blacklist.</p>
+<hr>
+<h3 id="9-unescaped-user-input-in-regex">🟠 9. Unescaped user input in <code>$regex</code></h3>
+<pre class="lang-js"><code>{ title: { $regex: search, $options: "i" } }</code></pre>
+<p><code>(((((</code> throws; <code>.*</code> or <code>(a+)+$</code> causes a full scan or catastrophic</p>
+<p>backtracking (ReDoS). <em>Fix:</em> <code>escapeRegex()</code>.</p>
+<hr>
+<h3 id="10-upload-filenames-were-attacker-controlled-and-collided">🟠 10. Upload filenames were attacker-controlled and collided</h3>
+<pre class="lang-js"><code>filename: (req, file, cb) =&gt; cb(null, file.originalname)
+destination: (req, file, cb) =&gt; cb(null, "./public")</code></pre>
+<p>Two simultaneous <code>video.mp4</code> uploads overwrote each other, <code>../</code> in a name</p>
+<p>could escape the directory, and <code>./public</code> was being served by</p>
+<p><code>express.static</code>. <em>Fix:</em> random names, a non-served <code>tmp/uploads</code>, a MIME</p>
+<p>allow-list and a size cap.</p>
+<hr>
+<h3 id="11-login-leaked-which-accounts-exist">🟠 11. Login leaked which accounts exist</h3>
+<p>"User Not Found, you may register" vs "Invalid Password" lets anyone</p>
+<p>enumerate users. <em>Fix:</em> identical 401 + "Invalid credentials" for both.</p>
+<hr>
+<h3 id="12-email-undefined-in-the-login-query">🟠 12. <code>{ email: undefined }</code> in the login query</h3>
+<p><code>findOne({ $or: [{ email: undefined }, { username }] })</code> — MongoDB reads</p>
+<p><code>{field: undefined}</code> as "field does not exist", which can match an unintended</p>
+<p>document. <em>Fix:</em> build <code>$or</code> from present values only.</p>
+<hr>
+<h3 id="13-apierror-destroyed-every-stack-trace">🟡 13. <code>apiError</code> destroyed every stack trace</h3>
+<pre class="lang-js"><code>constructor(..., stack = " ") { if (stack) this.stack = stack; }</code></pre>
+<p><code>" "</code> is truthy. <strong>Every error in the app</strong> had its stack replaced with a</p>
+<p>space. <em>Fix:</em> default to <code>undefined</code>.</p>
+<hr>
+<h3 id="14-getvideobyid-dereferenced-before-the-null-check">🟡 14. <code>getVideoById</code> dereferenced before the null check</h3>
+<pre class="lang-js"><code>video.durationFormatted = formatDuration(video.duration);
+if (!video) return res.status(404)...      // ← too late</code></pre>
+<p>Any missing id threw "Cannot set property of null" → 500 instead of 404. (It</p>
+<p>was also a no-op: assigning an arbitrary property to a Mongoose document</p>
+<p>without <code>toObject()</code> does nothing.)</p>
+<hr>
+<h3 id="15-dbname-was-silently-ignored">🟡 15. <code>DBNAME</code> was silently ignored</h3>
+<p><code>${MONGODB_URL}/${DBNAME}</code> appended the name after the query string. The</p>
+<p>driver used its default database, <code>test</code>. <em>Fix:</em> <code>{ dbName }</code> as an option,</p>
+<p>keeping <code>test</code> so no data was orphaned.</p>
+<hr>
+<h3 id="16-socketconn-wrote-to-a-different-database">🟡 16. SocketConn wrote to a different database</h3>
+<p>It connected with no <code>dbName</code>, so presence updates could land in a different</p>
+<p>database from the one the API reads. <em>Fix:</em> same <code>dbName</code> on both.</p>
+<hr>
+<h3 id="17-duplicate-subscriptions">🟡 17. Duplicate subscriptions</h3>
+<p>No unique index, and a check-then-insert race. Two fast clicks created two</p>
+<p>documents and the subscriber count was permanently wrong. <em>Fix:</em> unique</p>
+<p>compound index + handle error <code>11000</code>.</p>
+<hr>
+<h3 id="18-searchelastic-referenced-an-unimported-variable">🟡 18. <code>searchElastic</code> referenced an unimported variable</h3>
+<p>Guaranteed <code>ReferenceError</code>. <em>Fix:</em> import it, and fall back to Mongo when</p>
+<p>Elasticsearch is absent.</p>
+<hr>
+<h3 id="19-validatepagination-produced-a-string-status-code">🟡 19. <code>validatePagination</code> produced a string status code</h3>
+<pre class="lang-js"><code>next(new apiError(`${error.status}`, ...));   // "undefined"</code></pre>
+<p>Status codes must be numbers; this fell through to 500 with a nonsense</p>
+<p>message. The middleware was also never actually mounted on any route.</p>
+<hr>
+<h3 id="20-redis-could-take-the-whole-api-down">🔵 20. Redis could take the whole API down</h3>
+<p><code>await connectRedis()</code> at boot threw on any Redis problem. <em>Fix:</em> never</p>
+<p>throws, in-memory fallback, <code>/health</code> reports the mode.</p>
+<hr>
+<h3 id="21-the-cache-blocked-responses-and-cached-errors">🔵 21. The cache blocked responses and cached errors</h3>
+<p><code>res.json</code> was replaced with an <code>async</code> function that awaited Redis <strong>before</strong></p>
+<p>sending, and it cached 4xx/5xx bodies for the full TTL. <em>Fix:</em> respond first,</p>
+<p>cache after, success only.</p>
+<hr>
+<h3 id="22-trending-returned-the-entire-collection">🔵 22. <code>Trending</code> returned the entire collection</h3>
+<p>The comment said "pagination, sort by views"; the code was <code>Video.find(filter)</code></p>
+<p>with no <code>.limit()</code>. The navbar typeahead called it on every search.</p>
+<hr>
+<h3 id="23-no-views-increment-and-no-watch-history">🔵 23. No <code>views</code> increment and no watch history</h3>
+<p>Both fields existed in the schema and were never written. Every video showed</p>
+<p>"0 views" forever.</p>
+<hr>
+<h3 id="24-unstable-sort-skip-limit">🔵 24. Unstable sort + skip/limit</h3>
+<p>An unrecognised <code>?sort=</code> gave <code>{}</code> — natural order, which MongoDB does not</p>
+<p>guarantee between queries. Rows could duplicate or disappear across pages.</p>
+<hr>
+<h3 id="25-cloudinary-assets-were-never-deleted">🔵 25. Cloudinary assets were never deleted</h3>
+<p>Deleting a video removed the document but left the video and thumbnail in</p>
+<p>Cloudinary forever. Same for replaced avatars (the code literally said</p>
+<p><code>//todo delete old image</code>).</p>
+<hr>
+<h3 id="26-sigterm-was-not-handled">🔵 26. <code>SIGTERM</code> was not handled</h3>
+<p>Only <code>SIGINT</code>, and it called <code>process.exit()</code> immediately. Docker, Kubernetes</p>
+<p>and Render all send <code>SIGTERM</code> — so every deploy killed in-flight requests.</p>
+<hr>
+<h2 id="frontend">Frontend</h2>
+<h3 id="27-searchusers-was-called-but-never-defined">🔴 27. <code>searchUsers</code> was called but never defined</h3>
+<p><code>pages/searchIndv.jsx</code> called <code>searchUsers(query)</code> with no import and no such</p>
+<p>function anywhere. <code>ReferenceError</code> on the first keystroke. <em>Fix:</em> added</p>
+<p><code>GET /users/search</code> and wired it up.</p>
+<hr>
+<h3 id="28-videos-map-is-not-a-function-blanked-the-watch-page">🔴 28. <code>videos.map is not a function</code> blanked the watch page</h3>
+<p><code>/videos/any</code> returned a paginated envelope while the page expected a bare</p>
+<p>array. With no error boundary, this unmounted the <strong>entire</strong> React tree →</p>
+<p>blank white screen. <em>Fix:</em> accept both shapes, always hand <code>setVideos</code> an</p>
+<p>array, and add an <code>ErrorBoundary</code>.</p>
+<hr>
+<h3 id="29-every-page-except-had-no-navigation">🔴 29. Every page except <code>/</code> had no navigation</h3>
+<p>Only <code>/</code> was inside <code>MainLayout</code>. Open a video and there was no way back</p>
+<p>except the browser button. <em>Fix:</em> restructured the route tree — app pages</p>
+<p>under <code>MainLayout</code>, only <code>/login</code>, <code>/register</code> and the full-screen chat bare.</p>
+<hr>
+<h3 id="30-passwords-rendered-in-plain-text">🟠 30. Passwords rendered in plain text</h3>
+<p><code>type='text'</code> on the password field in both login and register. Visible to</p>
+<p>anyone looking at the screen, and no password manager would offer to save it.</p>
+<hr>
+<h3 id="31-protected-pages-rendered-for-signed-out-users">🟠 31. Protected pages rendered for signed-out users</h3>
+<p>Every request inside them 401'd, leaving a blank screen and a console full of</p>
+<p>errors — or a hard <code>window.location</code> redirect that threw away app state.</p>
+<p><em>Fix:</em> a <code>&lt;Protected&gt;</code> gate that toasts and shows a "Log in" panel.</p>
+<hr>
+<h3 id="32-1-2-mb-js-bundle-from-two-never-rendered-imports">🔵 32. 1.2 MB JS bundle from two never-rendered imports</h3>
+<pre class="lang-js"><code>import Aurora from "../assets/aurora.jsx";         // → ogl
+import { GridScan } from "../assets/gridscan.jsx"; // → three, face-api, postprocessing</code></pre>
+<p>A static <code>import</code> bundles the module whether or not you use the binding.</p>
+<p>Roughly 600 kB downloaded by every visitor for components that were never on</p>
+<p>screen.</p>
+<p><strong>330 kB gzip → 78 kB gzip</strong>, combined with route-level <code>React.lazy</code>.</p>
+<hr>
+<h3 id="33-search-fired-a-request-per-keystroke">🔵 33. Search fired a request per keystroke</h3>
+<p>No debounce → 429 after about ten characters. <em>Fix:</em> 350 ms debounce +</p>
+<p><code>placeholderData</code> so the dropdown does not flash empty.</p>
+<hr>
+<h3 id="34-infinite-scroll-watched-the-wrong-element">🔵 34. Infinite scroll watched the wrong element</h3>
+<p><code>ref={loadMoreRef}</code> on every card; a ref holds one value, and reassigning</p>
+<p><code>.current</code> does not re-run the observer effect. <em>Fix:</em> one sentinel below the</p>
+<p>grid.</p>
+<hr>
+<h3 id="35-thumbnail-pop-in-while-scrolling">🔵 35. Thumbnail pop-in while scrolling</h3>
+<p>Three causes: <code>fetchPriority="low"</code> deprioritised every thumbnail; the <code>&lt;img&gt;</code></p>
+<p>was unmounted and remounted by the hover preview, forcing a re-decode; and</p>
+<p>there was no placeholder. <em>Fix:</em> drop <code>fetchPriority</code>, keep the image mounted</p>
+<p>and layer the video over it, fade in over a shimmer.</p>
+<hr>
+<h3 id="36-cached-images-stayed-invisible">🔵 36. Cached images stayed invisible</h3>
+<p><code>onLoad</code> can fire <strong>before</strong> React attaches the handler for a cached image, so</p>
+<p>the element stayed at <code>opacity-0</code> forever. <em>Fix:</em> a <code>ref</code> callback checking</p>
+<p><code>complete &amp;&amp; naturalWidth &gt; 0</code>, plus <code>onError</code>.</p>
+<hr>
+<h3 id="37-layout-shift-in-the-feed-grid">🔵 37. Layout shift in the feed grid</h3>
+<p>Grid rows size to their tallest item, so a short title made its card shorter</p>
+<p>and the row shifted as data arrived. <em>Fix:</em> fixed-height meta block with the</p>
+<p>views/age row pinned, and a skeleton of identical height.</p>
+<hr>
+<h3 id="38-a-please-log-in-modal-every-5-minutes">🔵 38. A "Please log in" modal every 5 minutes</h3>
+<p>A <code>setInterval</code> nagged anonymous visitors forever. The feed is public. <em>Fix:</em></p>
+<p>prompt on an actual 401, and only if there <em>was</em> a session.</p>
+<hr>
+<h3 id="39-90-redundant-requests-per-page-for-anonymous-visitors">🔵 39. ~90 redundant requests per page for anonymous visitors</h3>
+<p>Every page calls <code>/currentuser</code> → 401 → refresh → 401 → repeat on every</p>
+<p>navigation. <em>Fix:</em> a 30-second circuit breaker, cleared on login.</p>
+<hr>
+<h3 id="40-stale-currentuser-cache-after-login">🔵 40. Stale <code>currentUser</code> cache after login</h3>
+<p><code>staleTime: 60s</code> meant the cached <em>signed-out</em> result was still served after a</p>
+<p>successful login, so the navbar and <code>Protected</code> still thought nobody was</p>
+<p>logged in. <em>Fix:</em> <code>invalidateQueries(["currentUser"])</code> before navigating.</p>
+<hr>
+<h3 id="41-persisted-theme-pointed-at-a-404">🔵 41. Persisted theme pointed at a 404</h3>
+<p>The chat wallpaper was persisted as an <strong>asset URL</strong>, and Vite fingerprints</p>
+<p>asset URLs per build. <em>Fix:</em> validate against the themes that currently exist</p>
+<p>and fall back.</p>
+<hr>
+<h3 id="42-json-parse-in-a-usestate-initialiser">🔵 42. <code>JSON.parse</code> in a <code>useState</code> initialiser</h3>
+<p><code>JSON.parse("undefined")</code> throws, and a throw in a state initialiser blanks</p>
+<p>the whole app. <code>localStorage</code> itself also throws in private mode. <em>Fix:</em></p>
+<p>try/catch both.</p>
+<hr>
+<h3 id="43-menu-actions-were-console-log-stubs">🔵 43. Menu actions were <code>console.log</code> stubs</h3>
+<p>"Watch later", "Share", "Not interested", "Report" all logged and did nothing.</p>
+<p><em>Fix:</em> real <code>watchLater</code> / <code>notInterested</code> persistence, a Saved page, native</p>
+<p>share with a clipboard fallback, and honest messaging for playlists (which</p>
+<p>need a schema that does not exist yet).</p>
+<hr>
+<h3 id="44-unreadable-text-in-dark-mode">🔵 44. Unreadable text in dark mode</h3>
+<p>Tailwind's preflight sets <code>color: inherit</code> on form controls, so adding</p>
+<p><code>body { color: var(--text) }</code> made the login inputs white-on-white. The</p>
+<p>create-video page hardcoded <code>text-neutral-800</code> on a container that sits on</p>
+<p>black, and its buttons had no text colour at all. <em>Fix:</em> explicit colours on</p>
+<p>always-light cards, theme-aware classes everywhere else.</p>
+<hr>
+<h3 id="45-useeffectevent-imported-from-stable-react">🔵 45. <code>useEffectEvent</code> imported from stable React</h3>
+<p>Experimental, not exported — silently <code>undefined</code> because React is CJS and</p>
+<p>Vite's interop does not throw on a missing named export.</p>
+<hr>
+<h3 id="46-dead-files-and-duplicated-css">🔵 46. Dead files and duplicated CSS</h3>
+<p>Four empty <code>.jsx</code> files; two <code>input[type="file"]</code> blocks where the second</p>
+<p>silently overrode the first; the login background is a <strong>4.1 MB JPEG</strong></p>
+<p>(still outstanding — see part 9).</p>
+<hr>
+<h2 id="the-pattern">The pattern</h2>
+<p>Most of these fall into five buckets:</p>
+<ol>
+<li><strong>Evaluation order</strong> — ESM hoisting, route order, null check after use.</li>
+<li><strong>Wrong API shape</strong> — <code>req.file</code> vs <code>req.files</code>, body vs params, object vs</li>
+</ol>
+<p>   array, array vs envelope.</p>
+<ol>
+<li><strong>Missing validation</strong> — regex, mass assignment, filenames, sort values.</li>
+<li><strong>Error paths never exercised</strong> — the refresh endpoint, every <code>catch</code> that</li>
+</ol>
+<p>   threw from an unwrapped async handler.</p>
+<ol>
+<li><strong>Fire-and-forget without a fallback</strong> — Redis, Cloudinary cleanup, caches</li>
+</ol>
+<p>   that were never invalidated.</p>
+<p>Bucket 4 is the one worth internalising: **the happy path was tested by hand</p>
+<p>and the error paths never were.** A single integration test hitting</p>
+<p><code>/refreshtoken</code> would have caught the worst bug in the repository.</p>
+<hr>
+<p>Next: <strong><a href="./09-DESIGN-DECISIONS.md">09 — Design decisions</a></strong></p></section>
+<section class="part" id="part-8"><h1 id="9-design-decisions">9 — Design Decisions</h1>
+<p>Every non-obvious choice, with the alternative that was rejected and why.</p>
+<p>This is the part interviewers probe hardest: anyone can write code, fewer can</p>
+<p>explain the trade-off they chose.</p>
+<hr>
+<h2 id="9-1-backend">9.1 Backend</h2>
+<h3 id="keep-asynchandler-even-though-express-5-handles-promises">Keep <code>asyncHandler</code> even though Express 5 handles promises</h3>
+<p>Express 5 auto-forwards rejected promises, so the wrapper is technically</p>
+<p>redundant. Kept because it is explicit, costs nothing, and the codebase mixes</p>
+<p>wrapped and unwrapped handlers — a single convention is worth more than the</p>
+<p>six lines saved.</p>
+<h3 id="redis-fails-open-authorisation-fails-closed">Redis fails open, authorisation fails closed</h3>
+<table><thead><tr><th>Component</th><th>On failure</th><th>Why</th></tr></thead><tbody><tr><td>Redis cache</td><td>serve uncached</td><td>it is an optimisation</td></tr><tr><td>Rate limiter</td><td>let the request through</td><td>locking everyone out is worse than brief over-permissiveness</td></tr><tr><td>Elasticsearch</td><td>fall back to Mongo regex</td><td>degraded search beats no search</td></tr><tr><td><code>verifyJWT</code></td><td><strong>reject</strong></td><td>an auth check that fails open is not a check</td></tr></tbody></table>
+<p>The rule: **fail open for availability concerns, fail closed for security</p>
+<p>concerns.** Being able to state that distinction is the point.</p>
+<h3 id="an-in-memory-fallback-rather-than-just-skipping-the-cache">An in-memory fallback rather than just skipping the cache</h3>
+<p>A <code>Map</code> with TTLs is ~80 lines. The alternative — <code>if (!redis) return next()</code></p>
+<p>— means a Redis outage removes rate limiting entirely, which is exactly when</p>
+<p>you are most likely to be under load. The fallback is per-instance rather than</p>
+<p>shared, which is a real limitation, and <code>/health</code> surfaces which mode you are</p>
+<p>in so it is never silent.</p>
+<h3 id="preserve-test-as-the-database-name">Preserve <code>test</code> as the database name</h3>
+<p>The <code>DBNAME</code> bug meant all real data lives in the default <code>test</code> database.</p>
+<p>"Fixing" it properly would have pointed the app at an empty database and</p>
+<p>appeared to delete everything. The fix makes the name <strong>explicit and correct</strong></p>
+<p>while keeping the same target.</p>
+<p><em>Principle: a correctness fix that moves live data is a migration, not a fix.</em></p>
+<h3 id="post-videos-any-kept-as-an-alias"><code>POST /videos/any</code> kept as an alias</h3>
+<pre class="lang-js"><code>export const any = getVideosByOwner;</code></pre>
+<p>The old name is meaningless, but the frontend calls it. Aliasing lets the</p>
+<p>implementation improve without a coordinated deploy. (The response shape did</p>
+<p>change, which broke the watch page — a reminder that renaming is safe and</p>
+<p>reshaping is not. The consumer now accepts both.)</p>
+<h3 id="watch-history-on-the-user-messages-in-their-own-collection">Watch history on the user, messages in their own collection</h3>
+<p>Both are "a list of things". The difference is <strong>bounded vs unbounded</strong>.</p>
+<p>Watch history is capped at 100 with <code>$slice</code>, always read with the user, and</p>
+<p>never queried in reverse — so embedding ids is right. Messages grow without</p>
+<p>limit and would eventually hit the 16 MB document ceiling.</p>
+<h3 id="conversationid-derived-not-stored"><code>conversationId</code> derived, not stored</h3>
+<p><code>[a, b].sort().join("_")</code> is symmetric, needs no extra collection, and cannot</p>
+<p>drift out of sync. The cost: it does not generalise to group chats, which</p>
+<p>would need a real <code>Conversation</code> document. A deliberate trade for a 1-to-1</p>
+<p>messaging product.</p>
+<h3 id="rate-limit-by-user-when-known-ip-otherwise">Rate limit by user when known, IP otherwise</h3>
+<p>IP-only punishes everyone behind a shared NAT (a school, an office, a mobile</p>
+<p>carrier). User-only is unusable for login, which is pre-authentication.</p>
+<p><code>req.user?._id ?? req.ip</code> covers both — and <code>trust proxy</code> makes the IP real.</p>
+<h3 id="tighter-limits-on-credential-endpoints">Tighter limits on credential endpoints</h3>
+<p>30/20s for reads, 10/60s for login and register. Those are the brute-force</p>
+<p>surface, and they should be slow; a feed endpoint should not be.</p>
+<hr>
+<h2 id="9-2-frontend">9.2 Frontend</h2>
+<h3 id="route-structure-two-layouts-not-one">Route structure: two layouts, not one</h3>
+<table><thead><tr><th>Layout</th><th>Pages</th><th>Why</th></tr></thead><tbody><tr><td><code>MainLayout</code></td><td>feed, channel, watch, saved, search, settings, inbox</td><td>needs the navbar</td></tr><tr><td><code>AuthLayout</code></td><td>login, register, <strong>chat view</strong></td><td>full-bleed, no chrome</td></tr></tbody></table>
+<p>The chat view is the interesting one. It renders its <em>own</em> <code>fixed top-0</code></p>
+<p>header and <code>fixed bottom-0</code> composer, so a navbar above it would double up.</p>
+<p>The inbox (<code>/message</code>) is a normal list and keeps the navbar.</p>
+<h3 id="protected-renders-a-panel-instead-of-redirecting"><code>&lt;Protected&gt;</code> renders a panel instead of redirecting</h3>
+<p>A hard redirect loses the URL the user wanted, and makes "log in and come</p>
+<p>back" impossible. Rendering in place preserves the route, passes</p>
+<p><code>state.from</code> to the login page, and the URL stays shareable.</p>
+<p>It also distinguishes <strong>three</strong> states, not two:</p>
+<pre class="lang-text"><code>loading  → spinner         (NOT the signed-out panel)
+no user  → toast + panel
+user     → the page</code></pre>
+<p>Collapsing loading into "signed out" makes the panel flash on every refresh</p>
+<p>before the session check returns — a small thing that makes an app feel broken.</p>
+<h3 id="toasts-over-a-dom-customevent-not-react-context">Toasts over a DOM <code>CustomEvent</code>, not React context</h3>
+<pre class="lang-js"><code>window.dispatchEvent(new CustomEvent("app-toast", { detail: { ... } }));</code></pre>
+<p>Because the axios interceptor needs to raise toasts and it lives <strong>outside</strong></p>
+<p>the component tree. A context-based API would force every non-React module to</p>
+<p>receive a callback. The interceptor already dispatched a <code>rate-limit</code> event</p>
+<p>that nothing listened for — this gave it a home.</p>
+<h3 id="the-feed-channels-and-watch-pages-stay-public">The feed, channels and watch pages stay public</h3>
+<p>Only personal pages are gated. A social platform whose content requires login</p>
+<p>has no discovery path and no shareable links. <code>optionalJWT</code> lets the watch</p>
+<p>page record history when it knows who you are, without requiring it.</p>
+<h3 id="optimistic-hide-for-not-interested-server-round-trip-for-watch-later">Optimistic hide for "Not interested", server round trip for "Watch later"</h3>
+<p>"Not interested" is low-stakes and benefits from feeling instant, so the card</p>
+<p>disappears immediately and rolls back on error. "Watch later" shows a toast on</p>
+<p>confirmation because the user expects to find it in a list afterwards —</p>
+<p>claiming success before the server agrees would be a lie if it failed.</p>
+<h3 id="save-to-playlist-is-disabled-not-fake">"Save to playlist" is disabled, not fake</h3>
+<p>Playlists need a collection with name, ordering and privacy. That schema does</p>
+<p>not exist. A button that silently does nothing is worse than a disabled one,</p>
+<p>and a disabled one is more honest than a fake success toast.</p>
+<h3 id="fixed-height-meta-block-pinned-views-age-row">Fixed-height meta block, pinned views/age row</h3>
+<p>CSS grid rows size to their tallest item. Without a reservation, a one-line</p>
+<p>title made its card shorter and the whole row shifted as thumbnails and titles</p>
+<p>streamed in. The skeleton uses the identical <code>h-[102px]</code>, so swapping</p>
+<p>placeholder for data causes <strong>zero</strong> layout shift.</p>
+<p>The title itself is <em>not</em> fixed-height — the channel name sits naturally</p>
+<p>underneath it — and only the views/age row is absolutely positioned at the</p>
+<p>bottom. That keeps the natural reading rhythm while giving the eye a stable</p>
+<p>line to scan across cards.</p>
+<h3 id="skeletons-over-spinners">Skeletons over spinners</h3>
+<p>A spinner says "something is happening". A skeleton says "content of *this</p>
+<p>shape* is arriving", and if it matches the real layout it eliminates layout</p>
+<p>shift. Used for the feed, search results and the Saved list; the spinner is</p>
+<p>kept only for "fetching the next page", where the layout is already stable.</p>
+<h3 id="css-variables-alongside-the-darkmode-prop">CSS variables alongside the <code>darkMode</code> prop</h3>
+<p>The components thread a <code>darkMode</code> boolean through props. Rewriting all of</p>
+<p>them to Tailwind's <code>dark:</code> variant would have been a large, risky change.</p>
+<p>Instead <code>:root</code> / <code>body.dark</code> tokens give plain CSS one source of truth while</p>
+<p>the prop-driven classes stay untouched — the two systems coexist and</p>
+<p><code>document.body.className</code> already drove the switch.</p>
+<h3 id="input-deliberately-ignores-dark-mode"><code>.input</code> deliberately ignores dark mode</h3>
+<p>It is used only on the register form, which always renders on a white card</p>
+<p>over a photo. Making it follow the theme produced white text on white.</p>
+<p>**A component that always renders on a fixed background should not follow a</p>
+<p>global theme.**</p>
+<h3 id="prefers-reduced-motion-honoured-globally"><code>prefers-reduced-motion</code> honoured globally</h3>
+<p>The app leans on transitions, hover-to-play previews and particle backgrounds.</p>
+<p>For people with vestibular disorders that is actively unpleasant, and it is</p>
+<p>three lines of CSS.</p>
+<h3 id="visible-focus-rings-restored">Visible focus rings restored</h3>
+<p>Tailwind's preflight removes the UA outline and none of the custom buttons</p>
+<p>added one back, so keyboard navigation was invisible. A <code>:focus-visible</code> rule</p>
+<p>restores it without showing a ring on mouse clicks.</p>
+<hr>
+<h2 id="9-3-performance">9.3 Performance</h2>
+<h3 id="dead-imports-were-the-whole-problem">Dead imports were the whole problem</h3>
+<p>Route-level <code>React.lazy</code> is the textbook answer and it helped — but it took</p>
+<p>the bundle from 1,207 kB to 910 kB. Deleting two never-rendered imports took</p>
+<p>it to <strong>273 kB</strong>.</p>
+<p>The lesson is to <strong>measure before optimising</strong>. The obvious fix was worth 25%;</p>
+<p>the unglamorous one was worth 70%.</p>
+<h3 id="loading-lazy-kept-fetchpriority-low-removed"><code>loading="lazy"</code> kept, <code>fetchPriority="low"</code> removed</h3>
+<p><code>loading="lazy"</code> is correct: it defers off-screen images and the browser</p>
+<p>starts them ~1250 px ahead. <code>fetchPriority="low"</code> layered an <em>additional</em></p>
+<p>deprioritisation on top, which is what made thumbnails arrive visibly late</p>
+<p>while scrolling.</p>
+<h3 id="the-view-counter-is-fire-and-forget">The view counter is fire-and-forget</h3>
+<pre class="lang-js"><code>Video.updateOne({ _id }, { $inc: { views: 1 } }).catch(() =&gt; {});</code></pre>
+<p>Awaiting it would add a database round trip to every page load for a number</p>
+<p>nobody checks for exactness. At scale this should be batched in Redis and</p>
+<p>flushed periodically — the <code>.catch()</code> is mandatory either way, since an</p>
+<p>unhandled rejection crashes Node.</p>
+<hr>
+<h2 id="9-4-known-limitations-say-these-before-you-are-asked">9.4 Known limitations (say these before you are asked)</h2>
+<ol>
+<li><strong>No tests.</strong> The single highest-value next step. One integration test on</li>
+</ol>
+<p>   <code>/refreshtoken</code> would have caught the worst bug in the repo.</p>
+<ol>
+<li><strong>Socket.IO is unauthenticated.</strong> Anyone can emit <code>register-user</code> with any</li>
+</ol>
+<p>   id. Needs a JWT handshake middleware.</p>
+<ol>
+<li><strong>Prop drilling in <code>App.jsx</code>.</strong> Eight pieces of state threaded through</li>
+</ol>
+<p>   three levels. Needs split contexts.</p>
+<ol>
+<li><strong><code>isLoggedIn</code> duplicates the query cache.</strong> Derived state that can drift.</li>
+<li>**<code>KEYS videos:*</code> for invalidation.** O(n) and blocking. Needs a</li>
+</ol>
+<p>   generation counter.</p>
+<ol>
+<li><strong><code>skip</code>/<code>limit</code> pagination.</strong> O(offset), and unstable under inserts.</li>
+<li><strong>Uploads proxy through the API.</strong> A 200 MB video occupies a server for the</li>
+</ol>
+<p>   whole transfer. Signed direct-to-Cloudinary uploads are the single biggest</p>
+<p>   available win.</p>
+<ol>
+<li><strong>The login background is a 4.1 MB JPEG.</strong> Should be a resized WebP/AVIF</li>
+</ol>
+<p>   with a <code>&lt;picture&gt;</code> fallback — probably under 150 kB.</p>
+<ol>
+<li><strong>No CSRF tokens.</strong> Mitigated by <code>sameSite</code>, but defence in depth would add</li>
+</ol>
+<p>   them.</p>
+<ol>
+<li><strong>No pagination on the inbox.</strong> <code>getConversations</code> aggregates every message</li>
+</ol>
+<p>    the user has ever sent or received on each load.</p>
+<ol>
+<li><strong>Presence is in-process.</strong> Breaks across multiple instances without the</li>
+</ol>
+<p>    Socket.IO Redis adapter.</p>
+<ol>
+<li><strong>No structured logging.</strong> <code>console.log</code> is not queryable; pino/winston</li>
+</ol>
+<p>    with request ids would be.</p>
+<p>Being able to list these unprompted is worth more than having fixed half of</p>
+<p>them silently. It demonstrates you know where the bodies are.</p>
+<hr>
+<p>Next: <strong><a href="./10-QA.md">10 — Interview Q&A</a></strong></p></section>
+<section class="part" id="part-9"><h1 id="10-interview-q-a">10 — Interview Q&A</h1>
+<p>Answers phrased the way you would actually say them, each anchored to this</p>
+<p>project.</p>
+<hr>
+<h2 id="project-walkthrough">Project walkthrough</h2>
+<p><strong>"Walk me through your project."</strong></p>
+<blockquote><p>It's a video-sharing platform with real-time messaging — three services</p><p>sharing a MongoDB Atlas cluster. A React SPA on Vite, an Express REST API</p><p>for auth, videos and message persistence, and a separate Socket.IO service</p><p>for presence and live delivery.</p><p></p><p>The split I'd call out: messages are <strong>written</strong> through the REST API so</p><p>they're validated, rate-limited and durably stored, and <strong>delivered</strong></p><p>through the socket service. The socket layer is a transport, not a source of</p><p>truth — if it dies, nothing is lost, the next history fetch still returns</p><p>everything.</p><p></p><p>Auth is JWT in httpOnly cookies with refresh-token rotation. Media goes to</p><p>Cloudinary. Redis caches feed pages and backs the rate limiter, but it's</p><p>deliberately optional — if it's unreachable the API falls back to an</p><p>in-process cache and keeps serving.</p></blockquote>
+<p><strong>"What was the hardest bug?"</strong></p>
+<blockquote><p>Redis kept connecting to localhost even though <code>REDIS_URL</code> pointed at</p><p>Upstash. The value was right in <code>.env</code> and right in the shell.</p><p></p><p>The cause was ES module evaluation order. <code>index.js</code> imported <code>redis.js</code> at</p><p>the top and called <code>dotenv.config()</code> in the body — but imports are hoisted</p><p>and the whole dependency graph is evaluated <em>before</em> the importing module's</p><p>body runs. So <code>redis.js</code> read <code>process.env.REDIS_URL</code> while it was still</p><p>undefined, and <code>createClient</code> defaults to localhost.</p><p></p><p>What made it hard is that it was silent. No error about missing config —</p><p>just a connection refused to an address nobody configured. The same bug was</p><p>also breaking CORS and Cloudinary, which looked like three unrelated</p><p>problems.</p><p></p><p>The fix was moving <code>dotenv.config()</code> into its own module imported first,</p><p>since module bodies evaluate in source order. The broader lesson is that</p><p><code>import</code> is a hoisted declaration, not an in-place statement — which is</p><p>exactly the difference from <code>require()</code>.</p></blockquote>
+<p><strong>"What would you do differently?"</strong></p>
+<blockquote><p>Write tests first. There were no tests at all, and the worst bug —</p><p><code>refreshAccessToken</code> referencing two undefined variables, so every session</p><p>silently died when the access token expired — would have been caught by a</p><p>single integration test, or honestly just by running ESLint over the</p><p>backend.</p><p></p><p>Architecturally, I'd make uploads go directly to Cloudinary with a signed</p><p>URL instead of proxying a 200 MB video through the API server. And I'd use</p><p>cursor pagination from the start rather than <code>skip</code>/<code>limit</code>.</p></blockquote>
+<hr>
+<h2 id="javascript">JavaScript</h2>
+<p><strong>"<code>var</code> vs <code>let</code> vs <code>const</code>?"</strong></p>
+<blockquote><p><code>var</code> is function-scoped and hoisted initialised to <code>undefined</code>. <code>let</code> and</p><p><code>const</code> are block-scoped and hoisted but in the temporal dead zone, so</p><p>reading before the declaration throws. <code>const</code> prevents reassignment of the</p><p>binding, not mutation of the value — <code>const arr = []; arr.push(1)</code> is fine.</p><p></p><p>The practical consequence is closures in loops: <code>var</code> gives one shared</p><p>binding so three <code>setTimeout</code>s all log 3; <code>let</code> is re-bound per iteration so</p><p>they log 0, 1, 2.</p></blockquote>
+<p><strong>"Explain the event loop."</strong></p>
+<blockquote><p>JavaScript runs on one thread with a queue. The key rule is that the entire</p><p><strong>microtask</strong> queue drains between every <strong>macrotask</strong>. Promise callbacks</p><p>and <code>queueMicrotask</code> are microtasks; timers, I/O and <code>setImmediate</code> are</p><p>macrotasks. <code>process.nextTick</code> jumps ahead of promises.</p><p></p><p>So <code>setTimeout(fn, 0)</code> runs <em>after</em> an already-resolved promise's <code>.then</code>.</p><p></p><p>Practically, in this project it means a long synchronous operation — an</p><p>unbounded <code>Video.find()</code> with no limit, say — blocks the entire server, not</p><p>just that request. That's why the <code>Trending</code> endpoint returning the whole</p><p>collection was an availability risk, not just a slow query.</p></blockquote>
+<p><strong>"<code>==</code> vs <code>===</code>?"</strong></p>
+<blockquote><p><code>===</code> compares type and value. <code>==</code> coerces first, with rules that aren't</p><p>worth memorising: <code>"" == 0</code> is true, <code>null == undefined</code> is true but</p><p><code>null == 0</code> is false, <code>NaN != NaN</code>.</p><p></p><p>Always <code>===</code>. The one idiomatic exception is <code>x == null</code> as a shorthand for</p><p>"null or undefined" — though <code>??</code> usually expresses that better now.</p></blockquote>
+<p><strong>"What's a closure?"</strong></p>
+<blockquote><p>A function plus the lexical environment it was created in. The inner</p><p>function keeps access to the outer scope's variables after the outer</p><p>function has returned.</p><p></p><p>In this project every middleware is one. <code>rateLimiter({ limit: 10 })</code></p><p>returns a handler that still sees <code>limit</code> — that's how <code>rateLimit</code> and</p><p><code>authRateLimit</code> are two functions with different captured configuration from</p><p>the same factory.</p></blockquote>
+<p><strong>"<code>null</code> vs <code>undefined</code>?"</strong></p>
+<blockquote><p><code>undefined</code> means "never assigned" — the default for uninitialised</p><p>variables, missing parameters, and absent object properties. <code>null</code> is an</p><p>explicit "assigned, and the value is nothing".</p><p></p><p>It matters in MongoDB: <code>{ field: undefined }</code> is treated as "field doesn't</p><p>exist" and can match unintended documents, which was a real bug in the login</p><p>query here. <code>{ field: null }</code> matches documents where it's actually null.</p></blockquote>
+<hr>
+<h2 id="node-express">Node & Express</h2>
+<p><strong>"What is middleware?"</strong></p>
+<blockquote><p>A function with <code>(req, res, next)</code> that sits in a chain. It can read and</p><p>mutate the request, end the response, or call <code>next()</code> to continue. Error</p><p>middleware takes <strong>four</strong> parameters — Express identifies it by arity, so</p><p>dropping the unused <code>next</code> silently turns it into ordinary middleware and</p><p>your error handler never runs.</p><p></p><p>Order is semantics: CORS first, because an error thrown before it produces a</p><p>response with no CORS headers that the browser reports as a generic network</p><p>failure. Body parsers before routes, or <code>req.body</code> is undefined. Error</p><p>handler last.</p></blockquote>
+<p><strong>"How do you handle async errors in Express?"</strong></p>
+<blockquote><p>In Express 4 you can't just throw from an <code>async</code> handler — Express only</p><p>catches synchronous throws. An async function returns a rejected promise,</p><p>Express ignores the return value, so nothing responds and the request hangs</p><p>until the client times out.</p><p></p><p>The fix is a wrapper: <code>Promise.resolve(handler(req,res,next)).catch(next)</code>.</p><p>Express 5, which this project uses, forwards rejections automatically — so</p><p>the wrapper is now belt-and-braces. I kept it because the codebase mixes</p><p>styles and one convention is clearer.</p><p></p><p>This was a live bug here: two route handlers threw inside a <code>catch</code> block</p><p>without the wrapper, and the navbar's typeahead hit one of them, so any</p><p>error hung a request per keystroke.</p></blockquote>
+<p><strong>"What is CORS?"</strong></p>
+<blockquote><p>A browser mechanism that restricts cross-origin reads. The server declares</p><p>who may read its responses via <code>Access-Control-Allow-Origin</code>.</p><p></p><p>Two rules that catch people out. First, <code>*</code> is forbidden with</p><p><code>Access-Control-Allow-Credentials: true</code> — so with cookies you must echo the</p><p>origin back from an allow-list. Second, non-simple requests trigger a</p><p>preflight <code>OPTIONS</code>, and if preflight fails the real request is never sent.</p><p></p><p>And it's enforced by the browser, not the server — it protects <em>users</em> from</p><p>other <em>sites</em>, it's not a defence against scripted clients.</p></blockquote>
+<p><strong>"Streams?"</strong></p>
+<blockquote><p>Four kinds: readable, writable, duplex, transform. The point is processing</p><p>data in chunks instead of loading it all into memory.</p><p></p><p>Directly relevant here: multer's disk storage streams uploads to disk, so a</p><p>200 MB video uses constant memory. Memory storage would hold the whole thing</p><p>in RAM — fine for an avatar, fatal for video.</p></blockquote>
+<hr>
+<h2 id="mongodb">MongoDB</h2>
+<p><strong>"Embed or reference?"</strong></p>
+<blockquote><p>Embed when the data is read together, bounded in size, and doesn't need</p><p>independent queries. Reference when it's unbounded, shared, or queried on</p><p>its own.</p><p></p><p>In this project: watch history is an embedded array of ids capped at 100</p><p>with <code>$slice</code> — bounded, always read with the user, never queried in</p><p>reverse. Messages are a separate collection because they're unbounded and</p><p>would eventually hit the 16 MB document limit. Subscriptions are their own</p><p>collection because it's many-to-many and queried from both directions.</p><p></p><p>The 16 MB limit is the hard constraint behind all of it.</p></blockquote>
+<p><strong>"How do indexes work? What's the ESR rule?"</strong></p>
+<blockquote><p>A B-tree on the indexed fields, so a lookup is O(log n) instead of a</p><p>collection scan.</p><p></p><p>For compound indexes the field order is Equality, Sort, Range. The feed</p><p>query matches <code>{isPublished: true}</code> and sorts by <code>createdAt</code> descending, so</p><p>the index is <code>{isPublished: 1, createdAt: -1}</code>. Get it wrong and Mongo has</p><p>to sort in memory — and an in-memory sort over 32 MB fails outright.</p><p></p><p>A compound index also serves any prefix of itself, so <code>{a,b,c}</code> covers <code>{a}</code></p><p>and <code>{a,b}</code> but not <code>{b}</code>.</p></blockquote>
+<p><strong>"<code>save()</code> vs <code>findByIdAndUpdate()</code>?"</strong></p>
+<blockquote><p><code>save()</code> runs document middleware; update operators talk to the database</p><p>directly and skip it entirely.</p><p></p><p>That's load-bearing here. The password is hashed in a <code>pre("save")</code> hook, so</p><p>changing a password with <code>findByIdAndUpdate</code> would store it in <strong>plaintext</strong>.</p><p>The change-password controller deliberately assigns and calls <code>.save()</code>.</p><p></p><p>Related subtlety: the hook guards on <code>isModified("password")</code>. Without it,</p><p>the <code>save()</code> that stores a new refresh token would re-hash the already-hashed</p><p>password and permanently lock the account out.</p></blockquote>
+<p><strong>"How would you fix slow pagination?"</strong></p>
+<blockquote><p><code>skip(n)</code> walks and discards n documents, so it's O(offset) — at page 1000</p><p>with limit 20 the database reads 20,020 documents to return 20. It's also</p><p>unstable: an insert between page 1 and page 2 shifts everything and the user</p><p>sees duplicates.</p><p></p><p>Cursor pagination fixes both — instead of <code>?page=3</code> you pass the last item</p><p>you saw and query <code>{createdAt: {$lt: cursor}}</code>. O(log n) via the index, and</p><p>stable under inserts. You lose "jump to page 7", which is exactly the right</p><p>trade for an infinite feed.</p></blockquote>
+<hr>
+<h2 id="react">React</h2>
+<p><strong>"Why do keys matter?"</strong></p>
+<blockquote><p>React matches children between renders by key. With index keys, deleting the</p><p>first item renumbers everything — React thinks item 0 <em>changed</em> rather than</p><p><em>was removed</em>, so it reuses the DOM node and its component state. A typed</p><p>input value or a playing video attaches to the wrong row.</p><p></p><p>Index keys are only safe for an append-only list that's never reordered or</p><p>filtered.</p></blockquote>
+<p><strong>"<code>useEffect</code> — when does cleanup run?"</strong></p>
+<blockquote><p>Before the next effect run, and on unmount.</p><p></p><p>That's what makes debouncing work: the effect sets a timer, cleanup clears</p><p>it, so each keystroke cancels the pending one and only the last survives.</p><p>Without it the navbar fired a search per keystroke and tripped the server's</p><p>rate limiter after about ten characters.</p></blockquote>
+<p><strong>"What's a stale closure?"</strong></p>
+<blockquote><p>An effect or callback captures variables from the render it was created in.</p><p>With an empty dependency array it captures the <em>first</em> render's values</p><p>forever — so an interval logging <code>count</code> always logs 0.</p><p></p><p>Fixes: list the dependency, or use the functional updater</p><p><code>setCount(c =&gt; c + 1)</code> so you never read the current value at all.</p></blockquote>
+<p><strong>"<code>useMemo</code> vs <code>useCallback</code> vs <code>useRef</code>?"</strong></p>
+<blockquote><p><code>useMemo</code> caches a computed value, <code>useCallback</code> caches a function identity,</p><p><code>useRef</code> is a mutable box that persists across renders <em>without</em> triggering</p><p>one.</p><p></p><p><code>useRef</code> has two distinct jobs here: holding a DOM node for the</p><p>IntersectionObserver, and holding a <code>toasted</code> boolean in <code>&lt;Protected&gt;</code> — if</p><p>that were state, setting it would re-render, which re-runs the effect, which</p><p>toasts again.</p></blockquote>
+<p><strong>"How would you improve performance?"</strong></p>
+<blockquote><p>I'd measure first. Here the build was 1.2 MB and the obvious answer —</p><p>route-level code splitting with <code>React.lazy</code> — only got it to 910 kB.</p><p></p><p>The real win was two <code>import</code> statements for components that were never</p><p>rendered. A static import bundles and executes the module whether or not you</p><p>use the binding, so about 600 kB of three.js, face-api and WebGL libraries</p><p>shipped to every visitor for nothing. Deleting them plus the code splitting</p><p>took it to 273 kB — 330 kB gzip down to 78.</p><p></p><p>Beyond bundle size: <code>IntersectionObserver</code> instead of scroll listeners,</p><p>debounced search, TanStack Query so three components share one request, and</p><p>fixed-height skeletons so there's no layout shift.</p></blockquote>
+<p><strong>"Error boundaries?"</strong></p>
+<blockquote><p>A class component with <code>getDerivedStateFromError</code> and <code>componentDidCatch</code> —</p><p>there's no hook equivalent. It catches render-phase errors in its subtree,</p><p>but <strong>not</strong> event handlers, async code, or SSR.</p><p></p><p>I added one after a type error on the watch page — `videos.map is not a</p><p>function` — unmounted the entire React tree and left a blank white screen.</p><p>Now the failure is contained to that route with a retry button.</p></blockquote>
+<hr>
+<h2 id="auth-security">Auth & security</h2>
+<p><strong>"Why bcrypt and not SHA-256?"</strong></p>
+<blockquote><p>SHA-256 is designed to be fast — billions of guesses per second on a GPU,</p><p>which is exactly what you don't want. bcrypt is deliberately slow and</p><p>tunable: cost 10 means 2¹⁰ iterations, roughly 100 ms, and each increment</p><p>doubles it. It also generates a per-user salt automatically and embeds it in</p><p>the hash, so identical passwords produce different hashes and rainbow tables</p><p>are useless.</p><p></p><p>Argon2id is the current recommendation because it's memory-hard too, so it</p><p>also resists GPU and ASIC attacks.</p></blockquote>
+<p><strong>"Why two tokens?"</strong></p>
+<blockquote><p>A JWT can't be revoked — verification is pure signature maths with no</p><p>database lookup, which is what makes it scale and also what makes it a</p><p>problem.</p><p></p><p>So you make the unrevocable token short-lived, and gate renewal behind a</p><p>long-lived refresh token that <strong>is</strong> checked against the database. Logout</p><p>unsets the stored refresh token, so it dies immediately; the access token</p><p>survives at most one more expiry window.</p><p></p><p>I also rotate: every refresh issues a new refresh token and overwrites the</p><p>stored one, so a stolen token is single-use.</p></blockquote>
+<p><strong>"Cookies or localStorage for tokens?"</strong></p>
+<blockquote><p>httpOnly cookies. <code>localStorage</code> is readable by any JavaScript on the page,</p><p>so one XSS takes every token. An httpOnly cookie can't be read by script at</p><p>all.</p><p></p><p>The trade is CSRF, since cookies are sent automatically — but <code>sameSite</code> is</p><p>a one-line mitigation, and there's no equivalent one-liner for "a script can</p><p>read your token". XSS is also more common than CSRF in practice.</p><p></p><p><code>sameSite</code> needs care: production has the API and SPA on different sites so</p><p>it must be <code>none</code>, which requires <code>secure: true</code>. Locally both are</p><p><code>localhost</code>, so <code>lax</code> works over plain HTTP. Getting that wrong is the</p><p>classic "works locally, broken in production" auth bug.</p></blockquote>
+<p><strong>"How do you prevent injection?"</strong></p>
+<blockquote><p>Never concatenate user input into something you then execute.</p><p></p><p>MongoDB isn't immune just because it isn't SQL. User input going straight</p><p>into <code>$regex</code> was a real bug here — <code>(((((</code> throws, and <code>(a+)+$</code> causes</p><p>catastrophic backtracking. I escape the metacharacters.</p><p></p><p>There's also query-object injection: <code>{email: undefined}</code> is read as "field</p><p>doesn't exist" and can match the wrong document, so I build the <code>$or</code> from</p><p>present values only. And mass assignment —</p><p><code>Object.assign(video, req.body)</code> let a client set <code>views</code> or <code>owner</code>, so</p><p>that's a whitelist now.</p></blockquote>
+<p><strong>"Rate limiting — how, and what's wrong with it?"</strong></p>
+<blockquote><p>Redis <code>INCR</code> with a TTL: increment a key per user or IP, set the expiry on</p><p>the first hit, reject over the limit.</p><p></p><p>The flaw is the boundary burst — a fixed window allows 2× the limit across</p><p>the boundary, 30 requests at 19.9 s and another 30 at 20.1 s. A sliding</p><p>window or token bucket fixes that; token bucket is the usual production</p><p>choice because it also allows deliberate bursts.</p><p></p><p>I made it fail <strong>open</strong>: if Redis is down, requests go through. Locking</p><p>every user out of the product because a cache is unavailable is worse than</p><p>brief over-permissiveness. For an authorisation check I'd do the opposite.</p></blockquote>
+<hr>
+<h2 id="system-design">System design</h2>
+<p><strong>"How would you scale this to a million users?"</strong></p>
+<blockquote><p>I'd go in order of what actually hurts.</p><p></p><p>First, uploads. A 200 MB video currently streams through the API server to</p><p>Cloudinary, tying up a process for the whole transfer. Signed direct uploads</p><p>move those bytes browser-to-Cloudinary and the API only stores the resulting</p><p>URL. Single biggest win.</p><p></p><p>Second, pagination — <code>skip</code>/<code>limit</code> is O(offset). Cursor-based for the feed.</p><p></p><p>Third, make the API genuinely stateless so I can run N instances behind a</p><p>load balancer. That means the Socket.IO Redis adapter for presence, since</p><p><code>onlineUsers</code> is currently an in-process <code>Map</code> that breaks the moment there</p><p>are two instances.</p><p></p><p>Then caching: cache the user lookup that <code>verifyJWT</code> does on every request,</p><p>and replace <code>KEYS videos:*</code> invalidation with a generation counter, because</p><p><code>KEYS</code> is O(n) and blocks Redis.</p><p></p><p>Reads dominate a feed, so MongoDB read replicas, then sharding on <code>owner</code></p><p>for videos if a single replica set isn't enough. Video delivery moves to a</p><p>CDN with HLS adaptive bitrate.</p><p></p><p>At the far end the feed itself becomes the problem and you'd precompute</p><p>timelines with fan-out-on-write rather than querying per request.</p></blockquote>
+<p><strong>"How does your real-time messaging work?"</strong></p>
+<blockquote><p>Socket.IO with rooms. On connect the client emits <code>register-user</code> and the</p><p>socket joins a room named after the user id, so delivering a message is</p><p><code>io.to(receiverId).emit(...)</code> — no socket-id bookkeeping and automatic</p><p>multi-device fan-out.</p><p></p><p>Presence uses a <code>Map&lt;userId, Set&lt;socketId&gt;&gt;</code> rather than a single socket id,</p><p>because one user has multiple tabs. The online/offline transition only fires</p><p>when the set becomes empty — it's reference counting, and it's the thing</p><p>most presence implementations get wrong.</p><p></p><p>Messages are persisted through the REST API, not the socket, so validation,</p><p>rate limiting and durability live in one place.</p><p></p><p>I'd call out two gaps honestly: the socket isn't authenticated, so anyone</p><p>can claim any user id — that needs a JWT handshake middleware. And presence</p><p>is in-process, so it needs the Redis adapter before running more than one</p><p>instance.</p></blockquote>
+<p><strong>"Why cache, and how do you invalidate?"</strong></p>
+<blockquote><p>Feed pages are read constantly and change rarely, so cache-aside with a</p><p>5-minute TTL on <code>videos:&lt;page&gt;:&lt;limit&gt;:&lt;sort&gt;</code>, invalidated on create,</p><p>update and delete.</p><p></p><p>Two things I'd flag. The cache key includes the user id — without that, a</p><p>personalised response cached for one user gets served to another, which is a</p><p>data-leak class of bug.</p><p></p><p>And my invalidation uses <code>KEYS videos:*</code>, which is O(n) over the whole</p><p>keyspace and blocks Redis since it's single-threaded. Fine at this scale,</p><p>wrong at any real scale — I'd use a generation counter so bumping one</p><p>integer orphans every old key and they expire naturally.</p></blockquote>
+<p><strong>"What happens if Redis goes down?"</strong></p>
+<blockquote><p>Nothing user-visible. It's a cache and a rate-limit counter, not a source of</p><p>truth, so I wrote the client to never throw — every call falls back to an</p><p>in-process <code>Map</code> with TTLs.</p><p></p><p>The degradation is real and worth naming: the fallback is per-instance, so</p><p>hit rate drops and rate limits become per-instance rather than global.</p><p><code>/health</code> reports which mode you're in, so it's never a silent surprise.</p><p></p><p>The original code did <code>await connectRedis()</code> at boot and would crash the</p><p>entire API if Redis was unreachable — a cache outage became a total outage.</p></blockquote>
+<hr>
+<h2 id="closing-questions-to-ask-them">Closing questions to ask them</h2>
+<ul>
+<li>How do you handle database migrations and schema changes?</li>
+<li>What does your testing pyramid actually look like in practice?</li>
+<li>How is on-call structured, and what's a typical incident?</li>
+<li>What's the deploy process — how long from merge to production?</li>
+<li>Where does the team feel the most technical debt?</li>
+</ul></section>
+
+</body>
+</html>
