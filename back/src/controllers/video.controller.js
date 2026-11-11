@@ -291,8 +291,48 @@ export const getVideosByOwner = asyncHandler(async (req, res) => {
     );
 });
 
-/** Keeps the old `POST /any` contract alive for existing frontend calls. */
-export const any = getVideosByOwner;
+/**
+ * `POST /videos/any` — the ORIGINAL contract: `data` is a bare array.
+ *
+ * Three pages (watch, channel, account) do `res.data.data.map(...)`. Changing
+ * the shape to a paginated envelope broke all three with
+ * "videos.map is not a function", which — with no error boundary — blanked
+ * the whole page. Keeping the old shape here is the right call: a rename is
+ * safe, a reshape is a breaking change.
+ *
+ * Use `getVideosByOwner` (above) when you want pagination metadata.
+ */
+export const any = asyncHandler(async (req, res) => {
+    const owner = req.body?.owner || req.query?.owner;
+    const excludeId = req.body?.excludeId;
+    const limit = Math.min(50, Math.max(1, Number(req.body?.limit) || 20));
+
+    if (!mongoose.isValidObjectId(owner)) {
+        throw new apiError(400, "`owner` must be a valid user id");
+    }
+
+    const filter = { owner };
+
+    // Honour `excludeId` so a video never recommends itself. The original
+    // accepted the parameter and ignored it.
+    if (excludeId && mongoose.isValidObjectId(excludeId)) {
+        filter._id = { $ne: excludeId };
+    }
+
+    const videos = await Video.find(filter)
+        .sort({ createdAt: -1 })
+        .limit(limit)
+        .populate("owner", "username fullName avatar")
+        .lean();
+
+    return res.status(200).json({
+        success: true,
+        data: videos.map((video) => ({
+            ...video,
+            durationFormatted: formatDuration(video.duration),
+        })),
+    });
+});
 
 /**
  * Paginated + searchable feed (`/practicevideo`).
